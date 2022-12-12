@@ -11,7 +11,7 @@
 
             <Image
                 Source="dotnet_bot.png"
-                SemanticProperties.Description="eOdvjetnik wave!"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="200"
                 HorizontalOptions="Center" />
 
@@ -22,9 +22,9 @@
                 HorizontalOptions="Center" />
 
             <Label
-                Text="Welcome to eOdvjetnik 1.0 " 
+                Text="Welcome to .NET Multi-platform App UI"
                 SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to eOdvjetnik App"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
                 FontSize="18"
                 HorizontalOptions="Center" />
 
