@@ -2,13 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.MainPage">
-
     <ScrollView>
         <VerticalStackLayout
             Spacing="25"
             Padding="30,0"
             VerticalOptions="Center">
-
             <Image
                 Source="e_odvjetnik.png"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"
@@ -16,28 +14,23 @@
                 HorizontalOptions="Center" 
                 BackgroundColor="White"
                 />
-
             <Label
                 Text="Dobrodošli"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />
-
             <Label
-                Text="Za početak se spojite na svoj VPN server"
+                Text="VPN server"
                 SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Za početak se spojite na svoj VPN server"
+                SemanticProperties.Description="NAS server"
                 FontSize="18"
                 HorizontalOptions="Center" />
-
             <Button
                 x:Name="CounterBtn"
                 Text="Spoji se"
                 SemanticProperties.Hint="Spoji se"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
-
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>
