@@ -22,6 +22,7 @@
             <Label
                 Text="VPN server"
                 SemanticProperties.HeadingLevel="Level2"
+                
                 SemanticProperties.Description="NAS server"
                 FontSize="18"
                 HorizontalOptions="Center" />
