@@ -7,7 +7,7 @@
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
-        Title="Home"
+        Title="Kalendar  Dokumenti  Novi klijent  Postavke  Naplata  Podrška"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
