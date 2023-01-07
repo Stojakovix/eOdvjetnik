@@ -22,7 +22,7 @@ public partial class MainPage : ContentPage
             if (status == NTStatus.STATUS_SUCCESS)
             {
                 var shares = client.ListShares(out status);
-                var shares2 = "Test";
+                var shares2 = "SPOJENO";
                 CounterBtn.Text = shares2;
                 client.Logoff();
             }
