@@ -68,6 +68,8 @@
                 SemanticProperties.Hint="Spoji se"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
+            
+
         </VerticalStackLayout>
         
     </ScrollView>

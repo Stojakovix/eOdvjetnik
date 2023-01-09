@@ -97,4 +97,10 @@
 		<PackageReference Include="SMBLibrary.Adapters" Version="1.4.9" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="Kalendar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

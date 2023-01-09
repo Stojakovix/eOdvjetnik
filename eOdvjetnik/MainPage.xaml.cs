@@ -15,15 +15,16 @@ public partial class MainPage : ContentPage
 
         //SMB
         SMB1Client client = new SMB1Client(); // SMB2Client can be used as well
-        bool isConnected = client.Connect(IPAddress.Parse("192.168.1.211"), SMBTransportType.DirectTCPTransport);
+        bool isConnected = client.Connect(IPAddress.Parse("192.168.1.113"), SMBTransportType.DirectTCPTransport);
         if (isConnected)
         {
-            NTStatus status = client.Login(String.Empty, "user", "walter");
+            NTStatus status = client.Login(String.Empty, "robi", "walter");
             if (status == NTStatus.STATUS_SUCCESS)
             {
                 var shares = client.ListShares(out status);
                 var shares2 = "SPOJENO";
                 CounterBtn.Text = shares2;
+                
                 client.Logoff();
             }
             client.Disconnect();
@@ -38,9 +39,13 @@ public partial class MainPage : ContentPage
         //Kraj SMB
     }
 
-	private void OnCounterClicked(object sender, EventArgs e)
+	private async void OnCounterClicked(object sender, EventArgs e)
 	{
-		count++;
+        //await Navigation.PushAsync(new kalendar());
+        await Shell.Current.GoToAsync("Kalendar");
+
+
+        
 
 
 
@@ -49,12 +54,12 @@ public partial class MainPage : ContentPage
 
 
 
-		//if (count == 1)
-			//CounterBtn.Text = $"Spojeno {count} ";
-		//else
-			//CounterBtn.Text = $"Spojeno {count} ";
+        //if (count == 1)
+        //CounterBtn.Text = $"Spojeno {count} ";
+        //else
+        //CounterBtn.Text = $"Spojeno {count} ";
 
-		//SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+        //SemanticScreenReader.Announce(CounterBtn.Text);
+    }
 }
 
