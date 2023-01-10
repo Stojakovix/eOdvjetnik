@@ -11,9 +11,15 @@
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
-    
+    <ShellContent
+        Title="Kalendar"
+        ContentTemplate="{DataTemplate local:Kalendar}"
+        Route="Kalendar"
+        />
 
-    
-
-
+    <ShellContent
+        Title="Dokumenti"
+        ContentTemplate="{DataTemplate local:Dokumenti}"
+        Route="Dokumenti"
+        />
 </Shell>
