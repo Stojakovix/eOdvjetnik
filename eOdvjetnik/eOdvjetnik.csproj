@@ -49,6 +49,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="NewFolder1\**" />
+	  <Compile Remove="Resources\NewFolder\**" />
+	  <EmbeddedResource Remove="NewFolder1\**" />
+	  <EmbeddedResource Remove="Resources\NewFolder\**" />
+	  <MauiCss Remove="NewFolder1\**" />
+	  <MauiCss Remove="Resources\NewFolder\**" />
+	  <MauiXaml Remove="NewFolder1\**" />
+	  <MauiXaml Remove="Resources\NewFolder\**" />
+	  <None Remove="NewFolder1\**" />
+	  <None Remove="Resources\NewFolder\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Fonts\SF-Pro-Display-Black.otf" />
 	  <None Remove="Resources\Fonts\SF-Pro-Display-BlackItalic.otf" />
 	  <None Remove="Resources\Fonts\SF-Pro-Display-Bold.otf" />
@@ -95,6 +108,9 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="SMBLibrary" Version="1.4.9" />
 		<PackageReference Include="SMBLibrary.Adapters" Version="1.4.9" />
+		<PackageReference Include="Syncfusion.Licensing" Version="20.4.0.44" />
+		<PackageReference Include="Syncfusion.Maui.Core" Version="20.4.44" />
+		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="20.4.44" />
 	</ItemGroup>
 
 	<ItemGroup>
