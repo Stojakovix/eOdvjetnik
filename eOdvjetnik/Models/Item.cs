@@ -7,7 +7,7 @@ using SQLite;
 
 namespace eOdvjetnik.Models
 {
-    public class Item
+    public class DocsItem
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
+using eOdvjetnik.Data;
+using eOdvjetnik.Views;
 //using Microsoft.UI.Xaml.Documents;
 //using Microsoft.UI;
 
@@ -24,6 +26,11 @@ public static class MauiProgram
 
 #if DEBUG
 		builder.Logging.AddDebug();
+		builder.Services.AddSingleton<Dokumenti>();
+		builder.Services.AddTransient<DocsItemPage>();
+
+		builder.Services.AddSingleton<DocsDatabase>();
+
 #endif
 
 		return builder.Build();

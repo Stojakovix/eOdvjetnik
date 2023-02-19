@@ -20,40 +20,40 @@ namespace eOdvjetnik.Data
             if (Database is not null)
                 return;
             Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-            var result = await Database.CreateTableAsync<Item>();
+            var result = await Database.CreateTableAsync<DocsItem>();
         } 
 
-        public async Task<List<Item>> GetItemsAsync()
+        public async Task<List<DocsItem>> GetItemsAsync()
         {
             await Init();
-            return await Database.Table<Item>().ToListAsync();
+            return await Database.Table<DocsItem>().ToListAsync();
         }
         //public async Task<List<Item>> GetItemsNotDoneAsync()
         //{
         //    await Init();
         //    return await Database.Table<Item>().Where(t =>t.Done).ToListAsync();
         //}  *za todo, izbacuje gotove zadatke* može se iskoristit za gotove sastanke
-        public async Task<Item> GetItemAsync(int id)
+        public async Task<DocsItem> GetItemAsync(int id)
         {
             await Init();
-            return await Database.Table<Item>().Where(i => i.Id== id).FirstOrDefaultAsync();
+            return await Database.Table<DocsItem>().Where(i => i.Id== id).FirstOrDefaultAsync();
         }
-        public async Task<int> SaveItemAsync(Item AddItem)
+        public async Task<int> SaveItemAsync(DocsItem item)
         {
             await Init();
-            if (AddItem.Id != 0)
+            if (item.Id != 0)
             {
-                return await Database.UpdateAsync(AddItem);
+                return await Database.UpdateAsync(item);
             }
             else
             {
-                return await Database.InsertAsync(AddItem);
+                return await Database.InsertAsync(item);
             }
          }
-        public async Task <int> DeleteItemAsync(Item DeleteItem)
+        public async Task <int> DeleteItemAsync(DocsItem item)
             {
             await Init();
-            return await Database.DeleteAsync(DeleteItem);
+            return await Database.DeleteAsync(item);
             }
     }
 }

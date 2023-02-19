@@ -8,6 +8,6 @@ public partial class AppShell : Shell
 
 		Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
 		Routing.RegisterRoute(nameof(Kalendar), typeof(Kalendar));
-		Routing.RegisterRoute(nameof(Dokumenti), typeof(Dokumenti));
+		Routing.RegisterRoute(nameof(Views.Dokumenti), typeof(Views.Dokumenti));
 	}
 }
