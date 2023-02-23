@@ -8,10 +8,10 @@ public partial class Dokumenti : ContentPage
 {
     DocsDatabase database;
     public ObservableCollection<DocsItem> Items { get; set; } = new();
-    public Dokumenti(DocsDatabase docsDatabase)
+    public Dokumenti(DocsDatabase docsdatabase)
     {
         InitializeComponent();
-        database = docsDatabase;
+        database = docsdatabase;
         BindingContext = this;
     }
 
@@ -23,9 +23,12 @@ public partial class Dokumenti : ContentPage
         {
             Items.Clear();
             foreach (var item in items)
+            {
                 Items.Add(item);
+            }
         });
     }
+
     async void OnItemAdded(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(DocsItemPage), true, new Dictionary<string, object>
@@ -33,14 +36,16 @@ public partial class Dokumenti : ContentPage
             ["Item"] = new DocsItem()
         });
     }
+
     private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is not DocsItem item)
             return;
-
         await Shell.Current.GoToAsync(nameof(DocsItemPage), true, new Dictionary<string, object>
         {
-            ["item"] = item
+            ["Item"] = item
+
         });
     }
+           
 }

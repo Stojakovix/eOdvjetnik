@@ -19,6 +19,28 @@ public partial class DocsItemPage : ContentPage
 		InitializeComponent();
 		database = docsDatabase;
 	}
-	
-	
+	async void OnSaveClicked(object sender, EventArgs e)
+	{
+		if (string.IsNullOrWhiteSpace(Item.Name))
+		{
+			await DisplayAlert("Please write name", "please", "ok");
+			return;
+		}
+		await database.SaveItemAsync(Item);
+		await Shell.Current.GoToAsync("..");
+
+	}
+	async void OnDeleteClicked(object sender, EventArgs e)
+	{
+		if (Item.ID == 0)
+			return;
+		await database.DeleteItemAsync(Item);
+		await Shell.Current.GoToAsync("..");
+	}	
+	async void OnCancelClicked(object sender, EventArgs e)
+	{
+		await Shell.Current.GoToAsync("..");
+	}
 }
+
+	

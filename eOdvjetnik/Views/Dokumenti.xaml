@@ -2,7 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:eOdvjetnik.Models"
+             xmlns:data="clr-namespace:eOdvjetnik.Data"
              x:Class="eOdvjetnik.Views.Dokumenti"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="True"
              Title="Dokumenti">
 
     <Grid RowDefinitions="*,Auto">
@@ -11,6 +14,7 @@
             ItemsSource="{Binding Items}"
             SelectionMode="Single"
             SelectionChanged="CollectionView_SelectionChanged">
+
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:DocsItem">
                     <Grid ColumnDefinitions="*, Auto" Padding="20">
@@ -20,7 +24,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Grid.Row="1" Text="Provjera buttona" Clicked="OnItemAdded" Margin="20" />
+        <Button Grid.Row="1" Text="Dodaj item" Clicked="OnItemAdded" Margin="20" />
 
     </Grid>
 </ContentPage>
