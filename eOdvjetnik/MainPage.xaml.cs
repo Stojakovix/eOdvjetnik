@@ -2,6 +2,8 @@
 using SMBLibrary;
 using System.Net;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.ApplicationModel.DataTransfer;
+using System.Diagnostics;
 
 namespace eOdvjetnik;
 
@@ -15,17 +17,19 @@ public partial class MainPage : ContentPage
 
         //SMB
         SMB2Client client = new SMB2Client(); // SMB2Client can be used as well
-        bool isConnected = client.Connect(System.Net.IPAddress.Parse("192.168.1.115"), SMBTransportType.DirectTCPTransport);
+        bool isConnected = client.Connect(System.Net.IPAddress.Parse("192.168.1.211"), SMBTransportType.DirectTCPTransport);
         if (isConnected)
         {
-            NTStatus status = client.Login(String.Empty, "robi", "walter");
+            NTStatus status = client.Login(String.Empty, "user", "walter");
             if (status == NTStatus.STATUS_SUCCESS)
             {
                 List <string> shares = client.ListShares(out _);
+                System.Diagnostics.Debug.WriteLine("----------------------------------------------------------------");
                 foreach (var share in shares)
                 {
                     System.Diagnostics.Debug.WriteLine(share);
                 }
+                System.Diagnostics.Debug.WriteLine("----------------------------------------------------------------");
                 var shares2 = "SPOJENO";
                 CounterBtn.Text = shares2;
                 
