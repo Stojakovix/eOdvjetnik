@@ -14,25 +14,32 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 
         //SMB
-        SMB1Client client = new SMB1Client(); // SMB2Client can be used as well
-        bool isConnected = client.Connect(IPAddress.Parse("192.168.1.113"), SMBTransportType.DirectTCPTransport);
+        SMB2Client client = new SMB2Client(); // SMB2Client can be used as well
+        bool isConnected = client.Connect(System.Net.IPAddress.Parse("192.168.1.115"), SMBTransportType.DirectTCPTransport);
         if (isConnected)
         {
             NTStatus status = client.Login(String.Empty, "robi", "walter");
             if (status == NTStatus.STATUS_SUCCESS)
             {
-                var shares = client.ListShares(out status);
+                List <string> shares = client.ListShares(out _);
+                foreach (var share in shares)
+                {
+                    System.Diagnostics.Debug.WriteLine(share);
+                }
                 var shares2 = "SPOJENO";
                 CounterBtn.Text = shares2;
                 
-                client.Logoff();
+                
             }
+            else
+            {
+                DisplayAlert("Connection", "Connection not established", "try again");
+                
+            }
+            client.Logoff();
             client.Disconnect();
         }
-        else {
-            
-            //shares.Text = $"Spojeno {count} ";
-        }
+        
 
 
 
