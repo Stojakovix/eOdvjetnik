@@ -10,7 +10,7 @@ namespace eOdvjetnik;
 public static class Constants
 {
     public const string DatabaseFilename = "DocsDatabase.db3";
-    public static string dbLocation = "C:\\Users\\robi\\Source\\Repos\\robivin\\eOdvjetnik";
+    public static string dbLocation = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 
     public const SQLite.SQLiteOpenFlags Flags =
         SQLite.SQLiteOpenFlags.ReadWrite |

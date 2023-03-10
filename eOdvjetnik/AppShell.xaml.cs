@@ -1,6 +1,7 @@
 ﻿namespace eOdvjetnik;
 using Views;
 
+
 public partial class AppShell : Shell
 {
 	public AppShell()

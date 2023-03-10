@@ -1,9 +1,7 @@
 ﻿using SMBLibrary.Client;
 using SMBLibrary;
-using System.Net;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.ApplicationModel.DataTransfer;
-using System.Diagnostics;
+using eOdvjetnik.Views;
+
 
 namespace eOdvjetnik;
 
@@ -53,24 +51,8 @@ public partial class MainPage : ContentPage
 	private async void OnCounterClicked(object sender, EventArgs e)
 	{
         //await Navigation.PushAsync(new kalendar());
-        await Shell.Current.GoToAsync("Dokumenti");
+        await Shell.Current.GoToAsync("///Dokumenti");
 
-
-        
-
-
-
-
-
-
-
-
-        //if (count == 1)
-        //CounterBtn.Text = $"Spojeno {count} ";
-        //else
-        //CounterBtn.Text = $"Spojeno {count} ";
-
-        //SemanticScreenReader.Announce(CounterBtn.Text);
     }
 }
 

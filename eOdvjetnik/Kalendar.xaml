@@ -10,10 +10,10 @@
 
 
 
-    <scheduler:SfScheduler View="TimelineMonth"
-                           AllowedViews="Day,Week,WorkWeek, Month, TimelineDay, TimelineWeek,TimelineWorkWeek, TimelineMonth, Agenda" 
+    <scheduler:SfScheduler View="Agenda"
+                           AllowedViews="Day,Week,Month,Agenda" 
                            TodayHighlightBrush="Blue"
-                           AppointmentsSource="{Binding SchedulerEvents}">
+                           AppointmentsSource="{Binding SchedulerEvents}" FirstDayOfWeek="Monday">
 
         <scheduler:SfScheduler.BindingContext>
             <local:ControlViewModel></local:ControlViewModel>
