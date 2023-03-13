@@ -24,14 +24,13 @@ public static class MauiProgram
 
             });
 
-#if DEBUG
-		builder.Logging.AddDebug();
+
 		builder.Services.AddSingleton<Dokumenti>();
 		builder.Services.AddTransient<DocsItemPage>();
 
 		builder.Services.AddSingleton<DocsDatabase>();
 
-#endif
+
 
 		return builder.Build();
 	}

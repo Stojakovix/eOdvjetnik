@@ -1,11 +1,15 @@
 using System.Collections.ObjectModel;
 using eOdvjetnik.Data;
 using eOdvjetnik.Models;
+using SMBLibrary;
+using SMBLibrary.Client;
 
 namespace eOdvjetnik.Views;
 
 public partial class Dokumenti : ContentPage
 {
+
+
     DocsDatabase database;
     public ObservableCollection<DocsItem> Items { get; set; } = new();
     public Dokumenti(DocsDatabase docsdatabase)
@@ -13,7 +17,41 @@ public partial class Dokumenti : ContentPage
         InitializeComponent();
         database = docsdatabase;
         BindingContext = this;
+
+
+        //SMB
+        SMB2Client client = new SMB2Client();
+        bool isConnected = client.Connect(System.Net.IPAddress.Parse("192.168.1.115"), SMBTransportType.DirectTCPTransport);
+        if (isConnected)
+        {
+            NTStatus status = client.Login(String.Empty, "robi", "walter");
+            if (status == NTStatus.STATUS_SUCCESS)
+            {
+                List<string> shares = client.ListShares(out _);
+                System.Diagnostics.Debug.WriteLine("----------------------------------------------------------------");
+                foreach (var share in shares)
+                {
+                    System.Diagnostics.Debug.WriteLine(share);
+                }
+                System.Diagnostics.Debug.WriteLine("----------------------------------------------------------------");
+                DisplayAlert("Connection", "Connection established", "ok");
+            }
+            else
+            {
+                DisplayAlert("Connection", "Connection not established", "try again");
+
+            }
+            client.Logoff();
+            client.Disconnect();
+        }
+
     }
+
+    //SMB
+
+   
+    
+
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
