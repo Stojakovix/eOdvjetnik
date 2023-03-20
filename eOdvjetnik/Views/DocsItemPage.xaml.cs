@@ -19,7 +19,7 @@ public partial class DocsItemPage : ContentPage
 	{
 		InitializeComponent();
 		database = docsDatabase;
-		AddDeviceInfo(Item);
+		
 		
 
 		
@@ -47,13 +47,7 @@ public partial class DocsItemPage : ContentPage
 	{
 		await Shell.Current.GoToAsync("..");
 	}
-	async void AddDeviceInfo(object sender)
-	{
-		Item = item;
-		
-
-		await database.SaveItemAsync(Item);
-	}
+	
 }
 
 	

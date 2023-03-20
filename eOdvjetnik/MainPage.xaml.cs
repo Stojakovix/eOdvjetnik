@@ -5,6 +5,9 @@ using System.Diagnostics;
 using Microsoft.Maui.Devices;
 using System.Text;
 using eOdvjetnik.Data;
+using eOdvjetnik.Services;
+using System.Collections.ObjectModel;
+
 
 namespace eOdvjetnik;
 
@@ -16,9 +19,12 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
         ReadDeviceInfo();
-
+        TimeUtils.GetMicroseconds();
         
-    }
+        
+     
+        
+}
 
 	private async void OnCounterClicked(object sender, EventArgs e)
 	{
@@ -51,5 +57,24 @@ public partial class MainPage : ContentPage
         
 
     }
+    public class TimeUtils
+    {
+        private const string url = "https://zadar-ict.hr/eodvjetnik/token.php?token=";
+        private HttpClient _Client = new();
+
+        public static string GetMicroseconds()
+        {
+            double timestamp = Stopwatch.GetTimestamp();
+            double microseconds = 1_000_000.0 * timestamp /Stopwatch.Frequency;
+
+            string RestUrl = "https://zadar-ict.hr/eodvjetnik/token.php?token=" + microseconds;
+            
+
+            return (string)RestUrl;
+        }
+       
+
+    }
+    
 }
 
