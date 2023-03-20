@@ -1,6 +1,8 @@
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace eOdvjetnik.Views;
 
@@ -12,25 +14,59 @@ public partial class Register : ContentPage
 	}
     private const string url = "https://zadar-ict.hr/eodvjetnik/token.php?token=";
     private HttpClient _Client = new HttpClient();
-    private ObservableCollection<User> userCollection;
+    private ObservableCollection<Licence> userCollection;
 
     protected override async void OnAppearing()
     {
 
         base.OnAppearing();
-        Debug.WriteLine("url je--------------------" + url);
-        var httpResponse = await _Client.GetAsync(url);
-      
 
+
+        double timestamp = Stopwatch.GetTimestamp();
+        double microseconds = 1_000_000.0 * timestamp / Stopwatch.Frequency;
+
+         
+
+        Debug.WriteLine("url je--------------------" + url + microseconds);
+        var httpResponse = await _Client.GetAsync(url+ microseconds);
+        //Items = new List<TodoItem>();
+
+        string content = await httpResponse.Content.ReadAsStringAsync();
+        //Items = JsonSerializer.Deserialize<List<TodoItem>>(content, _serializerOptions);
+
+
+        Debug.WriteLine(content);
         if (httpResponse.IsSuccessStatusCode)
         {
+            Debug.WriteLine("Uso u if");
             Response responseData = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
-            userCollection = new ObservableCollection<User>(responseData.Users);
+
+
+
+
+
+            userCollection = new ObservableCollection<Licence>(responseData.Licence);
             User_List.ItemsSource = userCollection;
+            Debug.WriteLine(responseData);
+            Debug.WriteLine(userCollection);
+            Debug.WriteLine(User_List);
+
+
         }
     }
 
-    public class User
+    public class TodoItem
+    {
+        public string Respond { get; set; }
+        public string Licence { get; set; }
+        public string Active { get; set; }
+        
+    }
+
+
+
+
+    public class Licence
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -55,7 +91,7 @@ public partial class Register : ContentPage
 
     public class Response
     {
-        [JsonProperty("page")]
+        [JsonProperty("Response")]
         public int Page { get; set; }
 
         [JsonProperty("per_page")]
@@ -68,6 +104,6 @@ public partial class Register : ContentPage
         public int TotalPages { get; set; }
 
         [JsonProperty("data")]
-        public ObservableCollection<User> Users { get; set; }
+        public ObservableCollection<Licence> Licence { get; set; }
     }
 }
