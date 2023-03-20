@@ -21,7 +21,7 @@ public partial class Dokumenti : ContentPage
 
         //SMB
         SMB2Client client = new SMB2Client();
-        bool isConnected = client.Connect(System.Net.IPAddress.Parse("192.168.1.115"), SMBTransportType.DirectTCPTransport);
+        bool isConnected = client.Connect(System.Net.IPAddress.Parse("192.168.1.103"), SMBTransportType.DirectTCPTransport);
         if (isConnected)
         {
             NTStatus status = client.Login(String.Empty, "robi", "walter");

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -10,7 +11,10 @@ namespace eOdvjetnik
     public static class RestConstants
     {
         //URL of REST service
-        public static string RestUrl = "https://zadar-ict.hr/eodvjetnik/token.php?token={0}";
+        public static long microtime = Stopwatch.GetTimestamp();
+        
+        public static string RestUrl = "https://zadar-ict.hr/eodvjetnik/token.php?token=" + microtime;
+
         // URL of REST service(android does not use localhost)
         // USE http cleartext for local deployment. Change to https for production(release)
       //  public static string LocalHostUrl = DeviceInfo.Platform == DevicePlatform.Android ? "10.0.2.2" : "localhost";

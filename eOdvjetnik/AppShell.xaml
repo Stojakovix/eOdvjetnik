@@ -25,4 +25,9 @@
         ContentTemplate="{DataTemplate views:Dokumenti}"
         Route="Dokumenti"
         />
+    <ShellContent
+        Title="Register"
+        ContentTemplate="{DataTemplate views:Register}"
+        Route="Register"
+        />
 </Shell>
