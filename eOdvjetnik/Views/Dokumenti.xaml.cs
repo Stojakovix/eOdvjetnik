@@ -14,13 +14,19 @@ public partial class Dokumenti : ContentPage
     public ObservableCollection<DocsItem> Items { get; set; } = new();
     public Dokumenti(DocsDatabase docsdatabase)
     {
+
+        
         InitializeComponent();
         database = docsdatabase;
         BindingContext = this;
-
+        /*
 
         //SMB
         SMB2Client client = new SMB2Client();
+
+        
+         
+         
         bool isConnected = client.Connect(System.Net.IPAddress.Parse("192.168.1.115"), SMBTransportType.DirectTCPTransport);
         if (isConnected)
         {
@@ -44,13 +50,13 @@ public partial class Dokumenti : ContentPage
             client.Logoff();
             client.Disconnect();
         }
-
+        */
     }
 
     //SMB
 
-   
-    
+
+
 
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
