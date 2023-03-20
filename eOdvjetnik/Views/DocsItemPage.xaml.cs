@@ -1,6 +1,7 @@
 using eOdvjetnik.Data;
 using eOdvjetnik.Models;
-
+using System.Diagnostics;
+using Microsoft.Maui.Devices;
 
 namespace eOdvjetnik.Views;
 
@@ -18,7 +19,12 @@ public partial class DocsItemPage : ContentPage
 	{
 		InitializeComponent();
 		database = docsDatabase;
+		AddDeviceInfo(Item);
+		
+
+		
 	}
+	
 	async void OnSaveClicked(object sender, EventArgs e)
 	{
 		if (string.IsNullOrWhiteSpace(Item.Name))
@@ -40,6 +46,13 @@ public partial class DocsItemPage : ContentPage
 	async void OnCancelClicked(object sender, EventArgs e)
 	{
 		await Shell.Current.GoToAsync("..");
+	}
+	async void AddDeviceInfo(object sender)
+	{
+		Item = item;
+		
+
+		await database.SaveItemAsync(Item);
 	}
 }
 

@@ -17,7 +17,7 @@ namespace eOdvjetnik.Data
                 return;
 
                 Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-                var result = await Database.CreateTableAsync<DocsItem>();
+            _ = await Database.CreateTableAsync<DocsItem>();
         }
 
         public async Task<List<DocsItem>> GetItemsAsync()
