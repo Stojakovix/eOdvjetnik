@@ -3,6 +3,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text.Json;
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.Maui.Devices;
 
 namespace eOdvjetnik.Views;
 
@@ -24,11 +27,32 @@ public partial class Register : ContentPage
 
         double timestamp = Stopwatch.GetTimestamp();
         double microseconds = 1_000_000.0 * timestamp / Stopwatch.Frequency;
+        string hashedData= ComputeSha256Hash(microseconds.ToString());
+        // ----------------- platform ispod --------------
+        var device = DeviceInfo.Current.Platform;
+        
 
-         
+        static string ComputeSha256Hash(string rawData)
+        {
+            // Create a SHA256   
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
 
-        Debug.WriteLine("url je--------------------" + url + microseconds);
-        var httpResponse = await _Client.GetAsync(url+ microseconds);
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
+
+        
+        Debug.WriteLine("url je--------------------" + url + hashedData + device);
+        var httpResponse = await _Client.GetAsync(url+ hashedData + device);
         //Items = new List<TodoItem>();
 
         string content = await httpResponse.Content.ReadAsStringAsync();
