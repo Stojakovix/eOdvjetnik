@@ -11,10 +11,10 @@ namespace eOdvjetnik.Views;
 
 public partial class Register : ContentPage
 {
-	public Register()
-	{
-		InitializeComponent();
-	}
+    public Register()
+    {
+        InitializeComponent();
+    }
     private const string url = "https://zadar-ict.hr/eodvjetnik/token.php?token=";
     private HttpClient _Client = new HttpClient();
     private ObservableCollection<Licence> userCollection;
@@ -27,10 +27,10 @@ public partial class Register : ContentPage
 
         double timestamp = Stopwatch.GetTimestamp();
         double microseconds = 1_000_000.0 * timestamp / Stopwatch.Frequency;
-        string hashedData= ComputeSha256Hash(microseconds.ToString());
+        string hashedData = ComputeSha256Hash(microseconds.ToString());
         // ----------------- platform ispod --------------
         var device = DeviceInfo.Current.Platform;
-        
+
 
         static string ComputeSha256Hash(string rawData)
         {
@@ -50,9 +50,9 @@ public partial class Register : ContentPage
             }
         }
 
-        
+
         Debug.WriteLine("url je--------------------" + url + hashedData + device);
-        var httpResponse = await _Client.GetAsync(url+ hashedData + device);
+        var httpResponse = await _Client.GetAsync(url + hashedData + device);
         //Items = new List<TodoItem>();
 
         string content = await httpResponse.Content.ReadAsStringAsync();
@@ -69,11 +69,11 @@ public partial class Register : ContentPage
 
 
 
-            userCollection = new ObservableCollection<Licence>(responseData.Licence);
-            User_List.ItemsSource = userCollection;
-            Debug.WriteLine(responseData);
-            Debug.WriteLine(userCollection);
-            Debug.WriteLine(User_List);
+            //userCollection = new ObservableCollection<Licence>(responseData.Licence);
+            //User_List.ItemsSource = userCollection;
+            //Debug.WriteLine(responseData);
+            //Debug.WriteLine(userCollection);
+            //Debug.WriteLine(User_List);
 
 
         }
@@ -84,7 +84,7 @@ public partial class Register : ContentPage
         public string Respond { get; set; }
         public string Licence { get; set; }
         public string Active { get; set; }
-        
+
     }
 
 
