@@ -65,7 +65,7 @@ public partial class Register : ContentPage
             string content = await httpResponse.Content.ReadAsStringAsync();
             Debug.WriteLine(content);
             Debug.WriteLine("Uso u if");
-            /*
+            
 
             Response responseData = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
 
@@ -93,7 +93,7 @@ public partial class Register : ContentPage
 
 
 
-    /*
+    
     public class Licence
     {
         [JsonProperty("id")]
@@ -133,5 +133,5 @@ public partial class Register : ContentPage
 
         [JsonProperty("data")]
         public ObservableCollection<Licence> Licence { get; set; }
-    }*/
+    }
 }
