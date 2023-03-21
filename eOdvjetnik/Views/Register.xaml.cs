@@ -14,7 +14,7 @@ public partial class Register : ContentPage
 	}
     private const string url = "https://zadar-ict.hr/eodvjetnik/token.php?token=";
     private HttpClient _Client = new HttpClient();
-    private ObservableCollection<Licence> userCollection;
+    //private ObservableCollection<Licence> userCollection;
 
     protected override async void OnAppearing()
     {
@@ -31,26 +31,30 @@ public partial class Register : ContentPage
         var httpResponse = await _Client.GetAsync(url+ microseconds);
         //Items = new List<TodoItem>();
 
-        string content = await httpResponse.Content.ReadAsStringAsync();
         //Items = JsonSerializer.Deserialize<List<TodoItem>>(content, _serializerOptions);
 
 
-        Debug.WriteLine(content);
+        
         if (httpResponse.IsSuccessStatusCode)
         {
+
+            string content = await httpResponse.Content.ReadAsStringAsync();
+            Debug.WriteLine(content);
             Debug.WriteLine("Uso u if");
+            /*
+
             Response responseData = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
 
 
 
 
-
+            
             userCollection = new ObservableCollection<Licence>(responseData.Licence);
             User_List.ItemsSource = userCollection;
             Debug.WriteLine(responseData);
             Debug.WriteLine(userCollection);
             Debug.WriteLine(User_List);
-
+            */
 
         }
     }
@@ -65,7 +69,7 @@ public partial class Register : ContentPage
 
 
 
-
+    /*
     public class Licence
     {
         [JsonProperty("id")]
@@ -105,5 +109,5 @@ public partial class Register : ContentPage
 
         [JsonProperty("data")]
         public ObservableCollection<Licence> Licence { get; set; }
-    }
+    }*/
 }
