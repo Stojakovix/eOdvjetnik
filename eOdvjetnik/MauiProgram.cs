@@ -29,6 +29,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<DocsItemPage>();
 
 		builder.Services.AddSingleton<DocsDatabase>();
+		builder.Services.AddSingleton<DeviceIdDatabase>();
 
 
 

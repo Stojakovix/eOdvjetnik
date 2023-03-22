@@ -6,53 +6,65 @@ using System.Text.Json;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Maui.Devices;
+using System.ComponentModel.DataAnnotations.Schema;
+using eOdvjetnik.Data;
 
 namespace eOdvjetnik.Views;
 
 public partial class Register : ContentPage
 {
+    DeviceIdDatabase database;
     public Register()
     {
         InitializeComponent();
+       // database = deviceIdDatabase;
     }
     private const string url = "https://zadar-ict.hr/eodvjetnik/token.php?token=";
     private HttpClient _Client = new HttpClient();
-    //private ObservableCollection<Licence> userCollection;
+
+
+    public static string GetMicroSeconds()
+    {
+        double timestamp = Stopwatch.GetTimestamp();
+        double microseconds = 1_000_000.0 * timestamp / Stopwatch.Frequency;
+        string hashedData = ComputeSha256Hash(microseconds.ToString());
+        return hashedData;
+    }
+    static string ComputeSha256Hash(string rawData)
+    {
+        // Create a SHA256   
+        using (SHA256 sha256Hash = SHA256.Create())
+        {
+            // ComputeHash - returns byte array  
+            byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+            // Convert byte array to a string   
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                builder.Append(bytes[i].ToString("x2"));
+            }
+            return builder.ToString();
+        }
+
+    }
+
 
     protected override async void OnAppearing()
     {
 
         base.OnAppearing();
 
-
-        double timestamp = Stopwatch.GetTimestamp();
-        double microseconds = 1_000_000.0 * timestamp / Stopwatch.Frequency;
-        string hashedData = ComputeSha256Hash(microseconds.ToString());
         // ----------------- platform ispod --------------
         var device = DeviceInfo.Current.Platform;
 
+        
 
-        static string ComputeSha256Hash(string rawData)
-        {
-            // Create a SHA256   
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                // ComputeHash - returns byte array  
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
-
-                // Convert byte array to a string   
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    builder.Append(bytes[i].ToString("x2"));
-                }
-                return builder.ToString();
-            }
-        }
+        
 
 
-        Debug.WriteLine("url je--------------------" + url + hashedData + device);
-        var httpResponse = await _Client.GetAsync(url + hashedData + device);
+        Debug.WriteLine("url je--------------------" + url + GetMicroSeconds() + device);
+        var httpResponse = await _Client.GetAsync(url + GetMicroSeconds() + device);
         //Items = new List<TodoItem>();
 
         //Items = JsonSerializer.Deserialize<List<TodoItem>>(content, _serializerOptions);
@@ -67,18 +79,7 @@ public partial class Register : ContentPage
             Debug.WriteLine("Uso u if");
             
 
-            Response responseData = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
-
-
-
-
-
-            //userCollection = new ObservableCollection<Licence>(responseData.Licence);
-            //User_List.ItemsSource = userCollection;
-            //Debug.WriteLine(responseData);
-            //Debug.WriteLine(userCollection);
-            //Debug.WriteLine(User_List);
-
+            Response _ = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
 
         }
     }

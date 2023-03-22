@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using eOdvjetnik.Models;
 
+
 namespace eOdvjetnik.Data
 {
     public class DocsDatabase
@@ -37,7 +38,7 @@ namespace eOdvjetnik.Data
         }
         public async Task<int> SaveItemAsync(DocsItem item)
         {
-            await Init();
+            
             if(item.ID != 0)
             {
                 return await Database.UpdateAsync(item);
