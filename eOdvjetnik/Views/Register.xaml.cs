@@ -15,7 +15,7 @@ public partial class Register : ContentPage
 {
     DocsDatabase database;
 
-    //public ObservableCollection<Licence> Items { get; set; } = new();
+    public ObservableCollection<Licence> Items { get; set; } = new();
 
     public Register()//DocsDatabase docsdatabase
     {
