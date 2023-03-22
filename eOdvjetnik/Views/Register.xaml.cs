@@ -1,34 +1,46 @@
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
+//using System.ComponentModel;
 using System.Diagnostics;
 using System.Text.Json;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Maui.Devices;
-using System.ComponentModel.DataAnnotations.Schema;
 using eOdvjetnik.Data;
+using eOdvjetnik.Models;
 
 namespace eOdvjetnik.Views;
 
 public partial class Register : ContentPage
 {
-    DeviceIdDatabase database;
-    public Register()
+    DocsDatabase database;
+    public ObservableCollection<License> Items { get; set; } = new();
+    public Register(DocsDatabase docsdatabase)
     {
         InitializeComponent();
-       // database = deviceIdDatabase;
+        database = docsdatabase;
+        Debug.WriteLine("inicijal");
+
+        
+    }
+
+    public License Item
+    {
+        get => BindingContext as License;
+        set => BindingContext = value;
     }
     private const string url = "https://zadar-ict.hr/eodvjetnik/token.php?token=";
     private HttpClient _Client = new HttpClient();
+    
 
 
     public static string GetMicroSeconds()
     {
         double timestamp = Stopwatch.GetTimestamp();
         double microseconds = 1_000_000.0 * timestamp / Stopwatch.Frequency;
-        string hashedData = ComputeSha256Hash(microseconds.ToString());
+        string hashedData = ComputeSha256Hash(microseconds.ToString());  
         return hashedData;
+        
     }
     static string ComputeSha256Hash(string rawData)
     {
@@ -54,17 +66,11 @@ public partial class Register : ContentPage
     {
 
         base.OnAppearing();
-
+        var time = GetMicroSeconds();
         // ----------------- platform ispod --------------
         var device = DeviceInfo.Current.Platform;
-
-        
-
-        
-
-
-        Debug.WriteLine("url je--------------------" + url + GetMicroSeconds() + device);
-        var httpResponse = await _Client.GetAsync(url + GetMicroSeconds() + device);
+        Debug.WriteLine("url je--------------------" + url + time + device);
+        var httpResponse = await _Client.GetAsync(url + time + device);
         //Items = new List<TodoItem>();
 
         //Items = JsonSerializer.Deserialize<List<TodoItem>>(content, _serializerOptions);
@@ -77,9 +83,8 @@ public partial class Register : ContentPage
             string content = await httpResponse.Content.ReadAsStringAsync();
             Debug.WriteLine(content);
             Debug.WriteLine("Uso u if");
-            
-
-            Response _ = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
+           // Response _ = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
+           // await database.SaveLicenseAsync(Models.License);
 
         }
     }
@@ -118,21 +123,21 @@ public partial class Register : ContentPage
         }
     }
 
-    public class Response
-    {
-        [JsonProperty("Response")]
-        public int Page { get; set; }
+    //public class Response
+    //{
+    //    [JsonProperty("Response")]
+    //    public int Page { get; set; }
 
-        [JsonProperty("per_page")]
-        public int PerPage { get; set; }
+    //    [JsonProperty("per_page")]
+    //    public int PerPage { get; set; }
 
-        [JsonProperty("total")]
-        public int Total { get; set; }
+    //    [JsonProperty("total")]
+    //    public int Total { get; set; }
 
-        [JsonProperty("total_pages")]
-        public int TotalPages { get; set; }
+    //    [JsonProperty("total_pages")]
+    //    public int TotalPages { get; set; }
 
-        [JsonProperty("data")]
-        public ObservableCollection<Licence> Licence { get; set; }
-    }
+    //    [JsonProperty("data")]
+    //    public ObservableCollection<Licence> Licence { get; set; }
+    //}
 }

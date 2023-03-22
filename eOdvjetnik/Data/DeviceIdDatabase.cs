@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using eOdvjetnik.Models;
 using System;
+using System.Diagnostics;
 
 namespace eOdvjetnik.Data
 {
@@ -16,10 +17,10 @@ namespace eOdvjetnik.Data
         {
 
         }
-        
+  
         public async Task Init()
         {
-            
+            Debug.WriteLine("-----------------------inicijaliziro bazu");
             if (Database is not null)
                 return;
             Database = new SQLiteAsyncConnection("C:\\Users\\robi\\Source\\Repos\\eOdvjetnik\\eOdvjetnik", Constants.Flags);

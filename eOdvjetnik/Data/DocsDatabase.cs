@@ -19,6 +19,7 @@ namespace eOdvjetnik.Data
 
                 Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
             _ = await Database.CreateTableAsync<DocsItem>();
+            _ = await Database.CreateTableAsync<License>();
         }
 
         public async Task<List<DocsItem>> GetItemsAsync()
@@ -52,6 +53,19 @@ namespace eOdvjetnik.Data
         {
             await Init();
             return await Database.DeleteAsync(item);
+        }
+
+        public async Task<int> SaveLicenseAsync(License item)
+        {
+
+            if (item.ID != 0)
+            {
+                return await Database.UpdateAsync(item);
+            }
+            else
+            {
+                return await Database.InsertAsync(item);
+            }
         }
     }
 }
