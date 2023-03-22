@@ -6,10 +6,17 @@ using SMBLibrary.Client;
 
 namespace eOdvjetnik.Views;
 
+
+
+
+
+
 public partial class Dokumenti : ContentPage
 {
     DocsDatabase database;
+
     public ObservableCollection<DocsItem> Items { get; set; } = new();
+
     public Dokumenti(DocsDatabase docsdatabase)
     {
 

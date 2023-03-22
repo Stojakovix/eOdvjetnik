@@ -1,34 +1,37 @@
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
-//using System.ComponentModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Text.Json;
 using System.Security.Cryptography;
 using System.Text;
-using Microsoft.Maui.Devices;
-using eOdvjetnik.Data;
-using eOdvjetnik.Models;
+//using Microsoft.Maui.Devices;
+//using eOdvjetnik.Data;
+//using eOdvjetnik.Models;
 
 namespace eOdvjetnik.Views;
 
 public partial class Register : ContentPage
 {
-    DocsDatabase database;
-    public ObservableCollection<License> Items { get; set; } = new();
-    public Register(DocsDatabase docsdatabase)
+    //DocsDatabase database;
+
+    //public ObservableCollection<Licence> Items { get; set; } = new();
+
+    public Register()//DocsDatabase docsdatabase
     {
-        InitializeComponent();
-        database = docsdatabase;
+        //InitializeComponent();
+        //database = docsdatabase;
         Debug.WriteLine("inicijal");
 
         
     }
-
-    public License Item
+    /*
+    public Licence Item
     {
-        get => BindingContext as License;
+        get => BindingContext as Licence;
         set => BindingContext = value;
     }
+    */
     private const string url = "https://zadar-ict.hr/eodvjetnik/token.php?token=";
     private HttpClient _Client = new HttpClient();
     
@@ -98,7 +101,7 @@ public partial class Register : ContentPage
     }
 
 
-
+    /*
     
     public class Licence
     {
@@ -121,7 +124,7 @@ public partial class Register : ContentPage
         {
             get { return $"{FirstName} {LastName}"; }
         }
-    }
+    }*/
 
     //public class Response
     //{
