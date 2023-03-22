@@ -5,15 +5,15 @@ using System.Diagnostics;
 using System.Text.Json;
 using System.Security.Cryptography;
 using System.Text;
-//using Microsoft.Maui.Devices;
-//using eOdvjetnik.Data;
-//using eOdvjetnik.Models;
+using Microsoft.Maui.Devices;
+using eOdvjetnik.Data;
+using eOdvjetnik.Models;
 
 namespace eOdvjetnik.Views;
 
 public partial class Register : ContentPage
 {
-    //DocsDatabase database;
+    DocsDatabase database;
 
     //public ObservableCollection<Licence> Items { get; set; } = new();
 
