@@ -19,7 +19,7 @@ namespace eOdvjetnik.Data
 
                 Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
             _ = await Database.CreateTableAsync<DocsItem>();
-            _ = await Database.CreateTableAsync<Licence>();
+            _ = await Database.CreateTableAsync<DeviceIdItem>();
         }
 
         public async Task<List<DocsItem>> GetItemsAsync()
@@ -55,7 +55,7 @@ namespace eOdvjetnik.Data
             return await Database.DeleteAsync(item);
         }
 
-        public async Task<int> SaveLicenceAsync(Licence item)
+        public async Task<int> SaveLicenceAsync(DeviceIdItem item)
         {
 
             if (item.ID != 0)

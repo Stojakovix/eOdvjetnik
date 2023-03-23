@@ -79,6 +79,7 @@ public partial class Dokumenti : ContentPage
     async void OnItemAdded(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(DocsItemPage), true, new Dictionary<string, object>
+        
         {
             ["Item"] = new DocsItem()
         });

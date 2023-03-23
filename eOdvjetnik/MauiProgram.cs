@@ -2,6 +2,8 @@
 using Syncfusion.Maui.Core.Hosting;
 using eOdvjetnik.Data;
 using eOdvjetnik.Views;
+using eOdvjetnik.Services;
+using Microsoft.Maui.Storage;
 //using Microsoft.UI.Xaml.Documents;
 //using Microsoft.UI;
 
@@ -23,9 +25,10 @@ public static class MauiProgram
                 fonts.AddFont("SF - Pro - Display - Bold.otf", "SF-Pro-Display-Bold");
 
             });
+        
 
 
-		builder.Services.AddSingleton<Dokumenti>();
+        builder.Services.AddSingleton<Dokumenti>();
 		builder.Services.AddTransient<DocsItemPage>();
 
 		builder.Services.AddSingleton<DocsDatabase>();

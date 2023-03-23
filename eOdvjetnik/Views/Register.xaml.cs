@@ -13,25 +13,25 @@ namespace eOdvjetnik.Views;
 
 public partial class Register : ContentPage
 {
-    DocsDatabase database;
+    DeviceIdDatabase database;
+    
 
-    public ObservableCollection<Licence> Items { get; set; } = new();
+    public ObservableCollection<DeviceIdItem> Items { get; set; } = new();
 
     public Register()//DocsDatabase docsdatabase
     {
-        //InitializeComponent();
-        //database = docsdatabase;
+        InitializeComponent();
+        database = new DeviceIdDatabase();
         Debug.WriteLine("inicijal");
-
-        
+        Debug.WriteLine(Item);
     }
-    /*
-    public Licence Item
+    
+    public DeviceIdItem Item
     {
-        get => BindingContext as Licence;
+        get => BindingContext as DeviceIdItem;
         set => BindingContext = value;
     }
-    */
+    
     private const string url = "https://zadar-ict.hr/eodvjetnik/token.php?token=";
     private HttpClient _Client = new HttpClient();
     
@@ -41,7 +41,8 @@ public partial class Register : ContentPage
     {
         double timestamp = Stopwatch.GetTimestamp();
         double microseconds = 1_000_000.0 * timestamp / Stopwatch.Frequency;
-        string hashedData = ComputeSha256Hash(microseconds.ToString());  
+        string hashedData = ComputeSha256Hash(microseconds.ToString()); 
+        
         return hashedData;
         
     }
@@ -86,9 +87,14 @@ public partial class Register : ContentPage
             string content = await httpResponse.Content.ReadAsStringAsync();
             Debug.WriteLine(content);
             Debug.WriteLine("Uso u if");
-           // Response _ = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
-           // await database.SaveLicenseAsync(Models.License);
-
+            // Response _ = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
+            // await database.SaveLicenseAsync(Models.License);
+            await database.SaveItemAsync(Item);
+            
+        }
+        else
+        {
+            Debug.WriteLine("Nije uspio response");
         }
     }
 

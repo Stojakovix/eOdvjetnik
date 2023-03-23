@@ -15,11 +15,5 @@ namespace eOdvjetnik.Models
         public string Notes { get; set; }
         public bool Done { get; set; }
     }
-    public class Licence
-    {
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
-        public string HID{ get; set; }
-        
-    }
+    
 }
