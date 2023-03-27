@@ -3,7 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              x:Class="eOdvjetnik.MainPage">
-    
+
+    <ContentPage.Resources>
+        <StyleSheet>
+            <![CDATA[
+            ^button {
+                background-color: #007acc;
+
+                
+            }
+            ]]>
+        </StyleSheet>
+    </ContentPage.Resources>
+
     <ScrollView>
         <VerticalStackLayout>
 
@@ -23,17 +35,30 @@
             <Label
                 Text="VPN server"
                 SemanticProperties.HeadingLevel="Level2"
-                
                 SemanticProperties.Description="NAS server"
                 FontSize="18"
                 HorizontalOptions="Center" />
             <Button
                 x:Name="CounterBtn"
+                StyleClass="my-button"
                 Text="Spoji se"
                 SemanticProperties.Hint="Spoji se"
                 Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-           
+                HorizontalOptions="Center" >
+                <!--<Button.Style>  !XML NAČIN DODAVANJA STILA!
+                    <Style TargetType="Button">
+                        <Setter Property="BackgroundColor" Value="#007acc" />
+                        <Setter Property="TextColor" Value="White" />
+                        
+                        <Setter Property="Padding" Value="10, 20" />
+                        <Setter Property="FontSize" Value="16" />
+                        <Setter Property="FontAttributes" Value="Bold" />
+                        
+                        <Setter Property="TextTransform" Value="Uppercase" />
+                    </Style>
+                </Button.Style>-->
+            </Button>
+
 
 
         </VerticalStackLayout>

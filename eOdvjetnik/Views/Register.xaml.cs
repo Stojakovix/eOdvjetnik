@@ -21,18 +21,17 @@ public partial class Register : ContentPage
     public Register()//DocsDatabase docsdatabase
     {
         InitializeComponent();
-        database = new DeviceIdDatabase();
         Debug.WriteLine("inicijal");
-        Debug.WriteLine(Item);
+        
     }
-    
+    /*
     public DeviceIdItem Item
     {
         get => BindingContext as DeviceIdItem;
         set => BindingContext = value;
     }
-    
-    private const string url = "https://zadar-ict.hr/eodvjetnik/token.php?token=";
+    */
+    private const string url = "https://cc.eodvjetnik.hr/token.json?token=";
     private HttpClient _Client = new HttpClient();
     
 
@@ -73,23 +72,39 @@ public partial class Register : ContentPage
         var time = GetMicroSeconds();
         // ----------------- platform ispod --------------
         var device = DeviceInfo.Current.Platform;
-        Debug.WriteLine("url je--------------------" + url + time + device);
-        var httpResponse = await _Client.GetAsync(url + time + device);
+        Debug.WriteLine("url je--------------------" + url + time);
+        var httpResponse = await _Client.GetAsync(url + time);
         //Items = new List<TodoItem>();
 
         //Items = JsonSerializer.Deserialize<List<TodoItem>>(content, _serializerOptions);
+        database.Add(new DeviceIdItem
+        {
+            HID = time
+        });
 
-
+        /*
+         
+            public class DeviceIdItem
+    {
+        [PrimaryKey, AutoIncrement]
+        public int ID { get; set; }
+        public string HID{ get; set; }
         
+    }
+         */
+
+
+
         if (httpResponse.IsSuccessStatusCode)
         {
 
             string content = await httpResponse.Content.ReadAsStringAsync();
             Debug.WriteLine(content);
-            Debug.WriteLine("Uso u if");
+            //Debug.WriteLine("Uso u if" + Item);
             // Response _ = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
             // await database.SaveLicenseAsync(Models.License);
-            await database.SaveItemAsync(Item);
+
+            //await database.SaveItemAsync(Item);
             
         }
         else

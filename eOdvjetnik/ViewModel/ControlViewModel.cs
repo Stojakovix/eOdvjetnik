@@ -13,7 +13,7 @@ namespace sample
     {
         public ObservableCollection<SchedulerAppointment> SchedulerEvents { get; set; }
         public  ControlViewModel() {
-            this.SchedulerEvents = new ObservableCollection<SchedulerAppointment>
+            SchedulerEvents = new ObservableCollection<SchedulerAppointment>
             {
                 new SchedulerAppointment
                 {

@@ -32,10 +32,13 @@ public static class MauiProgram
 		builder.Services.AddTransient<DocsItemPage>();
 
 		builder.Services.AddSingleton<DocsDatabase>();
-		builder.Services.AddSingleton<DeviceIdDatabase>();
+		
+
+        string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Licence.db3");
+
+        builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<DeviceIdDatabase>(s, dbPath));
 
 
-
-		return builder.Build();
+        return builder.Build();
 	}
 }
