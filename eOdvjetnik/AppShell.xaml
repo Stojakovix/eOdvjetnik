@@ -16,7 +16,7 @@
 
     <ShellContent
         Title="Kalendar"
-        ContentTemplate="{DataTemplate local:Kalendar}"
+        ContentTemplate="{DataTemplate views:Kalendar}"
         Route="Kalendar"
         />
 
