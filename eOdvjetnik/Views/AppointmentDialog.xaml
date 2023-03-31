@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:scheduler="clr-namespace:Syncfusion.Maui.Scheduler;assembly=Syncfusion.Maui.Scheduler"
+             x:Class="eOdvjetnik.Views.AppointmentDialog"
+             Title="AppointmentDialog">
+
+
+    <StackLayout>
+        <Label Text="New Appointment" FontAttributes="Bold" HorizontalOptions="Center" />
+        <Entry x:Name="SubjectEntry" Placeholder="Subject" />
+        <DatePicker x:Name="StartDatePicker" />
+        <TimePicker x:Name="StartTimePicker" />
+        <DatePicker x:Name="EndDatePicker" />
+        <TimePicker x:Name="EndTimePicker" />
+        
+        <Button Text="Add" Clicked="Add_Clicked" />
+        <Button Text="Cancel" Clicked="Cancel_Clicked"/>
+    </StackLayout>
+
+</ContentPage>
