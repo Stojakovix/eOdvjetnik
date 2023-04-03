@@ -7,128 +7,36 @@
              Title="Kalendar"
              xmlns:local="clr-namespace:eOdvjetnik.Views"
              xmlns:syncTheme="clr-namespace:Syncfusion.Maui.Themes;assembly=Syncfusion.Maui.Core"
+             xmlns:viewModel="clr-namespace:eOdvjetnik.ViewModel"
              
              >
-    
+
 
 
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-        <Grid.Resources>
-            <DataTemplate x:Key="dayAppointmentTemplate">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.1*"/>
-                        <RowDefinition Height="0.8*"/>
-                        <RowDefinition Height="0.1*"/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" Background="{Binding Data.Background}" IsClippedToBounds="True">
-                        <Label Text="{Binding Data.EventName}" VerticalOptions="Center" TextColor="White" LineBreakMode="WordWrap" MaxLines="1" FontSize="Caption" FontAttributes="Bold" Margin="5,5,5,0"/>
-                    </Grid>
-                    <Grid Grid.Row="1" Background="{Binding Data.Background}" Opacity="0.8" IsClippedToBounds="True" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0.3*"/>
-                            <RowDefinition Height="0.7*"/>
-                        </Grid.RowDefinitions>
-                        <Image Aspect="AspectFit" VerticalOptions="Center" Margin="0, 10, 0, 10" HorizontalOptions="Center" HeightRequest="{OnPlatform Android= 30, iOS=30, MacCatalyst=50}" WidthRequest="{OnPlatform Android= 30, iOS=30, MacCatalyst=50}" Source="{Binding Data.Location}"/>
-                        <Label Text="{Binding Data.Notes}" Grid.Row="1" TextColor="White" LineBreakMode="WordWrap" Margin="3,3,3,0" FontSize="10" />
-                    </Grid>
-                    <BoxView Grid.Row="2" Background="{Binding Data.Background}"/>
-                </Grid>
 
-            </DataTemplate>
-
-            <DataTemplate x:Key="monthAppointmentTemplate">
-                <Grid Margin="2,1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.1*"/>
-                        <ColumnDefinition Width="0.9*"/>
-                    </Grid.ColumnDefinitions>
-                    <Border StrokeThickness="1" Stroke="{Binding Data.Background}" Background="{Binding Data.Background}" Padding="0" Margin="0" Opacity="0.8">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="5, 0, 5, 0" />
-                        </Border.StrokeShape>
-                    </Border>
-                    <Border Grid.Column="1" Background="{Binding Data.Background}" Padding="0" Margin="-1, 0, 0, 0" StrokeThickness="1" Stroke="{Binding Data.Background}">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="0, 5, 0, 5" />
-                        </Border.StrokeShape>
-                        <Label Padding="3, 0, 0, 0" HorizontalTextAlignment="Start" Text="{Binding Data.EventName}" FontSize="10" FontAttributes="Bold" MaxLines="1" TextColor="White" LineBreakMode="WordWrap" HorizontalOptions="Start"  VerticalOptions="Center" />
-                    </Border>
-                </Grid>
-            </DataTemplate>
-
-            <DataTemplate x:Key="timelineAppointmentTemplate">
-                <Grid Margin="2,1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.1*"/>
-                        <ColumnDefinition Width="0.9*"/>
-                    </Grid.ColumnDefinitions>
-                    <Border StrokeThickness="1" Stroke="{Binding Data.Background}" Background="{Binding Data.Background}" Padding="0" Margin="0" Opacity="0.8">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="5, 0, 5, 0" />
-                        </Border.StrokeShape>
-                    </Border>
-                    <Border Grid.Column="1" Background="{Binding Data.Background}" Padding="0" Margin="-1, 0, 0, 0" StrokeThickness="1" Stroke="{Binding Data.Background}">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="0, 5, 0, 5" />
-                        </Border.StrokeShape>
-                        <Label HorizontalTextAlignment="Center" Text="{Binding Data.EventName}" FontSize="10" FontAttributes="Bold"  TextColor="White" LineBreakMode="WordWrap" HorizontalOptions="Center"  VerticalOptions="Center" />
-                    </Border>
-                </Grid>
-            </DataTemplate>
-        </Grid.Resources>
         <scheduler:SfScheduler x:Name="Scheduler" 
-                               View="Day"
-                               AllowedViews="Day,Week,WorkWeek,Agenda,Month" AutomationProperties.IsInAccessibleTree="False" CalendarType="Gregorian" FirstDayOfWeek="Monday" Visual=""
-                               SelectedCellBackground="Orange"
-                               TodayHighlightBrush="Red"
+                               View="Agenda"
+                               AllowedViews="Day,Week,WorkWeek,Agenda,Month"  
+                               CalendarType="Gregorian" 
+                               FirstDayOfWeek="Monday"
+                               AppointmentsSource ="{Binding Appointments}"
+                               Tapped="Scheduler_Tapped"
+                               BackgroundColor="white"
                                
-                              
                                >
-            <scheduler:SfScheduler.HeaderView>
-                <scheduler:SchedulerHeaderView
-                    Height="50"
-                    />
-            </scheduler:SfScheduler.HeaderView>
             <scheduler:SfScheduler.AppointmentMapping>
                 <scheduler:SchedulerAppointmentMapping
-                        Subject="EventName"
-                        StartTime="From"
-                        EndTime="To"
-                        Background="Background"
-                        IsAllDay="IsAllDay"
-                        StartTimeZone="StartTimeZone"
-                        EndTimeZone="EndTimeZone"
-                        RecurrenceExceptionDates="RecurrenceExceptions"
-                        RecurrenceRule="RecurrenceRule"
-                        RecurrenceId="RecurrenceId"/>
+              
+                StartTime="StartTime"
+                
+                />
             </scheduler:SfScheduler.AppointmentMapping>
-            <scheduler:SfScheduler.MonthView>
-                <scheduler:SchedulerMonthView AppointmentTemplate="{StaticResource Key=monthAppointmentTemplate}"
-                                AppointmentDisplayMode="Text" />
-            </scheduler:SfScheduler.MonthView>
-            <scheduler:SfScheduler.TimelineView>
-                <scheduler:SchedulerTimelineView
-                                AppointmentTemplate="{StaticResource Key=timelineAppointmentTemplate}" 
-                                
-                    />
-                    
-            </scheduler:SfScheduler.TimelineView>
-            
-            <scheduler:SfScheduler.DaysView>
-                <scheduler:SchedulerDaysView
-                                 AppointmentTemplate="{StaticResource Key=dayAppointmentTemplate}"
-                                 
-                    />
-            </scheduler:SfScheduler.DaysView>
-            <scheduler:SfScheduler.Behaviors>
-				<local:AppearanceCustomizationBehavior/>
-            </scheduler:SfScheduler.Behaviors>
+            <scheduler:SfScheduler.BindingContext>
+                <local:AppointmentDialog/>
+            </scheduler:SfScheduler.BindingContext>
+
         </scheduler:SfScheduler>
     </Grid>
 

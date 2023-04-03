@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
+             x:Class="eOdvjetnik.Views.AppointmentDialog"
+             Title="AppointmentDialog"
+             xmlns:local ="clr-namespace:eOdvjetnik.Models"
+             x:DataType="local:Meeting"
+             >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Entry Grid.Row="0" Placeholder="Event Name" Text="{Binding EventName}" />
+        <controls:TimePicker Grid.Row="1" Time="{Binding StartTime}" />
+        <controls:TimePicker Grid.Row="2" Time="{Binding EndTime}" />
+        <Button Grid.Row="3" Text="Save" Clicked="Save_Clicked" />
+    </Grid>
+</ContentPage>
