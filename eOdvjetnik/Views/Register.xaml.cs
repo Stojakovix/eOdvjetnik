@@ -82,6 +82,7 @@ public partial class Register : ContentPage
             var httpResponse = await _Client.GetAsync(url + time);
             //Items = new List<TodoItem>();
 
+            //Sprema u preferences index neku vrijednost iz varijable
             Preferences.Set("key", time);
             Debug.WriteLine("spremio u preferences");
             string preferencesKey = Preferences.Get("key", "default_value");
@@ -94,17 +95,6 @@ public partial class Register : ContentPage
             {
                 HID = time
             });
-
-            /*
-
-                public class DeviceIdItem
-        {
-            [PrimaryKey, AutoIncrement]
-            public int ID { get; set; }
-            public string HID{ get; set; }
-
-        }
-             */
 
 
 
