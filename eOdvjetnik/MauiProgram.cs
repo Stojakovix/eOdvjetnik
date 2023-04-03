@@ -32,7 +32,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<DocsItemPage>();
 		
 		builder.Services.AddSingleton<Kalendar>();
-		builder.Services.AddTransient<AppointmentDialog>();
+		//builder.Services.AddTransient<AppointmentDialog>();
+		
 
 		builder.Services.AddSingleton<DocsDatabase>();
 		

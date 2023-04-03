@@ -7,6 +7,7 @@
              Title="Kalendar"
              xmlns:local="clr-namespace:eOdvjetnik.Views"
              xmlns:syncTheme="clr-namespace:Syncfusion.Maui.Themes;assembly=Syncfusion.Maui.Core"
+             xmlns:viewModel="clr-namespace:eOdvjetnik.ViewModel"
              
              >
 
@@ -14,31 +15,26 @@
 
 
     <Grid>
-        
+
         <scheduler:SfScheduler x:Name="Scheduler" 
-                               View="Day"
-                               AllowedViews="Day,Week,WorkWeek,Agenda,Month" 
-                               AutomationProperties.IsInAccessibleTree="False" 
+                               View="Agenda"
+                               AllowedViews="Day,Week,WorkWeek,Agenda,Month"  
                                CalendarType="Gregorian" 
                                FirstDayOfWeek="Monday"
-                               Tapped="AddAppointment_Clicked"
-                               AppointmentsSource="AppointmentDialog"
+                               AppointmentsSource ="{Binding Appointments}"
+                               Tapped="Scheduler_Tapped"
+                               BackgroundColor="white"
+                               
                                >
             <scheduler:SfScheduler.AppointmentMapping>
                 <scheduler:SchedulerAppointmentMapping
-                    Subject="EventName"
-                    StartTime="From"
-                    EndTime="To"
-                    >
-                    
-                </scheduler:SchedulerAppointmentMapping>
+              
+                StartTime="StartTime"
                 
+                />
             </scheduler:SfScheduler.AppointmentMapping>
-
             <scheduler:SfScheduler.BindingContext>
-
-                <local:Kalendar/>
-
+                <local:AppointmentDialog/>
             </scheduler:SfScheduler.BindingContext>
 
         </scheduler:SfScheduler>
