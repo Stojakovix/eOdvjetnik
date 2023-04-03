@@ -36,9 +36,10 @@
     <Button Text="Save" Clicked="OnSaveClicked" />
     <Button Text="Load" Clicked="OnLoadClicked" />
     <Button Text="Delete" Clicked="OnDeleteClicked" />
-</StackLayout>
 
+</StackLayout>
 <Button Text="NAS Postavke" Clicked="NASPostavkeClicked" />
+
 
             <!-->
             NAS FORMS

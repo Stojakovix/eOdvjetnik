@@ -60,6 +60,11 @@ public partial class MainPage : ContentPage
         USEREntry.Text = user;
         var pass = Preferences.Get(PASS, "");
         PASSEntry.Text = pass;
+
+
+     //Preferences.Set(IP, "");
+     //Preferences.Set(USER, "");
+     //Preferences.Set(PASS, "");
     }
 
     private void OnDeleteClicked(object sender, EventArgs e)
