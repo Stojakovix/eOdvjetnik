@@ -4,6 +4,12 @@ using eOdvjetnik.Models;
 using SMBLibrary;
 using SMBLibrary.Client;
 
+
+
+
+
+
+
 namespace eOdvjetnik.Views;
 
 
@@ -17,6 +23,12 @@ public partial class Dokumenti : ContentPage
 
     public ObservableCollection<DocsItem> Items { get; set; } = new();
 
+
+    private const string IP = "IP Adresa";
+    private const string USER = "Korisničko ime";
+    private const string PASS = "Lozinka";
+
+
     public Dokumenti(DocsDatabase docsdatabase)
     {
 
@@ -24,16 +36,15 @@ public partial class Dokumenti : ContentPage
         InitializeComponent();
         database = docsdatabase;
         BindingContext = this;
-        /*
-         * 
-         INICIRAJ MYSSQL KONEKCIJU DA DOHVATI SVE DOKUMENTE
+       
+         //INICIRAJ SMB KONEKCIJU DA DOHVATI SVE DOKUMENTE
 
         //SMB
         SMB2Client client = new SMB2Client();
-        bool isConnected = client.Connect(System.Net.IPAddress.Parse("192.168.1.103"), SMBTransportType.DirectTCPTransport);
+        bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP, "")), SMBTransportType.DirectTCPTransport);
         if (isConnected)
         {
-            NTStatus status = client.Login(String.Empty, "robi", "walter");
+            NTStatus status = client.Login(String.Empty, Preferences.Get(USER, ""), Preferences.Get(PASS, ""));
             if (status == NTStatus.STATUS_SUCCESS)
             {
                 List<string> shares = client.ListShares(out _);
@@ -53,7 +64,7 @@ public partial class Dokumenti : ContentPage
             client.Logoff();
             client.Disconnect();
         }
-        */
+        
     }
 
     //SMB

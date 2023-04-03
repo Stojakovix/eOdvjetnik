@@ -19,6 +19,30 @@
     <ScrollView>
         <VerticalStackLayout>
 
+            <!-->
+            NAS FORMS
+            -->
+<StackLayout  x:Name="NASForm" IsVisible="false">
+    <Label Text="IP adresa" />
+    <Entry x:Name="IPEntry" />
+
+    <Label Text="Korisničko ime" />
+    <Entry x:Name="USEREntry" />
+
+    <Label Text="Lozinka" />
+    <Entry x:Name="PASSEntry" />
+
+
+    <Button Text="Save" Clicked="OnSaveClicked" />
+    <Button Text="Load" Clicked="OnLoadClicked" />
+    <Button Text="Delete" Clicked="OnDeleteClicked" />
+</StackLayout>
+
+<Button Text="NAS Postavke" Clicked="NASPostavkeClicked" />
+
+            <!-->
+            NAS FORMS
+            -->
             <Image
                 Source="e_odvjetnik.png"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"
