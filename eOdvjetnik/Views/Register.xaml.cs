@@ -8,6 +8,7 @@ using System.Text;
 using Microsoft.Maui.Devices;
 using eOdvjetnik.Data;
 using eOdvjetnik.Models;
+//using Microsoft.Maui.;
 
 namespace eOdvjetnik.Views;
 
@@ -69,48 +70,73 @@ public partial class Register : ContentPage
     {
 
         base.OnAppearing();
-        var time = GetMicroSeconds();
-        // ----------------- platform ispod --------------
-        var device = DeviceInfo.Current.Platform;
-        Debug.WriteLine("url je--------------------" + url + time);
-        var httpResponse = await _Client.GetAsync(url + time);
-        //Items = new List<TodoItem>();
 
-        //Items = JsonSerializer.Deserialize<List<TodoItem>>(content, _serializerOptions);
-        database.Add(new DeviceIdItem
-        {
-            HID = time
-        });
-
-        /*
-         
-            public class DeviceIdItem
-    {
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
-        public string HID{ get; set; }
-        
-    }
-         */
-
-
-
-        if (httpResponse.IsSuccessStatusCode)
+        //Provjerava da li ima ključ spremnjen u preferences
+        if (string.IsNullOrEmpty(Preferences.Get("key", "default_value")))
         {
 
-            string content = await httpResponse.Content.ReadAsStringAsync();
-            Debug.WriteLine(content);
-            //Debug.WriteLine("Uso u if" + Item);
-            // Response _ = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
-            // await database.SaveLicenseAsync(Models.License);
+            var time = GetMicroSeconds();
+            // ----------------- platform ispod --------------
+            var device = DeviceInfo.Current.Platform;
+            Debug.WriteLine("url je--------------------" + url + time);
+            var httpResponse = await _Client.GetAsync(url + time);
+            //Items = new List<TodoItem>();
 
-            //await database.SaveItemAsync(Item);
-            
+            Preferences.Set("key", time);
+            Debug.WriteLine("spremio u preferences");
+            string preferencesKey = Preferences.Get("key", "default_value");
+            Debug.WriteLine("Izvađen iz preferences: " + preferencesKey);
+
+
+
+            //Items = JsonSerializer.Deserialize<List<TodoItem>>(content, _serializerOptions);
+            database.Add(new DeviceIdItem
+            {
+                HID = time
+            });
+
+            /*
+
+                public class DeviceIdItem
+        {
+            [PrimaryKey, AutoIncrement]
+            public int ID { get; set; }
+            public string HID{ get; set; }
+
+        }
+             */
+
+
+
+            if (httpResponse.IsSuccessStatusCode)
+            {
+
+                string content = await httpResponse.Content.ReadAsStringAsync();
+                Debug.WriteLine(content);
+                Debug.WriteLine("Uso u if");
+
+
+                // Response _ = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
+                // await database.SaveLicenseAsync(Models.License);
+
+                //await database.SaveItemAsync(Item);
+
+            }
+            else
+            {
+                Debug.WriteLine("Nije uspio response");
+            }//Kraj if httpResponse
+
         }
         else
         {
-            Debug.WriteLine("Nije uspio response");
-        }
+            Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Preferences.Get("key", "default_value"));
+
+            
+
+
+
+        }//Kraj IF preferences
     }
 
     public class TodoItem

@@ -26,7 +26,7 @@ public partial class Dokumenti : ContentPage
         BindingContext = this;
         /*
          * 
-         INICIRAJ MYSSQL KONEKCIJU DA DOHVATI SVE DOKUMENTE
+         INICIRAJ SMB KONEKCIJU DA DOHVATI SVE DOKUMENTE
 
         //SMB
         SMB2Client client = new SMB2Client();
