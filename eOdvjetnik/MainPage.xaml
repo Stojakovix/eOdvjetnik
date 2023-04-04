@@ -48,6 +48,8 @@
     <Label Text="Lozinka" />
     <Entry x:Name="PASSEntryMySQL" />
 
+    <Label Text="Ime baze podataka" />
+    <Entry x:Name="databasenameEntryMySQL" />
 
     <Button Text="Save" Clicked="OnSaveClickedMySQL" />
     <Button Text="Load" Clicked="OnLoadClickedMySQL" />

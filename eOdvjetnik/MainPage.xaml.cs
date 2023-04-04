@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Text.Json;
 using Microsoft.Maui.Controls;
+using MySql.Data.MySqlClient;
 //using OpenVpn;
 //using WireGuardNT_PInvoke;
 
@@ -32,7 +33,9 @@ public partial class MainPage : ContentPage
     private const string IP_mysql = "IP Adresa2";
     private const string USER_mysql = "Korisničko ime2";
     private const string PASS_mysql = "Lozinka2";
-
+    private const string databasename_mysql = "databasename";
+    //MySQL varijable
+    public string query;
 
 
     //int count = 0;
@@ -60,6 +63,8 @@ public partial class MainPage : ContentPage
         Preferences.Set(IP_mysql, IPEntryMySQL.Text);
         Preferences.Set(USER_mysql, USEREntryMySQL.Text);
         Preferences.Set(PASS_mysql, PASSEntryMySQL.Text);
+        Preferences.Set(databasename_mysql, databasenameEntryMySQL.Text);
+
         DisplayAlert("Success", "Data saved", "OK");
     }
     private void OnLoadClicked(object sender, EventArgs e)
@@ -79,11 +84,13 @@ public partial class MainPage : ContentPage
     private void OnLoadClickedMySQL(object sender, EventArgs e)
     {
         var ipmysql = Preferences.Get(IP_mysql, "");
-        IPEntry.Text = ipmysql;
+        IPEntryMySQL.Text = ipmysql;
         var useripmysql = Preferences.Get(USER_mysql, "");
-        USEREntry.Text = useripmysql;
+        USEREntryMySQL.Text = useripmysql;
         var passipmysql = Preferences.Get(PASS_mysql, "");
-        PASSEntry.Text = passipmysql;
+        PASSEntryMySQL.Text = passipmysql;
+        var databasenamemysql = Preferences.Get(databasename_mysql, "");
+        databasenameEntryMySQL.Text = databasenamemysql;
 
         //Preferences.Set(IP, "");
         //Preferences.Set(USER, "");
@@ -101,7 +108,35 @@ public partial class MainPage : ContentPage
         Preferences.Remove(IP_mysql);
         Preferences.Remove(USER_mysql);
         Preferences.Remove(PASS_mysql);
+        Preferences.Remove(databasename_mysql);
         DisplayAlert("Success", "Data deleted", "OK");
+    }
+    public void sqlQuery(string query, string databasename) {
+        // MySQL connection settings
+        string connString = "server="+ Preferences.Get(IP_mysql, "") + ";user="+ Preferences.Get(USER_mysql, "") + ";password="+ Preferences.Get(PASS_mysql, "") + ";database="+ Preferences.Get(databasename_mysql, "");
+
+        // Connect to MySQL database
+        using MySqlConnection conn = new MySqlConnection(connString);
+        conn.Open();
+
+        // SQL query
+        //string query = "SELECT * FROM your_table";
+
+        // Execute query and retrieve data
+        using MySqlCommand cmd = new MySqlCommand(query, conn);
+        using MySqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            // Access data using column names or indices
+            string column1 = reader.GetString("column1");
+            int column2 = reader.GetInt32("column2");
+            // ...
+        }
+
+        // Close the reader and the connection
+        reader.Close();
+        conn.Close();
     }
     private async void OnCounterClicked(object sender, EventArgs e)
     {
