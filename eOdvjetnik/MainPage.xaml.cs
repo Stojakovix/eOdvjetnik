@@ -111,7 +111,8 @@ public partial class MainPage : ContentPage
         Preferences.Remove(databasename_mysql);
         DisplayAlert("Success", "Data deleted", "OK");
     }
-    public void sqlQuery(string query, string databasename) {
+    public void sqlQuery(string query) {
+        Debug.WriteLine("Usao u sqlQuerry  *******");
         // MySQL connection settings
         string connString = "server="+ Preferences.Get(IP_mysql, "") + ";user="+ Preferences.Get(USER_mysql, "") + ";password="+ Preferences.Get(PASS_mysql, "") + ";database="+ Preferences.Get(databasename_mysql, "");
 
@@ -128,9 +129,13 @@ public partial class MainPage : ContentPage
 
         while (reader.Read())
         {
+            Debug.WriteLine("Usao u while  *******");
             // Access data using column names or indices
-            string column1 = reader.GetString("column1");
-            int column2 = reader.GetInt32("column2");
+            string column1 = reader.GetString("name");
+            int column2 = reader.GetInt32("active");
+            Debug.WriteLine(column1);
+            Debug.WriteLine(column2);
+
             // ...
         }
 
@@ -281,6 +286,10 @@ public partial class MainPage : ContentPage
 
 
         }//Kraj IF preferences
+        //MySQL Query
+        sqlQuery("SELECT * FROM test.sample;");
+
+
     }
 
     
