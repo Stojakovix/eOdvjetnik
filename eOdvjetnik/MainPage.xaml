@@ -38,7 +38,24 @@
     <Button Text="Delete" Clicked="OnDeleteClicked" />
 
 </StackLayout>
+            <StackLayout  x:Name="MySQLForm" IsVisible="false">
+    <Label Text="IP adresa" />
+    <Entry x:Name="IPEntryMySQL" />
+
+    <Label Text="Korisničko ime" />
+    <Entry x:Name="USEREntryMySQL" />
+
+    <Label Text="Lozinka" />
+    <Entry x:Name="PASSEntryMySQL" />
+
+
+    <Button Text="Save" Clicked="OnSaveClickedMySQL" />
+    <Button Text="Load" Clicked="OnLoadClickedMySQL" />
+    <Button Text="Delete" Clicked="OnDeleteClickedMySQL" />
+
+</StackLayout>
 <Button Text="NAS Postavke" Clicked="NASPostavkeClicked" />
+<Button Text="MySQL Postavke" Clicked="MySQLPostavkeClicked" />
 
 
             <!-->

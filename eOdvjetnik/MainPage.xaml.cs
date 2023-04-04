@@ -24,10 +24,14 @@ namespace eOdvjetnik;
 
 public partial class MainPage : ContentPage
 {
-
+    //Varijable za NAS preferenceas
     private const string IP = "IP Adresa";
     private const string USER = "Korisničko ime";
     private const string PASS = "Lozinka";
+    //Varijable za MySQL preferences
+    private const string IP_mysql = "IP Adresa2";
+    private const string USER_mysql = "Korisničko ime2";
+    private const string PASS_mysql = "Lozinka2";
 
 
 
@@ -38,12 +42,12 @@ public partial class MainPage : ContentPage
 
     //KRAJ NAS
     public MainPage()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         ReadDeviceInfo();
         GetMicroSeconds();
 
-}
+    }
     private void OnSaveClicked(object sender, EventArgs e)
     {
         Preferences.Set(IP, IPEntry.Text);
@@ -51,9 +55,16 @@ public partial class MainPage : ContentPage
         Preferences.Set(PASS, PASSEntry.Text);
         DisplayAlert("Success", "Data saved", "OK");
     }
-
+    private void OnSaveClickedMySQL(object sender, EventArgs e)
+    {
+        Preferences.Set(IP_mysql, IPEntryMySQL.Text);
+        Preferences.Set(USER_mysql, USEREntryMySQL.Text);
+        Preferences.Set(PASS_mysql, PASSEntryMySQL.Text);
+        DisplayAlert("Success", "Data saved", "OK");
+    }
     private void OnLoadClicked(object sender, EventArgs e)
     {
+
         var ip = Preferences.Get(IP, "");
         IPEntry.Text = ip;
         var user = Preferences.Get(USER, "");
@@ -61,12 +72,23 @@ public partial class MainPage : ContentPage
         var pass = Preferences.Get(PASS, "");
         PASSEntry.Text = pass;
 
-
-     //Preferences.Set(IP, "");
-     //Preferences.Set(USER, "");
-     //Preferences.Set(PASS, "");
+        //Preferences.Set(IP, "");
+        //Preferences.Set(USER, "");
+        //Preferences.Set(PASS, "");
     }
+    private void OnLoadClickedMySQL(object sender, EventArgs e)
+    {
+        var ipmysql = Preferences.Get(IP_mysql, "");
+        IPEntry.Text = ipmysql;
+        var useripmysql = Preferences.Get(USER_mysql, "");
+        USEREntry.Text = useripmysql;
+        var passipmysql = Preferences.Get(PASS_mysql, "");
+        PASSEntry.Text = passipmysql;
 
+        //Preferences.Set(IP, "");
+        //Preferences.Set(USER, "");
+        //Preferences.Set(PASS, "");
+    }
     private void OnDeleteClicked(object sender, EventArgs e)
     {
         Preferences.Remove(IP);
@@ -74,15 +96,22 @@ public partial class MainPage : ContentPage
         Preferences.Remove(PASS);
         DisplayAlert("Success", "Data deleted", "OK");
     }
+    private void OnDeleteClickedMySQL(object sender, EventArgs e)
+    {
+        Preferences.Remove(IP_mysql);
+        Preferences.Remove(USER_mysql);
+        Preferences.Remove(PASS_mysql);
+        DisplayAlert("Success", "Data deleted", "OK");
+    }
     private async void OnCounterClicked(object sender, EventArgs e)
-	{
+    {
         //await Navigation.PushAsync(new kalendar());
         await Shell.Current.GoToAsync("///Dokumenti");
 
     }
     public static void ReadDeviceInfo()
     {
-        
+
         StringBuilder sb = new();
 
         sb.AppendLine($"Model: {DeviceInfo.Current.Model}");
@@ -102,7 +131,7 @@ public partial class MainPage : ContentPage
         sb.AppendLine($"Virtual device? {isVirtual}");
 
         Debug.WriteLine(sb.ToString());
-        
+
 
     }
 
@@ -141,10 +170,24 @@ public partial class MainPage : ContentPage
         }
         else {
             NASForm.IsVisible = true;
-            OnLoadClicked("",e);
+            OnLoadClicked("", e);
         }
-        
+
     }
+
+    private void MySQLPostavkeClicked(object sender, EventArgs e) {
+        if (MySQLForm.IsVisible == true)
+        {
+            MySQLForm.IsVisible = false;
+        }
+        else
+        {
+            MySQLForm.IsVisible = true;
+            OnLoadClickedMySQL("", e);
+        }
+    }
+
+
     protected override async void OnAppearing()
     {
 
