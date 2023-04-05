@@ -135,9 +135,9 @@
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.4">
 		  <TreatAsUsed>true</TreatAsUsed>
 		</PackageReference>
-		<PackageReference Include="Syncfusion.Licensing" Version="21.1.35" />
-		<PackageReference Include="Syncfusion.Maui.Core" Version="21.1.35" />
-		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="21.1.35" />
+		<PackageReference Include="Syncfusion.Licensing" Version="21.1.38" />
+		<PackageReference Include="Syncfusion.Maui.Core" Version="21.1.38" />
+		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="21.1.38" />
 		<PackageReference Include="OpenAI" Version="1.7.2" />
 		<PackageReference Include="OpenVPN" Version="1.0.3" />
 		<PackageReference Include="WireGuardNT-PInvoke" Version="1.0.4" />
@@ -162,6 +162,10 @@
 	  <MauiXaml Update="Views\Register.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="ViewModel\" />
 	</ItemGroup>
 
 </Project>

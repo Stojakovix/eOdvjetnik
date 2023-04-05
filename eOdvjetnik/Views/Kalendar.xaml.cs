@@ -16,7 +16,17 @@ public partial class Kalendar : ContentPage
     }
     private void Scheduler_Tapped(object sender, SchedulerTappedEventArgs e)
     {
-        Navigation.PushAsync(new AppointmentDialog());
+        if (e.Element == SchedulerElement.SchedulerCell || e.Element == SchedulerElement.Appointment)
+        {
+            if (e.Appointments != null)
+            {
+                this.Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
+            }
+            else
+            {
+                this.Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
+            }
+        }
     }
 
 }

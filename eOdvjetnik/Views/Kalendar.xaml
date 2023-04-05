@@ -7,7 +7,7 @@
              Title="Kalendar"
              xmlns:local="clr-namespace:eOdvjetnik.Views"
              xmlns:syncTheme="clr-namespace:Syncfusion.Maui.Themes;assembly=Syncfusion.Maui.Core"
-             xmlns:viewModel="clr-namespace:eOdvjetnik.ViewModel"
+             
              
              >
 
@@ -28,9 +28,9 @@
                                >
             <scheduler:SfScheduler.AppointmentMapping>
                 <scheduler:SchedulerAppointmentMapping
-              
+                Subject="EventName"
                 StartTime="StartTime"
-                
+                EndTime="EndTime"
                 />
             </scheduler:SfScheduler.AppointmentMapping>
             <scheduler:SfScheduler.BindingContext>

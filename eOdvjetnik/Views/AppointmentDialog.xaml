@@ -4,20 +4,26 @@
              xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
              x:Class="eOdvjetnik.Views.AppointmentDialog"
              Title="AppointmentDialog"
-             xmlns:local ="clr-namespace:eOdvjetnik.Models"
-             x:DataType="local:Meeting"
+             xmlns:models="clr-namespace:eOdvjetnik.Models"
+             x:DataType="models:Meeting"
              >
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Entry Grid.Row="0" Placeholder="Event Name" Text="{Binding EventName}" />
-        <controls:TimePicker Grid.Row="1" Time="{Binding StartTime}" />
-        <controls:TimePicker Grid.Row="2" Time="{Binding EndTime}" />
-        <Button Grid.Row="3" Text="Save" Clicked="Save_Clicked" />
-    </Grid>
+    <ScrollView>
+        <VerticalStackLayout Padding="20"
+                             Spacing="10"
+                             VerticalOptions="StartAndExpand">
+            <Label Text="Name"/>
+            <Entry Text="{Binding EventName}"/>
+            <Label Text="From"/>
+            <TimePicker Format="D" Time="{Binding From, Mode=TwoWay}"/>
+            <Label Text="To"/>
+            <TimePicker Format="D" Time="{Binding To, Mode=TwoWay}"/>
+            
+            <Button Text="Save"
+                    Clicked="Save_Clicked" />
+            
+
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

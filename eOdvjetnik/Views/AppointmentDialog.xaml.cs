@@ -8,26 +8,36 @@ namespace eOdvjetnik.Views;
 
 public partial class AppointmentDialog : ContentPage
 {
-    public ObservableCollection<SchedulerAppointment> Appointments { get; set; } = new ObservableCollection<SchedulerAppointment>();
+    public ObservableCollection<SchedulerAppointment> Appointments { get; set; } = new();
     public Meeting Meeting { get; set; } = new Meeting();
     public AppointmentDialog()
     {
-        BindingContext = Meeting;
         InitializeComponent();
+        BindingContext = Meeting;
     }
 
     private void Save_Clicked(object sender, EventArgs e)
     {
-        Debug.WriteLine($"Meeting EventName: {Meeting.EventName}");
-        Debug.WriteLine($"Meeting StartTime: {Meeting.StartTime:f}");
-        Debug.WriteLine($"Meeting EndTime: {Meeting.EndTime:f}");
+        //Debug.WriteLine($"Meeting EventName: {Meeting.EventName}");
+        //Debug.WriteLine($"Meeting to: {Meeting.From:f}");
+        //Debug.WriteLine($"Meeting EndTime: {Meeting.To:f}");
+        
+
         var appointment = new SchedulerAppointment()
         {
             Subject = Meeting.EventName,
-            StartTime = Meeting.StartTime,
-            EndTime = Meeting.EndTime
+            StartTime = Meeting.From, 
+            EndTime = Meeting.To,
+            
+            
         };
+        
+
         Appointments.Add(appointment);
+        Meeting = new();
+        BindingContext = Meeting;
+
+
         Navigation.PopAsync();
 
         Debug.WriteLine("svi eventi u oc u ");
