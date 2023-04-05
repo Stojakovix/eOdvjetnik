@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Text.Json;
 using Microsoft.Maui.Controls;
+using MySql.Data.MySqlClient;
 //using OpenVpn;
 //using WireGuardNT_PInvoke;
 
@@ -24,11 +25,17 @@ namespace eOdvjetnik;
 
 public partial class MainPage : ContentPage
 {
-
+    //Varijable za NAS preferenceas
     private const string IP = "IP Adresa";
     private const string USER = "Korisničko ime";
     private const string PASS = "Lozinka";
-
+    //Varijable za MySQL preferences
+    private const string IP_mysql = "IP Adresa2";
+    private const string USER_mysql = "Korisničko ime2";
+    private const string PASS_mysql = "Lozinka2";
+    private const string databasename_mysql = "databasename";
+    //MySQL varijable
+    public string query;
 
 
     //int count = 0;
@@ -38,12 +45,12 @@ public partial class MainPage : ContentPage
 
     //KRAJ NAS
     public MainPage()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         ReadDeviceInfo();
         GetMicroSeconds();
 
-}
+    }
     private void OnSaveClicked(object sender, EventArgs e)
     {
         Preferences.Set(IP, IPEntry.Text);
@@ -51,17 +58,44 @@ public partial class MainPage : ContentPage
         Preferences.Set(PASS, PASSEntry.Text);
         DisplayAlert("Success", "Data saved", "OK");
     }
+    private void OnSaveClickedMySQL(object sender, EventArgs e)
+    {
+        Preferences.Set(IP_mysql, IPEntryMySQL.Text);
+        Preferences.Set(USER_mysql, USEREntryMySQL.Text);
+        Preferences.Set(PASS_mysql, PASSEntryMySQL.Text);
+        Preferences.Set(databasename_mysql, databasenameEntryMySQL.Text);
 
+        DisplayAlert("Success", "Data saved", "OK");
+    }
     private void OnLoadClicked(object sender, EventArgs e)
     {
+
         var ip = Preferences.Get(IP, "");
         IPEntry.Text = ip;
         var user = Preferences.Get(USER, "");
         USEREntry.Text = user;
         var pass = Preferences.Get(PASS, "");
         PASSEntry.Text = pass;
-    }
 
+        //Preferences.Set(IP, "");
+        //Preferences.Set(USER, "");
+        //Preferences.Set(PASS, "");
+    }
+    private void OnLoadClickedMySQL(object sender, EventArgs e)
+    {
+        var ipmysql = Preferences.Get(IP_mysql, "");
+        IPEntryMySQL.Text = ipmysql;
+        var useripmysql = Preferences.Get(USER_mysql, "");
+        USEREntryMySQL.Text = useripmysql;
+        var passipmysql = Preferences.Get(PASS_mysql, "");
+        PASSEntryMySQL.Text = passipmysql;
+        var databasenamemysql = Preferences.Get(databasename_mysql, "");
+        databasenameEntryMySQL.Text = databasenamemysql;
+
+        //Preferences.Set(IP, "");
+        //Preferences.Set(USER, "");
+        //Preferences.Set(PASS, "");
+    }
     private void OnDeleteClicked(object sender, EventArgs e)
     {
         Preferences.Remove(IP);
@@ -69,15 +103,55 @@ public partial class MainPage : ContentPage
         Preferences.Remove(PASS);
         DisplayAlert("Success", "Data deleted", "OK");
     }
+    private void OnDeleteClickedMySQL(object sender, EventArgs e)
+    {
+        Preferences.Remove(IP_mysql);
+        Preferences.Remove(USER_mysql);
+        Preferences.Remove(PASS_mysql);
+        Preferences.Remove(databasename_mysql);
+        DisplayAlert("Success", "Data deleted", "OK");
+    }
+    public void sqlQuery(string query) {
+        Debug.WriteLine("Usao u sqlQuerry  *******");
+        // MySQL connection settings
+        string connString = "server="+ Preferences.Get(IP_mysql, "") + ";user="+ Preferences.Get(USER_mysql, "") + ";password="+ Preferences.Get(PASS_mysql, "") + ";database="+ Preferences.Get(databasename_mysql, "");
+
+        // Connect to MySQL database
+        using MySqlConnection conn = new MySqlConnection(connString);
+        conn.Open();
+
+        // SQL query
+        //string query = "SELECT * FROM your_table";
+
+        // Execute query and retrieve data
+        using MySqlCommand cmd = new MySqlCommand(query, conn);
+        using MySqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            Debug.WriteLine("Usao u while  *******");
+            // Access data using column names or indices
+            string column1 = reader.GetString("name");
+            int column2 = reader.GetInt32("active");
+            Debug.WriteLine(column1);
+            Debug.WriteLine(column2);
+
+            // ...
+        }
+
+        // Close the reader and the connection
+        reader.Close();
+        conn.Close();
+    }
     private async void OnCounterClicked(object sender, EventArgs e)
-	{
+    {
         //await Navigation.PushAsync(new kalendar());
         await Shell.Current.GoToAsync("///Dokumenti");
 
     }
     public static void ReadDeviceInfo()
     {
-        
+
         StringBuilder sb = new();
 
         sb.AppendLine($"Model: {DeviceInfo.Current.Model}");
@@ -97,7 +171,7 @@ public partial class MainPage : ContentPage
         sb.AppendLine($"Virtual device? {isVirtual}");
 
         Debug.WriteLine(sb.ToString());
-        
+
 
     }
 
@@ -136,10 +210,24 @@ public partial class MainPage : ContentPage
         }
         else {
             NASForm.IsVisible = true;
-            OnLoadClicked("",e);
+            OnLoadClicked("", e);
         }
-        
+
     }
+
+    private void MySQLPostavkeClicked(object sender, EventArgs e) {
+        if (MySQLForm.IsVisible == true)
+        {
+            MySQLForm.IsVisible = false;
+        }
+        else
+        {
+            MySQLForm.IsVisible = true;
+            OnLoadClickedMySQL("", e);
+        }
+    }
+
+
     protected override async void OnAppearing()
     {
 
@@ -198,6 +286,10 @@ public partial class MainPage : ContentPage
 
 
         }//Kraj IF preferences
+        //MySQL Query
+        sqlQuery("SELECT * FROM test.sample;");
+
+
     }
 
     
