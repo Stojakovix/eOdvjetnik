@@ -4,39 +4,22 @@
              xmlns:scheduler="clr-namespace:Syncfusion.Maui.Scheduler;assembly=Syncfusion.Maui.Scheduler"
              xmlns:models="clr-namespace:eOdvjetnik.Models"
              x:Class="eOdvjetnik.Views.Kalendar"
+             xmlns:local="clr-namespace:eOdvjetnik.ViewModel"
              Title="Kalendar"
-             xmlns:local="clr-namespace:eOdvjetnik.Views"
-             xmlns:syncTheme="clr-namespace:Syncfusion.Maui.Themes;assembly=Syncfusion.Maui.Core"
-             
-             
              >
-
-
-
-
+    <ContentPage.BindingContext>
+        <local:KalendarViewModel x:Name="viewmodel"/>
+    </ContentPage.BindingContext>
     <Grid>
-
         <scheduler:SfScheduler x:Name="Scheduler" 
-                               View="Agenda"
-                               AllowedViews="Day,Week,WorkWeek,Agenda,Month"  
-                               CalendarType="Gregorian" 
-                               FirstDayOfWeek="Monday"
-                               AppointmentsSource ="{Binding Appointments}"
-                               Tapped="Scheduler_Tapped"
-                               BackgroundColor="white"
-                               
-                               >
-            <scheduler:SfScheduler.AppointmentMapping>
-                <scheduler:SchedulerAppointmentMapping
-                Subject="EventName"
-                StartTime="StartTime"
-                EndTime="EndTime"
-                />
-            </scheduler:SfScheduler.AppointmentMapping>
-            <scheduler:SfScheduler.BindingContext>
-                <local:AppointmentDialog/>
-            </scheduler:SfScheduler.BindingContext>
-
+                           View="Day"
+                           FirstDayOfWeek="Monday"
+                           Tapped="Scheduler_Tapped"
+                           SelectedCellBackground="Orange"
+                           AppointmentsSource="{Binding Appointments}"
+                           ShowWeekNumber="True"
+                           BackgroundColor="White"
+                           AllowedViews="Day,Week,WorkWeek,Agenda,Month,TimelineDay,TimelineWeek,TimelineWorkWeek,TimelineMonth">
         </scheduler:SfScheduler>
     </Grid>
 

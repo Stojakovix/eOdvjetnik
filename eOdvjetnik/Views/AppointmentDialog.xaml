@@ -8,22 +8,156 @@
              x:DataType="models:Meeting"
              >
 
-    <ScrollView>
-        <VerticalStackLayout Padding="20"
-                             Spacing="10"
-                             VerticalOptions="StartAndExpand">
-            <Label Text="Name"/>
-            <Entry Text="{Binding EventName}"/>
-            <Label Text="From"/>
-            <TimePicker Format="D" Time="{Binding From, Mode=TwoWay}"/>
-            <Label Text="To"/>
-            <TimePicker Format="D" Time="{Binding To, Mode=TwoWay}"/>
-            
-            <Button Text="Save"
-                    Clicked="Save_Clicked" />
-            
-
-
-        </VerticalStackLayout>
-    </ScrollView>
+    <StackLayout Padding="10,10,10,10">
+        <Grid
+        x:Name="eventName_layout"
+        HeightRequest="40"
+        Padding="20,10,20,0"
+        VerticalOptions="Start">
+            <Entry
+            x:Name="eventNameText"
+            HeightRequest="40"
+            TextColor="Black" />
+        </Grid>
+        <Grid
+        x:Name="organizer_layout"
+        HeightRequest="40"
+        Padding="20,20,20,0"
+        VerticalOptions="Start">
+            <Entry
+            x:Name="organizerText"
+            HeightRequest="40"
+            TextColor="Black" />
+        </Grid>
+        <Grid
+        x:Name="startTimeLabel_layout"
+        HeightRequest="40"
+        Padding="20,10,20,0"
+        VerticalOptions="Start">
+            <Label
+            FontSize="15"
+            Text="From"
+            TextColor="Gray" />
+        </Grid>
+        <Grid
+        x:Name="StartdateTimePicker_layout"
+        Padding="20,0,20,0"
+        VerticalOptions="Start">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid
+            x:Name="start_datepicker_layout"
+            Grid.Column="0"
+            HeightRequest="50"
+            VerticalOptions="Start">
+                <DatePicker x:Name="startDate_picker" HeightRequest="40" />
+            </Grid>
+            <Grid
+            x:Name="start_timepicker_layout"
+            Grid.Column="1"
+            HeightRequest="50"
+            VerticalOptions="Start">
+                <TimePicker x:Name="startTime_picker" HeightRequest="40" />
+            </Grid>
+        </Grid>
+        <Grid
+        x:Name="endTimeLabel_layout"
+        HeightRequest="40"
+        Padding="20,10,20,0"
+        VerticalOptions="Start">
+            <Label
+            FontSize="15"
+            HeightRequest="40"
+            Text="To"
+            TextColor="Gray" />
+        </Grid>
+        <Grid
+        x:Name="EndDateTimePicker_layout"
+        Padding="20,0,20,0"
+        VerticalOptions="Start">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid
+            x:Name="end_datepicker_layout"
+            Grid.Column="0"
+            HeightRequest="50"
+            VerticalOptions="Start">
+                <DatePicker
+                x:Name="endDate_picker"
+                Grid.Column="0"
+                HeightRequest="50"
+                VerticalOptions="Start" />
+            </Grid>
+            <Grid
+            x:Name="end_timepicker_layout"
+            Grid.Column="1"
+            HeightRequest="50"
+            VerticalOptions="Start">
+                <TimePicker
+                x:Name="endTime_picker"
+                HeightRequest="50"
+                VerticalOptions="Start" />
+            </Grid>
+        </Grid>
+        <Grid
+      x:Name="allDay"
+      HeightRequest="40"
+      Padding="20,10,20,0"
+      VerticalOptions="Start">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label 
+        FontSize="15"  Grid.Column="0"
+        HeightRequest="40" VerticalTextAlignment="Center"
+        Text="AllDay"
+        TextColor="Gray" />
+            <Grid Grid.Column="1" Padding="20,0,0,0">
+                <Switch x:Name="switchAllDay" HorizontalOptions="Start" VerticalOptions="Center" />
+            </Grid>
+        </Grid>
+        <Grid HeightRequest="40" VerticalOptions="Start" Padding="20,20,20,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid
+        Grid.Column="0"
+        HeightRequest="36"
+        Padding="10,0,0,0">
+                <Button
+        x:Name="DeleteButton"
+        Text="Delete"
+        Background="Red"            
+        TextColor="#3B3B3B"
+        WidthRequest="100" />
+            </Grid>
+            <Grid
+        Grid.Column="1"
+        HeightRequest="36"
+        Padding="10,0,0,0">
+                <Button
+        x:Name="cancelButton"
+        Text="Cancel"
+        TextColor="#3B3B3B"
+        WidthRequest="100" />
+            </Grid>
+            <Grid
+        Grid.Column="2"
+        HeightRequest="36"
+        Padding="0,0,10,0">
+                <Button
+        x:Name="saveButton"
+        Text="Save"
+        TextColor="White"
+        WidthRequest="100" />
+            </Grid>
+        </Grid>
+    </StackLayout>
 </ContentPage>
