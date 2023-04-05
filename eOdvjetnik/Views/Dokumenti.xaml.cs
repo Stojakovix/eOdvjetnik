@@ -5,17 +5,7 @@ using SMBLibrary;
 using SMBLibrary.Client;
 
 
-
-
-
-
-
-
 namespace eOdvjetnik.Views;
-
-
-
-
 
 
 public partial class Dokumenti : ContentPage
@@ -69,9 +59,6 @@ public partial class Dokumenti : ContentPage
     }
 
     //SMB
-
-
-
 
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
