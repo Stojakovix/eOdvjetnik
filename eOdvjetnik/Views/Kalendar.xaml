@@ -18,7 +18,7 @@
                            SelectedCellBackground="Orange"
                            AppointmentsSource="{Binding Appointments}"
                            ShowWeekNumber="True"
-                           BackgroundColor="White"
+                           BackgroundColor="{AppThemeBinding Dark=White, Light=Gray}"
                            AllowedViews="Day,Week,WorkWeek,Agenda,Month,TimelineDay,TimelineWeek,TimelineWorkWeek,TimelineMonth">
         </scheduler:SfScheduler>
     </Grid>

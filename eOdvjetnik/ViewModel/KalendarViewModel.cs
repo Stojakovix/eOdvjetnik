@@ -11,17 +11,17 @@ namespace eOdvjetnik.ViewModel
 
         public KalendarViewModel()
         {
-            Appointments = new ObservableCollection<SchedulerAppointment>
-            {
-                //Adding scheduler appointment in the scheduler appointment collection. 
-                new SchedulerAppointment()
-                {
-                    StartTime = DateTime.Today.AddHours(9),
-                    EndTime = DateTime.Today.AddHours(11),
-                    Subject = "Client Meeting",
-                    Location = "Hutchison road",
-                }
-            };
+            //Appointments = new ObservableCollection<SchedulerAppointment>
+            //{
+            //    //Adding scheduler appointment in the scheduler appointment collection. 
+            //    new SchedulerAppointment()
+            //    {
+            //        StartTime = DateTime.Today.AddHours(9),
+            //        EndTime = DateTime.Today.AddHours(11),
+            //        Subject = "Client Meeting",
+            //        Location = "Hutchison road",
+            //    }
+            //};
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ public partial class AppointmentDialog : ContentPage
         this.scheduler = scheduler;
         cancelButton.BackgroundColor = Color.FromArgb("#E5E5E5");
         saveButton.BackgroundColor = Color.FromArgb("#2196F3");
-        eventNameText.Placeholder = "Event name";
-        organizerText.Placeholder = "update the notes";
+        eventNameText.Placeholder = "Događaj";
+        organizerText.Placeholder = "Bilješke";
 
         UpdateEditor();
         saveButton.Clicked += SaveButton_Clicked;
@@ -64,13 +64,13 @@ public partial class AppointmentDialog : ContentPage
 
         if (endDate < startDate)
         {
-            Application.Current.MainPage.DisplayAlert("", "End time should be greater than start time", "OK");
+            Application.Current.MainPage.DisplayAlert("", "Datum završetka sastanka trebalo bi biti veće od datuma početka", "OK");
         }
         else if (endDate == startDate)
         {
             if (endTime < startTime)
             {
-                Application.Current.MainPage.DisplayAlert("", "End time should be greater than start time", "OK");
+                Application.Current.MainPage.DisplayAlert("", "Vrijeme završetka sastanka trebalo bi biti veće od vremena početka", "OK");
             }
             else
             {

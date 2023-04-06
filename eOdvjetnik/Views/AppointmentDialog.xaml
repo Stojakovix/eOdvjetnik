@@ -17,7 +17,7 @@
             <Entry
             x:Name="eventNameText"
             HeightRequest="40"
-            TextColor="Black" />
+            TextColor="Gray" />
         </Grid>
         <Grid
         x:Name="organizer_layout"
@@ -27,7 +27,7 @@
             <Entry
             x:Name="organizerText"
             HeightRequest="40"
-            TextColor="Black" />
+            TextColor="Gray" />
         </Grid>
         <Grid
         x:Name="startTimeLabel_layout"
@@ -36,7 +36,7 @@
         VerticalOptions="Start">
             <Label
             FontSize="15"
-            Text="From"
+            Text="Početak"
             TextColor="Gray" />
         </Grid>
         <Grid
@@ -71,7 +71,7 @@
             <Label
             FontSize="15"
             HeightRequest="40"
-            Text="To"
+            Text="Završetak"
             TextColor="Gray" />
         </Grid>
         <Grid
@@ -112,16 +112,16 @@
       Padding="20,10,20,0"
       VerticalOptions="Start">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label 
         FontSize="15"  Grid.Column="0"
         HeightRequest="40" VerticalTextAlignment="Center"
-        Text="AllDay"
+        Text="Cjelodnevni događaj"
         TextColor="Gray" />
             <Grid Grid.Column="1" Padding="20,0,0,0">
-                <Switch x:Name="switchAllDay" HorizontalOptions="Start" VerticalOptions="Center" />
+                <Switch x:Name="switchAllDay" HorizontalOptions="Start"  VerticalOptions="Center" />
             </Grid>
         </Grid>
         <Grid HeightRequest="40" VerticalOptions="Start" Padding="20,20,20,0">
