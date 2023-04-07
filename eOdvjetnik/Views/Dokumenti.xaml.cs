@@ -3,8 +3,8 @@ using eOdvjetnik.Data;
 using eOdvjetnik.Models;
 using SMBLibrary;
 using SMBLibrary.Client;
-using SMBLibrary.SMB2;
 using System;
+using System.Reflection;
 
 
 namespace eOdvjetnik.Views
@@ -35,8 +35,20 @@ namespace eOdvjetnik.Views
             if (isConnected)
             {
                 NTStatus status = client.Login(String.Empty, Preferences.Get(USER, ""), Preferences.Get(PASS, ""));
+
                 if (status == NTStatus.STATUS_SUCCESS)
                 {
+
+                    /*
+                    Type type = client.ListShares(out _).GetType();
+                    PropertyInfo[] properties = type.GetProperties();
+
+                    foreach (PropertyInfo property in properties)
+                    {
+                        object value = property.GetValue(client.ListShares(out _));
+                        Console.WriteLine($"{property.Name}: {value}");
+                    }
+                    */
                     List<string> shares = client.ListShares(out _);
                     System.Diagnostics.Debug.WriteLine("----------------------------------------------------------------");
 
@@ -44,19 +56,46 @@ namespace eOdvjetnik.Views
                     {
                         System.Diagnostics.Debug.WriteLine(share);
                         ShareFiles.Add(share);
+                    }
+                    System.Diagnostics.Debug.WriteLine("-------------------111111------------------");
+
+
+                    ISMBFileStore fileStore = client.TreeConnect("Racuni", out status);
+                    if (status == NTStatus.STATUS_SUCCESS)
+                    {
+                        System.Diagnostics.Debug.WriteLine("-------------------222222------------------");
+
+                        object directoryHandle;
+                        FileStatus fileStatus;
+                        status = fileStore.CreateFile(out directoryHandle, out fileStatus, String.Empty, AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
+
+                        System.Diagnostics.Debug.WriteLine("-------------------333333------------------");
+
+                        List<QueryDirectoryFileInformation> fileList;
+                        status = fileStore.QueryDirectory(out fileList, directoryHandle, "*", FileInformationClass.FileDirectoryInformation);
 
 
 
+                        status = fileStore.CloseFile(directoryHandle);
+                        foreach (var file1 in fileList)
+                        {
+                            System.Diagnostics.Debug.WriteLine(file1.Length.ToString());
+                            System.Diagnostics.Debug.WriteLine(file1.ToString());
 
+                        }
 
+                        System.Diagnostics.Debug.WriteLine("44444444444444");
 
-
-
-
+                        System.Diagnostics.Debug.WriteLine(fileList);
 
 
 
                     }
+
+                    
+
+
+
 
                     System.Diagnostics.Debug.WriteLine("----------------------------------------------------------------");
                     DisplayAlert("Connection", "Connection established", "ok");
