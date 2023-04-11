@@ -5,6 +5,7 @@ using SMBLibrary;
 using SMBLibrary.Client;
 using System;
 using System.Reflection;
+using SMBLibrary.SMB1;
 
 
 namespace eOdvjetnik.Views
@@ -16,6 +17,7 @@ namespace eOdvjetnik.Views
         public ObservableCollection<DocsItem> Items { get; set; } = new();
 
         public ObservableCollection<string> ShareFiles { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> ShareFolders { get; set; } = new ObservableCollection<string>();
 
         private const string IP = "IP Adresa";
         private const string USER = "Korisničko ime";
@@ -35,46 +37,27 @@ namespace eOdvjetnik.Views
             if (isConnected)
             {
                 NTStatus status = client.Login(String.Empty, Preferences.Get(USER, ""), Preferences.Get(PASS, ""));
-
-                if (status == NTStatus.STATUS_SUCCESS)
-                {
-
-                    /*
-                    Type type = client.ListShares(out _).GetType();
-                    PropertyInfo[] properties = type.GetProperties();
-
-                    foreach (PropertyInfo property in properties)
-                    {
-                        object value = property.GetValue(client.ListShares(out _));
-                        Console.WriteLine($"{property.Name}: {value}");
-                    }
-                    */
-                    List<string> shares = client.ListShares(out _);
-                    System.Diagnostics.Debug.WriteLine("----------------------------------------------------------------");
-
-                    foreach (var share in shares)
-                    {
-                        System.Diagnostics.Debug.WriteLine(share);
-                        ShareFiles.Add(share);
-                    }
-                    System.Diagnostics.Debug.WriteLine("-------------------111111------------------");
-
-
-                    ISMBFileStore fileStore = client.TreeConnect("Racuni", out status);
+                    ISMBFileStore fileStore = client.TreeConnect("Users", out status);
                     if (status == NTStatus.STATUS_SUCCESS)
                     {
-                        System.Diagnostics.Debug.WriteLine("-------------------222222------------------");
-
                         object directoryHandle;
                         FileStatus fileStatus;
-                        status = fileStore.CreateFile(out directoryHandle, out fileStatus, String.Empty, AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
-
-                        System.Diagnostics.Debug.WriteLine("-------------------333333------------------");
-
+                        status = fileStore.CreateFile(out directoryHandle, out fileStatus, "user\\Desktop", AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
                         List<QueryDirectoryFileInformation> fileList;
                         status = fileStore.QueryDirectory(out fileList, directoryHandle, "*", FileInformationClass.FileDirectoryInformation);
 
+                        foreach (SMBLibrary.FileDirectoryInformation file in fileList)
+                        {
+                            Console.WriteLine($"Filename: {file.FileName}");
+                            Console.WriteLine($"File Attributes: {file.FileAttributes}");
+                            Console.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
+                            Console.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
+                            Console.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
+                            Console.WriteLine("----------End of Folder/file-----------");
+                            Console.WriteLine();
+                            ShareFiles.Add(file.FileName);
 
+                        }
 
                         status = fileStore.CloseFile(directoryHandle);
                         foreach (var file1 in fileList)
@@ -98,7 +81,7 @@ namespace eOdvjetnik.Views
 
 
                     System.Diagnostics.Debug.WriteLine("----------------------------------------------------------------");
-                    DisplayAlert("Connection", "Connection established", "ok");
+                    //DisplayAlert("Connection", "Connection established", "ok");
                 }
                 else
                 {
@@ -106,7 +89,7 @@ namespace eOdvjetnik.Views
                 }
                 client.Logoff();
                 client.Disconnect();
-            }
+            
         }
 
         //SMB
