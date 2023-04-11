@@ -37,12 +37,12 @@ namespace eOdvjetnik.Views
             if (isConnected)
             {
                 NTStatus status = client.Login(String.Empty, Preferences.Get(USER, ""), Preferences.Get(PASS, ""));
-                    ISMBFileStore fileStore = client.TreeConnect("Users", out status);
+                    ISMBFileStore fileStore = client.TreeConnect("/", out status);
                     if (status == NTStatus.STATUS_SUCCESS)
                     {
                         object directoryHandle;
                         FileStatus fileStatus;
-                        status = fileStore.CreateFile(out directoryHandle, out fileStatus, "user\\Desktop", AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
+                        status = fileStore.CreateFile(out directoryHandle, out fileStatus, "", AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
                         List<QueryDirectoryFileInformation> fileList;
                         status = fileStore.QueryDirectory(out fileList, directoryHandle, "*", FileInformationClass.FileDirectoryInformation);
 
