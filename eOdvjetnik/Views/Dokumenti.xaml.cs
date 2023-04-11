@@ -3,6 +3,9 @@ using eOdvjetnik.Data;
 using eOdvjetnik.Models;
 using SMBLibrary;
 using SMBLibrary.Client;
+using System;
+using System.Reflection;
+using SMBLibrary.SMB1;
 
 
 namespace eOdvjetnik.Views;
@@ -14,6 +17,8 @@ public partial class Dokumenti : ContentPage
 
     public ObservableCollection<DocsItem> Items { get; set; } = new();
 
+        public ObservableCollection<string> ShareFiles { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> ShareFolders { get; set; } = new ObservableCollection<string>();
 
     private const string IP = "IP Adresa";
     private const string USER = "Korisničko ime";
@@ -30,33 +35,66 @@ public partial class Dokumenti : ContentPage
        
          //INICIRAJ SMB KONEKCIJU DA DOHVATI SVE DOKUMENTE
 
-        //SMB
-        SMB2Client client = new SMB2Client();
-        bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP, "")), SMBTransportType.DirectTCPTransport);
-        if (isConnected)
-        {
-            NTStatus status = client.Login(String.Empty, Preferences.Get(USER, ""), Preferences.Get(PASS, ""));
-            if (status == NTStatus.STATUS_SUCCESS)
+            //SMB
+            SMB2Client client = new SMB2Client();
+            bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP, "")), SMBTransportType.DirectTCPTransport);
+            if (isConnected)
             {
-                List<string> shares = client.ListShares(out _);
-                System.Diagnostics.Debug.WriteLine("----------------------------------------------------------------");
-                foreach (var share in shares)
-                {
-                    System.Diagnostics.Debug.WriteLine(share);
-                }
-                System.Diagnostics.Debug.WriteLine("----------------------------------------------------------------");
-                DisplayAlert("Connection", "Connection established", "ok");
-            }
-            else
-            {
-                DisplayAlert("Connection", "Connection not established", "try again");
+                NTStatus status = client.Login(String.Empty, Preferences.Get(USER, ""), Preferences.Get(PASS, ""));
+                    ISMBFileStore fileStore = client.TreeConnect("Users", out status);
+                    if (status == NTStatus.STATUS_SUCCESS)
+                    {
+                        object directoryHandle;
+                        FileStatus fileStatus;
+                        status = fileStore.CreateFile(out directoryHandle, out fileStatus, "user\\Desktop", AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
+                        List<QueryDirectoryFileInformation> fileList;
+                        status = fileStore.QueryDirectory(out fileList, directoryHandle, "*", FileInformationClass.FileDirectoryInformation);
 
-            }
-            client.Logoff();
-            client.Disconnect();
+                        foreach (SMBLibrary.FileDirectoryInformation file in fileList)
+                        {
+                            Console.WriteLine($"Filename: {file.FileName}");
+                            Console.WriteLine($"File Attributes: {file.FileAttributes}");
+                            Console.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
+                            Console.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
+                            Console.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
+                            Console.WriteLine("----------End of Folder/file-----------");
+                            Console.WriteLine();
+                            ShareFiles.Add(file.FileName);
+
+                        }
+
+                        status = fileStore.CloseFile(directoryHandle);
+                        foreach (var file1 in fileList)
+                        {
+                            System.Diagnostics.Debug.WriteLine(file1.Length.ToString());
+                            System.Diagnostics.Debug.WriteLine(file1.ToString());
+
+                        }
+
+                        System.Diagnostics.Debug.WriteLine("44444444444444");
+
+                        System.Diagnostics.Debug.WriteLine(fileList);
+
+
+
+                    }
+
+                    
+
+
+
+
+                    System.Diagnostics.Debug.WriteLine("----------------------------------------------------------------");
+                    //DisplayAlert("Connection", "Connection established", "ok");
+                }
+                else
+                {
+                    DisplayAlert("Connection", "Connection not established", "try again");
+                }
+                client.Logoff();
+                client.Disconnect();
+            
         }
-        
-    }
 
     //SMB
 
