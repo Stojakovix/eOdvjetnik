@@ -1,12 +1,15 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:eOdvjetnik.Models"
+                
              xmlns:data="clr-namespace:eOdvjetnik.Data"
              x:Class="eOdvjetnik.Views.Dokumenti"
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              ios:Page.UseSafeArea="True"
              Title="Dokumenti">
+
+   
 
     <Grid RowDefinitions="*,Auto">
         <CollectionView
@@ -24,7 +27,39 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <!--Prikaz fajlova-->
+        <StackLayout>
+            <Label Text="Share Files:"/>
+<ListView ItemsSource="{Binding ShareFiles}" Margin="20">
+    <ListView.ItemTemplate>
+        
+        <DataTemplate>
+            <ImageCell Text="{Binding .}" ImageSource="Icons/folder-1484.png"/>
+        </DataTemplate>
+    </ListView.ItemTemplate>
+</ListView>
+        </StackLayout>
         <Button Grid.Row="1" Text="Dodaj item" Clicked="OnItemAdded" Margin="20" />
 
     </Grid>
 </ContentPage>
+
+<!--
+<ListView ItemsSource="{Binding ShareFiles}" Margin="20">
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            <ViewCell>
+                <StackLayout Orientation="Horizontal" Margin="0">
+                    <Image Source="Icons/folder.png" WidthRequest="40" HeightRequest="40"/>
+                    <Label Text="{Binding .}" VerticalTextAlignment="Center"/>
+                </StackLayout>
+            </ViewCell>
+        </DataTemplate>
+    </ListView.ItemTemplate>
+</ListView>
+</StackLayout>
+
+-->
+
+
+

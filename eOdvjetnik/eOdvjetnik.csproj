@@ -80,6 +80,7 @@
 	  <MauiXaml Remove="Resources\NewFolder\**" />
 	  <None Remove="NewFolder1\**" />
 	  <None Remove="Resources\NewFolder\**" />
+	  <None Remove="Resources\Icons\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -165,4 +166,7 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Resources\Icons\" />
+	</ItemGroup>
 </Project>
