@@ -4,18 +4,7 @@
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              x:Class="eOdvjetnik.MainPage">
 
-    <ContentPage.Resources>
-        <StyleSheet>
-            <![CDATA[
-            ^button {
-                background-color: #007acc;
-
-                
-            }
-            ]]>
-        </StyleSheet>
-    </ContentPage.Resources>
-
+   
     <ScrollView>
         <VerticalStackLayout>
 
