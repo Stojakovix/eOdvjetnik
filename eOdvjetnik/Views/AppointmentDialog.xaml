@@ -53,14 +53,19 @@
             HeightRequest="50"
             VerticalOptions="Start"
             >
-                <DatePicker x:Name="startDate_picker" HeightRequest="40" Format="dd/MM/yyyy" />
+                <DatePicker x:Name="startDate_picker" HeightRequest="40" Format="dd/MM/yyyy"  />
             </Grid>
             <Grid
             x:Name="start_timepicker_layout"
             Grid.Column="1"
             HeightRequest="50"
             VerticalOptions="Start">
-                <TimePicker x:Name="startTime_picker" HeightRequest="40" Format="HH:mm"  />
+                <TimePicker x:Name="startTime_picker" 
+                            HeightRequest="40" 
+                            Format="HH:mm"
+                            
+                            
+                            />
             </Grid>
         </Grid>
         <Grid
@@ -104,6 +109,8 @@
                 HeightRequest="50"
                 VerticalOptions="Start"
                 Format="HH:mm"
+                
+                
                 />
             </Grid>
         </Grid>

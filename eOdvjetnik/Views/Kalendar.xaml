@@ -19,10 +19,27 @@
                            AppointmentsSource="{Binding Appointments}"
                            ShowWeekNumber="True"
                            BackgroundColor="{AppThemeBinding Dark=White, Light=Black}"
-                           AllowedViews="Day,Week,WorkWeek,Agenda,Month,TimelineDay,TimelineWeek,TimelineWorkWeek,TimelineMonth"
+                           AllowedViews="Day,Week,WorkWeek,Agenda,Month"
+                          
                            >
+
+            <scheduler:SfScheduler.DaysView>
+                <scheduler:SchedulerDaysView
+                    TimeFormat="HH:mm "
+                    TimeInterval="2:0:0"
+                    
+                    >
+                  
+                </scheduler:SchedulerDaysView>
+            </scheduler:SfScheduler.DaysView>
+            
+            
+            
+            
             
         </scheduler:SfScheduler>
+      
     </Grid>
+    
 
 </ContentPage>

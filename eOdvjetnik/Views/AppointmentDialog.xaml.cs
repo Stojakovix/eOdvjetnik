@@ -25,6 +25,7 @@ public partial class AppointmentDialog : ContentPage
         cancelButton.Clicked += CancelButton_Clicked;
         switchAllDay.Toggled += SwitchAllDay_Toggled;
         DeleteButton.Clicked += DeleteButton_Clicked;
+        
 
     }
 
@@ -122,6 +123,8 @@ public partial class AppointmentDialog : ContentPage
         {
             eventNameText.Text = appointment.Subject.ToString();
             organizerText.Text = appointment.Notes;
+
+           
             startDate_picker.Date = appointment.StartTime;
             endDate_picker.Date = appointment.EndTime;
 
@@ -129,6 +132,8 @@ public partial class AppointmentDialog : ContentPage
             {
                 startTime_picker.Time = new TimeSpan(appointment.StartTime.Hour, appointment.StartTime.Minute, appointment.StartTime.Second);
                 endTime_picker.Time = new TimeSpan(appointment.EndTime.Hour, appointment.EndTime.Minute, appointment.EndTime.Second);
+
+               
                 switchAllDay.IsToggled = false;
             }
             else

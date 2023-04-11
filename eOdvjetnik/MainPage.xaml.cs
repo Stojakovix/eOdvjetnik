@@ -287,7 +287,7 @@ public partial class MainPage : ContentPage
 
         }//Kraj IF preferences
         //MySQL Query
-        sqlQuery("SELECT * FROM test.sample;");
+        //sqlQuery("SELECT * FROM test.sample;");
 
 
     }
