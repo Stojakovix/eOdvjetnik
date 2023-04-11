@@ -22,6 +22,7 @@
             <!-->
             NAS FORMS
             -->
+
 <StackLayout  x:Name="NASForm" IsVisible="false">
     <Label Text="IP adresa" />
     <Entry x:Name="IPEntry" />
@@ -102,9 +103,6 @@
                     </Style>
                 </Button.Style>-->
             </Button>
-
-
-
         </VerticalStackLayout>
         
     </ScrollView>
