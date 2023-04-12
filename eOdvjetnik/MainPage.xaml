@@ -54,7 +54,7 @@
             NAS FORMS
             -->
             <Image
-                Source="e_odvjetnik.png"
+                Source="folder_1484.png"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="200"
                 HorizontalOptions="Center" 

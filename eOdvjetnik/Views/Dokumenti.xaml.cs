@@ -41,7 +41,7 @@ public partial class Dokumenti : ContentPage
             if (isConnected)
             {
                 NTStatus status = client.Login(String.Empty, Preferences.Get(USER, ""), Preferences.Get(PASS, ""));
-                    ISMBFileStore fileStore = client.TreeConnect("Users", out status);
+                    ISMBFileStore fileStore = client.TreeConnect("Racuni", out status);
                     if (status == NTStatus.STATUS_SUCCESS)
                     {
                         object directoryHandle;
