@@ -1,6 +1,7 @@
 using Syncfusion.Maui.Scheduler;
 using System.Collections.ObjectModel;
 
+
 namespace eOdvjetnik.Views;
 
 public partial class AppointmentDialog : ContentPage
@@ -8,7 +9,7 @@ public partial class AppointmentDialog : ContentPage
     SchedulerAppointment appointment;
     DateTime selectedDate;
     SfScheduler scheduler;
-
+    public int MinuteIncrement { get; set; }
     public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler)
     {
         InitializeComponent();
