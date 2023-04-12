@@ -30,12 +30,6 @@
         <!--Prikaz fajlova-->
 
 
-            <StackLayout>
-        <Label x:Name="fileListLabel"
-               FontSize="Large"
-               Text="File List:" />
-    </StackLayout>
-
 
 
         <StackLayout>
