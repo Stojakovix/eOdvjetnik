@@ -41,7 +41,7 @@ public partial class Dokumenti : ContentPage
             if (isConnected)
             {
                 NTStatus status = client.Login(String.Empty, Preferences.Get(USER, ""), Preferences.Get(PASS, ""));
-                    ISMBFileStore fileStore = client.TreeConnect("testSMB", out status);
+                    ISMBFileStore fileStore = client.TreeConnect("Users", out status);
                     if (status == NTStatus.STATUS_SUCCESS)
                     {
                         object directoryHandle;
@@ -63,20 +63,20 @@ public partial class Dokumenti : ContentPage
 
                         }
 
-                    var listView = new ListView
-                    {
-                        ItemsSource = ShareFiles
-                    };
+                    //var listView = new ListView
+                    //{
+                    //    ItemsSource = ShareFiles
+                    //};
 
-                    listView.ItemTemplate = new DataTemplate(() =>
-                    {
-                        var imageCell = new ImageCell();
-                        imageCell.SetBinding(ImageCell.TextProperty, ".");
-                        imageCell.SetBinding(ImageCell.ImageSourceProperty, new Binding("Resources/icons/folder_1484.png", BindingMode.Default, null, null, null, new FileImageSourceConverter()));
-                        return imageCell;
-                    });
+                    //listView.ItemTemplate = new DataTemplate(() =>
+                    //{
+                    //    var imageCell = new ImageCell();
+                    //    imageCell.SetBinding(ImageCell.TextProperty, ".");
+                    //    imageCell.SetBinding(ImageCell.ImageSourceProperty, new Binding("Resources/icons/folder_1484.png", BindingMode.Default, null, null, null, new FileImageSourceConverter()));
+                    //    return imageCell;
+                    //});
 
-                status = fileStore.CloseFile(directoryHandle);
+                    status = fileStore.CloseFile(directoryHandle);
                         foreach (var file1 in fileList)
                         {
                             System.Diagnostics.Debug.WriteLine(file1.Length.ToString());

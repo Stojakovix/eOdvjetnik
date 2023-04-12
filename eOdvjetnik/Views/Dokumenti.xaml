@@ -2,17 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:eOdvjetnik.Models"
-                
+ 
              xmlns:data="clr-namespace:eOdvjetnik.Data"
              x:Class="eOdvjetnik.Views.Dokumenti"
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              ios:Page.UseSafeArea="True"
              Title="Dokumenti">
 
-   
+    <ScrollView>
+        <VerticalStackLayout>
+            
+           
 
     <Grid RowDefinitions="*,Auto">
         <CollectionView
+            
             VerticalOptions="Fill"
             ItemsSource="{Binding Items}"
             SelectionMode="Single"
@@ -21,6 +25,7 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:DocsItem">
                     <Grid ColumnDefinitions="*, Auto" Padding="20">
+                        <Image Source="e_odvjetnik.png"/>
                         <Label Text="{Binding Name}"
                                VerticalTextAlignment="Center"/>
                     </Grid>
@@ -30,23 +35,49 @@
         <!--Prikaz fajlova-->
 
 
-            <StackLayout>
+            <!--<StackLayout>
         <Label x:Name="fileListLabel"
                FontSize="Large"
                Text="File List:" />
-    </StackLayout>
+    </StackLayout>-->
 
 
 
-        <StackLayout>
+        <!--<StackLayout>
             <Label Text="Share Files:"/>
             <ListView ItemsSource="{Binding ShareFiles}" Margin="20">
-                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                    <ImageCell Text="{Binding .}" ImageSource="Resources/Images/folder_1484.png"/>
+                </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-        <Button Grid.Row="1" Text="Dodaj item" Clicked="OnItemAdded" Margin="20" />
+        <Button Grid.Row="1" Text="Dodaj item" Clicked="OnItemAdded" Margin="20" />-->
 
-    </Grid>
+                <ListView ItemsSource="{Binding ShareFiles}"
+          Margin="20">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal"
+                             Padding="10">
+                                    <Image Source="folder_1484.png"
+                           WidthRequest="50"
+                           HeightRequest="50"
+                           Aspect="AspectFit"/>
+                                    <Label Text="{Binding .}"
+                           VerticalTextAlignment="Center"
+                           Margin="10,0,0,0"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
 
 <!--

@@ -61,7 +61,7 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
-
+		
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
 
@@ -80,6 +80,7 @@
 	  <MauiXaml Remove="Resources\NewFolder\**" />
 	  <None Remove="NewFolder1\**" />
 	  <None Remove="Resources\NewFolder\**" />
+	  <MauiImage Remove="Resources\Images\folder_1484.png" />
 	  <None Remove="Resources\Icons\" />
 	</ItemGroup>
 
@@ -124,6 +125,10 @@
 	  <None Remove="Resources\Fonts\SFUIDisplay-Thin.otf" />
 	  <None Remove="Resources\Fonts\SFUIDisplay-Ultralight.otf" />
 	  <None Remove="Resources\Fonts\SFUIText-Regular.otf" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\Images\folder_1484.png" />
 	</ItemGroup>
 
 	<ItemGroup>
