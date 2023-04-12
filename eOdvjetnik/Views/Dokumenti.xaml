@@ -40,14 +40,9 @@
 
         <StackLayout>
             <Label Text="Share Files:"/>
-<ListView ItemsSource="{Binding ShareFiles}" Margin="20">
-    <ListView.ItemTemplate>
-        
-        <DataTemplate>
-            <ImageCell Text="{Binding .}" ImageSource="Icons/folder-1484.png"/>
-        </DataTemplate>
-    </ListView.ItemTemplate>
-</ListView>
+            <ListView ItemsSource="{Binding ShareFiles}" Margin="20">
+                
+            </ListView>
         </StackLayout>
         <Button Grid.Row="1" Text="Dodaj item" Clicked="OnItemAdded" Margin="20" />
 
