@@ -18,7 +18,7 @@
                            SelectedCellBackground="Orange"
                            AppointmentsSource="{Binding Appointments}"
                            ShowWeekNumber="True"
-                           BackgroundColor="{AppThemeBinding Dark=White, Light=Black}"
+                           BackgroundColor="{AppThemeBinding Dark=White, Light=White}"
                            AllowedViews="Day,Week,WorkWeek,Agenda,Month"
                           
                            >
