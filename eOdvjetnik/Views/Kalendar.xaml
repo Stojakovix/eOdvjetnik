@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:scheduler="clr-namespace:Syncfusion.Maui.Scheduler;assembly=Syncfusion.Maui.Scheduler"
              xmlns:models="clr-namespace:eOdvjetnik.Models"
+             xmlns:popup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
              x:Class="eOdvjetnik.Views.Kalendar"
              xmlns:local="clr-namespace:eOdvjetnik.ViewModel"
              Title="Kalendar"
@@ -21,7 +22,8 @@
                            BackgroundColor="{AppThemeBinding Dark=White, Light=White}"
                            AllowedViews="Day,Week,WorkWeek,Agenda,Month"
                            TodayHighlightBrush="Red"
-                          
+                           
+                           
                            >
 
             <scheduler:SfScheduler.DaysView>
@@ -29,7 +31,19 @@
                     TimeFormat="HH:mm "
                     TimeInterval="1:0:0"
                     CurrentTimeIndicatorBrush="Red"
+                    
                     >
+                    <scheduler:SchedulerDaysView.TimeRulerTextStyle>
+                        
+                    </scheduler:SchedulerDaysView.TimeRulerTextStyle>
+                    <scheduler:SchedulerDaysView.TimeRegionTemplate>
+                        <DataTemplate>
+                            <Grid Background="#fafafa">
+                                  <!--Background="#f7f7f7-->
+                                
+                            </Grid>
+                        </DataTemplate>
+                    </scheduler:SchedulerDaysView.TimeRegionTemplate>
                   
                 </scheduler:SchedulerDaysView>
             </scheduler:SfScheduler.DaysView>
@@ -38,8 +52,14 @@
             
             
             
+            
         </scheduler:SfScheduler>
-      
+            
+            
+
+       <!--Pokušaj popup dialoga kad double tappaš na event da-->
+        
+        
     </Grid>
     
 

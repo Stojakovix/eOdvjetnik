@@ -64,10 +64,7 @@
                 <TimePicker x:Name="startTime_picker" 
                             HeightRequest="40" 
                             Format="HH:mm"
-                            MinuteInterval="15"
-                            
-                            
-                            
+
                             />
             </Grid>
         </Grid>

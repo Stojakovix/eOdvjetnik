@@ -4,12 +4,71 @@
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              x:Class="eOdvjetnik.MainPage">
 
-   
+<!--Crasha se CSS kad implementiraš ->
+    font-size: 15px;
+                    left: 1;
+                width: 99%;
+padding-right: 30;
+    border-radius: 5;
+    padding: 5 5;
+    min-height: 65;
+    height: 100%;
+    -->
+    <ContentPage.Resources>
+        <StyleSheet>
+            <![CDATA[
+            ^Button {
+                text-align: left;
+                color: black;
+                position: absolute;
+                background: #5dc1e4;
+                font-size: 15;
+                top: 0;
+                
+                
+                
+                
+                
+                
+            }
+            ]]>
+        </StyleSheet>
+    </ContentPage.Resources>
     <ScrollView>
         <VerticalStackLayout>
 
             <!-->
+            
+            
             NAS FORMS
+            
+            <popup:SfPopup x:Name="popupLayout"
+                           ShowFooter="True"
+                           ShowCloseButton="True"
+                           AppearanceMode="TwoButton">
+                <popup:SfPopup.ContentTemplate>
+                    <DataTemplate>
+
+
+                        <StackLayout  x:Name="NASForm" IsVisible="false">
+                            <Label Text="IP adresa" />
+                            <Entry x:Name="IPEntry" />
+
+                            <Label Text="Korisničko ime" />
+                            <Entry x:Name="USEREntry" />
+
+                            <Label Text="Lozinka" />
+                            <Entry x:Name="PASSEntry" />
+
+                            <StackLayout>
+                                <Button Text="Save" Clicked="OnSaveClicked" />
+                                <Button Text="Load" Clicked="OnLoadClicked" />
+                                <Button Text="Delete" Clicked="OnDeleteClicked" />
+                            </StackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </popup:SfPopup.ContentTemplate>
+            </popup:SfPopup>
             -->
 
 <StackLayout  x:Name="NASForm" IsVisible="false">

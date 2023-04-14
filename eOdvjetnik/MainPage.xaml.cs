@@ -204,6 +204,7 @@ public partial class MainPage : ContentPage
     }
     private void NASPostavkeClicked(object sender, EventArgs e)
     {
+        
         if (NASForm.IsVisible == true)
         {
             NASForm.IsVisible = false;
@@ -211,6 +212,7 @@ public partial class MainPage : ContentPage
         else {
             NASForm.IsVisible = true;
             OnLoadClicked("", e);
+           
         }
 
     }
