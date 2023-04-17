@@ -113,7 +113,7 @@ padding-right: 30;
             NAS FORMS
             -->
             <Image
-                Source="folder_1484.png"
+                Source="logo.png"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="200"
                 HorizontalOptions="Center" 

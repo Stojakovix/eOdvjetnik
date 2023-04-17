@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="eOdvjetnik" android:versionCode="1" android:versionName="version one">
-	<application android:allowBackup="true" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true" android:label="eOdvjetnik"></application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.zadarict.eodvjetnik" android:versionCode="2" android:versionName="1.2">
+	<application android:allowBackup="true" android:roundIcon="@android:mipmap/sym_def_app_icon" android:supportsRtl="true" android:label="eodvjetnik"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-sdk android:minSdkVersion="33" android:targetSdkVersion="33" />
+	<uses-sdk android:minSdkVersion="29" android:targetSdkVersion="33" />
 </manifest>
