@@ -1,5 +1,6 @@
 using Syncfusion.Maui.Scheduler;
 using System.Collections.ObjectModel;
+using eOdvjetnik.Models;
 
 
 namespace eOdvjetnik.Views;
@@ -18,21 +19,22 @@ public partial class AppointmentDialog : ContentPage
         this.scheduler = scheduler;
         cancelButton.BackgroundColor = Color.FromArgb("#E5E5E5");
         saveButton.BackgroundColor = Color.FromArgb("#2196F3");
-        eventNameText.Placeholder = "Događaj";
-        organizerText.Placeholder = "Bilješke";
+        eventNameText.Placeholder = "Event name";
+        organizerText.Placeholder = "update the notes";
 
         UpdateEditor();
         saveButton.Clicked += SaveButton_Clicked;
         cancelButton.Clicked += CancelButton_Clicked;
         switchAllDay.Toggled += SwitchAllDay_Toggled;
         DeleteButton.Clicked += DeleteButton_Clicked;
-        
 
     }
 
     private void DeleteButton_Clicked(object sender, EventArgs e)
     {
         (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Remove(this.appointment);
+        var todoItem = new Appointment() { From = appointment.StartTime, To = appointment.EndTime, AllDay = appointment.IsAllDay, DescriptionNotes = appointment.Notes, EventName = appointment.Subject, ID = (int)appointment.Id };
+        App.Database.DeleteSchedulerAppointmentAsync(todoItem);
         this.Navigation.PopAsync();
     }
 
@@ -66,24 +68,22 @@ public partial class AppointmentDialog : ContentPage
 
         if (endDate < startDate)
         {
-            Application.Current.MainPage.DisplayAlert("", "Datum završetka sastanka trebalo bi biti veće od datuma početka", "OK");
+            Application.Current.MainPage.DisplayAlert("", "End time should be greater than start time", "OK");
         }
         else if (endDate == startDate)
         {
             if (endTime < startTime)
             {
-                Application.Current.MainPage.DisplayAlert("", "Vrijeme završetka sastanka trebalo bi biti veće od vremena početka", "OK");
+                Application.Current.MainPage.DisplayAlert("", "End time should be greater than start time", "OK");
             }
             else
             {
                 AppointmentDetails();
-                this.IsVisible = false;
             }
         }
         else
         {
             AppointmentDetails();
-            this.IsVisible = false;
         }
     }
 
@@ -91,20 +91,21 @@ public partial class AppointmentDialog : ContentPage
     {
         if (appointment == null)
         {
-            var scheduleAppointment = new SchedulerAppointment();
-            scheduleAppointment.Subject = this.eventNameText.Text;
-            scheduleAppointment.StartTime = this.startDate_picker.Date.Add(this.startTime_picker.Time);
-            scheduleAppointment.EndTime = this.endDate_picker.Date.Add(this.endTime_picker.Time);
-            scheduleAppointment.IsAllDay = this.switchAllDay.IsToggled;
-            scheduleAppointment.Notes = this.organizerText.Text;
-
+            appointment = new SchedulerAppointment();
+            appointment.Subject = this.eventNameText.Text;
+            appointment.StartTime = this.startDate_picker.Date.Add(this.startTime_picker.Time);
+            appointment.EndTime = this.endDate_picker.Date.Add(this.endTime_picker.Time);
+            appointment.IsAllDay = this.switchAllDay.IsToggled;
+            appointment.Notes = this.organizerText.Text;
 
             if (this.scheduler.AppointmentsSource == null)
             {
                 this.scheduler.AppointmentsSource = new ObservableCollection<SchedulerAppointment>();
             }
 
-           (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Add(scheduleAppointment);
+            appointment.Id = (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Count;
+
+            (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Add(appointment);
         }
         else
         {
@@ -115,6 +116,10 @@ public partial class AppointmentDialog : ContentPage
             appointment.Notes = this.organizerText.Text;
         }
 
+        //// - add or edit the appointment in the database collection
+        var todoItem = new Appointment() { From = appointment.StartTime, To = appointment.EndTime, AllDay = appointment.IsAllDay, DescriptionNotes = appointment.Notes, EventName = appointment.Subject, ID = (int)appointment.Id };
+        App.Database.SaveSchedulerAppointmentAsync(todoItem);
+
         this.Navigation.PopAsync();
     }
 
@@ -124,8 +129,6 @@ public partial class AppointmentDialog : ContentPage
         {
             eventNameText.Text = appointment.Subject.ToString();
             organizerText.Text = appointment.Notes;
-
-           
             startDate_picker.Date = appointment.StartTime;
             endDate_picker.Date = appointment.EndTime;
 
@@ -133,8 +136,6 @@ public partial class AppointmentDialog : ContentPage
             {
                 startTime_picker.Time = new TimeSpan(appointment.StartTime.Hour, appointment.StartTime.Minute, appointment.StartTime.Second);
                 endTime_picker.Time = new TimeSpan(appointment.EndTime.Hour, appointment.EndTime.Minute, appointment.EndTime.Second);
-
-               
                 switchAllDay.IsToggled = false;
             }
             else

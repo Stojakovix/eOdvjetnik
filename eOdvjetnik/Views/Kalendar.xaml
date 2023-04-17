@@ -33,9 +33,6 @@
                     CurrentTimeIndicatorBrush="Red"
                     
                     >
-                    <scheduler:SchedulerDaysView.TimeRulerTextStyle>
-                        
-                    </scheduler:SchedulerDaysView.TimeRulerTextStyle>
                     <scheduler:SchedulerDaysView.TimeRegionTemplate>
                         <DataTemplate>
                             <Grid Background="#fafafa">
@@ -44,9 +41,13 @@
                             </Grid>
                         </DataTemplate>
                     </scheduler:SchedulerDaysView.TimeRegionTemplate>
-                  
+
+                    
+
                 </scheduler:SchedulerDaysView>
             </scheduler:SfScheduler.DaysView>
+            
+            
             
             
             

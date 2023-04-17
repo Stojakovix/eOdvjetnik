@@ -1,8 +1,8 @@
 using Syncfusion.Maui.Scheduler;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
-using System.Xml;
-
+using eOdvjetnik.Data;
+using eOdvjetnik.Models;
 namespace eOdvjetnik.Views;
 
 public partial class Kalendar : ContentPage
@@ -24,7 +24,7 @@ public partial class Kalendar : ContentPage
                 
         //        return false;
         //    }
-            
+
         //    return true;
         //};
 
@@ -33,8 +33,8 @@ public partial class Kalendar : ContentPage
 
     private ObservableCollection<SchedulerTimeRegion> GetTimeRegion()
     {
-        var startTime = DateTime.Today.Date.AddHours(19);
-        var endTime = startTime.AddHours(10);
+        var startTime = DateTime.UnixEpoch.AddHours(19);
+        var endTime = startTime.AddHours(12);
 
         var timeRegions = new ObservableCollection<SchedulerTimeRegion>();
         var timeRegion = new SchedulerTimeRegion()
@@ -50,11 +50,32 @@ public partial class Kalendar : ContentPage
          
         };
         timeRegions.Add(timeRegion);
+
+        var wkStart = DateTime.UnixEpoch.AddHours(1);
+        var wkEnd = DateTime.UnixEpoch.AddHours(23);
+        timeRegion = new SchedulerTimeRegion()
+        {
+            StartTime = wkStart,
+            EndTime = wkEnd,
+            //Text = "pauza",
+            EnablePointerInteraction = true,
+            RecurrenceRule = "FREQ=WEEKLY;BYDAY=SA,SU;INTERVAL=1",
+        };
+        timeRegions.Add(timeRegion);
         return timeRegions;
     }
+    private void CreateTabele()
+    {
+        var appointments = App.Database.GetSchedulerAppointment();
+        if (appointments.Count == 0)
+        {
+            var todoItem = new Appointment() { From = DateTime.Today.AddHours(10), To = DateTime.Today.AddHours(12), AllDay = false, DescriptionNotes = "Meeting", EventName = "Annual", ID = 1 };
+            App.Database.SaveSchedulerAppointmentAsync(todoItem);
+        }
+    }
 
-    
-    
+
+
 
     private void Scheduler_Tapped(object sender, SchedulerTappedEventArgs e)
     {
@@ -70,6 +91,7 @@ public partial class Kalendar : ContentPage
             }
         }
     }
+
 
    
 

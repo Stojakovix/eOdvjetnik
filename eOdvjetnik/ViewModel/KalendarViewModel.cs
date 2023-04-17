@@ -1,7 +1,8 @@
-﻿
-using Syncfusion.Maui.Scheduler;
+﻿using Syncfusion.Maui.Scheduler;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using eOdvjetnik.Models;
+using eOdvjetnik.Data;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -11,17 +12,23 @@ namespace eOdvjetnik.ViewModel
 
         public KalendarViewModel()
         {
-            //Appointments = new ObservableCollection<SchedulerAppointment>
-            //{
-            //    //Adding scheduler appointment in the scheduler appointment collection. 
-            //    new SchedulerAppointment()
-            //    {
-            //        StartTime = DateTime.Today.AddHours(9),
-            //        EndTime = DateTime.Today.AddHours(11),
-            //        Subject = "Client Meeting",
-            //        Location = "Hutchison road",
-            //    }
-            //};
+            var dataBaseAppointments = App.Database.GetSchedulerAppointment();
+
+            if (dataBaseAppointments != null)
+            {
+                Appointments = new ObservableCollection<SchedulerAppointment>();
+                foreach (Appointment appointment in dataBaseAppointments)
+                {
+                    Appointments.Add(new SchedulerAppointment()
+                    {
+                        StartTime = appointment.From,
+                        EndTime = appointment.To,
+                        Subject = appointment.EventName,
+                        IsAllDay = appointment.AllDay,
+                        Id = appointment.ID
+                    });
+                }
+            }
         }
 
         /// <summary>
