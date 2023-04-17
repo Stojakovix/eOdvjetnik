@@ -28,5 +28,11 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>ITSEncryptionExportComplianceCode</key>
+	<true/>
+	<key>UIRequiresPersistentWiFi</key>
+	<true/>
 </dict>
 </plist>
