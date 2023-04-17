@@ -33,12 +33,12 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
-	  <CodesignProvision>eOdvjetnik certifikat</CodesignProvision>
-	  <CodesignKey>iPhone Developer: Created via API (667S88QMSZ)</CodesignKey>
+	  <CodesignProvision>App Store eOdvjetnik Apple iOS Distribution Profil</CodesignProvision>
+	  <CodesignKey>iPhone Distribution</CodesignKey>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
-	  <CodesignKey>iPhone Developer: Created via API (667S88QMSZ)</CodesignKey>
+	  <CodesignKey>iPhone Developer</CodesignKey>
 	  <CodesignProvision>eOdvjetnik certifikat</CodesignProvision>
 	  <MtouchDebug>true</MtouchDebug>
 	</PropertyGroup>
@@ -49,13 +49,15 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
 	  <EnablePackageSigning>true</EnablePackageSigning>
-	  <CodesignKey>Mac Developer</CodesignKey>
+	  <CodesignKey>3rd Party Mac Developer Application</CodesignKey>
 	  <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
+	  <CodesignProvision>Mac Store eOdvjetnik Distribute Profile</CodesignProvision>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
 	  <CodesignKey>Mac Developer</CodesignKey>
 	  <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
+	  <CodesignProvision>Mac Store eOdvjetnik Mac OS Develop Profile</CodesignProvision>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
