@@ -54,7 +54,7 @@
 	  <CodesignProvision>Mac Store eOdvjetnik Distribute Profile</CodesignProvision>
 	  <EnableCodeSigning>True</EnableCodeSigning>
 	  <UseHardenedRuntime>true</UseHardenedRuntime>
-	  <CodesignEntitlements>Info.plist</CodesignEntitlements>
+	  <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
