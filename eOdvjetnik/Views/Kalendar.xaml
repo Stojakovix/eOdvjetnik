@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:scheduler="clr-namespace:Syncfusion.Maui.Scheduler;assembly=Syncfusion.Maui.Scheduler"
              xmlns:models="clr-namespace:eOdvjetnik.Models"
-             xmlns:popup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
              x:Class="eOdvjetnik.Views.Kalendar"
              xmlns:local="clr-namespace:eOdvjetnik.ViewModel"
              Title="Kalendar"
@@ -11,7 +10,28 @@
     <ContentPage.BindingContext>
         <local:KalendarViewModel x:Name="viewmodel"/>
     </ContentPage.BindingContext>
+
+    
+    
+
     <Grid>
+        <Grid.Resources>
+            <DataTemplate x:Key="appointmentTemplate">
+                <Frame Background="lightblue"
+                       Opacity="0.2"
+                       CornerRadius="3"
+                       Padding="10,5,15,5"
+                       
+                      >
+                    <Label Text="{Binding Subject}"
+                           TextColor="Black"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           FontFamily="Bold"/>
+                </Frame>
+            </DataTemplate>
+        </Grid.Resources>
+        
         <scheduler:SfScheduler x:Name="Scheduler" 
                            View="Day"
                            FirstDayOfWeek="Monday"
@@ -23,46 +43,35 @@
                            AllowedViews="Day,Week,WorkWeek,Agenda,Month"
                            TodayHighlightBrush="Red"
                            CalendarType="Gregorian"
+                          
                            
-                           
-                           >
 
+                           >
+            
+            
             <scheduler:SfScheduler.DaysView>
                 <scheduler:SchedulerDaysView
                     TimeFormat="HH:mm "
                     TimeInterval="1:0:0"
                     CurrentTimeIndicatorBrush="Red"
+                    AppointmentTemplate="{StaticResource appointmentTemplate}"
                     
                     >
                     <scheduler:SchedulerDaysView.TimeRegionTemplate>
                         <DataTemplate>
                             <Grid Background="#fafafa">
-                                  <!--Background="#f7f7f7-->
-                                
+                                <!--Background="#f7f7f7-->
                             </Grid>
                         </DataTemplate>
                     </scheduler:SchedulerDaysView.TimeRegionTemplate>
-
-                    
-
                 </scheduler:SchedulerDaysView>
             </scheduler:SfScheduler.DaysView>
-            
-            
-            
-            
-            
-            
-            
-            
-        </scheduler:SfScheduler>
-            
-            
 
-       <!--Pokušaj popup dialoga kad double tappaš na event da-->
-        
-        
+
+        </scheduler:SfScheduler>
+
     </Grid>
-    
 
 </ContentPage>
+    
+    

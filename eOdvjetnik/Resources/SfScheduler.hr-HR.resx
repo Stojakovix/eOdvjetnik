@@ -119,47 +119,50 @@
   </resheader>
   <data name="Agenda" xml:space="preserve">
     <value>Agenda</value>
-    <comment>Svi sastanci</comment>
+    <comment>Agenda view</comment>
   </data>
   <data name="AllDay" xml:space="preserve">
-    <value>Cijeli dan</value>
-    <comment>Sastanak cijeli dan</comment>
+    <value>Cjelodnevno</value>
+    <comment>All Day</comment>
   </data>
   <data name="Day" xml:space="preserve">
     <value>Dan</value>
-    <comment>Dan u tjednu</comment>
+    <comment>Day view</comment>
   </data>
   <data name="Month" xml:space="preserve">
     <value>Mjesec</value>
-    <comment>Cijeli mjesec</comment>
+    <comment>Month view</comment>
   </data>
   <data name="NoEvents" xml:space="preserve">
-    <value>Nema Događaja</value>
-    <comment>Nema događaja</comment>
+    <value>Nema događaja</value>
+    <comment>No events</comment>
   </data>
   <data name="TimelineDay" xml:space="preserve">
-    <value>Vremenska crta Dana</value>
+    <value>Kronologija dan</value>
+    <comment>Timeline day view</comment>
   </data>
   <data name="TimelineMonth" xml:space="preserve">
-    <value>Vremenska crta mjeseca</value>
+    <value>Kronologija mjesec</value>
+    <comment>Timeline month view</comment>
   </data>
   <data name="TimelineWeek" xml:space="preserve">
-    <value>Vremenska crta tjedna</value>
+    <value>Kronologija tjedan</value>
+    <comment>Timeline week</comment>
   </data>
-  <data name="TimeLineWorkWeek" xml:space="preserve">
-    <value>Vremenska crta radnog tjedna</value>
+  <data name="TimelineWorkWeek" xml:space="preserve">
+    <value>Kronologija radni tjedan</value>
+    <comment>Timeline work week</comment>
   </data>
   <data name="Today" xml:space="preserve">
-    <value>Današnji dan</value>
+    <value>Danas</value>
+    <comment>Today</comment>
   </data>
   <data name="Week" xml:space="preserve">
     <value>Tjedan</value>
+    <comment>Week</comment>
   </data>
   <data name="WorkWeek" xml:space="preserve">
     <value>Radni tjedan</value>
-  </data>
-  <data name="Year" xml:space="preserve">
-    <value>Godina</value>
-    <comment>Godina</comment>
+    <comment>Work week</comment>
   </data>
 </root>
