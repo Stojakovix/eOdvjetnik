@@ -1,4 +1,7 @@
 ﻿using eOdvjetnik.Data;
+using Syncfusion.Maui.Scheduler;
+using System.Globalization;
+using System.Resources;
 
 namespace eOdvjetnik;
 
@@ -11,10 +14,12 @@ public partial class App : Application
 		
 
         InitializeComponent();
-
+        CultureInfo.CurrentUICulture = new CultureInfo("hr-HR");
+        SfSchedulerResources.ResourceManager = new ResourceManager("eOdvjetnik.Resources.SfScheduler", Application.Current.GetType().Assembly);
+        
 		MainPage = new AppShell();
 	}
-
+    
     public static SchedulerDatabase Database
     {
         get

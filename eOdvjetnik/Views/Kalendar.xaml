@@ -22,6 +22,7 @@
                            BackgroundColor="{AppThemeBinding Dark=White, Light=White}"
                            AllowedViews="Day,Week,WorkWeek,Agenda,Month"
                            TodayHighlightBrush="Red"
+                           CalendarType="Gregorian"
                            
                            
                            >

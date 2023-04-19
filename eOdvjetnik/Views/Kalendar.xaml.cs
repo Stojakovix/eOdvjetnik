@@ -17,17 +17,7 @@ public partial class Kalendar : ContentPage
 
         Scheduler.View = SchedulerView.Day;
         Scheduler.DaysView.TimeRegions = GetTimeRegion();
-        //Scheduler.SelectableDayPredicate = (date) =>
-        //{
-        //    if (date.DayOfWeek == DayOfWeek.Sunday || date.DayOfWeek == DayOfWeek.Saturday)
-        //    {
-                
-        //        return false;
-        //    }
-
-        //    return true;
-        //};
-
+        
 
     }
 
