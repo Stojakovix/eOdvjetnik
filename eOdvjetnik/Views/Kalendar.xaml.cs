@@ -70,7 +70,7 @@ public partial class Kalendar : ContentPage
 
 
 
-    private void Scheduler_Tapped(object sender, SchedulerTappedEventArgs e)
+    private void Scheduler_Tapped(object sender, SchedulerDoubleTappedEventArgs e)
     {
         if (e.Element == SchedulerElement.SchedulerCell || e.Element == SchedulerElement.Appointment)
         {
