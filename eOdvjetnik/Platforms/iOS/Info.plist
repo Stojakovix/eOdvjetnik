@@ -36,5 +36,7 @@
 	<true/>
 	<key>com.apple.security.network.client</key>
 	<true/>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>This app uses Wi-Fi to connect to nearby devices and enable wireless file transfers.</string>
 </dict>
 </plist>

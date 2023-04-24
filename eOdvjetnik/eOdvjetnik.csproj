@@ -19,8 +19,8 @@
 		<ApplicationIdGuid>70cf2bf6-7324-45d9-a89e-7377ea1e46e0</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.31</ApplicationDisplayVersion>
-		<ApplicationVersion>131</ApplicationVersion>
+		<ApplicationDisplayVersion>1.35</ApplicationDisplayVersion>
+		<ApplicationVersion>135</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
@@ -35,12 +35,12 @@
 	  <CreatePackage>false</CreatePackage>
 	  <CodesignProvision>App Store eOdvjetnik Apple iOS Distribution Profil</CodesignProvision>
 	  <CodesignKey>iPhone Distribution</CodesignKey>
-	  <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+	  <CodesignEntitlements>Platforms\iOS\Entitlements.plist</CodesignEntitlements>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
-	  <CodesignKey>iPhone Developer</CodesignKey>
-	  <CodesignProvision>eOdvjetnik certifikat</CodesignProvision>
+	  <CodesignKey>iPhone Distribution</CodesignKey>
+	  <CodesignProvision>App Store eOdvjetnik Apple iOS Distribution Profil</CodesignProvision>
 	  <MtouchDebug>true</MtouchDebug>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -88,6 +88,7 @@
 	  <MauiXaml Remove="NewFolder1\**" />
 	  <None Remove="NewFolder1\**" />
 	  <None Remove="Resources\Icons\" />
+	  <EmbeddedResource Remove="Resources\SfScheduler.hr-HR.resx" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -177,5 +178,8 @@
 
 	<ItemGroup>
 	  <Folder Include="Resources\Icons\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <BundleResource Include="Resources\SfScheduler.hr-HR.resx" />
 	</ItemGroup>
 </Project>
