@@ -8,16 +8,16 @@ using eOdvjetnik.Data;
 using eOdvjetnik.Services;
 using System.Collections.ObjectModel;
 using System.Security.Cryptography;
+using Microsoft.Maui.Networking;
 
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Text.Json;
 using Microsoft.Maui.Controls;
- using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
+
 //using OpenVpn;
 //using WireGuardNT_PInvoke;
-
-
 
 
 
@@ -288,13 +288,26 @@ public partial class MainPage : ContentPage
 
 
         }//Kraj IF preferences
-        //MySQL Query
-        //sqlQuery("SELECT * FROM test.sample;");
+         //MySQL Query
+         //sqlQuery("SELECT * FROM test.sample;");
+
+        // Check if the current connection profile is set to WiFi
+        if (Connectivity.NetworkAccess == NetworkAccess.Internet && Connectivity.ConnectionProfiles.Contains(ConnectionProfile.WiFi))
+        {
+            // Your network code here
+        }
+        else
+        {
+            // Handle case where the device is not connected to a WiFi network
+        }
+
+
+
 
 
     }
 
-    
+
 
 
 }
