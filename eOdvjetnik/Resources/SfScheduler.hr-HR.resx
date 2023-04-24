@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Agenda" xml:space="preserve">
-    <value>Agenda</value>
+    <value>Dnevni red</value>
     <comment>Agenda view</comment>
   </data>
   <data name="AllDay" xml:space="preserve">
-    <value>Cjelodnevno</value>
+    <value>Cijeli dan</value>
     <comment>All Day</comment>
   </data>
   <data name="Day" xml:space="preserve">
@@ -138,19 +138,19 @@
     <comment>No events</comment>
   </data>
   <data name="TimelineDay" xml:space="preserve">
-    <value>Kronologija dan</value>
+    <value>Vremenska trakaDan</value>
     <comment>Timeline day view</comment>
   </data>
   <data name="TimelineMonth" xml:space="preserve">
-    <value>Kronologija mjesec</value>
+    <value>Vremenska crtaMjesec</value>
     <comment>Timeline month view</comment>
   </data>
   <data name="TimelineWeek" xml:space="preserve">
-    <value>Kronologija tjedan</value>
+    <value>Tjedan vremenske trake</value>
     <comment>Timeline week</comment>
   </data>
   <data name="TimelineWorkWeek" xml:space="preserve">
-    <value>Kronologija radni tjedan</value>
+    <value>Vremenska crtaRadni tjedan</value>
     <comment>Timeline work week</comment>
   </data>
   <data name="Today" xml:space="preserve">

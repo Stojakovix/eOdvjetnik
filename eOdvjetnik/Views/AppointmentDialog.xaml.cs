@@ -10,7 +10,7 @@ public partial class AppointmentDialog : ContentPage
     SchedulerAppointment appointment;
     DateTime selectedDate;
     SfScheduler scheduler;
-    public int MinuteIncrement { get; set; }
+    
     public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler)
     {
         InitializeComponent();
@@ -32,10 +32,18 @@ public partial class AppointmentDialog : ContentPage
 
     private void DeleteButton_Clicked(object sender, EventArgs e)
     {
-        (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Remove(this.appointment);
-        var todoItem = new Appointment() { From = appointment.StartTime, To = appointment.EndTime, AllDay = appointment.IsAllDay, DescriptionNotes = appointment.Notes, EventName = appointment.Subject, ID = (int)appointment.Id };
-        App.Database.DeleteSchedulerAppointmentAsync(todoItem);
-        this.Navigation.PopAsync();
+        if (appointment == null)
+        {
+            this.Navigation.PopAsync();
+
+        }
+        else
+        {
+            (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Remove(this.appointment);
+            var todoItem = new Appointment() { From = appointment.StartTime, To = appointment.EndTime, AllDay = appointment.IsAllDay, DescriptionNotes = appointment.Notes, EventName = appointment.Subject, ID = (int)appointment.Id };
+            App.Database.DeleteSchedulerAppointmentAsync(todoItem);
+            this.Navigation.PopAsync();
+        }
     }
 
     private void SwitchAllDay_Toggled(object sender, ToggledEventArgs e)

@@ -1,6 +1,9 @@
 ﻿namespace eOdvjetnik;
 
-using System.Security.AccessControl;
+using Syncfusion.Maui.Scheduler;
+using System.Globalization;
+using Syncfusion.Maui.Scheduler;
+using System.Resources;
 using Views;
 
 
@@ -16,5 +19,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(DocsItemPage), typeof(DocsItemPage));
 		Routing.RegisterRoute(nameof(AppointmentDialog), typeof(AppointmentDialog));
         Routing.RegisterRoute(nameof(Register), typeof(Register));
+
+        
     }
 }

@@ -83,15 +83,10 @@
 
 	<ItemGroup>
 	  <Compile Remove="NewFolder1\**" />
-	  <Compile Remove="Resources\NewFolder\**" />
 	  <EmbeddedResource Remove="NewFolder1\**" />
-	  <EmbeddedResource Remove="Resources\NewFolder\**" />
 	  <MauiCss Remove="NewFolder1\**" />
-	  <MauiCss Remove="Resources\NewFolder\**" />
 	  <MauiXaml Remove="NewFolder1\**" />
-	  <MauiXaml Remove="Resources\NewFolder\**" />
 	  <None Remove="NewFolder1\**" />
-	  <None Remove="Resources\NewFolder\**" />
 	  <None Remove="Resources\Icons\" />
 	</ItemGroup>
 
@@ -139,6 +134,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="LocalizationResourceManager.Maui" Version="1.0.3" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		

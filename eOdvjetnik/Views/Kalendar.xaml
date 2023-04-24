@@ -17,21 +17,25 @@
     <Grid>
         <Grid.Resources>
             <DataTemplate x:Key="appointmentTemplate">
-                <Frame Background="lightblue"
-                       Opacity="0.2"
-                       CornerRadius="3"
+                
+                    <Frame BackgroundColor="LightBlue"
+                       Opacity="0.5"
                        Padding="10,5,15,5"
-                       
-                      >
-                    <Label Text="{Binding Subject}"
+                       HasShadow="False"
+                       BorderColor="Transparent"
+                       >
+                        <Label Text="{Binding Subject}"
                            TextColor="Black"
                            HorizontalOptions="CenterAndExpand"
                            VerticalOptions="CenterAndExpand"
                            FontFamily="Bold"/>
-                </Frame>
+                    </Frame>
+               
+                       
             </DataTemplate>
         </Grid.Resources>
-        
+
+
         <scheduler:SfScheduler x:Name="Scheduler" 
                            View="Day"
                            FirstDayOfWeek="Monday"
@@ -43,6 +47,7 @@
                            AllowedViews="Day,Week,WorkWeek,Agenda,Month"
                            TodayHighlightBrush="Red"
                            CalendarType="Gregorian"
+                           EnableReminder="True"
                           
                            
 

@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Collections.ObjectModel;
 using eOdvjetnik.Data;
 using eOdvjetnik.Models;
+using System.Globalization;
+using System.Resources;
 
 namespace eOdvjetnik.Views;
 
@@ -15,7 +17,7 @@ public partial class Kalendar : ContentPage
         InitializeComponent();
         Debug.WriteLine("inicijalizirano");
         _ = new SfScheduler();
-
+  
         Scheduler.View = SchedulerView.Day;
         Scheduler.DaysView.TimeRegions = GetTimeRegion();
         
