@@ -8,3 +8,7 @@
     text-align: center;
     text-transform: uppercase;
 }
+.e-scheduler .e-work-cells:hover {
+    background-color: inherit !important;
+}
+

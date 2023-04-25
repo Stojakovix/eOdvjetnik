@@ -13,7 +13,7 @@ namespace eOdvjetnik.ViewModel
         public KalendarViewModel()
         {
             var dataBaseAppointments = App.Database.GetSchedulerAppointment();
-
+            
             if (dataBaseAppointments != null)
             {
                 Appointments = new ObservableCollection<SchedulerAppointment>();
@@ -27,6 +27,7 @@ namespace eOdvjetnik.ViewModel
                         IsAllDay = appointment.AllDay,
                         Id = appointment.ID
                     });
+                  
                 }
             }
         }

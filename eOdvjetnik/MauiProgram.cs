@@ -37,12 +37,13 @@ public static class MauiProgram
         builder.Services.AddSingleton<Dokumenti>();
         builder.Services.AddTransient<DocsItemPage>();
 
-        builder.Services.AddSingleton<Kalendar>();
+        builder.Services.AddTransient<Kalendar>();
+        builder.Services.AddTransient<AppointmentDialog>();
         
 
 
         builder.Services.AddSingleton<DocsDatabase>();
-
+        
 
         string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Licence.db3");
 

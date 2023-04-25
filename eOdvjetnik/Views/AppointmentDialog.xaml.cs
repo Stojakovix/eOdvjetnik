@@ -42,7 +42,7 @@ public partial class AppointmentDialog : ContentPage
             (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Remove(this.appointment);
             var todoItem = new Appointment() { From = appointment.StartTime, To = appointment.EndTime, AllDay = appointment.IsAllDay, DescriptionNotes = appointment.Notes, EventName = appointment.Subject, ID = (int)appointment.Id };
             App.Database.DeleteSchedulerAppointmentAsync(todoItem);
-            this.Navigation.PopAsync();
+            AppShell.Current.GoToAsync("//Kalendar");
         }
     }
 
@@ -129,6 +129,7 @@ public partial class AppointmentDialog : ContentPage
         App.Database.SaveSchedulerAppointmentAsync(todoItem);
 
         this.Navigation.PopAsync();
+        
     }
 
     private void UpdateEditor()
@@ -154,6 +155,7 @@ public partial class AppointmentDialog : ContentPage
                 endTime_picker.IsEnabled = false;
                 switchAllDay.IsToggled = true;
             }
+            
         }
         else
         {

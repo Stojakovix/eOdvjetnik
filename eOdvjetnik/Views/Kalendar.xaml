@@ -12,29 +12,50 @@
     </ContentPage.BindingContext>
 
     
-    
+
+
 
     <Grid>
         <Grid.Resources>
             <DataTemplate x:Key="appointmentTemplate">
-                
-                    <Frame BackgroundColor="LightBlue"
-                       Opacity="0.5"
-                       Padding="10,5,15,5"
-                       HasShadow="False"
-                       BorderColor="Transparent"
+<!--Ne koristit Frame, nema podršku za dynamic data binding, koristi border-->
+                <Border BackgroundColor="LightBlue"
+                        Opacity="0.5"
+                        Padding="5,15,10,5"                     
+                        StrokeShape="RoundRectangle 40,40,40,40"
+                        Stroke="Transparent"
                        >
-                        <Label Text="{Binding Subject}"
+                    <Label Text="{Binding Subject}"
                            TextColor="Black"
                            HorizontalOptions="CenterAndExpand"
                            VerticalOptions="CenterAndExpand"
-                           FontFamily="Bold"/>
-                    </Frame>
-               
-                       
+                           FontFamily="Bold"
+                           Padding="5,5,5,5"
+                           LineBreakMode="WordWrap"
+                           MaxLines="2"/>
+                    
+                </Border>
+
+
+            </DataTemplate>
+            <DataTemplate x:Key="AllDayAppointmentTemplate">
+                <Grid BackgroundColor="LightBlue"
+                      Opacity="0.5">
+                    <Label Text="{Binding Subject}"
+                           VerticalOptions="Center"
+                           TextColor="Black"
+                           LineBreakMode="WordWrap"
+                           MaxLines="2"
+                           FontSize="Caption"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center">
+                        
+                    </Label>
+                </Grid>
             </DataTemplate>
         </Grid.Resources>
 
+        
 
         <scheduler:SfScheduler x:Name="Scheduler" 
                            View="Day"
@@ -48,19 +69,18 @@
                            TodayHighlightBrush="Red"
                            CalendarType="Gregorian"
                            EnableReminder="True"
-                          
-                           
+                           SelectedAppointmentBackground="Transparent"
 
                            >
-            
-            
+
+
             <scheduler:SfScheduler.DaysView>
                 <scheduler:SchedulerDaysView
                     TimeFormat="HH:mm "
                     TimeInterval="1:0:0"
                     CurrentTimeIndicatorBrush="Red"
                     AppointmentTemplate="{StaticResource appointmentTemplate}"
-                    
+                    AllDayAppointmentTemplate="{StaticResource AllDayAppointmentTemplate}"
                     >
                     <scheduler:SchedulerDaysView.TimeRegionTemplate>
                         <DataTemplate>
