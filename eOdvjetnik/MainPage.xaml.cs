@@ -46,11 +46,36 @@ public partial class MainPage : ContentPage
     DeviceIdDatabase database;
 
     //KRAJ NAS
+
+
+
+    async void AskForWiFiPermission()
+    {
+        var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+        if (status != PermissionStatus.Granted)
+        {
+            status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+            if (status != PermissionStatus.Granted)
+            {
+                // Permission denied. Handle accordingly.
+            }
+        }
+        else
+        {
+            // Permission already granted. Proceed with using WiFi.
+        }
+    }
+
+
+
+
+
     public MainPage()
     {
         InitializeComponent();
         ReadDeviceInfo();
         GetMicroSeconds();
+        AskForWiFiPermission();
 
     }
     private void OnSaveClicked(object sender, EventArgs e)

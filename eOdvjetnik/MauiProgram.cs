@@ -11,7 +11,7 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-//using Xamarin.Essentials;
+
 
 namespace eOdvjetnik;
 public static class MauiProgram
@@ -22,24 +22,7 @@ public static class MauiProgram
     {
 
 
-        async void AskForWiFiPermission()
-        {
-            var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
-            if (status != PermissionStatus.Granted)
-            {
-                status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
-                if (status != PermissionStatus.Granted)
-                {
-                    // Permission denied. Handle accordingly.
-                }
-            }
-            else
-            {
-                // Permission already granted. Proceed with using WiFi.
-            }
-        }
 
-        AskForWiFiPermission();
 
 
 
