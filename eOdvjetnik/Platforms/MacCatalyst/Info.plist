@@ -33,6 +33,7 @@
 	<string>hr</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Zadar ICT © 2023</string>
-
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Please allow this option, wee need it for precise data. Thank You</string>
 </dict>
 </plist>
