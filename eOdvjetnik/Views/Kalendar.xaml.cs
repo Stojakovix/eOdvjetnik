@@ -1,10 +1,8 @@
 using Syncfusion.Maui.Scheduler;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
-using eOdvjetnik.Data;
 using eOdvjetnik.Models;
-using System.Globalization;
-using System.Resources;
+using MySql.Data.MySqlClient;
 
 namespace eOdvjetnik.Views;
 
@@ -20,9 +18,12 @@ public partial class Kalendar : ContentPage
   
         Scheduler.View = SchedulerView.Day;
         Scheduler.DaysView.TimeRegions = GetTimeRegion();
-        
+       // MySQL Query;
+       
 
     }
+
+
 
     private ObservableCollection<SchedulerTimeRegion> GetTimeRegion()
     {
@@ -70,7 +71,7 @@ public partial class Kalendar : ContentPage
 
 
 
-    private void Scheduler_Tapped(object sender, SchedulerDoubleTappedEventArgs e)
+    private void Scheduler_DoubleTapped(object sender, SchedulerDoubleTappedEventArgs e)
     {
        
         if (e.Element == SchedulerElement.SchedulerCell || e.Element == SchedulerElement.Appointment)
@@ -89,20 +90,7 @@ public partial class Kalendar : ContentPage
 
    
 
-    //private void DoubleTapped(object sender, SchedulerDoubleTappedEventArgs e)
-    //{
-    //    if (e.Element == SchedulerElement.SchedulerCell || e.Element == SchedulerElement.Appointment)
-    //    {
-    //        if(e.Appointments != null)
-    //        {
-    //            popup.Show();
-    //        }
-    //        else
-    //        {
-    //            popup.Show();
-    //        }
-    //    }
-    //}
+    
 
    
 

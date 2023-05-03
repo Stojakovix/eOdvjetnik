@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using eOdvjetnik.Models;
 using eOdvjetnik.Data;
+using System.Diagnostics;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -27,9 +28,11 @@ namespace eOdvjetnik.ViewModel
                         IsAllDay = appointment.AllDay,
                         Id = appointment.ID
                     });
-                  
+                    Debug.WriteLine($"{appointment.ID} {appointment.EventName} {appointment.AllDay} {appointment.From} {appointment.To}");
                 }
+                
             }
+            
         }
 
         /// <summary>

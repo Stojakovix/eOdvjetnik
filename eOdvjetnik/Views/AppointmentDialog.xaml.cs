@@ -111,7 +111,7 @@ public partial class AppointmentDialog : ContentPage
                 this.scheduler.AppointmentsSource = new ObservableCollection<SchedulerAppointment>();
             }
 
-            appointment.Id = (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Count;
+            //appointment.Id = (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Count;
 
             (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Add(appointment);
         }

@@ -1,19 +1,7 @@
-﻿using SMBLibrary.Client;
-using SMBLibrary;
-using eOdvjetnik.Views;
-using System.Diagnostics;
-using Microsoft.Maui.Devices;
+﻿using System.Diagnostics;
 using System.Text;
 using eOdvjetnik.Data;
-using eOdvjetnik.Services;
-using System.Collections.ObjectModel;
 using System.Security.Cryptography;
-using Microsoft.Maui.Networking;
-
-using Newtonsoft.Json;
-using System.ComponentModel;
-using System.Text.Json;
-using Microsoft.Maui.Controls;
 using MySql.Data.MySqlClient;
 
 //using OpenVpn;
@@ -131,8 +119,9 @@ public partial class MainPage : ContentPage
         {
             Debug.WriteLine("Usao u while  *******");
             // Access data using column names or indices
-            string column1 = reader.GetString("name");
-            int column2 = reader.GetInt32("active");
+            int column1 = reader.GetInt32("ID");
+            string column2 = reader.GetString("EventName");
+            
             Debug.WriteLine(column1);
             Debug.WriteLine(column2);
 
@@ -287,9 +276,10 @@ public partial class MainPage : ContentPage
 
 
 
-        }//Kraj IF preferences
+        }
+        //Kraj IF preferences
          //MySQL Query
-         //sqlQuery("SELECT * FROM test.sample;");
+         sqlQuery("SELECT * FROM events;");
 
         // Check if the current connection profile is set to WiFi
         if (Connectivity.NetworkAccess == NetworkAccess.Internet && Connectivity.ConnectionProfiles.Contains(ConnectionProfile.WiFi))
