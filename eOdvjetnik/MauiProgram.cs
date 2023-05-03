@@ -12,6 +12,7 @@ using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
+
 namespace eOdvjetnik;
 public static class MauiProgram
 {
@@ -19,6 +20,13 @@ public static class MauiProgram
 
     public static MauiApp CreateMauiApp()
     {
+
+
+
+
+
+
+
         var builder = MauiApp.CreateBuilder();
 
         builder.ConfigureSyncfusionCore();

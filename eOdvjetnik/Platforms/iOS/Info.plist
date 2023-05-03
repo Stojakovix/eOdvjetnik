@@ -38,5 +38,7 @@
 	<true/>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>This app uses Wi-Fi to connect to nearby devices and enable wireless file transfers.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Da bi ste koristiti WiFi molimo vas da dopustite korištenje lokacije. - eOdvjetnik</string>
 </dict>
 </plist>

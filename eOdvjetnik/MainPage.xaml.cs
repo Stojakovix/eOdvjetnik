@@ -4,6 +4,8 @@ using eOdvjetnik.Data;
 using System.Security.Cryptography;
 using MySql.Data.MySqlClient;
 
+
+
 //using OpenVpn;
 //using WireGuardNT_PInvoke;
 
@@ -32,77 +34,102 @@ public partial class MainPage : ContentPage
     DeviceIdDatabase database;
 
     //KRAJ NAS
+
+
+
+    async void AskForWiFiPermission()
+    {
+        var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+        if (status != PermissionStatus.Granted)
+        {
+            status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+            if (status != PermissionStatus.Granted)
+            {
+                // Permission denied. Handle accordingly.
+            }
+        }
+        else
+        {
+            // Permission already granted. Proceed with using WiFi.
+        }
+    }
+
+
+
+
+
     public MainPage()
     {
         InitializeComponent();
         ReadDeviceInfo();
         GetMicroSeconds();
+        AskForWiFiPermission();
 
     }
     private void OnSaveClicked(object sender, EventArgs e)
     {
-        Preferences.Set(IP, IPEntry.Text);
-        Preferences.Set(USER, USEREntry.Text);
-        Preferences.Set(PASS, PASSEntry.Text);
+        Microsoft.Maui.Storage.Preferences.Set(IP, IPEntry.Text);
+        Microsoft.Maui.Storage.Preferences.Set(USER, USEREntry.Text);
+        Microsoft.Maui.Storage.Preferences.Set(PASS, PASSEntry.Text);
         DisplayAlert("Success", "Data saved", "OK");
     }
     private void OnSaveClickedMySQL(object sender, EventArgs e)
     {
-        Preferences.Set(IP_mysql, IPEntryMySQL.Text);
-        Preferences.Set(USER_mysql, USEREntryMySQL.Text);
-        Preferences.Set(PASS_mysql, PASSEntryMySQL.Text);
-        Preferences.Set(databasename_mysql, databasenameEntryMySQL.Text);
+        Microsoft.Maui.Storage.Preferences.Set(IP_mysql, IPEntryMySQL.Text);
+        Microsoft.Maui.Storage.Preferences.Set(USER_mysql, USEREntryMySQL.Text);
+        Microsoft.Maui.Storage.Preferences.Set(PASS_mysql, PASSEntryMySQL.Text);
+        Microsoft.Maui.Storage.Preferences.Set(databasename_mysql, databasenameEntryMySQL.Text);
 
         DisplayAlert("Success", "Data saved", "OK");
     }
     private void OnLoadClicked(object sender, EventArgs e)
     {
 
-        var ip = Preferences.Get(IP, "");
+        var ip = Microsoft.Maui.Storage.Preferences.Get(IP, "");
         IPEntry.Text = ip;
-        var user = Preferences.Get(USER, "");
+        var user = Microsoft.Maui.Storage.Preferences.Get(USER, "");
         USEREntry.Text = user;
-        var pass = Preferences.Get(PASS, "");
+        var pass = Microsoft.Maui.Storage.Preferences.Get(PASS, "");
         PASSEntry.Text = pass;
 
-        //Preferences.Set(IP, "");
-        //Preferences.Set(USER, "");
-        //Preferences.Set(PASS, "");
+        //Microsoft.Maui.Storage.Preferences.Set(IP, "");
+        //Microsoft.Maui.Storage.Preferences.Set(USER, "");
+        //Microsoft.Maui.Storage.Preferences.Set(PASS, "");
     }
     private void OnLoadClickedMySQL(object sender, EventArgs e)
     {
-        var ipmysql = Preferences.Get(IP_mysql, "");
+        var ipmysql = Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "");
         IPEntryMySQL.Text = ipmysql;
-        var useripmysql = Preferences.Get(USER_mysql, "");
+        var useripmysql = Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "");
         USEREntryMySQL.Text = useripmysql;
-        var passipmysql = Preferences.Get(PASS_mysql, "");
+        var passipmysql = Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "");
         PASSEntryMySQL.Text = passipmysql;
-        var databasenamemysql = Preferences.Get(databasename_mysql, "");
+        var databasenamemysql = Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
         databasenameEntryMySQL.Text = databasenamemysql;
 
-        //Preferences.Set(IP, "");
-        //Preferences.Set(USER, "");
-        //Preferences.Set(PASS, "");
+        //Microsoft.Maui.Storage.Preferences.Set(IP, "");
+        //Microsoft.Maui.Storage.Preferences.Set(USER, "");
+        //Microsoft.Maui.Storage.Preferences.Set(PASS, "");
     }
     private void OnDeleteClicked(object sender, EventArgs e)
     {
-        Preferences.Remove(IP);
-        Preferences.Remove(USER);
-        Preferences.Remove(PASS);
+        Microsoft.Maui.Storage.Preferences.Remove(IP);
+        Microsoft.Maui.Storage.Preferences.Remove(USER);
+        Microsoft.Maui.Storage.Preferences.Remove(PASS);
         DisplayAlert("Success", "Data deleted", "OK");
     }
     private void OnDeleteClickedMySQL(object sender, EventArgs e)
     {
-        Preferences.Remove(IP_mysql);
-        Preferences.Remove(USER_mysql);
-        Preferences.Remove(PASS_mysql);
-        Preferences.Remove(databasename_mysql);
+        Microsoft.Maui.Storage.Preferences.Remove(IP_mysql);
+        Microsoft.Maui.Storage.Preferences.Remove(USER_mysql);
+        Microsoft.Maui.Storage.Preferences.Remove(PASS_mysql);
+        Microsoft.Maui.Storage.Preferences.Remove(databasename_mysql);
         DisplayAlert("Success", "Data deleted", "OK");
     }
     public void sqlQuery(string query) {
         Debug.WriteLine("Usao u sqlQuerry  *******");
         // MySQL connection settings
-        string connString = "server="+ Preferences.Get(IP_mysql, "") + ";user="+ Preferences.Get(USER_mysql, "") + ";password="+ Preferences.Get(PASS_mysql, "") + ";database="+ Preferences.Get(databasename_mysql, "");
+        string connString = "server="+ Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "") + ";user="+ Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "") + ";password="+ Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "") + ";database="+ Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
 
         // Connect to MySQL database
         using MySqlConnection conn = new MySqlConnection(connString);
@@ -143,14 +170,14 @@ public partial class MainPage : ContentPage
 
         StringBuilder sb = new();
 
-        sb.AppendLine($"Model: {DeviceInfo.Current.Model}");
-        sb.AppendLine($"Manufacturer: {DeviceInfo.Current.Manufacturer}");
-        sb.AppendLine($"Name: {DeviceInfo.Current.Name}");
-        sb.AppendLine($"OS Version: {DeviceInfo.Current.VersionString}");
-        sb.AppendLine($"Idiom: {DeviceInfo.Current.Idiom}");
-        sb.AppendLine($"Platform: {DeviceInfo.Current.Platform}");
+        sb.AppendLine($"Model: {Microsoft.Maui.Devices.DeviceInfo.Current.Model}");
+        sb.AppendLine($"Manufacturer: {Microsoft.Maui.Devices.DeviceInfo.Current.Manufacturer}");
+        sb.AppendLine($"Name: {Microsoft.Maui.Devices.DeviceInfo.Current.Name}");
+        sb.AppendLine($"OS Version: {Microsoft.Maui.Devices.DeviceInfo.Current.VersionString}");
+        sb.AppendLine($"Idiom: {Microsoft.Maui.Devices.DeviceInfo.Current.Idiom}");
+        sb.AppendLine($"Platform: {Microsoft.Maui.Devices.DeviceInfo.Current.Platform}");
 
-        bool isVirtual = DeviceInfo.Current.DeviceType switch
+        bool isVirtual = Microsoft.Maui.Devices.DeviceInfo.Current.DeviceType switch
         {
             Microsoft.Maui.Devices.DeviceType.Physical => false,
             Microsoft.Maui.Devices.DeviceType.Virtual => true,
@@ -225,20 +252,20 @@ public partial class MainPage : ContentPage
         base.OnAppearing();
 
         //Provjerava da li ima ključ spremnjen u preferences
-        if (string.IsNullOrEmpty(Preferences.Get("key", "default_value")))
+        if (string.IsNullOrEmpty(Microsoft.Maui.Storage.Preferences.Get("key", "default_value")))
         {
 
             var time = GetMicroSeconds();
             // ----------------- platform ispod --------------
-            var device = DeviceInfo.Current.Platform;
+            var device = Microsoft.Maui.Devices.DeviceInfo.Current.Platform;
             Debug.WriteLine("url je--------------------" + url + time);
             var httpResponse = await _Client.GetAsync(url + time);
             //Items = new List<TodoItem>();
 
             //Sprema u preferences index neku vrijednost iz varijable
-            Preferences.Set("key", time);
+            Microsoft.Maui.Storage.Preferences.Set("key", time);
             Debug.WriteLine("spremio u preferences");
-            string preferencesKey = Preferences.Get("key", "default_value");
+            string preferencesKey = Microsoft.Maui.Storage.Preferences.Get("key", "default_value");
             Debug.WriteLine("Izvađen iz preferences: " + preferencesKey);
 
 
@@ -270,7 +297,7 @@ public partial class MainPage : ContentPage
         }
         else
         {
-            Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Preferences.Get("key", "default_value"));
+            Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Microsoft.Maui.Storage.Preferences.Get("key", "default_value"));
 
 
 
@@ -280,16 +307,6 @@ public partial class MainPage : ContentPage
         //Kraj IF preferences
          //MySQL Query
          sqlQuery("SELECT * FROM events;");
-
-        // Check if the current connection profile is set to WiFi
-        if (Connectivity.NetworkAccess == NetworkAccess.Internet && Connectivity.ConnectionProfiles.Contains(ConnectionProfile.WiFi))
-        {
-            // Your network code here
-        }
-        else
-        {
-            // Handle case where the device is not connected to a WiFi network
-        }
 
 
 

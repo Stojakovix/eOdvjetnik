@@ -46,7 +46,7 @@ public partial class Dokumenti : ContentPage
                     {
                         object directoryHandle;
                         FileStatus fileStatus;
-                        status = fileStore.CreateFile(out directoryHandle, out fileStatus, "", AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
+                        status = fileStore.CreateFile(out directoryHandle, out fileStatus, "user", AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
                         List<QueryDirectoryFileInformation> fileList;
                         status = fileStore.QueryDirectory(out fileList, directoryHandle, "*", FileInformationClass.FileDirectoryInformation);
 
