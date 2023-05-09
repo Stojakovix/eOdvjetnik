@@ -1,6 +1,7 @@
 ﻿using System;
 using MySql.Data.MySqlClient;
 using System.Diagnostics;
+using System.Text.Json;
 
 
 namespace eOdvjetnik.Services
@@ -14,7 +15,7 @@ namespace eOdvjetnik.Services
         private const string databasename_mysql = "databasename";
 
 
-        public void sqlQuery(string query)
+        public MySqlDataReader sqlQuery(string query)
         {
             Debug.WriteLine("Usao u sqlQuerry  *******");
             // MySQL connection settings
@@ -30,6 +31,9 @@ namespace eOdvjetnik.Services
             // Execute query and retrieve data
             using MySqlCommand cmd = new MySqlCommand(query, conn);
             using MySqlDataReader reader = cmd.ExecuteReader();
+            var return2 = JsonSerializer.Serialize(reader);
+            Debug.WriteLine(return2);
+
 
             while (reader.Read())
             {
@@ -44,9 +48,15 @@ namespace eOdvjetnik.Services
                 // ...
             }
 
+
+
             // Close the reader and the connection
             reader.Close();
             conn.Close();
+
+            return return2;
+
+            
         }
 
         public ExternalSQLConnect()

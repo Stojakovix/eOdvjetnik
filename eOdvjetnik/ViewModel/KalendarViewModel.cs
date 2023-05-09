@@ -4,7 +4,7 @@ using System.ComponentModel;
 using eOdvjetnik.Models;
 using eOdvjetnik.Data;
 using System.Diagnostics;
-
+using eOdvjetnik.Services;
 namespace eOdvjetnik.ViewModel
 {
     public class KalendarViewModel : INotifyPropertyChanged
@@ -15,6 +15,7 @@ namespace eOdvjetnik.ViewModel
         {
             var dataBaseAppointments = App.Database.GetSchedulerAppointment();
             
+
             if (dataBaseAppointments != null)
             {
                 Appointments = new ObservableCollection<SchedulerAppointment>();

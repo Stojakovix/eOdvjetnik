@@ -29,6 +29,10 @@ public partial class AppointmentDialog : ContentPage
         switchAllDay.Toggled += SwitchAllDay_Toggled;
         DeleteButton.Clicked += DeleteButton_Clicked;
 
+
+        //MySQL Query
+        // Instantiate the service
+        
     }
 
     private void DeleteButton_Clicked(object sender, EventArgs e)
@@ -125,12 +129,7 @@ public partial class AppointmentDialog : ContentPage
             appointment.Notes = this.organizerText.Text;
         }
 
-        //MySQL Query
-        // Instantiate the service
-        var odvjetnik_nas = new ExternalSQLConnect();
-
-        // Call the function
-        odvjetnik_nas.sqlQuery("Select * from events");
+        
 
 
         //// - add or edit the appointment in the database collection

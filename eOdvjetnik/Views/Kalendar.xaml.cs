@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Collections.ObjectModel;
 using eOdvjetnik.Models;
 using MySql.Data.MySqlClient;
+using eOdvjetnik.Services;
 
 namespace eOdvjetnik.Views;
 
@@ -18,8 +19,62 @@ public partial class Kalendar : ContentPage
   
         Scheduler.View = SchedulerView.Day;
         Scheduler.DaysView.TimeRegions = GetTimeRegion();
-       // MySQL Query;
-       
+        // MySQL Query;
+        //var odvjetnik_nas = new ExternalSQLConnect();
+
+
+        //Call the function
+       // MySqlDataReader reader = odvjetnik_nas.sqlQuery("Select * from events");
+        //Debug.WriteLine("Usao usqlQuery");
+
+        //while (reader.Read())
+        //{
+
+        //    Debug.WriteLine("Usao u while  *******");
+        //    // Access data using column names or indices
+        //    int column1 = reader.GetInt32("ID");
+        //    string column2 = reader.GetString("EventName");
+
+        //    Debug.WriteLine(column1);
+        //    Debug.WriteLine(column2);
+
+        //    // ...
+        //}
+
+        try
+        {
+            // MySQL Query;
+            var odvjetnik_nas = new ExternalSQLConnect();
+
+            // Call the function
+            using (MySqlDataReader reader = odvjetnik_nas.sqlQuery("Select * from events"))
+            {
+                Debug.WriteLine("Usao usqlQuery");
+
+                while (reader.Read())
+                {
+                    Debug.WriteLine("Usao u while  *******");
+                    // Access data using column names or indices
+                    int column1 = reader.GetInt32("ID");
+                    string column2 = reader.GetString("EventName");
+
+                    Debug.WriteLine(column1);
+                    Debug.WriteLine(column2);
+
+                    // ...
+                }
+
+                // Close the reader and the connection
+                //reader.Close();
+                reader.Dispose();
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+
+
 
     }
 
