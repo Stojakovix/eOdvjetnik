@@ -1,6 +1,7 @@
 using Syncfusion.Maui.Scheduler;
 using System.Collections.ObjectModel;
 using eOdvjetnik.Models;
+using eOdvjetnik.Services;
 
 
 namespace eOdvjetnik.Views;
@@ -124,8 +125,23 @@ public partial class AppointmentDialog : ContentPage
             appointment.Notes = this.organizerText.Text;
         }
 
+        //MySQL Query
+        // Instantiate the service
+        var odvjetnik_nas = new ExternalSQLConnect();
+
+        // Call the function
+        odvjetnik_nas.sqlQuery("Select * from events");
+
+
         //// - add or edit the appointment in the database collection
-        var todoItem = new Appointment() { From = appointment.StartTime, To = appointment.EndTime, AllDay = appointment.IsAllDay, DescriptionNotes = appointment.Notes, EventName = appointment.Subject, ID = (int)appointment.Id };
+        var todoItem = new Appointment() {
+            From = appointment.StartTime,
+            To = appointment.EndTime,
+            AllDay = appointment.IsAllDay,
+            DescriptionNotes = appointment.Notes,
+            EventName = appointment.Subject,
+            ID = (int)appointment.Id
+        };
         App.Database.SaveSchedulerAppointmentAsync(todoItem);
 
         this.Navigation.PopAsync();
