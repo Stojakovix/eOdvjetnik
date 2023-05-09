@@ -32,8 +32,10 @@ namespace eOdvjetnik.Services
             using MySqlCommand cmd = new MySqlCommand(query, conn);
             using MySqlDataReader reader = cmd.ExecuteReader();
             var return2 = JsonSerializer.Serialize(reader);
-            Debug.WriteLine(return2);
 
+            Debug.WriteLine("++++++++++++");
+            Debug.WriteLine(return2);
+            Debug.WriteLine("++++++++++++");
 
             while (reader.Read())
             {
@@ -54,7 +56,7 @@ namespace eOdvjetnik.Services
             reader.Close();
             conn.Close();
 
-            return return2;
+            //return return2;
 
             
         }
