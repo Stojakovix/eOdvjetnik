@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using eOdvjetnik.Models;
 using MySql.Data.MySqlClient;
 using eOdvjetnik.Services;
+using Microsoft.Maui.Controls.Shapes;
 
 namespace eOdvjetnik.Views;
 
@@ -19,55 +20,26 @@ public partial class Kalendar : ContentPage
   
         Scheduler.View = SchedulerView.Day;
         Scheduler.DaysView.TimeRegions = GetTimeRegion();
-        // MySQL Query;
-        //var odvjetnik_nas = new ExternalSQLConnect();
 
 
-        //Call the function
-       // MySqlDataReader reader = odvjetnik_nas.sqlQuery("Select * from events");
-        //Debug.WriteLine("Usao usqlQuery");
-
-        //while (reader.Read())
-        //{
-
-        //    Debug.WriteLine("Usao u while  *******");
-        //    // Access data using column names or indices
-        //    int column1 = reader.GetInt32("ID");
-        //    string column2 = reader.GetString("EventName");
-
-        //    Debug.WriteLine(column1);
-        //    Debug.WriteLine(column2);
-
-        //    // ...
-        //}
+        //MySQL Query;
+        var odvjetnik_nas = new ExternalSQLConnect();
 
         try
         {
-            // MySQL Query;
-            var odvjetnik_nas = new ExternalSQLConnect();
+            //Call the function
+            string[][] resultArray = odvjetnik_nas.sqlQuery("Select * from events");
+            Debug.WriteLine("Usao usqlQuery");
 
-            // Call the function
-            using (MySqlDataReader reader = odvjetnik_nas.sqlQuery("Select * from events"))
+            //Ispis iz array
+            for (int i = 0; i < resultArray.Length; i++)
             {
-                Debug.WriteLine("Usao usqlQuery");
-
-                while (reader.Read())
+                for (int j = 0; j < resultArray[i].Length; j++)
                 {
-                    Debug.WriteLine("Usao u while  *******");
-                    // Access data using column names or indices
-                    int column1 = reader.GetInt32("ID");
-                    string column2 = reader.GetString("EventName");
-
-                    Debug.WriteLine(column1);
-                    Debug.WriteLine(column2);
-
-                    // ...
+                    Debug.WriteLine(resultArray[i][j]);
                 }
-
-                // Close the reader and the connection
-                //reader.Close();
-                reader.Dispose();
             }
+
         }
         catch (Exception ex)
         {

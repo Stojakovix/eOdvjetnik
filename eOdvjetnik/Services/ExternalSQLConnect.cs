@@ -15,7 +15,7 @@ namespace eOdvjetnik.Services
         private const string databasename_mysql = "databasename";
 
 
-        public MySqlDataReader sqlQuery(string query)
+        public string[][] sqlQuery(string query)
         {
             Debug.WriteLine("Usao u sqlQuerry  *******");
             // MySQL connection settings
@@ -31,23 +31,18 @@ namespace eOdvjetnik.Services
             // Execute query and retrieve data
             using MySqlCommand cmd = new MySqlCommand(query, conn);
             using MySqlDataReader reader = cmd.ExecuteReader();
-            var return2 = JsonSerializer.Serialize(reader);
-
-            Debug.WriteLine("++++++++++++");
-            Debug.WriteLine(return2);
-            Debug.WriteLine("++++++++++++");
+            List<string[]> results = new List<string[]>();
 
             while (reader.Read())
             {
-                Debug.WriteLine("Usao u while  *******");
-                // Access data using column names or indices
-                int column1 = reader.GetInt32("ID");
-                string column2 = reader.GetString("EventName");
+                string[] row = new string[reader.FieldCount];
 
-                Debug.WriteLine(column1);
-                Debug.WriteLine(column2);
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    row[i] = reader[i].ToString();
+                }
 
-                // ...
+                results.Add(row);
             }
 
 
@@ -56,7 +51,7 @@ namespace eOdvjetnik.Services
             reader.Close();
             conn.Close();
 
-            //return return2;
+            return results.ToArray();
 
             
         }
