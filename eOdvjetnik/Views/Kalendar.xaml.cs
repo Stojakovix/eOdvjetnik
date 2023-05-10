@@ -41,7 +41,7 @@ public partial class Kalendar : ContentPage
                 {
                     Debug.WriteLine(pair.Key + ": " + pair.Value);
                 }
-                Debug.WriteLine();
+                //Debug.WriteLine();
             }
 
         }
