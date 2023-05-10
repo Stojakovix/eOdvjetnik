@@ -28,16 +28,20 @@ public partial class Kalendar : ContentPage
         try
         {
             //Call the function
-            string[][] resultArray = odvjetnik_nas.sqlQuery("Select * from events");
+            Dictionary<string, string>[] resultArray = odvjetnik_nas.sqlQuery("Select * from events");
             Debug.WriteLine("Usao usqlQuery");
 
-            //Ispis iz array
-            for (int i = 0; i < resultArray.Length; i++)
+
+
+            // Print the attribute names
+
+            foreach (Dictionary<string, string> row in resultArray)
             {
-                for (int j = 0; j < resultArray[i].Length; j++)
+                foreach (KeyValuePair<string, string> pair in row)
                 {
-                    Debug.WriteLine(resultArray[i][j]);
+                    Debug.WriteLine(pair.Key + ": " + pair.Value);
                 }
+                Debug.WriteLine();
             }
 
         }

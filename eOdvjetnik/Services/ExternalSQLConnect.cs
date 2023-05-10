@@ -15,7 +15,7 @@ namespace eOdvjetnik.Services
         private const string databasename_mysql = "databasename";
 
 
-        public string[][] sqlQuery(string query)
+        public Dictionary<string, string>[] sqlQuery(string query)
         {
             Debug.WriteLine("Usao u sqlQuerry  *******");
             // MySQL connection settings
@@ -31,20 +31,21 @@ namespace eOdvjetnik.Services
             // Execute query and retrieve data
             using MySqlCommand cmd = new MySqlCommand(query, conn);
             using MySqlDataReader reader = cmd.ExecuteReader();
-            List<string[]> results = new List<string[]>();
+            List<Dictionary<string, string>> results = new List<Dictionary<string, string>>();
 
             while (reader.Read())
             {
-                string[] row = new string[reader.FieldCount];
+                Dictionary<string, string> row = new Dictionary<string, string>();
 
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
-                    row[i] = reader[i].ToString();
+                    string attributeName = reader.GetName(i);
+                    string attributeValue = reader[i].ToString();
+                    row.Add(attributeName, attributeValue);
                 }
 
                 results.Add(row);
             }
-
 
 
             // Close the reader and the connection
