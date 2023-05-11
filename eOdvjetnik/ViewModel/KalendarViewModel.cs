@@ -6,6 +6,7 @@ using eOdvjetnik.Data;
 using System.Diagnostics;
 using eOdvjetnik.Services;
 using MySql.Data.MySqlClient;
+using System.Linq;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -15,14 +16,26 @@ namespace eOdvjetnik.ViewModel
 
         public KalendarViewModel()
         {
-            var dataBaseAppointments = App.Database.GetSchedulerAppointment();
+            Appointments = new ObservableCollection<SchedulerAppointment>(); // Initialize the Appointments collection
 
+            // Fetch appointments from the remote server
             FetchAppointmentFromRemoteServer();
 
-            if (Appointments != null)
+            // Add appointments to the remote server
+            var dataBaseAppointments = App.Database.GetSchedulerAppointment();
+            if (dataBaseAppointments != null)
             {
+                var schedulerAppointments = dataBaseAppointments.Select(appointment => new SchedulerAppointment()
+                {
+                    StartTime = appointment.From,
+                    EndTime = appointment.To,
+                    Subject = appointment.EventName,
+                    IsAllDay = appointment.AllDay,
+                    Id = appointment.ID
+                });
+                AddAppointmentToRemoteServer(schedulerAppointments);
 
-                Appointments = new ObservableCollection<SchedulerAppointment>();
+                // Add appointments from the local database to the Appointments collection
                 foreach (Appointment appointment in dataBaseAppointments)
                 {
                     Appointments.Add(new SchedulerAppointment()
@@ -33,44 +46,79 @@ namespace eOdvjetnik.ViewModel
                         IsAllDay = appointment.AllDay,
                         Id = appointment.ID
                     });
-                    
+
                     Debug.WriteLine($"{appointment.ID} {appointment.EventName} {appointment.AllDay} {appointment.From} {appointment.To}");
                 }
-
             }
-
+            else
+            {
+                // Handle the case when dataBaseAppointments is null
+                Debug.WriteLine("dataBaseAppointments is null");
+            }
         }
 
         private void FetchAppointmentFromRemoteServer()
         {
-            try { 
-            ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
-            string query = "SELECT * FROM Events";
-            Dictionary<string, string>[] appointmentData = externalSQLConnect.sqlQuery(query);
-            if(appointmentData !=null )
+            try
             {
-                foreach (Dictionary<string, string>appointmentRow in appointmentData) {
-
-                    Appointments.Add(new SchedulerAppointment()
+                ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+                string query = "SELECT * FROM Events";
+                Dictionary<string, string>[] appointmentData = externalSQLConnect.sqlQuery(query);
+                if (appointmentData != null)
+                {
+                    foreach (Dictionary<string, string> appointmentRow in appointmentData)
                     {
-                        StartTime = DateTime.Parse(appointmentRow["TimeFrom"]),
-                        EndTime = DateTime.Parse(appointmentRow["TimeTo"]),
-                        Subject = appointmentRow["EventName"],
-                        IsAllDay = bool.Parse(appointmentRow["AllDay"]),
-                        Id = int.Parse(appointmentRow["ID"]),
-                        Notes = appointmentRow["DescriptionNotes"]
-                    });
-                        Debug.WriteLine(Appointments.Count);
+
+                        // Parsaj bool u čitljiv format
+                        bool isAllDay;
+                        bool.TryParse(appointmentRow["AllDay"], out isAllDay);
+
+                        // parsaj date/time
+
+
+                        Appointments.Add(new SchedulerAppointment()
+                        {
+                            StartTime = DateTime.Parse(appointmentRow["TimeFrom"]),
+                            EndTime = DateTime.Parse(appointmentRow["TimeTo"]),
+                            Subject = appointmentRow["EventName"],
+                            IsAllDay = isAllDay,
+                            Id = int.Parse(appointmentRow["ID"]),
+                            Notes = appointmentRow["DescriptionNotes"]
+                        });
+                        Debug.WriteLine(Appointments.Count  + "IZVRŠIO QUERY DO KRAJA --------------");
                     }
-            }
+                }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
-               
+                Debug.WriteLine(ex.Message + "in kalendarViewModel addAppointmentToDb");
+
             }
-            
+
         }
+
+        private void AddAppointmentToRemoteServer(IEnumerable<SchedulerAppointment> appointments)
+        {
+            Debug.WriteLine("Ušao u add appointment");
+            try
+            {
+                ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+
+                foreach (SchedulerAppointment appointment in appointments)
+                {
+                    string query = $"INSERT INTO Events (TimeFrom, TimeTo, EventName, AllDay, ID, DescriptionNotes) VALUES ('{appointment.StartTime}', '{appointment.EndTime}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Id}', '{appointment.Notes}')";
+                    externalSQLConnect.sqlQuery(query);
+
+
+                    Debug.WriteLine("Appoinments added to remote server.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message + " in KalendarViewModel AddAppointmentToServer");
+            }
+        }
+
 
 
         /// <summary>
