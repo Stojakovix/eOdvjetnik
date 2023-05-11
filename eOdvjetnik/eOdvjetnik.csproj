@@ -19,8 +19,8 @@
 		<ApplicationIdGuid>70cf2bf6-7324-45d9-a89e-7377ea1e46e0</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.77</ApplicationDisplayVersion>
-		<ApplicationVersion>177</ApplicationVersion>
+		<ApplicationDisplayVersion>1.80</ApplicationDisplayVersion>
+		<ApplicationVersion>180</ApplicationVersion>
 		<!-- Pin the MAUI version -->
         <MauiVersion>7.0.59</MauiVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>

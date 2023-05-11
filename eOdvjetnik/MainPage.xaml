@@ -74,29 +74,28 @@ padding-right: 30;
 <StackLayout  x:Name="NASForm" IsVisible="false">
     <Label Text="IP adresa" />
     <Entry x:Name="IPEntry" />
-
     <Label Text="Korisničko ime" />
     <Entry x:Name="USEREntry" />
-
     <Label Text="Lozinka" />
     <Entry x:Name="PASSEntry" />
-
+    <Label Text="Folder" />
+    <Entry x:Name="FOLDEREntry" />
+    <Label Text="Sub Folder" />
+    <Entry x:Name="SUBFOLDEREntry" />
 
     <Button Text="Save" Clicked="OnSaveClicked" />
     <Button Text="Load" Clicked="OnLoadClicked" />
     <Button Text="Delete" Clicked="OnDeleteClicked" />
 
 </StackLayout>
-            <StackLayout  x:Name="MySQLForm" IsVisible="false">
+
+<StackLayout  x:Name="MySQLForm" IsVisible="false">
     <Label Text="IP adresa" />
     <Entry x:Name="IPEntryMySQL" />
-
     <Label Text="Korisničko ime" />
     <Entry x:Name="USEREntryMySQL" />
-
     <Label Text="Lozinka" />
     <Entry x:Name="PASSEntryMySQL" />
-
     <Label Text="Ime baze podataka" />
     <Entry x:Name="databasenameEntryMySQL" />
 

@@ -22,6 +22,9 @@ public partial class MainPage : ContentPage
     private const string IP = "IP Adresa";
     private const string USER = "Korisničko ime";
     private const string PASS = "Lozinka";
+    private const string FOLDER = "Folder";
+    private const string SUBFOLDER = "SubFolder";
+
     //Varijable za MySQL preferences
     private const string IP_mysql = "IP Adresa2";
     private const string USER_mysql = "Korisničko ime2";
@@ -74,6 +77,9 @@ public partial class MainPage : ContentPage
         Microsoft.Maui.Storage.Preferences.Set(IP, IPEntry.Text);
         Microsoft.Maui.Storage.Preferences.Set(USER, USEREntry.Text);
         Microsoft.Maui.Storage.Preferences.Set(PASS, PASSEntry.Text);
+        Microsoft.Maui.Storage.Preferences.Set(FOLDER, FOLDEREntry.Text);
+        Microsoft.Maui.Storage.Preferences.Set(SUBFOLDER, SUBFOLDEREntry.Text);
+
         DisplayAlert("Success", "Data saved", "OK");
     }
     private void OnSaveClickedMySQL(object sender, EventArgs e)
@@ -94,6 +100,10 @@ public partial class MainPage : ContentPage
         USEREntry.Text = user;
         var pass = Microsoft.Maui.Storage.Preferences.Get(PASS, "");
         PASSEntry.Text = pass;
+        var folder = Microsoft.Maui.Storage.Preferences.Get(FOLDER, "");
+        FOLDEREntry.Text = folder;
+        var subfolder = Microsoft.Maui.Storage.Preferences.Get(SUBFOLDER, "");
+        SUBFOLDEREntry.Text = subfolder;
 
         //Microsoft.Maui.Storage.Preferences.Set(IP, "");
         //Microsoft.Maui.Storage.Preferences.Set(USER, "");
@@ -119,6 +129,8 @@ public partial class MainPage : ContentPage
         Microsoft.Maui.Storage.Preferences.Remove(IP);
         Microsoft.Maui.Storage.Preferences.Remove(USER);
         Microsoft.Maui.Storage.Preferences.Remove(PASS);
+        Microsoft.Maui.Storage.Preferences.Remove(FOLDER);
+        Microsoft.Maui.Storage.Preferences.Remove(SUBFOLDER);
         DisplayAlert("Success", "Data deleted", "OK");
     }
     private void OnDeleteClickedMySQL(object sender, EventArgs e)
@@ -156,7 +168,6 @@ public partial class MainPage : ContentPage
         };
 
         sb.AppendLine($"Virtual device? {isVirtual}");
-
         Debug.WriteLine(sb.ToString());
 
 

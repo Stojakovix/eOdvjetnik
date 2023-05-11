@@ -23,6 +23,10 @@ public partial class Dokumenti : ContentPage
     private const string IP = "IP Adresa";
     private const string USER = "Korisničko ime";
     private const string PASS = "Lozinka";
+    private const string FOLDER = "Folder";
+    private const string SUBFOLDER = "SubFolder";
+
+
 
 
     public Dokumenti(DocsDatabase docsdatabase)
@@ -32,21 +36,22 @@ public partial class Dokumenti : ContentPage
         InitializeComponent();
         database = docsdatabase;
         BindingContext = this;
-       
-         //INICIRAJ SMB KONEKCIJU DA DOHVATI SVE DOKUMENTE
 
+        //INICIRAJ SMB KONEKCIJU DA DOHVATI SVE DOKUMENTE
+        try
+        {
             //SMB
             SMB2Client client = new SMB2Client();
             bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP, "")), SMBTransportType.DirectTCPTransport);
             if (isConnected)
             {
                 NTStatus status = client.Login(String.Empty, Preferences.Get(USER, ""), Preferences.Get(PASS, ""));
-                    ISMBFileStore fileStore = client.TreeConnect("Users", out status);
+                    ISMBFileStore fileStore = client.TreeConnect(Preferences.Get(FOLDER, ""), out status);
                     if (status == NTStatus.STATUS_SUCCESS)
                     {
                         object directoryHandle;
                         FileStatus fileStatus;
-                        status = fileStore.CreateFile(out directoryHandle, out fileStatus, "user", AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
+                        status = fileStore.CreateFile(out directoryHandle, out fileStatus, Preferences.Get(SUBFOLDER, ""), AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
                         List<QueryDirectoryFileInformation> fileList;
                         status = fileStore.QueryDirectory(out fileList, directoryHandle, "*", FileInformationClass.FileDirectoryInformation);
 
@@ -106,8 +111,13 @@ public partial class Dokumenti : ContentPage
                 }
                 client.Logoff();
                 client.Disconnect();
-            
+
         }
+        catch (Exception ex)
+        {
+            DisplayAlert("Error", ex.Message, "OK");
+        }
+    }
 
     //SMB
 
