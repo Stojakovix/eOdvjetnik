@@ -58,20 +58,18 @@
                 <ListView ItemsSource="{Binding ShareFiles}"
           Margin="20">
                     <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal"
-                             Padding="10">
-                                    <Image Source="folder_1484.png"
-                           WidthRequest="50"
-                           HeightRequest="50"
-                           Aspect="AspectFit"/>
-                                    <Label Text="{Binding .}"
-                           VerticalTextAlignment="Center"
-                           Margin="10,0,0,0"/>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
+                      <DataTemplate>
+                        <ViewCell>
+                          <StackLayout Orientation="Horizontal" Padding="10">
+                            <Image Source="folder_1484.png" WidthRequest="50" HeightRequest="50" Aspect="AspectFit"/>
+                            <Label x:Name="DocumentLabel" Text="{Binding .}" VerticalTextAlignment="Center" Margin="10,0,0,0">
+                              <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnLabelTapped"/>
+                              </Label.GestureRecognizers>
+                            </Label>
+                          </StackLayout>
+                        </ViewCell>
+                      </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
 

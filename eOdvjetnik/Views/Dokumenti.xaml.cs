@@ -27,6 +27,13 @@ public partial class Dokumenti : ContentPage
     private const string SUBFOLDER = "SubFolder";
 
 
+    private void OnLabelTapped(object sender, EventArgs e)
+    {
+        Label label = (Label)sender;
+        string labelText = label.Text;
+        // Do something with the label text, such as display it in a message box
+        DisplayAlert("Label Tapped", labelText, "OK");
+    }
 
 
     public Dokumenti(DocsDatabase docsdatabase)
@@ -36,7 +43,7 @@ public partial class Dokumenti : ContentPage
         InitializeComponent();
         database = docsdatabase;
         BindingContext = this;
-
+        
         //INICIRAJ SMB KONEKCIJU DA DOHVATI SVE DOKUMENTE
         try
         {
@@ -111,6 +118,13 @@ public partial class Dokumenti : ContentPage
                 }
                 client.Logoff();
                 client.Disconnect();
+
+
+            
+
+
+
+
 
         }
         catch (Exception ex)

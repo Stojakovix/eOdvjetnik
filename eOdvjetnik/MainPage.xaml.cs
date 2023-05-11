@@ -71,6 +71,9 @@ public partial class MainPage : ContentPage
         GetMicroSeconds();
         AskForWiFiPermission();
 
+
+
+
     }
     private void OnSaveClicked(object sender, EventArgs e)
     {
