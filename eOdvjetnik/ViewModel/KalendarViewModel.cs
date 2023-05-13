@@ -7,6 +7,7 @@ using System.Diagnostics;
 using eOdvjetnik.Services;
 using MySql.Data.MySqlClient;
 using System.Linq;
+using System.Globalization;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -106,9 +107,9 @@ namespace eOdvjetnik.ViewModel
 
                 foreach (SchedulerAppointment appointment in appointments)
                 {
-                    string query = $"INSERT INTO Events (TimeFrom, TimeTo, EventName, AllDay, ID, DescriptionNotes) VALUES ('{appointment.StartTime}', '{appointment.EndTime}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Id}', '{appointment.Notes}')";
-                    externalSQLConnect.sqlQuery(query);
 
+                    string query = $"INSERT INTO Events (TimeFrom, TimeTo, EventName, AllDay, ID, DescriptionNotes) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Id}', '{appointment.Notes}')";
+                    externalSQLConnect.sqlQuery(query);
 
                     Debug.WriteLine("Appoinments added to remote server.");
                 }

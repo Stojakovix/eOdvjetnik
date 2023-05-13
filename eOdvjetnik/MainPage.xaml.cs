@@ -6,6 +6,7 @@ using MySql.Data.MySqlClient;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Xaml;
+using System.Globalization;
 
 
 
@@ -71,6 +72,10 @@ public partial class MainPage : ContentPage
         GetMicroSeconds();
         AskForWiFiPermission();
 
+        string input = "24. 04. 2023. 09:00:00";
+        DateTime parsedDateTime = DateTime.ParseExact(input, "dd. MM. yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
+        string output = parsedDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+        Console.WriteLine(output);
 
 
 
