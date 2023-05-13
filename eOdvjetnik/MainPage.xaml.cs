@@ -236,75 +236,92 @@ public partial class MainPage : ContentPage
     }
 
 
-    protected override async void OnAppearing()
+    protected override void OnAppearing()
     {
 
-        base.OnAppearing();
-        //zakomentirati nakon setanja na null
-        //Microsoft.Maui.Storage.Preferences.Set("key", null);
-        //Provjerava da li ima ključ spremnjen u preferences
-        if (string.IsNullOrEmpty(Microsoft.Maui.Storage.Preferences.Get("key",null)))
+        try
         {
+            //zakomentirati nakon setanja na null
+            //Microsoft.Maui.Storage.Preferences.Set("key", null);
+            //Provjerava da li ima ključ spremnjen u preferences
+            if (string.IsNullOrEmpty(Microsoft.Maui.Storage.Preferences.Get("key", null))) {
 
-            var time = GetMicroSeconds();
-            // ----------------- platform ispod --------------
-            var device = Microsoft.Maui.Devices.DeviceInfo.Current.Platform;
-            Debug.WriteLine("url je----------------main" + url + time);
-            //var httpResponse = await _Client.GetAsync(url + time);
-            //Items = new List<TodoItem>();
+                base.OnAppearing();
 
-            //Sprema u preferences index neku vrijednost iz varijable
-            Microsoft.Maui.Storage.Preferences.Set("key", time);
-            Debug.WriteLine("spremio u preferences");
-            string preferencesKey = Microsoft.Maui.Storage.Preferences.Get("key", null);
-            Debug.WriteLine("Izvađen iz preferences: " + preferencesKey);
+                var time = GetMicroSeconds();
+                // ----------------- platform ispod --------------
+                var device = Microsoft.Maui.Devices.DeviceInfo.Current.Platform;
+                Debug.WriteLine("url je----------------main" + url + time);
+                //var httpResponse = await _Client.GetAsync(url + time);
+                //Items = new List<TodoItem>();
 
-
-
-            //Items = JsonSerializer.Deserialize<List<TodoItem>>(content, _serializerOptions);
-            
-
-
-            /*
-            if (httpResponse.IsSuccessStatusCode)
-            {
-
-                string content = await httpResponse.Content.ReadAsStringAsync();
-                Debug.WriteLine(content);
-                Debug.WriteLine("Uso u if");
+                //Sprema u preferences index neku vrijednost iz varijable
+                Microsoft.Maui.Storage.Preferences.Set("key", time);
+                Debug.WriteLine("spremio u preferences");
+                string preferencesKey = Microsoft.Maui.Storage.Preferences.Get("key", null);
+                Debug.WriteLine("Izvađen iz preferences: " + preferencesKey);
 
 
-                // Response _ = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
-                // await database.SaveLicenseAsync(Models.License);
 
-                //await database.SaveItemAsync(Item);
+
+
+                //Items = JsonSerializer.Deserialize<List<TodoItem>>(content, _serializerOptions);
+
+
+
+                /*
+
+
+                    if (httpResponse.IsSuccessStatusCode)
+                    {
+
+                        string content = await httpResponse.Content.ReadAsStringAsync();
+                        Debug.WriteLine(content);
+                        Debug.WriteLine("Uso u if");
+
+
+                        // Response _ = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
+                        // await database.SaveLicenseAsync(Models.License);
+
+                        //await database.SaveItemAsync(Item);
+
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Nije uspio response");
+                    }//Kraj if httpResponse
+
+
+                */
+            }
+            else {
+                Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Microsoft.Maui.Storage.Preferences.Get("key", null));
 
             }
-            else
+             }
+
+                
+
+
+
+                    
+                
+            
+            //Kraj IF preferences
+
+            catch (Exception ex)
             {
-                Debug.WriteLine("Nije uspio response");
-            }//Kraj if httpResponse
-            */
-        }
-        else
-        {
-            Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Microsoft.Maui.Storage.Preferences.Get("key", null));
+                Debug.WriteLine(ex.Message + " in MainPage");
+            }
+
 
 
 
 
 
         }
-        //Kraj IF preferences
 
-
-
-
-
-
-    }
-
-
+    
 
 
 }
