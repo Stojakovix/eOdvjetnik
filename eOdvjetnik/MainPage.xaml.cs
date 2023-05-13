@@ -240,22 +240,23 @@ public partial class MainPage : ContentPage
     {
 
         base.OnAppearing();
-
+        //zakomentirati nakon setanja na null
+        //Microsoft.Maui.Storage.Preferences.Set("key", null);
         //Provjerava da li ima ključ spremnjen u preferences
-        if (string.IsNullOrEmpty(Microsoft.Maui.Storage.Preferences.Get("key", "default_value")))
+        if (string.IsNullOrEmpty(Microsoft.Maui.Storage.Preferences.Get("key",null)))
         {
 
             var time = GetMicroSeconds();
             // ----------------- platform ispod --------------
             var device = Microsoft.Maui.Devices.DeviceInfo.Current.Platform;
-            Debug.WriteLine("url je--------------------" + url + time);
-            var httpResponse = await _Client.GetAsync(url + time);
+            Debug.WriteLine("url je----------------main" + url + time);
+            //var httpResponse = await _Client.GetAsync(url + time);
             //Items = new List<TodoItem>();
 
             //Sprema u preferences index neku vrijednost iz varijable
             Microsoft.Maui.Storage.Preferences.Set("key", time);
             Debug.WriteLine("spremio u preferences");
-            string preferencesKey = Microsoft.Maui.Storage.Preferences.Get("key", "default_value");
+            string preferencesKey = Microsoft.Maui.Storage.Preferences.Get("key", null);
             Debug.WriteLine("Izvađen iz preferences: " + preferencesKey);
 
 
@@ -264,7 +265,7 @@ public partial class MainPage : ContentPage
             
 
 
-
+            /*
             if (httpResponse.IsSuccessStatusCode)
             {
 
@@ -283,11 +284,11 @@ public partial class MainPage : ContentPage
             {
                 Debug.WriteLine("Nije uspio response");
             }//Kraj if httpResponse
-
+            */
         }
         else
         {
-            Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Microsoft.Maui.Storage.Preferences.Get("key", "default_value"));
+            Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Microsoft.Maui.Storage.Preferences.Get("key", null));
 
 
 
