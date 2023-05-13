@@ -238,63 +238,67 @@ public partial class MainPage : ContentPage
 
     protected override async void OnAppearing()
     {
-
-        base.OnAppearing();
-
-        //Provjerava da li ima ključ spremnjen u preferences
-        if (string.IsNullOrEmpty(Microsoft.Maui.Storage.Preferences.Get("key", "default_value")))
+        try
         {
+            base.OnAppearing();
 
-            var time = GetMicroSeconds();
-            // ----------------- platform ispod --------------
-            var device = Microsoft.Maui.Devices.DeviceInfo.Current.Platform;
-            Debug.WriteLine("url je--------------------" + url + time);
-            var httpResponse = await _Client.GetAsync(url + time);
-            //Items = new List<TodoItem>();
-
-            //Sprema u preferences index neku vrijednost iz varijable
-            Microsoft.Maui.Storage.Preferences.Set("key", time);
-            Debug.WriteLine("spremio u preferences");
-            string preferencesKey = Microsoft.Maui.Storage.Preferences.Get("key", "default_value");
-            Debug.WriteLine("Izvađen iz preferences: " + preferencesKey);
-
-
-
-            //Items = JsonSerializer.Deserialize<List<TodoItem>>(content, _serializerOptions);
-            
-
-
-
-            if (httpResponse.IsSuccessStatusCode)
+            //Provjerava da li ima ključ spremnjen u preferences
+            if (string.IsNullOrEmpty(Microsoft.Maui.Storage.Preferences.Get("key", "default_value")) && Microsoft.Maui.Storage.Preferences.Get("key", "default_value") == "default_value")
             {
 
-                string content = await httpResponse.Content.ReadAsStringAsync();
-                Debug.WriteLine(content);
-                Debug.WriteLine("Uso u if");
+                var time = GetMicroSeconds();
+                // ----------------- platform ispod --------------
+                var device = Microsoft.Maui.Devices.DeviceInfo.Current.Platform;
+                Debug.WriteLine("url je--------------------" + url + time);
+                var httpResponse = await _Client.GetAsync(url + time);
+                //Items = new List<TodoItem>();
+
+                //Sprema u preferences index neku vrijednost iz varijable
+                Preferences.Remove("key");
+                Microsoft.Maui.Storage.Preferences.Set("key", time);
+
+                Debug.WriteLine("spremio u preferences" + time);
+                string preferencesKey = Microsoft.Maui.Storage.Preferences.Get("key", "default_value");
+                Debug.WriteLine("Izvađen iz preferences: " + preferencesKey);
 
 
-                // Response _ = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
-                // await database.SaveLicenseAsync(Models.License);
 
-                //await database.SaveItemAsync(Item);
+                //Items = JsonSerializer.Deserialize<List<TodoItem>>(content, _serializerOptions);
+
+
+
+
+                if (httpResponse.IsSuccessStatusCode)
+                {
+
+                    string content = await httpResponse.Content.ReadAsStringAsync();
+                    Debug.WriteLine(content);
+                    Debug.WriteLine("Uso u if");
+
+
+                    // Response _ = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
+                    // await database.SaveLicenseAsync(Models.License);
+
+                    //await database.SaveItemAsync(Item);
+
+                }
+                else
+                {
+                    Debug.WriteLine("Nije uspio response");
+                }//Kraj if httpResponse
 
             }
             else
             {
-                Debug.WriteLine("Nije uspio response");
-            }//Kraj if httpResponse
-
-        }
-        else
-        {
-            Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Microsoft.Maui.Storage.Preferences.Get("key", "default_value"));
-
-
-
-
-
+                Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Microsoft.Maui.Storage.Preferences.Get("key", "default_value"));
+            }
         }
         //Kraj IF preferences
+
+    catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message + " in MainPage");
+        }
 
 
 
