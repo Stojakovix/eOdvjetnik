@@ -69,34 +69,51 @@ namespace eOdvjetnik.ViewModel
                 {
                     foreach (Dictionary<string, string> appointmentRow in appointmentData)
                     {
-
-                        // Parsaj bool u čitljiv format
+                        // Parse bool to a readable format
                         bool isAllDay;
                         bool.TryParse(appointmentRow["AllDay"], out isAllDay);
 
-                        // parsaj date/time
+                        // Parse date/time
+                        DateTime startTime = DateTime.Parse(appointmentRow["TimeFrom"]);
+                        DateTime endTime = DateTime.Parse(appointmentRow["TimeTo"]);
+                        string eventName = appointmentRow["EventName"];
+                        string descriptionNotes = appointmentRow["DescriptionNotes"];
+                        int appointmentId = int.Parse(appointmentRow["ID"]);
 
-
-                        Appointments.Add(new SchedulerAppointment()
+                        var existingAppointment = Appointments.FirstOrDefault(a => (int)a.Id == appointmentId);
+                        if (existingAppointment != null)
                         {
-                            StartTime = DateTime.Parse(appointmentRow["TimeFrom"]),
-                            EndTime = DateTime.Parse(appointmentRow["TimeTo"]),
-                            Subject = appointmentRow["EventName"],
-                            IsAllDay = isAllDay,
-                            Id = int.Parse(appointmentRow["ID"]),
-                            Notes = appointmentRow["DescriptionNotes"]
-                        });
-                        Debug.WriteLine(Appointments.Count  + "IZVRŠIO QUERY DO KRAJA --------------");
+                            // Update existing appointment
+                            existingAppointment.StartTime = startTime;
+                            existingAppointment.EndTime = endTime;
+                            existingAppointment.Subject = eventName;
+                            existingAppointment.IsAllDay = isAllDay;
+                            existingAppointment.Notes = descriptionNotes;
+                        }
+                        else
+                        {
+                            // Add new appointment
+                            Appointments.Add(new SchedulerAppointment()
+                            {
+                                StartTime = startTime,
+                                EndTime = endTime,
+                                Subject = eventName,
+                                IsAllDay = isAllDay,
+                                Id = appointmentId,
+                                Notes = descriptionNotes
+                            });
+                        }
+
+                        Debug.WriteLine(Appointments.Count + "IZVRŠIO QUERY DO KRAJA --------------");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message + "in kalendarViewModel addAppointmentToDb");
-
+                Debug.WriteLine(ex.Message + " in kalendarViewModel FetchAppointmentFromRemoteServer");
             }
-
         }
+
 
         private void AddAppointmentToRemoteServer(IEnumerable<SchedulerAppointment> appointments)
         {
