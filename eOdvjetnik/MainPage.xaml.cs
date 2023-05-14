@@ -236,30 +236,32 @@ public partial class MainPage : ContentPage
     }
 
 
-    protected override async void OnAppearing()
+    protected override void OnAppearing()
     {
+
         try
         {
-            base.OnAppearing();
-
+            //zakomentirati nakon setanja na null
+            //Microsoft.Maui.Storage.Preferences.Set("key", null);
             //Provjerava da li ima ključ spremnjen u preferences
-            if (string.IsNullOrEmpty(Microsoft.Maui.Storage.Preferences.Get("key", "default_value")) && Microsoft.Maui.Storage.Preferences.Get("key", "default_value") == "default_value")
-            {
+            if (string.IsNullOrEmpty(Microsoft.Maui.Storage.Preferences.Get("key", null))) {
+
+                base.OnAppearing();
 
                 var time = GetMicroSeconds();
                 // ----------------- platform ispod --------------
                 var device = Microsoft.Maui.Devices.DeviceInfo.Current.Platform;
-                Debug.WriteLine("url je--------------------" + url + time);
-                var httpResponse = await _Client.GetAsync(url + time);
+                Debug.WriteLine("url je----------------main" + url + time);
+                //var httpResponse = await _Client.GetAsync(url + time);
                 //Items = new List<TodoItem>();
 
                 //Sprema u preferences index neku vrijednost iz varijable
-                Preferences.Remove("key");
                 Microsoft.Maui.Storage.Preferences.Set("key", time);
-
-                Debug.WriteLine("spremio u preferences" + time);
-                string preferencesKey = Microsoft.Maui.Storage.Preferences.Get("key", "default_value");
+                Debug.WriteLine("spremio u preferences");
+                string preferencesKey = Microsoft.Maui.Storage.Preferences.Get("key", null);
                 Debug.WriteLine("Izvađen iz preferences: " + preferencesKey);
+
+
 
 
 
@@ -267,47 +269,59 @@ public partial class MainPage : ContentPage
 
 
 
-
-                if (httpResponse.IsSuccessStatusCode)
-                {
-
-                    string content = await httpResponse.Content.ReadAsStringAsync();
-                    Debug.WriteLine(content);
-                    Debug.WriteLine("Uso u if");
+                /*
 
 
-                    // Response _ = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
-                    // await database.SaveLicenseAsync(Models.License);
+                    if (httpResponse.IsSuccessStatusCode)
+                    {
 
-                    //await database.SaveItemAsync(Item);
+                        string content = await httpResponse.Content.ReadAsStringAsync();
+                        Debug.WriteLine(content);
+                        Debug.WriteLine("Uso u if");
 
-                }
-                else
-                {
-                    Debug.WriteLine("Nije uspio response");
-                }//Kraj if httpResponse
+
+                        // Response _ = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
+                        // await database.SaveLicenseAsync(Models.License);
+
+                        //await database.SaveItemAsync(Item);
+
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Nije uspio response");
+                    }//Kraj if httpResponse
+
+
+                */
+            }
+            else {
+                Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Microsoft.Maui.Storage.Preferences.Get("key", null));
 
             }
-            else
+             }
+
+                
+
+
+
+                    
+                
+            
+            //Kraj IF preferences
+
+            catch (Exception ex)
             {
-                Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Microsoft.Maui.Storage.Preferences.Get("key", "default_value"));
+                Debug.WriteLine(ex.Message + " in MainPage");
             }
+
+
+
+
+
+
         }
-        //Kraj IF preferences
 
-    catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message + " in MainPage");
-        }
-
-
-
-
-
-
-    }
-
-
+    
 
 
 }

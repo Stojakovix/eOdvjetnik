@@ -125,9 +125,9 @@ namespace eOdvjetnik.ViewModel
                 foreach (SchedulerAppointment appointment in appointments)
                 {
 
+
                     string query = $"INSERT INTO Events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}' , '{hardware_id}')";
                     externalSQLConnect.sqlQuery(query);
-
                     Debug.WriteLine("Appoinments added to remote server.");
                 }
             }

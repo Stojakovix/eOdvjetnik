@@ -70,22 +70,23 @@ public partial class Register : ContentPage
     {
 
         base.OnAppearing();
-
+        //zakomentirati nakon setanja na null
+        //Microsoft.Maui.Storage.Preferences.Set("key", null);
         //Provjerava da li ima ključ spremnjen u preferences
-        if (string.IsNullOrEmpty(Preferences.Get("key", "default_value")))
+        if (string.IsNullOrEmpty(Preferences.Get("key", null)))
         {
 
             var time = GetMicroSeconds();
             // ----------------- platform ispod --------------
             var device = DeviceInfo.Current.Platform;
-            Debug.WriteLine("url je--------------------" + url + time);
-            var httpResponse = await _Client.GetAsync(url + time);
+            Debug.WriteLine("url je++**+++++****" + url + time);
+            //var httpResponse = await _Client.GetAsync(url + time);
             //Items = new List<TodoItem>();
 
             //Sprema u preferences index neku vrijednost iz varijable
             Preferences.Set("key", time);
             Debug.WriteLine("spremio u preferences");
-            string preferencesKey = Preferences.Get("key", "default_value");
+            string preferencesKey = Preferences.Get("key", null);
             Debug.WriteLine("Izvađen iz preferences: " + preferencesKey);
 
 
@@ -96,7 +97,7 @@ public partial class Register : ContentPage
                 HID = time
             });
 
-
+            /*
 
             if (httpResponse.IsSuccessStatusCode)
             {
@@ -116,11 +117,11 @@ public partial class Register : ContentPage
             {
                 Debug.WriteLine("Nije uspio response");
             }//Kraj if httpResponse
-
+            */
         }
         else
         {
-            Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Preferences.Get("key", "default_value"));
+            Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Preferences.Get("key", null));
 
             
 

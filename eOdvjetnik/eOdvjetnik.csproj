@@ -171,6 +171,7 @@
 		<PackageReference Include="WireGuardNT-PInvoke" Version="1.0.4" />
 		<PackageReference Include="MySql.Data" Version="8.0.33" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
+		<PackageReference Include="IeuanWalker.Maui.Breadcrumb" Version="1.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>

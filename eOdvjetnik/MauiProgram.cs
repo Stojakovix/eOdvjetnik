@@ -11,7 +11,7 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-
+using IeuanWalker.Maui.StateButton;
 
 namespace eOdvjetnik;
 public static class MauiProgram
@@ -40,7 +40,9 @@ public static class MauiProgram
 
             });
 
-
+        builder
+            .UseMauiApp<App>()
+            .UseStateButton();
 
         builder.Services.AddSingleton<Dokumenti>();
         builder.Services.AddTransient<DocsItemPage>();
