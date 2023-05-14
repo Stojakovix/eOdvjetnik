@@ -7,14 +7,22 @@
              x:Class="eOdvjetnik.Views.Dokumenti"
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              ios:Page.UseSafeArea="True"
-             Title="Dokumenti">
+             Title="Dokumenti"
+             xmlns:breadcrumb="clr-namespace:Breadcrumb;assembly=Breadcrumb">
+
+
+<breadcrumb:Breadcrumb>
+    <breadcrumb:Breadcrumb.Separator>
+        <UriImageSource Uri="https://cdn.iconscout.com/icon/free/png-256/xamarin-4-599473.png" />
+    </breadcrumb:Breadcrumb.Separator>
+</breadcrumb:Breadcrumb>
 
     <ScrollView>
         <VerticalStackLayout>
-            
-           
+
 
     <Grid RowDefinitions="*,Auto">
+
         <CollectionView
             
             VerticalOptions="Fill"
