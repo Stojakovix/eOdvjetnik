@@ -96,20 +96,9 @@ public partial class Dokumenti : ContentPage
                             System.Diagnostics.Debug.WriteLine(file1.ToString());
 
                         }
-
                         System.Diagnostics.Debug.WriteLine("44444444444444");
-
                         System.Diagnostics.Debug.WriteLine(fileList);
-
-
-
                     }
-
-                    
-
-
-
-
                     System.Diagnostics.Debug.WriteLine("----------------------------------------------------------------");
                     //DisplayAlert("Connection", "Connection established", "ok");
                 }
@@ -119,14 +108,6 @@ public partial class Dokumenti : ContentPage
                 }
                 client.Logoff();
                 client.Disconnect();
-
-
-            
-
-
-
-
-
         }
         catch (Exception ex)
         {
