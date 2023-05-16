@@ -89,15 +89,7 @@ public partial class Kalendar : ContentPage
         timeRegions.Add(timeRegion);
         return timeRegions;
     }
-    private void CreateTabele()
-    {
-        var appointments = App.Database.GetSchedulerAppointment();
-        if (appointments.Count == 0)
-        {
-            var todoItem = new Appointment() { From = DateTime.Today.AddHours(10), To = DateTime.Today.AddHours(12), AllDay = false, DescriptionNotes = "Meeting", EventName = "Annual", ID = 1 };
-            App.Database.SaveSchedulerAppointmentAsync(todoItem);
-        }
-    }
+    
 
 
 

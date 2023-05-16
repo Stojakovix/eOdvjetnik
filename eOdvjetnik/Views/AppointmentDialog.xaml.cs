@@ -2,7 +2,8 @@ using Syncfusion.Maui.Scheduler;
 using System.Collections.ObjectModel;
 using eOdvjetnik.Models;
 using eOdvjetnik.Services;
-
+using eOdvjetnik.ViewModel;
+using System.Diagnostics;
 
 namespace eOdvjetnik.Views;
 
@@ -11,7 +12,7 @@ public partial class AppointmentDialog : ContentPage
     SchedulerAppointment appointment;
     DateTime selectedDate;
     SfScheduler scheduler;
-    
+
     public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler)
     {
         InitializeComponent();
@@ -32,7 +33,7 @@ public partial class AppointmentDialog : ContentPage
 
         //MySQL Query
         // Instantiate the service
-        
+
     }
 
     private void DeleteButton_Clicked(object sender, EventArgs e)
@@ -53,7 +54,7 @@ public partial class AppointmentDialog : ContentPage
 
     private void SwitchAllDay_Toggled(object sender, ToggledEventArgs e)
     {
-        if ((sender as Switch).IsToggled)
+        if ((sender as Microsoft.Maui.Controls.Switch).IsToggled)
         {
             startTime_picker.Time = new TimeSpan(12, 0, 0);
             startTime_picker.IsEnabled = false;
@@ -64,7 +65,7 @@ public partial class AppointmentDialog : ContentPage
         {
             startTime_picker.IsEnabled = true;
             endTime_picker.IsEnabled = true;
-            (sender as Switch).IsToggled = false;
+            (sender as Microsoft.Maui.Controls.Switch).IsToggled = false;
         }
     }
     private void CancelButton_Clicked(object sender, EventArgs e)
@@ -78,6 +79,7 @@ public partial class AppointmentDialog : ContentPage
         var startDate = startDate_picker.Date;
         var endTime = endTime_picker.Time;
         var startTime = startTime_picker.Time;
+        
 
         if (endDate < startDate)
         {
@@ -92,13 +94,38 @@ public partial class AppointmentDialog : ContentPage
             else
             {
                 AppointmentDetails();
+                AddAppointmentToRemoteServer(appointment);
             }
         }
         else
         {
             AppointmentDetails();
+            AddAppointmentToRemoteServer(appointment);
+           
         }
     }
+
+    private void AddAppointmentToRemoteServer(SchedulerAppointment appointment)
+    {
+        try
+        {
+            ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+            var hardware_id = Preferences.Get("key", "default_value");
+
+
+            string query = $"INSERT INTO Events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}' , '{hardware_id}')";
+            
+          
+            externalSQLConnect.sqlQuery(query);
+
+            Debug.WriteLine("Appointment added to remote server.");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message + " in KalendarViewModel AddAppointmentToServer");
+        }
+    }
+
 
     private void AppointmentDetails()
     {
@@ -129,11 +156,12 @@ public partial class AppointmentDialog : ContentPage
             appointment.Notes = this.organizerText.Text;
         }
 
-        
+
 
 
         //// - add or edit the appointment in the database collection
-        var todoItem = new Appointment() {
+        var todoItem = new Appointment()
+        {
             From = appointment.StartTime,
             To = appointment.EndTime,
             AllDay = appointment.IsAllDay,
@@ -144,9 +172,8 @@ public partial class AppointmentDialog : ContentPage
         App.Database.SaveSchedulerAppointmentAsync(todoItem);
 
         this.Navigation.PopAsync();
-        
-    }
 
+    }
     private void UpdateEditor()
     {
         if (appointment != null)
@@ -170,7 +197,7 @@ public partial class AppointmentDialog : ContentPage
                 endTime_picker.IsEnabled = false;
                 switchAllDay.IsToggled = true;
             }
-            
+
         }
         else
         {

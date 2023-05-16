@@ -87,6 +87,7 @@
                     CurrentTimeIndicatorBrush="Red"
                     AppointmentTemplate="{StaticResource AppointmentTemplate}"
                     AllDayAppointmentTemplate="{StaticResource AllDayAppointmentTemplate}"
+                    
                     >
                     <scheduler:SchedulerDaysView.TimeRegionTemplate>
                         <DataTemplate>

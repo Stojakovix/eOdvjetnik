@@ -34,7 +34,7 @@ namespace eOdvjetnik.ViewModel
                     IsAllDay = appointment.AllDay,
                     Id = appointment.ID
                 });
-                AddAppointmentToRemoteServer(schedulerAppointments);
+                //AddAppointmentToRemoteServer(schedulerAppointments);
 
                 // Add appointments from the local database to the Appointments collection
                 foreach (Appointment appointment in dataBaseAppointments)
@@ -47,7 +47,7 @@ namespace eOdvjetnik.ViewModel
                         IsAllDay = appointment.AllDay,
                         Id = appointment.ID
                     });
-
+                    AddAppointmentToRemoteServer(schedulerAppointments);
                     Debug.WriteLine($"{appointment.ID} {appointment.EventName} {appointment.AllDay} {appointment.From} {appointment.To}");
                 }
             }
@@ -79,8 +79,8 @@ namespace eOdvjetnik.ViewModel
                         string eventName = appointmentRow["EventName"];
                         string descriptionNotes = appointmentRow["DescriptionNotes"];
                         int appointmentId = int.Parse(appointmentRow["ID"]);
-
-                        var existingAppointment = Appointments.FirstOrDefault(a => (int)a.Id == appointmentId);
+                        int internalEventId = int.Parse(appointmentRow["internal_event_id"]);
+                        var existingAppointment = Appointments.FirstOrDefault(a => (int)a.Id == internalEventId);
                         if (existingAppointment != null)
                         {
                             // Update existing appointment
@@ -122,10 +122,10 @@ namespace eOdvjetnik.ViewModel
             {
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 var hardware_id = Preferences.Get("key", "default_value");
+                
+                
                 foreach (SchedulerAppointment appointment in appointments)
                 {
-
-
                     string query = $"INSERT INTO Events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}' , '{hardware_id}')";
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine("Appoinments added to remote server.");
@@ -136,8 +136,6 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message + " in KalendarViewModel AddAppointmentToServer");
             }
         }
-
-
 
         /// <summary>
         /// Property changed event handler

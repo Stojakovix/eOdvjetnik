@@ -62,6 +62,18 @@ namespace eOdvjetnik.Services
         private const string databasename_mysql = "databasename";
 
 
+        //public int SqlScalar(string query)
+        //{
+        //    int result = 0;
+        //    string connString = $"server={IP_mysql};user={USER_mysql};password={PASS_mysql};database={databasename_mysql}";
+        //    using (MySqlConnection conn = new MySqlConnection(connString))
+        //    {
+        //        conn.Open();
+        //        MySqlCommand cmd = new MySqlCommand(query, conn);
+        //        result = (int)cmd.ExecuteScalar();
+        //    }
+        //    return result;
+        //}
         public Dictionary<string, string>[] sqlQuery(string query)
         {
 
