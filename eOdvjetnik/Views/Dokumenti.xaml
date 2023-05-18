@@ -11,11 +11,6 @@
              xmlns:breadcrumb="clr-namespace:Breadcrumb;assembly=Breadcrumb">
 
 
-<breadcrumb:Breadcrumb>
-    <breadcrumb:Breadcrumb.Separator>
-        <UriImageSource Uri="https://cdn.iconscout.com/icon/free/png-256/xamarin-4-599473.png" />
-    </breadcrumb:Breadcrumb.Separator>
-</breadcrumb:Breadcrumb>
 
     <ScrollView>
         <VerticalStackLayout>
