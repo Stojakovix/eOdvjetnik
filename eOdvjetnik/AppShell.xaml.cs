@@ -1,9 +1,4 @@
 ﻿namespace eOdvjetnik;
-
-using Syncfusion.Maui.Scheduler;
-using System.Globalization;
-using Syncfusion.Maui.Scheduler;
-using System.Resources;
 using Views;
 
 

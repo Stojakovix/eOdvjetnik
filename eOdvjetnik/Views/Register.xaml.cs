@@ -1,4 +1,3 @@
-using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -66,7 +65,7 @@ public partial class Register : ContentPage
     }
 
 
-    protected override async void OnAppearing()
+    protected override void OnAppearing()
     {
 
         base.OnAppearing();
