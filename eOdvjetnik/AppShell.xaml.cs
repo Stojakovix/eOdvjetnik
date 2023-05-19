@@ -1,8 +1,8 @@
 ﻿namespace eOdvjetnik;
-
 using System.Diagnostics;
 using Views;
-
+using Microsoft.Maui.Controls;
+using Syncfusion.Maui.Popup;
 
 public partial class AppShell : Shell
 {
@@ -15,9 +15,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(Dokumenti), typeof(Dokumenti));
 		Routing.RegisterRoute(nameof(DocsItemPage), typeof(DocsItemPage));
 		Routing.RegisterRoute(nameof(AppointmentDialog), typeof(AppointmentDialog));
-       
-
-        
+   
     }
 
 	private async void OnButtonClicked(object sender, EventArgs e)
@@ -41,4 +39,22 @@ public partial class AppShell : Shell
 
 
     }
+
+    private void OnSupportButtonClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            Debug.WriteLine("stisnut support");
+            var popup = new SfPopup();
+
+            popup.Show();
+        }
+
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+
+    }
+
 }

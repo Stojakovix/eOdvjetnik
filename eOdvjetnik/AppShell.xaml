@@ -3,27 +3,31 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:eOdvjetnik"
        xmlns:views="clr-namespace:eOdvjetnik.Views"
+       xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
+       
+       
        Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
        Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=False, iOS=False}">
 
-    <Shell.TitleView>
-        <Grid>
+    <Shell.TitleView >
+        <Grid Margin="10,0" BackgroundColor="Transparent">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"  />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Text="Početna" Clicked="OnButtonClicked" x:Name="PočetnaButton" BackgroundColor="Transparent" />
-            <Button Grid.Column="1" Text="Kalendar" Clicked="OnButtonClicked"  x:Name="KalendarButton" BackgroundColor="Transparent"/>
-            <Button Grid.Column="2" Text="Dokumenti" Clicked="OnButtonClicked"  x:Name="DokumentiButton" BackgroundColor="Transparent"/>
-            
+
+            <Button Grid.Column="0" Text="Početna" Clicked="OnButtonClicked" x:Name="PočetnaButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0"/>
+            <Button Grid.Column="1" Text="Kalendar" Clicked="OnButtonClicked" x:Name="KalendarButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0"/>
+            <Button Grid.Column="2" Text="Dokumenti" Clicked="OnButtonClicked" x:Name="DokumentiButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0"/>
+
+            <Button Grid.Column="3" Text="Support" BackgroundColor="Transparent" BorderWidth="0" Clicked="OnSupportButtonClicked" />
+
         </Grid>
     </Shell.TitleView>
-
-
-    <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+    
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
     <ShellContent ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
     <ShellContent ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
 </Shell>
