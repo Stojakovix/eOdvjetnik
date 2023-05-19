@@ -15,7 +15,8 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(Dokumenti), typeof(Dokumenti));
 		Routing.RegisterRoute(nameof(DocsItemPage), typeof(DocsItemPage));
 		Routing.RegisterRoute(nameof(AppointmentDialog), typeof(AppointmentDialog));
-   
+
+		SfPopup popup = new SfPopup();
     }
 
 	private async void OnButtonClicked(object sender, EventArgs e)
@@ -45,7 +46,7 @@ public partial class AppShell : Shell
         try
         {
             Debug.WriteLine("stisnut support");
-            var popup = new SfPopup();
+			popup.ShowCloseButton = true;
 
             popup.Show();
         }
