@@ -1,33 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Shell
-    x:Class="eOdvjetnik.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:eOdvjetnik"
-    xmlns:views="clr-namespace:eOdvjetnik.Views"
-    Shell.FlyoutBehavior="Flyout">
+<Shell x:Class="eOdvjetnik.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:eOdvjetnik"
+       xmlns:views="clr-namespace:eOdvjetnik.Views"
+       Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
+       Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=False, iOS=False}">
 
-    <ShellContent
-        Title="Početna"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" 
-        />
-    
+    <Shell.TitleView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Text="Početna" Clicked="OnButtonClicked" x:Name="PočetnaButton" BackgroundColor="Transparent" />
+            <Button Grid.Column="1" Text="Kalendar" Clicked="OnButtonClicked"  x:Name="KalendarButton" BackgroundColor="Transparent"/>
+            <Button Grid.Column="2" Text="Dokumenti" Clicked="OnButtonClicked"  x:Name="DokumentiButton" BackgroundColor="Transparent"/>
+            
+        </Grid>
+    </Shell.TitleView>
 
-    <ShellContent
-        Title="Kalendar"
-        ContentTemplate="{DataTemplate views:Kalendar}"
-        Route="Kalendar"
-        />
 
-    <ShellContent
-        Title="Dokumenti"
-        ContentTemplate="{DataTemplate views:Dokumenti}"
-        Route="Dokumenti"
-        />
-    <ShellContent
-        Title="Register"
-        ContentTemplate="{DataTemplate views:Register}"
-        Route="Register"
-        />
+    <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+    <ShellContent ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
+    <ShellContent ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
 </Shell>

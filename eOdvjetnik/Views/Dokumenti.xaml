@@ -9,14 +9,7 @@
              ios:Page.UseSafeArea="True"
              Title="Dokumenti"
              xmlns:breadcrumb="clr-namespace:Breadcrumb;assembly=Breadcrumb">
-
-
-<breadcrumb:Breadcrumb>
-    <breadcrumb:Breadcrumb.Separator>
-        <UriImageSource Uri="https://cdn.iconscout.com/icon/free/png-256/xamarin-4-599473.png" />
-    </breadcrumb:Breadcrumb.Separator>
-</breadcrumb:Breadcrumb>
-
+    
     <ScrollView>
         <VerticalStackLayout>
 
@@ -86,22 +79,7 @@
     </ScrollView>
 </ContentPage>
 
-<!--
-<ListView ItemsSource="{Binding ShareFiles}" Margin="20">
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <ViewCell>
-                <StackLayout Orientation="Horizontal" Margin="0">
-                    <Image Source="Icons/folder.png" WidthRequest="40" HeightRequest="40"/>
-                    <Label Text="{Binding .}" VerticalTextAlignment="Center"/>
-                </StackLayout>
-            </ViewCell>
-        </DataTemplate>
-    </ListView.ItemTemplate>
-</ListView>
-</StackLayout>
 
--->
 
 
 
