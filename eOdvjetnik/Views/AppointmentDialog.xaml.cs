@@ -75,33 +75,41 @@ public partial class AppointmentDialog : ContentPage
 
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
-        var endDate = endDate_picker.Date;
-        var startDate = startDate_picker.Date;
-        var endTime = endTime_picker.Time;
-        var startTime = startTime_picker.Time;
-        
+        try
+        {
+            var endDate = endDate_picker.Date;
+            var startDate = startDate_picker.Date;
+            var endTime = endTime_picker.Time;
+            var startTime = startTime_picker.Time;
 
-        if (endDate < startDate)
-        {
-            Application.Current.MainPage.DisplayAlert("", "End time should be greater than start time", "OK");
-        }
-        else if (endDate == startDate)
-        {
-            if (endTime < startTime)
+
+            if (endDate < startDate)
             {
                 Application.Current.MainPage.DisplayAlert("", "End time should be greater than start time", "OK");
+            }
+            else if (endDate == startDate)
+            {
+                if (endTime < startTime)
+                {
+                    Application.Current.MainPage.DisplayAlert("", "End time should be greater than start time", "OK");
+                }
+                else
+                {
+                    AppointmentDetails();
+                    AddAppointmentToRemoteServer(appointment);
+                    Navigation.PopAsync();
+                }
             }
             else
             {
                 AppointmentDetails();
                 AddAppointmentToRemoteServer(appointment);
+                Navigation.PopAsync();
             }
         }
-        else
+        catch (Exception ex)
         {
-            AppointmentDetails();
-            AddAppointmentToRemoteServer(appointment);
-           
+            Debug.WriteLine(ex.Message + " in KalendarViewModel SaveButtonClicked");
         }
     }
 

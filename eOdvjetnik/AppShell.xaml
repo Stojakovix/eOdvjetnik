@@ -6,10 +6,10 @@
        xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
        
        
-       Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
-       Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=False, iOS=False}">
-    
-    <Shell.TitleView >
+       Shell.FlyoutBehavior="{OnPlatform WinUI=Flyout, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
+       Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=True, iOS=False}">
+
+    <Shell.TitleView>
         <Grid Margin="10,0" BackgroundColor="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"  />
@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Text="Početna" Clicked="OnButtonClicked" x:Name="PočetnaButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0" />
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" Grid.Column="0" Text="Početna" Clicked="OnButtonClicked" x:Name="PočetnaButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0" />
             <Button Grid.Column="1" Text="Kalendar" Clicked="OnButtonClicked" x:Name="KalendarButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0"/>
             <Button Grid.Column="2" Text="Dokumenti" Clicked="OnButtonClicked" x:Name="DokumentiButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0"/>
 
@@ -30,14 +30,19 @@
                             <Label Text="Broj moba" TextColor="Black"/>
                             <Label Text="Email" TextColor="Black"/>
                         </StackLayout>
-                        
+
                     </DataTemplate>
                 </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
         </Grid>
-    </Shell.TitleView>
     
-    <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
-    <ShellContent ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
-    <ShellContent ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
+    </Shell.TitleView>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+    
+    
+    <ShellContent Title="Početna" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+    <ShellContent Title="Kalendar" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
+    <ShellContent Title="Dokumenti" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
 </Shell>
