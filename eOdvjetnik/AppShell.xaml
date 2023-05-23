@@ -6,7 +6,7 @@
        xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
        
        
-       Shell.FlyoutBehavior="{OnPlatform WinUI=Flyout, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
+       Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
        Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=True, iOS=False}">
 
     <Shell.TitleView>
@@ -16,19 +16,21 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" Grid.Column="0" Text="Početna" Clicked="OnButtonClicked" x:Name="PočetnaButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0" />
-            <Button Grid.Column="1" Text="Kalendar" Clicked="OnButtonClicked" x:Name="KalendarButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0"/>
-            <Button Grid.Column="2" Text="Dokumenti" Clicked="OnButtonClicked" x:Name="DokumentiButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0"/>
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" Grid.Column="1" Text="Kalendar" Clicked="OnButtonClicked" x:Name="KalendarButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0"/>
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" Grid.Column="2" Text="Dokumenti" Clicked="OnButtonClicked" x:Name="DokumentiButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0"/>
 
             <Button Grid.Column="3" Text="Support" BackgroundColor="Transparent" BorderWidth="0" Clicked="OnSupportButtonClicked"/>
-            <sfPopup:SfPopup x:Name="popup">
+            <Button Grid.Column="4" Text="Postavke" BackgroundColor="Transparent" BorderWidth="0"/>
+            <sfPopup:SfPopup x:Name="popup" HeaderTitle="Korisnička podrška">
                 <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
                         <StackLayout>
                             <Label Text="Broj moba" TextColor="Black"/>
-                            <Label Text="Email" TextColor="Black"/>
+                            <Label Text="Email - bruno@zadar-ict.hr" TextColor="Black"/>
                         </StackLayout>
 
                     </DataTemplate>
@@ -37,11 +39,8 @@
         </Grid>
     
     </Shell.TitleView>
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
-    </Shell.BackButtonBehavior>
-    
-    
+ 
+
     <ShellContent Title="Početna" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
     <ShellContent Title="Kalendar" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
     <ShellContent Title="Dokumenti" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />

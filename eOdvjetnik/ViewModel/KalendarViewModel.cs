@@ -2,12 +2,9 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using eOdvjetnik.Models;
-using eOdvjetnik.Data;
 using System.Diagnostics;
 using eOdvjetnik.Services;
-using MySql.Data.MySqlClient;
-using System.Linq;
-using System.Globalization;
+
 
 namespace eOdvjetnik.ViewModel
 {
@@ -17,29 +14,18 @@ namespace eOdvjetnik.ViewModel
 
         public KalendarViewModel()
         {
-            Appointments = new ObservableCollection<SchedulerAppointment>(); // Initialize the Appointments collection
-
-            // Fetch appointments from the remote server
-            FetchAppointmentFromRemoteServer();
-
-            // Add appointments to the remote server
-            var dataBaseAppointments = App.Database.GetSchedulerAppointment();
-            if (dataBaseAppointments != null)
+            try
             {
-                var schedulerAppointments = dataBaseAppointments.Select(appointment => new SchedulerAppointment()
-                {
-                    StartTime = appointment.From,
-                    EndTime = appointment.To,
-                    Subject = appointment.EventName,
-                    IsAllDay = appointment.AllDay,
-                    Id = appointment.ID
-                });
-                //AddAppointmentToRemoteServer(schedulerAppointments);
+                Appointments = new ObservableCollection<SchedulerAppointment>(); // Initialize the Appointments collection
 
-                // Add appointments from the local database to the Appointments collection
-                foreach (Appointment appointment in dataBaseAppointments)
+                // Fetch appointments from the remote server
+                FetchAppointmentFromRemoteServer();
+
+                // Add appointments to the remote server
+                var dataBaseAppointments = App.Database.GetSchedulerAppointment();
+                if (dataBaseAppointments != null)
                 {
-                    Appointments.Add(new SchedulerAppointment()
+                    var schedulerAppointments = dataBaseAppointments.Select(appointment => new SchedulerAppointment()
                     {
                         StartTime = appointment.From,
                         EndTime = appointment.To,
@@ -47,14 +33,33 @@ namespace eOdvjetnik.ViewModel
                         IsAllDay = appointment.AllDay,
                         Id = appointment.ID
                     });
-                    AddAppointmentToRemoteServer(schedulerAppointments);
-                    Debug.WriteLine($"{appointment.ID} {appointment.EventName} {appointment.AllDay} {appointment.From} {appointment.To}");
+                    //AddAppointmentToRemoteServer(schedulerAppointments);
+
+                    // Add appointments from the local database to the Appointments collection
+                    foreach (Appointment appointment in dataBaseAppointments)
+                    {
+                        Appointments.Add(new SchedulerAppointment()
+                        {
+                            StartTime = appointment.From,
+                            EndTime = appointment.To,
+                            Subject = appointment.EventName,
+                            IsAllDay = appointment.AllDay,
+                            Id = appointment.ID
+                        });
+                        AddAppointmentToRemoteServer(schedulerAppointments);
+                        Debug.WriteLine($"{appointment.ID} {appointment.EventName} {appointment.AllDay} {appointment.From} {appointment.To}");
+                    }
+                }
+                else
+                {
+                    // Handle the case when dataBaseAppointments is null
+                    Debug.WriteLine("dataBaseAppointments is null");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                // Handle the case when dataBaseAppointments is null
-                Debug.WriteLine("dataBaseAppointments is null");
+
+                Debug.WriteLine(ex.Message + "in kalendarViewModel init");
             }
         }
 

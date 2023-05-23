@@ -89,32 +89,35 @@ namespace eOdvjetnik.Services
             using MySqlCommand cmd = new MySqlCommand(query, conn);
             using MySqlDataReader reader = cmd.ExecuteReader();
             List<Dictionary<string, string>> results = new List<Dictionary<string, string>>();
-
-            while (reader.Read())
-            {
-                Dictionary<string, string> row = new Dictionary<string, string>();
-
-                for (int i = 0; i < reader.FieldCount; i++)
+            
+            
+                while (reader.Read())
                 {
-                    string attributeName = reader.GetName(i);
-                    string attributeValue = reader[i].ToString();
-                    row.Add(attributeName, attributeValue);
+                    Dictionary<string, string> row = new Dictionary<string, string>();
+
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        string attributeName = reader.GetName(i);
+                        string attributeValue = reader[i].ToString();
+                        row.Add(attributeName, attributeValue);
+                    }
+
+                    results.Add(row);
                 }
 
-                results.Add(row);
-            }
 
+                // Close the reader and the connection
+                reader.Close();
+                conn.Close();
 
-            // Close the reader and the connection
-            reader.Close();
-            conn.Close();
-
-            return results.ToArray();
-
+                return results.ToArray();
             
+            
+
+
         }
 
 
-	}
+    }
 }
 

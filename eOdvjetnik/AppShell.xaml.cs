@@ -21,41 +21,42 @@ public partial class AppShell : Shell
 
 	private async void OnButtonClicked(object sender, EventArgs e)
 	{
-		try { 
-		string route = "";
+		try
+		{
+			string route = "";
 
-		if (sender == PočetnaButton)
-			route = "///MainPage";
-		else if (sender == KalendarButton)
-			route = "Kalendar";
-		else if (sender == DokumentiButton)
-			route = "Dokumenti";
+			if (sender == PočetnaButton)
+				route = "///MainPage";
+			else if (sender == KalendarButton)
+				route = "Kalendar";
+			else if (sender == DokumentiButton)
+				route = "Dokumenti";
 
-		await Current.GoToAsync(route);
-        }
-		catch(Exception ex)
+			await Current.GoToAsync(route);
+		}
+		catch (Exception ex)
+		{
+			Debug.WriteLine(ex.Message + "in AppShell");
+		}
+
+
+	}
+
+	private void OnSupportButtonClicked(object sender, EventArgs e)
+	{
+		try
+		{
+			Debug.WriteLine("stisnut support");
+			popup.ShowCloseButton = true;
+
+			popup.Show();
+		}
+
+		catch (Exception ex)
 		{
 			Debug.WriteLine(ex.Message);
 		}
 
-
-    }
-
-    private void OnSupportButtonClicked(object sender, EventArgs e)
-    {
-        try
-        {
-            Debug.WriteLine("stisnut support");
-			popup.ShowCloseButton = true;
-
-            popup.Show();
-        }
-
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message);
-        }
-
-    }
+	}
 
 }

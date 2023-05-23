@@ -2,10 +2,7 @@
 using System.Text;
 using eOdvjetnik.Data;
 using System.Security.Cryptography;
-using MySql.Data.MySqlClient;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.Xaml;
+using eOdvjetnik.ViewModel;
 using System.Globalization;
 
 
@@ -61,17 +58,13 @@ public partial class MainPage : ContentPage
         }
     }
 
-
-
-
-
     public MainPage()
     {
         InitializeComponent();
         ReadDeviceInfo();
         GetMicroSeconds();
         AskForWiFiPermission();
-
+        BindingContext = new MainPageViewModel();
         string input = "24. 04. 2023. 09:00:00";
         DateTime parsedDateTime = DateTime.ParseExact(input, "dd. MM. yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
         string output = parsedDateTime.ToString("yyyy-MM-dd HH:mm:ss");
@@ -80,25 +73,28 @@ public partial class MainPage : ContentPage
 
 
     }
-    private void OnSaveClicked(object sender, EventArgs e)
-    {
-        Microsoft.Maui.Storage.Preferences.Set(IP, IPEntry.Text);
-        Microsoft.Maui.Storage.Preferences.Set(USER, USEREntry.Text);
-        Microsoft.Maui.Storage.Preferences.Set(PASS, PASSEntry.Text);
-        Microsoft.Maui.Storage.Preferences.Set(FOLDER, FOLDEREntry.Text);
-        Microsoft.Maui.Storage.Preferences.Set(SUBFOLDER, SUBFOLDEREntry.Text);
+    //private void OnSaveClicked(object sender, EventArgs e)
+    //{
+    //    Preferences.Set(IP, IPEntry.Text);
+    //    Preferences.Set(USER, USEREntry.Text);
+    //    Preferences.Set(PASS, PASSEntry.Text);
+    //    Preferences.Set(FOLDER, FOLDEREntry.Text);
+    //    Preferences.Set(SUBFOLDER, SUBFOLDEREntry.Text);
 
-        DisplayAlert("Success", "Data saved", "OK");
-    }
-    private void OnSaveClickedMySQL(object sender, EventArgs e)
-    {
-        Microsoft.Maui.Storage.Preferences.Set(IP_mysql, IPEntryMySQL.Text);
-        Microsoft.Maui.Storage.Preferences.Set(USER_mysql, USEREntryMySQL.Text);
-        Microsoft.Maui.Storage.Preferences.Set(PASS_mysql, PASSEntryMySQL.Text);
-        Microsoft.Maui.Storage.Preferences.Set(databasename_mysql, databasenameEntryMySQL.Text);
+    //    DisplayAlert("Success", "Data saved", "OK");
+    //    NASPostavkeClicked(sender, e);
+    //}
+    //private void OnSaveClickedMySQL(object sender, EventArgs e)
+    //{
+    //    Preferences.Set(IP_mysql, IPEntryMySQL.Text);
+    //    Preferences.Set(USER_mysql, USEREntryMySQL.Text);
+    //    Preferences.Set(PASS_mysql, PASSEntryMySQL.Text);
+    //    Preferences.Set(databasename_mysql, databasenameEntryMySQL.Text);
 
-        DisplayAlert("Success", "Data saved", "OK");
-    }
+    //    DisplayAlert("Success", "Data saved", "OK");
+    //    MySQLPostavkeClicked(sender, e);
+
+    //}
     private void OnLoadClicked(object sender, EventArgs e)
     {
 
@@ -134,22 +130,22 @@ public partial class MainPage : ContentPage
     }
     private void OnDeleteClicked(object sender, EventArgs e)
     {
-        Microsoft.Maui.Storage.Preferences.Remove(IP);
-        Microsoft.Maui.Storage.Preferences.Remove(USER);
-        Microsoft.Maui.Storage.Preferences.Remove(PASS);
-        Microsoft.Maui.Storage.Preferences.Remove(FOLDER);
-        Microsoft.Maui.Storage.Preferences.Remove(SUBFOLDER);
+        Preferences.Remove(IP);
+        Preferences.Remove(USER);
+        Preferences.Remove(PASS);
+        Preferences.Remove(FOLDER);
+        Preferences.Remove(SUBFOLDER);
         DisplayAlert("Success", "Data deleted", "OK");
     }
     private void OnDeleteClickedMySQL(object sender, EventArgs e)
     {
-        Microsoft.Maui.Storage.Preferences.Remove(IP_mysql);
-        Microsoft.Maui.Storage.Preferences.Remove(USER_mysql);
-        Microsoft.Maui.Storage.Preferences.Remove(PASS_mysql);
-        Microsoft.Maui.Storage.Preferences.Remove(databasename_mysql);
+        Preferences.Remove(IP_mysql);
+        Preferences.Remove(USER_mysql);
+        Preferences.Remove(PASS_mysql);
+        Preferences.Remove(databasename_mysql);
         DisplayAlert("Success", "Data deleted", "OK");
     }
-    
+
     private async void OnCounterClicked(object sender, EventArgs e)
     {
         //await Navigation.PushAsync(new kalendar());
@@ -170,8 +166,8 @@ public partial class MainPage : ContentPage
 
         bool isVirtual = Microsoft.Maui.Devices.DeviceInfo.Current.DeviceType switch
         {
-            Microsoft.Maui.Devices.DeviceType.Physical => false,
-            Microsoft.Maui.Devices.DeviceType.Virtual => true,
+            DeviceType.Physical => false,
+            DeviceType.Virtual => true,
             _ => false
         };
 
@@ -210,20 +206,22 @@ public partial class MainPage : ContentPage
     }
     private void NASPostavkeClicked(object sender, EventArgs e)
     {
-        
+
         if (NASForm.IsVisible == true)
         {
             NASForm.IsVisible = false;
         }
-        else {
+        else
+        {
             NASForm.IsVisible = true;
             OnLoadClicked("", e);
-           
+
         }
 
     }
 
-    private void MySQLPostavkeClicked(object sender, EventArgs e) {
+    private void MySQLPostavkeClicked(object sender, EventArgs e)
+    {
         if (MySQLForm.IsVisible == true)
         {
             MySQLForm.IsVisible = false;
@@ -244,7 +242,8 @@ public partial class MainPage : ContentPage
             //zakomentirati nakon setanja na null
             //Microsoft.Maui.Storage.Preferences.Set("key", null);
             //Provjerava da li ima ključ spremnjen u preferences
-            if (string.IsNullOrEmpty(Microsoft.Maui.Storage.Preferences.Get("key", null))) {
+            if (string.IsNullOrEmpty(Microsoft.Maui.Storage.Preferences.Get("key", null)))
+            {
 
                 base.OnAppearing();
 
@@ -261,16 +260,8 @@ public partial class MainPage : ContentPage
                 string preferencesKey = Microsoft.Maui.Storage.Preferences.Get("key", null);
                 Debug.WriteLine("Izvađen iz preferences: " + preferencesKey);
 
-
-
-
-
                 //Items = JsonSerializer.Deserialize<List<TodoItem>>(content, _serializerOptions);
-
-
-
                 /*
-
 
                     if (httpResponse.IsSuccessStatusCode)
                     {
@@ -294,35 +285,20 @@ public partial class MainPage : ContentPage
 
                 */
             }
-            else {
+            else
+            {
                 Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Microsoft.Maui.Storage.Preferences.Get("key", null));
 
             }
-             }
+        }
+        //Kraj IF preferences
 
-                
-
-
-
-                    
-                
-            
-            //Kraj IF preferences
-
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message + " in MainPage");
-            }
-
-
-
-
-
-
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message + " in MainPage");
         }
 
-    
-
+    }
 
 }
 

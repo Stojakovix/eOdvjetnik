@@ -1,10 +1,8 @@
 using Syncfusion.Maui.Scheduler;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
-using eOdvjetnik.Models;
-using MySql.Data.MySqlClient;
 using eOdvjetnik.Services;
-using Microsoft.Maui.Controls.Shapes;
+
 
 namespace eOdvjetnik.Views;
 

@@ -2,7 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
-             x:Class="eOdvjetnik.MainPage">
+             x:Class="eOdvjetnik.MainPage"
+             xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
+             xmlns:local ="clr-namespace:eOdvjetnik.ViewModel"
+             >
 
 <!--Crasha se CSS kad implementiraš ->
     font-size: 15px;
@@ -29,79 +32,47 @@ padding-right: 30;
             ]]>
         </StyleSheet>
     </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel/>
+    </ContentPage.BindingContext>
     <ScrollView>
         <VerticalStackLayout>
 
-            <!-->
+            <StackLayout HorizontalOptions="CenterAndExpand"  x:Name="NASForm" IsVisible="false">
+                <Label Text="IP adresa" />
+                <Entry x:Name="IPEntry" Text="{Binding IPNas}" />
+                <Label Text="Korisničko ime" />
+                <Entry x:Name="USEREntry" Text="{Binding UserNas}" />
+                <Label Text="Lozinka" />
+                <Entry x:Name="PASSEntry" Text="{Binding PassNas}" />
+                <Label Text="Folder" />
+                <Entry x:Name="FOLDEREntry" Text="{Binding Folder}" />
+                <Label Text="Sub Folder"  />
+                <Entry x:Name="SUBFOLDEREntry" Text="{Binding SubFolder}" />
+
+                <Button Text="Save" Command="{Binding SaveCommandNAS}"  />
+                <Button Text="Load" Command="{Binding LoadCommandNAS}"/>
+                <Button Text="Delete"  Command="{Binding DeleteCommandNAS}"/>
+
+            </StackLayout>
+
+            <StackLayout HorizontalOptions="CenterAndExpand"  x:Name="MySQLForm" IsVisible="false">
+                <Label Text="IP adresa" />
+                <Entry x:Name="IPEntryMySQL"  Text="{Binding IP}" />
+                <Label Text="Korisničko ime" />
+                <Entry x:Name="USEREntryMySQL" Text="{Binding UserName}" />
+                <Label Text="Lozinka" />
+                <Entry x:Name="PASSEntryMySQL" Text="{Binding Password}"  />
+                <Label Text="Ime baze podataka" />
+                <Entry x:Name="databasenameEntryMySQL" Text="{Binding DatabaseName}" />
+
+                <Button Text="Save"  Command="{Binding SaveCommand}" />
+                <Button Text="Load"  Command="{Binding LoadCommand}" />
+                <Button Text="Delete"  Command="{Binding DeleteCommand}" />
+
+            </StackLayout>
             
-            
-            NAS FORMS
-            
-            <popup:SfPopup x:Name="popupLayout"
-                           ShowFooter="True"
-                           ShowCloseButton="True"
-                           AppearanceMode="TwoButton">
-                <popup:SfPopup.ContentTemplate>
-                    <DataTemplate>
-
-
-                        <StackLayout  x:Name="NASForm" IsVisible="false">
-                            <Label Text="IP adresa" />
-                            <Entry x:Name="IPEntry" />
-
-                            <Label Text="Korisničko ime" />
-                            <Entry x:Name="USEREntry" />
-
-                            <Label Text="Lozinka" />
-                            <Entry x:Name="PASSEntry" />
-
-                            <StackLayout>
-                                <Button Text="Save" Clicked="OnSaveClicked" />
-                                <Button Text="Load" Clicked="OnLoadClicked" />
-                                <Button Text="Delete" Clicked="OnDeleteClicked" />
-                            </StackLayout>
-                        </StackLayout>
-                    </DataTemplate>
-                </popup:SfPopup.ContentTemplate>
-            </popup:SfPopup>
-            -->
-
-<StackLayout  x:Name="NASForm" IsVisible="false">
-    <Label Text="IP adresa" />
-    <Entry x:Name="IPEntry" />
-    <Label Text="Korisničko ime" />
-    <Entry x:Name="USEREntry" />
-    <Label Text="Lozinka" />
-    <Entry x:Name="PASSEntry" />
-    <Label Text="Folder" />
-    <Entry x:Name="FOLDEREntry" />
-    <Label Text="Sub Folder" />
-    <Entry x:Name="SUBFOLDEREntry" />
-
-    <Button Text="Save" Clicked="OnSaveClicked" />
-    <Button Text="Load" Clicked="OnLoadClicked" />
-    <Button Text="Delete" Clicked="OnDeleteClicked" />
-
-</StackLayout>
-
-<StackLayout  x:Name="MySQLForm" IsVisible="false">
-    <Label Text="IP adresa" />
-    <Entry x:Name="IPEntryMySQL" />
-    <Label Text="Korisničko ime" />
-    <Entry x:Name="USEREntryMySQL" />
-    <Label Text="Lozinka" />
-    <Entry x:Name="PASSEntryMySQL" />
-    <Label Text="Ime baze podataka" />
-    <Entry x:Name="databasenameEntryMySQL" />
-
-    <Button Text="Save" Clicked="OnSaveClickedMySQL" />
-    <Button Text="Load" Clicked="OnLoadClickedMySQL" />
-    <Button Text="Delete" Clicked="OnDeleteClickedMySQL" />
-
-</StackLayout>
-<Button Text="NAS Postavke" Clicked="NASPostavkeClicked" />
-<Button Text="MySQL Postavke" Clicked="MySQLPostavkeClicked" />
-
 
             <!-->
             NAS FORMS
@@ -145,6 +116,10 @@ padding-right: 30;
                     </Style>
                 </Button.Style>-->
             </Button>
+            <VerticalStackLayout HorizontalOptions="Center">
+                <Button Text="NAS Postavke" Clicked="NASPostavkeClicked" />
+                <Button Text="MySQL Postavke" Clicked="MySQLPostavkeClicked" />
+            </VerticalStackLayout>
         </VerticalStackLayout>
         
     </ScrollView>
