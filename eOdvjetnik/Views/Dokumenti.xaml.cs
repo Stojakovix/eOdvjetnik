@@ -103,6 +103,7 @@ public partial class Dokumenti : ContentPage
                 else
                 {
                     DisplayAlert("Connection", "Connection not established", "try again");
+                Shell.Current.GoToAsync("..");
                 }
                 client.Logoff();
                 client.Disconnect();

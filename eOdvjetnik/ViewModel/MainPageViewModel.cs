@@ -53,6 +53,10 @@ namespace eOdvjetnik.ViewModel
         public ICommand PopupAcceptCommand { get; set; }
         public ICommand ShowPopupCommand { get; set; }
 
+        public ICommand ClosePopupCommand { get; set; }
+
+        
+
         public bool PopupOpen
         {
             get { return isOpen;}
@@ -84,6 +88,7 @@ namespace eOdvjetnik.ViewModel
 
             //PopupAcceptCommand = new Command(PopupAccept);
             ShowPopupCommand = new Command(Popup);
+            ClosePopupCommand = new Command(PopupClose);
         }
 
 
@@ -116,10 +121,10 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                var ipmysql = Preferences.Get(IP, "");
-                var usermysql = Preferences.Get(UserName, "");
-                var passmysql = Preferences.Get(Password, "");
-                var databaseNamemysql = Preferences.Get(databasename_mysql, "");
+                var ipmysql = Preferences.Get(IP, IP_mysql);
+                var usermysql = Preferences.Get(UserName, USER_mysql);
+                var passmysql = Preferences.Get(Password, PASS_mysql);
+                var databaseNamemysql = Preferences.Get(DatabaseName, databasename_mysql);
 
                 Debug.WriteLine("Load uspješan");
             }
@@ -142,22 +147,38 @@ namespace eOdvjetnik.ViewModel
         //POČETAK KOMANDI ZA NAS
 
         private void OnSaveClickedNas()
-        {
+        {         
             try
             {
+                // Preference value
                 string ip_nas = IPNas;
                 string pass_nas = PassNas;
                 string user_nas = UserNas;
                 string folder = Folder;
                 string subFolder = SubFolder;
 
+                Preferences.Remove(IP_nas, ip_nas);
+                Preferences.Remove(PASS_nas, pass_nas);
+                Preferences.Remove(USER_nas, user_nas);
+                Preferences.Remove(FOLDER_nas, folder);
+                Preferences.Remove(SUBFOLDER_nas, subFolder);
+
+                if (Preferences.Default == null)
+                {
+                    Debug.WriteLine("Uspješno obrisano");
+                }
+                else
+                {
+                    Debug.WriteLine("JEbga nije ");
+                }
                 Preferences.Set(IP_nas, ip_nas);
                 Preferences.Set(PASS_nas, pass_nas);
                 Preferences.Set(USER_nas, user_nas);
                 Preferences.Set(FOLDER_nas, folder);
                 Preferences.Set(SUBFOLDER_nas, subFolder);
 
-                Debug.WriteLine("Nas saved");
+                Debug.WriteLine("Nas saved " + Preferences.Default);
+                PopupClose();
             }
 
             catch (Exception ex)
@@ -170,11 +191,11 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                var ipmysql = Preferences.Get(IPNas, "");
-                var usermysql = Preferences.Get(UserNas, "");
-                var passmysql = Preferences.Get(PassNas, "");
-                var folder = Preferences.Get(Folder, "");
-                var subfolder = Preferences.Get(SubFolder, "");
+                var ipmynas = Preferences.Get(IP_nas, IPNas);
+                var usermynas = Preferences.Get(USER_nas, UserNas);
+                var passmynas = Preferences.Get(PASS_nas, PassNas);
+                var folder = Preferences.Get(FOLDER_nas, Folder);
+                var subfolder = Preferences.Get(SUBFOLDER_nas, SubFolder);
 
                 Debug.WriteLine("Load uspješan");
             }
@@ -186,13 +207,20 @@ namespace eOdvjetnik.ViewModel
 
         private void OnDeleteClickedNas()
         {
-            Preferences.Remove(IPNas);
-            Preferences.Remove(UserNas);
-            Preferences.Remove(PassNas);
-            Preferences.Remove(Folder);
-            Preferences.Remove(SubFolder);
+            try
+            {
+                Preferences.Remove(IP_nas, IPNas);
+                Preferences.Remove(USER_nas, UserNas);
+                Preferences.Remove(PASS_nas, PassNas);
+                Preferences.Remove(FOLDER_nas, Folder);
+                Preferences.Remove(SUBFOLDER_nas, SubFolder);
 
-            Debug.WriteLine("Succesfully deleted the values");
+                Debug.WriteLine("Succesfully deleted the values");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
 
         //KRAJ NAS KOMANDI
@@ -203,6 +231,12 @@ namespace eOdvjetnik.ViewModel
         {
             PopupOpen = true;
             Visible = true;
+        }
+
+        private void PopupClose()
+        {
+            PopupOpen = false;
+            Visible = false;
         }
         
         //private void PopupAccept()
