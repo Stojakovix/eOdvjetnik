@@ -95,24 +95,24 @@ public partial class MainPage : ContentPage
     //    MySQLPostavkeClicked(sender, e);
 
     //}
-    private void OnLoadClicked(object sender, EventArgs e)
-    {
+    //private void OnLoadClicked(object sender, EventArgs e)
+    //{
 
-        var ip = Microsoft.Maui.Storage.Preferences.Get(IP, "");
-        IPEntry.Text = ip;
-        var user = Microsoft.Maui.Storage.Preferences.Get(USER, "");
-        USEREntry.Text = user;
-        var pass = Microsoft.Maui.Storage.Preferences.Get(PASS, "");
-        PASSEntry.Text = pass;
-        var folder = Microsoft.Maui.Storage.Preferences.Get(FOLDER, "");
-        FOLDEREntry.Text = folder;
-        var subfolder = Microsoft.Maui.Storage.Preferences.Get(SUBFOLDER, "");
-        SUBFOLDEREntry.Text = subfolder;
+    //    var ip = Microsoft.Maui.Storage.Preferences.Get(IP, "");
+    //    IPEntry.Text = ip;
+    //    var user = Microsoft.Maui.Storage.Preferences.Get(USER, "");
+    //    USEREntry.Text = user;
+    //    var pass = Microsoft.Maui.Storage.Preferences.Get(PASS, "");
+    //    PASSEntry.Text = pass;
+    //    var folder = Microsoft.Maui.Storage.Preferences.Get(FOLDER, "");
+    //    FOLDEREntry.Text = folder;
+    //    var subfolder = Microsoft.Maui.Storage.Preferences.Get(SUBFOLDER, "");
+    //    SUBFOLDEREntry.Text = subfolder;
 
-        //Microsoft.Maui.Storage.Preferences.Set(IP, "");
-        //Microsoft.Maui.Storage.Preferences.Set(USER, "");
-        //Microsoft.Maui.Storage.Preferences.Set(PASS, "");
-    }
+    //    //Microsoft.Maui.Storage.Preferences.Set(IP, "");
+    //    //Microsoft.Maui.Storage.Preferences.Set(USER, "");
+    //    //Microsoft.Maui.Storage.Preferences.Set(PASS, "");
+    //}
     private void OnLoadClickedMySQL(object sender, EventArgs e)
     {
         var ipmysql = Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "");
@@ -204,34 +204,34 @@ public partial class MainPage : ContentPage
         }
 
     }
-    private void NASPostavkeClicked(object sender, EventArgs e)
-    {
+    //private void NASPostavkeClicked(object sender, EventArgs e)
+    //{
 
-        if (NASForm.IsVisible == true)
-        {
-            NASForm.IsVisible = false;
-        }
-        else
-        {
-            NASForm.IsVisible = true;
-            OnLoadClicked("", e);
+    //    if (NASForm.IsVisible == true)
+    //    {
+    //        NASForm.IsVisible = false;
+    //    }
+    //    else
+    //    {
+    //        NASForm.IsVisible = true;
+    //        OnLoadClicked("", e);
 
-        }
+    //    }
 
-    }
+    //}
 
-    private void MySQLPostavkeClicked(object sender, EventArgs e)
-    {
-        if (MySQLForm.IsVisible == true)
-        {
-            MySQLForm.IsVisible = false;
-        }
-        else
-        {
-            MySQLForm.IsVisible = true;
-            OnLoadClickedMySQL("", e);
-        }
-    }
+    //private void MySQLPostavkeClicked(object sender, EventArgs e)
+    //{
+    //    if (MySQLForm.IsVisible == true)
+    //    {
+    //        MySQLForm.IsVisible = false;
+    //    }
+    //    else
+    //    {
+    //        MySQLForm.IsVisible = true;
+    //        OnLoadClickedMySQL("", e);
+    //    }
+    //}
 
 
     protected override void OnAppearing()

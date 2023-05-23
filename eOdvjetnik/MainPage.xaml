@@ -38,24 +38,36 @@ padding-right: 30;
     </ContentPage.BindingContext>
     <ScrollView>
         <VerticalStackLayout>
+            <sfPopup:SfPopup IsVisible="{Binding Visible}"
+                             IsOpen="{Binding PopupOpen}"
+                             BackgroundColor="Gray"
+                             VerticalOptions="StartAndExpand"
+                             HorizontalOptions="FillAndExpand"
+                             
+                             ShowHeader="False"
+                             Margin="20">
+                <sfPopup:SfPopup.ContentTemplate>
+                    <DataTemplate>
+                        <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
+                            <Label Text="IP adresa" />
+                            <Entry x:Name="IPEntry" Text="{Binding IPNas}" />
+                            <Label Text="Korisničko ime" />
+                            <Entry x:Name="USEREntry" Text="{Binding UserNas}" />
+                            <Label Text="Lozinka" />
+                            <Entry x:Name="PASSEntry" Text="{Binding PassNas}" />
+                            <Label Text="Folder" />
+                            <Entry x:Name="FOLDEREntry" Text="{Binding Folder}" />
+                            <Label Text="Sub Folder" />
+                            <Entry x:Name="SUBFOLDEREntry" Text="{Binding SubFolder}" />
 
-            <StackLayout HorizontalOptions="CenterAndExpand"  x:Name="NASForm" IsVisible="false">
-                <Label Text="IP adresa" />
-                <Entry x:Name="IPEntry" Text="{Binding IPNas}" />
-                <Label Text="Korisničko ime" />
-                <Entry x:Name="USEREntry" Text="{Binding UserNas}" />
-                <Label Text="Lozinka" />
-                <Entry x:Name="PASSEntry" Text="{Binding PassNas}" />
-                <Label Text="Folder" />
-                <Entry x:Name="FOLDEREntry" Text="{Binding Folder}" />
-                <Label Text="Sub Folder"  />
-                <Entry x:Name="SUBFOLDEREntry" Text="{Binding SubFolder}" />
-
-                <Button Text="Save" Command="{Binding SaveCommandNAS}"  />
-                <Button Text="Load" Command="{Binding LoadCommandNAS}"/>
-                <Button Text="Delete"  Command="{Binding DeleteCommandNAS}"/>
-
-            </StackLayout>
+                            <Button Text="Save" Command="{Binding SaveCommandNAS}" />
+                            <Button Text="Load" Command="{Binding LoadCommandNAS}" />
+                            <Button Text="Delete" Command="{Binding DeleteCommandNAS}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </sfPopup:SfPopup.ContentTemplate>
+            </sfPopup:SfPopup>
+            
 
             <StackLayout HorizontalOptions="CenterAndExpand"  x:Name="MySQLForm" IsVisible="false">
                 <Label Text="IP adresa" />
@@ -117,8 +129,8 @@ padding-right: 30;
                 </Button.Style>-->
             </Button>
             <VerticalStackLayout HorizontalOptions="Center">
-                <Button Text="NAS Postavke" Clicked="NASPostavkeClicked" />
-                <Button Text="MySQL Postavke" Clicked="MySQLPostavkeClicked" />
+                <Button x:Name="NasPopup" Text="NAS Postavke"/>
+                <Button Text="MySQL Postavke" Command="{Binding ShowPopupCommand}" />
             </VerticalStackLayout>
         </VerticalStackLayout>
         

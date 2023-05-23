@@ -1,9 +1,11 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Input;
+using Syncfusion.Maui.Popup;
 
 namespace eOdvjetnik.ViewModel
 {
-    public class MainPageViewModel
+    public class MainPageViewModel : INotifyPropertyChanged
     {
         //Varijable za NAS preferenceas
         private const string IP_nas = "IP Adresa";
@@ -44,6 +46,32 @@ namespace eOdvjetnik.ViewModel
         public string Folder { get; set; } 
         public string SubFolder { get; set; }
 
+
+        // Varijable za Popup
+
+        private bool isOpen, visible;
+        public ICommand PopupAcceptCommand { get; set; }
+        public ICommand ShowPopupCommand { get; set; }
+
+        public bool PopupOpen
+        {
+            get { return isOpen;}
+            set
+            {
+                isOpen = value;
+                OnPropertyChanged(nameof(PopupOpen));
+            }
+        }
+
+        public bool Visible
+        {
+            get { return visible; }
+            set
+            {
+                visible = value;
+                OnPropertyChanged(nameof(Visible));
+            }
+        }
         public MainPageViewModel()
         {
             SaveCommand = new Command(OnSaveClickedMySQL);
@@ -53,6 +81,9 @@ namespace eOdvjetnik.ViewModel
             SaveCommandNAS = new Command(OnSaveClickedNas);
             LoadCommandNAS = new Command(OnLoadClickedNas);
             DeleteCommandNAS = new Command(OnDeleteClickedNas);
+
+            //PopupAcceptCommand = new Command(PopupAccept);
+            ShowPopupCommand = new Command(Popup);
         }
 
 
@@ -165,5 +196,36 @@ namespace eOdvjetnik.ViewModel
         }
 
         //KRAJ NAS KOMANDI
+
+        //Komande za otvaranje
+
+        private void Popup()
+        {
+            PopupOpen = true;
+            Visible = true;
+        }
+        
+        //private void PopupAccept()
+        //{
+        //    try
+        //    {
+        //        var ipmysql = Preferences.Get(IPNas, "");
+        //        var usermysql = Preferences.Get(UserNas, "");
+        //        var passmysql = Preferences.Get(PassNas, "");
+        //        if ()
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.Message);
+        //    }
+        //}
+
+
+        // Mora bit kad god je INotifyPropertyChanged na pageu
+        public event PropertyChangedEventHandler PropertyChanged;
+        void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
