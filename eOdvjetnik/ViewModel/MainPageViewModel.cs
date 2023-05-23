@@ -47,7 +47,7 @@ namespace eOdvjetnik.ViewModel
         public string SubFolder { get; set; }
 
 
-        // Varijable za Popup
+        // Varijable za PopupNAS
 
         private bool isOpen, visible;
         public ICommand PopupAcceptCommand { get; set; }
@@ -55,7 +55,33 @@ namespace eOdvjetnik.ViewModel
 
         public ICommand ClosePopupCommand { get; set; }
 
-        
+        //
+
+        private bool sqlOpen, sqlvisible;
+        public ICommand SQLPopupAcceptCommand { get; set; }
+        public ICommand SQLShowPopupCommand { get; set; }
+
+        public ICommand SQLClosePopupCommand { get; set; }
+
+        public bool SQLPopupOpen
+        {
+            get { return sqlOpen; }
+            set
+            {
+                sqlOpen = value;
+                OnPropertyChanged(nameof(SQLPopupOpen));
+            }
+        }
+
+        public bool SQLVisible
+        {
+            get { return sqlvisible; }
+            set
+            {
+                sqlvisible = value;
+                OnPropertyChanged(nameof(SQLVisible));
+            }
+        }
 
         public bool PopupOpen
         {
@@ -90,11 +116,19 @@ namespace eOdvjetnik.ViewModel
             ShowPopupCommand = new Command(Popup);
             ClosePopupCommand = new Command(PopupClose);
 
+            SQLShowPopupCommand = new Command(SQLPopup);
+
             IPNas = Preferences.Get(IP_nas, "");
             UserNas = Preferences.Get(USER_nas, "");
             PassNas = Preferences.Get(PASS_nas, "");
             Folder = Preferences.Get(FOLDER_nas, "");
             SubFolder = Preferences.Get(SUBFOLDER_nas, "");
+
+            IP = Preferences.Get(IP_mysql, "");
+            UserName = Preferences.Get(USER_mysql, "");
+            Password = Preferences.Get(PASS_mysql, "");
+            DatabaseName = Preferences.Get(databasename_mysql, "");
+
         }
 
 
@@ -113,9 +147,11 @@ namespace eOdvjetnik.ViewModel
                 Preferences.Set(PASS_mysql, Password);
                 Preferences.Set(databasename_mysql, DatabaseName);
 
-
+                SQLPopupClose();
                 Debug.WriteLine("Saved");
                 Debug.WriteLine(UserName + " " + Password);
+
+               
             }
             catch(Exception ex)
             {
@@ -142,10 +178,23 @@ namespace eOdvjetnik.ViewModel
 
         private void OnDeleteClickedMySQL()
         {
-            Preferences.Remove(IP);
-            Preferences.Remove(UserName);
-            Preferences.Remove(Password);
-            Preferences.Remove(databasename_mysql);
+            if (String.IsNullOrEmpty(IP))
+            {
+                ShowAlert("Alert", "Data is already deleted.");
+            }
+            else
+            {
+                Preferences.Remove(IP);
+                Preferences.Remove(UserName);
+                Preferences.Remove(Password);
+                Preferences.Remove(databasename_mysql);
+
+            }
+
+            IP = "";
+            UserName = "";
+            Password = "";
+            DatabaseName = "";
         }
 
         //KRAJ KOMANDI ZA SQL
@@ -163,11 +212,11 @@ namespace eOdvjetnik.ViewModel
                 string folder = Folder;
                 string subFolder = SubFolder;
 
-                Preferences.Remove(IP_nas, ip_nas);
-                Preferences.Remove(PASS_nas, pass_nas);
-                Preferences.Remove(USER_nas, user_nas);
-                Preferences.Remove(FOLDER_nas, folder);
-                Preferences.Remove(SUBFOLDER_nas, subFolder);
+                //Preferences.Remove(IP_nas, ip_nas);
+                //Preferences.Remove(PASS_nas, pass_nas);
+                //Preferences.Remove(USER_nas, user_nas);
+                //Preferences.Remove(FOLDER_nas, folder);
+                //Preferences.Remove(SUBFOLDER_nas, subFolder);
 
                 if (Preferences.Default == null)
                 {
@@ -215,13 +264,25 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                Preferences.Remove(IP_nas, IPNas);
-                Preferences.Remove(USER_nas, UserNas);
-                Preferences.Remove(PASS_nas, PassNas);
-                Preferences.Remove(FOLDER_nas, Folder);
-                Preferences.Remove(SUBFOLDER_nas, SubFolder);
+                if (String.IsNullOrEmpty(IPNas))
+                {
+                    ShowAlert("Alert", "Data is already deleted.");
+                }
+                else
+                {
+                    Preferences.Remove(IPNas);
+                    Preferences.Remove(UserNas);
+                    Preferences.Remove(PassNas);
+                    Preferences.Remove(Folder);
+                    Preferences.Remove(SubFolder);
 
-                Debug.WriteLine("Succesfully deleted the values");
+                    Debug.WriteLine("Succesfully deleted the values");
+                }
+                IPNas = "";
+                UserNas = "";
+                PassNas = "";
+                Folder = "";
+                SubFolder = "";
             }
             catch (Exception ex)
             {
@@ -246,7 +307,22 @@ namespace eOdvjetnik.ViewModel
             PopupOpen = false;
             Visible = false;
         }
-        
+        /// <summary>
+        /// NAPRAVI SQL POPUP NE RADI
+        /// 
+        /// </summary>
+        private void SQLPopup()
+        {
+            SQLPopupOpen = true;
+            SQLVisible = true;
+        }
+
+        private void SQLPopupClose()
+        {
+            SQLPopupOpen = false;
+            SQLVisible = false;
+
+        }
         //private void PopupAccept()
         //{
         //    try
@@ -262,7 +338,10 @@ namespace eOdvjetnik.ViewModel
         //    }
         //}
 
-
+        private async void ShowAlert(string title, string message)
+        {
+            await Application.Current.MainPage.DisplayAlert(title, message, "OK");
+        }
         // Mora bit kad god je INotifyPropertyChanged na pageu
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged(string propertyName)

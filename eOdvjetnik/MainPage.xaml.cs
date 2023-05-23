@@ -113,21 +113,21 @@ public partial class MainPage : ContentPage
     //    //Microsoft.Maui.Storage.Preferences.Set(USER, "");
     //    //Microsoft.Maui.Storage.Preferences.Set(PASS, "");
     //}
-    private void OnLoadClickedMySQL(object sender, EventArgs e)
-    {
-        var ipmysql = Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "");
-        IPEntryMySQL.Text = ipmysql;
-        var useripmysql = Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "");
-        USEREntryMySQL.Text = useripmysql;
-        var passipmysql = Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "");
-        PASSEntryMySQL.Text = passipmysql;
-        var databasenamemysql = Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
-        databasenameEntryMySQL.Text = databasenamemysql;
+    //private void OnLoadClickedMySQL(object sender, EventArgs e)
+    //{
+    //    var ipmysql = Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "");
+    //    IPEntryMySQL.Text = ipmysql;
+    //    var useripmysql = Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "");
+    //    USEREntryMySQL.Text = useripmysql;
+    //    var passipmysql = Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "");
+    //    PASSEntryMySQL.Text = passipmysql;
+    //    var databasenamemysql = Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
+    //    databasenameEntryMySQL.Text = databasenamemysql;
 
-        //Microsoft.Maui.Storage.Preferences.Set(IP, "");
-        //Microsoft.Maui.Storage.Preferences.Set(USER, "");
-        //Microsoft.Maui.Storage.Preferences.Set(PASS, "");
-    }
+    //    //Microsoft.Maui.Storage.Preferences.Set(IP, "");
+    //    //Microsoft.Maui.Storage.Preferences.Set(USER, "");
+    //    //Microsoft.Maui.Storage.Preferences.Set(PASS, "");
+    //}
     private void OnDeleteClicked(object sender, EventArgs e)
     {
         Preferences.Remove(IP);
