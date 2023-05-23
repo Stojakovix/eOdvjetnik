@@ -89,6 +89,12 @@ namespace eOdvjetnik.ViewModel
             //PopupAcceptCommand = new Command(PopupAccept);
             ShowPopupCommand = new Command(Popup);
             ClosePopupCommand = new Command(PopupClose);
+
+            IPNas = Preferences.Get(IP_nas, "");
+            UserNas = Preferences.Get(USER_nas, "");
+            PassNas = Preferences.Get(PASS_nas, "");
+            Folder = Preferences.Get(FOLDER_nas, "");
+            SubFolder = Preferences.Get(SUBFOLDER_nas, "");
         }
 
 
@@ -231,6 +237,8 @@ namespace eOdvjetnik.ViewModel
         {
             PopupOpen = true;
             Visible = true;
+
+
         }
 
         private void PopupClose()

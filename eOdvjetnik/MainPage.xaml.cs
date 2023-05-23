@@ -204,17 +204,17 @@ public partial class MainPage : ContentPage
         }
 
     }
-    //private void NASPostavkeClicked(object sender, EventArgs e)
+    //private void naspostavkeclicked(object sender, eventargs e)
     //{
 
-    //    if (NASForm.IsVisible == true)
+    //    if (nasform.isvisible == true)
     //    {
-    //        NASForm.IsVisible = false;
+    //        nasform.isvisible = false;
     //    }
     //    else
     //    {
-    //        NASForm.IsVisible = true;
-    //        OnLoadClicked("", e);
+    //        nasform.isvisible = true;
+    //        onloadclicked("", e);
 
     //    }
 

@@ -46,9 +46,10 @@ padding-right: 30;
                              ShowCloseButton="True"
                              IsFullScreen="False"
                              ShowHeader="False"
+                             x:Name="NASPopup"
                              
                              Margin="20">
-                <sfPopup:SfPopup.ContentTemplate>
+                <sfPopup:SfPopup.ContentTemplate >
                     <DataTemplate>
                         <Grid BackgroundColor="Gray">
                             <Grid.RowDefinitions>
@@ -89,7 +90,47 @@ padding-right: 30;
                     </DataTemplate>
                 </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
-            
+            <Grid BackgroundColor="Gray">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" />
+                <Entry x:Name="IPEntry" Text="{Binding IP}" Grid.Row="0" Grid.Column="1" />
+
+                <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" />
+                <Entry x:Name="USEREntry" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1" />
+
+                <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" />
+                <Entry x:Name="PASSEntry" Text="{Binding Password}" Grid.Row="2" Grid.Column="1" />
+
+                <Label Text="Database" Grid.Row="3" Grid.Column="0" />
+                <Entry x:Name="DatabaseEntry" Text="{Binding DatabaseName}" Grid.Row="3" Grid.Column="1" />
+
+
+                <Button Text="Save" Command="{Binding SaveCommand}" Grid.Row="5"  />
+                <Button Text="Load" Command="{Binding LoadCommand}" Grid.Row="6"  />
+                <Button Text="Delete" Command="{Binding DeleteCommand}" Grid.Row="7" />
+            </Grid>
+            <sfPopup:SfPopup>
+                <sfPopup:SfPopup.ContentTemplate>
+                    <DataTemplate>
+                        
+                    </DataTemplate>
+                </sfPopup:SfPopup.ContentTemplate>
+            </sfPopup:SfPopup>
 
             <StackLayout HorizontalOptions="CenterAndExpand"  x:Name="MySQLForm" IsVisible="false">
                 <Label Text="IP adresa" />
