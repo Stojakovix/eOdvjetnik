@@ -7,6 +7,8 @@ using eOdvjetnik.ViewModel;
 
 public partial class AppShell : Shell
 {
+	
+
 	public AppShell()
 	{
 		InitializeComponent();
@@ -23,45 +25,27 @@ public partial class AppShell : Shell
 		
     }
 
-	private async void OnButtonClicked(object sender, EventArgs e)
+	private void buttonClick()
 	{
-		try
-		{
-			string route = "";
-
-			if (sender == PočetnaButton)
-				route = "///MainPage";
-			else if (sender == KalendarButton)
-				route = "Kalendar";
-			else if (sender == DokumentiButton)
-				route = "Dokumenti";
-
-			await Current.GoToAsync(route);
-			Debug.WriteLine("CLICKED___");
-		}
-		catch (Exception ex)
-		{
-			Debug.WriteLine(ex.Message + "in AppShell");
-		}
-
-
+		Current.GoToAsync("Kalendar");
 	}
 
-	private void OnSupportButtonClicked(object sender, EventArgs e)
-	{
-		try
-		{
-			Debug.WriteLine("stisnut support");
-			popup.ShowCloseButton = true;
 
-			popup.Show();
-		}
+	//private void OnSupportButtonClicked(object sender, EventArgs e)
+	//{
+	//	try
+	//	{
+	//		Debug.WriteLine("stisnut support");
+	//		popup.ShowCloseButton = true;
 
-		catch (Exception ex)
-		{
-			Debug.WriteLine(ex.Message);
-		}
+	//		popup.Show();
+	//	}
 
-	}
+	//	catch (Exception ex)
+	//	{
+	//		Debug.WriteLine(ex.Message);
+	//	}
+
+	//}
 
 }

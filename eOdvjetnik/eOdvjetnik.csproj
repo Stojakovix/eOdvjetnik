@@ -103,6 +103,8 @@
 	  <None Remove="NewFolder1\**" />
 	  <None Remove="Resources\Icons\" />
 	  <EmbeddedResource Remove="Resources\SfScheduler.hr-HR.resx" />
+	  <None Remove="Settings.bundle\" />
+	  <None Remove="Settings.bundle\EmptyTextFile.txt" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -190,9 +192,11 @@
 
 	<ItemGroup>
 	  <Folder Include="Resources\Icons\" />
+	  <Folder Include="Settings.bundle\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\SfScheduler.hr-HR.resx" />
+	  <BundleResource Include="Settings.bundle\Root.plist" />
 	</ItemGroup>
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptioneOdvjetnikHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 </Project>

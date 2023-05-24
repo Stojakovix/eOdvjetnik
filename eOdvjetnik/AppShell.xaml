@@ -1,51 +1,52 @@
-<Shell x:Class="eOdvjetnik.AppShell"
+﻿<Shell x:Class="eOdvjetnik.AppShell"
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:eOdvjetnik"
        xmlns:views="clr-namespace:eOdvjetnik.Views"
        xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
-       xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
-       
+       xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"     
        Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
-       Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=True, iOS=False}">
+       Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=True, iOS=False}"
+       >
 
-    <Shell.MenuBarItems>
-        <MenuBarItem Text="Kalendar">
-            
-        </MenuBarItem>
-    </Shell.MenuBarItems>
+    
     <Shell.BindingContext>
         <viewmodel:AppShellViewModel/>
     </Shell.BindingContext>
+
+
+   
     <Shell.TitleView>
-        <Grid Margin="10,0" BackgroundColor="Transparent">
+        <Grid  Padding="0,0,0,0" Margin="10,0" BackgroundColor="Transparent">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"  />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" Grid.Column="0" Text="Početna" Clicked="OnButtonClicked" x:Name="PočetnaButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0" />
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" Grid.Column="1" Text="Kalendar" Command="{Binding ButtonClickCommand}" x:Name="KalendarButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0"/>
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" Grid.Column="2" Text="Dokumenti" Clicked="OnButtonClicked" x:Name="DokumentiButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0"/>
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" Grid.Column="0" Text="Početna" Command="{Binding MainClickCommand}" x:Name="PočetnaButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0" />
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" Grid.Column="1" Text="Kalendar" Command="{Binding KalendarClickCommand}" x:Name="KalendarButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0"/>
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" Grid.Column="2" Text="Dokumenti" Command="{Binding DokumentiClickCommand}" x:Name="DokumentiButton" BackgroundColor="Transparent" Margin="10,0" BorderWidth="0"/>
 
-            <Button Grid.Column="3" Text="Support" BackgroundColor="Transparent" BorderWidth="0" Clicked="OnSupportButtonClicked"/>
+            <Button Grid.Column="3" Text="Support" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"/>
             <Button Grid.Column="4" Text="Postavke" BackgroundColor="Transparent" BorderWidth="0"/>
-            <sfPopup:SfPopup x:Name="popup" HeaderTitle="Korisnička podrška">
+            <sfPopup:SfPopup x:Name="popup" HeaderTitle="Korisnička podrška" IsVisible="{Binding Visible}" IsOpen="{Binding PopupOpen}">
                 <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
                         <StackLayout>
                             <Label Text="Broj moba" TextColor="Black"/>
                             <Label Text="Email - bruno@zadar-ict.hr" TextColor="Black"/>
                         </StackLayout>
-
                     </DataTemplate>
                 </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
+
+
+            
         </Grid>
-    
+
     </Shell.TitleView>
 
     <ShellContent Title="Početna" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />

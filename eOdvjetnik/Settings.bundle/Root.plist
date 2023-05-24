@@ -1,0 +1,27 @@
+﻿<dict>
+  <key>PreferenceSpecifiers</key>
+  <array>
+    <dict>
+      <key>Type</key>
+      <string>PSToggleSwitchSpecifier</string>
+      <key>Title</key>
+      <string>Setting 1</string>
+      <key>Key</key>
+      <string>setting1</string>
+      <key>DefaultValue</key>
+      <true/>
+    </dict>
+    <dict>
+      <key>Type</key>
+      <string>PSTextFieldSpecifier</string>
+      <key>Title</key>
+      <string>Setting 2</string>
+      <key>Key</key>
+      <string>setting2</string>
+      <key>DefaultValue</key>
+      <string>Default Value</string>
+    </dict>
+  </array>
+  <key>StringsTable</key>
+  <string>Root</string>
+</dict>
