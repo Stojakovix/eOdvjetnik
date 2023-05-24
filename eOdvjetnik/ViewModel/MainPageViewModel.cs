@@ -211,21 +211,6 @@ namespace eOdvjetnik.ViewModel
                 string user_nas = UserNas;
                 string folder = Folder;
                 string subFolder = SubFolder;
-
-                //Preferences.Remove(IP_nas, ip_nas);
-                //Preferences.Remove(PASS_nas, pass_nas);
-                //Preferences.Remove(USER_nas, user_nas);
-                //Preferences.Remove(FOLDER_nas, folder);
-                //Preferences.Remove(SUBFOLDER_nas, subFolder);
-
-                if (Preferences.Default == null)
-                {
-                    Debug.WriteLine("Uspješno obrisano");
-                }
-                else
-                {
-                    Debug.WriteLine("JEbga nije ");
-                }
                 Preferences.Set(IP_nas, ip_nas);
                 Preferences.Set(PASS_nas, pass_nas);
                 Preferences.Set(USER_nas, user_nas);

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Views;
 using Microsoft.Maui.Controls;
 using Syncfusion.Maui.Popup;
+using eOdvjetnik.ViewModel;
 
 public partial class AppShell : Shell
 {
@@ -16,7 +17,10 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(DocsItemPage), typeof(DocsItemPage));
 		Routing.RegisterRoute(nameof(AppointmentDialog), typeof(AppointmentDialog));
 
+		BindingContext = new AppShellViewModel();
+
 		SfPopup popup = new SfPopup();
+		
     }
 
 	private async void OnButtonClicked(object sender, EventArgs e)
@@ -33,6 +37,7 @@ public partial class AppShell : Shell
 				route = "Dokumenti";
 
 			await Current.GoToAsync(route);
+			Debug.WriteLine("CLICKED___");
 		}
 		catch (Exception ex)
 		{

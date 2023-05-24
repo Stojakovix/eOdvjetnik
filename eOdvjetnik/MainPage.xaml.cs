@@ -70,7 +70,7 @@ public partial class MainPage : ContentPage
         string output = parsedDateTime.ToString("yyyy-MM-dd HH:mm:ss");
         Console.WriteLine(output);
 
-
+        
 
     }
     //private void OnSaveClicked(object sender, EventArgs e)
