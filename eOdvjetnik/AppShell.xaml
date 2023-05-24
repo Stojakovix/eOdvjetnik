@@ -7,8 +7,8 @@
        xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
        
        
-       Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Flyout, Android=Flyout, iOS=Flyout}"
-       Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=True, iOS=False}">
+       Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
+       Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=False, Android=True, iOS=False}">
 
     <Shell.MenuBarItems>
     <MenuBarItem Text="MENU">
