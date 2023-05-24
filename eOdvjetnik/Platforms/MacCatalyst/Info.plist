@@ -35,5 +35,7 @@
 	<string>Zadar ICT © 2023</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Please allow this option, wee need it for precise data. Thank You</string>
+	<key>SettingsBundle</key>
+	<string>Settings.bundle</string>
 </dict>
 </plist>
