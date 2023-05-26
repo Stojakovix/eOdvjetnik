@@ -70,7 +70,8 @@ public partial class AppointmentDialog : ContentPage
     }
     private void CancelButton_Clicked(object sender, EventArgs e)
     {
-        this.Navigation.PopAsync();
+        Shell.Current.GoToAsync(nameof(Kalendar));
+        Debug.WriteLine("Cancel Clicked");
     }
 
     private void SaveButton_Clicked(object sender, EventArgs e)
@@ -97,7 +98,7 @@ public partial class AppointmentDialog : ContentPage
                 {
                     AppointmentDetails();
                     AddAppointmentToRemoteServer(appointment);
-                    Navigation.PopAsync();
+                    Shell.Current.GoToAsync(nameof(Kalendar));
                 }
             }
             else

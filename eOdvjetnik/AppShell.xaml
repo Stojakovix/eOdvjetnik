@@ -7,6 +7,7 @@
        xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"     
        Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
        Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=True, iOS=False}"
+       
        >
 
     
@@ -15,7 +16,7 @@
     </Shell.BindingContext>
 
 
-   
+
     <Shell.TitleView>
         <Grid  Padding="0,0,0,0" Margin="10,0" BackgroundColor="Transparent">
             <Grid.ColumnDefinitions>
@@ -32,22 +33,22 @@
 
             <Button Grid.Column="3" Text="Support" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"/>
             <Button Grid.Column="4" Text="Postavke" BackgroundColor="Transparent" BorderWidth="0"/>
-            <sfPopup:SfPopup x:Name="popup" HeaderTitle="Korisnička podrška" IsVisible="{Binding Visible}" IsOpen="{Binding PopupOpen}">
+
+            <sfPopup:SfPopup x:Name="popup" HeaderTitle="Korisnička podrška" IsVisible="{Binding Visible}" IsOpen="{Binding PopupOpen}" >
                 <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
                         <StackLayout>
                             <Label Text="Broj moba" TextColor="Black"/>
                             <Label Text="Email - bruno@zadar-ict.hr" TextColor="Black"/>
+                            <Label Text="{Binding Version}" TextColor="Black"/>
                         </StackLayout>
                     </DataTemplate>
                 </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
 
-
-            
         </Grid>
-
     </Shell.TitleView>
+    
 
     <ShellContent Title="Početna" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
     <ShellContent Title="Kalendar" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />

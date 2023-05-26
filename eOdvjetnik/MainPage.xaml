@@ -168,6 +168,8 @@ padding-right: 30;
                              HeaderTitle="SQL postavke"
                              x:Name="SQLPopup"
                              StaysOpen="True"
+                             RelativePosition="AlignTopLeft"
+                             
 
                              Margin="20">
 

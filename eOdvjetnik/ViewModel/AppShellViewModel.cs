@@ -12,7 +12,10 @@ namespace eOdvjetnik.ViewModel
         public ICommand MainClickCommand { get; set; }
         public ICommand KalendarClickCommand { get; set; }
         public ICommand DokumentiClickCommand { get; set; }
+
+        // popup komande
         public ICommand OnSupportClickCommand { get; set; }
+        public ICommand PopupCloseCommand { get; set; }
 
         private bool isOpen, visible;
 
@@ -36,11 +39,16 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
+        public string Version { get; set; }
+
         public AppShellViewModel()
 		{
 			MainClickCommand = new Command(OnMainClick);
 			KalendarClickCommand = new Command(OnKalendarClick);
 			DokumentiClickCommand = new Command(OnDokumentiClick);
+            Version = $"Version {AppInfo.VersionString}";
+            //Popup pozivanje
+            PopupCloseCommand = new Command(PopupClose);
             OnSupportClickCommand = new Command(OnSupportClick);
            
             SfPopup popup = new SfPopup();
@@ -56,7 +64,7 @@ namespace eOdvjetnik.ViewModel
         private async void OnDokumentiClick()
         {
 
-            await Shell.Current.GoToAsync(nameof(Dokumenti));
+            await Shell.Current.GoToAsync("///Dokumenti");
             Debug.WriteLine("KLIKNO");
         }
 
@@ -71,6 +79,12 @@ namespace eOdvjetnik.ViewModel
         {
             PopupOpen = true;
             visible = true;
+        }
+
+        private void PopupClose()
+        {
+            PopupOpen = false;
+            visible = false;
         }
 
 
