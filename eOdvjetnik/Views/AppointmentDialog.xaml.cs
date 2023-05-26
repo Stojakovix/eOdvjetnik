@@ -48,7 +48,7 @@ public partial class AppointmentDialog : ContentPage
             (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Remove(this.appointment);
             var todoItem = new Appointment() { From = appointment.StartTime, To = appointment.EndTime, AllDay = appointment.IsAllDay, DescriptionNotes = appointment.Notes, EventName = appointment.Subject, ID = (int)appointment.Id };
             App.Database.DeleteSchedulerAppointmentAsync(todoItem);
-            AppShell.Current.GoToAsync("//Kalendar");
+            Shell.Current.GoToAsync("//Kalendar");
         }
     }
 
@@ -70,7 +70,7 @@ public partial class AppointmentDialog : ContentPage
     }
     private void CancelButton_Clicked(object sender, EventArgs e)
     {
-        Shell.Current.GoToAsync(nameof(Kalendar));
+        Shell.Current.GoToAsync("//Kalendar");
         Debug.WriteLine("Cancel Clicked");
     }
 
@@ -98,7 +98,7 @@ public partial class AppointmentDialog : ContentPage
                 {
                     AppointmentDetails();
                     AddAppointmentToRemoteServer(appointment);
-                    Shell.Current.GoToAsync(nameof(Kalendar));
+                    Shell.Current.GoToAsync("///Kalendar");
                 }
             }
             else

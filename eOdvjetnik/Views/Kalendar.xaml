@@ -8,6 +8,7 @@
              Title="Kalendar"
              xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
              
+             
              >
     <ContentPage.BindingContext>
         <local:KalendarViewModel x:Name="viewmodel"/>

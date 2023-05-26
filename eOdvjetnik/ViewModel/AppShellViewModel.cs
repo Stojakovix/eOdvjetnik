@@ -71,7 +71,7 @@ namespace eOdvjetnik.ViewModel
         private async void OnKalendarClick()
         {
 
-            await Shell.Current.GoToAsync(nameof(Kalendar));
+            await Shell.Current.GoToAsync(nameof(Kalendar) + "?cache=true");
             Debug.WriteLine("KLIKNO");
         }
 
