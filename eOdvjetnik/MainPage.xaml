@@ -102,6 +102,22 @@ padding-right: 30;
             <VerticalStackLayout HorizontalOptions="Center">
                 <Button x:Name="NasPopup" Text="NAS Postavke"  Command="{Binding ShowPopupCommand}" />
                 <Button Text="MySQL Postavke" Command="{Binding SQLShowPopupCommand}" />
+
+                <Label
+                Text="DD logo test"
+                SemanticProperties.HeadingLevel="Level2"
+                FontSize="18"
+                Opacity="0"
+                HorizontalOptions="Center" />
+
+                <Image
+                Source="logotext.png"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="logo"
+                HeightRequest="120"
+                HorizontalOptions="Center" 
+                />
+                
             </VerticalStackLayout>
             <sfPopup:SfPopup IsVisible="{Binding Visible}"
                              IsOpen="{Binding PopupOpen}"
