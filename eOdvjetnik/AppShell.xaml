@@ -7,7 +7,7 @@
        xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"  
        Shell.FlyoutBehavior="{OnPlatform WinUI=Flyout, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
        Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=True, iOS=False}"
-       
+ 
        >
 
     
@@ -53,7 +53,10 @@
             <Button Grid.Column="3" Text="Support" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"/>
             <Button Grid.Column="4" Text="Postavke" BackgroundColor="Transparent" BorderWidth="0"/>
 
-            <sfPopup:SfPopup x:Name="popup" HeaderTitle="Korisnička podrška" IsVisible="{Binding Visible}" IsOpen="{Binding PopupOpen}" >
+            <sfPopup:SfPopup x:Name="popup" 
+                             HeaderTitle="Korisnička podrška" 
+                             IsVisible="{Binding SupportVisible}" 
+                             IsOpen="{Binding SupportPopupOpen}" >
                 <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
                         <StackLayout>
@@ -65,19 +68,126 @@
                 </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
 
-            
-            
+            <sfPopup:SfPopup IsVisible="{Binding NASVisible}"
+                             IsOpen="{Binding NASPopupOpen}"
+                             VerticalOptions="CenterAndExpand"
+                             HorizontalOptions="CenterAndExpand"
+                             MinimumHeightRequest="500"
+                             ShowHeader="True"
+                             HeaderTitle="NAS postavke"
+                             x:Name="NASPopup"
+                             Margin="20">
+                <sfPopup:SfPopup.ContentTemplate >
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" />
+                            <Entry x:Name="IPEntry" Text="{Binding IPNas}" Grid.Row="0" Grid.Column="1" TextColor="Black" />
+
+                            <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" />
+                            <Entry x:Name="USEREntry" Text="{Binding UserNas}" Grid.Row="1" Grid.Column="1" TextColor="Black" />
+
+                            <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" />
+                            <Entry x:Name="PASSEntry" Text="{Binding PassNas}" Grid.Row="2" Grid.Column="1" TextColor="Black" />
+
+                            <Label Text="Folder" Grid.Row="3" Grid.Column="0" TextColor="Black" />
+                            <Entry x:Name="FOLDEREntry" Text="{Binding Folder}" Grid.Row="3" Grid.Column="1" TextColor="Black" />
+
+                            <Label Text="Sub Folder" Grid.Row="4" Grid.Column="0" TextColor="Black" />
+                            <Entry x:Name="SUBFOLDEREntry" Text="{Binding SubFolder}" Grid.Row="4" Grid.Column="1" TextColor="Black" />
+
+                            <Button Text="Save" Command="{Binding SaveCommandNAS}" Grid.Row="5"  />
+                            <Button Text="Load" Command="{Binding LoadCommandNAS}" Grid.Row="6"  />
+                            <Button Text="Delete" Command="{Binding DeleteCommandNAS}" Grid.Row="7" />
+                        </Grid>
+                    </DataTemplate>
+                </sfPopup:SfPopup.ContentTemplate>
+            </sfPopup:SfPopup>
+
+            <sfPopup:SfPopup IsVisible="{Binding SQLVisible}"
+                             IsOpen="{Binding SQLPopupOpen}"
+                             VerticalOptions="CenterAndExpand"
+                             HorizontalOptions="CenterAndExpand"
+                             MinimumHeightRequest="500"
+                             ShowCloseButton="True"
+                             IsFullScreen="False"
+                             ShowHeader="True"
+                             HeaderTitle="SQL postavke"
+                             x:Name="SQLPopup"
+                             StaysOpen="True"
+                             RelativePosition="AlignTopLeft"
+                             Margin="20">
+
+                <sfPopup:SfPopup.ContentTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" />
+                            <Entry x:Name="IPEntry" Text="{Binding IP}" Grid.Row="0" Grid.Column="1" TextColor="Black" />
+
+                            <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" />
+                            <Entry x:Name="USEREntry" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1" TextColor="Black" />
+
+                            <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" />
+                            <Entry x:Name="PASSEntry" Text="{Binding Password}" Grid.Row="2" Grid.Column="1" TextColor="Black" />
+
+                            <Label Text="Database" Grid.Row="3" Grid.Column="0" TextColor="Black" />
+                            <Entry x:Name="DatabaseEntry" Text="{Binding DatabaseName}" Grid.Row="3" Grid.Column="1" TextColor="Black" />
+
+
+                            <Button Text="Save" Command="{Binding SQLSaveCommand}" Grid.Row="5" Grid.Column="1" />
+                            <Button Text="Load" Command="{Binding SQLLoadCommand}" Grid.Row="6" Grid.Column="1" />
+                            <Button Text="Delete" Command="{Binding SQLDeleteCommand}" Grid.Row="7" Grid.Column="1" />
+                        </Grid>
+                    </DataTemplate>
+                </sfPopup:SfPopup.ContentTemplate>
+            </sfPopup:SfPopup>
 
         </Grid>
     </Shell.TitleView>
+    
+    
     
 
     <ShellContent Title="Početna" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"  />
     <ShellContent Title="Kalendar" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
     <ShellContent Title="Dokumenti" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
-    <MenuItem Text="SQLPopup"
-              Command="{Binding }"/>
+    <MenuItem Text="NASPopup"
+              Command="{Binding ShowNASPopupCommand }"/>
+    <MenuItem Text="SQlPopup"
+              Command="{Binding SQLShowPopupCommand}"/>
     <MenuItem Text="Support"
               Command="{Binding OnSupportClickCommand}"/>
+    
 
 </Shell>

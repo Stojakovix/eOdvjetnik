@@ -55,7 +55,7 @@ namespace eOdvjetnik.ViewModel
 
         public ICommand ClosePopupCommand { get; set; }
 
-        //
+        // Varijable za SQL
 
         private bool sqlOpen, sqlvisible;
         public ICommand SQLPopupAcceptCommand { get; set; }
