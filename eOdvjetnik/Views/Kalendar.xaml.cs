@@ -22,13 +22,16 @@ public partial class Kalendar : ContentPage
 
         //MySQL Query;
         var odvjetnik_nas = new ExternalSQLConnect();
+        var hardware_id = Preferences.Get("key", "default_value");
 
         try
         {
             //Call the function
-            Dictionary<string, string>[] resultArray = odvjetnik_nas.sqlQuery("Select * from events");
-            Debug.WriteLine("Usao usqlQuery");
+            Dictionary<string, string>[] resultArray = odvjetnik_nas.sqlQuery("Select * from events where hardwareid = '"+ hardware_id + "' and TimeFrom > '2023-05-25 20:00:00'");//
+            Debug.WriteLine("Usao usqlQuery 11------------------------------------------------**");
 
+            
+             
 
 
             // Print the attribute names
@@ -39,7 +42,7 @@ public partial class Kalendar : ContentPage
                 {
                     Debug.WriteLine(pair.Key + ": " + pair.Value);
                 }
-                //Debug.WriteLine();
+                Debug.WriteLine("Print the attribute names");
             }
 
         }

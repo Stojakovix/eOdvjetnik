@@ -77,7 +77,7 @@ namespace eOdvjetnik.Services
         public Dictionary<string, string>[] sqlQuery(string query)
         {
 
-            Debug.WriteLine("Usao u sqlQuerry  *******");
+            Debug.WriteLine("Core.cs -> Dictionary -> Usao u sqlQuerry  *******");
             // MySQL connection settings
             string connString = "server=" + Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "") + ";user=" + Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "") + ";password=" + Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "") + ";database=" + Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
 
