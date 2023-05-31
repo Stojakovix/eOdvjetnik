@@ -4,7 +4,7 @@
        xmlns:local="clr-namespace:eOdvjetnik"
        xmlns:views="clr-namespace:eOdvjetnik.Views"
        xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
-       xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"     
+       xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"  
        Shell.FlyoutBehavior="{OnPlatform WinUI=Flyout, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
        Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=True, iOS=False}"
        
@@ -65,6 +65,9 @@
                 </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
 
+            
+            
+
         </Grid>
     </Shell.TitleView>
     
@@ -72,4 +75,9 @@
     <ShellContent Title="Početna" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"  />
     <ShellContent Title="Kalendar" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
     <ShellContent Title="Dokumenti" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
+    <MenuItem Text="SQLPopup"
+              Command="{Binding }"/>
+    <MenuItem Text="Support"
+              Command="{Binding OnSupportClickCommand}"/>
+
 </Shell>
