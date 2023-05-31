@@ -60,6 +60,22 @@ namespace eOdvjetnik.ViewModel
                     foreach (int item in ExtDifference){
                         Debug.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++");
                         Debug.WriteLine("KalendarViewModel -> ExtDifference: " + item);
+                        foreach (Dictionary<string, string> appointmentRow in appointmentData)
+                        {
+                            if (int.Parse(appointmentRow["internal_event_id"]) == item && int.Parse(appointmentRow["internal_event_id"]) != 0)
+                            {
+                                // Add new appointment
+                                Appointments.Add(new SchedulerAppointment()
+                                {
+                                    StartTime = DateTime.Parse(appointmentRow["TimeFrom"]),
+                                    EndTime = DateTime.Parse(appointmentRow["TimeTo"]),
+                                    Subject = appointmentRow["EventName"],
+                                    //IsAllDay = isAllDay,
+                                    Notes = appointmentRow["DescriptionNotes"]
+                                });
+                            }
+                        }
+                        Debug.WriteLine("-----------------------------------------------");
                         Debug.WriteLine("-----------------------------------------------");
 
                     }
@@ -75,7 +91,7 @@ namespace eOdvjetnik.ViewModel
 
 
 
-                    
+                    /*
                     foreach (Dictionary<string, string> appointmentRow in appointmentData)
                     {
                         // Parse bool to a readable format
@@ -116,7 +132,7 @@ namespace eOdvjetnik.ViewModel
                         Debug.WriteLine(Appointments.Count + "IZVRŠIO QUERY DO KRAJA --------------");
                         Debug.WriteLine(Appointments.Count + "IZVRŠIO QUERY DO KRAJA --------------");
                         Debug.WriteLine(Appointments.Count + "IZVRŠIO QUERY DO KRAJA --------------");
-                    }
+                    }*/
                 }
 
 
