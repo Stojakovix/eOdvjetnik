@@ -14,7 +14,7 @@
     <Shell.BindingContext>
         <viewmodel:AppShellViewModel/>
     </Shell.BindingContext>
-
+    
 
 
     <Shell.TitleView>

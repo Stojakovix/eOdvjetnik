@@ -58,6 +58,8 @@ namespace eOdvjetnik.ViewModel
         public ICommand LoadCommandNAS { get; set; }
         public ICommand DeleteCommandNAS { get; set; }
 
+        
+
         //Vrijednost varijabli NAS
 
         public string IPNas { get; set; }
@@ -149,19 +151,24 @@ namespace eOdvjetnik.ViewModel
 			KalendarClickCommand = new Command(OnKalendarClick);
 			DokumentiClickCommand = new Command(OnDokumentiClick);
             #endregion
+
             #region Support komande
             Version = $"Version {AppInfo.VersionString}";
+            
             //Popup pozivanje
             PopupCloseCommand = new Command(PopupClose);
             OnSupportClickCommand = new Command(OnSupportClick);
             #endregion
+
             #region NAS komande
             SaveCommandNAS = new Command(OnSaveClickedNas);
             LoadCommandNAS = new Command(OnLoadClickedNas);
             DeleteCommandNAS = new Command(OnDeleteClickedNas);
             ShowNASPopupCommand = new Command(NASPopup);
+            CloseNASPopupCommand = new Command(NASPopupClosed);
 
             #endregion
+
             #region SQL komande
             SQLSaveCommand = new Command(OnSaveClickedMySQL);
             SQLLoadCommand = new Command(OnLoadClickedMySQL);
@@ -244,7 +251,7 @@ namespace eOdvjetnik.ViewModel
                 Preferences.Set(SUBFOLDER_nas, subFolder);
 
                 Debug.WriteLine("Nas saved " + Preferences.Default);
-                PopupClose();
+                NASPopupClosed();
             }
 
             catch (Exception ex)
@@ -305,6 +312,11 @@ namespace eOdvjetnik.ViewModel
             
         }
 
+        private void NASPopupClosed()
+        {
+            NASPopupOpen = false;
+            NASVisible = false;
+        }
         #endregion
 
         #region SQL Funkcije
