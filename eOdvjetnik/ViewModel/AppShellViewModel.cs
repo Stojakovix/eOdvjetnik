@@ -214,7 +214,7 @@ namespace eOdvjetnik.ViewModel
         private async void OnKalendarClick()
         {
 
-            await Shell.Current.GoToAsync(nameof(Kalendar) + "?cache=true");
+            await Shell.Current.GoToAsync("///Kalendar");
             Debug.WriteLine("KLIKNO");
         }
         #endregion

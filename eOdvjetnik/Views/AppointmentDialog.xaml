@@ -6,8 +6,9 @@
              Title="AppointmentDialog"
              xmlns:models="clr-namespace:eOdvjetnik.Models"
              x:DataType="models:Appointment"
+             
              >
-
+    <Shell.NavBarIsVisible>False</Shell.NavBarIsVisible>
     <StackLayout Padding="10,10,10,10"
                  NavigationPage.HasNavigationBar="False">
         <Grid

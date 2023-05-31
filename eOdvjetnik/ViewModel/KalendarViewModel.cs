@@ -121,23 +121,6 @@ namespace eOdvjetnik.ViewModel
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 // Fetch appointments from the remote server
                 //FetchAppointmentFromRemoteServer();
 

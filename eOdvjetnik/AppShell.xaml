@@ -15,11 +15,12 @@
         <viewmodel:AppShellViewModel/>
     </Shell.BindingContext>
     
-
+    
 
     <Shell.TitleView>
-        <Grid  Padding="0,0,0,0" Margin="10,0" BackgroundColor="Transparent">
+        <Grid  Padding="0,0,0,0" Margin="10,0" BackgroundColor="Transparent" HeightRequest="50">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -40,7 +41,7 @@
                     BackgroundColor="Transparent" 
                     Margin="10,0" 
                     BorderWidth="0"
-                    CommandParameter="cache=true"
+                    
                     />
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="2" Text="Dokumenti" Command="{Binding DokumentiClickCommand}" 
@@ -49,9 +50,11 @@
                     Margin="10,0" 
                     BorderWidth="0"
                     />
+            
 
             <Button Grid.Column="3" Text="Support" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"/>
-            <Button Grid.Column="4" Text="Postavke" BackgroundColor="Transparent" BorderWidth="0"/>
+            <Button Grid.Column="4" Text="Sql Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding SQLShowPopupCommand}"/>
+            <Button Grid.Column="5" Text="Nas Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"/>
 
             <sfPopup:SfPopup x:Name="popup" 
                              HeaderTitle="Korisnička podrška" 
@@ -70,13 +73,10 @@
 
             <sfPopup:SfPopup IsVisible="{Binding NASVisible}"
                              IsOpen="{Binding NASPopupOpen}"
-                             VerticalOptions="CenterAndExpand"
-                             HorizontalOptions="CenterAndExpand"
-                             MinimumHeightRequest="500"
-                             ShowHeader="True"
                              HeaderTitle="NAS postavke"
                              x:Name="NASPopup"
-                             Margin="20">
+                             MinimumHeightRequest="500"
+                             >
                 <sfPopup:SfPopup.ContentTemplate >
                     <DataTemplate>
                         <Grid>
@@ -128,8 +128,7 @@
                              IsFullScreen="False"
                              ShowHeader="True"
                              HeaderTitle="SQL postavke"
-                             x:Name="SQLPopup"
-                             StaysOpen="True"
+                             x:Name="SQLPopup"                      
                              RelativePosition="AlignTopLeft"
                              Margin="20">
 
