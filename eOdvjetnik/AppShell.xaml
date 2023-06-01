@@ -26,6 +26,8 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
@@ -50,11 +52,25 @@
                     Margin="10,0" 
                     BorderWidth="0"
                     />
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+                    Grid.Column="3" Text="Klijenti" Command="{Binding KlijentiClickCommand}" 
+                    x:Name="KlijentiButton"
+                    BackgroundColor="Transparent"
+                    Margin="10,0" 
+                    BorderWidth="0"
+                    />
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+                    Grid.Column="4" Text="Naplata" Command="{Binding NaplataClickCommand}" 
+                    x:Name="NaplataButton"
+                    BackgroundColor="Transparent"
+                    Margin="10,0" 
+                    BorderWidth="0"
+                    />
             
 
-            <Button Grid.Column="3" Text="Support" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"/>
-            <Button Grid.Column="4" Text="Sql Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding SQLShowPopupCommand}"/>
-            <Button Grid.Column="5" Text="Nas Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"/>
+            <Button Grid.Column="5" Text="Support" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"/>
+            <Button Grid.Column="6" Text="Sql Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding SQLShowPopupCommand}"/>
+            <Button Grid.Column="7" Text="Nas Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"/>
 
             <sfPopup:SfPopup x:Name="popup" 
                              HeaderTitle="Korisnička podrška" 
@@ -181,6 +197,9 @@
     <ShellContent Title="Početna" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"  />
     <ShellContent Title="Kalendar" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
     <ShellContent Title="Dokumenti" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
+    <ShellContent Title="Klijenti" ContentTemplate="{DataTemplate views:Klijenti}" Route="Klijenti" />
+    <ShellContent Title="Naplata" ContentTemplate="{DataTemplate views:Naplata}" Route="Naplata" />
+    
     <MenuItem Text="NASPopup"
               Command="{Binding ShowNASPopupCommand }"/>
     <MenuItem Text="SQlPopup"

@@ -18,6 +18,8 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(Dokumenti), typeof(Dokumenti));
 		Routing.RegisterRoute(nameof(DocsItemPage), typeof(DocsItemPage));
 		Routing.RegisterRoute(nameof(AppointmentDialog), typeof(AppointmentDialog));
+		Routing.RegisterRoute(nameof(Klijenti), typeof(Klijenti)); 
+		Routing.RegisterRoute(nameof(Naplata), typeof(Naplata));
 
 		BindingContext = new AppShellViewModel();
 

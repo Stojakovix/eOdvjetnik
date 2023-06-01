@@ -13,6 +13,8 @@ namespace eOdvjetnik.ViewModel
         public ICommand MainClickCommand { get; set; }
         public ICommand KalendarClickCommand { get; set; }
         public ICommand DokumentiClickCommand { get; set; }
+        public ICommand KlijentiClickCommand { get; set; }
+        public ICommand NaplataClickCommand { get; set; }
         #endregion
         // popup komande
         #region Support
@@ -147,9 +149,12 @@ namespace eOdvjetnik.ViewModel
         public AppShellViewModel()
 		{
             #region Navigacija komande
+
             MainClickCommand = new Command(OnMainClick);
 			KalendarClickCommand = new Command(OnKalendarClick);
 			DokumentiClickCommand = new Command(OnDokumentiClick);
+            KlijentiClickCommand = new Command(OnKlijentiClick);
+            NaplataClickCommand = new Command(OnNaplataClick);
             #endregion
 
             #region Support komande
@@ -216,6 +221,18 @@ namespace eOdvjetnik.ViewModel
 
             await Shell.Current.GoToAsync("///Kalendar");
             Debug.WriteLine("KLIKNO");
+        }
+
+        private async void OnKlijentiClick()
+        {
+            await Shell.Current.GoToAsync("///Klijenti");
+            Debug.WriteLine("KLIKNO Klijente");
+        }
+
+        private async void OnNaplataClick()
+        {
+            await Shell.Current.GoToAsync("///Naplata");
+            Debug.WriteLine("KLIKNO Naplatu");
         }
         #endregion
 
