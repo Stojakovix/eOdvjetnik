@@ -21,6 +21,7 @@ namespace eOdvjetnik.ViewModel
         public const string databasename_mysql = "databasename";
         //MySQL varijable
         public string query;
+        public string datetime { get; set; }
 
         //Save za mysql
         public ICommand SaveCommand { get; set; }
@@ -129,6 +130,7 @@ namespace eOdvjetnik.ViewModel
             Password = Preferences.Get(PASS_mysql, "");
             DatabaseName = Preferences.Get(databasename_mysql, "");
 
+            datetime = DateTime.Now.ToString("f");
         }
 
 
