@@ -53,7 +53,7 @@
                     BorderWidth="0"
                     />
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="3" Text="Klijenti" Command="{Binding KlijentiClickCommand}" 
+                    Grid.Column="3" Text="Datoteka Osoba" Command="{Binding KlijentiClickCommand}" 
                     x:Name="KlijentiButton"
                     BackgroundColor="Transparent"
                     Margin="10,0" 

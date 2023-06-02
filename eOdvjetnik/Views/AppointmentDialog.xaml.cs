@@ -120,13 +120,8 @@ public partial class AppointmentDialog : ContentPage
         {
             ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
             var hardware_id = Preferences.Get("key", "default_value");
-
-
             string query = $"INSERT INTO Events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}' , '{hardware_id}')";
-            
-          
             externalSQLConnect.sqlQuery(query);
-
             Debug.WriteLine("Appointment added to remote server.");
         }
         catch (Exception ex)

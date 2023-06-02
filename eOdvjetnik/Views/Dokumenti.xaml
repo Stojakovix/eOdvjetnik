@@ -64,10 +64,11 @@
                           <StackLayout Orientation="Horizontal" Padding="10">
                             <Image Source="folder_1484.png" WidthRequest="50" HeightRequest="50" Aspect="AspectFit"/>
                             <Label x:Name="DocumentLabel" Text="{Binding .}" VerticalTextAlignment="Center" Margin="10,0,0,0">
-                              <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnLabelTapped"/>
-                              </Label.GestureRecognizers>
+
                             </Label>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnLabelTapped" NumberOfTapsRequired="1"/>
+                                    </StackLayout.GestureRecognizers>
                           </StackLayout>
                         </ViewCell>
                       </DataTemplate>

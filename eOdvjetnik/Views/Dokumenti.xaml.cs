@@ -28,10 +28,11 @@ public partial class Dokumenti : ContentPage
 
     private void OnLabelTapped(object sender, EventArgs e)
     {
-        Label label = (Label)sender;
-        string labelText = label.Text;
-        // Do something with the label text, such as display it in a message box
-        DisplayAlert("Label Tapped", labelText, "OK");
+        
+        StackLayout stack = (StackLayout)sender;
+        string item = Label.TextProperty.ToString();
+        // Do something with the item, such as display it in a message box
+        DisplayAlert("Item Tapped", item, "OK");
     }
 
 
