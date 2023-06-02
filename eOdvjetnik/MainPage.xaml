@@ -188,8 +188,8 @@ padding-right: 30;
 
         <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="End">
                 <Image Source="text_only.png" Margin="5" HeightRequest="20"/>
-                <Label Text="Trenutno otvoreni dokument:" FontSize="Small" Margin="5"/>
-                <Label Text="Dan i datum" FontSize="Small" Margin="5" />
+                <Label Text="Trenutno otvoreni dokument" FontSize="Small" Margin="5"/>
+                <Label Text="{Binding datetime}" FontSize="Small" Margin="5" />
 
             
             </FlexLayout>
