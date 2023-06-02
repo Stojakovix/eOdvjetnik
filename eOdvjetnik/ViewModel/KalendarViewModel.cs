@@ -85,6 +85,11 @@ namespace eOdvjetnik.ViewModel
                     foreach (int item in IntDifference){
                         Debug.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++");
                         Debug.WriteLine("KalendarViewModel -> IntDifference: " + item);
+                        foreach (Appointment appointment in dataBaseAppointments)
+                        {
+                            externalSQLConnect.sqlQuery($"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, hardwareid) VALUES ('{appointment.From.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.To.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EventName}', '{appointment.AllDay}', '{appointment.DescriptionNotes}', '{appointment.ID}' , '{hardware_id}')");
+                            Debug.WriteLine("Appoinments added to remote server.");
+                        }
                         Debug.WriteLine("-----------------------------------------------");
                     }
 
