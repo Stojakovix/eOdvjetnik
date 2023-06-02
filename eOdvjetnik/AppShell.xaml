@@ -20,14 +20,15 @@
     <Shell.TitleView>
         <Grid  Padding="0,0,0,0" Margin="10,0" BackgroundColor="Transparent" HeightRequest="50">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
@@ -36,6 +37,7 @@
                     BackgroundColor="Transparent" 
                     Margin="10,0" 
                     BorderWidth="0"
+                    
                     />
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="1" Text="Kalendar" Command="{Binding KalendarClickCommand}" 
@@ -66,11 +68,18 @@
                     Margin="10,0" 
                     BorderWidth="0"
                     />
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+                    Grid.Column="5" Text="Spisi" Command="{Binding SpisiClickCommand}" 
+                    x:Name="SpisiButton"
+                    BackgroundColor="Transparent"
+                    Margin="10,0" 
+                    BorderWidth="0"
+                    />
             
 
-            <Button Grid.Column="5" Text="Support" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"/>
-            <Button Grid.Column="6" Text="Sql Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding SQLShowPopupCommand}"/>
-            <Button Grid.Column="7" Text="Nas Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"/>
+            <Button Grid.Column="6" Text="Support" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"/>
+            <Button Grid.Column="7" Text="Sql Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding SQLShowPopupCommand}"/>
+            <Button Grid.Column="8" Text="Nas Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"/>
 
             <sfPopup:SfPopup x:Name="popup" 
                              HeaderTitle="Korisnička podrška" 
@@ -199,6 +208,7 @@
     <ShellContent Title="Dokumenti" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
     <ShellContent Title="Klijenti" ContentTemplate="{DataTemplate views:Klijenti}" Route="Klijenti" />
     <ShellContent Title="Naplata" ContentTemplate="{DataTemplate views:Naplata}" Route="Naplata" />
+    <ShellContent Title="Naplata" ContentTemplate="{DataTemplate views:Spisi}" Route="Spisi" />
     
     <MenuItem Text="NASPopup"
               Command="{Binding ShowNASPopupCommand }"/>
