@@ -117,8 +117,8 @@
                             </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="2*" />
                             </Grid.ColumnDefinitions>
 
                             <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" />
@@ -136,9 +136,9 @@
                             <Label Text="Sub Folder" Grid.Row="4" Grid.Column="0" TextColor="Black" />
                             <Entry x:Name="SUBFOLDEREntry" Text="{Binding SubFolder}" Grid.Row="4" Grid.Column="1" TextColor="Black" />
 
-                            <Button Text="Save" Command="{Binding SaveCommandNAS}" Grid.Row="5"  />
-                            <Button Text="Load" Command="{Binding LoadCommandNAS}" Grid.Row="6"  />
-                            <Button Text="Delete" Command="{Binding DeleteCommandNAS}" Grid.Row="7" />
+                            <Button Text="Save" Command="{Binding SaveCommandNAS}" Grid.Row="5" Grid.Column="1"  />
+                            <Button Text="Load" Command="{Binding LoadCommandNAS}" Grid.Row="6" Grid.Column="1" />
+                            <Button Text="Delete" Command="{Binding DeleteCommandNAS}" Grid.Row="7" Grid.Column="1" />
                         </Grid>
                     </DataTemplate>
                 </sfPopup:SfPopup.ContentTemplate>
