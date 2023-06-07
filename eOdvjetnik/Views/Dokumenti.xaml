@@ -16,7 +16,7 @@
 
     <Grid RowDefinitions="*,Auto">
 
-        <CollectionView
+        <!--<CollectionView
             
             VerticalOptions="Fill"
             ItemsSource="{Binding Items}"
@@ -32,29 +32,7 @@
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>
-        <!--Prikaz fajlova-->
-
-
-            <!--<StackLayout>
-        <Label x:Name="fileListLabel"
-               FontSize="Large"
-               Text="File List:" />
-    </StackLayout>-->
-
-
-
-        <!--<StackLayout>
-            <Label Text="Share Files:"/>
-            <ListView ItemsSource="{Binding ShareFiles}" Margin="20">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                    <ImageCell Text="{Binding .}" ImageSource="Resources/Images/folder_1484.png"/>
-                </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
-        <Button Grid.Row="1" Text="Dodaj item" Clicked="OnItemAdded" Margin="20" />-->
+        </CollectionView>-->
 
                 <ListView ItemsSource="{Binding ShareFiles}"
           Margin="20">

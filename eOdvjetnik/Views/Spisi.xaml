@@ -2,11 +2,28 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.Spisi"
+             xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
              Title="Spisi">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ContentPage.BindingContext>
+        <viewmodel:SpisiViewModel/>
+    </ContentPage.BindingContext>
+    <StackLayout>
+        <CollectionView
+            
+            VerticalOptions="Fill"
+            ItemsSource="{Binding FilesDataList}"
+           >
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate >
+                    <Grid ColumnDefinitions="*, Auto" Padding="20">
+                        <Label Text="{Binding id}"
+                               VerticalTextAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
 </ContentPage>

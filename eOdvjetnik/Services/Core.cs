@@ -1,7 +1,6 @@
 ﻿using System;
 using MySql.Data.MySqlClient;
 using System.Diagnostics;
-using System.Text.Json;
 
 
 namespace eOdvjetnik.Services
@@ -61,19 +60,6 @@ namespace eOdvjetnik.Services
         private const string PASS_mysql = "Lozinka2";
         private const string databasename_mysql = "databasename";
 
-
-        //public int SqlScalar(string query)
-        //{
-        //    int result = 0;
-        //    string connString = $"server={IP_mysql};user={USER_mysql};password={PASS_mysql};database={databasename_mysql}";
-        //    using (MySqlConnection conn = new MySqlConnection(connString))
-        //    {
-        //        conn.Open();
-        //        MySqlCommand cmd = new MySqlCommand(query, conn);
-        //        result = (int)cmd.ExecuteScalar();
-        //    }
-        //    return result;
-        //}
         public Dictionary<string, string>[] sqlQuery(string query)
         {
 
@@ -112,11 +98,7 @@ namespace eOdvjetnik.Services
 
                 return results.ToArray();
             
-            
-
-
         }
-
 
     }
 }
