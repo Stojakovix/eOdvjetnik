@@ -11,7 +11,32 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <syncfusion:SfDataGrid x:Name="FileDataGrid"
-                               ItemsSource="{Binding FileItems}">
+                               ItemsSource="{Binding FileItems}"
+                               ColumnWidthMode="FitByHeader"
+                               BackgroundColor="White">
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:DataGridTextColumn HeaderText="ID" MappingName="Id"/>
+                <syncfusion:DataGridTextColumn HeaderText="Broj Spisa" MappingName="BrojSpisa"/>
+                <syncfusion:DataGridTextColumn HeaderText="Spisi Col" MappingName="Spisicol"/>
+                <syncfusion:DataGridTextColumn HeaderText="Klijent ID" MappingName="ClientId"/>
+                <syncfusion:DataGridTextColumn HeaderText="Opponent ID" MappingName="OpponentId"/>
+                <syncfusion:DataGridTextColumn HeaderText="Inicijali Voditelj ID" MappingName="InicijaliVoditeljId"/>
+                <syncfusion:DataGridTextColumn HeaderText="Inicijali Dodao" MappingName="InicijaliDodao"/>
+                <syncfusion:DataGridTextColumn HeaderText="Files Col" MappingName="Filescol"/>
+                <syncfusion:DataGridTextColumn HeaderText="Inicijali Dodjeljeno" MappingName="InicijaliDodjeljeno"/>
+                <syncfusion:DataGridTextColumn HeaderText="Created" MappingName="Created"/>
+                <syncfusion:DataGridTextColumn HeaderText="Aktivno/Pasivno" MappingName="AktivnoPasivno"/>
+                <syncfusion:DataGridTextColumn HeaderText="Referenca" MappingName="Referenca"/>
+                <syncfusion:DataGridTextColumn HeaderText="Datum Promjene Statusa" MappingName="DatumPromjeneStatusa"/>
+                <syncfusion:DataGridTextColumn HeaderText="Uzrok" MappingName="Uzrok"/>
+                <syncfusion:DataGridTextColumn HeaderText="Datum Kreiranja Spisa" MappingName="DatumKreiranjaSpisa"/>
+                <syncfusion:DataGridTextColumn HeaderText="Datum Izmjene Spisa" MappingName="DatumIzmjeneSpisa"/>
+                <syncfusion:DataGridTextColumn HeaderText="Kreirao" MappingName="Kreirao"/>
+                <syncfusion:DataGridTextColumn HeaderText="Zadnje Uredio" MappingName="ZadnjeUredio"/>
+                <syncfusion:DataGridTextColumn HeaderText="Jezik" MappingName="Jezik"/>
+                <syncfusion:DataGridTextColumn HeaderText="Broj Predmeta" MappingName="BrojPredmeta"/>
+
+            </syncfusion:SfDataGrid.Columns>
             
         </syncfusion:SfDataGrid>
     </ContentPage.Content>
