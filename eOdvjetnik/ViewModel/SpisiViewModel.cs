@@ -36,44 +36,60 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                string query = "Select * from files";
+                string query = "Select * from files Limit 50";
                 Debug.WriteLine(query + "u SpisiViewModelu");
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
                 if (filesData != null)
                 {
                     foreach (Dictionary<string, string> filesRow in filesData)
                     {
+                        int id;
+                        int clientId;
+                        int opponentId;
+                        int inicijaliVoditeljId;
+                        DateTime created;
+                        DateTime datumPromjeneStatusa;
+                        DateTime datumKreiranjaSpisa;
+                        DateTime datumIzmjeneSpisa;
+
+                        int.TryParse(filesRow["id"], out id);
+                        int.TryParse(filesRow["client_id"], out clientId);
+                        int.TryParse(filesRow["opponent_id"], out opponentId);
+                        int.TryParse(filesRow["inicijali_voditelj_id"], out inicijaliVoditeljId);
+                        DateTime.TryParse(filesRow["created"], out created);
+                        DateTime.TryParse(filesRow["datum_promjene_statusa"], out datumPromjeneStatusa);
+                        DateTime.TryParse(filesRow["datum_kreiranja_spisa"], out datumKreiranjaSpisa);
+                        DateTime.TryParse(filesRow["datum_izmjene_spisa"], out datumIzmjeneSpisa);
+
                         fileItems.Add(new FileItem()
                         {
-                            Id = int.Parse(filesRow["id"]),
+                            Id = id,
                             BrojSpisa = filesRow["broj_spisa"],
                             Spisicol = filesRow["spisicol"],
-                            ClientId = int.Parse(filesRow["client_id"]),
-                            OpponentId = int.Parse(filesRow["opponent_id"]),
-                            InicijaliVoditeljId = int.Parse(filesRow["inicijali_voditelj_id"]),
+                            ClientId = clientId,
+                            OpponentId = opponentId,
+                            InicijaliVoditeljId = inicijaliVoditeljId,
                             InicijaliDodao = filesRow["inicijali_dodao"],
                             Filescol = filesRow["filescol"],
                             InicijaliDodjeljeno = filesRow["inicijali_dodjeljeno"],
-                            Created = DateTime.Parse(filesRow["created"]),
+                            Created = created,
                             AktivnoPasivno = filesRow["aktivno_pasivno"],
                             Referenca = filesRow["referenca"],
-                            DatumPromjeneStatusa = DateTime.Parse(filesRow["datum_promjene_statusa"]),
+                            DatumPromjeneStatusa = datumPromjeneStatusa,
                             Uzrok = filesRow["uzrok"],
-                            DatumKreiranjaSpisa = DateTime.Parse(filesRow["datum_kreiranja_spisa"]),
-                            DatumIzmjeneSpisa = DateTime.Parse(filesRow["datum_izmjene_spisa"]),
+                            DatumKreiranjaSpisa = datumKreiranjaSpisa,
+                            DatumIzmjeneSpisa = datumIzmjeneSpisa,
                             Kreirao = filesRow["kreirao"],
-                            ZadnjeUredio = filesRow["zadnje uredio"],
+                            ZadnjeUredio = filesRow["zadnje_uredio"],
                             Jezik = filesRow["jezik"],
                             BrojPredmeta = filesRow["broj_predmeta"]
-
-
                         });
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                Debug.WriteLine(ex.Message);
             }
         }
 

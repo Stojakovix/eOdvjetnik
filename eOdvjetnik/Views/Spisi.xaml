@@ -9,21 +9,10 @@
     <ContentPage.BindingContext>
         <viewmodel:SpisiViewModel/>
     </ContentPage.BindingContext>
-    <StackLayout>
-        <CollectionView
+    <ContentPage.Content>
+        <syncfusion:SfDataGrid x:Name="FileDataGrid"
+                               ItemsSource="{Binding FileItems}">
             
-            VerticalOptions="Fill"
-            ItemsSource="{Binding FilesDataList}"
-           >
-
-            <CollectionView.ItemTemplate>
-                <DataTemplate >
-                    <Grid ColumnDefinitions="*, Auto" Padding="20">
-                        <Label Text="{Binding id}"
-                               VerticalTextAlignment="Center"/>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </StackLayout>
+        </syncfusion:SfDataGrid>
+    </ContentPage.Content>
 </ContentPage>
