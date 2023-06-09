@@ -6,7 +6,7 @@
        xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
        xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"  
        Shell.FlyoutBehavior="{OnPlatform WinUI=Flyout, MacCatalyst=Flyout, Android=Flyout, iOS=Flyout}"
-       Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=True, iOS=False}"
+       Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=False, iOS=False}"
  
        >
 
@@ -85,7 +85,7 @@
                              IsOpen="{Binding SupportPopupOpen}" >
                 <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
-                        <StackLayout>
+                        <StackLayout Margin="20,0,0,0" >
                             <Label Text="Broj moba" TextColor="Black"/>
                             <Label Text="Email - bruno@zadar-ict.hr" TextColor="Black"/>
                             <Label Text="{Binding Version}" TextColor="Black"/>

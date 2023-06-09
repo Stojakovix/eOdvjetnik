@@ -7,7 +7,7 @@
              xmlns:local ="clr-namespace:eOdvjetnik.ViewModel"
              >
 
-<!--Crasha se CSS kad implementiraš ->
+    <!--Crasha se CSS kad implementiraš ->
     font-size: 15px;
                     left: 1;
                 width: 99%;
@@ -37,163 +37,41 @@ padding-right: 30;
         <local:MainPageViewModel/>
     </ContentPage.BindingContext>
 
-    <FlexLayout Direction="Column">
 
-        <FlexLayout FlexLayout.Grow="1">
-            <ScrollView>
-        <VerticalStackLayout>
-            
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
 
-            <!--<StackLayout HorizontalOptions="CenterAndExpand"  x:Name="MySQLForm">
-                <Label Text="IP adresa" />
-                <Entry x:Name="IPEntryMySQL"  Text="{Binding IP}" />
-                <Label Text="Korisničko ime" />
-                <Entry x:Name="USEREntryMySQL" Text="{Binding UserName}" />
-                <Label Text="Lozinka" />
-                <Entry x:Name="PASSEntryMySQL" Text="{Binding Password}"  />
-                <Label Text="Ime baze podataka" />
-                <Entry x:Name="databasenameEntryMySQL" Text="{Binding DatabaseName}" />
+        </Grid.RowDefinitions>
 
-                <Button Text="Save"  Command="{Binding SaveCommand}" />
-                <Button Text="Load"  Command="{Binding LoadCommand}" />
-                <Button Text="Delete"  Command="{Binding DeleteCommand}" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-            </StackLayout>-->
-            
-
-            <!-->
-            NAS FORMS
-            -->
-            <Image
-                Source="logo.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" 
-                BackgroundColor="White"
-                />
-            <Label
-                Text="Dobrodošli"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-            
-            <Label
-                Text="VPN server"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="NAS server"
-                FontSize="18"
-                HorizontalOptions="Center" />
-            <Button
+        <Image Source="text_only.png" Margin="5" HeightRequest="20" HorizontalOptions="Start" Grid.Row="1" />
+        <Label Text="{Binding datetime}"  FontSize="Small" Margin="5" HorizontalOptions="End" Grid.Row="2" Grid.Column="2"/>
+        <Button
                 x:Name="CounterBtn"
                 StyleClass="my-button"
                 Text="Spoji se"
                 SemanticProperties.Hint="Spoji se"
                 Clicked="OnCounterClicked"
-                HorizontalOptions="Center" >
-                <!--<Button.Style>  !XML NAČIN DODAVANJA STILA!
-                    <Style TargetType="Button">
-                        <Setter Property="BackgroundColor" Value="#007acc" />
-                        <Setter Property="TextColor" Value="White" />
-                        
-                        <Setter Property="Padding" Value="10, 20" />
-                        <Setter Property="FontSize" Value="16" />
-                        <Setter Property="FontAttributes" Value="Bold" />
-                        
-                        <Setter Property="TextTransform" Value="Uppercase" />
-                    </Style>
-                </Button.Style>-->
-            </Button>
-            <VerticalStackLayout HorizontalOptions="Center">
-                <Button x:Name="NasPopup" Text="NAS Postavke"  Command="{Binding ShowPopupCommand}" />
-                <Button Text="MySQL Postavke" Command="{Binding SQLShowPopupCommand}" />
-
-                <Label
-                Text="DD logo test"
-                SemanticProperties.HeadingLevel="Level2"
-                FontSize="18"
-                Opacity="0"
-                HorizontalOptions="Center" />
-
-                <Image
-                Source="logotext.png"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="logo"
-                HeightRequest="120"
-                HorizontalOptions="Center" 
-                />
-                
-            </VerticalStackLayout>
+            Grid.Column="1"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="150"
+            HeightRequest="80"
+            FontSize="Large"
             
+                >
 
-            <sfPopup:SfPopup IsVisible="{Binding SQLVisible}"
-                             IsOpen="{Binding SQLPopupOpen}"
-                             VerticalOptions="CenterAndExpand"
-                             HorizontalOptions="CenterAndExpand"
-                             MinimumHeightRequest="500"
-                             ShowCloseButton="True"
-                             IsFullScreen="False"
-                             ShowHeader="True"
-                             HeaderTitle="SQL postavke"
-                             x:Name="SQLPopup"
-                             StaysOpen="True"
-                             RelativePosition="AlignTopLeft"
-                             
+        </Button>
 
-                             Margin="20">
+    </Grid>
 
-                <sfPopup:SfPopup.ContentTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" />
-                            <Entry x:Name="IPEntry" Text="{Binding IP}" Grid.Row="0" Grid.Column="1" TextColor="Black" />
-
-                            <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" />
-                            <Entry x:Name="USEREntry" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1" TextColor="Black" />
-
-                            <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" />
-                            <Entry x:Name="PASSEntry" Text="{Binding Password}" Grid.Row="2" Grid.Column="1" TextColor="Black" />
-
-                            <Label Text="Database" Grid.Row="3" Grid.Column="0" TextColor="Black" />
-                            <Entry x:Name="DatabaseEntry" Text="{Binding DatabaseName}" Grid.Row="3" Grid.Column="1" TextColor="Black" />
-
-
-                            <Button Text="Save" Command="{Binding SaveCommand}" Grid.Row="5"  />
-                            <Button Text="Load" Command="{Binding LoadCommand}" Grid.Row="6"  />
-                            <Button Text="Delete" Command="{Binding DeleteCommand}" Grid.Row="7" />
-                        </Grid>
-                    </DataTemplate>
-                </sfPopup:SfPopup.ContentTemplate>
-            </sfPopup:SfPopup>
-        </VerticalStackLayout>
-
-                
-            </ScrollView>
-        </FlexLayout>
-
-        <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="End">
-                <Image Source="text_only.png" Margin="5" HeightRequest="20"/>
-                <Label Text="Trenutno otvoreni dokument" FontSize="Small" Margin="5"/>
-                <Label Text="{Binding datetime}" FontSize="Small" Margin="5" />
-
-            
-            </FlexLayout>
-
-    </FlexLayout>
 
 </ContentPage>
+
