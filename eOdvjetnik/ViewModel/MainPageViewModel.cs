@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 using Syncfusion.Maui.Popup;
+using Timer = System.Timers.Timer;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -21,7 +22,19 @@ namespace eOdvjetnik.ViewModel
         public const string databasename_mysql = "databasename";
         //MySQL varijable
         public string query;
-        public string datetime { get; set; }
+
+        //DateTime
+        private Timer timer;
+        private string currenttime { get; set; }
+        public string datetime
+        {
+            get { return currenttime; }
+            set
+            {
+                currenttime = value;
+                OnPropertyChanged(nameof(datetime));
+            }
+        }
 
         //Save za mysql
         public ICommand SaveCommand { get; set; }
@@ -130,9 +143,23 @@ namespace eOdvjetnik.ViewModel
             Password = Preferences.Get(PASS_mysql, "");
             DatabaseName = Preferences.Get(databasename_mysql, "");
 
-            datetime = DateTime.Now.ToString("f");
+            //DateTimeRefresh
+            RefreshTime();
+            var timer = Application.Current.Dispatcher.CreateTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += (s, e) => RefreshTime();
+            timer.Start();
         }
 
+        //DateTime
+
+        void RefreshTime()
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+               datetime = DateTime.Now.ToString("f");
+            });
+        }
 
         // POČETAK KOMANDI ZA SQL
         private void OnSaveClickedMySQL()
