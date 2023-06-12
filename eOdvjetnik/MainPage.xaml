@@ -52,7 +52,7 @@ padding-right: 30;
         </Grid.ColumnDefinitions>
 
         <Image Source="text_only.png" Margin="5" HeightRequest="20" HorizontalOptions="Start" Grid.Row="1" />
-        <Label Text="{Binding datetime}"  FontSize="Small" Margin="5" HorizontalOptions="End" Grid.Row="2" Grid.Column="2"/>
+        <Label Text="{Binding datetime}"  FontSize="Small" Margin="5" HorizontalOptions="End" Grid.Row="2" Grid.ColumnSpan="3"/>
         <Button
                 x:Name="CounterBtn"
                 StyleClass="my-button"
