@@ -1,8 +1,6 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using eOdvjetnik.Model;
 using eOdvjetnik.Services;
 
@@ -11,7 +9,7 @@ namespace eOdvjetnik.ViewModel
     public class SpisiViewModel : INotifyPropertyChanged
     {
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
-        string query = "Select * from files";
+        
         private ObservableCollection<FileItem> fileItems;
         public ObservableCollection<FileItem> FileItems
         {
@@ -37,6 +35,7 @@ namespace eOdvjetnik.ViewModel
             try
             {
                 string query = "SELECT * FROM files ORDER BY id DESC LIMIT 1;";
+
                 Debug.WriteLine(query + "u SpisiViewModelu");
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
                 if (filesData != null)

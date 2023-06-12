@@ -3,14 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.Spisi"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
-             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             
              Title="Spisi">
 
     <ContentPage.BindingContext>
         <viewmodel:SpisiViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <syncfusion:SfDataGrid x:Name="FileDataGrid"
+        <VerticalStackLayout>
+            <ListView ItemsSource="{Binding FileItems}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="Id" Detail="{Binding Id}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+        <!--<syncfusion:SfDataGrid x:Name="FileDataGrid"
                                ItemsSource="{Binding FileItems}"
                                ColumnWidthMode="FitByHeader"
                                BackgroundColor="White">
@@ -38,6 +47,6 @@
 
             </syncfusion:SfDataGrid.Columns>
             
-        </syncfusion:SfDataGrid>
+        </syncfusion:SfDataGrid>-->
     </ContentPage.Content>
 </ContentPage>
