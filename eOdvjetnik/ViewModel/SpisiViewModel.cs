@@ -34,7 +34,7 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                string query = "SELECT * FROM files ORDER BY id DESC LIMIT 1;";
+                string query = "SELECT * FROM files ORDER BY id DESC LIMIT 50;";
 
                 Debug.WriteLine(query + "u SpisiViewModelu");
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
