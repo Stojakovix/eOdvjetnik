@@ -6,24 +6,24 @@
        xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
        xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"  
        Shell.FlyoutBehavior="{OnPlatform WinUI=Flyout, MacCatalyst=Flyout, Android=Flyout, iOS=Flyout}"
-       Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=False, iOS=False}"
+       Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=True, iOS=False}"
  
        >
 
-    
+
     <Shell.BindingContext>
         <viewmodel:AppShellViewModel/>
     </Shell.BindingContext>
 
-    
+
 
     <Shell.TitleView>
-        <HorizontalStackLayout BackgroundColor="Transparent" HeightRequest="30" Padding="0,0,0,0" >
+        <HorizontalStackLayout BackgroundColor="Transparent" Padding="0,0,0,0" >
             <HorizontalStackLayout.Margin>
                 <OnPlatform x:TypeArguments="Thickness" Default="0,0,0,0">
                     <On Platform="MacCatalyst" Value="0,15,0,0" />
                 </OnPlatform>
-     
+
             </HorizontalStackLayout.Margin>
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
@@ -48,17 +48,17 @@
                     Margin="10,0" 
                     BorderWidth="0"
                     />
-            
+
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="2" Text="Dokumenti" Command="{Binding DokumentiClickCommand}" 
                     x:Name="DokumentiButton"
                     BackgroundColor="Transparent"
                     BorderWidth="0"
                     />
-            
+
             <!--kontakti-->
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="3" Text="Klijenti" Command="{Binding KlijentiClickCommand}" 
+                    Grid.Column="3" Text="Datoteka Osoba" Command="{Binding KlijentiClickCommand}" 
                     x:Name="KlijentiButton"
                     BackgroundColor="Transparent"
                     BorderWidth="0"
@@ -69,15 +69,15 @@
                     BackgroundColor="Transparent"
                     BorderWidth="0"
                     />
-            
-            <Button Grid.Column="6" Text="NAS Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"  
- />
-            <Button Grid.Column="7" Text="SQL Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding SQLShowPopupCommand}"  
- />
-            <Button Grid.Column="8" Text="Support" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"     
- />
 
 
+
+            <Button Grid.Column="6" Text="Support" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"     
+ />
+            <Button Grid.Column="7" Text="Sql Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding SQLShowPopupCommand}"  
+ />
+            <Button Grid.Column="8" Text="Nas Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"  
+ />
 
             <sfPopup:SfPopup x:Name="popup" 
                              HeaderTitle="Korisnička podrška" 
@@ -85,7 +85,7 @@
                              IsOpen="{Binding SupportPopupOpen}" >
                 <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
-                        <StackLayout Margin="20,0,0,0" >
+                        <StackLayout>
                             <Label Text="Broj moba" TextColor="Black"/>
                             <Label Text="Email - bruno@zadar-ict.hr" TextColor="Black"/>
                             <Label Text="{Binding Version}" TextColor="Black"/>
@@ -195,26 +195,26 @@
                 </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
 
-           
-            </HorizontalStackLayout>
+
+        </HorizontalStackLayout>
     </Shell.TitleView>
-    
-    
-    
+
+
+
 
     <ShellContent Title="Početna" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"  />
     <ShellContent Title="Kalendar" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
-    <ShellContent Title="Spisi" ContentTemplate="{DataTemplate views:Spisi}" Route="Spisi" />
     <ShellContent Title="Dokumenti" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
     <ShellContent Title="Klijenti" ContentTemplate="{DataTemplate views:Klijenti}" Route="Klijenti" />
     <ShellContent Title="Naplata" ContentTemplate="{DataTemplate views:Naplata}" Route="Naplata" />
-    
-    <MenuItem Text="NAS Postavke"
+    <ShellContent Title="Spisi" ContentTemplate="{DataTemplate views:Spisi}" Route="Spisi" />
+
+    <MenuItem Text="NASPopup"
               Command="{Binding ShowNASPopupCommand }"/>
-    <MenuItem Text="SQl Postavke"
+    <MenuItem Text="SQlPopup"
               Command="{Binding SQLShowPopupCommand}"/>
     <MenuItem Text="Support"
               Command="{Binding OnSupportClickCommand}"/>
-    
+
 
 </Shell>
