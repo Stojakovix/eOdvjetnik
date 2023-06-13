@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using eOdvjetnik.Model;
@@ -34,7 +34,8 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                string query = "Select * from files Limit 1";
+                string query = "SELECT * FROM files ORDER BY id DESC LIMIT 50;";
+
                 Debug.WriteLine(query + "u SpisiViewModelu");
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
                 if (filesData != null)
