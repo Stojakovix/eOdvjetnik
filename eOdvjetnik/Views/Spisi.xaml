@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.Spisi"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
+             BackgroundColor="Black"
              
              Title="Spisi">
 
@@ -11,10 +12,50 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <VerticalStackLayout>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Text="ID" />
+                <Label Grid.Row="0" Grid.Column="1" Text="Broj spisa" />
+                <Label Grid.Row="0" Grid.Column="2" Text="Created" />
+
+            </Grid>
+
+
             <ListView ItemsSource="{Binding FileItems}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="Id" Detail="{Binding Id}"/>
+                        <ViewCell>
+                            <Grid Margin="5" Padding="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding Id}" />
+                                
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding BrojSpisa}" />
+                                <Label Grid.Row="1" Grid.Column="2" Text="{Binding Created}" />
+
+
+                            </Grid>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
