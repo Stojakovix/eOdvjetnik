@@ -1,23 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.Spisi"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
-             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
-             Title="Spisi"
-             >
- 
-
+             BackgroundColor="White"
+             
+             Title="Spisi">
 
     <ContentPage.BindingContext>
         <viewmodel:SpisiViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <VerticalStackLayout>
+        <!--<VerticalStackLayout>
             <ListView ItemsSource="{Binding FileItems}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="Id" Detail="{Binding Id}"/>
+                        <TextCell Text="Id" Detail="{Binding Filescol}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
