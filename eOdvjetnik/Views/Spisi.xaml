@@ -21,9 +21,9 @@
                     </Style>
                 </Grid.Resources>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
 
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -31,9 +31,9 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Text="ID" />
-                <Label Grid.Row="0" Grid.Column="1" Text="Broj spisa" />
-                <Label Grid.Row="0" Grid.Column="2" Text="Created" />
+                <Label Grid.Row="0" Grid.Column="0" MaximumWidthRequest="150" Text="ID" />
+                <Label Grid.Row="0" Grid.Column="1" MaximumWidthRequest="150" Text="Broj spisa" />
+                <Label Grid.Row="0" Grid.Column="2" MaximumWidthRequest="150" Text="Created" />
 
             </Grid>
 
@@ -47,11 +47,12 @@
                                     <Style TargetType="Label">
                                         <Setter Property="TextColor" Value="Black" />
                                     </Style>
+                                    
                                 </Grid.Resources>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
 
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
@@ -59,10 +60,9 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding Id}" />
-                                
-                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding BrojSpisa}" />
-                                <Label Grid.Row="1" Grid.Column="2" Text="{Binding Created}" />
+                                <Label Grid.Row="1" Grid.Column="0" MaximumWidthRequest="150" Text="{Binding Id}" />
+                                <Label Grid.Row="1" Grid.Column="1" MaximumWidthRequest="150" Text="{Binding BrojSpisa}" />
+                                <Label Grid.Row="1" Grid.Column="2" MaximumWidthRequest="150" Text="{Binding Created}" />
 
 
                             </Grid>
