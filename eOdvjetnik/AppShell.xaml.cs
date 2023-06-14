@@ -28,9 +28,20 @@ public partial class AppShell : Shell
 		
     }
 
-	private void buttonClick()
+	private void onClosed(object sender, EventArgs e)
 	{
-		Current.GoToAsync("Kalendar");
+		try
+		{
+			Debug.WriteLine("closed SQL");
+			popup.IsOpen = false;
+			popup.IsVisible = false;
+
+		 }
+		catch (Exception ex)
+		{
+			Debug.WriteLine(ex.Message + " in AppShellxaml.cs");
+			
+		}
 	}
 
 

@@ -34,7 +34,7 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                string query = "SELECT * FROM files ORDER BY id DESC LIMIT 50;";
+                string query = "SELECT * FROM files ORDER BY id DESC LIMIT 99;";
 
                 Debug.WriteLine(query + "u SpisiViewModelu");
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
@@ -64,24 +64,24 @@ namespace eOdvjetnik.ViewModel
                         {
                             Id = id,
                             BrojSpisa = filesRow["broj_spisa"],
-                            Spisicol = filesRow["spisicol"],
-                            ClientId = clientId,
+                           // Spisicol = filesRow["spisicol"],
+                           // ClientId = clientId,
                             OpponentId = opponentId,
                             InicijaliVoditeljId = inicijaliVoditeljId,
-                            InicijaliDodao = filesRow["inicijali_dodao"],
+                          //  InicijaliDodao = filesRow["inicijali_dodao"],
                             Filescol = filesRow["filescol"],
-                            InicijaliDodjeljeno = filesRow["inicijali_dodjeljeno"],
+                          //  InicijaliDodjeljeno = filesRow["inicijali_dodjeljeno"],
                             Created = created,
-                            AktivnoPasivno = filesRow["aktivno_pasivno"],
-                            Referenca = filesRow["referenca"],
+                           // AktivnoPasivno = filesRow["aktivno_pasivno"],
+                           // Referenca = filesRow["referenca"],
                             DatumPromjeneStatusa = datumPromjeneStatusa,
-                            Uzrok = filesRow["uzrok"],
+                           // Uzrok = filesRow["uzrok"],
                             DatumKreiranjaSpisa = datumKreiranjaSpisa,
                             DatumIzmjeneSpisa = datumIzmjeneSpisa,
-                            Kreirao = filesRow["kreirao"],
-                            ZadnjeUredio = filesRow["zadnje_uredio"],
-                            Jezik = filesRow["jezik"],
-                            BrojPredmeta = filesRow["broj_predmeta"]
+                           // Kreirao = filesRow["kreirao"],
+                          //  ZadnjeUredio = filesRow["zadnje_uredio"],
+                          //  Jezik = filesRow["jezik"],
+                           // BrojPredmeta = filesRow["broj_predmeta"]
                         });
                     }
                 }

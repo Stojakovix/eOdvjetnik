@@ -98,11 +98,12 @@
                              IsOpen="{Binding NASPopupOpen}"
                              HeaderTitle="NAS postavke"
                              x:Name="NASPopup"
-                             MinimumHeightRequest="500"
+                             AutoSizeMode="Both"
+                             
                              >
                 <sfPopup:SfPopup.ContentTemplate >
                     <DataTemplate>
-                        <Grid>
+                        <Grid Padding="10,0,10,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -144,20 +145,18 @@
 
             <sfPopup:SfPopup IsVisible="{Binding SQLVisible}"
                              IsOpen="{Binding SQLPopupOpen}"
-                             VerticalOptions="CenterAndExpand"
-                             HorizontalOptions="CenterAndExpand"
-                             MinimumHeightRequest="500"
                              ShowCloseButton="True"
                              IsFullScreen="False"
                              ShowHeader="True"
                              HeaderTitle="SQL postavke"
-                             x:Name="SQLPopup"                      
-                             RelativePosition="AlignTopLeft"
+                             x:Name="SQLPopup"
+                             Closed="onClosed"
+                             AutoSizeMode="Both"
                              Margin="20">
 
                 <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <Grid Padding="10,0,10,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -174,10 +173,10 @@
                                 <ColumnDefinition Width="2*" />
                             </Grid.ColumnDefinitions>
 
-                            <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" />
+                            <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" LineBreakMode="WordWrap" />
                             <Entry x:Name="IPEntry" Text="{Binding IP}" Grid.Row="0" Grid.Column="1" TextColor="Black" />
 
-                            <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" />
+                            <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" LineBreakMode="NoWrap" />
                             <Entry x:Name="USEREntry" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1" TextColor="Black" />
 
                             <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" />

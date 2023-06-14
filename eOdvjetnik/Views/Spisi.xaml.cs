@@ -9,5 +9,6 @@ public partial class Spisi : ContentPage
 	{
 		InitializeComponent();
 		this.BindingContext = new SpisiViewModel();
+		
 	}
 }
