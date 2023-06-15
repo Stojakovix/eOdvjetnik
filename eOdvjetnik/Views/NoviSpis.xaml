@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eOdvjetnik.Views.NoviSpis"
+             Title="NoviSpis">
+    <ScrollView>
+        <Grid BackgroundColor="grey">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label Text="Id" Grid.Row="0" Grid.Column="0" />
+            <Entry x:Name="IdEntry" Keyboard="Numeric" Grid.Row="0" Grid.Column="1" />
+            <Label Text="BrojSpisa" Grid.Row="1" Grid.Column="0" />
+            <Entry x:Name="BrojSpisaEntry" Grid.Row="1" Grid.Column="1" />
+            <Label Text="Spisicol" Grid.Row="2" Grid.Column="0" />
+            <Entry x:Name="SpisicolEntry" Grid.Row="2" Grid.Column="1" />
+            <Label Text="ClientId" Grid.Row="3" Grid.Column="0" />
+            <Entry x:Name="ClientIdEntry" Keyboard="Numeric" Grid.Row="3" Grid.Column="1" />
+            <Label Text="OpponentId" Grid.Row="4" Grid.Column="0" />
+            <Entry x:Name="OpponentIdEntry" Keyboard="Numeric" Grid.Row="4" Grid.Column="1" />
+            <Label Text="InicijaliVoditeljId" Grid.Row="5" Grid.Column="0" />
+            <Entry x:Name="InicijaliVoditeljIdEntry" Keyboard="Numeric" Grid.Row="5" Grid.Column="1" />
+            <Label Text="InicijaliDodao" Grid.Row="6" Grid.Column="0" />
+            <Entry x:Name="InicijaliDodaoEntry" Grid.Row="6" Grid.Column="1" />
+            <Label Text="Filescol" Grid.Row="7" Grid.Column="0" />
+            <Entry x:Name="FilescolEntry" Grid.Row="7" Grid.Column="1" />
+            <Label Text="InicijaliDodjeljeno" Grid.Row="8" Grid.Column="0" />
+            <Entry x:Name="InicijaliDodjeljenoEntry" Grid.Row="8" Grid.Column="1" />
+            <Label Text="Created" Grid.Row="9" Grid.Column="0" />
+            <DatePicker x:Name="CreatedDatePicker" Grid.Row="9" Grid.Column="1" />
+            <Label Text="AktivnoPasivno" Grid.Row="10" Grid.Column="0" />
+            <Entry x:Name="AktivnoPasivnoEntry" Grid.Row="10" Grid.Column="1" />
+            <Label Text="Referenca" Grid.Row="11" Grid.Column="0" />
+            <Entry x:Name="ReferencaEntry" Grid.Row="11" Grid.Column="1" />
+            <Label Text="DatumPromjeneStatusa" Grid.Row="12" Grid.Column="0" />
+            <DatePicker x:Name="DatumPromjeneStatusaDatePicker" Grid.Row="12" Grid.Column="1" />
+            <Label Text="Uzrok" Grid.Row="13" Grid.Column="0" />
+            <Entry x:Name="UzrokEntry" Grid.Row="13" Grid.Column="1" />
+            <Label Text="DatumKreiranjaSpisa" Grid.Row="14" Grid.Column="0" />
+            <DatePicker x:Name="DatumKreiranjaSpisaDatePicker" Grid.Row="14" Grid.Column="1" />
+            <Label Text="DatumIzmjeneSpisa" Grid.Row="15" Grid.Column="0" />
+            <DatePicker x:Name="DatumIzmjeneSpisaDatePicker" Grid.Row="15" Grid.Column="1" />
+            <Label Text="Kreirao" Grid.Row="16" Grid.Column="0" />
+            <Entry x:Name="KreiraoEntry" Grid.Row="16" Grid.Column="1" />
+            <Label Text="ZadnjeUredio" Grid.Row="17" Grid.Column="0" />
+            <Entry x:Name="ZadnjeUredioEntry" Grid.Row="17" Grid.Column="1" />
+            <Label Text="Jezik" Grid.Row="18" Grid.Column="0" />
+            <Entry x:Name="JezikEntry" Grid.Row="18" Grid.Column="1" />
+            <Label Text="BrojPredmeta" Grid.Row="19" Grid.Column="0" />
+            <Entry x:Name="BrojPredmetaEntry" Grid.Row="19" Grid.Column="1" />
+
+            <Button x:Name="Save button" Grid.Row="20" Grid.Column="1" Command="" Text="Save spis"/>
+        </Grid>
+    </ScrollView>
+</ContentPage>

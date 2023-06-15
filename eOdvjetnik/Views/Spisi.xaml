@@ -10,44 +10,74 @@
     <ContentPage.BindingContext>
         <viewmodel:SpisiViewModel/>
     </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Dodaj" Order="Secondary" Command="{Binding OnDodajClick}"/>
+        <ToolbarItem Text="Bezveze provjera" Order="Secondary" Priority="1"/>
+        <ToolbarItem Text="Drugi item" Order="Secondary"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <!--<VerticalStackLayout>
-            <ListView ItemsSource="{Binding FileItems}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="Id" Detail="{Binding Filescol}"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </VerticalStackLayout>
-        <!--<syncfusion:SfDataGrid x:Name="FileDataGrid"
-                               ItemsSource="{Binding FileItems}"
-                               ColumnWidthMode="FitByHeader"
-                               BackgroundColor="White">
-            <syncfusion:SfDataGrid.Columns>
-                <syncfusion:DataGridTextColumn HeaderText="ID" MappingName="Id"/>
-                <syncfusion:DataGridTextColumn HeaderText="Broj Spisa" MappingName="BrojSpisa"/>
-                <syncfusion:DataGridTextColumn HeaderText="Spisi Col" MappingName="Spisicol"/>
-                <syncfusion:DataGridTextColumn HeaderText="Klijent ID" MappingName="ClientId"/>
-                <syncfusion:DataGridTextColumn HeaderText="Opponent ID" MappingName="OpponentId"/>
-                <syncfusion:DataGridTextColumn HeaderText="Inicijali Voditelj ID" MappingName="InicijaliVoditeljId"/>
-                <syncfusion:DataGridTextColumn HeaderText="Inicijali Dodao" MappingName="InicijaliDodao"/>
-                <syncfusion:DataGridTextColumn HeaderText="Files Col" MappingName="Filescol"/>
-                <syncfusion:DataGridTextColumn HeaderText="Inicijali Dodjeljeno" MappingName="InicijaliDodjeljeno"/>
-                <syncfusion:DataGridTextColumn HeaderText="Created" MappingName="Created"/>
-                <syncfusion:DataGridTextColumn HeaderText="Aktivno/Pasivno" MappingName="AktivnoPasivno"/>
-                <syncfusion:DataGridTextColumn HeaderText="Referenca" MappingName="Referenca"/>
-                <syncfusion:DataGridTextColumn HeaderText="Datum Promjene Statusa" MappingName="DatumPromjeneStatusa"/>
-                <syncfusion:DataGridTextColumn HeaderText="Uzrok" MappingName="Uzrok"/>
-                <syncfusion:DataGridTextColumn HeaderText="Datum Kreiranja Spisa" MappingName="DatumKreiranjaSpisa"/>
-                <syncfusion:DataGridTextColumn HeaderText="Datum Izmjene Spisa" MappingName="DatumIzmjeneSpisa"/>
-                <syncfusion:DataGridTextColumn HeaderText="Kreirao" MappingName="Kreirao"/>
-                <syncfusion:DataGridTextColumn HeaderText="Zadnje Uredio" MappingName="ZadnjeUredio"/>
-                <syncfusion:DataGridTextColumn HeaderText="Jezik" MappingName="Jezik"/>
-                <syncfusion:DataGridTextColumn HeaderText="Broj Predmeta" MappingName="BrojPredmeta"/>
+        <ScrollView>
+            <VerticalStackLayout>
 
-            </syncfusion:SfDataGrid.Columns>
+
+            <Grid Margin="5" Padding="5" BackgroundColor="White">
+                <Grid.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="TextColor" Value="Black" />
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" MaximumWidthRequest="150" Text="ID" />
+                <Label Grid.Row="0" Grid.Column="1" MaximumWidthRequest="150" Text="Broj spisa" />
+                <Label Grid.Row="0" Grid.Column="2" MaximumWidthRequest="150" Text="Created" />
+
+            </Grid>
+
             
-        </syncfusion:SfDataGrid>-->
+                <ListView ItemsSource="{Binding FileItems}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Margin="5" Padding="5" BackgroundColor="White">
+                                    <Grid.Resources>
+                                        <Style TargetType="Label">
+                                            <Setter Property="TextColor" Value="Black" />
+                                        </Style>
+
+                                    </Grid.Resources>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="1" Grid.Column="0" MaximumWidthRequest="150" Text="{Binding Id}" />
+                                    <Label Grid.Row="1" Grid.Column="1" MaximumWidthRequest="150" Text="{Binding BrojSpisa}" />
+                                    <Label Grid.Row="1" Grid.Column="2" MaximumWidthRequest="150" Text="{Binding Created}" />
+
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            
+        </VerticalStackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

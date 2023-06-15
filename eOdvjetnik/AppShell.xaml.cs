@@ -21,6 +21,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(Klijenti), typeof(Klijenti)); 
 		Routing.RegisterRoute(nameof(Naplata), typeof(Naplata));
 		Routing.RegisterRoute(nameof(Spisi), typeof(Spisi));
+		Routing.RegisterRoute(nameof(NoviSpis), typeof(NoviSpis));
 
 		BindingContext = new AppShellViewModel();
 

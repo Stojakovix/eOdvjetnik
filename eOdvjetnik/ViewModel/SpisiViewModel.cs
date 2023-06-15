@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Windows.Input;
 using eOdvjetnik.Model;
 using eOdvjetnik.Services;
 
@@ -9,7 +10,10 @@ namespace eOdvjetnik.ViewModel
     public class SpisiViewModel : INotifyPropertyChanged
     {
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
-        
+
+        public ICommand OnDodajClick { get; set; }
+
+
         private ObservableCollection<FileItem> fileItems;
         public ObservableCollection<FileItem> FileItems
         {
@@ -18,7 +22,7 @@ namespace eOdvjetnik.ViewModel
         }
         public SpisiViewModel()
         {
-            
+            OnDodajClick = new Command(onDodajCLick);
             try
             {
                fileItems = new ObservableCollection<FileItem>();
@@ -34,7 +38,7 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                string query = "SELECT * FROM files ORDER BY id DESC LIMIT 99;";
+                string query = "SELECT * FROM files ORDER BY id DESC LIMIT 100;";
 
                 Debug.WriteLine(query + "u SpisiViewModelu");
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
@@ -64,24 +68,24 @@ namespace eOdvjetnik.ViewModel
                         {
                             Id = id,
                             BrojSpisa = filesRow["broj_spisa"],
-                           // Spisicol = filesRow["spisicol"],
-                           // ClientId = clientId,
+                            Spisicol = filesRow["spisicol"],
+                            ClientId = clientId,
                             OpponentId = opponentId,
                             InicijaliVoditeljId = inicijaliVoditeljId,
-                          //  InicijaliDodao = filesRow["inicijali_dodao"],
+                            InicijaliDodao = filesRow["inicijali_dodao"],
                             Filescol = filesRow["filescol"],
-                          //  InicijaliDodjeljeno = filesRow["inicijali_dodjeljeno"],
+                            InicijaliDodjeljeno = filesRow["inicijali_dodjeljeno"],
                             Created = created,
-                           // AktivnoPasivno = filesRow["aktivno_pasivno"],
-                           // Referenca = filesRow["referenca"],
+                            AktivnoPasivno = filesRow["aktivno_pasivno"],
+                            Referenca = filesRow["referenca"],
                             DatumPromjeneStatusa = datumPromjeneStatusa,
-                           // Uzrok = filesRow["uzrok"],
+                            Uzrok = filesRow["uzrok"],
                             DatumKreiranjaSpisa = datumKreiranjaSpisa,
                             DatumIzmjeneSpisa = datumIzmjeneSpisa,
-                           // Kreirao = filesRow["kreirao"],
-                          //  ZadnjeUredio = filesRow["zadnje_uredio"],
-                          //  Jezik = filesRow["jezik"],
-                           // BrojPredmeta = filesRow["broj_predmeta"]
+                            Kreirao = filesRow["kreirao"],
+                            ZadnjeUredio = filesRow["zadnje_uredio"],
+                            Jezik = filesRow["jezik"],
+                            BrojPredmeta = filesRow["broj_predmeta"]
                         });
                     }
                 }
@@ -94,6 +98,14 @@ namespace eOdvjetnik.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        #region Komande
+
+        private async void onDodajCLick()
+        {
+            await Shell.Current.GoToAsync("/NoviSpis");
+            Debug.WriteLine("novi spis clicked");
+        }
+        #endregion
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

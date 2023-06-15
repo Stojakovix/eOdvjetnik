@@ -198,6 +198,9 @@
 	  <MauiXaml Update="Views\Naplata.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\NoviSpis.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Spisi.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
