@@ -58,7 +58,7 @@
 
             <!--kontakti-->
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="3" Text="Datoteka Osoba" Command="{Binding KlijentiClickCommand}" 
+                    Grid.Column="3" Text="Osobe" Command="{Binding KlijentiClickCommand}" 
                     x:Name="KlijentiButton"
                     BackgroundColor="Transparent"
                     BorderWidth="0"
@@ -72,23 +72,24 @@
 
 
 
-            <Button Grid.Column="6" Text="Support" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"     
+            <Button Grid.Column="6" Text="Korisnička podrška" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"     
  />
-            <Button Grid.Column="7" Text="Sql Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding SQLShowPopupCommand}"  
+            <Button Grid.Column="7" Text="SQL postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding SQLShowPopupCommand}"  
  />
-            <Button Grid.Column="8" Text="Nas Postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"  
+            <Button Grid.Column="8" Text="NAS postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"  
  />
 
             <sfPopup:SfPopup x:Name="popup" 
                              HeaderTitle="Korisnička podrška" 
                              IsVisible="{Binding SupportVisible}" 
-                             IsOpen="{Binding SupportPopupOpen}" >
+                             IsOpen="{Binding SupportPopupOpen}"
+                            >
                 <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Label Text="Broj moba" TextColor="Black"/>
-                            <Label Text="Email - bruno@zadar-ict.hr" TextColor="Black"/>
-                            <Label Text="{Binding Version}" TextColor="Black"/>
+                            <Label Text="Broj mobitela: 222-333" TextColor="Black" Margin="20,0,0,10"/>
+                            <Label Text="Email: bruno@zadar-ict.hr" TextColor="Black" Margin="20,0,0,10" />
+                            <Label Text="{Binding Version}" TextColor="Black" Margin="20,0,0,10" />
                         </StackLayout>
                     </DataTemplate>
                 </sfPopup:SfPopup.ContentTemplate>
@@ -99,11 +100,13 @@
                              HeaderTitle="NAS postavke"
                              x:Name="NASPopup"
                              AutoSizeMode="Both"
-                             
+                             ShowCloseButton="True"
+                             WidthRequest="260"
+
                              >
                 <sfPopup:SfPopup.ContentTemplate >
                     <DataTemplate>
-                        <Grid Padding="10,0,10,0">
+                        <Grid Margin="10,0,10,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -111,33 +114,31 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
+
                             </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="3*" />
                             </Grid.ColumnDefinitions>
 
-                            <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" />
+                            <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                             <Entry x:Name="IPEntry" Text="{Binding IPNas}" Grid.Row="0" Grid.Column="1" TextColor="Black" />
 
-                            <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" />
+                            <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                             <Entry x:Name="USEREntry" Text="{Binding UserNas}" Grid.Row="1" Grid.Column="1" TextColor="Black" />
 
-                            <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" />
-                            <Entry x:Name="PASSEntry" Text="{Binding PassNas}" Grid.Row="2" Grid.Column="1" TextColor="Black" />
+                            <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                            <Entry x:Name="PASSEntry" Text="{Binding PassNas}" Grid.Row="2" Grid.Column="1" TextColor="Black"  />
 
-                            <Label Text="Folder" Grid.Row="3" Grid.Column="0" TextColor="Black" />
+                            <Label Text="Mapa" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                             <Entry x:Name="FOLDEREntry" Text="{Binding Folder}" Grid.Row="3" Grid.Column="1" TextColor="Black" />
 
-                            <Label Text="Sub Folder" Grid.Row="4" Grid.Column="0" TextColor="Black" />
+                            <Label Text="Podmapa" Grid.Row="4" Grid.Column="0" TextColor="Black"  VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                             <Entry x:Name="SUBFOLDEREntry" Text="{Binding SubFolder}" Grid.Row="4" Grid.Column="1" TextColor="Black" />
 
-                            <Button Text="Save" Command="{Binding SaveCommandNAS}" Grid.Row="5" Grid.Column="1"  />
-                            <Button Text="Load" Command="{Binding LoadCommandNAS}" Grid.Row="6" Grid.Column="1" />
-                            <Button Text="Delete" Command="{Binding DeleteCommandNAS}" Grid.Row="7" Grid.Column="1" />
+                            <Button Text="Spremi" Command="{Binding SaveCommandNAS}" Grid.Row="5" Grid.Column="1" Margin="0,10,0,10" CornerRadius="25" />
+
                         </Grid>
                     </DataTemplate>
                 </sfPopup:SfPopup.ContentTemplate>
@@ -152,11 +153,15 @@
                              x:Name="SQLPopup"
                              Closed="onClosed"
                              AutoSizeMode="Both"
-                             Margin="20">
+                             WidthRequest="260"
+
+                             >
+                
+                
 
                 <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
-                        <Grid Padding="10,0,10,0">
+                        <Grid Margin="10,0,10,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -164,31 +169,29 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
+
                             </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="3*" />
                             </Grid.ColumnDefinitions>
 
-                            <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" LineBreakMode="WordWrap" />
-                            <Entry x:Name="IPEntry" Text="{Binding IP}" Grid.Row="0" Grid.Column="1" TextColor="Black" />
+                            <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                            <Entry x:Name="IPEntry" Text="{Binding IP}" Grid.Row="0" Grid.Column="1" TextColor="Black"  />
 
-                            <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" LineBreakMode="NoWrap" />
-                            <Entry x:Name="USEREntry" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1" TextColor="Black" />
+                            <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                            <Entry x:Name="USEREntry" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1" TextColor="Black"  />
 
-                            <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" />
+                            <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                             <Entry x:Name="PASSEntry" Text="{Binding Password}" Grid.Row="2" Grid.Column="1" TextColor="Black" />
 
-                            <Label Text="Database" Grid.Row="3" Grid.Column="0" TextColor="Black" />
+                            <Label Text="Baza podataka" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                             <Entry x:Name="DatabaseEntry" Text="{Binding DatabaseName}" Grid.Row="3" Grid.Column="1" TextColor="Black" />
 
 
-                            <Button Text="Save" Command="{Binding SQLSaveCommand}" Grid.Row="5" Grid.Column="1" />
-                            <Button Text="Load" Command="{Binding SQLLoadCommand}" Grid.Row="6" Grid.Column="1" />
-                            <Button Text="Delete" Command="{Binding SQLDeleteCommand}" Grid.Row="7" Grid.Column="1" />
+                            <Button Text="Spremi" Command="{Binding SQLSaveCommand}" Grid.Row="5" Grid.Column="1" Margin="0,10,0,10" CornerRadius="25" />
+
                         </Grid>
                     </DataTemplate>
                 </sfPopup:SfPopup.ContentTemplate>
@@ -203,17 +206,19 @@
 
     <ShellContent Title="Početna" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"  />
     <ShellContent Title="Kalendar" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
-    <ShellContent Title="Dokumenti" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
-    <ShellContent Title="Klijenti" ContentTemplate="{DataTemplate views:Klijenti}" Route="Klijenti" />
-    <ShellContent Title="Naplata" ContentTemplate="{DataTemplate views:Naplata}" Route="Naplata" />
+    <ShellContent Title="Osobe" ContentTemplate="{DataTemplate views:Klijenti}" Route="Klijenti" />
     <ShellContent Title="Spisi" ContentTemplate="{DataTemplate views:Spisi}" Route="Spisi" />
+    <ShellContent Title="Dokumenti" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
+    <ShellContent Title="Naplata" ContentTemplate="{DataTemplate views:Naplata}" Route="Naplata" />
 
-    <MenuItem Text="NASPopup"
-              Command="{Binding ShowNASPopupCommand }"/>
-    <MenuItem Text="SQlPopup"
-              Command="{Binding SQLShowPopupCommand}"/>
-    <MenuItem Text="Support"
+    <MenuItem Text="Korisnička podrška"
               Command="{Binding OnSupportClickCommand}"/>
+    <MenuItem Text="SQL postavke"
+              Command="{Binding SQLShowPopupCommand}"/>
+    <MenuItem Text="NAS postavke"
+              Command="{Binding ShowNASPopupCommand }"/>
+
+
 
 
 </Shell>
