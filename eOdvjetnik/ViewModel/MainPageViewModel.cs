@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 using Syncfusion.Maui.Popup;
+using Microsoft.Maui.Devices;
 using Timer = System.Timers.Timer;
 
 namespace eOdvjetnik.ViewModel
@@ -116,6 +117,47 @@ namespace eOdvjetnik.ViewModel
                 OnPropertyChanged(nameof(Visible));
             }
         }
+
+        /// Varijable za popup i licencu
+        public string hardwareID = Microsoft.Maui.Storage.Preferences.Get("key", null);
+
+        private string activation_code;
+        public string Activation_code
+        {
+            get { return activation_code; }
+            set
+            {
+                activation_code = value;
+                OnPropertyChanged(nameof(Activation_code));
+            }
+        }
+        private string licence_type;
+        private DateTime expiry_date;
+
+        private bool licenceIsActive;
+        private bool expiredLicence;
+
+        private bool activationOpen, activationVisible;
+        public bool ActivationOpen
+        {
+            get { return ActivationOpen; }
+            set
+            {
+                activationOpen = value;
+                OnPropertyChanged(nameof(ActivationOpen));
+            }
+        }
+
+        public bool ActivationVisible
+        {
+            get { return activationVisible; }
+            set
+            {
+                ActivationVisible = value;
+                OnPropertyChanged(nameof(ActivationVisible));
+            }
+        }
+
         public MainPageViewModel()
         {
             SaveCommand = new Command(OnSaveClickedMySQL);
@@ -149,6 +191,13 @@ namespace eOdvjetnik.ViewModel
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += (s, e) => RefreshTime();
             timer.Start();
+
+            //Provjera licence
+            licenceIsActive = false; // maknuti kad se sredi provjera
+            HasLicenceExpired();
+            AktivnaLicenca();
+
+
         }
 
         //DateTime
@@ -158,7 +207,8 @@ namespace eOdvjetnik.ViewModel
             MainThread.BeginInvokeOnMainThread(() =>
             {
                datetime = DateTime.Now.ToString("f");
-            });
+            }
+            );
         }
 
         // POČETAK KOMANDI ZA SQL
@@ -351,6 +401,40 @@ namespace eOdvjetnik.ViewModel
         //        Debug.WriteLine(ex.Message);
         //    }
         //}
+
+        // Provjera licence //
+
+        private void AktivnaLicenca() //da se popup za licencu ne pojavljuje
+        {
+            if (!licenceIsActive || !expiredLicence )
+            {
+                ActivationOpen = true;
+                ActivationVisible = true;
+            }
+          
+        }
+
+        private void HasLicenceExpired() //za popup o isteku
+        {
+            if (DateTime.Now < expiry_date)
+            {
+                expiredLicence = true;
+            }
+        }
+
+
+        private void RobiĆeSredit()
+        {
+            //public string hardwareID
+
+
+            //aktivacijski_kod = .ToString;
+            //DateTime expirydate 
+            //string licence_type;
+
+
+        }
+
 
         private async void ShowAlert(string title, string message)
         {
