@@ -33,6 +33,8 @@ namespace eOdvjetnik.ViewModel
         private ObservableCollection<FileItem> fileItems;
         private void AddSpisToRemoteServer()
         {
+
+            /*
             try
             {
                 
@@ -46,6 +48,7 @@ namespace eOdvjetnik.ViewModel
             {
                 Debug.WriteLine(ex.Message + " in KalendarViewModel AddAppointmentToServer");
             }
+            */
         }
         public void generateFiles()
         {
