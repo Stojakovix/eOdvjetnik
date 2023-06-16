@@ -72,7 +72,7 @@
             <Label Text="BrojPredmeta" Grid.Row="19" Grid.Column="0" />
             <Entry x:Name="BrojPredmetaEntry" Grid.Row="19" Grid.Column="1" />
 
-            <Button x:Name="Save button" Grid.Row="20" Grid.Column="1" Command="" Text="Save spis"/>
+           
         </Grid>
     </ScrollView>
 </ContentPage>

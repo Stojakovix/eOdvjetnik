@@ -31,22 +31,22 @@ namespace eOdvjetnik.ViewModel
         }
 
         private ObservableCollection<FileItem> fileItems;
-        private void AddSpisToRemoteServer()
-        {
-            try
-            {
-                
-                string query = $"INSERT INTO Files (id, broj_spisa, spisicol, client_id, opponent_id, inicijali_voditelj_id, inicijali_dodao, filescol, inicijali_dodjeljeno, created, aktivno_pasivno, referenca, datum_promjene_statusa, uzrok, datum_kreiranja_spisa, datum_izmjene_spisa, kreirao, zadnje_uredio, jezik,broj_predmeta ) " +
-                    $"VALUES ('{fileItem.Id}', '{fileItem.BrojSpisa}', '{fileItem.Spisicol}', '{fileItem.ClientId}', '{fileItem.OpponentId}', '{fileItem.InicijaliVoditeljId}' , '{fileItem.InicijaliDodao}' , '{fileItem.Filescol}' , '{fileItem.InicijaliDodjeljeno}' , '{fileItem.Created}' , '{fileItem.AktivnoPasivno}' , '{fileItem.Referenca}' , '{fileItem.DatumPromjeneStatusa}' , '{fileItem.Uzrok}' , '{fileItem.DatumKreiranjaSpisa}' , '{fileItem.DatumIzmjeneSpisa}' , '{fileItem.Kreirao}' , '{fileItem.ZadnjeUredio}' , '{fileItem.Jezik}' , '{fileItem.BrojPredmeta}' )";
-
-                externalSQLConnect.sqlQuery(query);
-                Debug.WriteLine("Appointment added to remote server.");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message + " in KalendarViewModel AddAppointmentToServer");
-            }
-        }
+     // private void AddSpisToRemoteServer()
+     // {
+     //     try
+     //     {
+     //         
+     //         string query = $"INSERT INTO Files (id, broj_spisa, spisicol, client_id, opponent_id, inicijali_voditelj_id, inicijali_dodao, filescol, inicijali_dodjeljeno, created, aktivno_pasivno, referenca, datum_promjene_statusa, uzrok, datum_kreiranja_spisa, datum_izmjene_spisa, kreirao, zadnje_uredio, jezik,broj_predmeta ) " +
+     //             $"VALUES ('{fileItem.Id}', '{fileItem.BrojSpisa}', '{fileItem.Spisicol}', '{fileItem.ClientId}', '{fileItem.OpponentId}', '{fileItem.InicijaliVoditeljId}' , '{fileItem.InicijaliDodao}' , '{fileItem.Filescol}' , '{fileItem.InicijaliDodjeljeno}' , '{fileItem.Created}' , '{fileItem.AktivnoPasivno}' , '{fileItem.Referenca}' , '{fileItem.DatumPromjeneStatusa}' , '{fileItem.Uzrok}' , '{fileItem.DatumKreiranjaSpisa}' , '{fileItem.DatumIzmjeneSpisa}' , '{fileItem.Kreirao}' , '{fileItem.ZadnjeUredio}' , '{fileItem.Jezik}' , '{fileItem.BrojPredmeta}' )";
+     //
+     //         externalSQLConnect.sqlQuery(query);
+     //         Debug.WriteLine("Appointment added to remote server.");
+     //     }
+     //     catch (Exception ex)
+     //     {
+     //         Debug.WriteLine(ex.Message + " in KalendarViewModel AddAppointmentToServer");
+     //     }
+     // }
         public void generateFiles()
         {
 

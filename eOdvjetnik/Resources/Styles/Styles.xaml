@@ -380,11 +380,10 @@
 
     <Style TargetType="Page" ApplyToDerivedTypes="True">
         <Setter Property="Padding" Value="0"/>
-<<<<<<< Updated upstream
+
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White }}" />
-=======
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
->>>>>>> Stashed changes
+
+
     </Style>
 
     <Style TargetType="Shell" ApplyToDerivedTypes="True">
