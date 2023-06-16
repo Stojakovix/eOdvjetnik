@@ -140,23 +140,14 @@ namespace eOdvjetnik.ViewModel
         private bool activationOpen, activationVisible;
         public bool ActivationOpen
         {
-            get { return ActivationOpen; }
-            set
-            {
-                activationOpen = value;
-                OnPropertyChanged(nameof(ActivationOpen));
-            }
+            get; set;
+
         }
 
         public bool ActivationVisible
-        {
-            get { return activationVisible; }
-            set
-            {
-                ActivationVisible = value;
-                OnPropertyChanged(nameof(ActivationVisible));
-            }
-        }
+       {
+            get;set;
+       }
 
         public MainPageViewModel()
         {
@@ -196,6 +187,8 @@ namespace eOdvjetnik.ViewModel
             licenceIsActive = false; // maknuti kad se sredi provjera
             HasLicenceExpired();
             AktivnaLicenca();
+            ActivationOpen = true;
+            ActivationVisible = true;
 
 
         }
