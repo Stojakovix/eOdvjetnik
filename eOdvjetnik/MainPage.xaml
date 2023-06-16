@@ -59,8 +59,8 @@ padding-right: 30;
 
 
         <sfPopup:SfPopup x:Name="AktivacijskiPopup" 
-                             IsVisible="{Binding AktivacijaVisible}" 
-                             IsOpen="{Binding AktivacijaOpen}"
+                             IsVisible="{Binding ActivationVisible}" 
+                             IsOpen="{Binding ActivationOpen}"
                              IsFullScreen="True"
                              ShowHeader="False"
                              StaysOpen="False"
@@ -93,7 +93,7 @@ padding-right: 30;
                                   Margin="0,0,0,20"/>
 
                             <Label 
-                                  Text="{Binding aktivacijski_kod}"
+                                  Text="{Binding Activation_code}"
                                   VerticalOptions="Center" 
                                   HorizontalOptions="Center"
                                   FontSize="50" />
