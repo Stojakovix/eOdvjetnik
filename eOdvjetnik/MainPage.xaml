@@ -51,72 +51,48 @@ padding-right: 30;
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+            <VerticalStackLayout Grid.ColumnSpan="3"  IsVisible="{Binding ActivationVisible}" >
+                <Image Source="text_only.png" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
+
+                <Label 
+                        Text="AKTIVACIJSKI KOD" 
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center"
+                        FontSize="Large"
+                        Margin="0,0,0,20"/>
+
+                <Label 
+                        Text="{Binding Activation_code}"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center"
+                        FontSize="Large"
+                        Margin="0,0,0,120"/>
+
+
+            <Label  
+                        Text="Za aktivaciju aplikacije obratite se voditelju vašeg odvjetničkog društva."
+                        HorizontalOptions="Center"
+                        FontSize="Small"
+                        Margin="10,0,0,10"
+                        LineBreakMode="WordWrap"/>
+
+
+                <Label 
+                        Text="Kontakt informacije: tel: 0800 123 224, email: info@eodvjednik.hr"
+                        HorizontalOptions="Center"
+                        FontSize="Small"
+                        Margin="10,0,0,10"
+                        LineBreakMode="WordWrap" />
+
+            </VerticalStackLayout>
+
+
         <Image Source="text_only.png" Margin="5" HeightRequest="20" HorizontalOptions="Start" Grid.Row="1" />
         <Label Text="{Binding datetime}"  FontSize="Small" Margin="5" HorizontalOptions="End" Grid.Row="2" Grid.ColumnSpan="3"/>
-        <Label Text="Tip licence" FontSize="Small" Margin="5" HorizontalOptions="Center" Grid.Row="2" Grid.Column="1"  />
+        <Label Text="" FontSize="Small" Margin="5" HorizontalOptions="Center" Grid.Row="2" Grid.Column="1"/>
 
 
 
-
-        <sfPopup:SfPopup x:Name="AktivacijskiPopup" 
-                             IsVisible="{Binding ActivationVisible}" 
-                             IsOpen="{Binding ActivationOpen}"
-                             IsFullScreen="True"
-                             ShowHeader="False"
-                             StaysOpen="False"
-                             AutoSizeMode="Both"
-                             BackgroundColor="White">
-            
-            <sfPopup:SfPopup.ContentTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                        </Grid.RowDefinitions>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-
-                        <VerticalStackLayout Grid.Row="1" >
-                            <Image Source="text_only.png" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,150,0,50" />
-
-                            <Label 
-                                  Text="AKTIVACIJSKI KOD" 
-                                  VerticalOptions="Center" 
-                                  HorizontalOptions="Center"
-                                  FontSize="50"
-                                  Margin="0,0,0,20"/>
-
-                            <Label 
-                                  Text="{Binding Activation_code}"
-                                  VerticalOptions="Center" 
-                                  HorizontalOptions="Center"
-                                  FontSize="50" />
-
-                        </VerticalStackLayout>
-
-                        <Label  Grid.Row="2"
-                                Text="Za aktivaciju aplikacije obratite se voditelju vašeg odvjetničkog društva."
-                                HorizontalOptions="Start"
-                                FontSize="Small"
-                                Margin="15,0,0,0"/>
-                        
-                        
-                        <Label Grid.Row="3"
-                               Text="Kontakt informacije: tel: 0800 123 224, email: info@eodvjednik.hr"
-                               HorizontalOptions="Start"
-                               FontSize="Small"
-                               Margin="15,0,0,0"/>
-
-                    </Grid>
-                </DataTemplate>
-            </sfPopup:SfPopup.ContentTemplate>
-        </sfPopup:SfPopup>
 
 
     </Grid>
