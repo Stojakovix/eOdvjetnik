@@ -5,7 +5,7 @@
        xmlns:views="clr-namespace:eOdvjetnik.Views"
        xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
        xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"  
-       Shell.FlyoutBehavior="{OnPlatform WinUI=Flyout, MacCatalyst=Flyout, Android=Flyout, iOS=Flyout}"
+       Shell.FlyoutBehavior="{OnPlatform WinUI=Flyout, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
        Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=True, iOS=True}"
  
        >
@@ -16,12 +16,18 @@
     </Shell.BindingContext>
 
 
-
+    <Shell.ToolbarItems>
+        <ToolbarItem Text="Početna" Order="Primary"  />
+        <ToolbarItem Text="Kalendar" Order="Primary" />
+        <ToolbarItem Text="Dokumenti" Order="Primary" />
+        <ToolbarItem Text="Osobe" Order="Primary" />
+        <ToolbarItem Text="Spisi" Order="Primary" />
+    </Shell.ToolbarItems>
     <Shell.TitleView>
         <HorizontalStackLayout BackgroundColor="Transparent" Padding="0,0,0,0" >
             <HorizontalStackLayout.Margin>
                 <OnPlatform x:TypeArguments="Thickness" Default="0,0,0,0">
-                    <On Platform="MacCatalyst" Value="0,15,0,0" />
+                    <On Platform="MacCatalyst" Value="0,0,0,-50" />
                 </OnPlatform>
 
             </HorizontalStackLayout.Margin>
@@ -72,11 +78,11 @@
 
 
 
-            <Button Grid.Column="6" Text="Korisnička podrška" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"     
+            <Button Grid.Column="6" Text="Korisnička podrška" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"     
  />
-            <Button Grid.Column="7" Text="SQL postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding SQLShowPopupCommand}"  
+            <Button Grid.Column="7" Text="SQL postavke" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  BackgroundColor="Transparent" BorderWidth="0" Command="{Binding SQLShowPopupCommand}"  
  />
-            <Button Grid.Column="8" Text="NAS postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"  
+            <Button Grid.Column="8" Text="NAS postavke" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"  
  />
 
             <sfPopup:SfPopup x:Name="popup" 

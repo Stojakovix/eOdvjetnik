@@ -37,7 +37,7 @@ padding-right: 30;
         <local:MainPageViewModel/>
     </ContentPage.BindingContext>
 
-
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
