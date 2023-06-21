@@ -37,7 +37,7 @@ padding-right: 30;
         <local:MainPageViewModel/>
     </ContentPage.BindingContext>
 
-
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -59,14 +59,18 @@ padding-right: 30;
                         VerticalOptions="Center" 
                         HorizontalOptions="Center"
                         FontSize="Large"
-                        Margin="0,0,0,20"/>
+                        Margin="0,0,0,20"
+                        TextColor="Black"
+                    />
 
                 <Label 
                         Text="{Binding Activation_code}"
                         VerticalOptions="Center" 
                         HorizontalOptions="Center"
                         FontSize="Large"
-                        Margin="0,0,0,120"/>
+                        Margin="0,0,0,120"
+                        TextColor="Black"
+                    />
 
 
             <Label  
@@ -74,7 +78,11 @@ padding-right: 30;
                         HorizontalOptions="Center"
                         FontSize="Small"
                         Margin="10,0,0,10"
-                        LineBreakMode="WordWrap"/>
+                        LineBreakMode="WordWrap"
+                        TextColor="Black"
+                
+                />
+                
 
 
                 <Label 
@@ -82,14 +90,16 @@ padding-right: 30;
                         HorizontalOptions="Center"
                         FontSize="Small"
                         Margin="10,0,0,10"
-                        LineBreakMode="WordWrap" />
+                        LineBreakMode="WordWrap"
+                        TextColor="Black"        
+                />
 
             </VerticalStackLayout>
 
 
         <Image Source="text_only.png" Margin="5" HeightRequest="20" HorizontalOptions="Start" Grid.Row="1" />
-        <Label Text="{Binding datetime}"  FontSize="Small" Margin="5" HorizontalOptions="End" Grid.Row="2" Grid.ColumnSpan="3"/>
-        <Label Text="" FontSize="Small" Margin="5" HorizontalOptions="Center" Grid.Row="2" Grid.Column="1"/>
+        <Label TextColor="Black" Text="{Binding datetime}"  FontSize="Small" Margin="5" HorizontalOptions="End" Grid.Row="2" Grid.ColumnSpan="3"/>
+        <Label TextColor="Black" Text="" FontSize="Small" Margin="5" HorizontalOptions="Center" Grid.Row="2" Grid.Column="1"/>
 
 
 

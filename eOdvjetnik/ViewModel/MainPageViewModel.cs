@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace eOdvjetnik.ViewModel
 {
-    public class MainPageViewModel : INotifyPropertyChanged
+    public  class MainPageViewModel : INotifyPropertyChanged
     {
         //Varijable za NAS preferenceas
         private const string IP_nas = "IP Adresa";
@@ -120,16 +120,7 @@ namespace eOdvjetnik.ViewModel
         /// Varijable za popup i licencu
         public string hardwareID = Preferences.Get("key", null);
 
-        private string activation_code;
-        public string Activation_code
-        {
-            get { return activation_code; }
-            set
-            {
-                activation_code = value;
-                OnPropertyChanged(nameof(Activation_code));
-            }
-        }
+  
         private string licence_type;
         private DateTime expiry_date;
 
@@ -154,8 +145,12 @@ namespace eOdvjetnik.ViewModel
 
         }
 
+    
 
-        public  MainPageViewModel()
+     public string Activation_code = Preferences.Get("activation_code", null);
+
+
+        public MainPageViewModel()
         {
             SaveCommand = new Command(OnSaveClickedMySQL);
             LoadCommand = new Command(OnLoadClickedMySQL);
@@ -191,13 +186,11 @@ namespace eOdvjetnik.ViewModel
 
 
             //Provjera licence
-            WorkAround();
             licenceIsActive = false; // maknuti kad se sredi provjera
             HasLicenceExpired();
             AktivnaLicenca();
             ActivationOpen = true;
             ActivationVisible = true;
-
 
         }
 
@@ -422,61 +415,8 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-        public void WorkAround() // testirao da pokrene async Task ActivationLoop(), nije uspjelo
-        {
-            Console.WriteLine("Starting Activation Loop.");
-
-            Task.Run(async () =>
-            {
-                await ActivationLoop();
-                Console.WriteLine("Activation Loop completed.");
-            }).GetAwaiter().GetResult();
-        }
-        public async Task ActivationLoop()
-        {
-
-            string string1 = "https://cc.eodvjetnik.hr/eodvjetnikadmin/waiting-lists/request?cpuid=";
-            string string2 = Preferences.Get("key", null);
-            string activationURL = string.Concat(string1, string2);
-
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    HttpResponseMessage response = await client.GetAsync(activationURL);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string jsonContent = await response.Content.ReadAsStringAsync();
-                        response.EnsureSuccessStatusCode();
-                        var content = await response.Content.ReadAsStringAsync();
-                        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                        var data = JsonSerializer.Deserialize<ActivationData[]>(content, options);
-                        Console.WriteLine($"Received data: {data[0].id}, {data[0].created}, {data[0].hwid}, {data[0].IP}, {data[0].activation_code}");
-                    }
-                    else
-                    {
-                        // Što ako se ne može povezati
-                        
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Activation error:" + ex.Message);
-            }
-
-
-            
-        }
-        public class ActivationData
-        {
-            public int id { get; set; }
-            public DateTime created { get; set; }
-            public string hwid { get; set; }
-            public string IP { get; set; }
-            public string activation_code { get; set; }
-        }
+   
+        
 
         private async void ShowAlert(string title, string message)
         {

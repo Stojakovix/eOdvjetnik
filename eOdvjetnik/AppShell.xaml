@@ -20,7 +20,7 @@
         <FlexLayout BackgroundColor="Transparent" Padding="0,0,0,0">
             <FlexLayout.Margin>
                 <OnPlatform x:TypeArguments="Thickness" Default="0,0,0,0">
-                    <On Platform="MacCatalyst" Value="0,15,0,0" />
+                    <On Platform="MacCatalyst" Value="0,0,0,-50" />
                 </OnPlatform>
 
             </FlexLayout.Margin>
@@ -73,11 +73,11 @@
                     />
 
 
-            <Button Grid.Column="6" Text="Korisnička podrška" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"     
+            <Button Grid.Column="6" Text="Korisnička podrška" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"     
  />
-            <Button Grid.Column="7" Text="SQL postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding SQLShowPopupCommand}"  
+            <Button Grid.Column="7" Text="SQL postavke" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  BackgroundColor="Transparent" BorderWidth="0" Command="{Binding SQLShowPopupCommand}"  
  />
-            <Button Grid.Column="8" HorizontalOptions="End" Text="NAS postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"  
+            <Button Grid.Column="8" Text="NAS postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"  
  />
 
             <sfPopup:SfPopup x:Name="popup" 
