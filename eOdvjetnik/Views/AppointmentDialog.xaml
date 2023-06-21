@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
+             xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              x:Class="eOdvjetnik.Views.AppointmentDialog"
              Title="AppointmentDialog"
              xmlns:models="clr-namespace:eOdvjetnik.Models"
@@ -9,170 +10,183 @@
              
              >
     <Shell.NavBarIsVisible>False</Shell.NavBarIsVisible>
-    <StackLayout Padding="10,10,10,10"
-                 NavigationPage.HasNavigationBar="False">
-        <Grid
-        x:Name="eventName_layout"
-        WidthRequest="400"
-        HorizontalOptions="Start"
-        HeightRequest="40"
-        Padding="20,10,20,0"
-        VerticalOptions="Start">
-            <Entry
-            x:Name="eventNameText"
-            HeightRequest="40"
-            TextColor="Gray" />
-        </Grid>
-        <Grid
-        x:Name="organizer_layout"
-        HeightRequest="40"
-        WidthRequest="400"
-        HorizontalOptions="StartAndExpand"
-        Padding="20,20,20,0"
-        VerticalOptions="Start">
-            <Entry
-            x:Name="organizerText"
-            HeightRequest="40"
-            TextColor="Gray" />
-        </Grid>
-        <Grid
-        x:Name="startTimeLabel_layout"
-        HeightRequest="40"
-        Padding="20,10,20,0"
-        VerticalOptions="Start">
-            <Label
-            FontSize="15"
-            Text="Početak"
-            TextColor="Gray" />
-        </Grid>
-        <Grid
-        x:Name="StartdateTimePicker_layout"
-        Padding="20,0,20,0"
-        VerticalOptions="Start">
+    <StackLayout  NavigationPage.HasNavigationBar="False">
+
+        <Grid Margin="20,100,0,0" HorizontalOptions="Center" VerticalOptions="Center" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <Grid
-            x:Name="start_datepicker_layout"
-            Grid.Column="0"
-            HeightRequest="50"
-            VerticalOptions="Start"
-            >
-                <DatePicker x:Name="startDate_picker" HeightRequest="40" Format="dd/MM/yyyy"  />
+            
+            <Grid Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,10"
+                  x:Name="eventName_layout"
+                  WidthRequest="355"
+                  HorizontalOptions="Start"
+                  VerticalOptions="Start">
+                  <Entry
+                   Placeholder="Naziv ročišta"
+                  x:Name="eventNameText"
+                  TextColor="Gray" />
             </Grid>
-            <Grid
-            x:Name="start_timepicker_layout"
-            Grid.Column="1"
-            HeightRequest="50"
-            VerticalOptions="Start">
-                <TimePicker x:Name="startTime_picker" 
-                            HeightRequest="40" 
-                            Format="HH:mm"
-                            />
+
+            <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,10"
+                  x:Name="organizer_layout"
+                  WidthRequest="355"
+                  HorizontalOptions="Start"
+                  VerticalOptions="Start">
+
+                    <Entry  
+                        x:Name="organizerText"
+                        Placeholder="Dodatne informacije"
+                        TextColor="Gray"/>
+
+                
+  
+        
             </Grid>
-        </Grid>
-        <Grid
-        x:Name="endTimeLabel_layout"
-        HeightRequest="40"
-        Padding="20,10,20,0"
-        VerticalOptions="Start">
-            <Label
-            FontSize="15"
-            HeightRequest="40"
-            Text="Završetak"
-            TextColor="Gray" />
-        </Grid>
-        <Grid
+
+            <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="10,0,0,10"
+                  x:Name="startTimeLabel_layout"
+                  VerticalOptions="Center">
+                  <Label
+                  FontSize="Small"
+                  Text="Početak"
+                  TextColor="Gray" />
+            </Grid>
+
+            <Grid Grid.Row="3" Margin="0,0,0,10"
+                   x:Name="StartdateTimePicker_layout"
+                   VerticalOptions="Start">
+                     <Grid.ColumnDefinitions>
+                         <ColumnDefinition Width="auto" />
+                         <ColumnDefinition Width="auto"/>
+                     </Grid.ColumnDefinitions>
+                          <Grid   Grid.Column="0" 
+                                 x:Name="start_datepicker_layout"
+                                 VerticalOptions="Start">
+                              <DatePicker x:Name="startDate_picker" Format="dd/MM/yyyy" />
+                          </Grid>
+                
+                      <Grid
+                      x:Name="start_timepicker_layout" Padding="6,6,0,0"
+                          
+                      Grid.Column="1"
+                      >
+                          
+                          <TimePicker x:Name="startTime_picker" 
+                                      Format="HH:mm"/>
+                      </Grid>
+            </Grid>
+            
+            
+            
+            <Grid Grid.Row="4" Margin="10,0,0,10"
+                    x:Name="endTimeLabel_layout"
+                    VerticalOptions="Start">
+                     <Label
+                     FontSize="Small"
+                     Text="Završetak"
+                     TextColor="Gray" />
+             </Grid>
+
+            <Grid Grid.Row="5" Margin="0,0,0,10"
         x:Name="EndDateTimePicker_layout"
-        Padding="20,0,20,0"
         VerticalOptions="Start">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Grid
             x:Name="end_datepicker_layout"
             Grid.Column="0"
-            HeightRequest="50"
             VerticalOptions="Start">
                 <DatePicker
                 x:Name="endDate_picker"
                 Grid.Column="0"
-                HeightRequest="50"
                 VerticalOptions="Start"
                 Format="dd/MM/yyyy"/>
             </Grid>
             <Grid
-            x:Name="end_timepicker_layout"
+            x:Name="end_timepicker_layout" Padding="6,6,0,0"
             Grid.Column="1"
-            HeightRequest="50"
             VerticalOptions="Start">
                 <TimePicker
                 x:Name="endTime_picker"
-                HeightRequest="50"
                 VerticalOptions="Start"
                 Format="HH:mm"
                                
                 
                 />
             </Grid>
+                
+                
         </Grid>
-        <Grid
-      x:Name="allDay"
-      HeightRequest="40"
-      Padding="20,10,20,0"
-      VerticalOptions="Start">
+            
+            
+            <Grid Grid.Row="6" Margin="20,0,0,20"
+                 x:Name="allDay"
+                 VerticalOptions="Start">
+                       <Grid.ColumnDefinitions>
+                           <ColumnDefinition Width="auto" />
+                           <ColumnDefinition Width="*"/>
+                       </Grid.ColumnDefinitions>
+                       <Label 
+                   FontSize="15"  Grid.Column="0"
+                   VerticalTextAlignment="Center"
+                   Text="Cjelodnevni događaj"
+                   TextColor="Gray" />
+                       <Grid Grid.Column="1" Padding="20,0,0,0">
+                           <Switch x:Name="switchAllDay" HorizontalOptions="Start"  VerticalOptions="Center" BackgroundColor="White" ThumbColor="Gray" />
+                       </Grid>
+        </Grid>
+            
+            
+            
+            <Grid Grid.Row="7"  VerticalOptions="Start" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Label 
-        FontSize="15"  Grid.Column="0"
-        HeightRequest="40" VerticalTextAlignment="Center"
-        Text="Cjelodnevni događaj"
-        TextColor="Gray" />
-            <Grid Grid.Column="1" Padding="20,0,0,0">
-                <Switch x:Name="switchAllDay" HorizontalOptions="Start"  VerticalOptions="Center" />
+            <Grid
+                  Grid.Column="0">
+                  <Button
+                  x:Name="DeleteButton"
+                  Text="Delete"
+                  Background="Red"            
+                  TextColor="#3B3B3B"
+                  WidthRequest="100" />
+            </Grid>
+            <Grid 
+                  Grid.Column="1">
+                          <Button
+                  x:Name="cancelButton"
+                  Text="Cancel"
+                  BackgroundColor="Green"
+                  TextColor="#3B3B3B"
+                  WidthRequest="100" />
+            </Grid>
+            <Grid
+                   Grid.Column="2">
+                           <Button
+                   x:Name="saveButton"
+                   Text="Save"
+                   TextColor="White"
+                   WidthRequest="100" />
             </Grid>
         </Grid>
-        <Grid HeightRequest="40" VerticalOptions="Start" Padding="20,20,20,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid
-        Grid.Column="0"
-        HeightRequest="36"
-        Padding="10,0,0,0">
-                <Button
-        x:Name="DeleteButton"
-        Text="Delete"
-        Background="Red"            
-        TextColor="#3B3B3B"
-        WidthRequest="100" />
-            </Grid>
-            <Grid
-        Grid.Column="1"
-        HeightRequest="36"
-        Padding="10,0,0,0">
-                <Button
-        x:Name="cancelButton"
-        Text="Cancel"
-        TextColor="#3B3B3B"
-        WidthRequest="100" />
-            </Grid>
-            <Grid
-        Grid.Column="2"
-        HeightRequest="36"
-        Padding="0,0,10,0">
-                <Button
-        x:Name="saveButton"
-        Text="Save"
-        TextColor="White"
-        WidthRequest="100" />
-            </Grid>
         </Grid>
     </StackLayout>
 </ContentPage>
