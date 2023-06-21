@@ -39,6 +39,8 @@ padding-right: 30;
 
     
     <Grid>
+
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="30" />
@@ -50,10 +52,13 @@ padding-right: 30;
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Image Source="main_pozadina.jpg" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Aspect="AspectFill" />
 
-            <VerticalStackLayout Grid.ColumnSpan="3"  IsVisible="{Binding ActivationVisible}" >
-                <Image Source="text_only.png" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
 
+        <VerticalStackLayout  Grid.ColumnSpan="3"  IsVisible="{Binding ActivationVisible}" >
+                
+                <Image Source="text_only.png" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
+                
                 <Label 
                         Text="AKTIVACIJSKI KOD" 
                         VerticalOptions="Center" 
@@ -93,7 +98,7 @@ padding-right: 30;
                         LineBreakMode="WordWrap"
                         TextColor="Black"        
                 />
-
+            
             </VerticalStackLayout>
 
 
@@ -102,7 +107,7 @@ padding-right: 30;
         <Label TextColor="Black" Text="" FontSize="Small" Margin="5" HorizontalOptions="Center" Grid.Row="2" Grid.Column="1"/>
 
 
-
+        
 
 
     </Grid>
