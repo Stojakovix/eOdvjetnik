@@ -5,7 +5,7 @@
        xmlns:views="clr-namespace:eOdvjetnik.Views"
        xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
        xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"  
-       Shell.FlyoutBehavior="{OnPlatform WinUI=Flyout, MacCatalyst=Flyout, Android=Flyout, iOS=Flyout}"
+       Shell.FlyoutBehavior="{OnPlatform WinUI=Flyout, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
        Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=True, iOS=True}"
  
        >
@@ -16,39 +16,33 @@
     </Shell.BindingContext>
 
 
-
     <Shell.TitleView>
-        <HorizontalStackLayout BackgroundColor="Transparent" Padding="0,0,0,0" >
-            <HorizontalStackLayout.Margin>
+        <FlexLayout BackgroundColor="Transparent" Padding="0,0,0,0">
+            <FlexLayout.Margin>
                 <OnPlatform x:TypeArguments="Thickness" Default="0,0,0,0">
                     <On Platform="MacCatalyst" Value="0,15,0,0" />
                 </OnPlatform>
 
-            </HorizontalStackLayout.Margin>
+            </FlexLayout.Margin>
+            
+            
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="0" Text="Početna" Command="{Binding MainClickCommand}" 
                     x:Name="PočetnaButton" 
                     BackgroundColor="Transparent" 
                     BorderWidth="0"
-  
                     
                     />
+            
+            
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="1" Text="Kalendar" Command="{Binding KalendarClickCommand}" 
+                    Grid.Column="1" Text="Ročišnik" Command="{Binding KalendarClickCommand}" 
                     x:Name="KalendarButton" 
                     BackgroundColor="Transparent" 
                     BorderWidth="0"
                     
                     />
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="5" Text="Spisi" Command="{Binding SpisiClickCommand}" 
-                    x:Name="SpisiButton"
-                    BackgroundColor="Transparent"
-                    Margin="10,0" 
-                    BorderWidth="0"
-                    />
-
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="2" Text="Dokumenti" Command="{Binding DokumentiClickCommand}" 
                     x:Name="DokumentiButton"
@@ -70,13 +64,20 @@
                     BorderWidth="0"
                     />
 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+                    Grid.Column="5" Text="Spisi" Command="{Binding SpisiClickCommand}" 
+                    x:Name="SpisiButton"
+                    BackgroundColor="Transparent"
+                    Margin="10,0" 
+                    BorderWidth="0"
+                    />
 
 
             <Button Grid.Column="6" Text="Korisnička podrška" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"     
  />
             <Button Grid.Column="7" Text="SQL postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding SQLShowPopupCommand}"  
  />
-            <Button Grid.Column="8" Text="NAS postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"  
+            <Button Grid.Column="8" HorizontalOptions="End" Text="NAS postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"  
  />
 
             <sfPopup:SfPopup x:Name="popup" 
@@ -198,7 +199,7 @@
             </sfPopup:SfPopup>
 
 
-        </HorizontalStackLayout>
+        </FlexLayout>
     </Shell.TitleView>
 
 

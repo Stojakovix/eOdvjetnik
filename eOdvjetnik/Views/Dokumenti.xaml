@@ -41,7 +41,7 @@
                         <ViewCell>
                           <StackLayout Orientation="Horizontal" Padding="2" >
                             <Image Source="folder_1484.png" WidthRequest="50" HeightRequest="50" Aspect="Fill"/>
-                                    <Label x:Name="DocumentLabel" Text="{Binding .}" VerticalTextAlignment="Center" Margin="10,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    <Label x:Name="DocumentLabel" Text="{Binding .}" VerticalTextAlignment="Center" Margin="10,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" TextColor="Black">
 
                             </Label>
                                     <StackLayout.GestureRecognizers>

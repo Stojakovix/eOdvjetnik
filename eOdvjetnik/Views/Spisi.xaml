@@ -5,45 +5,65 @@
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
              BackgroundColor="White"
              
+             
              Title="Spisi">
 
     <ContentPage.BindingContext>
         <viewmodel:SpisiViewModel/>
     </ContentPage.BindingContext>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Dodaj" Order="Secondary" Command="{Binding OnDodajClick}"/>
-        <ToolbarItem Text="Bezveze provjera" Order="Secondary" Priority="1"/>
-        <ToolbarItem Text="Drugi item" Order="Secondary"/>
-    </ContentPage.ToolbarItems>
+    <!--<ContentPage.ToolbarItems  >
+        <ToolbarItem Text="Dodaj" Order="Primary" Command="{Binding OnDodajClick}" />
+        <ToolbarItem Text="Bezveze provjera" Order="Primary" Priority="1"/>
+        <ToolbarItem Text="Drugi item" Order="Primary"/>
+    </ContentPage.ToolbarItems>-->
+
+    <!--<Shell.TitleView>
+        <FlexLayout>
+            <Button Text="Dodaj" Command="{Binding OnDodajClick}"></Button>
+        </FlexLayout>
+    </Shell.TitleView>-->
+
     <ContentPage.Content>
         <ScrollView>
             <VerticalStackLayout>
+                
+                <Grid Margin="0,0,0,10" Padding="5" BackgroundColor="White" Background="LightGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Text="Dodaj" Command="{Binding OnDodajClick}" BorderColor="LightBlue" HorizontalOptions="Fill"/>
+                    <Button Grid.Column="1" Text="Obriši" BorderColor="LightBlue" HorizontalOptions="Fill"/>
+                    <SearchBar Grid.Column="2" Placeholder="Pretraži" HorizontalOptions="EndAndExpand" BackgroundColor="LightGray"></SearchBar>
+
+                </Grid>
+
+                <Grid Margin="5" Padding="5" BackgroundColor="White">
+                    <Grid.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="TextColor" Value="Black" />
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" MaximumWidthRequest="150" Text="ID" />
+                    <Label Grid.Row="0" Grid.Column="1" MaximumWidthRequest="150" Text="Broj spisa" />
+                    <Label Grid.Row="0" Grid.Column="2" MaximumWidthRequest="150" Text="Created" />
+
+                </Grid>
 
 
-            <Grid Margin="5" Padding="5" BackgroundColor="White">
-                <Grid.Resources>
-                    <Style TargetType="Label">
-                        <Setter Property="TextColor" Value="Black" />
-                    </Style>
-                </Grid.Resources>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" MaximumWidthRequest="150" Text="ID" />
-                <Label Grid.Row="0" Grid.Column="1" MaximumWidthRequest="150" Text="Broj spisa" />
-                <Label Grid.Row="0" Grid.Column="2" MaximumWidthRequest="150" Text="Created" />
-
-            </Grid>
-
-            
                 <ListView ItemsSource="{Binding FileItems}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -76,8 +96,8 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            
-        </VerticalStackLayout>
+
+            </VerticalStackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>
