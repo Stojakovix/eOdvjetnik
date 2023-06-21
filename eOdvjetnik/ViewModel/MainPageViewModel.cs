@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace eOdvjetnik.ViewModel
 {
-    public  class MainPageViewModel : INotifyPropertyChanged
+    public class MainPageViewModel : INotifyPropertyChanged
     {
         //Varijable za NAS preferenceas
         private const string IP_nas = "IP Adresa";
@@ -57,7 +57,7 @@ namespace eOdvjetnik.ViewModel
         public string IPNas { get; set; }
         public string UserNas { get; set; }
         public string PassNas { get; set; }
-        public string Folder { get; set; } 
+        public string Folder { get; set; }
         public string SubFolder { get; set; }
 
 
@@ -77,7 +77,7 @@ namespace eOdvjetnik.ViewModel
 
         public ICommand SQLClosePopupCommand { get; set; }
 
-       
+
 
         public bool SQLPopupOpen
         {
@@ -101,7 +101,7 @@ namespace eOdvjetnik.ViewModel
 
         public bool PopupOpen
         {
-            get { return isOpen;}
+            get { return isOpen; }
             set
             {
                 isOpen = value;
@@ -122,7 +122,7 @@ namespace eOdvjetnik.ViewModel
         /// Varijable za popup i licencu
         public string hardwareID = Preferences.Get("key", null);
 
-  
+
         private string licence_type;
         private DateTime expiry_date;
 
@@ -137,9 +137,9 @@ namespace eOdvjetnik.ViewModel
         }
 
         public bool ActivationVisible
-       {
-            get;set;
-       }
+        {
+            get; set;
+        }
 
         public string activationURL
         {
@@ -147,9 +147,9 @@ namespace eOdvjetnik.ViewModel
 
         }
 
-    
 
-     public string Activation_code { get; set; }
+
+        public string Activation_code { get; set; }
 
 
         public MainPageViewModel()
@@ -204,7 +204,7 @@ namespace eOdvjetnik.ViewModel
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
-               datetime = DateTime.Now.ToString("f");
+                datetime = DateTime.Now.ToString("f");
             }
             );
         }
@@ -228,9 +228,9 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine("Saved");
                 Debug.WriteLine(UserName + " " + Password);
 
-               
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
@@ -279,7 +279,7 @@ namespace eOdvjetnik.ViewModel
         //POČETAK KOMANDI ZA NAS
 
         private void OnSaveClickedNas()
-        {         
+        {
             try
             {
                 // Preference value
@@ -303,8 +303,8 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message + "In MainPageViewModel NAS");
             }
         }
-        
-        private void OnLoadClickedNas() 
+
+        private void OnLoadClickedNas()
         {
             try
             {
@@ -358,16 +358,34 @@ namespace eOdvjetnik.ViewModel
 
         private void Popup()
         {
-            PopupOpen = true;
-            Visible = true;
+            try
+            {
+                PopupOpen = true;
+                Visible = true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
 
 
         }
 
         private void PopupClose()
         {
-            PopupOpen = false;
-            Visible = false;
+            try
+            {
+                PopupOpen = false;
+                Visible = false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            
+
+
         }
         /// <summary>
         /// NAPRAVI SQL POPUP NE RADI
@@ -375,14 +393,32 @@ namespace eOdvjetnik.ViewModel
         /// </summary>
         private void SQLPopup()
         {
-            SQLPopupOpen = true;
-            SQLVisible = true;
+
+            try
+            {
+                SQLPopupOpen = true;
+                SQLVisible = true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
         }
 
         private void SQLPopupClose()
         {
-            SQLPopupOpen = false;
-            SQLVisible = false;
+
+            try
+            {
+                SQLPopupOpen = false;
+                SQLVisible = false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
 
         }
         //private void PopupAccept()
@@ -404,11 +440,11 @@ namespace eOdvjetnik.ViewModel
 
         private void AktivnaLicenca() //da se popup za licencu ne pojavljuje
         {
-            if (!licenceIsActive || !expiredLicence )
+            if (!licenceIsActive || !expiredLicence)
             {
                 ActivationVisible = false;
             }
-          
+
         }
 
         private void HasLicenceExpired() //za popup o isteku
@@ -419,8 +455,8 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-   
-        
+
+
 
         private async void ShowAlert(string title, string message)
         {

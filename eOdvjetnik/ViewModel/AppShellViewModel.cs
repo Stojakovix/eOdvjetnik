@@ -331,15 +331,31 @@ namespace eOdvjetnik.ViewModel
         }
         private void NASPopup()
         {
-            NASPopupOpen = true;
-            NASVisible = true;
+            try
+            {
+                NASPopupOpen = true;
+                NASVisible = true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            
             
         }
 
         private void NASPopupClosed()
         {
-            NASPopupOpen = false;
-            NASVisible = false;
+            try
+            {
+                NASPopupOpen = false;
+                NASVisible = false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            
         }
         #endregion
 
@@ -409,13 +425,29 @@ namespace eOdvjetnik.ViewModel
 
         private void SQLPopup()
         {
-            SQLPopupOpen = true;
-            SQLVisible = true;
+            try
+            {
+                SQLPopupOpen = true;
+                SQLVisible = true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            
         }
         private void SQLPopupClose()
         {
-            SQLPopupOpen = false;
-            SQLVisible = false;
+            try
+            {
+                SQLPopupOpen = false;
+                SQLVisible = false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            
 
         }
 
