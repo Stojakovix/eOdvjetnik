@@ -77,6 +77,8 @@ namespace eOdvjetnik.ViewModel
 
         public ICommand SQLClosePopupCommand { get; set; }
 
+       
+
         public bool SQLPopupOpen
         {
             get { return sqlOpen; }
@@ -147,7 +149,7 @@ namespace eOdvjetnik.ViewModel
 
     
 
-     public string Activation_code = Preferences.Get("activation_code", null);
+     public string Activation_code { get; set; }
 
 
         public MainPageViewModel()
@@ -177,6 +179,8 @@ namespace eOdvjetnik.ViewModel
             Password = Preferences.Get(PASS_mysql, "");
             DatabaseName = Preferences.Get(databasename_mysql, "");
 
+            Activation_code = Preferences.Get("activation_code", "");
+
             //DateTimeRefresh
             RefreshTime();
             var timer = Application.Current.Dispatcher.CreateTimer();
@@ -184,7 +188,7 @@ namespace eOdvjetnik.ViewModel
             timer.Tick += (s, e) => RefreshTime();
             timer.Start();
 
-
+            Debug.WriteLine(Activation_code + "-------------------------------------");
             //Provjera licence
             licenceIsActive = false; // maknuti kad se sredi provjera
             HasLicenceExpired();
