@@ -4,6 +4,7 @@ using eOdvjetnik.Data;
 using System.Security.Cryptography;
 using eOdvjetnik.ViewModel;
 using System.Globalization;
+using System.Text.Json;
 
 
 
@@ -37,9 +38,67 @@ public partial class MainPage : ContentPage
     private HttpClient _Client = new HttpClient();
     DeviceIdDatabase database;
 
+    public string activation_code {get;set;}
+
     //KRAJ NAS
 
+    public async void ActivationLoop()
+    {
+        Debug.WriteLine("MainPageViewModel - > ActivationLoop");
+        string string1 = "https://cc.eodvjetnik.hr/eodvjetnikadmin/waiting-lists/request?cpuid=";
+        string string2 = Preferences.Get("key", null);
+        string activationURL = string.Concat(string1, string2);
+        Debug.WriteLine("MainPageViewModel - > ActivationLoop - Spoio URL" + activationURL);
+        try
+        {
+            Debug.WriteLine("MainPageViewModel - > ActivationLoop -> usao u try");
 
+            using (var client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(activationURL);
+                Debug.WriteLine("MainPageViewModel - > ActivationLoop -> Dohvatio response");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("MainPageViewModel - > ActivationLoop -> uspješno dohvatio");
+
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
+                    var content = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("MainPageViewModel - > ActivationLoop -> contetnt " + content);
+
+                    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                    var data = JsonSerializer.Deserialize<ActivationData[]>(content, options);
+
+                    activation_code = data[0].activation_code;
+
+                    Preferences.Set("activation_code", activation_code);
+                Debug.WriteLine($"Received data: {data[0].id}, {data[0].created}, {data[0].hwid}, {data[0].IP}, {data[0].activation_code}");
+                }
+                else
+                {
+                    // Što ako se ne može povezati
+
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Activation error:" + ex.Message);
+        }
+
+
+
+    }
+
+    public class ActivationData
+    {
+        public int id { get; set; }
+        public DateTime created { get; set; }
+        public string hwid { get; set; }
+        public string IP { get; set; }
+        public string activation_code { get; set; }
+    }
 
     async void AskForWiFiPermission()
     {
@@ -69,10 +128,9 @@ public partial class MainPage : ContentPage
         DateTime parsedDateTime = DateTime.ParseExact(input, "dd. MM. yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
         string output = parsedDateTime.ToString("yyyy-MM-dd HH:mm:ss");
         Console.WriteLine(output);
+        ActivationLoop();
 
-        
-
-    }
+        }
     //private void OnSaveClicked(object sender, EventArgs e)
     //{
     //    Preferences.Set(IP, IPEntry.Text);
@@ -234,7 +292,7 @@ public partial class MainPage : ContentPage
     //}
 
 
-    protected override void OnAppearing()
+    protected  override void OnAppearing()
     {
 
         try
@@ -259,7 +317,6 @@ public partial class MainPage : ContentPage
                 Debug.WriteLine("spremio u preferences");
                 string preferencesKey = Microsoft.Maui.Storage.Preferences.Get("key", null);
                 Debug.WriteLine("Izvađen iz preferences: " + preferencesKey);
-
                 //Items = JsonSerializer.Deserialize<List<TodoItem>>(content, _serializerOptions);
                 /*
 
@@ -288,6 +345,8 @@ public partial class MainPage : ContentPage
             else
             {
                 Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Microsoft.Maui.Storage.Preferences.Get("key", null));
+
+      
 
             }
         }
