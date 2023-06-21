@@ -43,7 +43,7 @@ padding-right: 30;
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="30"  />
 
         </Grid.RowDefinitions>
 
@@ -52,10 +52,10 @@ padding-right: 30;
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Image Source="main_pozadina.jpg" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Aspect="AspectFill" />
+        <Image Opacity="0.5" HorizontalOptions="Center" Grid.ColumnSpan="3" Grid.Row="0" Source="main_pozadina.jpg"   Aspect="AspectFill"   />
 
 
-        <VerticalStackLayout  Grid.ColumnSpan="3"  IsVisible="{Binding ActivationVisible}" >
+        <VerticalStackLayout   Grid.ColumnSpan="3"  IsVisible="{Binding ActivationVisible}" >
                 
                 <Image Source="text_only.png" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
                 
@@ -101,13 +101,13 @@ padding-right: 30;
             
             </VerticalStackLayout>
 
-
-        <Image Source="text_only.png" Margin="5" HeightRequest="20" HorizontalOptions="Start" Grid.Row="1" />
+        <Label BackgroundColor="#d3d3d3" Grid.Row="1" Grid.ColumnSpan="3" />
+        <Image Source="text_only.png" Margin="5" HeightRequest="20" HorizontalOptions="Start" Grid.Row="1"  />
         <Label TextColor="Black" Text="{Binding datetime}"  FontSize="Small" Margin="5" HorizontalOptions="End" Grid.Row="2" Grid.ColumnSpan="3"/>
         <Label TextColor="Black" Text="" FontSize="Small" Margin="5" HorizontalOptions="Center" Grid.Row="2" Grid.Column="1"/>
 
 
-        
+
 
 
     </Grid>
