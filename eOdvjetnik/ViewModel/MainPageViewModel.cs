@@ -35,6 +35,7 @@ namespace eOdvjetnik.ViewModel
                 OnPropertyChanged(nameof(datetime));
             }
         }
+        public string Version { get; set; }
 
         //Save za mysql
         public ICommand SaveCommand { get; set; }
@@ -121,35 +122,17 @@ namespace eOdvjetnik.ViewModel
 
         /// Varijable za popup i licencu
         public string hardwareID = Preferences.Get("key", null);
+        public string Activation_code { get; set; }
+        public string licence_type { get; set; }
+        public DateTime expire_date { get; set; }
+        public string expireDate { get; set; }
 
-
-        private string licence_type;
-        private DateTime expiry_date;
-
-        private bool licenceIsActive;
+        private string licenceIsActive;
         private bool expiredLicence;
-
-        private bool activationOpen, activationVisible;
-        public bool ActivationOpen
-        {
-            get; set;
-
-        }
-
         public bool ActivationVisible
         {
             get; set;
         }
-
-        public string activationURL
-        {
-            get; set;
-
-        }
-
-
-
-        public string Activation_code { get; set; }
 
 
         public MainPageViewModel()
@@ -179,7 +162,17 @@ namespace eOdvjetnik.ViewModel
             Password = Preferences.Get(PASS_mysql, "");
             DatabaseName = Preferences.Get(databasename_mysql, "");
 
+
             Activation_code = Preferences.Get("activation_code", "");
+          licence_type = Preferences.Get("licence_type", ""); 
+          expireDate = Preferences.Get("expire_date", "");
+          licenceIsActive = Preferences.Get("licence_active", ""); //konvertirati u bool
+
+            Version = $"Verzija {AppInfo.VersionString}";
+            //Provjera licence
+            //HasLicenceExpired();
+            // LicenceStatus(); // otkomentirati kasnije
+            ActivationVisible = true; //privremeno, za prikaz Aktivacije na glavnoj stranici
 
             //DateTimeRefresh
             RefreshTime();
@@ -187,14 +180,6 @@ namespace eOdvjetnik.ViewModel
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += (s, e) => RefreshTime();
             timer.Start();
-
-            Debug.WriteLine(Activation_code + "-------------------------------------");
-            //Provjera licence
-            licenceIsActive = false; // maknuti kad se sredi provjera
-            HasLicenceExpired();
-            AktivnaLicenca();
-            ActivationOpen = true;
-            ActivationVisible = true;
 
         }
 
@@ -205,6 +190,7 @@ namespace eOdvjetnik.ViewModel
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 datetime = DateTime.Now.ToString("f");
+
             }
             );
         }
@@ -367,9 +353,6 @@ namespace eOdvjetnik.ViewModel
             {
                 Debug.WriteLine(ex.Message);
             }
-
-
-
         }
 
         private void PopupClose()
@@ -383,9 +366,6 @@ namespace eOdvjetnik.ViewModel
             {
                 Debug.WriteLine(ex.Message);
             }
-            
-
-
         }
         /// <summary>
         /// NAPRAVI SQL POPUP NE RADI
@@ -408,7 +388,6 @@ namespace eOdvjetnik.ViewModel
 
         private void SQLPopupClose()
         {
-
             try
             {
                 SQLPopupOpen = false;
@@ -418,8 +397,6 @@ namespace eOdvjetnik.ViewModel
             {
                 Debug.WriteLine(ex.Message);
             }
-
-
         }
         //private void PopupAccept()
         //{
@@ -438,24 +415,29 @@ namespace eOdvjetnik.ViewModel
 
         // Provjera licence //
 
-        private void AktivnaLicenca() //da se popup za licencu ne pojavljuje
+        private void LicenceStatus() //Prikaz aktivacije na glavnoj stranici 
         {
-            if (!licenceIsActive || !expiredLicence)
-            {
-                ActivationVisible = false;
-            }
+            Debug.WriteLine("Datum isteka licence:" + expireDate);
 
+          //if (!licenceIsActive || !expiredLicence)
+          //{
+          //    ActivationVisible = false;
+          //}
+          //else
+          //{
+          //    ActivationVisible = true;
+          //}
         }
 
-        private void HasLicenceExpired() //za popup o isteku
+        private void HasLicenceExpired() // Provjera isteka licence
         {
-            if (DateTime.Now < expiry_date)
+            if (DateTime.Now < expire_date)
             {
                 expiredLicence = true;
+                Debug.WriteLine("Licence has expired on:" + expireDate);
+
             }
         }
-
-
 
 
         private async void ShowAlert(string title, string message)
