@@ -52,7 +52,7 @@ padding-right: 30;
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Image Opacity="0.5" HorizontalOptions="Center" Grid.ColumnSpan="3" Grid.Row="0" Source="main_pozadina.jpg"   Aspect="AspectFill"   />
+        <Image Opacity="0.5" HorizontalOptions="Center" Grid.ColumnSpan="3" Grid.Row="0" Source="main_pozadina.jpg"   Aspect="AspectFill" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=False}"  />
 
 
         <VerticalStackLayout   Grid.ColumnSpan="3"  IsVisible="{Binding ActivationVisible}" >
