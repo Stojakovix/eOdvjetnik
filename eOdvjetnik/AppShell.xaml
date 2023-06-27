@@ -6,7 +6,7 @@
        xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
        xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"  
        Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
-       Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=True, iOS=True}"
+       Shell.NavBarIsVisible="{OnPlatform WinUI=False, MacCatalyst=True, Android=True, iOS=True}"
  
        >
 
@@ -203,11 +203,13 @@
     </Shell.TitleView>
     <FlyoutItem>
         <ShellContent Title="Početna" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"  />
-        <ShellContent Title="Kalendar" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
-        <ShellContent Title="Osobe" ContentTemplate="{DataTemplate views:Klijenti}" Route="Klijenti" />
+        <ShellContent Title="Ročišnik" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
         <ShellContent Title="Spisi" ContentTemplate="{DataTemplate views:Spisi}" Route="Spisi" />
-        <ShellContent Title="Dokumenti" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
-        <ShellContent Title="Naplata" ContentTemplate="{DataTemplate views:Naplata}" Route="Naplata" />
+        <ShellContent Title="Kontakti" ContentTemplate="{DataTemplate views:Klijenti}" Route="Klijenti" />
+        <ShellContent Title="Tarife i Naplata" ContentTemplate="{DataTemplate views:Naplata}" Route="Naplata" />
+        <ShellContent Title="Svi Dokumenti" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
+        <ShellContent Title="Korisnička podrška" />
+        <ShellContent Title="Postavke" />
     </FlyoutItem>
     <MenuItem Text="Korisnička podrška"
               Command="{Binding OnSupportClickCommand}"/>

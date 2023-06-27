@@ -5,6 +5,9 @@ using System.Security.Cryptography;
 using eOdvjetnik.ViewModel;
 using System.Globalization;
 using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Runtime.InteropServices.JavaScript;
+
 
 
 
@@ -38,7 +41,9 @@ public partial class MainPage : ContentPage
     private HttpClient _Client = new HttpClient();
     DeviceIdDatabase database;
 
-    public string activation_code {get;set;}
+    public string activation_code { get; set; }
+    public string licence_type { get; set; }
+    public string expire_date { get; set; }
 
     //KRAJ NAS
 
@@ -65,15 +70,15 @@ public partial class MainPage : ContentPage
                     string jsonContent = await response.Content.ReadAsStringAsync();
                     response.EnsureSuccessStatusCode();
                     var content = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine("MainPageViewModel - > ActivationLoop -> contetnt " + content);
+                    Debug.WriteLine("MainPageViewModel - > ActivationLoop -> content " + content);
 
                     var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                    var data = JsonSerializer.Deserialize<ActivationData[]>(content, options);
+                    var data = System.Text.Json.JsonSerializer.Deserialize<ActivationData[]>(content, options);
 
                     activation_code = data[0].activation_code;
-
                     Preferences.Set("activation_code", activation_code);
-                Debug.WriteLine($"Received data: {data[0].id}, {data[0].created}, {data[0].hwid}, {data[0].IP}, {data[0].activation_code}");
+
+                    Debug.WriteLine($"Received data: {data[0].id}, {data[0].created}, {data[0].hwid}, {data[0].IP}, {data[0].activation_code}");
                 }
                 else
                 {
@@ -86,10 +91,8 @@ public partial class MainPage : ContentPage
         {
             Debug.WriteLine("Activation error:" + ex.Message);
         }
-
-
-
     }
+
 
     public class ActivationData
     {
@@ -99,6 +102,120 @@ public partial class MainPage : ContentPage
         public string IP { get; set; }
         public string activation_code { get; set; }
     }
+
+    public async void LicenceCheck()
+    {
+        Debug.WriteLine("MainPageViewModel - > LicenceCheck");
+        string string1 = "https://cc.eodvjetnik.hr/eodvjetnikadmin/licences/request?cpuid=";
+        string string2 = Preferences.Get("key", null);
+        string licenceURL = string.Concat(string1, string2);
+        Debug.WriteLine("MainPageViewModel - > LicenceCheck - Spoio URL" + licenceURL);
+        try
+        {
+            Debug.WriteLine("MainPageViewModel - > LicenceCheck -> usao u try");
+
+            using (var client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(licenceURL);
+                Debug.WriteLine("MainPageViewModel - > LicenceCheck -> Dohvatio response");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("MainPageViewModel - > LicenceCheck -> uspješno dohvatio");
+
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
+                    var content = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("MainPageViewModel - > LicenceCheck -> content " + content);
+
+
+                    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                    var jsonObject = JsonSerializer.Deserialize<JsonElement>(content, options);
+
+                    // int licenceIsActive = jsonObject.GetProperty("Devices")[0].GetProperty("licence_active").GetInt32(); 
+                    string licenceIsActive = jsonObject.GetProperty("Devices")[0].GetProperty("licence_active").GetString();
+                    string licenceType = jsonObject.GetProperty("LicenceTypes")[0].GetProperty("naziv").GetString();
+                    string expireDate = jsonObject.GetProperty("Licences")[0].GetProperty("expire_date").GetString();
+
+                    Preferences.Set("expire_date", expireDate);
+                    Preferences.Set("licence_type", licenceType);
+                    Preferences.Set("licence_active", licenceIsActive);
+
+
+                    Debug.WriteLine("Datum isteka licence: " + expireDate);
+                    Debug.WriteLine("Vrsta licence: " + expireDate);
+                    Debug.WriteLine("Licenca je aktivna? " + licenceIsActive);
+
+
+
+                }
+                else
+                {
+                    // Što ako se ne može povezati
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Activation error:" + ex.Message);
+        }
+    }
+
+    public class Device
+    {
+        public int id { get; set; }
+        public int company_id { get; set; }
+        public string hwid { get; set; }
+        public int licence_active { get; set; }
+        public int device_type_id { get; set; }
+        public string opis { get; set; }
+    }
+
+    public class DevicesHasLicence
+    {
+        public int devices_id { get; set; }
+        public int licences_id { get; set; }
+    }
+
+    public class Licence
+    {
+        public int id { get; set; }
+        public int licence_type_id { get; set; }
+        public DateTime expire_date { get; set; }
+        public DateTime activation_date { get; set; }
+        public int company_id { get; set; }
+        public object automatic_renewal { get; set; }
+    }
+
+    public class Company
+    {
+        public int id { get; set; }
+        public string naziv { get; set; }
+        public string OIB { get; set; }
+        public string adresa { get; set; }
+        public string email { get; set; }
+        public string telefon { get; set; }
+        public string fax { get; set; }
+        public string mobitel { get; set; }
+        public int user_id { get; set; }
+    }
+
+    public class LicenceType
+    {
+        public int id { get; set; }
+        public string naziv { get; set; }
+        public int cijena { get; set; }
+    }
+
+    public class RootObject
+    {
+        public List<Device> Devices { get; set; }
+        public List<DevicesHasLicence> DevicesHasLicences { get; set; }
+        public List<Licence> Licences { get; set; }
+        public List<Company> Companies { get; set; }
+        public List<LicenceType> LicenceTypes { get; set; }
+    }
+
 
     async void AskForWiFiPermission()
     {
@@ -129,8 +246,9 @@ public partial class MainPage : ContentPage
         string output = parsedDateTime.ToString("yyyy-MM-dd HH:mm:ss");
         Console.WriteLine(output);
         ActivationLoop();
+        LicenceCheck();
 
-        }
+    }
     //private void OnSaveClicked(object sender, EventArgs e)
     //{
     //    Preferences.Set(IP, IPEntry.Text);
@@ -292,7 +410,7 @@ public partial class MainPage : ContentPage
     //}
 
 
-    protected  override void OnAppearing()
+    protected override void OnAppearing()
     {
 
         try
@@ -346,7 +464,7 @@ public partial class MainPage : ContentPage
             {
                 Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Microsoft.Maui.Storage.Preferences.Get("key", null));
 
-      
+
 
             }
         }

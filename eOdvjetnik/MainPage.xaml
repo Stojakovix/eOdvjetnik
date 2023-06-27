@@ -51,15 +51,18 @@ padding-right: 30;
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+
         </Grid.ColumnDefinitions>
-        <Image Opacity="0.5" HorizontalOptions="Center" Grid.ColumnSpan="3" Grid.Row="0" Source="main_pozadina.jpg"   Aspect="AspectFill" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=False}"  />
+        <Image Opacity="0.5" HorizontalOptions="Center" Grid.ColumnSpan="3" Grid.Row="0" Source="main_pozadina.jpg"  
+               Aspect="AspectFill" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=False}"  />
 
+        <VerticalStackLayout   Grid.ColumnSpan="5"  IsVisible="{Binding ActivationVisible}" >
 
-        <VerticalStackLayout   Grid.ColumnSpan="3"  IsVisible="{Binding ActivationVisible}" >
-                
-                <Image Source="text_only.png" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
-                
-                <Label 
+            <Image Source="text_only.png" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
+
+            <Label 
                         Text="AKTIVACIJSKI KOD" 
                         VerticalOptions="Center" 
                         HorizontalOptions="Center"
@@ -68,7 +71,7 @@ padding-right: 30;
                         TextColor="Black"
                     />
 
-                <Label 
+            <Label 
                         Text="{Binding Activation_code}"
                         VerticalOptions="Center" 
                         HorizontalOptions="Center"
@@ -87,10 +90,10 @@ padding-right: 30;
                         TextColor="Black"
                 
                 />
-                
 
 
-                <Label 
+
+            <Label 
                         Text="Kontakt informacije: tel: 0800 123 224, email: info@eodvjednik.hr"
                         HorizontalOptions="Center"
                         FontSize="Small"
@@ -98,14 +101,17 @@ padding-right: 30;
                         LineBreakMode="WordWrap"
                         TextColor="Black"        
                 />
-            
-            </VerticalStackLayout>
 
-        <Label BackgroundColor="#d3d3d3" Grid.Row="1" Grid.ColumnSpan="3" />
+
+        </VerticalStackLayout>
+
+        <Label BackgroundColor="#dbdbdb" Grid.Row="1" Grid.ColumnSpan="5" />
         <Image Source="text_only.png" Margin="5" HeightRequest="20" HorizontalOptions="Start" Grid.Row="1"  />
-        <Label TextColor="Black" Text="{Binding datetime}"  FontSize="Small" Margin="5" HorizontalOptions="End" Grid.Row="2" Grid.ColumnSpan="3"/>
-        <Label TextColor="Black" Text="" FontSize="Small" Margin="5" HorizontalOptions="Center" Grid.Row="2" Grid.Column="1"/>
-
+        <Label TextColor="Black" Text="{Binding datetime}"  FontSize="Small" Margin="5" HorizontalOptions="End" Grid.Row="1" Grid.ColumnSpan="5"/>
+        <Label TextColor="Black" Text="{Binding Version}" FontSize="Small" Margin="5" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1" 
+               IsVisible="{OnPlatform Android=False, iOS=False}" />
+        <Label TextColor="Black" Text="{Binding licence_type, StringFormat='Licenca: {0}'}" FontSize="Small" Margin="5" HorizontalOptions="Start" 
+               Grid.Row="1" Grid.Column="3" IsVisible="{OnPlatform Android=False, iOS=False}" />
 
 
 
