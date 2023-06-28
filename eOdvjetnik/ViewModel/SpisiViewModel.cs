@@ -12,7 +12,7 @@ namespace eOdvjetnik.ViewModel
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
         public ICommand OnDodajClick { get; set; }
 
-        
+        private ObservableCollection<FileItem> initialFileItems;
 
         private ObservableCollection<FileItem> fileItems;
         public ObservableCollection<FileItem> FileItems
@@ -75,19 +75,32 @@ namespace eOdvjetnik.ViewModel
                 return searchCommand;
             }
         }
+        public ICommand OnResetClick { get; set; }
+
+        public void ResetListView()
+        {
+            fileItems.Clear();
+            foreach (var item in initialFileItems)
+            {
+                fileItems.Add(item);
+            }
+        }
 
 
         public void GenerateSearchResults()
         {
             try
             {
-                string query = "SELECT * FROM files WHERE BrojSpisa %like% @searchText";
+                fileItems.Clear();
+                string query = "SELECT * FROM files WHERE broj_spisa =" + SearchText;
+                Debug.WriteLine(query);
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
                 Debug.WriteLine(query + " u Search resultu");
                 if (filesData != null)
                 {
                     foreach (Dictionary<string, string> filesRow in filesData)
                     {
+                        
                         #region Varijable za listu
                         int id;
                         int clientId;
@@ -130,7 +143,14 @@ namespace eOdvjetnik.ViewModel
                             Jezik = filesRow["jezik"],
                             BrojPredmeta = filesRow["broj_predmeta"]
                         });
+                        
+                        //Debug.WriteLine(filesRow["broj_spisa"]);
                     }
+                    foreach(FileItem item in FileItems)
+                    {
+                        Debug.WriteLine(item.BrojSpisa);
+                    }
+                    
                 }
             } 
             catch (Exception ex)
@@ -143,7 +163,7 @@ namespace eOdvjetnik.ViewModel
 
         public SpisiViewModel()
         {
-            
+            OnResetClick = new Command(ResetListView);
             OnDodajClick = new Command(onDodajCLick);
             try
             {
@@ -210,6 +230,7 @@ namespace eOdvjetnik.ViewModel
                             Jezik = filesRow["jezik"],
                             BrojPredmeta = filesRow["broj_predmeta"]
                         });
+                        initialFileItems = new ObservableCollection<FileItem>(fileItems);
                     }
                 }
             }

@@ -53,7 +53,8 @@ namespace eOdvjetnik.Services
 
 
     public class ExternalSQLConnect
-	{
+    {
+        
         //Varijable za MySQL preferences
         private const string IP_mysql = "IP Adresa2";
         private const string USER_mysql = "Korisničko ime2";
@@ -62,21 +63,23 @@ namespace eOdvjetnik.Services
 
         public Dictionary<string, string>[] sqlQuery(string query)
         {
-
-            Debug.WriteLine("Core.cs -> Dictionary -> Usao u sqlQuerry  *******");
-            // MySQL connection settings
-            string connString = "server=" + Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "") + ";user=" + Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "") + ";password=" + Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "") + ";database=" + Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
-
-            // Connect to MySQL database
-            using MySqlConnection conn = new MySqlConnection(connString);
-            conn.Open();
-
-            // Execute query and retrieve data
-            using MySqlCommand cmd = new MySqlCommand(query, conn);
-            using MySqlDataReader reader = cmd.ExecuteReader();
-            List<Dictionary<string, string>> results = new List<Dictionary<string, string>>();
             
             
+
+                Debug.WriteLine("Core.cs -> Dictionary -> Usao u sqlQuerry  *******");
+                // MySQL connection settings
+                string connString = "server=" + Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "") + ";user=" + Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "") + ";password=" + Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "") + ";database=" + Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
+
+                // Connect to MySQL database
+                using MySqlConnection conn = new MySqlConnection(connString);
+                conn.Open();
+
+                // Execute query and retrieve data
+                using MySqlCommand cmd = new MySqlCommand(query, conn);
+                using MySqlDataReader reader = cmd.ExecuteReader();
+                List<Dictionary<string, string>> results = new List<Dictionary<string, string>>();
+
+
                 while (reader.Read())
                 {
                     Dictionary<string, string> row = new Dictionary<string, string>();
@@ -97,9 +100,10 @@ namespace eOdvjetnik.Services
                 conn.Close();
 
                 return results.ToArray();
+
             
         }
-
     }
+    
 }
 

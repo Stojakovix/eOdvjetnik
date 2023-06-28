@@ -36,11 +36,14 @@
 
                     <Button Grid.Column="0" Text="Dodaj" Command="{Binding OnDodajClick}" BorderColor="LightBlue" HorizontalOptions="Fill"/>
                     <Button Grid.Column="1" Text="Obriši" BorderColor="LightBlue" HorizontalOptions="Fill"/>
+                    <Button Grid.Column="1" Text="Poništi" BorderColor="LightBlue" HorizontalOptions="EndAndExpand" Command="{Binding OnResetClick}"/>
+                    
                     <SearchBar Grid.Column="2" Placeholder="Pretraži" 
                                HorizontalOptions="EndAndExpand" 
                                BackgroundColor="LightGray"
-                               SearchCommand="{Binding PerformSearch}"
-                               SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                               SearchCommand="{Binding SearchCommand}"
+                               Text="{Binding SearchText}"
+                               
                                />
 
                 </Grid>
