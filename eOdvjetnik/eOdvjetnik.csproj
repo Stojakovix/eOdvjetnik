@@ -101,16 +101,26 @@
 	  <MauiCss Remove="NewFolder1\**" />
 	  <MauiXaml Remove="NewFolder1\**" />
 	  <None Remove="NewFolder1\**" />
+	  <Compile Remove="Services\SaveAndroid.cs" />
 	  <None Remove="Resources\Icons\" />
 	  <EmbeddedResource Remove="Resources\SfScheduler.hr-HR.resx" />
+	  <None Remove="Resources\Images\adventure.jpg" />
 	  <None Remove="Resources\Images\Image1.png" />
 	  <None Remove="Resources\Images\logoimg.svg" />
 	  <None Remove="Resources\Images\logotext.svg" />
 	  <None Remove="Resources\Images\main_pozadina.jpg" />
+	  <None Remove="Resources\Images\mountain_200.jpg" />
+	  <None Remove="Resources\Images\mountain_300.jpg" />
+	  <None Remove="Resources\Images\road_550_w.jpg" />
 	  <None Remove="Settings.bundle\" />
 	  <None Remove="Settings.bundle\EmptyTextFile.txt" />
 	</ItemGroup>
-
+	 <ItemGroup>
+		 <EmbeddedResource Include="Resources\DocIO\AdventureCycle.jpg" />
+		 <EmbeddedResource Include="Resources\DocIO\Mountain-200.jpg" />
+		 <EmbeddedResource Include="Resources\DocIO\Mountain-300.jpg" />
+		 <EmbeddedResource Include="Resources\DocIO\Road-550-W.jpg" />
+	 </ItemGroup>
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\SF-Pro-Display-Black.otf" />
 	  <None Remove="Resources\Fonts\SF-Pro-Display-BlackItalic.otf" />
@@ -164,6 +174,7 @@
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.5">
 			<TreatAsUsed>true</TreatAsUsed>
 		</PackageReference>
+		<PackageReference Include="Syncfusion.DocIO.NET" Version="22.1.34" />
 		<PackageReference Include="Syncfusion.Licensing" Version="22.1.34" />
 		<PackageReference Include="Syncfusion.Maui.Core" Version="22.1.34" />
 		<PackageReference Include="Syncfusion.Maui.DataForm" Version="22.1.34" />
@@ -172,6 +183,7 @@
 		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="22.1.34" />
 		<PackageReference Include="OpenAI" Version="1.7.2" />
 		<PackageReference Include="OpenVPN" Version="1.0.3" />
+		<PackageReference Include="System.Windows.Extensions" Version="7.0.0" />
 		<PackageReference Include="WireGuardNT-PInvoke" Version="1.0.4" />
 		<PackageReference Include="MySql.Data" Version="8.0.33" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.8.0-preview1" />
