@@ -36,7 +36,12 @@
 
                     <Button Grid.Column="0" Text="Dodaj" Command="{Binding OnDodajClick}" BorderColor="LightBlue" HorizontalOptions="Fill"/>
                     <Button Grid.Column="1" Text="Obriši" BorderColor="LightBlue" HorizontalOptions="Fill"/>
-                    <SearchBar Grid.Column="2" Placeholder="Pretraži" HorizontalOptions="EndAndExpand" BackgroundColor="LightGray"></SearchBar>
+                    <SearchBar Grid.Column="2" Placeholder="Pretraži" 
+                               HorizontalOptions="EndAndExpand" 
+                               BackgroundColor="LightGray"
+                               SearchCommand="{Binding PerformSearch}"
+                               SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                               />
 
                 </Grid>
 
@@ -64,7 +69,7 @@
                 </Grid>
 
 
-                <ListView ItemsSource="{Binding FileItems}">
+                <ListView ItemsSource="{Binding SearchResults}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>

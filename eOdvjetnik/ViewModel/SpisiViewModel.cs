@@ -10,22 +10,66 @@ namespace eOdvjetnik.ViewModel
     public class SpisiViewModel : INotifyPropertyChanged
     {
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
-
         public ICommand OnDodajClick { get; set; }
-
 
         private ObservableCollection<FileItem> fileItems;
         public ObservableCollection<FileItem> FileItems
         {
             get { return fileItems; }
-            set { this.fileItems = value; }
+            set { fileItems = value; }
         }
+
+
+        #region Search
+
+
+        private ObservableCollection<FileItem> searchResults;
+        private string searchQuery;
+        public ObservableCollection<FileItem> SearchResults
+        {
+            get { return searchResults; }
+            set { searchResults = value; OnPropertyChanged(nameof(SearchResults)); }
+        }
+        public string SearchQuery
+        {
+            get { return searchQuery; }
+            set { searchQuery = value; OnPropertyChanged(nameof(SearchQuery)); }
+        }
+
+        public ICommand PerformSearch => new Command<string>((query) =>
+        {
+            try
+            {
+                // Perform search based on query
+                // Update SearchResults property accordingly
+                SearchResults = new ObservableCollection<FileItem>(FileItems.Where(item =>
+                {
+                    foreach (var property in item.GetType().GetProperties())
+                    {
+                        var value = property.GetValue(item)?.ToString();
+                        if (!string.IsNullOrEmpty(value) && value.Contains(query))
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                }));
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message + "in Perform search");
+                throw;
+            }
+        });
+        #endregion
+
+
         public SpisiViewModel()
         {
             OnDodajClick = new Command(onDodajCLick);
             try
             {
-               fileItems = new ObservableCollection<FileItem>();
+                fileItems = new ObservableCollection<FileItem>();
                 this.GenerateFiles();
             }
             catch (Exception ex)
@@ -46,6 +90,7 @@ namespace eOdvjetnik.ViewModel
                 {
                     foreach (Dictionary<string, string> filesRow in filesData)
                     {
+                        #region Varijable za listu
                         int id;
                         int clientId;
                         int opponentId;
@@ -63,7 +108,7 @@ namespace eOdvjetnik.ViewModel
                         DateTime.TryParse(filesRow["datum_promjene_statusa"], out datumPromjeneStatusa);
                         DateTime.TryParse(filesRow["datum_kreiranja_spisa"], out datumKreiranjaSpisa);
                         DateTime.TryParse(filesRow["datum_izmjene_spisa"], out datumIzmjeneSpisa);
-
+                        #endregion
                         fileItems.Add(new FileItem()
                         {
                             Id = id,
@@ -95,9 +140,7 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message);
             }
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
-
         #region Komande
 
         private async void onDodajCLick()
