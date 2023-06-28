@@ -47,7 +47,7 @@
                   HorizontalOptions="Start"
                   VerticalOptions="Start">
 
-                    <Entry  
+                    <Editor  
                         x:Name="organizerText"
                         Placeholder="Dodatne informacije"
                         TextColor="Gray"/>

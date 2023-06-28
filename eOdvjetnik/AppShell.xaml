@@ -6,8 +6,8 @@
        xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
        xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"  
        Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
-       Shell.NavBarIsVisible="{OnPlatform WinUI=False, MacCatalyst=True, Android=True, iOS=True}"
- 
+       Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=True, iOS=True}"
+
        >
 
 
@@ -17,7 +17,7 @@
 
 
     <Shell.TitleView>
-        <HorizontalStackLayout BackgroundColor="Transparent" Padding="0,0,0,0">
+        <HorizontalStackLayout BackgroundColor="Black" Spacing="-10">
             <HorizontalStackLayout.Margin>
                 <OnPlatform x:TypeArguments="Thickness" Default="0,0,0,0">
                     <On Platform="MacCatalyst" Value="0,0,0,-50" />
@@ -28,56 +28,101 @@
 
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="0" Text="Početna" Command="{Binding MainClickCommand}" 
-                    x:Name="PočetnaButton" 
+                    Grid.Column="0" Text="Početna" 
+                    Command="{Binding MainClickCommand}" 
+                    x:Name="PočetnaButton"
                     BackgroundColor="Transparent" 
-                    BorderWidth="0"
+                    FontSize="Default"
+                    TextColor="White"
                     
+                    BorderWidth="0"                    
                     />
 
-
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="1" Text="Ročišnik" Command="{Binding KalendarClickCommand}" 
+                    Grid.Column="1" Text="Ročišnik" 
+                    Command="{Binding KalendarClickCommand}" 
                     x:Name="KalendarButton" 
                     BackgroundColor="Transparent" 
                     BorderWidth="0"
-                    
-                    />
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="2" Text="Dokumenti" Command="{Binding DokumentiClickCommand}" 
-                    x:Name="DokumentiButton"
-                    BackgroundColor="Transparent"
-                    BorderWidth="0"
-                    />
-
-            <!--kontakti-->
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="3" Text="Osobe" Command="{Binding KlijentiClickCommand}" 
-                    x:Name="KlijentiButton"
-                    BackgroundColor="Transparent"
-                    BorderWidth="0"
-                    />
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="4" Text="Naplata" Command="{Binding NaplataClickCommand}" 
-                    x:Name="NaplataButton"
-                    BackgroundColor="Transparent"
-                    BorderWidth="0"
+                    FontSize="Default"
+                    TextColor="White"
                     />
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="5" Text="Spisi" Command="{Binding SpisiClickCommand}" 
+                    Grid.Column="5" Text="Spisi" 
+                    Command="{Binding SpisiClickCommand}" 
                     x:Name="SpisiButton"
                     BackgroundColor="Transparent"
                     Margin="10,0" 
                     BorderWidth="0"
+                    FontSize="Default"
+                    TextColor="White"
                     />
 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+                    Grid.Column="3" Text="Kontakti" 
+                    Command="{Binding KlijentiClickCommand}" 
+                    x:Name="KlijentiButton"
+                    BackgroundColor="Transparent"
+                    BorderWidth="0"
+                    FontSize="Default"
+                    TextColor="White"
+                    />
 
-            <Button Grid.Column="6" Text="Korisnička podrška" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  BackgroundColor="Transparent" BorderWidth="0" Command="{Binding OnSupportClickCommand}"     
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+                    Grid.Column="4" Text="Tarife i Naplata" 
+                    Command="{Binding NaplataClickCommand}" 
+                    x:Name="NaplataButton"
+                    BackgroundColor="Transparent"
+                    BorderWidth="0"
+                    FontSize="Default"
+                    TextColor="White"
+                    />
+
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+                    Grid.Column="2" Text="Svi Dokumenti" 
+                    Command="{Binding DokumentiClickCommand}" 
+                    x:Name="DokumentiButton"
+                    BackgroundColor="Transparent"
+                    BorderWidth="0"
+                    FontSize="Default"
+                    TextColor="White"
+                    />
+
+            <!--kontakti-->
+
+
+
+
+
+            <Button Grid.Column="6" 
+                    Text="Korisnička Podrška" 
+                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
+                    BackgroundColor="Transparent" 
+                    BorderWidth="0" 
+                    Command="{Binding OnSupportClickCommand}"
+                    FontSize="Default"
+                    TextColor="White"
  />
-            <Button Grid.Column="7" Text="SQL postavke" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  BackgroundColor="Transparent" BorderWidth="0" Command="{Binding SQLShowPopupCommand}"  
- />
-            <Button Grid.Column="8" Text="NAS postavke" BackgroundColor="Transparent" BorderWidth="0" Command="{Binding ShowNASPopupCommand}"  
+
+            <Button Grid.Column="7" 
+                    Text="SQL Postavke" 
+                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
+                    BackgroundColor="Transparent" 
+                    BorderWidth="0" 
+                    Command="{Binding SQLShowPopupCommand}"
+                    FontSize="Default"
+                    TextColor="White"
+                    />
+
+            <Button Grid.Column="8" 
+                    Text="NAS Postavke" 
+                    BackgroundColor="Transparent"
+                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
+                    BorderWidth="0"
+                    Command="{Binding ShowNASPopupCommand}"  
+                    FontSize="Default"
+                    TextColor="White"
  />
 
             <sfPopup:SfPopup x:Name="popup" 
@@ -201,24 +246,23 @@
 
         </HorizontalStackLayout>
     </Shell.TitleView>
-    <FlyoutItem>
+    
         <ShellContent Title="Početna" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"  />
         <ShellContent Title="Ročišnik" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
         <ShellContent Title="Spisi" ContentTemplate="{DataTemplate views:Spisi}" Route="Spisi" />
         <ShellContent Title="Kontakti" ContentTemplate="{DataTemplate views:Klijenti}" Route="Klijenti" />
         <ShellContent Title="Tarife i Naplata" ContentTemplate="{DataTemplate views:Naplata}" Route="Naplata" />
         <ShellContent Title="Svi Dokumenti" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
-        <ShellContent Title="Korisnička podrška" />
+
+        <ShellContent Title="Korisnička podrška" ContentTemplate="{DataTemplate sfPopup:SfPopup}" />
         <ShellContent Title="Postavke" />
-    </FlyoutItem>
+    
     <MenuItem Text="Korisnička podrška"
               Command="{Binding OnSupportClickCommand}"/>
     <MenuItem Text="SQL postavke"
               Command="{Binding SQLShowPopupCommand}"/>
     <MenuItem Text="NAS postavke"
               Command="{Binding ShowNASPopupCommand }"/>
-
-
 
 
 </Shell>
