@@ -69,7 +69,7 @@
                 </Grid>
 
 
-                <ListView ItemsSource="{Binding SearchResults}">
+                <ListView ItemsSource="{Binding FileItems}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
