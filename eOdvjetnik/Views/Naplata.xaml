@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage BackgroundColor="Aqua" xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage BackgroundColor="White" xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.Naplata"
              Title="Naplata">
 
     <VerticalStackLayout>
         <ScrollView>
-            <Grid RowSpacing="25" RowDefinitions="Auto,Auto,Auto,Auto,*"
-            Padding="{OnPlatform iOS='30,60,30,30', Default='30'}">
+            <Grid RowSpacing="1" RowDefinitions="Auto,Auto,Auto,Auto,*"
+            Padding="{OnPlatform iOS='0,0,0,0', Default='0'}">
                 <Button 
+                BorderColor="Aqua"
+                BorderWidth="1"
+                BackgroundColor="Azure"
                 Text="Napravi dokument"
                 FontAttributes="Bold"
                 Grid.Row="0"
@@ -26,14 +29,14 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button  HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Parnični postupak" Clicked="Button1_Clicked" Grid.Column="0"  />
-            <Button  HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Kazneni postupak" Clicked="Button2_Clicked" Grid.Column="1"  />
-            <Button  HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Ovršni postupak" Clicked="Button3_Clicked" Grid.Column="2"  />
-            <Button  HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Upravni postupak" Clicked="Button4_Clicked" Grid.Column="3"  />
-            <Button  HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Stečajni postupak" Clicked="Button5_Clicked" Grid.Column="4"  />
-            <Button  HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Sastav ugovora" Clicked="Button7_Clicked" Grid.Column="6"  />
-            <Button  HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Prekršajni postupak" Clicked="Button6_Clicked" Grid.Column="5"  />
+            </Grid.ColumnDefinitions> 
+            <Button BorderColor="Aqua" BorderWidth="1" BackgroundColor="Azure" HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Parnični postupak" Clicked="Button1_Clicked" Grid.Column="0"  />
+            <Button BorderColor="Aqua" BorderWidth="1" BackgroundColor="Azure" HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Kazneni postupak" Clicked="Button2_Clicked" Grid.Column="1"  />
+            <Button BorderColor="Aqua" BorderWidth="1" BackgroundColor="Azure" HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Ovršni postupak" Clicked="Button3_Clicked" Grid.Column="2"  />
+            <Button BorderColor="Aqua" BorderWidth="1" BackgroundColor="Azure" HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Upravni postupak" Clicked="Button4_Clicked" Grid.Column="3"  />
+            <Button BorderColor="Aqua" BorderWidth="1" BackgroundColor="Azure" HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Stečajni postupak" Clicked="Button5_Clicked" Grid.Column="4"  />
+            <Button BorderColor="Aqua" BorderWidth="1" BackgroundColor="Azure" HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Sastav ugovora" Clicked="Button7_Clicked" Grid.Column="6"  />
+            <Button BorderColor="Aqua" BorderWidth="1" BackgroundColor="Azure" HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Prekršajni postupak" Clicked="Button6_Clicked" Grid.Column="5"  />
             
         </Grid>
         <Frame BackgroundColor="White" x:Name="Frame1" IsVisible="True" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
