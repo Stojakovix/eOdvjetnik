@@ -5,6 +5,18 @@
              Title="Naplata">
 
     <VerticalStackLayout>
+        <ScrollView>
+            <Grid RowSpacing="25" RowDefinitions="Auto,Auto,Auto,Auto,*"
+            Padding="{OnPlatform iOS='30,60,30,30', Default='30'}">
+                <Button 
+                Text="Napravi dokument"
+                FontAttributes="Bold"
+                Grid.Row="0"
+                SemanticProperties.Hint="Ajmoo"
+                Clicked="CreateDocument"
+                HorizontalOptions="Center" />
+            </Grid>
+        </ScrollView>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

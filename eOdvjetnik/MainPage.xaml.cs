@@ -413,6 +413,9 @@ public partial class MainPage : ContentPage
     protected override void OnAppearing()
     {
 
+        base.OnAppearing();
+        this.Window.MinimumHeight = 620;
+        this.Window.MinimumWidth = 860;
         try
         {
             //zakomentirati nakon setanja na null
