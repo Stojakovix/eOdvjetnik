@@ -22,8 +22,10 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(Naplata), typeof(Naplata));
 		Routing.RegisterRoute(nameof(Spisi), typeof(Spisi));
 		Routing.RegisterRoute(nameof(NoviSpis), typeof(NoviSpis));
+        Routing.RegisterRoute(nameof(Postavke), typeof(Postavke));
 
-		BindingContext = new AppShellViewModel();
+
+        BindingContext = new AppShellViewModel();
 
 		SfPopup popup = new SfPopup();
 		

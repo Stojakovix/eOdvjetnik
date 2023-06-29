@@ -124,6 +124,15 @@
                     FontSize="Default"
                     TextColor="White"
  />
+            <Button Grid.Column="9" 
+                    Text="Postavke" 
+                    BackgroundColor="Transparent"
+                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
+                    BorderWidth="0"
+                    Command="{Binding PostavkeClickCommand}" 
+                    FontSize="Default"
+                    TextColor="White"
+ />
 
             <sfPopup:SfPopup x:Name="popup" 
                              HeaderTitle="Korisnička podrška" 
@@ -255,7 +264,7 @@
         <ShellContent Title="Svi Dokumenti" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
 
         <ShellContent Title="Korisnička podrška" ContentTemplate="{DataTemplate sfPopup:SfPopup}" />
-        <ShellContent Title="Postavke" />
+    <ShellContent Title="Postavke" ContentTemplate="{DataTemplate views:Postavke}" Route="Postavke" />
     
     <MenuItem Text="Korisnička podrška"
               Command="{Binding OnSupportClickCommand}"/>

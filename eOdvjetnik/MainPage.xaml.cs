@@ -138,14 +138,11 @@ public partial class MainPage : ContentPage
                     string expireDate = jsonObject.GetProperty("Licences")[0].GetProperty("expire_date").GetString();
 
                     Preferences.Set("expire_date", expireDate);
-                    Preferences.Set("licence_type", licenceType);
-                    Preferences.Set("licence_active", licenceIsActive);
-
-
                     Debug.WriteLine("Datum isteka licence: " + expireDate);
                     Debug.WriteLine("Vrsta licence: " + expireDate);
+                    Preferences.Set("licence_type", licenceType);
+                    Preferences.Set("licence_active", licenceIsActive);
                     Debug.WriteLine("Licenca je aktivna? " + licenceIsActive);
-
 
 
                 }

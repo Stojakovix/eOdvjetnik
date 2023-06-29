@@ -16,6 +16,8 @@ namespace eOdvjetnik.ViewModel
         public ICommand KlijentiClickCommand { get; set; }
         public ICommand NaplataClickCommand { get; set; }
         public ICommand SpisiClickCommand { get; set; }
+        public ICommand PostavkeClickCommand { get; set; }
+
         #endregion
         // popup komande
         #region Support
@@ -157,6 +159,7 @@ namespace eOdvjetnik.ViewModel
             KlijentiClickCommand = new Command(OnKlijentiClick);
             NaplataClickCommand = new Command(OnNaplataClick);
             SpisiClickCommand = new Command(OnSpisiClick);
+            PostavkeClickCommand = new Command(OnPostavkeClick);
             #endregion
 
             #region Support komande
@@ -240,6 +243,11 @@ namespace eOdvjetnik.ViewModel
         {
             await Shell.Current.GoToAsync("///Spisi");
             Debug.WriteLine("KLIKNO Spisi");
+        }
+        private async void OnPostavkeClick()
+        {
+            await Shell.Current.GoToAsync("///Postavke");
+            Debug.WriteLine("KLIKNO Postavke");
         }
         #endregion
 

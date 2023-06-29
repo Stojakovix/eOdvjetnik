@@ -3,6 +3,9 @@ using System.Diagnostics;
 using System.Windows.Input;
 using Timer = System.Timers.Timer;
 using System.Text.Json;
+using Google.Protobuf;
+using System.Globalization;
+using System;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -126,9 +129,9 @@ namespace eOdvjetnik.ViewModel
         public string licence_type { get; set; }
         public DateTime expire_date { get; set; }
         public string expireDate { get; set; }
+        public string licenceStatus  { get; set; }
+        public bool expiredLicence { get; set; }
 
-        private string licenceIsActive;
-        private bool expiredLicence;
         public bool ActivationVisible
         {
             get; set;
@@ -162,19 +165,13 @@ namespace eOdvjetnik.ViewModel
             Password = Preferences.Get(PASS_mysql, "");
             DatabaseName = Preferences.Get(databasename_mysql, "");
 
-
+            Version = $"Verzija {AppInfo.VersionString}";
             Activation_code = Preferences.Get("activation_code", "");
           licence_type = Preferences.Get("licence_type", ""); 
           expireDate = Preferences.Get("expire_date", "");
-          licenceIsActive = Preferences.Get("licence_active", ""); //konvertirati u bool
-
-            Version = $"Verzija {AppInfo.VersionString}";
-            //Provjera licence
-            //HasLicenceExpired();
-            // LicenceStatus(); // otkomentirati kasnije
-            ActivationVisible = true; //privremeno, za prikaz Aktivacije na glavnoj stranici
-
-            //DateTimeRefresh
+            licenceStatus = Preferences.Get("licence_active", "");
+            HasLicenceExpired();
+            
             RefreshTime();
             var timer = Application.Current.Dispatcher.CreateTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -183,14 +180,12 @@ namespace eOdvjetnik.ViewModel
 
         }
 
-        //DateTime
 
         void RefreshTime()
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 datetime = DateTime.Now.ToString("f");
-
             }
             );
         }
@@ -417,26 +412,26 @@ namespace eOdvjetnik.ViewModel
 
         private void LicenceStatus() //Prikaz aktivacije na glavnoj stranici 
         {
-            Debug.WriteLine("Datum isteka licence:" + expireDate);
 
-          //if (!licenceIsActive || !expiredLicence)
-          //{
-          //    ActivationVisible = false;
-          //}
-          //else
-          //{
-          //    ActivationVisible = true;
-          //}
+          if (expiredLicence == true)
+          {
+              ActivationVisible = true;
+          }
+          else
+          {
+              ActivationVisible = false;
+          }
         }
 
         private void HasLicenceExpired() // Provjera isteka licence
         {
-            if (DateTime.Now < expire_date)
+            
+            if (licenceStatus == "0")
             {
                 expiredLicence = true;
-                Debug.WriteLine("Licence has expired on:" + expireDate);
-
             }
+            else { expiredLicence = false; }
+            LicenceStatus();
         }
 
 
