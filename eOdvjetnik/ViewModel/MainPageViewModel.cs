@@ -415,23 +415,25 @@ namespace eOdvjetnik.ViewModel
 
           if (expiredLicence == true)
           {
-              ActivationVisible = true;
+              ActivationVisible = false;
           }
           else
           {
-              ActivationVisible = false;
+              ActivationVisible = true;
           }
         }
 
         private void HasLicenceExpired() // Provjera isteka licence
         {
-            
-            if (licenceStatus == "0")
+
+            if (licenceStatus == "0" || licenceStatus == null)
             {
                 expiredLicence = true;
             }
             else { expiredLicence = false; }
             LicenceStatus();
+            Debug.WriteLine("pa kaže;" + licenceStatus);
+            Debug.WriteLine("pa kaže2" + expiredLicence);
         }
 
 
