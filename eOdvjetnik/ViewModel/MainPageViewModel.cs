@@ -415,11 +415,11 @@ namespace eOdvjetnik.ViewModel
 
           if (expiredLicence == true)
           {
-              ActivationVisible = false;
+              ActivationVisible = true;
           }
           else
           {
-              ActivationVisible = true;
+              ActivationVisible = false;
           }
         }
 
@@ -432,8 +432,6 @@ namespace eOdvjetnik.ViewModel
             }
             else { expiredLicence = false; }
             LicenceStatus();
-            Debug.WriteLine("pa kaže;" + licenceStatus);
-            Debug.WriteLine("pa kaže2" + expiredLicence);
         }
 
 
