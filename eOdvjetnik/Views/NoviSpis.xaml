@@ -2,7 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.NoviSpis"
+             xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
              Title="NoviSpis">
+    <ContentPage.BindingContext>
+        <viewmodel:NoviSpisViewModel/>
+    </ContentPage.BindingContext>
     <ScrollView>
         <Grid BackgroundColor="grey">
             <Grid.ColumnDefinitions>
@@ -10,6 +14,7 @@
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -72,7 +77,9 @@
             <Label Text="BrojPredmeta" Grid.Row="19" Grid.Column="0" />
             <Entry x:Name="BrojPredmetaEntry" Grid.Row="19" Grid.Column="1" />
 
-           
+            <Button Text="Dodaj" Command="{Binding AddFilesToRemoteServer}" Grid.Row="20"/>
+
+
         </Grid>
     </ScrollView>
 </ContentPage>

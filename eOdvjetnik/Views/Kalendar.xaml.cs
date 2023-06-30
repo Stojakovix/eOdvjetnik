@@ -55,8 +55,6 @@ public partial class Kalendar : ContentPage
 
     }
 
-
-
     private ObservableCollection<SchedulerTimeRegion> GetTimeRegion()
     {
         var startTime = DateTime.UnixEpoch.AddHours(19);
@@ -90,10 +88,6 @@ public partial class Kalendar : ContentPage
         timeRegions.Add(timeRegion);
         return timeRegions;
     }
-    
-
-
-
 
     private void Scheduler_DoubleTapped(object sender, SchedulerDoubleTappedEventArgs e)
     {
