@@ -9,6 +9,6 @@ public partial class NoviSpis : ContentPage
 	public NoviSpis()
 	{
 		InitializeComponent();
-        this.BindingContext = new NoviSpisViewModel(FileItem);
+
     }
 }
