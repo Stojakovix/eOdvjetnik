@@ -1,68 +1,90 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage BackgroundColor="White" xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.Naplata"
+             xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
              Title="Naplata">
 
-    <VerticalStackLayout>
-        <ScrollView>
-            <Grid RowSpacing="1" RowDefinitions="Auto,Auto,Auto,Auto,*"
-            Padding="{OnPlatform iOS='0,0,0,0', Default='0'}">
-                <Button 
-                BorderColor="Aqua"
+    <ContentPage.BindingContext>
+        <viewmodel:NaplataViewModel/>
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout >
+        <Button 
+                BorderColor="DarkGray"
                 BorderWidth="1"
-                BackgroundColor="Azure"
-                Text="Napravi dokument"
+                BackgroundColor="#5ac8fa"
+                Text="Izradi račun"
                 FontAttributes="Bold"
-                Grid.Row="0"
-                    TextColor="Black"
-                SemanticProperties.Hint="Ajmoo"
+                TextColor="Black"
+                HorizontalOptions="Start"
                 Clicked="CreateDocument"
-                HorizontalOptions="Center" />
-            </Grid>
-        </ScrollView>
-        <Grid>
+            FontSize="Default"
+            Margin="10,10,10,10"
+            />
+
+        <Label Text="Pretraga prema tarifnom broju" HorizontalOptions="Start" FontSize="Default"  Margin="10,10,10,10"
+ />
+        <SearchBar Placeholder="Npr. 1.2" 
+                   BackgroundColor="LightGray"
+                   SearchCommand="{Binding SearchCommand}"
+                   Text="{Binding SearchText}"
+                   WidthRequest="400"
+                   HorizontalOptions="Start"
+                   Margin="10,0,10,10"
+                   FontSize="Default" />
+
+
+        <Grid Margin="0,0,10,0" Padding="10,10,10,10" >
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="TextColor" Value="Black" />
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions> 
-            <Button BorderColor="Aqua" BorderWidth="1" BackgroundColor="Azure" HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Parnični postupak"      Clicked="Button1_Clicked" Grid.Column="0"  />
-            <Button BorderColor="Aqua" BorderWidth="1" BackgroundColor="Azure" HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Kazneni postupak"       Clicked="Button2_Clicked" Grid.Column="1"  />
-            <Button BorderColor="Aqua" BorderWidth="1" BackgroundColor="Azure" HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Ovršni postupak"        Clicked="Button3_Clicked" Grid.Column="2"  />
-            <Button BorderColor="Aqua" BorderWidth="1" BackgroundColor="Azure" HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Upravni postupak"       Clicked="Button4_Clicked" Grid.Column="3"  />
-            <Button BorderColor="Aqua" BorderWidth="1" BackgroundColor="Azure" HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Stečajni postupak"      Clicked="Button5_Clicked" Grid.Column="4"  />
-            <Button BorderColor="Aqua" BorderWidth="1" BackgroundColor="Azure" HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Sastav ugovora"         Clicked="Button7_Clicked" Grid.Column="6"  />
-            <Button BorderColor="Aqua" BorderWidth="1" BackgroundColor="Azure" HeightRequest="33" MinimumWidthRequest="120" TextColor="Black" Text="Prekršajni postupak"    Clicked="Button6_Clicked" Grid.Column="5"  />
-            
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <HorizontalStackLayout Grid.Column="0">
+                <Label FontSize="Default"  Text="Broj bodova:" HorizontalOptions="Start" Padding="5,5,5,5" />
+                <Label Grid.Column="1" FontSize="Default" Text="Vrsta spisa:" HorizontalOptions="Start" Padding="5,5,5,5" />
+                </HorizontalStackLayout >
+
         </Grid>
-        <Frame BackgroundColor="White" x:Name="Frame1" IsVisible="True" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Label TextColor="Black" Text="Sadržaj za gumb 1" />
-        </Frame>
-
-        <Frame BackgroundColor="White" x:Name="Frame2" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Label TextColor="Black" Text="Sadržaj za gumb 2" />
-        </Frame>
-        <Frame BackgroundColor="White" x:Name="Frame3" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Label TextColor="Black" Text="Sadržaj za gumb 3" />
-        </Frame>
-        <Frame BackgroundColor="White" x:Name="Frame4" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Label TextColor="Black" Text="Sadržaj za gumb 4" />
-        </Frame>
-        <Frame BackgroundColor="White" x:Name="Frame5" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Label TextColor="Black" Text="Sadržaj za gumb 5" />
-        </Frame>
-        <Frame BackgroundColor="White" x:Name="Frame6" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Label TextColor="Black" Text="Sadržaj za gumb 6" />
-        </Frame>
-        <Frame BackgroundColor="White" x:Name="Frame7" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Label TextColor="Black" Text="Sadržaj za gumb 7" />
-        </Frame>
-
+        <ListView ItemsSource="{Binding TariffItems}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Margin="5" Padding="5" BackgroundColor="White">
+                            <Grid.Resources>
+                                <Style TargetType="Label">
+                                    <Setter Property="TextColor" Value="Black" />
+                                </Style>
+                            </Grid.Resources>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding bodovi}" HorizontalOptions="Center" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding name}" HorizontalOptions="Start"  />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </VerticalStackLayout>
 
 </ContentPage> 
