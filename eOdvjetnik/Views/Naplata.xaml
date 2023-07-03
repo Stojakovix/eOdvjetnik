@@ -9,8 +9,41 @@
         <viewmodel:NaplataViewModel/>
     </ContentPage.BindingContext>
 
-    <VerticalStackLayout >
-        <Button 
+   
+
+    <ScrollView>
+        <VerticalStackLayout >
+            <Grid>
+                <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                 <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Zastupnik:" FontSize="16" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="10,10,0,12"/>
+            <Label Grid.Column="1" Text="{Binding NazivTvrtke}" FontSize="16" BackgroundColor="White" TextColor="Black" Margin="10,10,0,12"/>
+
+                <Label Grid.Column="0" Grid.Row="1" Text="Klijent:" FontSize="16" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="10,0,0,12"/>
+                <Label Grid.Column="1" Grid.Row="1" Text="NazivKlijenta" FontSize="16" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12"/>
+
+                <Label Grid.Column="0" Grid.Row="2" Text="Tarifni broj:" FontSize="16" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="10,0,0,12"/>
+                <Label Grid.Column="1" Grid.Row="2" Text="{Binding odabraniTBR}" FontSize="16" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12" />
+
+                <Label Grid.Column="0" Grid.Row="3" Text="Tarifa:" FontSize="16" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="10,0,0,12"/>
+                <Label Grid.Column="1" Grid.Row="3" Text="{Binding odabraniNaziv}" FontSize="16" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12"  />
+
+                <Label Grid.Column="0" Grid.Row="4" Text="Bodovi:" FontSize="16" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="10,0,0,12"/>
+                <Label Grid.Column="1" Grid.Row="4" Text="{Binding odabraniBodovi}" FontSize="16" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12" />
+
+            </Grid>
+
+            <Button 
                 BorderColor="DarkGray"
                 BorderWidth="1"
                 BackgroundColor="#5ac8fa"
@@ -23,7 +56,7 @@
             Margin="10,10,10,10"
             />
 
-        <Label Text="Pretraga prema tarifnom broju" HorizontalOptions="Start" FontSize="Default"  Margin="10,10,10,10"
+        <Label Text="Pretraga po tarifnom broju ili nazivu" HorizontalOptions="Start" FontSize="Default"  Margin="10,10,10,10"
  />
         <SearchBar Placeholder="Npr. 1.2" 
                    BackgroundColor="LightGray"
@@ -35,7 +68,7 @@
                    FontSize="Default" />
 
 
-        <Grid Margin="0,0,10,0" Padding="10,10,10,10" >
+        <Grid Margin="10"   >
             <Grid.Resources>
                 <Style TargetType="Label">
                     <Setter Property="TextColor" Value="Black" />
@@ -43,49 +76,60 @@
             </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="Auto" />
+
             </Grid.ColumnDefinitions>
 
-            <HorizontalStackLayout Grid.Column="0">
-                <Label FontSize="Default"  Text="Broj bodova:" HorizontalOptions="Start" Padding="5,5,5,5" />
-                <Label Grid.Column="1" FontSize="Default" Text="Vrsta spisa:" HorizontalOptions="Start" Padding="5,5,5,5" />
-                </HorizontalStackLayout >
+            <Label Grid.Column="0" FontAttributes="Bold" Text="Tbr." Margin="5,0,0,0" />
+            <Label Grid.Column="1" FontAttributes="Bold" Text="Bodovi"   HorizontalOptions="Center" />
+            <Label Grid.Column="2" FontAttributes="Bold" Text="Vrsta" Margin="5,0,0,0" />
 
         </Grid>
-        <ListView ItemsSource="{Binding TariffItems}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid Margin="5" Padding="5" BackgroundColor="White">
-                            <Grid.Resources>
-                                <Style TargetType="Label">
-                                    <Setter Property="TextColor" Value="Black" />
-                                </Style>
-                            </Grid.Resources>
-                            
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            
-                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding bodovi}" HorizontalOptions="Center" />
-                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding name}" HorizontalOptions="Start"  />
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </VerticalStackLayout>
+
+
+            <ListView Margin="10,0,0,0" ItemsSource="{Binding TariffItems}" ItemSelected="ListViewItemSelected"  >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid BackgroundColor="White">
+                                <Grid.Resources>
+                                    <Style TargetType="Label">
+                                        <Setter Property="TextColor" Value="Black" />
+                                    </Style>
+                                </Grid.Resources>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Row="1" Grid.Column="0" Margin="0" Padding="5" StrokeThickness="0.1" Stroke="Black" >
+                                    <Label Text="{Binding oznaka}" HorizontalOptions="Start" />
+                                </Border>
+
+                                <Border Grid.Row="1" Grid.Column="1" Margin="0" Padding="5" StrokeThickness="0.1" Stroke="Black" >
+                                    <Label Text="{Binding bodovi}" HorizontalOptions="Center" />
+                                </Border>
+
+                                <Border Grid.Row="1" Grid.Column="2" Margin="0" Padding="5" StrokeThickness="0.1" Stroke="Black" >
+                                    <Label Text="{Binding concatenated_name}" WidthRequest="2000" HorizontalOptions="Start" />
+                                </Border>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
 
 </ContentPage> 
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -54,7 +55,8 @@ namespace eOdvjetnik.ViewModel
                 {
                     tariffItems.Clear();
                 }
-                string query = "SELECT * FROM `tariffs` WHERE `name` LIKE '%" + SearchText+ "%' or `oznaka` LIKE '%" + SearchText + "%'";
+                //string query = "SELECT * FROM `tariffs` WHERE `name` LIKE '%" + SearchText+ "%' or `oznaka` LIKE '%" + SearchText + "%'";
+                string query = "SELECT t1.*, CONCAT(t2.name, ' - ', t1.name) AS concatenated_name FROM tariffs t1 LEFT JOIN tariffs t2 ON t1.parent_id = t2.Id WHERE t1.name LIKE '%" + SearchText + "%' OR t1.oznaka LIKE '%" + SearchText + "%'";
                 Debug.WriteLine(query);
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
                 Debug.WriteLine(query + " u Search resultu");
@@ -64,26 +66,27 @@ namespace eOdvjetnik.ViewModel
                     {
 
                         int id;
-                        int Parent_id;
+                        int parent_id;
                         int.TryParse(filesRow["id"], out id);
-                        int.TryParse(filesRow["parent_id"], out Parent_id);
+                        int.TryParse(filesRow["parent_id"], out parent_id);
 
 
                         tariffItems.Add(new TariffItem()
                         {
                             Id = id,
-                            parent_id = Parent_id,
+                            parent_id = parent_id,
                             name = filesRow["name"],
                             oznaka = filesRow["oznaka"],
                             bodovi = filesRow["bodovi"],
-
+                            concatenated_name = filesRow["concatenated_name"],
                         });
+                        
 
-                        Debug.WriteLine(filesRow["broj_spisa"]);
+                        //Debug.WriteLine(filesRow["concatenated_name"]);
                     }
                     foreach (TariffItem item in TariffItems)
                     {
-                        Debug.WriteLine(item.name);
+                        //Debug.WriteLine(item.name);
                     }
 
                 }
@@ -91,6 +94,51 @@ namespace eOdvjetnik.ViewModel
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public string NazivTvrtke { get; set; }
+
+        private string odabrani_TBR;
+        public string odabraniTBR
+        {
+            get { return odabrani_TBR; }
+            set
+            {
+                if (odabrani_TBR != value)
+                {
+                    odabrani_TBR = value;
+                    OnPropertyChanged(nameof(odabraniTBR));
+                }
+            }
+        }
+
+        private string odabrani_Naziv;
+        public string odabraniNaziv
+        {
+            get { return odabrani_Naziv; }
+            set
+            {
+                if (odabrani_Naziv != value)
+                {
+                    odabrani_Naziv = value;
+                    OnPropertyChanged(nameof(odabraniNaziv));
+                }
+            }
+        }
+
+
+        private string odabrani_Bodovi;
+        public string odabraniBodovi
+        {
+            get { return odabrani_Bodovi; }
+            set
+            {
+                if (odabrani_Bodovi != value)
+                {
+                    odabrani_Bodovi = value;
+                    OnPropertyChanged(nameof(odabraniBodovi));
+                }
             }
         }
         public NaplataViewModel()
@@ -103,6 +151,15 @@ namespace eOdvjetnik.ViewModel
             {
                 Debug.WriteLine(ex.Message);
             }
+            NazivTvrtke = Preferences.Get("naziv_tvrtke", "");
+            odabrani_TBR = Preferences.Get("SelectedOznaka", "");
+            odabrani_Bodovi = Preferences.Get("SelectedBodovi", "");
+            odabrani_Naziv = Preferences.Get("SelectedConcatenatedName", "");
+
+            var timer = Application.Current.Dispatcher.CreateTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(200);
+            timer.Tick += (s, e) => Refresh();
+            timer.Start();
         }
 
 
@@ -112,5 +169,19 @@ namespace eOdvjetnik.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        void Refresh()
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                NazivTvrtke = Preferences.Get("naziv_tvrtke", "");
+                odabraniTBR = Preferences.Get("SelectedOznaka", "");
+                odabraniBodovi = Preferences.Get("SelectedBodovi", "");
+                odabraniNaziv = Preferences.Get("SelectedConcatenatedName", "");
+            }
+            );
+        }
     }
+
+
 }

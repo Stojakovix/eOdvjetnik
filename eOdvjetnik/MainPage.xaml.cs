@@ -133,16 +133,16 @@ public partial class MainPage : ContentPage
                     var jsonObject = JsonSerializer.Deserialize<JsonElement>(content, options);
 
                     // int licenceIsActive = jsonObject.GetProperty("Devices")[0].GetProperty("licence_active").GetInt32(); 
+
                     string licenceIsActive = jsonObject.GetProperty("Devices")[0].GetProperty("licence_active").GetString();
                     string licenceType = jsonObject.GetProperty("LicenceTypes")[0].GetProperty("naziv").GetString();
                     string expireDate = jsonObject.GetProperty("Licences")[0].GetProperty("expire_date").GetString();
+                    string nazivTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("naziv").GetString();
 
                     Preferences.Set("expire_date", expireDate);
-                    Debug.WriteLine("Datum isteka licence: " + expireDate);
-                    Debug.WriteLine("Vrsta licence: " + expireDate);
                     Preferences.Set("licence_type", licenceType);
                     Preferences.Set("licence_active", licenceIsActive);
-                    Debug.WriteLine("Licenca je aktivna? " + licenceIsActive);
+                    Preferences.Set("naziv_tvrtke", nazivTvrtke);
 
 
                 }
