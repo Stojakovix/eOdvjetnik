@@ -72,7 +72,7 @@
                 </Grid>
 
 
-                <ListView ItemsSource="{Binding FileItems}">
+                <ListView ItemsSource="{Binding FileItems}" x:Name="listView">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -96,7 +96,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Row="1" Grid.Column="0" MaximumWidthRequest="150" Text="{Binding Id}" />
                                     <Label Grid.Row="1" Grid.Column="1" MaximumWidthRequest="150" Text="{Binding BrojSpisa}" />
-                                    <Label Grid.Row="1" Grid.Column="2" MaximumWidthRequest="150" Text="{Binding Created}" />
+                                    <Label Grid.Row="1" Grid.Column="2" MaximumWidthRequest="150" Text="{Binding Created,  StringFormat='{}{0:dd/MM/yyyy}'}"  />
 
 
                                 </Grid>

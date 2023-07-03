@@ -30,10 +30,6 @@ public partial class Kalendar : ContentPage
             Dictionary<string, string>[] resultArray = odvjetnik_nas.sqlQuery("Select * from events where hardwareid = '"+ hardware_id + "' and TimeFrom > '2023-05-25 20:00:00'");//
             Debug.WriteLine("Usao usqlQuery 11------------------------------------------------**");
 
-            
-             
-
-
             // Print the attribute names
 
             foreach (Dictionary<string, string> row in resultArray)
@@ -44,14 +40,11 @@ public partial class Kalendar : ContentPage
                 }
                 Debug.WriteLine("Print the attribute names");
             }
-
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message + "u Kalendar.xaml.csu");
         }
-
-
 
     }
 

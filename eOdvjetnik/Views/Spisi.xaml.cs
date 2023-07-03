@@ -8,7 +8,7 @@ public partial class Spisi : ContentPage
 	public Spisi()
 	{
 		InitializeComponent();
-		this.BindingContext = new  SpisiViewModel();
+		this.BindingContext = new SpisiViewModel();
 
 	}
 }

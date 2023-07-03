@@ -10,6 +10,7 @@ namespace eOdvjetnik.ViewModel
     public class SpisiViewModel : INotifyPropertyChanged
     {
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+
         public ICommand OnDodajClick { get; set; }
 
         private ObservableCollection<FileItem> initialFileItems;
@@ -207,6 +208,7 @@ namespace eOdvjetnik.ViewModel
                             BrojPredmeta = filesRow["broj_predmeta"]
                         });
                         initialFileItems = new ObservableCollection<FileItem>(fileItems);
+                        
                     }
                 }
             }
@@ -215,6 +217,9 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message);
             }
         }
+
+       
+
         public event PropertyChangedEventHandler PropertyChanged;
         #region Komande
 

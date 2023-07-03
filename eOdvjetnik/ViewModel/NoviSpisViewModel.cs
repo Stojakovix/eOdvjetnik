@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Input;
 using eOdvjetnik.Model;
@@ -308,7 +305,6 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-
                 AddFilesToRemoteServer = new Command(() => AddSpisToRemoteServer(fileitem));
             }
             catch (Exception ex)
@@ -345,7 +341,7 @@ namespace eOdvjetnik.ViewModel
 
 
                 #endregion
-                
+
 
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 string disableForeignKeyChecksQuery = "SET FOREIGN_KEY_CHECKS = 0";
@@ -353,17 +349,24 @@ namespace eOdvjetnik.ViewModel
 
                 string query = $"INSERT INTO Files (broj_spisa, spisicol, client_id, opponent_id, inicijali_voditelj_id, inicijali_dodao, filescol, inicijali_dodjeljeno, created, aktivno_pasivno, referenca, datum_promjene_statusa, uzrok, datum_kreiranja_spisa, datum_izmjene_spisa, kreirao, zadnje_uredio, jezik,broj_predmeta ) " +
                         $"VALUES ('{brojSpisa}', '{spisiCol}', '{clientId}', '{opponentId}', '{inicijaliVoditelj}' , '{inicijaliDodao}' , '{filesCol}' , '{inicijaliDodijeljeno}' , '{created.ToString("yyyy-MM-dd HH:mm:ss")}' , '{aktivnoPasivno}' , '{referenca}' , '{datumPromjene.ToString("yyyy-MM-dd HH:mm:ss")}' , '{uzrok}' , '{datumKreiranja.ToString("yyyy-MM-dd HH:mm:ss")}' , '{datumIzmjene.ToString("yyyy-MM-dd HH:mm:ss")}' , '{kreirao}' , '{zadnjeUredio}' , '{jezik}' , '{brojPredmeta}' )";
-                    Debug.WriteLine(query + " in novi spis viewModel");
-                    externalSQLConnect.sqlQuery(query);  
-                    Debug.WriteLine("Appointment added to remote server in novi spis viewModel");
+                Debug.WriteLine(query + " in novi spis viewModel");
+                externalSQLConnect.sqlQuery(query);
+                Debug.WriteLine("Appointment added to remote server in novi spis viewModel");
                 
+
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message + " in noviSpisViewModel AddAppointmentToServer");
             }
         }
-       
+
+        private void DodajButtonClicked()
+        {
+            AddSpisToRemoteServer(fileitem);
+
+        }
+
         #region Property Changed
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
