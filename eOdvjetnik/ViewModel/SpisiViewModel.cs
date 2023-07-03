@@ -10,6 +10,7 @@ namespace eOdvjetnik.ViewModel
     public class SpisiViewModel : INotifyPropertyChanged
     {
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+
         public ICommand OnDodajClick { get; set; }
 
         private ObservableCollection<FileItem> initialFileItems;
@@ -20,36 +21,10 @@ namespace eOdvjetnik.ViewModel
             get { return fileItems; }
             set { fileItems = value; }
         }
-
+      
 
         #region Search
 
-
-        //public ICommand PerformSearch => new Command<string>((query) =>
-        //{
-        //    try
-        //    {
-        //        // Perform search based on query
-        //        // Update SearchResults property accordingly
-        //        SearchResults = new ObservableCollection<FileItem>(FileItems.Where(item =>
-        //        {
-        //            foreach (var property in item.GetType().GetProperties())
-        //            {
-        //                var value = property.GetValue(item)?.ToString();
-        //                if (!string.IsNullOrEmpty(value) && value.Contains(query))
-        //                {
-        //                    return true;
-        //                }
-        //            }
-        //            return false;
-        //        }));
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        Debug.WriteLine(ex.Message + "in Perform search");
-        //        throw;
-        //    }
-        //});
         private string _searchText;
         public string SearchText
         {
@@ -182,6 +157,8 @@ namespace eOdvjetnik.ViewModel
             {
                 string query = "SELECT * FROM files ORDER BY id DESC LIMIT 100;";
 
+
+
                // Debug.WriteLine(query + "u SpisiViewModelu");
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
                 if (filesData != null)
@@ -231,6 +208,7 @@ namespace eOdvjetnik.ViewModel
                             BrojPredmeta = filesRow["broj_predmeta"]
                         });
                         initialFileItems = new ObservableCollection<FileItem>(fileItems);
+                        
                     }
                 }
             }
@@ -239,6 +217,9 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message);
             }
         }
+
+       
+
         public event PropertyChangedEventHandler PropertyChanged;
         #region Komande
 

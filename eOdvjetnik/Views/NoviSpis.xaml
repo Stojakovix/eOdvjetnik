@@ -2,7 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.NoviSpis"
+             xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
              Title="NoviSpis">
+    <ContentPage.BindingContext>
+        <viewmodel:NoviSpisViewModel/>
+    </ContentPage.BindingContext>
     <ScrollView>
         <Grid BackgroundColor="grey">
             <Grid.ColumnDefinitions>
@@ -30,49 +34,52 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Label Text="Id" Grid.Row="0" Grid.Column="0" />
-            <Entry x:Name="IdEntry" Keyboard="Numeric" Grid.Row="0" Grid.Column="1" />
+            <Entry x:Name="IdEntry" Keyboard="Numeric" Grid.Row="0" Grid.Column="1" Text="{Binding Id}"  />
             <Label Text="BrojSpisa" Grid.Row="1" Grid.Column="0" />
-            <Entry x:Name="BrojSpisaEntry" Grid.Row="1" Grid.Column="1" />
+            <Entry x:Name="BrojSpisaEntry" Grid.Row="1" Grid.Column="1" Text="{Binding BrojSpisa}" />
             <Label Text="Spisicol" Grid.Row="2" Grid.Column="0" />
-            <Entry x:Name="SpisicolEntry" Grid.Row="2" Grid.Column="1" />
+            <Entry x:Name="SpisicolEntry" Grid.Row="2" Grid.Column="1" Text="{Binding SpisiCol}"/>
             <Label Text="ClientId" Grid.Row="3" Grid.Column="0" />
-            <Entry x:Name="ClientIdEntry" Keyboard="Numeric" Grid.Row="3" Grid.Column="1" />
+            <Entry x:Name="ClientIdEntry" Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding ClientId}"/>
             <Label Text="OpponentId" Grid.Row="4" Grid.Column="0" />
-            <Entry x:Name="OpponentIdEntry" Keyboard="Numeric" Grid.Row="4" Grid.Column="1" />
+            <Entry x:Name="OpponentIdEntry" Keyboard="Numeric" Grid.Row="4" Grid.Column="1"  Text="{Binding OpponentId}"/>
             <Label Text="InicijaliVoditeljId" Grid.Row="5" Grid.Column="0" />
-            <Entry x:Name="InicijaliVoditeljIdEntry" Keyboard="Numeric" Grid.Row="5" Grid.Column="1" />
+            <Entry x:Name="InicijaliVoditeljIdEntry" Keyboard="Numeric" Grid.Row="5" Grid.Column="1" Text="{Binding InicijaliVoditelj}"/>
             <Label Text="InicijaliDodao" Grid.Row="6" Grid.Column="0" />
-            <Entry x:Name="InicijaliDodaoEntry" Grid.Row="6" Grid.Column="1" />
+            <Entry x:Name="InicijaliDodaoEntry" Grid.Row="6" Grid.Column="1" Text="{Binding InicijaliDodao}"/>
             <Label Text="Filescol" Grid.Row="7" Grid.Column="0" />
-            <Entry x:Name="FilescolEntry" Grid.Row="7" Grid.Column="1" />
+            <Entry x:Name="FilescolEntry" Grid.Row="7" Grid.Column="1" Text="{Binding FilesCol}"/>
             <Label Text="InicijaliDodjeljeno" Grid.Row="8" Grid.Column="0" />
-            <Entry x:Name="InicijaliDodjeljenoEntry" Grid.Row="8" Grid.Column="1" />
+            <Entry x:Name="InicijaliDodjeljenoEntry" Grid.Row="8" Grid.Column="1" Text="{Binding InicijaliDodijeljeno}"/>
             <Label Text="Created" Grid.Row="9" Grid.Column="0" />
-            <DatePicker x:Name="CreatedDatePicker" Grid.Row="9" Grid.Column="1" />
+            <DatePicker x:Name="CreatedDatePicker" Grid.Row="9" Grid.Column="1" Date="{Binding Created}"/>
             <Label Text="AktivnoPasivno" Grid.Row="10" Grid.Column="0" />
-            <Entry x:Name="AktivnoPasivnoEntry" Grid.Row="10" Grid.Column="1" />
+            <Entry x:Name="AktivnoPasivnoEntry" Grid.Row="10" Grid.Column="1" Text="{Binding AktivnoPasivno}"/>
             <Label Text="Referenca" Grid.Row="11" Grid.Column="0" />
-            <Entry x:Name="ReferencaEntry" Grid.Row="11" Grid.Column="1" />
+            <Entry x:Name="ReferencaEntry" Grid.Row="11" Grid.Column="1" Text="{Binding Referenca}"/>
             <Label Text="DatumPromjeneStatusa" Grid.Row="12" Grid.Column="0" />
-            <DatePicker x:Name="DatumPromjeneStatusaDatePicker" Grid.Row="12" Grid.Column="1" />
+            <DatePicker x:Name="DatumPromjeneStatusaDatePicker" Grid.Row="12" Grid.Column="1" Date="{Binding DatumPromjene}"/>
             <Label Text="Uzrok" Grid.Row="13" Grid.Column="0" />
-            <Entry x:Name="UzrokEntry" Grid.Row="13" Grid.Column="1" />
+            <Entry x:Name="UzrokEntry" Grid.Row="13" Grid.Column="1" Text="{Binding Uzrok}"/>
             <Label Text="DatumKreiranjaSpisa" Grid.Row="14" Grid.Column="0" />
-            <DatePicker x:Name="DatumKreiranjaSpisaDatePicker" Grid.Row="14" Grid.Column="1" />
+            <DatePicker x:Name="DatumKreiranjaSpisaDatePicker" Grid.Row="14" Grid.Column="1" Date="{Binding DatumKreiranja}"/>
             <Label Text="DatumIzmjeneSpisa" Grid.Row="15" Grid.Column="0" />
-            <DatePicker x:Name="DatumIzmjeneSpisaDatePicker" Grid.Row="15" Grid.Column="1" />
+            <DatePicker x:Name="DatumIzmjeneSpisaDatePicker" Grid.Row="15" Grid.Column="1" Date="{Binding DatumIzmjene}"/>
             <Label Text="Kreirao" Grid.Row="16" Grid.Column="0" />
-            <Entry x:Name="KreiraoEntry" Grid.Row="16" Grid.Column="1" />
+            <Entry x:Name="KreiraoEntry" Grid.Row="16" Grid.Column="1" Text="{Binding Kreirao}"/>
             <Label Text="ZadnjeUredio" Grid.Row="17" Grid.Column="0" />
-            <Entry x:Name="ZadnjeUredioEntry" Grid.Row="17" Grid.Column="1" />
+            <Entry x:Name="ZadnjeUredioEntry" Grid.Row="17" Grid.Column="1" Text="{Binding ZadnjeUredio}"/>
             <Label Text="Jezik" Grid.Row="18" Grid.Column="0" />
-            <Entry x:Name="JezikEntry" Grid.Row="18" Grid.Column="1" />
+            <Entry x:Name="JezikEntry" Grid.Row="18" Grid.Column="1" Text="{Binding Jezik}"/>
             <Label Text="BrojPredmeta" Grid.Row="19" Grid.Column="0" />
-            <Entry x:Name="BrojPredmetaEntry" Grid.Row="19" Grid.Column="1" />
+            <Entry x:Name="BrojPredmetaEntry" Grid.Row="19" Grid.Column="1" Text="{Binding BrojPredmeta}"/>
 
-           
+            <Button Text="Dodaj" Command="{Binding AddFilesToRemoteServer}" Grid.Row="20"/>
+
+
         </Grid>
     </ScrollView>
 </ContentPage>
