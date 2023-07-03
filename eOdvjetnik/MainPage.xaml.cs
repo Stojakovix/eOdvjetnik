@@ -91,6 +91,7 @@ public partial class MainPage : ContentPage
         {
             Debug.WriteLine("Activation error:" + ex.Message);
         }
+        LicenceCheck();
     }
 
 
@@ -243,7 +244,7 @@ public partial class MainPage : ContentPage
         string output = parsedDateTime.ToString("yyyy-MM-dd HH:mm:ss");
         Console.WriteLine(output);
         ActivationLoop();
-        LicenceCheck();
+
 
     }
     //private void OnSaveClicked(object sender, EventArgs e)
