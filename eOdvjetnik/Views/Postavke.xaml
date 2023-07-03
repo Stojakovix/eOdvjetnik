@@ -35,8 +35,8 @@
             <Button Grid.Column="0" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button1_Clicked" Text="Uređaj i licenca" FontSize="Default"  />
             <Button Grid.Column="0" Grid.Row="1" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button2_Clicked" Text="Prijavi grešku" FontSize="Default"   />
             <Button Grid.Column="0" Grid.Row="2" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button3_Clicked" Text="Pošalji prijedlog" FontSize="Default"   />
-            <Button Grid.Column="0" Grid.Row="3" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button4_Clicked" Text="SQL postavke"  FontSize="Default"  />
-            <Button Grid.Column="0" Grid.Row="4" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button5_Clicked" Text="NAS postavke"  FontSize="Default"  />
+            <Button Grid.Column="0" Grid.Row="3" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button4_Clicked" Text="NAS postavke"  FontSize="Default"  />
+            <Button Grid.Column="0" Grid.Row="4" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button5_Clicked" Text="SQL postavke"  FontSize="Default"  />
             <Button Grid.Column="0" Grid.Row="5" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button6_Clicked" Text="Zaposlenici" FontSize="Default"   />
             <Button Grid.Column="0" Grid.Row="6" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button7_Clicked" Text="Stopa PDV-a" FontSize="Default"   />
 

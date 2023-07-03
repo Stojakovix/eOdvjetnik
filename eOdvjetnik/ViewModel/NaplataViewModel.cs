@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -98,10 +99,50 @@ namespace eOdvjetnik.ViewModel
 
         public string NazivTvrtke { get; set; }
 
+        private string odabrani_TBR;
+        public string odabraniTBR
+        {
+            get { return odabrani_TBR; }
+            set
+            {
+                if (odabrani_TBR != value)
+                {
+                    odabrani_TBR = value;
+                    OnPropertyChanged(nameof(odabraniTBR));
+                }
+            }
+        }
+
+        private string odabrani_Naziv;
+        public string odabraniNaziv
+        {
+            get { return odabrani_Naziv; }
+            set
+            {
+                if (odabrani_Naziv != value)
+                {
+                    odabrani_Naziv = value;
+                    OnPropertyChanged(nameof(odabraniNaziv));
+                }
+            }
+        }
+
+
+        private string odabrani_Bodovi;
+        public string odabraniBodovi
+        {
+            get { return odabrani_Bodovi; }
+            set
+            {
+                if (odabrani_Bodovi != value)
+                {
+                    odabrani_Bodovi = value;
+                    OnPropertyChanged(nameof(odabraniBodovi));
+                }
+            }
+        }
         public NaplataViewModel()
         {
-            NazivTvrtke = Preferences.Get("naziv_tvrtke", "");
-
             try
             {
                 tariffItems = new ObservableCollection<TariffItem>();
@@ -110,6 +151,15 @@ namespace eOdvjetnik.ViewModel
             {
                 Debug.WriteLine(ex.Message);
             }
+            NazivTvrtke = Preferences.Get("naziv_tvrtke", "");
+            odabrani_TBR = Preferences.Get("SelectedOznaka", "");
+            odabrani_Bodovi = Preferences.Get("SelectedBodovi", "");
+            odabrani_Naziv = Preferences.Get("SelectedConcatenatedName", "");
+
+            var timer = Application.Current.Dispatcher.CreateTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(200);
+            timer.Tick += (s, e) => Refresh();
+            timer.Start();
         }
 
 
@@ -119,5 +169,19 @@ namespace eOdvjetnik.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        void Refresh()
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                NazivTvrtke = Preferences.Get("naziv_tvrtke", "");
+                odabraniTBR = Preferences.Get("SelectedOznaka", "");
+                odabraniBodovi = Preferences.Get("SelectedBodovi", "");
+                odabraniNaziv = Preferences.Get("SelectedConcatenatedName", "");
+            }
+            );
+        }
     }
+
+
 }
