@@ -79,6 +79,7 @@ namespace eOdvjetnik.ViewModel
                             bodovi = filesRow["bodovi"],
                             concatenated_name = filesRow["concatenated_name"],
                         });
+                        
 
                         //Debug.WriteLine(filesRow["concatenated_name"]);
                     }
@@ -94,8 +95,13 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message);
             }
         }
+
+        public string NazivTvrtke { get; set; }
+
         public NaplataViewModel()
         {
+            NazivTvrtke = Preferences.Get("naziv_tvrtke", "");
+
             try
             {
                 tariffItems = new ObservableCollection<TariffItem>();

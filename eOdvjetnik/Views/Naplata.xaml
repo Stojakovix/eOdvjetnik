@@ -11,7 +11,34 @@
     
     <ScrollView>
         <VerticalStackLayout >
-        <Button 
+            <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                 <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+
+                </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Zastupnik:" FontSize="16" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="10,10,0,12"/>
+            <Label Grid.Column="1" Text="{Binding NazivTvrtke}" FontSize="16" BackgroundColor="White" TextColor="Black" Margin="10,10,0,12"/>
+
+                <Label Grid.Column="0" Grid.Row="1" Text="Klijent:" FontSize="16" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="10,0,0,12"/>
+                <Label Grid.Column="1" Grid.Row="1" Text="NazivKlijenta" FontSize="16" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12"/>
+
+                <Label Grid.Column="0" Grid.Row="2" Text="Tarifa:" FontSize="16" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="10,0,0,12"/>
+                <Label Grid.Column="1" Grid.Row="2" Text="NazivTarife" FontSize="16" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12"/>
+
+                <Label Grid.Column="0" Grid.Row="3" Text="Bodovi:" FontSize="16" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="10,0,0,12"/>
+                <Label Grid.Column="1" Grid.Row="3" Text="BrojBodova" FontSize="16" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12"/>
+
+            </Grid>
+
+            <Button 
                 BorderColor="DarkGray"
                 BorderWidth="1"
                 BackgroundColor="#5ac8fa"
