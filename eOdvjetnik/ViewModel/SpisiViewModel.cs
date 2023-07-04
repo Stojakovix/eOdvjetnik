@@ -21,7 +21,9 @@ namespace eOdvjetnik.ViewModel
             get { return fileItems; }
             set { fileItems = value; }
         }
-      
+
+        private int broj_spisa { get;set; }
+        public int brojSpisa { get; set; }
 
         #region Search
 
@@ -149,6 +151,50 @@ namespace eOdvjetnik.ViewModel
             {
                 Debug.WriteLine(ex.Message);
             }
+
+            var timer = Application.Current.Dispatcher.CreateTimer();
+            timer.Interval = TimeSpan.FromSeconds(5);
+            timer.Tick += (s, e) => CheckCount();
+            timer.Start();
+        }
+
+
+        void CheckCount()
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                 try
+                {
+                    broj_spisa = brojSpisa;
+
+                    string query = "SELECT COUNT(id) AS id FROM files;";
+                    Debug.WriteLine("Query prošao");
+
+                    Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                    if (filesData != null)
+                    {
+                        foreach (Dictionary<string, string> filesRow in filesData)
+                        {
+                            int id;
+                            int.TryParse(filesRow["id"], out id);
+                            brojSpisa = id;
+                            Debug.WriteLine("Brojevi spisa: " + broj_spisa + brojSpisa);
+                            if (brojSpisa > broj_spisa)
+                            {
+                                GenerateFiles();
+                            }
+                        }
+                    }
+
+
+                }
+
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+            );
         }
 
         public void GenerateFiles()

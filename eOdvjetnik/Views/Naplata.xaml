@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              x:Class="eOdvjetnik.Views.Naplata"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
              Title="Naplata">
@@ -9,25 +11,25 @@
         <viewmodel:NaplataViewModel/>
     </ContentPage.BindingContext>
 
-   
+
 
     <ScrollView>
         <VerticalStackLayout >
             <Grid>
                 <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                 <RowDefinition Height="Auto" />
-                  <RowDefinition Height="Auto" />
-                  <RowDefinition Height="Auto" />
-                  <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-            <Label Text="Zastupnik:" FontSize="16" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="10,10,0,12"/>
-            <Label Grid.Column="1" Text="{Binding NazivTvrtke}" FontSize="16" BackgroundColor="White" TextColor="Black" Margin="10,10,0,12"/>
+                <Label Text="Zastupnik:" FontSize="16" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="10,10,0,12"/>
+                <Label Grid.Column="1" Text="{Binding NazivTvrtke}" FontSize="16" BackgroundColor="White" TextColor="Black" Margin="10,10,0,12"/>
 
                 <Label Grid.Column="0" Grid.Row="1" Text="Klijent:" FontSize="16" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="10,0,0,12"/>
                 <Label Grid.Column="1" Grid.Row="1" Text="NazivKlijenta" FontSize="16" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12"/>
@@ -42,8 +44,35 @@
                 <Label Grid.Column="1" Grid.Row="4" Text="{Binding odabraniBodovi}" FontSize="16" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12" />
 
             </Grid>
+            <HorizontalStackLayout>
 
-            <Button 
+                <Button 
+                BorderColor="DarkGray"
+                BorderWidth="1"
+                BackgroundColor="#5ac8fa"
+                Text="Dodaj stavku"
+                FontAttributes="Bold"
+                TextColor="Black"
+                HorizontalOptions="Start"
+                Clicked="CreateDocument"
+            FontSize="Default"
+            Margin="10,10,10,10"
+            />
+
+                <Button 
+                BorderColor="DarkGray"
+                BorderWidth="1"
+                BackgroundColor="#5ac8fa"
+                Text="Pregled stavki"
+                FontAttributes="Bold"
+                TextColor="Black"
+                HorizontalOptions="Start"
+                Clicked="CreateDocument"
+            FontSize="Default"
+            Margin="10,10,10,10"
+            />
+
+                <Button 
                 BorderColor="DarkGray"
                 BorderWidth="1"
                 BackgroundColor="#5ac8fa"
@@ -55,10 +84,14 @@
             FontSize="Default"
             Margin="10,10,10,10"
             />
+            </HorizontalStackLayout>
 
-        <Label Text="Pretraga po tarifnom broju ili nazivu" HorizontalOptions="Start" FontSize="Default"  Margin="10,10,10,10"
+
+
+
+            <Label Text="Pretraga po tarifnom broju ili nazivu" HorizontalOptions="Start" FontSize="Default"  Margin="10,10,10,10"
  />
-        <SearchBar Placeholder="Npr. 1.2" 
+            <SearchBar Placeholder="Npr. 1.2" 
                    BackgroundColor="LightGray"
                    SearchCommand="{Binding SearchCommand}"
                    Text="{Binding SearchText}"
@@ -68,27 +101,27 @@
                    FontSize="Default" />
 
 
-        <Grid Margin="10"   >
-            <Grid.Resources>
-                <Style TargetType="Label">
-                    <Setter Property="TextColor" Value="Black" />
-                </Style>
-            </Grid.Resources>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="Auto" />
+            <Grid Margin="10"   >
+                <Grid.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="TextColor" Value="Black" />
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="Auto" />
 
-            </Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="0" FontAttributes="Bold" Text="Tbr." Margin="5,0,0,0" />
-            <Label Grid.Column="1" FontAttributes="Bold" Text="Bodovi"   HorizontalOptions="Center" />
-            <Label Grid.Column="2" FontAttributes="Bold" Text="Vrsta" Margin="5,0,0,0" />
+                <Label Grid.Column="0" FontAttributes="Bold" Text="Tbr." Margin="5,0,0,0" />
+                <Label Grid.Column="1" FontAttributes="Bold" Text="Bodovi"   HorizontalOptions="Center" />
+                <Label Grid.Column="2" FontAttributes="Bold" Text="Vrsta" Margin="5,0,0,0" />
 
-        </Grid>
+            </Grid>
 
 
             <ListView Margin="10,0,0,0" ItemsSource="{Binding TariffItems}" ItemSelected="ListViewItemSelected"  >
@@ -128,6 +161,99 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <sfPopup:SfPopup IsVisible="{Binding ReceiptVisible}"
+                             IsOpen="{Binding ReceiptPopupOpen}"
+                             HeaderTitle="Izrada Računa"
+                             x:Name="ReceitPopup"
+                             AutoSizeMode="Both"
+                             ShowCloseButton="True"
+                             WidthRequest="1000" >
+
+                <sfPopup:SfPopup.ContentTemplate >
+
+                    <DataTemplate>
+                        <Grid Margin="10">
+                            <Grid.Resources>
+                                <Style TargetType="Label">
+                                    <Setter Property="TextColor" Value="Black" />
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" FontAttributes="Bold" Text="Tbr." Margin="5,0,0,0" />
+                            <Label Grid.Column="1" FontAttributes="Bold" Text="Bodovi" Margin="5,0,0,0"  />
+                            <Label Grid.Column="2" FontAttributes="Bold" Text="Vrsta" Margin="5,0,0,0" />
+                            <Label Grid.Column="3" FontAttributes="Bold" Text="Vrsta" Margin="5,0,0,0" />
+                            <Label Grid.Column="4" FontAttributes="Bold" Text="Vrsta" Margin="5,0,0,0" />
+                        </Grid>
+                    </DataTemplate>
+
+
+                </sfPopup:SfPopup.ContentTemplate>
+
+                <syncfusion:SfListView  ItemsSource="{Binding ReceiptItems}">
+                    <syncfusion:SfListView.ItemTemplate>
+
+                        <DataTemplate>
+                            <StackLayout>
+
+                                <Grid BackgroundColor="White">
+                                    <Grid.Resources>
+                                        <Style TargetType="Label">
+                                            <Setter Property="TextColor" Value="Black" />
+                                        </Style>
+                                    </Grid.Resources>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Row="1" Grid.Column="0" Margin="0" Padding="5" StrokeThickness="0.1" Stroke="Black" >
+                                        <Label Text="{Binding Tbr}" HorizontalOptions="Start" />
+                                    </Border>
+
+                                    <Border Grid.Row="1" Grid.Column="1" Margin="0" Padding="5" StrokeThickness="0.1" Stroke="Black" >
+                                        <Label Text="{Binding Name}" HorizontalOptions="Center" />
+                                    </Border>
+
+                                    <Border Grid.Row="1" Grid.Column="2" Margin="0" Padding="5" StrokeThickness="0.1" Stroke="Black" >
+                                        <Label Text="{Binding Points}" WidthRequest="500" HorizontalOptions="Start" />
+                                    </Border>
+
+                                    <Border Grid.Row="1" Grid.Column="3" Margin="0" Padding="5" StrokeThickness="0.1" Stroke="Black" >
+                                        <Label Text="{Binding Points}" WidthRequest="500" HorizontalOptions="Start" />
+                                    </Border>
+
+                                    <Border Grid.Row="1" Grid.Column="4" Margin="0" Padding="5" StrokeThickness="0.1" Stroke="Black" >
+                                        <Label Text="100 milijuna eura" WidthRequest="500" HorizontalOptions="Start" />
+                                    </Border>
+                                </Grid>
+                            </StackLayout>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+                </syncfusion:SfListView>
+            </sfPopup:SfPopup>
         </VerticalStackLayout>
     </ScrollView>
 

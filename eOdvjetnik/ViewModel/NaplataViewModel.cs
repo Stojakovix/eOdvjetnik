@@ -1,10 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Input;
+using System.Xml.Linq;
 using eOdvjetnik.Models;
 using eOdvjetnik.Services;
+using Vanara.PInvoke;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -141,8 +143,33 @@ namespace eOdvjetnik.ViewModel
                 }
             }
         }
+
+        // Za popup 
+
+        private ObservableCollection<ReceiptItem> _receiptItems;
+        public ObservableCollection<ReceiptItem> ReceiptItems
+        {
+            get { return _receiptItems; }
+            set
+            {
+                _receiptItems = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ReceiptItems)));
+            }
+        }
+
+        public ICommand AddItemCommand { get; }
+        public ICommand EditItemCommand { get; }
+        public ICommand RemoveItemCommand { get; }
+
+
         public NaplataViewModel()
         {
+            ReceiptItems = new ObservableCollection<ReceiptItem>();
+
+            AddItemCommand = new Command(AddItem);
+            EditItemCommand = new Command<ReceiptItem>(EditItem);
+            RemoveItemCommand = new Command<ReceiptItem>(RemoveItem);
+
             try
             {
                 tariffItems = new ObservableCollection<TariffItem>();
@@ -181,6 +208,39 @@ namespace eOdvjetnik.ViewModel
             }
             );
         }
+
+        //Popup računa
+
+        private void AddItem()
+        {
+            ReceiptItem newItem = new ReceiptItem
+            {
+                Tbr = odabraniTBR,
+                Name = odabraniNaziv,
+                Points = odabraniBodovi
+        };
+        ReceiptItems.Add(newItem);
+        }
+
+
+        private void EditItem(ReceiptItem item)
+        {
+            //eh
+        }
+
+        private void RemoveItem(ReceiptItem item)
+        {
+            ReceiptItems.Remove(item);
+        }
+
+        public class ReceiptItem
+        {
+            public string Tbr { get; set; }
+            public string Name { get; set; }
+            public string Points { get; set; }
+        }
+
+
     }
 
 
