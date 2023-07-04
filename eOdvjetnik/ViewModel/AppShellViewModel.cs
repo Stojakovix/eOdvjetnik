@@ -9,6 +9,30 @@ namespace eOdvjetnik.ViewModel
 {
 	public class AppShellViewModel : INotifyPropertyChanged
 	{
+        public int daysRemaining {get;set;}
+        public string days_Remaining { get; set; }
+
+        private bool ExpiryisOpen, Expiryvisible;
+
+        public bool ExpiryPopupOpen
+        {
+            get { return ExpiryisOpen; }
+            set
+            {
+                ExpiryisOpen = value;
+                OnPropertyChanged(nameof(ExpiryPopupOpen));
+            }
+        }
+
+        public bool ExpiryVisible
+        {
+            get { return Expiryvisible; }
+            set
+            {
+                Expiryvisible = value;
+                OnPropertyChanged(nameof(ExpiryVisible));
+            }
+        }
         #region Navigacija
         public ICommand MainClickCommand { get; set; }
         public ICommand KalendarClickCommand { get; set; }
@@ -204,6 +228,9 @@ namespace eOdvjetnik.ViewModel
 
             #endregion
             SfPopup popup = new SfPopup();
+            daysRemaining = 11;
+            
+            CheckExpiry();
         }
 
         #region Navigacija Funkcije
@@ -461,6 +488,33 @@ namespace eOdvjetnik.ViewModel
 
         #endregion
 
+        #region Istek
+        private void CheckExpiry()
+        {
+            string days_remaining = Preferences.Get("days_until_expiry", "");
+            daysRemaining = Convert.ToInt32(days_remaining);
+            Debug.WriteLine(daysRemaining);
+            if (daysRemaining > 1 && daysRemaining < 10)
+            {
+                days_Remaining = string.Concat("Vaša licenca ističe za ", days_remaining, " dana");
+                ExpiryPopupOpen = true;
+                Expiryvisible = true;
+            }
+            else if (daysRemaining == 0)
+            {
+                days_Remaining = "Vaša licenca ističe sutra!";
+                ExpiryPopupOpen = true;
+                Expiryvisible = true;
+            }
+
+        }
+
+        private void PopupExpiryClose()
+        {
+            ExpiryPopupOpen = false;
+            Expiryvisible = false;
+        }
+        #endregion
         private async void ShowAlert(string title, string message)
         {
             await Application.Current.MainPage.DisplayAlert(title, message, "OK");

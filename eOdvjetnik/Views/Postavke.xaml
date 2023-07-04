@@ -95,41 +95,42 @@
                     </OnPlatform>
                 </Border.WidthRequest>
                 <StackLayout>
-                                <Grid Margin="10,10,10,0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
+                    <Grid Margin="10,10,10,0" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
 
-                                    </Grid.RowDefinitions>
+                        </Grid.RowDefinitions>
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2*" />
-                                        <ColumnDefinition Width="3*" />
-                                    </Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
 
-                                    <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                                    <Entry x:Name="IP_Entry" Text="{Binding IPNas}" Grid.Row="0" Grid.Column="1" TextColor="Black"  />
 
-                                    <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                                    <Entry x:Name="USER_Entry" Text="{Binding UserNas}" Grid.Row="1" Grid.Column="1" TextColor="Black" />
+                        <Label MinimumWidthRequest="50" Text="IP adresa"  TextColor="Black" LineBreakMode="NoWrap" VerticalOptions="Center" />
+                        <Entry Grid.Column="1"  x:Name="IP_Entry" Text="{Binding IPNas}" TextColor="Black"   />
 
-                                    <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                                    <Entry x:Name="PASS_Entry" Text="{Binding PassNas}" Grid.Row="2" Grid.Column="1" TextColor="Black"  />
+                        <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                        <Entry x:Name="USER_Entry" Text="{Binding UserNas}" Grid.Row="1" Grid.Column="1" TextColor="Black" />
 
-                                    <Label Text="Mapa" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                                    <Entry x:Name="FOLDER_Entry" Text="{Binding Folder}" Grid.Row="3" Grid.Column="1" TextColor="Black" />
+                        <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                        <Entry x:Name="PASS_Entry" Text="{Binding PassNas}" Grid.Row="2" Grid.Column="1" TextColor="Black"  />
 
-                                    <Label Text="Podmapa" Grid.Row="4" Grid.Column="0" TextColor="Black"  VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                                    <Entry x:Name="SUBFOLDER_Entry" Text="{Binding SubFolder}" Grid.Row="4" Grid.Column="1" TextColor="Black" />
+                        <Label Text="Mapa" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                        <Entry x:Name="FOLDER_Entry" Text="{Binding Folder}" Grid.Row="3" Grid.Column="1" TextColor="Black" />
+
+                        <Label Text="Podmapa" Grid.Row="4" Grid.Column="0" TextColor="Black"  VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                        <Entry x:Name="SUBFOLDER_Entry" Text="{Binding SubFolder}" Grid.Row="4" Grid.Column="1" TextColor="Black" VerticalOptions="Center" />
 
                         <Button Text="Spremi" Command="{Binding SaveCommandNAS}" Grid.Row="5" Grid.Column="1" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"  />
 
-                                </Grid>
-     
+                    </Grid>
+
 
                 </StackLayout>
             </Border>
@@ -142,38 +143,38 @@
                     </OnPlatform>
                 </Border.WidthRequest>
                 <StackLayout>
-                            <Grid Margin="10,10,10,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
+                    <Grid Margin="10,10,10,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
 
-                                </Grid.RowDefinitions>
+                        </Grid.RowDefinitions>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="3*" />
-                                </Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
 
-                                <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                                <Entry x:Name="IPEntry" Text="{Binding IP}" Grid.Row="0" Grid.Column="1" TextColor="Black" />
+                        <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                        <Entry x:Name="IPEntry" Text="{Binding IP}" Grid.Row="0" Grid.Column="1" TextColor="Black"  />
 
-                                <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                                <Entry x:Name="USEREntry" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1" TextColor="Black"  />
+                        <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                        <Entry x:Name="USEREntry" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1" TextColor="Black"  />
 
-                                <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                                <Entry x:Name="PASSEntry" Text="{Binding Password}" Grid.Row="2" Grid.Column="1" TextColor="Black" />
+                        <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                        <Entry x:Name="PASSEntry" Text="{Binding Password}" Grid.Row="2" Grid.Column="1" TextColor="Black" />
 
-                                <Label Text="Baza podataka" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                                <Entry x:Name="DatabaseEntry" Text="{Binding DatabaseName}" Grid.Row="3" Grid.Column="1" TextColor="Black" />
+                        <Label Text="Baza podataka" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                        <Entry x:Name="DatabaseEntry" Text="{Binding DatabaseName}" Grid.Row="3" Grid.Column="1" TextColor="Black"   />
 
                         <Button Text="Spremi" Command="{Binding SQLSaveCommand}" Grid.Row="5" Grid.Column="1" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"   />
 
-                            </Grid>
-                </StackLayout>           
+                    </Grid>
+                </StackLayout>
             </Border>
             <Border MaximumWidthRequest="420" Grid.Column="1" Grid.RowSpan="7"  BackgroundColor="White" 
                     x:Name="Frame6" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">

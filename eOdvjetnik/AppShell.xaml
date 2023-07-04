@@ -150,6 +150,22 @@
                 </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
 
+            <sfPopup:SfPopup x:Name="popupIstek" 
+                             HeaderTitle="Obavijest" HorizontalOptions="Center"
+                             IsVisible="{Binding ExpiryVisible}" 
+                             IsOpen="{Binding ExpiryPopupOpen}"
+                             ShowCloseButton="True"
+
+                            >
+                <sfPopup:SfPopup.ContentTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout>
+                            <Label Text="{Binding days_Remaining}" TextColor="Black" Margin="20,0,0,10" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </sfPopup:SfPopup.ContentTemplate>
+            </sfPopup:SfPopup>
+
             <sfPopup:SfPopup IsVisible="{Binding NASVisible}"
                              IsOpen="{Binding NASPopupOpen}"
                              HeaderTitle="NAS postavke"
