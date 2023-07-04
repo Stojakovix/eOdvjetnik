@@ -160,7 +160,7 @@ namespace eOdvjetnik.ViewModel
             }
 
             var timer = Application.Current.Dispatcher.CreateTimer();
-            timer.Interval = TimeSpan.FromSeconds(30);
+            timer.Interval = TimeSpan.FromSeconds(5);
             timer.Tick += (s, e) => CheckCount();
             timer.Start();
         }
@@ -209,6 +209,8 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
+                fileItems.Clear();
+
                 string query = "SELECT * FROM files ORDER BY id DESC LIMIT 100;";
 
                // Debug.WriteLine(query + "u SpisiViewModelu");
