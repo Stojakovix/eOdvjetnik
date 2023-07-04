@@ -12,6 +12,7 @@ namespace eOdvjetnik.ViewModel
 {
     public class NaplataViewModel : INotifyPropertyChanged
     {
+        #region Pretraga tarifa
 
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
 
@@ -52,7 +53,6 @@ namespace eOdvjetnik.ViewModel
             Debug.WriteLine(tariffItems);
             try
             {
-
                 if (tariffItems != null)
                 {
                     tariffItems.Clear();
@@ -99,6 +99,8 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
+  
+        
         public string NazivTvrtke { get; set; }
 
         private string odabrani_TBR;
@@ -144,7 +146,35 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-        // Za popup 
+
+        #endregion
+
+        #region Popup račun
+
+
+
+        private bool _ReceiptVisible;
+        public bool ReceiptVisible
+        {
+            get { return _ReceiptVisible; }
+            set
+            {
+                _ReceiptVisible = value;
+                OnPropertyChanged(nameof(ReceiptVisible));
+            }
+        }
+
+        private bool _ReceiptPopupOpen;
+
+        public bool ReceiptPopupOpen
+        {
+            get { return _ReceiptPopupOpen; }
+            set
+            {
+                _ReceiptPopupOpen = value;
+                OnPropertyChanged(nameof(ReceiptPopupOpen));
+            }
+        }
 
         private ObservableCollection<ReceiptItem> _receiptItems;
         public ObservableCollection<ReceiptItem> ReceiptItems
@@ -157,19 +187,109 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
+        public ICommand OnReciptClickCommand { get; set; }
+        public ICommand ReceiptCloseCommand { get; set; }
         public ICommand AddItemCommand { get; }
-        public ICommand EditItemCommand { get; }
         public ICommand RemoveItemCommand { get; }
+        public ICommand NewReceipt { get; }
 
+
+        public class ReceiptItem
+        {
+            public string Tbr { get; set; }
+            public string Name { get; set; }
+            public string Points { get; set; }
+
+            public float sumaIznosa
+            {
+                get
+                {
+                    if(float.TryParse(Points, out float points))
+                        {
+                        return points * 1.99f;
+                    }
+                    else { return 0f; }
+                }
+            }
+            public float Coefficent { get; set; } = 1f;
+
+
+
+        }
+        private void AddItem()
+        { try
+            {
+                ReceiptItem newItem = new ReceiptItem
+                {
+                    Tbr = odabraniTBR,
+                    Name = odabraniNaziv,
+                    Points = odabraniBodovi
+                };
+                ReceiptItems.Add(newItem);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
+        }
+
+  
+        private void RemoveItem(ReceiptItem item)
+        {
+            try
+            {
+                ReceiptItems.Remove(item);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private void OnReceiptClick()
+        {
+            try
+            {
+                ReceiptPopupOpen = true;
+                ReceiptVisible = true;
+            }
+             catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+
+        private void ReceiptPopupClose()
+        {
+            try
+            {
+                ReceiptPopupOpen = false;
+                ReceiptVisible = false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public void DeleteRecipt()
+        {
+            ReceiptItems.Clear();
+        }
+
+        #endregion
 
         public NaplataViewModel()
         {
             ReceiptItems = new ObservableCollection<ReceiptItem>();
 
+            OnReciptClickCommand = new Command(OnReceiptClick);
+            ReceiptCloseCommand = new Command(ReceiptPopupClose);
             AddItemCommand = new Command(AddItem);
-            EditItemCommand = new Command<ReceiptItem>(EditItem);
             RemoveItemCommand = new Command<ReceiptItem>(RemoveItem);
-
+            NewReceipt = new Command(DeleteRecipt);
             try
             {
                 tariffItems = new ObservableCollection<TariffItem>();
@@ -189,7 +309,7 @@ namespace eOdvjetnik.ViewModel
             timer.Start();
         }
 
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -205,39 +325,10 @@ namespace eOdvjetnik.ViewModel
                 odabraniTBR = Preferences.Get("SelectedOznaka", "");
                 odabraniBodovi = Preferences.Get("SelectedBodovi", "");
                 odabraniNaziv = Preferences.Get("SelectedConcatenatedName", "");
+
+
             }
             );
-        }
-
-        //Popup računa
-
-        private void AddItem()
-        {
-            ReceiptItem newItem = new ReceiptItem
-            {
-                Tbr = odabraniTBR,
-                Name = odabraniNaziv,
-                Points = odabraniBodovi
-        };
-        ReceiptItems.Add(newItem);
-        }
-
-
-        private void EditItem(ReceiptItem item)
-        {
-            //eh
-        }
-
-        private void RemoveItem(ReceiptItem item)
-        {
-            ReceiptItems.Remove(item);
-        }
-
-        public class ReceiptItem
-        {
-            public string Tbr { get; set; }
-            public string Name { get; set; }
-            public string Points { get; set; }
         }
 
 

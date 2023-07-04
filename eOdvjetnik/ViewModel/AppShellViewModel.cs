@@ -228,7 +228,6 @@ namespace eOdvjetnik.ViewModel
 
             #endregion
             SfPopup popup = new SfPopup();
-            daysRemaining = 11;
             
             CheckExpiry();
         }
@@ -491,21 +490,30 @@ namespace eOdvjetnik.ViewModel
         #region Istek
         private void CheckExpiry()
         {
-            string days_remaining = Preferences.Get("days_until_expiry", "");
-            daysRemaining = Convert.ToInt32(days_remaining);
-            Debug.WriteLine(daysRemaining);
-            if (daysRemaining > 1 && daysRemaining < 10)
+            try
             {
-                days_Remaining = string.Concat("Vaša licenca ističe za ", days_remaining, " dana");
-                ExpiryPopupOpen = true;
-                Expiryvisible = true;
+                daysRemaining = 11;
+                string days_remaining = Preferences.Get("days_until_expiry", "");
+                daysRemaining = Convert.ToInt32(days_remaining);
+                Debug.WriteLine(daysRemaining);
+                if (daysRemaining > 1 && daysRemaining < 10)
+                {
+                    days_Remaining = string.Concat("Vaša licenca ističe za ", days_remaining, " dana");
+                    ExpiryPopupOpen = true;
+                    Expiryvisible = true;
+                }
+                else if (daysRemaining == 0)
+                {
+                    days_Remaining = "Vaša licenca ističe sutra!";
+                    ExpiryPopupOpen = true;
+                    Expiryvisible = true;
+                }
             }
-            else if (daysRemaining == 0)
+            catch (Exception ex)
             {
-                days_Remaining = "Vaša licenca ističe sutra!";
-                ExpiryPopupOpen = true;
-                Expiryvisible = true;
+                Debug.WriteLine(ex.Message);
             }
+
 
         }
 
