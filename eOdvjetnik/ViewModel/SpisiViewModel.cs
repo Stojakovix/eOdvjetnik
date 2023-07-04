@@ -160,7 +160,7 @@ namespace eOdvjetnik.ViewModel
             }
 
             var timer = Application.Current.Dispatcher.CreateTimer();
-            timer.Interval = TimeSpan.FromSeconds(5);
+            timer.Interval = TimeSpan.FromSeconds(30);
             timer.Tick += (s, e) => CheckCount();
             timer.Start();
         }
@@ -175,7 +175,6 @@ namespace eOdvjetnik.ViewModel
                     broj_spisa = brojSpisa;
 
                     string query = "SELECT COUNT(id) AS id FROM files;";
-                    Debug.WriteLine("Query prošao");
 
                     Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
                     if (filesData != null)
@@ -185,7 +184,9 @@ namespace eOdvjetnik.ViewModel
                             int id;
                             int.TryParse(filesRow["id"], out id);
                             brojSpisa = id;
-                            Debug.WriteLine("Brojevi spisa: " + broj_spisa + brojSpisa);
+                            Debug.WriteLine(broj_spisa);
+                            Debug.WriteLine(brojSpisa);
+
                             if (brojSpisa > broj_spisa)
                             {
                                 GenerateFiles();
