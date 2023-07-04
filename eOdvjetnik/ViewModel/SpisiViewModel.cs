@@ -19,7 +19,14 @@ namespace eOdvjetnik.ViewModel
         public ObservableCollection<FileItem> FileItems
         {
             get { return fileItems; }
-            set { fileItems = value; }
+            set
+            {
+                if (fileItems != value)
+                {
+                    fileItems = value;
+                    OnPropertyChanged(nameof(FileItems));
+                }
+            }
         }
 
         private int broj_spisa { get;set; }
@@ -203,8 +210,6 @@ namespace eOdvjetnik.ViewModel
             {
                 string query = "SELECT * FROM files ORDER BY id DESC LIMIT 100;";
 
-
-
                // Debug.WriteLine(query + "u SpisiViewModelu");
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
                 if (filesData != null)
@@ -256,6 +261,7 @@ namespace eOdvjetnik.ViewModel
                         initialFileItems = new ObservableCollection<FileItem>(fileItems);
                         
                     }
+                    OnPropertyChanged(nameof(fileItems));
                 }
             }
             catch (Exception ex)
@@ -263,8 +269,12 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message);
             }
         }
+        public void RefreshDataFromServer()
+        {
+            // Call this method to refresh the data from the server after adding a new entry
+            GenerateFiles();
+        }
 
-       
 
         public event PropertyChangedEventHandler PropertyChanged;
         #region Komande

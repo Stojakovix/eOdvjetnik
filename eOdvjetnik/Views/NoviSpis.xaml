@@ -7,6 +7,8 @@
     <ContentPage.BindingContext>
         <viewmodel:NoviSpisViewModel/>
     </ContentPage.BindingContext>
+    
+
     <ScrollView>
         <Grid BackgroundColor="grey">
             <Grid.ColumnDefinitions>
@@ -77,7 +79,7 @@
             <Label Text="BrojPredmeta" Grid.Row="19" Grid.Column="0" />
             <Entry x:Name="BrojPredmetaEntry" Grid.Row="19" Grid.Column="1" Text="{Binding BrojPredmeta}"/>
 
-            <Button Text="Dodaj" Command="{Binding AddFilesToRemoteServer}" Grid.Row="20"/>
+            <Button Text="Dodaj" Command="{Binding OnDodajClick}" Grid.Row="20"/>
 
 
         </Grid>

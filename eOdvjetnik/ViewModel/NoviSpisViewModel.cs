@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Input;
 using eOdvjetnik.Model;
@@ -10,10 +11,39 @@ namespace eOdvjetnik.ViewModel
     public class NoviSpisViewModel : INotifyPropertyChanged
     {
         public ICommand AddFilesToRemoteServer { get; set; }
-
+       
+        public ICommand OnDodajClick { get; set; }
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
 
         FileItem fileitem;
+        public NoviSpisViewModel()
+        {      
+            try
+            {
+                OnDodajClick = new Command(DodajClickButton);
+                AddFilesToRemoteServer = new Command(() => AddSpisToRemoteServer(fileitem));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+
+        private ObservableCollection<FileItem> fileitems;
+        public ObservableCollection<FileItem> fileItems
+        {
+            get { return fileitems; }
+            set
+            {
+                if (fileitems != value)
+                {
+                    fileitems = value;
+                    OnPropertyChanged(nameof(fileItems));
+                }
+            }
+        }
+
         //private FileItem fileitem;
 
         #region Varijable za spremanje na server
@@ -286,7 +316,6 @@ namespace eOdvjetnik.ViewModel
 
         #endregion
 
-
         public FileItem FileItem
         {
             get { return fileitem; }
@@ -299,19 +328,18 @@ namespace eOdvjetnik.ViewModel
                 }
             }
         }
-
         //Napravi još bindinge sa svakim entry fieldom za svako polje da dodaje, vjerojatno neće bit dobar i trebat će se nešto konvertat, date time ili slično
-        public NoviSpisViewModel()
-        {
-            try
-            {
-                AddFilesToRemoteServer = new Command(() => AddSpisToRemoteServer(fileitem));
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
+        //public NoviSpisViewModel()
+        //{
+        //    try
+        //    {
+        //        AddFilesToRemoteServer = new Command(() => AddSpisToRemoteServer(fileitem));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.Message);
+        //    }
+        //}
         private void AddSpisToRemoteServer(FileItem fileItem)
         {
             try
@@ -339,9 +367,7 @@ namespace eOdvjetnik.ViewModel
                 string jezik = Jezik ?? string.Empty;
                 string brojPredmeta = BrojPredmeta ?? string.Empty;
 
-
                 #endregion
-
 
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 string disableForeignKeyChecksQuery = "SET FOREIGN_KEY_CHECKS = 0";
@@ -352,6 +378,7 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(query + " in novi spis viewModel");
                 externalSQLConnect.sqlQuery(query);
                 Debug.WriteLine("Appointment added to remote server in novi spis viewModel");
+                //spisiViewModel.RefreshDataFromServer();
                 
 
             }
@@ -361,12 +388,12 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-        private void DodajButtonClicked()
+        private void DodajClickButton()
         {
-            AddSpisToRemoteServer(fileitem);
-
+            AddSpisToRemoteServer(FileItem);
+            Shell.Current.GoToAsync("//Spisi");
         }
-
+       
         #region Property Changed
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
@@ -374,7 +401,6 @@ namespace eOdvjetnik.ViewModel
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
-
 
     }
 
