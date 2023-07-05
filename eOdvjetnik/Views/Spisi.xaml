@@ -56,21 +56,33 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
 
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" MaximumWidthRequest="150" Text="ID" />
                     <Label Grid.Row="0" Grid.Column="1" MaximumWidthRequest="150" Text="Broj spisa" />
-                    <Label Grid.Row="0" Grid.Column="2" MaximumWidthRequest="150" Text="Created" />
+                    <Label Grid.Row="0" Grid.Column="2" MaximumWidthRequest="150" Text="Datum kreiranja" />
+                    <Label Grid.Row="0" Grid.Column="3" MaximumWidthRequest="150" Text="Datum izmjene" />
+                    <Label Grid.Row="0" Grid.Column="4" MaximumWidthRequest="150" Text="Klijent" />
+                    <Label Grid.Row="0" Grid.Column="5" MaximumWidthRequest="150" Text="Protustranka" />
+                    <Label Grid.Row="0" Grid.Column="6" MaximumWidthRequest="150" Text="Dodao" />
 
                 </Grid>
 
 
-                <ListView ItemsSource="{Binding FileItems}" x:Name="listView">
+                <ListView ItemsSource="{Binding FileItems}" x:Name="listView" SelectionMode="Single" SeparatorColor="LightGrey" IsPullToRefreshEnabled="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -85,16 +97,28 @@
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
 
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Row="1" Grid.Column="0" MaximumWidthRequest="150" Text="{Binding Id}" />
                                     <Label Grid.Row="1" Grid.Column="1" MaximumWidthRequest="150" Text="{Binding BrojSpisa}" />
-                                    <Label Grid.Row="1" Grid.Column="2" MaximumWidthRequest="150" Text="{Binding Created,  StringFormat='{}{0:dd-MM-yyyy HH:mm:ss}'}"  />
+                                    <Label Grid.Row="1" Grid.Column="2" MaximumWidthRequest="150" Text="{Binding Created,  StringFormat='{}{0:f}'}"  />
+                                    <Label Grid.Row="1" Grid.Column="3" MaximumWidthRequest="150" Text="{Binding DatumIzmjeneSpisa,  StringFormat='{}{0:f}'}"  />
+                                    <Label Grid.Row="1" Grid.Column="4" MaximumWidthRequest="150" Text="{Binding ClientId}" />
+                                    <Label Grid.Row="1" Grid.Column="5" MaximumWidthRequest="150" Text="{Binding OpponentId}" />
+                                    <Label Grid.Row="1" Grid.Column="6" MaximumWidthRequest="150" Text="{Binding InicijaliDodao}" />
 
 
                                 </Grid>
