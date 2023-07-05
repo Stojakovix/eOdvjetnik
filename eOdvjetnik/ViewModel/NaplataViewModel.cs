@@ -184,6 +184,7 @@ namespace eOdvjetnik.ViewModel
             {
                 _receiptItems = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ReceiptItems)));
+
             }
         }
 
@@ -194,28 +195,80 @@ namespace eOdvjetnik.ViewModel
         public ICommand NewReceipt { get; }
 
 
+
         public class ReceiptItem
         {
+
             public string Tbr { get; set; }
             public string Name { get; set; }
             public string Points { get; set; }
+            public float Coefficent { get; set; } = 1f;
 
-            public float sumaIznosa
+            public float Amount
             {
                 get
                 {
-                    if(float.TryParse(Points, out float points))
-                        {
+                    if (float.TryParse(Points, out float points))
+                    {
                         return points * 1.99f;
                     }
                     else { return 0f; }
                 }
+          
             }
-            public float Coefficent { get; set; } = 1f;
+            public string Currency
+            {
+                get { return $"{Amount.ToString("0.00")} €"; }
+            }
 
+            public float TotalAmount { get; set; }
+
+            public string TotalAmountCurrency
+            {
+                get { return $"{TotalAmount.ToString("0.00")} €"; }
+            }
 
 
         }
+
+         public float UkupniIznos { get; private set; } 
+         
+         public void CalculateTotalAmount()
+         {
+            UkupniIznos = 0f; 
+         
+             try
+             {
+                 foreach (ReceiptItem item in _receiptItems)
+                 {
+                    UkupniIznos += item.Amount;
+                 }
+
+             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            Debug.WriteLine("Ukupni iznos: " + UkupniIznos);
+            ReplaceTotalAmountWithUkupniIznos();
+
+        }
+
+        public void ReplaceTotalAmountWithUkupniIznos()
+        {
+            try
+            {
+                foreach (ReceiptItem item in _receiptItems)
+                {
+                    item.TotalAmount = UkupniIznos;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
         private void AddItem()
         { try
             {
@@ -226,6 +279,8 @@ namespace eOdvjetnik.ViewModel
                     Points = odabraniBodovi
                 };
                 ReceiptItems.Add(newItem);
+                CalculateTotalAmount();
+
             }
             catch (Exception ex)
             {
@@ -239,7 +294,9 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
+
                 ReceiptItems.Remove(item);
+                CalculateTotalAmount();
             }
             catch (Exception ex)
             {
@@ -251,6 +308,7 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
+                CalculateTotalAmount();
                 ReceiptPopupOpen = true;
                 ReceiptVisible = true;
             }
@@ -273,7 +331,7 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message);
             }
         }
-
+ 
         public void DeleteRecipt()
         {
             ReceiptItems.Clear();
@@ -283,13 +341,13 @@ namespace eOdvjetnik.ViewModel
 
         public NaplataViewModel()
         {
-            ReceiptItems = new ObservableCollection<ReceiptItem>();
 
             OnReciptClickCommand = new Command(OnReceiptClick);
             ReceiptCloseCommand = new Command(ReceiptPopupClose);
+            NewReceipt = new Command(DeleteRecipt);
             AddItemCommand = new Command(AddItem);
             RemoveItemCommand = new Command<ReceiptItem>(RemoveItem);
-            NewReceipt = new Command(DeleteRecipt);
+            ReceiptItems = new ObservableCollection<ReceiptItem>();
             try
             {
                 tariffItems = new ObservableCollection<TariffItem>();

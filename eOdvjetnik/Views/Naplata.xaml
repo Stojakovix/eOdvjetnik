@@ -160,19 +160,27 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <sfPopup:SfPopup IsVisible="{Binding ReceiptVisible}"
+            <sfPopup:SfPopup IsVisible="{Binding ReceiptVisible}" 
                  IsOpen="{Binding ReceiptPopupOpen}"
-                 HeaderTitle="Izrada Računa" 
+                 HeaderTitle="Izrada Računa"  ShowHeader="False"
                  x:Name="ReceiptPopup"
                  ShowCloseButton="True"
                  AutoSizeMode="Both"
-                 MinimumWidthRequest="1300"
+                 MinimumWidthRequest="1350"
                  MinimumHeightRequest="600"
 >
-
+                <sfPopup:SfPopup.PopupStyle>
+                    <sfPopup:PopupStyle 
+                        Stroke="Black"
+                        MessageBackground="White">
+                    </sfPopup:PopupStyle>
+                    
+                </sfPopup:SfPopup.PopupStyle>
                 <sfPopup:SfPopup.ContentTemplate >
 
                     <DataTemplate>
+                        
+                        
                         <Grid Margin="10,0,0,10">
                             <Grid.Resources>
                                 <Style TargetType="Label">
@@ -182,6 +190,8 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+
 
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
@@ -190,22 +200,34 @@
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
 
                             </Grid.ColumnDefinitions>
-
-                            <Label Grid.Column="0" FontAttributes="Bold" Text="Tbr." Margin="10,0,0,10"  />
-                            <Label Grid.Column="1" FontAttributes="Bold" Text="Radnja" Margin="10,0,0,10"  />
-                            <Label Grid.Column="2" FontAttributes="Bold" Text="Bodovi" HorizontalOptions="End" />
-                            <Label Grid.Column="3" FontAttributes="Bold" Text="Koeficijent" HorizontalOptions="End"   />
-                            <Label Grid.Column="4" FontAttributes="Bold" Text="Iznos €" HorizontalOptions="End"   />
+                            <Button Grid.Row="0" Grid.ColumnSpan="5"
+                                                   BorderColor="DarkGray"
+                                                   BorderWidth="1"
+                                                   BackgroundColor="#5ac8fa"
+                                                   Text="Izradi račun"
+                                                   FontAttributes="Bold"
+                                                   TextColor="Black"
+                                                   HorizontalOptions="Center"
+                                                   Clicked="CreateDocument"
+                                                   FontSize="Default"
+                                                   Margin="10,20,10,10"/>
+                            
+                            <Label Grid.Row="1" Grid.Column="0" FontAttributes="Bold" Text="Tbr." Margin="10,0,0,10"  />
+                            <Label Grid.Row="1" Grid.Column="1" FontAttributes="Bold" Text="Radnja" Margin="10,0,0,10"  />
+                            <Label Grid.Row="1" Grid.Column="2" FontAttributes="Bold" Text="Bodovi" HorizontalOptions="End" Margin="0,0,5,0"  />
+                            <Label Grid.Row="1" Grid.Column="3" FontAttributes="Bold" Text="Koeficijent" HorizontalOptions="End" Margin="0,0,5,0" />
+                            <Label Grid.Row="1" Grid.Column="4" FontAttributes="Bold" Text="Iznos" HorizontalOptions="End" Margin="0,0,5,0"  />
 
                             <!-- Add the SfListView here -->
-                            <syncfusion:SfListView  ItemsSource="{Binding ReceiptItems}" Grid.Row="1" Grid.ColumnSpan="5">
+                            <syncfusion:SfListView  ItemsSource="{Binding ReceiptItems, Mode=TwoWay}" Grid.Row="2" Grid.ColumnSpan="6">
                                 <syncfusion:SfListView.ItemTemplate>
 
                                     <DataTemplate>
                                         <StackLayout>
-
+                                            
                                             <Grid  BackgroundColor="White">
                                                 <Grid.Resources>
                                                     <Style TargetType="Label">
@@ -220,18 +242,20 @@
                                                 </Grid.RowDefinitions>
 
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="100"/>
-                                                    <ColumnDefinition Width="800" />
-                                                    <ColumnDefinition Width="100" />
-                                                    <ColumnDefinition Width="100" />
-                                                    <ColumnDefinition Width="100" />
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+
                                                 </Grid.ColumnDefinitions>
 
-                                                <Border  Grid.Row="1" Grid.Column="0" Padding="10,0,0,0" StrokeThickness="0.1" Stroke="Black" >
+                                                <Border  Grid.Row="1" Grid.Column="0" Padding="10,0,0,0" StrokeThickness="0.1" Stroke="Black" WidthRequest="100" >
                                                     <Label Text="{Binding Tbr}" LineBreakMode="NoWrap" VerticalOptions="Center" />
                                                 </Border>
 
-                                                <Border Grid.Row="1" Grid.Column="1" Padding="10,0,0,0"  StrokeThickness="0.1" Stroke="Black" >
+                                                <Border Grid.Row="1" Grid.Column="1" Padding="10,0,0,0"  StrokeThickness="0.1" Stroke="Black" WidthRequest="800"  >
                                                     <Label Text="{Binding Name}" LineBreakMode="NoWrap" VerticalOptions="Center"  />
                                                 </Border>
 
@@ -244,28 +268,52 @@
                                                 </Border>
 
                                                 <Border Grid.Row="1" Grid.Column="4" StrokeThickness="0.1" Stroke="Black" Padding="0"  >
-                                                    <Entry Text="{Binding sumaIznosa, Mode=TwoWay}"  HorizontalTextAlignment="End" VerticalOptions="Center" WidthRequest="100"  />
+                                                    <Label Text="{Binding Currency}"  HorizontalTextAlignment="End" VerticalOptions="Center" WidthRequest="100" Padding="0,0,10,0" />
                                                 </Border>
+
+                                                <Button Grid.Row="1" Grid.Column="5" Text="Obriši" BackgroundColor="Red" TextColor="Black" FontSize="Default" FontAttributes="Bold" 
+                                                        VerticalOptions="Center" HorizontalOptions="Center" Padding="10,5,10,5" Margin="20,0,0,0" Command="{Binding RemoveItemCommand}" />
+                                               
+                                                
+                                                
                                             </Grid>
 
-                                            <Button 
-                                                   BorderColor="DarkGray"
-                                                   BorderWidth="1"
-                                                   BackgroundColor="#5ac8fa"
-                                                   Text="Izradi račun"
-                                                   FontAttributes="Bold"
-                                                   TextColor="Black"
-                                                   HorizontalOptions="Start"
-                                                   Clicked="CreateDocument"
-                                                   FontSize="Default"
-                                                   Margin="10,10,10,10"/>
+
+                                            <Grid Margin="0,10,0,0" >
+                                                <Grid.Resources>
+                                                    <Style TargetType="Label">
+                                                        <Setter Property="TextColor" Value="Black" />
+                                                    </Style>
+                                                </Grid.Resources>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="100" />
+                                                    <ColumnDefinition Width="100" />
+
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Text="Ukupni iznos:" HorizontalOptions="End" Grid.Column="0" FontAttributes="Bold" />
+
+                                                <Label Grid.Column="1" Text="{Binding TotalAmountCurrency}" HorizontalTextAlignment="End" WidthRequest="100" Padding="0,0,10,0" FontAttributes="Bold"   />
+
+                                            </Grid>
+
+
+
 
 
                                         </StackLayout>
                                     </DataTemplate>
                                 </syncfusion:SfListView.ItemTemplate>
                             </syncfusion:SfListView>
+
                         </Grid>
+                        
+                        
                     </DataTemplate>
                 </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
