@@ -146,11 +146,9 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-
         #endregion
 
         #region Popup račun
-
 
 
         private bool _ReceiptVisible;
@@ -191,18 +189,49 @@ namespace eOdvjetnik.ViewModel
         public ICommand OnReciptClickCommand { get; set; }
         public ICommand ReceiptCloseCommand { get; set; }
         public ICommand AddItemCommand { get; }
-        public ICommand RemoveItemCommand { get; }
+        public ICommand RemoveItemCommand { get;  set; }
         public ICommand NewReceipt { get; }
 
 
 
-        public class ReceiptItem
+        public class ReceiptItem : INotifyPropertyChanged
         {
 
             public string Tbr { get; set; }
             public string Name { get; set; }
             public string Points { get; set; }
-            public float Coefficent { get; set; } = 1f;
+
+
+
+            private int coefficient;
+            public int Coefficient
+            {
+                get { return coefficient; }
+                set
+                {
+                    if (coefficient != value)
+                    {
+                        coefficient = value;
+                        OnPropertyChanged(nameof(Coefficient));
+                        CoefficientChanged?.Invoke(this, EventArgs.Empty);
+                        OnPropertyChanged(nameof(Amount));
+                        OnPropertyChanged(nameof(Currency));
+                        OnPropertyChanged(nameof(TotalAmount));
+                        OnPropertyChanged(nameof(TotalAmountCurrency));
+
+                    }
+                }
+            }
+            public ReceiptItem()
+            {
+                CoefficientChanged += (sender, args) =>
+                {
+                    OnPropertyChanged(nameof(Amount));
+                    OnPropertyChanged(nameof(Currency));
+                };
+            }
+
+            public event EventHandler CoefficientChanged;
 
             public float Amount
             {
@@ -210,7 +239,7 @@ namespace eOdvjetnik.ViewModel
                 {
                     if (float.TryParse(Points, out float points))
                     {
-                        return points * 1.99f;
+                        return points * 1.99f * Coefficient;
                     }
                     else { return 0f; }
                 }
@@ -220,28 +249,47 @@ namespace eOdvjetnik.ViewModel
             {
                 get { return $"{Amount.ToString("0.00")} €"; }
             }
+            private float totalAmount;
 
-            public float TotalAmount { get; set; }
-
+            public float TotalAmount
+            {
+                get { return totalAmount; }
+                set
+                {
+                    if (totalAmount != value)
+                    {
+                        totalAmount = value;
+                        OnPropertyChanged(nameof(TotalAmount));
+                        OnPropertyChanged(nameof(TotalAmountCurrency));
+                    }
+                }
+            }
             public string TotalAmountCurrency
             {
                 get { return $"{TotalAmount.ToString("0.00")} €"; }
             }
 
+            public event PropertyChangedEventHandler PropertyChanged;
+
+
+            protected virtual void OnPropertyChanged(string propertyName)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
 
         }
 
-         public float UkupniIznos { get; private set; } 
+         public float totalAmount { get; private set; } 
          
          public void CalculateTotalAmount()
          {
-            UkupniIznos = 0f; 
+            totalAmount = 0f; 
          
              try
              {
                  foreach (ReceiptItem item in _receiptItems)
                  {
-                    UkupniIznos += item.Amount;
+                    totalAmount += item.Amount;
                  }
 
              }
@@ -249,24 +297,24 @@ namespace eOdvjetnik.ViewModel
             {
                 Debug.WriteLine(ex.Message);
             }
-            Debug.WriteLine("Ukupni iznos: " + UkupniIznos);
-            ReplaceTotalAmountWithUkupniIznos();
+            UpdateTotalAmount();
 
         }
 
-        public void ReplaceTotalAmountWithUkupniIznos()
+        public void UpdateTotalAmount()
         {
             try
             {
                 foreach (ReceiptItem item in _receiptItems)
                 {
-                    item.TotalAmount = UkupniIznos;
+                    item.TotalAmount = totalAmount;
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
+            Debug.WriteLine("Ukupno: " + totalAmount);
         }
 
         private void AddItem()
@@ -276,7 +324,8 @@ namespace eOdvjetnik.ViewModel
                 {
                     Tbr = odabraniTBR,
                     Name = odabraniNaziv,
-                    Points = odabraniBodovi
+                    Points = odabraniBodovi,
+                    Coefficient = 1
                 };
                 ReceiptItems.Add(newItem);
                 CalculateTotalAmount();
@@ -289,20 +338,9 @@ namespace eOdvjetnik.ViewModel
 
         }
 
-  
-        private void RemoveItem(ReceiptItem item)
-        {
-            try
-            {
 
-                ReceiptItems.Remove(item);
-                CalculateTotalAmount();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
+
+
 
         private void OnReceiptClick()
         {
@@ -337,6 +375,28 @@ namespace eOdvjetnik.ViewModel
             ReceiptItems.Clear();
         }
 
+  
+        private ReceiptItem _selectedReceiptItem;
+        public ReceiptItem SelectedReceiptItem
+        {
+            get { return _selectedReceiptItem; }
+            set
+            {
+                if (_selectedReceiptItem != value)
+                {
+                    _selectedReceiptItem = value;
+                    OnPropertyChanged(nameof(SelectedReceiptItem));
+                }
+            }
+        }
+
+        private void DeleteItem()
+        {
+            ReceiptItems.Remove(SelectedReceiptItem);
+            CalculateTotalAmount();
+
+        }
+
         #endregion
 
         public NaplataViewModel()
@@ -346,7 +406,8 @@ namespace eOdvjetnik.ViewModel
             ReceiptCloseCommand = new Command(ReceiptPopupClose);
             NewReceipt = new Command(DeleteRecipt);
             AddItemCommand = new Command(AddItem);
-            RemoveItemCommand = new Command<ReceiptItem>(RemoveItem);
+            RemoveItemCommand = new Command(DeleteItem);
+
             ReceiptItems = new ObservableCollection<ReceiptItem>();
             try
             {
@@ -383,6 +444,7 @@ namespace eOdvjetnik.ViewModel
                 odabraniTBR = Preferences.Get("SelectedOznaka", "");
                 odabraniBodovi = Preferences.Get("SelectedBodovi", "");
                 odabraniNaziv = Preferences.Get("SelectedConcatenatedName", "");
+                CalculateTotalAmount();
 
 
             }
