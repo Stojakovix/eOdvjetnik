@@ -58,7 +58,7 @@
                     FontSize="Default"
                     TextColor="White"
                     />
-            
+
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="4" Text="Tarifa" 
                     Command="{Binding NaplataClickCommand}" 
@@ -68,7 +68,7 @@
                     FontSize="Default"
                     TextColor="White"
                     />
-            
+
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="2" Text="Dokumenti" 
                     Command="{Binding DokumentiClickCommand}" 
@@ -78,7 +78,7 @@
                     FontSize="Default"
                     TextColor="White"
                     />
-            
+
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="3" Text="Kontakti" 
                     Command="{Binding KlijentiClickCommand}" 
@@ -89,9 +89,9 @@
                     TextColor="White"
                     />
 
-            
 
-            
+
+
 
             <!--kontakti-->
 
@@ -118,7 +118,6 @@
                     FontSize="Default"
                     TextColor="White"
  />
-
             <sfPopup:SfPopup x:Name="popup" 
                              HeaderTitle="Korisnička podrška" 
                              IsVisible="{Binding SupportVisible}" 
