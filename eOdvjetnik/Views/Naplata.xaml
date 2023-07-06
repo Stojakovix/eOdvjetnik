@@ -50,7 +50,7 @@
                 BorderColor="DarkGray"
                 BorderWidth="1"
                 BackgroundColor="#5ac8fa"
-                Text="Dodaj stavku"
+                Text="Dodaj stavku na račun"
                 FontAttributes="Bold"
                 TextColor="Black"
                 HorizontalOptions="Start"
@@ -70,17 +70,6 @@
                 FontSize="Default"
                 Margin="10,10,10,10"/>
 
-                <Button 
-                BorderColor="DarkGray"
-                BorderWidth="1"
-                BackgroundColor="Red"
-                Text="Novi račun"
-                FontAttributes="Bold"
-                TextColor="Black"
-                Command="{Binding NewReceipt}" 
-                HorizontalOptions="Start"
-                FontSize="Default"
-                Margin="10,10,10,10"/>
            
             </HorizontalStackLayout>
 
@@ -200,7 +189,6 @@
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="100" />
 
                             </Grid.ColumnDefinitions>
                             <Button Grid.Row="0" Grid.ColumnSpan="5"
@@ -215,20 +203,49 @@
                                                    FontSize="Default"
                                                    Margin="10,20,10,10"/>
                             
+
+                            <Button  Grid.Row="0" Grid.Column="2"
+                                   BorderColor="DarkGray"
+                                   BorderWidth="1"
+                                   BackgroundColor="Red"
+                                   Text="Obriši sve"
+                                   FontAttributes="Bold"
+                                   TextColor="Black"
+                                   Command="{Binding NewReceipt}" 
+                                   HorizontalOptions="Start"
+                                   FontSize="Default"
+                                   Margin="10,20,10,10"
+                                     Padding="5,5,5,5"
+                                     />
+                            <Button  Grid.Row="0" Grid.ColumnSpan="5"
+                                   BorderColor="DarkGray"
+                                   BorderWidth="1"
+                                   BackgroundColor="Red"
+                                   Text="Obriši odabranu stavku"
+                                   FontAttributes="Bold"
+                                   TextColor="Black"
+                                   Command="{Binding RemoveItemCommand}" 
+                                   HorizontalOptions="End"
+                                   FontSize="Default"
+                                   Margin="10,20,0,10"
+                                     Padding="5,5,5,5"
+                                     />
+
                             <Label Grid.Row="1" Grid.Column="0" FontAttributes="Bold" Text="Tbr." Margin="10,0,0,10"  />
                             <Label Grid.Row="1" Grid.Column="1" FontAttributes="Bold" Text="Radnja" Margin="10,0,0,10"  />
                             <Label Grid.Row="1" Grid.Column="2" FontAttributes="Bold" Text="Bodovi" HorizontalOptions="End" Margin="0,0,5,0"  />
                             <Label Grid.Row="1" Grid.Column="3" FontAttributes="Bold" Text="Koeficijent" HorizontalOptions="End" Margin="0,0,5,0" />
                             <Label Grid.Row="1" Grid.Column="4" FontAttributes="Bold" Text="Iznos" HorizontalOptions="End" Margin="0,0,5,0"  />
-
+  
+                            
                             <!-- Add the SfListView here -->
-                            <syncfusion:SfListView  ItemsSource="{Binding ReceiptItems, Mode=TwoWay}" Grid.Row="2" Grid.ColumnSpan="6">
+                            <syncfusion:SfListView  ItemsSource="{Binding ReceiptItems, Mode=TwoWay}" Grid.Row="2" Grid.ColumnSpan="6" SelectedItem="{Binding SelectedReceiptItem}"  >
                                 <syncfusion:SfListView.ItemTemplate>
 
                                     <DataTemplate>
                                         <StackLayout>
                                             
-                                            <Grid  BackgroundColor="White">
+                                            <Grid >
                                                 <Grid.Resources>
                                                     <Style TargetType="Label">
                                                         <Setter Property="TextColor" Value="Black" />
@@ -247,7 +264,6 @@
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="Auto" />
 
                                                 </Grid.ColumnDefinitions>
 
@@ -260,26 +276,25 @@
                                                 </Border>
 
                                                 <Border Grid.Row="1" Grid.Column="2" StrokeThickness="0.1" Padding="0" Stroke="Black" >
-                                                    <Entry Text="{Binding Points, Mode=TwoWay}" HorizontalTextAlignment="End" VerticalOptions="Center" WidthRequest="100" />
+                                                    <Label Text="{Binding Points}" HorizontalTextAlignment="End" VerticalOptions="Center" WidthRequest="100" Padding="0,0,10,0" />
                                                 </Border>
 
                                                 <Border Grid.Row="1" Grid.Column="3" StrokeThickness="0.1" Stroke="Black" Padding="0"  >
-                                                    <Entry Text="{Binding Coefficent, Mode=TwoWay}" HorizontalTextAlignment="End" VerticalOptions="Center" WidthRequest="100"  />
+                                                    <Entry Text="{Binding Coefficient, Mode=TwoWay}" HorizontalTextAlignment="End" VerticalOptions="Center" WidthRequest="100"  />
                                                 </Border>
 
                                                 <Border Grid.Row="1" Grid.Column="4" StrokeThickness="0.1" Stroke="Black" Padding="0"  >
                                                     <Label Text="{Binding Currency}"  HorizontalTextAlignment="End" VerticalOptions="Center" WidthRequest="100" Padding="0,0,10,0" />
                                                 </Border>
 
-                                                <Button Grid.Row="1" Grid.Column="5" Text="Obriši" BackgroundColor="Red" TextColor="Black" FontSize="Default" FontAttributes="Bold" 
-                                                        VerticalOptions="Center" HorizontalOptions="Center" Padding="10,5,10,5" Margin="20,0,0,0" Command="{Binding RemoveItemCommand}" />
+ 
                                                
                                                 
                                                 
                                             </Grid>
 
 
-                                            <Grid Margin="0,10,0,0" >
+                                            <Grid Margin="0,10,0,0" x:Name="iznosGrid" >
                                                 <Grid.Resources>
                                                     <Style TargetType="Label">
                                                         <Setter Property="TextColor" Value="Black" />
@@ -292,13 +307,17 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="100" />
-                                                    <ColumnDefinition Width="100" />
 
                                                 </Grid.ColumnDefinitions>
 
-                                                <Label Text="Ukupni iznos:" HorizontalOptions="End" Grid.Column="0" FontAttributes="Bold" />
+                                                <Label Text="Ukupni iznos:" HorizontalOptions="End" Grid.Column="0" FontAttributes="Bold"
+                                                        x:Name="UkupanIznos" IsVisible="{Binding UkupanIznosVisible}"
 
-                                                <Label Grid.Column="1" Text="{Binding TotalAmountCurrency}" HorizontalTextAlignment="End" WidthRequest="100" Padding="0,0,10,0" FontAttributes="Bold"   />
+                                                       />
+
+                                                <Label Grid.Column="1" Text="{Binding TotalAmountCurrency}" HorizontalTextAlignment="End" WidthRequest="100" Padding="0,0,10,0" FontAttributes="Bold" 
+                                                       x:Name="ukupanIznos" IsVisible="{Binding UkupanIznosVisible}"
+                                                       />
 
                                             </Grid>
 
