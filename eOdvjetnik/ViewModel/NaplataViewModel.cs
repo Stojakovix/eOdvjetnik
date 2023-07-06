@@ -200,8 +200,20 @@ namespace eOdvjetnik.ViewModel
             public string Tbr { get; set; }
             public string Name { get; set; }
             public string Points { get; set; }
+            private bool ukupanIznosVisible { get; set; }
+
+            public bool UkupanIznosVisible
+            {
+                get { return ukupanIznosVisible; }
+                set
+                {
+                    ukupanIznosVisible = value;
+                    OnPropertyChanged(nameof(UkupanIznosVisible));
+                }
+            }
 
 
+ 
 
             private int coefficient;
             public int Coefficient
@@ -279,9 +291,10 @@ namespace eOdvjetnik.ViewModel
 
         }
 
-         public float totalAmount { get; private set; } 
-         
-         public void CalculateTotalAmount()
+         public float totalAmount { get; private set; }
+
+ 
+        public void CalculateTotalAmount()
          {
             totalAmount = 0f; 
          
@@ -292,7 +305,26 @@ namespace eOdvjetnik.ViewModel
                     totalAmount += item.Amount;
                  }
 
-             }
+
+                int itemCount = _receiptItems.Count;
+
+                for (int i = 0; i < itemCount; i++)
+                {
+                    var currentItem = _receiptItems[i];
+
+                    if (i == itemCount - 1)
+                    {
+                        _receiptItems[i].UkupanIznosVisible = true;
+                    }
+                    else
+                    {
+                        _receiptItems[i].UkupanIznosVisible = false;
+                    }
+
+                }
+
+         
+            }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
@@ -314,7 +346,6 @@ namespace eOdvjetnik.ViewModel
             {
                 Debug.WriteLine(ex.Message);
             }
-            Debug.WriteLine("Ukupno: " + totalAmount);
         }
 
         private void AddItem()
@@ -325,7 +356,8 @@ namespace eOdvjetnik.ViewModel
                     Tbr = odabraniTBR,
                     Name = odabraniNaziv,
                     Points = odabraniBodovi,
-                    Coefficient = 1
+                    Coefficient = 1,
+                    UkupanIznosVisible = false
                 };
                 ReceiptItems.Add(newItem);
                 CalculateTotalAmount();
@@ -394,7 +426,6 @@ namespace eOdvjetnik.ViewModel
         {
             ReceiptItems.Remove(SelectedReceiptItem);
             CalculateTotalAmount();
-
         }
 
         #endregion

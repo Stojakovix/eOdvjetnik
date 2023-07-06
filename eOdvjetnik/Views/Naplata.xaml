@@ -151,16 +151,18 @@
 
             <sfPopup:SfPopup IsVisible="{Binding ReceiptVisible}" 
                  IsOpen="{Binding ReceiptPopupOpen}"
-                 HeaderTitle="Izrada Računa"  ShowHeader="False"
+                 HeaderTitle="Izrada Računa"  ShowHeader="True"
                  x:Name="ReceiptPopup"
                  ShowCloseButton="True"
                  AutoSizeMode="Both"
-                 MinimumWidthRequest="1350"
-                 MinimumHeightRequest="600"
+                 MinimumWidthRequest="1300"
+                 MinimumHeightRequest="800"
 >
                 <sfPopup:SfPopup.PopupStyle>
                     <sfPopup:PopupStyle 
                         Stroke="Black"
+                        HeaderBackground="White"
+                        HeaderTextAlignment="Center"
                         MessageBackground="White">
                     </sfPopup:PopupStyle>
                     
@@ -168,9 +170,9 @@
                 <sfPopup:SfPopup.ContentTemplate >
 
                     <DataTemplate>
-                        
-                        
-                        <Grid Margin="10,0,0,10">
+
+                        <ScrollView>
+                            <Grid Margin="45,0,0,10">
                             <Grid.Resources>
                                 <Style TargetType="Label">
                                     <Setter Property="TextColor" Value="Black" />
@@ -192,16 +194,16 @@
 
                             </Grid.ColumnDefinitions>
                             <Button Grid.Row="0" Grid.ColumnSpan="5"
-                                                   BorderColor="DarkGray"
-                                                   BorderWidth="1"
-                                                   BackgroundColor="#5ac8fa"
-                                                   Text="Izradi račun"
-                                                   FontAttributes="Bold"
-                                                   TextColor="Black"
-                                                   HorizontalOptions="Center"
-                                                   Clicked="CreateDocument"
-                                                   FontSize="Default"
-                                                   Margin="10,20,10,10"/>
+                                    BorderColor="DarkGray"
+                                    BorderWidth="1"
+                                    BackgroundColor="#5ac8fa"
+                                    Text="Izradi račun"
+                                    FontAttributes="Bold"
+                                    TextColor="Black"
+                                    HorizontalOptions="Start"
+                                    Clicked="CreateDocument"
+                                    FontSize="Default"
+                                    Margin="5,20,10,10"/>
                             
 
                             <Button  Grid.Row="0" Grid.Column="2"
@@ -236,16 +238,18 @@
                             <Label Grid.Row="1" Grid.Column="2" FontAttributes="Bold" Text="Bodovi" HorizontalOptions="End" Margin="0,0,5,0"  />
                             <Label Grid.Row="1" Grid.Column="3" FontAttributes="Bold" Text="Koeficijent" HorizontalOptions="End" Margin="0,0,5,0" />
                             <Label Grid.Row="1" Grid.Column="4" FontAttributes="Bold" Text="Iznos" HorizontalOptions="End" Margin="0,0,5,0"  />
-  
+
                             
                             <!-- Add the SfListView here -->
-                            <syncfusion:SfListView  ItemsSource="{Binding ReceiptItems, Mode=TwoWay}" Grid.Row="2" Grid.ColumnSpan="6" SelectedItem="{Binding SelectedReceiptItem}" >
+                            <syncfusion:SfListView  ItemsSource="{Binding ReceiptItems, Mode=TwoWay}" Grid.Row="2" Grid.ColumnSpan="6" SelectedItem="{Binding SelectedReceiptItem}"
+                                                    MinimumHeightRequest="800" 
+                                                    >
                                 <syncfusion:SfListView.ItemTemplate>
 
                                     <DataTemplate>
                                         <StackLayout>
                                             
-                                            <Grid  BackgroundColor="White">
+                                            <Grid >
                                                 <Grid.Resources>
                                                     <Style TargetType="Label">
                                                         <Setter Property="TextColor" Value="Black" />
@@ -294,7 +298,7 @@
                                             </Grid>
 
 
-                                            <Grid Margin="0,10,0,0" >
+                                            <Grid Margin="0,10,0,0" x:Name="iznosGrid" >
                                                 <Grid.Resources>
                                                     <Style TargetType="Label">
                                                         <Setter Property="TextColor" Value="Black" />
@@ -310,9 +314,14 @@
 
                                                 </Grid.ColumnDefinitions>
 
-                                                <Label Text="Ukupni iznos:" HorizontalOptions="End" Grid.Column="0" FontAttributes="Bold" />
+                                                <Label Text="Ukupni iznos:" HorizontalOptions="End" Grid.Column="0" FontAttributes="Bold"
+                                                        x:Name="UkupanIznos" IsVisible="{Binding UkupanIznosVisible}"
 
-                                                <Label Grid.Column="1" Text="{Binding TotalAmountCurrency}" HorizontalTextAlignment="End" WidthRequest="100" Padding="0,0,10,0" FontAttributes="Bold"   />
+                                                       />
+
+                                                <Label Grid.Column="1" Text="{Binding TotalAmountCurrency}" HorizontalTextAlignment="End" WidthRequest="100" Padding="0,0,10,0" FontAttributes="Bold" 
+                                                       x:Name="ukupanIznos" IsVisible="{Binding UkupanIznosVisible}"
+                                                       />
 
                                             </Grid>
 
@@ -324,11 +333,11 @@
                                     </DataTemplate>
                                 </syncfusion:SfListView.ItemTemplate>
                             </syncfusion:SfListView>
-
+                           
                         </Grid>
-                        
-                        
-                    </DataTemplate>
+    </ScrollView>
+
+    </DataTemplate>
                 </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
         </VerticalStackLayout>
