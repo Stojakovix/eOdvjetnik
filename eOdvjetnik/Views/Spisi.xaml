@@ -9,91 +9,82 @@
     <ContentPage.BindingContext>
         <viewmodel:SpisiViewModel/>
     </ContentPage.BindingContext>
-    <!--<ContentPage.ToolbarItems  >
-        <ToolbarItem Text="Dodaj" Order="Primary" Command="{Binding OnDodajClick}" />
-        <ToolbarItem Text="Bezveze provjera" Order="Primary" Priority="1"/>
-        <ToolbarItem Text="Drugi item" Order="Primary"/>
-    </ContentPage.ToolbarItems>-->
-
-    <!--<Shell.TitleView>
-        <FlexLayout>
-            <Button Text="Dodaj" Command="{Binding OnDodajClick}"></Button>
-        </FlexLayout>
-    </Shell.TitleView>-->
+ 
 
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView VerticalOptions="FillAndExpand">
             <VerticalStackLayout>
-                
-                <Grid Margin="0,0,0,10" Padding="5" BackgroundColor="White" Background="LightGray">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" Text="Dodaj" Command="{Binding OnDodajClick}" BorderColor="LightBlue" HorizontalOptions="Fill"/>
-                    <Button Grid.Column="1" Text="Obriši" BorderColor="LightBlue" HorizontalOptions="Fill"/>
-                    <Button Grid.Column="1" Text="Poništi" BorderColor="LightBlue" HorizontalOptions="EndAndExpand" Command="{Binding OnResetClick}"/>
-                    
-                    <SearchBar Grid.Column="2" Placeholder="Pretraži" 
+                <ListView ItemsSource="{Binding FileItems}" x:Name="listView" SeparatorColor="DarkRed" SelectionMode="Single" SeparatorVisibility="Default" >
+                    <ListView.Header>
+                        <VerticalStackLayout>
+                            <Grid Margin="0,0,0,10" Padding="5" BackgroundColor="White" Background="LightGray">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    
+                                </Grid.RowDefinitions>
+
+                                <Button Grid.Column="0" Grid.Row="0"  Text="Dodaj" Command="{Binding OnDodajClick}" BorderColor="LightBlue" HorizontalOptions="FillAndExpand"/>
+                                <Button Grid.Column="1" Grid.Row="0" Text="Obriši" BorderColor="LightBlue" HorizontalOptions="Fill"/>
+                                <Button Grid.Column="2" Grid.Row="0" Text="Poništi" BorderColor="LightBlue" HorizontalOptions="EndAndExpand" Command="{Binding OnResetClick}"/>
+
+                                <SearchBar Grid.Column="3" Placeholder="Pretraži" 
                                HorizontalOptions="EndAndExpand" 
                                BackgroundColor="LightGray"
                                SearchCommand="{Binding SearchCommand}"
                                Text="{Binding SearchText}"
-                               
                                />
-
-                </Grid>
-
-                <Grid Margin="5" Padding="5" BackgroundColor="White">
-                    <Grid.Resources>
-                        <Style TargetType="Label">
-                            <Setter Property="TextColor" Value="Black" />
-                        </Style>
-                    </Grid.Resources>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" MaximumWidthRequest="150" Text="ID" />
-                    <Label Grid.Row="0" Grid.Column="1" MaximumWidthRequest="150" Text="Broj spisa" />
-                    <Label Grid.Row="0" Grid.Column="2" MaximumWidthRequest="150" Text="Datum kreiranja" />
-                    <Label Grid.Row="0" Grid.Column="3" MaximumWidthRequest="150" Text="Datum izmjene" />
-                    <Label Grid.Row="0" Grid.Column="4" MaximumWidthRequest="150" Text="Klijent" />
-                    <Label Grid.Row="0" Grid.Column="5" MaximumWidthRequest="150" Text="Protustranka" />
-                    <Label Grid.Row="0" Grid.Column="6" MaximumWidthRequest="150" Text="Dodao" />
-
-                </Grid>
-
-
-                <ListView ItemsSource="{Binding FileItems}" x:Name="listView" SelectionMode="Single" SeparatorColor="LightGrey" IsPullToRefreshEnabled="True">
+                                <Grid Margin="5" Padding="5" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalOptions="Fill">
+                                    <Grid.Resources>
+                                        <Style TargetType="Label">
+                                            <Setter Property="TextColor" Value="Black" />
+                                        </Style>
+                                    </Grid.Resources>
+                                    
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" MaximumWidthRequest="150" Text="ID" />
+                                    <Label Grid.Column="1" MaximumWidthRequest="150" Text="Broj spisa" />
+                                    <Label Grid.Column="2" MaximumWidthRequest="150" Text="Datum kreiranja" />
+                                    <Label Grid.Column="3" MaximumWidthRequest="150" Text="Datum izmjene" />
+                                    <Label Grid.Column="4" MaximumWidthRequest="150" Text="Klijent" />
+                                    <Label Grid.Column="5" MaximumWidthRequest="150" Text="Protustranka" />
+                                    <Label Grid.Column="6" MaximumWidthRequest="150" Text="Dodao" />
+                                    <Label Grid.Column="7" MaximumWidthRequest="150" Text="Uzrok" />
+                                </Grid>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </ListView.Header>
                     <ListView.ItemTemplate>
+
                         <DataTemplate>
                             <ViewCell>
                                 <Grid Margin="5" Padding="5" BackgroundColor="White">
                                     <Grid.Resources>
                                         <Style TargetType="Label">
                                             <Setter Property="TextColor" Value="Black" />
+
                                         </Style>
 
                                     </Grid.Resources>
+
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
@@ -111,6 +102,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Row="1" Grid.Column="0" MaximumWidthRequest="150" Text="{Binding Id}" />
                                     <Label Grid.Row="1" Grid.Column="1" MaximumWidthRequest="150" Text="{Binding BrojSpisa}" />
@@ -119,6 +111,7 @@
                                     <Label Grid.Row="1" Grid.Column="4" MaximumWidthRequest="150" Text="{Binding ClientId}" />
                                     <Label Grid.Row="1" Grid.Column="5" MaximumWidthRequest="150" Text="{Binding OpponentId}" />
                                     <Label Grid.Row="1" Grid.Column="6" MaximumWidthRequest="150" Text="{Binding InicijaliDodao}" />
+                                    <Label Grid.Row="1" Grid.Column="7" MaximumWidthRequest="150" Text="{Binding Uzrok}" />
 
 
                                 </Grid>
@@ -126,7 +119,6 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
             </VerticalStackLayout>
         </ScrollView>
     </ContentPage.Content>

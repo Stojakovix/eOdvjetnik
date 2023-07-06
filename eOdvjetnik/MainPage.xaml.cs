@@ -5,14 +5,8 @@ using System.Security.Cryptography;
 using eOdvjetnik.ViewModel;
 using System.Globalization;
 using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.Runtime.InteropServices.JavaScript;
 
 
-
-
-//using OpenVpn;
-//using WireGuardNT_PInvoke;
 
 
 
@@ -20,18 +14,7 @@ namespace eOdvjetnik;
 
 public partial class MainPage : ContentPage
 {
-    //Varijable za NAS preferenceas
-    private const string IP = "IP Adresa";
-    private const string USER = "Korisničko ime";
-    private const string PASS = "Lozinka";
-    private const string FOLDER = "Folder";
-    private const string SUBFOLDER = "SubFolder";
-
-    //Varijable za MySQL preferences
-    private const string IP_mysql = "IP Adresa2";
-    private const string USER_mysql = "Korisničko ime2";
-    private const string PASS_mysql = "Lozinka2";
-    private const string databasename_mysql = "databasename";
+    
     //MySQL varijable
     public string query;
 
@@ -247,85 +230,8 @@ public partial class MainPage : ContentPage
 
 
     }
-    //private void OnSaveClicked(object sender, EventArgs e)
-    //{
-    //    Preferences.Set(IP, IPEntry.Text);
-    //    Preferences.Set(USER, USEREntry.Text);
-    //    Preferences.Set(PASS, PASSEntry.Text);
-    //    Preferences.Set(FOLDER, FOLDEREntry.Text);
-    //    Preferences.Set(SUBFOLDER, SUBFOLDEREntry.Text);
-
-    //    DisplayAlert("Success", "Data saved", "OK");
-    //    NASPostavkeClicked(sender, e);
-    //}
-    //private void OnSaveClickedMySQL(object sender, EventArgs e)
-    //{
-    //    Preferences.Set(IP_mysql, IPEntryMySQL.Text);
-    //    Preferences.Set(USER_mysql, USEREntryMySQL.Text);
-    //    Preferences.Set(PASS_mysql, PASSEntryMySQL.Text);
-    //    Preferences.Set(databasename_mysql, databasenameEntryMySQL.Text);
-
-    //    DisplayAlert("Success", "Data saved", "OK");
-    //    MySQLPostavkeClicked(sender, e);
-
-    //}
-    //private void OnLoadClicked(object sender, EventArgs e)
-    //{
-
-    //    var ip = Microsoft.Maui.Storage.Preferences.Get(IP, "");
-    //    IPEntry.Text = ip;
-    //    var user = Microsoft.Maui.Storage.Preferences.Get(USER, "");
-    //    USEREntry.Text = user;
-    //    var pass = Microsoft.Maui.Storage.Preferences.Get(PASS, "");
-    //    PASSEntry.Text = pass;
-    //    var folder = Microsoft.Maui.Storage.Preferences.Get(FOLDER, "");
-    //    FOLDEREntry.Text = folder;
-    //    var subfolder = Microsoft.Maui.Storage.Preferences.Get(SUBFOLDER, "");
-    //    SUBFOLDEREntry.Text = subfolder;
-
-    //    //Microsoft.Maui.Storage.Preferences.Set(IP, "");
-    //    //Microsoft.Maui.Storage.Preferences.Set(USER, "");
-    //    //Microsoft.Maui.Storage.Preferences.Set(PASS, "");
-    //}
-    //private void OnLoadClickedMySQL(object sender, EventArgs e)
-    //{
-    //    var ipmysql = Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "");
-    //    IPEntryMySQL.Text = ipmysql;
-    //    var useripmysql = Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "");
-    //    USEREntryMySQL.Text = useripmysql;
-    //    var passipmysql = Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "");
-    //    PASSEntryMySQL.Text = passipmysql;
-    //    var databasenamemysql = Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
-    //    databasenameEntryMySQL.Text = databasenamemysql;
-
-    //    //Microsoft.Maui.Storage.Preferences.Set(IP, "");
-    //    //Microsoft.Maui.Storage.Preferences.Set(USER, "");
-    //    //Microsoft.Maui.Storage.Preferences.Set(PASS, "");
-    //}
-    private void OnDeleteClicked(object sender, EventArgs e)
-    {
-        Preferences.Remove(IP);
-        Preferences.Remove(USER);
-        Preferences.Remove(PASS);
-        Preferences.Remove(FOLDER);
-        Preferences.Remove(SUBFOLDER);
-        DisplayAlert("Success", "Data deleted", "OK");
-    }
-    private void OnDeleteClickedMySQL(object sender, EventArgs e)
-    {
-        Preferences.Remove(IP_mysql);
-        Preferences.Remove(USER_mysql);
-        Preferences.Remove(PASS_mysql);
-        Preferences.Remove(databasename_mysql);
-        DisplayAlert("Success", "Data deleted", "OK");
-    }
-
-    private async void OnCounterClicked(object sender, EventArgs e)
-    {
-        //await Navigation.PushAsync(new kalendar());
-        await Shell.Current.GoToAsync("///Dokumenti");
-
-    }
+  
+   
     public static void ReadDeviceInfo()
     {
 
@@ -378,34 +284,7 @@ public partial class MainPage : ContentPage
         }
 
     }
-    //private void naspostavkeclicked(object sender, eventargs e)
-    //{
-
-    //    if (nasform.isvisible == true)
-    //    {
-    //        nasform.isvisible = false;
-    //    }
-    //    else
-    //    {
-    //        nasform.isvisible = true;
-    //        onloadclicked("", e);
-
-    //    }
-
-    //}
-
-    //private void MySQLPostavkeClicked(object sender, EventArgs e)
-    //{
-    //    if (MySQLForm.IsVisible == true)
-    //    {
-    //        MySQLForm.IsVisible = false;
-    //    }
-    //    else
-    //    {
-    //        MySQLForm.IsVisible = true;
-    //        OnLoadClickedMySQL("", e);
-    //    }
-    //}
+   
 
 
     protected override void OnAppearing()
@@ -428,38 +307,14 @@ public partial class MainPage : ContentPage
                 // ----------------- platform ispod --------------
                 var device = Microsoft.Maui.Devices.DeviceInfo.Current.Platform;
                 Debug.WriteLine("url je----------------main" + url + time);
-                //var httpResponse = await _Client.GetAsync(url + time);
-                //Items = new List<TodoItem>();
+                
 
                 //Sprema u preferences index neku vrijednost iz varijable
                 Microsoft.Maui.Storage.Preferences.Set("key", time);
                 Debug.WriteLine("spremio u preferences");
                 string preferencesKey = Microsoft.Maui.Storage.Preferences.Get("key", null);
                 Debug.WriteLine("Izvađen iz preferences: " + preferencesKey);
-                //Items = JsonSerializer.Deserialize<List<TodoItem>>(content, _serializerOptions);
-                /*
-
-                    if (httpResponse.IsSuccessStatusCode)
-                    {
-
-                        string content = await httpResponse.Content.ReadAsStringAsync();
-                        Debug.WriteLine(content);
-                        Debug.WriteLine("Uso u if");
-
-
-                        // Response _ = JsonConvert.DeserializeObject<Response>(await httpResponse.Content.ReadAsStringAsync());
-                        // await database.SaveLicenseAsync(Models.License);
-
-                        //await database.SaveItemAsync(Item);
-
-                    }
-                    else
-                    {
-                        Debug.WriteLine("Nije uspio response");
-                    }//Kraj if httpResponse
-
-
-                */
+                
             }
             else
             {

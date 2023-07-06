@@ -15,10 +15,10 @@ public partial class App : Application
 	public App(){
         InitializeComponent();
         Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjQ5MTQ1M0AzMjMyMmUzMDJlMzBRT2JkTm1HczFuTmdmNTVFcWNWU29xbGt6Z2lhRDFYYk1GZWppS3pjWnlNPQ==");
-       //CultureInfo.CurrentUICulture = new CultureInfo("hr-HR");
-       //SfSchedulerResources.ResourceManager = new ResourceManager("eOdvjetnik.SfScheduler", Application.Current.GetType().Assembly);
+        //CultureInfo.CurrentUICulture = new CultureInfo("hr-HR");
+        //SfSchedulerResources.ResourceManager = new ResourceManager("eOdvjetnik.SfScheduler", Application.Current.GetType().Assembly);
 
-
+        Application.Current.UserAppTheme = AppTheme.Light;
         MainPage = new AppShell();
 
 	}
