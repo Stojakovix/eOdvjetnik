@@ -23,7 +23,7 @@ public partial class Naplata : ContentPage
     public string adresaTvrtke { get; set; }
     public string nazivKlijenta { get; set; } = "Placeholder Company";
     public string OIBklijenta { get; set; } = "11111111111";
-    public string adresaKlijenta { get; set; } = "Zagreb 10000, Napuštenih snova BB";
+    public string adresaKlijenta { get; set; } = "Zagreb 10000, Radnička 1";
 
     public Naplata()
     {

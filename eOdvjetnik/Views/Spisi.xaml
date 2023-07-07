@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.Spisi"
@@ -74,7 +74,7 @@
 
                         <DataTemplate>
                             <ViewCell>
-                                <Grid Margin="5" Padding="5" BackgroundColor="White">
+                                <Grid Margin="5,0,0,0" Padding="0,0,0,-50" BackgroundColor="White">
                                     <Grid.Resources>
                                         <Style TargetType="Label">
                                             <Setter Property="TextColor" Value="Black" />

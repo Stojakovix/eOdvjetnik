@@ -49,11 +49,31 @@
                     />
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="5" Text="Spisi" 
+                    Grid.Column="5" Text="Upisnik" 
                     Command="{Binding SpisiClickCommand}" 
                     x:Name="SpisiButton"
                     BackgroundColor="Transparent"
                     Margin="10,0" 
+                    BorderWidth="0"
+                    FontSize="Default"
+                    TextColor="White"
+                    />
+
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+                    Grid.Column="4" Text="Tarifa" 
+                    Command="{Binding NaplataClickCommand}" 
+                    x:Name="NaplataButton"
+                    BackgroundColor="Transparent"
+                    BorderWidth="0"
+                    FontSize="Default"
+                    TextColor="White"
+                    />
+
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+                    Grid.Column="2" Text="Dokumenti" 
+                    Command="{Binding DokumentiClickCommand}" 
+                    x:Name="DokumentiButton"
+                    BackgroundColor="Transparent"
                     BorderWidth="0"
                     FontSize="Default"
                     TextColor="White"
@@ -69,25 +89,9 @@
                     TextColor="White"
                     />
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="4" Text="Tarife i Naplata" 
-                    Command="{Binding NaplataClickCommand}" 
-                    x:Name="NaplataButton"
-                    BackgroundColor="Transparent"
-                    BorderWidth="0"
-                    FontSize="Default"
-                    TextColor="White"
-                    />
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="2" Text="Svi Dokumenti" 
-                    Command="{Binding DokumentiClickCommand}" 
-                    x:Name="DokumentiButton"
-                    BackgroundColor="Transparent"
-                    BorderWidth="0"
-                    FontSize="Default"
-                    TextColor="White"
-                    />
+
+
 
             <!--kontakti-->
 
@@ -105,25 +109,6 @@
                     TextColor="White"
  />
 
-            <Button Grid.Column="7" 
-                    Text="SQL Postavke" 
-                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
-                    BackgroundColor="Transparent" 
-                    BorderWidth="0" 
-                    Command="{Binding SQLShowPopupCommand}"
-                    FontSize="Default"
-                    TextColor="White"
-                    />
-
-            <Button Grid.Column="8" 
-                    Text="NAS Postavke" 
-                    BackgroundColor="Transparent"
-                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
-                    BorderWidth="0"
-                    Command="{Binding ShowNASPopupCommand}"  
-                    FontSize="Default"
-                    TextColor="White"
- />
             <Button Grid.Column="9" 
                     Text="Postavke" 
                     BackgroundColor="Transparent"
@@ -133,7 +118,6 @@
                     FontSize="Default"
                     TextColor="White"
  />
-
             <sfPopup:SfPopup x:Name="popup" 
                              HeaderTitle="Korisnička podrška" 
                              IsVisible="{Binding SupportVisible}" 
@@ -222,6 +206,7 @@
                              ShowHeader="True"
                              HeaderTitle="SQL postavke"
                              x:Name="SQLPopup"
+                             
                              AutoSizeMode="Both"
                              WidthRequest="260"
 
