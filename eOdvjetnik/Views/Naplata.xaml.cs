@@ -300,6 +300,8 @@ public partial class Naplata : ContentPage
         ((ListView)sender).SelectedItem = null;
     }
 
+
+
     private Task SaveToPreferences(string oznaka, string bodovi, string concatenatedName)
     {
  

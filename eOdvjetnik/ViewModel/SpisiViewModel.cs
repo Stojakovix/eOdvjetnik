@@ -76,7 +76,11 @@ namespace eOdvjetnik.ViewModel
             try
             {
                 fileItems.Clear();
-                string query = "SELECT * FROM files WHERE broj_spisa =" + SearchText;
+                
+                // parametri za pretragu broj spisa, klijent id, opponent id, referenca, uzrok, broj predmeta
+                string search_term = SearchText;
+                string escaped_search_term = search_term.Replace("/", "\\/");
+                string query = "SELECT * FROM `files` WHERE `broj_spisa` LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci  or `referenca` LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci or `uzrok` LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci  or `broj_predmeta` LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci ORDER BY `broj_predmeta` DESC";
                 Debug.WriteLine(query);
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
                 Debug.WriteLine(query + " u Search resultu");
@@ -149,6 +153,7 @@ namespace eOdvjetnik.ViewModel
         {
             OnResetClick = new Command(ResetListView);
             OnDodajClick = new Command(onDodajCLick);
+           // ItemSelected = new Command(OnItemSelected);
             try
             {
                 fileItems = new ObservableCollection<FileItem>();
@@ -165,6 +170,10 @@ namespace eOdvjetnik.ViewModel
             timer.Start();
         }
 
+        //private void OnItemSelected(FileItem selectedItem)
+        //{
+
+        //}
 
         void CheckCount()
         {
