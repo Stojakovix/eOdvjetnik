@@ -122,11 +122,15 @@ public partial class MainPage : ContentPage
                     string licenceType = jsonObject.GetProperty("LicenceTypes")[0].GetProperty("naziv").GetString();
                     string expireDate = jsonObject.GetProperty("Licences")[0].GetProperty("expire_date").GetString();
                     string nazivTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("naziv").GetString();
+                    string OIBTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("OIB").GetString();
+                    string adresaTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("adresa").GetString();
 
                     Preferences.Set("expire_date", expireDate);
                     Preferences.Set("licence_type", licenceType);
                     Preferences.Set("licence_active", licenceIsActive);
                     Preferences.Set("naziv_tvrtke", nazivTvrtke);
+                    Preferences.Set("OIBTvrtke", OIBTvrtke);
+                    Preferences.Set("adresaTvrtke", adresaTvrtke);
 
 
                 }

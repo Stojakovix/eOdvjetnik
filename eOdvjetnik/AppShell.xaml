@@ -222,7 +222,6 @@
                              ShowHeader="True"
                              HeaderTitle="SQL postavke"
                              x:Name="SQLPopup"
-                             Closed="onClosed"
                              AutoSizeMode="Both"
                              WidthRequest="260"
 

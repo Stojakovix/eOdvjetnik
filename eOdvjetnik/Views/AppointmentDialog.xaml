@@ -165,8 +165,8 @@
                   <Button
                   x:Name="DeleteButton"
                   Text="Delete"
-                  Background="Red"            
-                  TextColor="#3B3B3B"
+                  Background="#DC143C"            
+                  TextColor="LightGray"
                   WidthRequest="100" />
             </Grid>
             <Grid 

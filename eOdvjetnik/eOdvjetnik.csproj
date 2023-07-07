@@ -120,6 +120,8 @@
 		 <EmbeddedResource Include="Resources\DocIO\Mountain-200.jpg" />
 		 <EmbeddedResource Include="Resources\DocIO\Mountain-300.jpg" />
 		 <EmbeddedResource Include="Resources\DocIO\Road-550-W.jpg" />
+		 <EmbeddedResource Include="Resources\DocIO\logoNincevic.png" />
+
 	 </ItemGroup>
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\SF-Pro-Display-Black.otf" />

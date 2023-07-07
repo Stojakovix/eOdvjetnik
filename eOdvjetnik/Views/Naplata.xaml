@@ -46,17 +46,7 @@
             </Grid>
             <HorizontalStackLayout>
 
-                <Button 
-                BorderColor="DarkGray"
-                BorderWidth="1"
-                BackgroundColor="#5ac8fa"
-                Text="Dodaj stavku na račun"
-                FontAttributes="Bold"
-                TextColor="Black"
-                HorizontalOptions="Start"
-                Command="{Binding AddItemCommand}" 
-                FontSize="Default"
-                Margin="20,10,10,10"/>
+
 
                 <Button 
                 BorderColor="DarkGray"
@@ -70,7 +60,18 @@
                 FontSize="Default"
                 Margin="10,10,10,10"/>
 
-           
+                <Button 
+                BorderColor="DarkGray"
+                BorderWidth="1"
+                BackgroundColor="#5ac8fa"
+                Text="Dodaj stavku na račun"
+                FontAttributes="Bold"
+                TextColor="Black"
+                HorizontalOptions="Start"
+                Command="{Binding AddItemCommand}" 
+                FontSize="Default"
+                Margin="20,10,10,10"/>
+
             </HorizontalStackLayout>
 
 
@@ -151,7 +152,7 @@
 
             <sfPopup:SfPopup IsVisible="{Binding ReceiptVisible}" 
                  IsOpen="{Binding ReceiptPopupOpen}"
-                 HeaderTitle="Izrada Računa"  ShowHeader="True"
+                 HeaderTitle="Izrada računa"  ShowHeader="True"
                  x:Name="ReceiptPopup"
                  ShowCloseButton="True"
                  AutoSizeMode="Both"
@@ -163,6 +164,7 @@
                         Stroke="Black"
                         HeaderBackground="White"
                         HeaderTextAlignment="Center"
+                        HeaderFontAttribute="Bold"
                         MessageBackground="White">
                     </sfPopup:PopupStyle>
                     
@@ -209,10 +211,10 @@
                             <Button  Grid.Row="0" Grid.Column="2"
                                    BorderColor="DarkGray"
                                    BorderWidth="1"
-                                   BackgroundColor="Red"
+                                   BackgroundColor="#DC143C"
                                    Text="Obriši sve"
                                    FontAttributes="Bold"
-                                   TextColor="Black"
+                                   TextColor="LightGray"
                                    Command="{Binding NewReceipt}" 
                                    HorizontalOptions="Start"
                                    FontSize="Default"
@@ -222,10 +224,10 @@
                             <Button  Grid.Row="0" Grid.ColumnSpan="5"
                                    BorderColor="DarkGray"
                                    BorderWidth="1"
-                                   BackgroundColor="Red"
+                                   BackgroundColor="#DC143C"
                                    Text="Obriši odabranu stavku"
                                    FontAttributes="Bold"
-                                   TextColor="Black"
+                                   TextColor="LightGray"
                                    Command="{Binding RemoveItemCommand}" 
                                    HorizontalOptions="End"
                                    FontSize="Default"

@@ -18,11 +18,21 @@ public partial class Naplata : ContentPage
 
     public event EventHandler onCreateDocument;
 
+    public string nazivTvrtke { get; set; }
+    public string OIBTvrtke { get; set; }
+    public string adresaTvrtke { get; set; }
+    public string nazivKlijenta { get; set; } = "Placeholder Company";
+    public string OIBklijenta { get; set; } = "11111111111";
+    public string adresaKlijenta { get; set; } = "Zagreb 10000, Napuštenih snova BB";
 
     public Naplata()
     {
         InitializeComponent();
         this.BindingContext = new NaplataViewModel();
+        nazivTvrtke = Preferences.Get("naziv_tvrtke", "");
+        OIBTvrtke = Preferences.Get("OIBTvrtke", "");
+        adresaTvrtke = Preferences.Get("adresaTvrtke", "");
+
 
     }
     private void CreateDocument(object sender, EventArgs e)
@@ -40,8 +50,16 @@ public partial class Naplata : ContentPage
         WParagraphStyle style = document.AddParagraphStyle("Normal") as WParagraphStyle;
         style.CharacterFormat.FontName = "Calibri";
         style.CharacterFormat.FontSize = 11f;
+        style.CharacterFormat.Bold = true;
         style.ParagraphFormat.BeforeSpacing = 0;
-        style.ParagraphFormat.AfterSpacing = 8;
+        style.ParagraphFormat.AfterSpacing = 0;
+        style.ParagraphFormat.LineSpacing = 13.8f;
+
+        style = document.AddParagraphStyle("Bold") as WParagraphStyle;
+        style.CharacterFormat.FontName = "Calibri";
+        style.CharacterFormat.FontSize = 11f;
+        style.ParagraphFormat.BeforeSpacing = 0;
+        style.ParagraphFormat.AfterSpacing = 0;
         style.ParagraphFormat.LineSpacing = 13.8f;
 
         style = document.AddParagraphStyle("Heading 1") as WParagraphStyle;
@@ -49,223 +67,43 @@ public partial class Naplata : ContentPage
         style.CharacterFormat.FontName = "Calibri Light";
         style.CharacterFormat.FontSize = 16f;
         style.CharacterFormat.TextColor = Syncfusion.Drawing.Color.FromArgb(46, 116, 181);
-        style.ParagraphFormat.BeforeSpacing = 12;
+        style.ParagraphFormat.BeforeSpacing = 0;
         style.ParagraphFormat.AfterSpacing = 0;
         style.ParagraphFormat.Keep = true;
         style.ParagraphFormat.KeepFollow = true;
         style.ParagraphFormat.OutlineLevel = OutlineLevel.Level1;
+        style.CharacterFormat.Bold = false;
         IWParagraph paragraph = section.HeadersFooters.Header.AddParagraph();
 
         Assembly assembly = typeof(MainPage).GetTypeInfo().Assembly;
-        string resourcePath = "eOdvjetnik.Resources.DocIO.AdventureCycle.jpg";
+        string resourcePath = "eOdvjetnik.Resources.DocIO.logoNincevic.png";
         //Gets the image stream.
         Stream imageStream = assembly.GetManifestResourceStream(resourcePath);
-        if (imageStream != null)
-        {
-            Debug.WriteLine("Radiiiiiiiiiiiiiiiiiiiiiiii Nije prazno");
-        }
-        else
-        {
-            Debug.WriteLine("prazno -.-");
-        }
         IWPicture picture = paragraph.AppendPicture(imageStream);
         picture.TextWrappingStyle = TextWrappingStyle.InFrontOfText;
+        picture.HorizontalAlignment = ShapeHorizontalAlignment.Center;
         picture.VerticalOrigin = VerticalOrigin.Margin;
-        picture.VerticalPosition = -45;
-        picture.HorizontalOrigin = HorizontalOrigin.Column;
-        picture.HorizontalPosition = 263.5f;
-        picture.WidthScale = 20;
-        picture.HeightScale = 15;
-        paragraph.ApplyStyle("Normal");
-        paragraph.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-        WTextRange textRange = paragraph.AppendText("GLUIĆ NINČEVIĆ odvjetničko društvo d.o.o.") as WTextRange;
-        paragraph = section.AddParagraph();
-        textRange = paragraph.AppendText("OIB:75663620109") as WTextRange;
-        paragraph = section.AddParagraph();
-        textRange = paragraph.AppendText("Adresa: Zadar, Špire Brusine 16") as WTextRange;
-        paragraph = section.AddParagraph();
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Calibri";
-        //textRange.CharacterFormat.TextColor = Syncfusion.Drawing.Color.Red;
-
-        //Appends the paragraph.
-        paragraph = section.AddParagraph();
-        
+        picture.VerticalPosition = -100;
+        picture.WidthScale = 26;
+        picture.HeightScale = 24;
+        paragraph.ApplyStyle("Heading 1");
         paragraph.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
-        paragraph = section.AddParagraph();
-        paragraph = section.AddParagraph();
-        paragraph = section.AddParagraph();
-        paragraph = section.AddParagraph();
-        paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Heading 1");
-        textRange = paragraph.AppendText("UGOVOR") as WTextRange;
-        textRange.CharacterFormat.FontSize = 28f;
+        WTextRange textRange = paragraph.AppendText("\n \n \n_____________________ GLUIĆ NINČEVIĆ ODVJETNIČKO DRUŠTVO _____________________") as WTextRange;
+        textRange.CharacterFormat.FontSize = 12f;
         textRange.CharacterFormat.FontName = "Calibri";
-
-        //Append the paragraph.
-        paragraph = section.AddParagraph();
-        paragraph.ParagraphFormat.FirstLineIndent = 36;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        textRange = paragraph.AppendText("Adventure Works Cycles, the fictitious company on which the AdventureWorks sample databases are based, is a large, multinational manufacturing company. The company manufactures and sells metal and composite bicycles to North American, European and Asian commercial markets. While its base operation is in Bothell, Washington with 290 employees, several regional sales teams are located throughout their market base.") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
+        textRange.CharacterFormat.TextColor = Syncfusion.Drawing.Color.Black;
 
         //Appends the paragraph.
         paragraph = section.AddParagraph();
-        paragraph.ParagraphFormat.FirstLineIndent = 36;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        textRange = paragraph.AppendText("In 2000, AdventureWorks Cycles bought a small manufacturing plant, Importadores Neptuno, located in Mexico. Importadores Neptuno manufactures several critical subcomponents for the AdventureWorks Cycles product line. These subcomponents are shipped to the Bothell location for final product assembly. In 2001, Importadores Neptuno, became the sole manufacturer and distributor of the touring bicycle product group.") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-
+        paragraph.ApplyStyle("Bold");
+        style.ParagraphFormat.BeforeSpacing = 12;
+        textRange = paragraph.AppendText("\n" + nazivTvrtke + "\n" + adresaTvrtke + "\nOIB: " + OIBTvrtke) as WTextRange;
+         
+        //Appends the paragraph.
         paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Heading 1");
-        paragraph.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("Product Overview") as WTextRange;
-        textRange.CharacterFormat.FontSize = 16f;
-        textRange.CharacterFormat.FontName = "Calibri";
-
-        //Appends the table.
-        IWTable table = section.AddTable();
-        table.ResetCells(3, 2);
-        table.TableFormat.Borders.BorderType = BorderStyle.None;
-        table.TableFormat.IsAutoResized = true;
-
-        //Appends the paragraph.
-        paragraph = table[0, 0].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        //Appends the picture to the paragraph.
-        resourcePath = "eOdvjetnik.Resources.DocIO.Mountain-200.jpg";
-        imageStream = assembly.GetManifestResourceStream(resourcePath);
-        picture = paragraph.AppendPicture(imageStream);
-        picture.TextWrappingStyle = TextWrappingStyle.TopAndBottom;
-        picture.VerticalOrigin = VerticalOrigin.Paragraph;
-        picture.VerticalPosition = 4.5f;
-        picture.HorizontalOrigin = HorizontalOrigin.Column;
-        picture.HorizontalPosition = -2.15f;
-        picture.WidthScale = 79;
-        picture.HeightScale = 79;
-
-        //Appends the paragraph.
-        paragraph = table[0, 1].AddParagraph();
-        paragraph.ApplyStyle("Heading 1");
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.AppendText("Mountain-200");
-        //Appends the paragraph.
-        paragraph = table[0, 1].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        paragraph.BreakCharacterFormat.FontName = "Times New Roman";
-
-        textRange = paragraph.AppendText("Product No: BK-M68B-38\r") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-        textRange = paragraph.AppendText("Size: 38\r") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-        textRange = paragraph.AppendText("Weight: 25\r") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-        textRange = paragraph.AppendText("Price: $2,294.99\r") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-        //Appends the paragraph.
-        paragraph = table[0, 1].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-
-        //Appends the paragraph.
-        paragraph = table[1, 0].AddParagraph();
-        paragraph.ApplyStyle("Heading 1");
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.AppendText("Mountain-300 ");
-        //Appends the paragraph.
-        paragraph = table[1, 0].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        paragraph.BreakCharacterFormat.FontName = "Times New Roman";
-        textRange = paragraph.AppendText("Product No: BK-M47B-38\r") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-        textRange = paragraph.AppendText("Size: 35\r") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-        textRange = paragraph.AppendText("Weight: 22\r") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-        textRange = paragraph.AppendText("Price: $1,079.99\r") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-        //Appends the paragraph.
-        paragraph = table[1, 0].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-
-        //Appends the paragraph.
-        paragraph = table[1, 1].AddParagraph();
-        paragraph.ApplyStyle("Heading 1");
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        //Appends the picture to the paragraph.
-        resourcePath = "eOdvjetnik.Resources.DocIO.Mountain-300.jpg";
-        imageStream = assembly.GetManifestResourceStream(resourcePath);
-
-        picture = paragraph.AppendPicture(imageStream);
-        picture.TextWrappingStyle = TextWrappingStyle.TopAndBottom;
-        picture.VerticalOrigin = VerticalOrigin.Paragraph;
-        picture.VerticalPosition = 8.2f;
-        picture.HorizontalOrigin = HorizontalOrigin.Column;
-        picture.HorizontalPosition = -14.95f;
-        picture.WidthScale = 75;
-        picture.HeightScale = 75;
-
-        //Append the paragraph.
-        paragraph = table[2, 0].AddParagraph();
-        paragraph.ApplyStyle("Heading 1");
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        //Appends the picture to the paragraph.
-        resourcePath = "eOdvjetnik.Resources.DocIO.Road-550-W.jpg";
-        imageStream = assembly.GetManifestResourceStream(resourcePath);
-        picture = paragraph.AppendPicture(imageStream);
-        picture.TextWrappingStyle = TextWrappingStyle.TopAndBottom;
-        picture.VerticalOrigin = VerticalOrigin.Paragraph;
-        picture.VerticalPosition = 3.75f;
-        picture.HorizontalOrigin = HorizontalOrigin.Column;
-        picture.HorizontalPosition = -5f;
-        picture.WidthScale = 92;
-        picture.HeightScale = 92;
-
-        //Appends the paragraph.
-        paragraph = table[2, 1].AddParagraph();
-        paragraph.ApplyStyle("Heading 1");
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.AppendText("Road-150 ");
-        //Appends the paragraph.
-        paragraph = table[2, 1].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        paragraph.BreakCharacterFormat.FontName = "Times New Roman";
-        textRange = paragraph.AppendText("Product No: BK-R93R-44\r") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-        textRange = paragraph.AppendText("Size: 44\r") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-        textRange = paragraph.AppendText("Weight: 14\r") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-        textRange = paragraph.AppendText("Price: $3,578.27\r") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-        //Appends the paragraph.
-        section.AddParagraph();
-
+        paragraph.ApplyStyle("Bold");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
+        textRange = paragraph.AppendText(nazivKlijenta + "\n" + adresaKlijenta + "\nOIB: " + OIBklijenta) as WTextRange;
         using MemoryStream ms = new();
         //Saves the Word document to the memory stream.
         document.Save(ms, FormatType.Docx);
