@@ -24,6 +24,8 @@ public partial class Naplata : ContentPage
     public string nazivKlijenta { get; set; } = "Placeholder Company";
     public string OIBklijenta { get; set; } = "11111111111";
     public string adresaKlijenta { get; set; } = "Zagreb 10000, Radnička 1";
+    string current_date { get; set; }
+    string payment_date { get; set; }
 
     public Naplata()
     {
@@ -32,7 +34,10 @@ public partial class Naplata : ContentPage
         nazivTvrtke = Preferences.Get("naziv_tvrtke", "");
         OIBTvrtke = Preferences.Get("OIBTvrtke", "");
         adresaTvrtke = Preferences.Get("adresaTvrtke", "");
-
+        current_date = DateTime.Now.ToString("dd.MM.yyyy.");
+        DateTime dateTime = DateTime.Now;
+        dateTime = dateTime.AddDays(7);
+        payment_date = dateTime.ToString("dd.MM.yyyy");
 
     }
     private void CreateDocument(object sender, EventArgs e)
@@ -49,18 +54,25 @@ public partial class Naplata : ContentPage
         //Creates Paragraph styles.
         WParagraphStyle style = document.AddParagraphStyle("Normal") as WParagraphStyle;
         style.CharacterFormat.FontName = "Calibri";
-        style.CharacterFormat.FontSize = 11f;
-        style.CharacterFormat.Bold = true;
+        style.CharacterFormat.FontSize = 10f;
         style.ParagraphFormat.BeforeSpacing = 0;
         style.ParagraphFormat.AfterSpacing = 0;
-        style.ParagraphFormat.LineSpacing = 13.8f;
+        style.ParagraphFormat.LineSpacing = 18f;
+
+        style = document.AddParagraphStyle("Normal2") as WParagraphStyle;
+        style.CharacterFormat.FontName = "Calibri";
+        style.CharacterFormat.FontSize = 10f;
+        style.ParagraphFormat.BeforeSpacing = 0;
+        style.ParagraphFormat.AfterSpacing = 0;
+        style.ParagraphFormat.LineSpacing = 12f; //manji spacing
 
         style = document.AddParagraphStyle("Bold") as WParagraphStyle;
         style.CharacterFormat.FontName = "Calibri";
-        style.CharacterFormat.FontSize = 11f;
+        style.CharacterFormat.Bold = true;
+        style.CharacterFormat.FontSize = 10f;
         style.ParagraphFormat.BeforeSpacing = 0;
         style.ParagraphFormat.AfterSpacing = 0;
-        style.ParagraphFormat.LineSpacing = 13.8f;
+        style.ParagraphFormat.LineSpacing = 12f;
 
         style = document.AddParagraphStyle("Heading 1") as WParagraphStyle;
         style.ApplyBaseStyle("Normal");
@@ -84,11 +96,12 @@ public partial class Naplata : ContentPage
         picture.HorizontalAlignment = ShapeHorizontalAlignment.Center;
         picture.VerticalOrigin = VerticalOrigin.Margin;
         picture.VerticalPosition = -100;
-        picture.WidthScale = 26;
-        picture.HeightScale = 24;
+        // 1 cm = 28.35f
+        picture.Width = 53.8f;
+        picture.Height = 80.8f;
         paragraph.ApplyStyle("Heading 1");
         paragraph.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
-        WTextRange textRange = paragraph.AppendText("\n \n \n_____________________ GLUIĆ NINČEVIĆ ODVJETNIČKO DRUŠTVO _____________________") as WTextRange;
+        WTextRange textRange = paragraph.AppendText("\n\n_____________________ GLUIĆ NINČEVIĆ ODVJETNIČKO DRUŠTVO _____________________") as WTextRange;
         textRange.CharacterFormat.FontSize = 12f;
         textRange.CharacterFormat.FontName = "Calibri";
         textRange.CharacterFormat.TextColor = Syncfusion.Drawing.Color.Black;
@@ -104,6 +117,139 @@ public partial class Naplata : ContentPage
         paragraph.ApplyStyle("Bold");
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
         textRange = paragraph.AppendText(nazivKlijenta + "\n" + adresaKlijenta + "\nOIB: " + OIBklijenta) as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("Broj računa: 123/5") as WTextRange;
+
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.BreakCharacterFormat.FontSize = 12f;
+        textRange = paragraph.AppendText("Datum računa\t\tMjesto izdavanja\tDospijeće računa") as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.BreakCharacterFormat.FontSize = 12f;
+        textRange = paragraph.AppendText(current_date + "\t\tZadar\t\t\t" + payment_date + "\n") as WTextRange;
+
+        //Tablica za stavke računa // binding za item.Count u tarrifitem
+
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("_____________________________________________________________________________________") as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.BreakCharacterFormat.FontSize = 12f;
+        textRange = paragraph.AppendText("Odvjetnička usluga\t\tTarifa\t\tCijena\t\tPDV iznos\t\tIznos sa PDV") as WTextRange;
+
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("_____________________________________________________________________________________") as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.BreakCharacterFormat.FontSize = 12f;
+        textRange = paragraph.AppendText("Opis usluge\t\tOpis tarife\t\t500,00\t\t125,00\t\t\t625,00 ") as WTextRange;
+
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("_____________________________________________________________________________________") as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.BreakCharacterFormat.FontSize = 12f;
+        textRange = paragraph.AppendText("\t\t\t\t\t\t500,00\t\t125,00\t\t\t625,00 EUR") as WTextRange;
+
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.BreakCharacterFormat.FontSize = 12f;
+        textRange = paragraph.AppendText("\t\t\t\t\t\t\t\t\t\t\t4.709,06 kn") as WTextRange;
+
+        //Tablica za PDV
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal2");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("\n\tPDV %\t\tIznos\t\tPDV iznos\tIznos s PDV ") as WTextRange;
+
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("_____________________________________________________________") as WTextRange;
+
+        //Appends the paragraph. //povući ukupnu sumu iz tarrifitem
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal2");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("\t25,00\t\t500,00\t\t125,00\t\t625,00 ") as WTextRange;
+
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("_____________________________________________________________") as WTextRange;
+
+        //Appends the paragraph. //povući ukupnu sumu iz tarrifitem
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("\t\t\t500,00\t\t125,00\t\t625,00 EUR") as WTextRange;
+
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("\t\t\t\t\t\t\t4.709,06 kn") as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal2");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("Konverzija u euro izvršena po fiksnom tečaju konverzije: 7,53450 HRK = 1 EUR.") as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal2");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("Obračun prema naplaćenoj naknadi") as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal2");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("Upozorenje:\tU slučaju neispunjenja dospjele obveze po ovom računu vjerovnik je ovlašten zatražiti \t\todređivanje ovrhe na temelju vjerodostojne isprave") as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal2");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("\nNačin plaćanja: \tTRANSAKCIJSKI RAČUN\nIBAN: \t\tHR76 234 000 9111 077 0402\nSWIFT CODE: \tPBZGHR2X\nModel: \t\t00\nPoziv na broj:\t303-2-2") as WTextRange;
+
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal2");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
+        textRange = paragraph.AppendText("Ante Gluić, odvjetnik") as WTextRange;
+
+        //Footer
+        paragraph = section.HeadersFooters.Footer.AddParagraph();
+        paragraph.ApplyStyle("Normal2");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Justify;
+        textRange = paragraph.AppendText("GLUIĆ NINČEVIĆ ODVJETNIČKO DRUŠTVO D.O.O. Špire Brusine 16, HR-2300 Zadar, tel: +385 23 700 750 fax: +385 23700751, ured@gn.hr, www.gn.hr, OIB: 75663620109, PBZ D.D. IBAN: HR7623400091110770402 MBS: 110057936, Trgovački sud u Zadru, Temeljni kapital u iznosu od 350 000,00 HKR uplaćen u cijelosti") as WTextRange;
+        textRange.CharacterFormat.FontSize = 10f;
+        textRange.CharacterFormat.FontName = "Calibri";
+        textRange.CharacterFormat.TextColor = Syncfusion.Drawing.Color.Black;
+
         using MemoryStream ms = new();
         //Saves the Word document to the memory stream.
         document.Save(ms, FormatType.Docx);
@@ -111,9 +257,6 @@ public partial class Naplata : ContentPage
         //Saves the memory stream as file.
         SaveService saveService = new();
         saveService.SaveAndView("Sample.docx", "application/msword", ms);
-
-
-
     }
    
  
