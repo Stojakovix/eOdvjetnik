@@ -172,6 +172,7 @@ namespace eOdvjetnik.ViewModel
             }
         }
  
+        public bool disableMenu { get; set; }
         #endregion
         public AppShellViewModel()
 		{
@@ -228,52 +229,95 @@ namespace eOdvjetnik.ViewModel
 
             #endregion
             SfPopup popup = new SfPopup();
-            
+           
+
             CheckExpiry();
+            
+        }
+
+        public void DisableMenu()
+        {
+             string ProvjeraAktivacije = Preferences.Get("activation_disable", "");
+            Debug.WriteLine(ProvjeraAktivacije);
+            if (ProvjeraAktivacije == "NOP") //promijeniti u "NOPE" da bi radilo
+            {
+                disableMenu = true;
+            }
+            else
+            {
+                disableMenu = false;
+            }
+            Debug.WriteLine(disableMenu);
         }
 
         #region Navigacija Funkcije
         private async void OnMainClick()
 		{
-
-			await Shell.Current.GoToAsync("///MainPage");
-			Debug.WriteLine("KLIKNO");
+            DisableMenu();
+            if (disableMenu == false)
+            {
+                await Shell.Current.GoToAsync("///MainPage");
+                Debug.WriteLine("KLIKNO");
+            }
+			
 		}
 
         private async void OnDokumentiClick()
         {
-
-            await Shell.Current.GoToAsync("///Dokumenti");
-            Debug.WriteLine("KLIKNO");
+            DisableMenu();
+            if (disableMenu == false)
+            {
+                await Shell.Current.GoToAsync("///Dokumenti");
+                Debug.WriteLine("KLIKNO");
+            }
         }
 
         private async void OnKalendarClick()
         {
-
-            await Shell.Current.GoToAsync("///Kalendar");
-            Debug.WriteLine("KLIKNO");
+            DisableMenu();
+            if (disableMenu == false)
+            {
+                await Shell.Current.GoToAsync("///Kalendar");
+                Debug.WriteLine("KLIKNO");
+            }
         }
 
         private async void OnKlijentiClick()
         {
-            await Shell.Current.GoToAsync("///Klijenti");
-            Debug.WriteLine("KLIKNO Klijente");
+            DisableMenu();
+            if (disableMenu == false)
+            {
+                await Shell.Current.GoToAsync("///Klijenti");
+                Debug.WriteLine("KLIKNO Klijente");
+            }
         }
 
         private async void OnNaplataClick()
         {
-            await Shell.Current.GoToAsync("///Naplata");
-            Debug.WriteLine("KLIKNO Naplatu");
+            DisableMenu();
+            if (disableMenu == false)
+            {
+                await Shell.Current.GoToAsync("///Naplata");
+                Debug.WriteLine("KLIKNO Naplatu");
+            }
         }
         private async void OnSpisiClick()
         {
-            await Shell.Current.GoToAsync("///Spisi");
-            Debug.WriteLine("KLIKNO Spisi");
+            DisableMenu();
+            if (disableMenu == false)
+            {
+                await Shell.Current.GoToAsync("///Spisi");
+                Debug.WriteLine("KLIKNO Spisi");
+            }
         }
         private async void OnPostavkeClick()
         {
-            await Shell.Current.GoToAsync("///Postavke");
-            Debug.WriteLine("KLIKNO Postavke");
+            DisableMenu();
+            if (disableMenu == false)
+            {
+                await Shell.Current.GoToAsync("///Postavke");
+                Debug.WriteLine("KLIKNO Postavke");
+            }
         }
         #endregion
 

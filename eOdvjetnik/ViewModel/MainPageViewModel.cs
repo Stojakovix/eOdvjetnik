@@ -457,10 +457,15 @@ namespace eOdvjetnik.ViewModel
             if (expiredLicence == true)
             {
                 ActivationVisible = true;
+                string aktivacija = "NOPE";
+                Preferences.Set("activation_disable", aktivacija);
             }
             else
             {
                 ActivationVisible = false;
+                string aktivacija = "KK";
+                Preferences.Set("activation_disable", aktivacija);
+
             }
         }
 
