@@ -2,11 +2,118 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.Klijenti"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
              Title="Datoteka Osoba">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentPage.BindingContext>
+        <viewmodel:KlijentiViewModel/>
+    </ContentPage.BindingContext>
+
+
+
+    <ScrollView>
+        <VerticalStackLayout >
+
+            <Button 
+                BorderColor="DarkGray"
+                BorderWidth="1"
+                BackgroundColor="#5ac8fa"
+                Text="Dodaj novi kontakt"
+                FontAttributes="Bold"
+                TextColor="Black"
+                HorizontalOptions="Start"
+                Command="{Binding DodajNoviKontakt}" 
+                FontSize="Default"
+                Margin="20,10,10,10"/>
+            
+            
+            <Label Text="Pretraga po imenu ili OIB-u" HorizontalOptions="Start" FontSize="Default"  Margin="22,10,10,10" FontAttributes="Bold"
+ />
+            <SearchBar  
+                   BackgroundColor="LightGray"
+                   SearchCommand="{Binding SearchCommand}"
+                   Text="{Binding SearchText}"
+                   WidthRequest="400"
+                   HorizontalOptions="Start"
+                   Margin="20,0,10,10"
+                   FontSize="Default" />
+
+
+            <Grid Margin="20,0,0,0"  >
+                <Grid.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="TextColor" Value="Black" />
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="Auto" />
+
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" FontAttributes="Bold" Text="Tbr." Margin="10,0,0,5" HorizontalOptions="Start" />
+                <Label Grid.Column="1" FontAttributes="Bold" Text="Bodovi"   HorizontalOptions="Center" />
+                <Label Grid.Column="2" FontAttributes="Bold" Text="Radnja" Margin="10,0,0,0" />
+
+            </Grid>
+
+
+            <ListView Margin="20,0,0,0" ItemsSource="{Binding Contacts}" ItemSelected="ListViewItemSelected"  >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid BackgroundColor="White">
+                                <Grid.Resources>
+                                    <Style TargetType="Label">
+                                        <Setter Property="TextColor" Value="Black" />
+                                    </Style>
+                                </Grid.Resources>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="100"  />
+                                    <ColumnDefinition Width="100"  />
+                                    <ColumnDefinition Width="100"  />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="100"  />
+                                    <ColumnDefinition Width="100"  />
+                                    <ColumnDefinition Width="100"  />
+                                    <ColumnDefinition Width="100"  />
+                                    <ColumnDefinition Width="100"  />
+
+
+
+                                </Grid.ColumnDefinitions>
+
+                                 <Label Grid.Row="1" Grid.Column="0" Text="{Binding Ime}" HorizontalOptions="Start" />
+                                 <Label Grid.Row="1" Grid.Column="1" Text="{Binding OIB}" HorizontalOptions="Start" />
+                                 <Label Grid.Row="1" Grid.Column="2" Text="{Binding Adresa}"  HorizontalOptions="Start" />
+                                <Label Grid.Row="1" Grid.Column="3" Text="{Binding Boraviste}"  HorizontalOptions="Start" />
+                                <Label Grid.Row="1" Grid.Column="4" Text="{Binding Telefon}"  HorizontalOptions="Start" />
+                                <Label Grid.Row="1" Grid.Column="5" Text="{Binding Mobitel}"  HorizontalOptions="Start" />
+                                <Label Grid.Row="1" Grid.Column="6" Text="{Binding Fax}"  HorizontalOptions="Start" />
+                                <Label Grid.Row="1" Grid.Column="7" Text="{Binding Email}"  HorizontalOptions="Start" />
+                                <Label Grid.Row="1" Grid.Column="8" Text="{Binding Datum_rodenja}"  HorizontalOptions="Start" />
+                                <Label Grid.Row="1" Grid.Column="9" Text="{Binding Ostalo}"  HorizontalOptions="Start" />
+                                <Label Grid.Row="1" Grid.Column="10" Text="{Binding Pravna}"  HorizontalOptions="Start" />
+                                <Label Grid.Row="1" Grid.Column="11" Text="{Binding Drzava}"  HorizontalOptions="Start" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

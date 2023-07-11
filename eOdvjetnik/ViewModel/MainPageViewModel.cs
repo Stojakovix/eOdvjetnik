@@ -430,17 +430,24 @@ namespace eOdvjetnik.ViewModel
 
         private void LicenceCheck() // Provjera isteka licence
         {
+          expiredLicence = true;
 
-            if (expire_date > current_date)
-            {
-                expiredLicence = true;
+          if (licenceStatus == "0" || licenceStatus == null)
+          {
+              expiredLicence = true;
 
-            }
-            else if (licenceStatus == "0" || licenceStatus == null)
-            {
-                expiredLicence = true;
-            }
-            else { expiredLicence = false; }
+          }
+          else if (licenceStatus == "1")
+          {
+              expiredLicence = false;
+
+          }
+            else if (expire_date > current_date)
+          {
+              expiredLicence = true;
+          }
+      
+
             ActivationScreen();
         }
 
