@@ -11,10 +11,12 @@ using System.Diagnostics;
 using eOdvjetnik.ViewModel;
 using Microsoft.Maui.Controls;
 using eOdvjetnik.Models;
+using System.Collections.ObjectModel;
 
 public partial class Naplata : ContentPage
 {
-
+    public ObservableCollection<ReceiptItem> ReceiptItems  = new ObservableCollection<ReceiptItem>();
+    private NaplataViewModel viewModel;
 
     public event EventHandler onCreateDocument;
 
@@ -27,10 +29,15 @@ public partial class Naplata : ContentPage
     string current_date { get; set; }
     string payment_date { get; set; }
 
+    public string imeUsluge { get; set; }
+    public string tbr { get; set; }
+    public string cijena { get; set; }
+
     public Naplata()
     {
         InitializeComponent();
-        this.BindingContext = new NaplataViewModel();
+        viewModel = new NaplataViewModel();
+        this.BindingContext = viewModel;
         nazivTvrtke = Preferences.Get("naziv_tvrtke", "");
         OIBTvrtke = Preferences.Get("OIBTvrtke", "");
         adresaTvrtke = Preferences.Get("adresaTvrtke", "");
@@ -38,10 +45,44 @@ public partial class Naplata : ContentPage
         DateTime dateTime = DateTime.Now;
         dateTime = dateTime.AddDays(7);
         payment_date = dateTime.ToString("dd.MM.yyyy");
+        
 
+    }
+    public void getReceiptData()
+    {
+        try
+        {
+            ObservableCollection<ReceiptItem> receiptItems = viewModel.ReceiptItems;
+
+            Debug.WriteLine("ulazak u try" + receiptItems);
+            foreach (ReceiptItem item in receiptItems)
+            {
+                if (item != null)
+                {
+                    imeUsluge = item.Name;
+                    tbr = item.Tbr;
+                    cijena = item.Currency;
+                    Debug.WriteLine(item.Name, item.Tbr, item.Currency);
+                }
+                else
+                {
+                    if(item == null)
+                    {
+                        Debug.WriteLine("item is null");
+                    }
+                }
+
+            }
+        }
+        catch (Exception ex)
+        {
+
+            Debug.WriteLine(ex.Message);
+        }
     }
     private void CreateDocument(object sender, EventArgs e)
     {
+        getReceiptData();
         //Creates a new document.
         using WordDocument document = new();
         //Adds a new section to the document.
@@ -148,7 +189,7 @@ public partial class Naplata : ContentPage
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");
         paragraph.BreakCharacterFormat.FontSize = 12f;
-        textRange = paragraph.AppendText("Odvjetnička usluga\t\tTarifa\t\tCijena\t\tPDV iznos\t\tIznos sa PDV") as WTextRange;
+        textRange = paragraph.AppendText(imeUsluge + "\t\tTarifa\t\tCijena\t\tPDV iznos\t\tIznos sa PDV") as WTextRange;
 
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");
@@ -159,7 +200,7 @@ public partial class Naplata : ContentPage
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");
         paragraph.BreakCharacterFormat.FontSize = 12f;
-        textRange = paragraph.AppendText("Opis usluge\t\tOpis tarife\t\t500,00\t\t125,00\t\t\t625,00 ") as WTextRange;
+        textRange = paragraph.AppendText(tbr + "\t\tOpis tarife\t\t500,00\t\t125,00\t\t\t625,00 ") as WTextRange;
 
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");
@@ -170,7 +211,7 @@ public partial class Naplata : ContentPage
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");
         paragraph.BreakCharacterFormat.FontSize = 12f;
-        textRange = paragraph.AppendText("\t\t\t\t\t\t500,00\t\t125,00\t\t\t625,00 EUR") as WTextRange;
+        textRange = paragraph.AppendText("\t\t\t\t\t\t" + cijena + "\t\t125,00\t\t\t625,00 EUR") as WTextRange;
 
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");

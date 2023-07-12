@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Security.Policy;
 
 namespace eOdvjetnik.Models
 {
@@ -9,6 +10,8 @@ namespace eOdvjetnik.Models
         public string Tbr { get; set; }
         public string Name { get; set; }
         public string Points { get; set; }
+        public string Opis { get; set; }
+        
         private bool ukupanIznosVisible { get; set; }
 
         public bool UkupanIznosVisible

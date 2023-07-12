@@ -262,6 +262,7 @@ namespace eOdvjetnik.ViewModel
                     Name = odabraniNaziv,
                     Points = odabraniBodovi,
                     Coefficient = 1,
+
                     UkupanIznosVisible = false
                 };
                 ReceiptItems.Add(newItem);
