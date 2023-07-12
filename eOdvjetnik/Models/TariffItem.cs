@@ -11,6 +11,8 @@ namespace eOdvjetnik.Models
         public string oznaka { get; set; }
         public string bodovi { get; set; }
         public string concatenated_name { get; set; }
+        public string parent_name { get; set; }
+       
 
     }
 }

@@ -4,7 +4,8 @@ using eOdvjetnik.ViewModel;
 using Microsoft.Maui.ApplicationModel.Communication;
 using Microsoft.Maui.Controls;
 using System;
-using static eOdvjetnik.ViewModel.KlijentiViewModel;
+using eOdvjetnik.Model;
+using eOdvjetnik.Models;
 
 public partial class Klijenti : ContentPage
 {
