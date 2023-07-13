@@ -162,33 +162,55 @@ public class KlijentiViewModel : INotifyPropertyChanged
         }
     }
 
-    public class ContactItem
+    private string _NazivKlijenta;
+    public string NazivKlijenta
     {
-
-        public int Id { get; set; }
-
-        public string Ime { get; set; }
-        public string OIB { get; set; }
-        public DateTime Datum_rodenja { get; set; }
-        public string Adresa { get; set; }
-        public string Boraviste { get; set; }
-        public string Telefon { get; set; }
-        public string Fax { get; set; }
-        public string Mobitel { get; set; }
-        public string Email { get; set; }
-        public string Ostalo { get; set; }
-        public string Drzava { get; set; }
-        public int Pravna { get; set; }
-
+        get { return _NazivKlijenta; }
+        set
+        {
+            if (_NazivKlijenta != value)
+            {
+                _NazivKlijenta = value;
+                OnPropertyChanged(nameof(NazivKlijenta));
+            }
+        }
     }
 
+    private string OIBKlijenta;
+    public string OIBklijenta
+    {
+        get { return OIBKlijenta; }
+        set
+        {
+            if (OIBKlijenta != value)
+            {
+                OIBKlijenta = value;
+                OnPropertyChanged(nameof(OIBklijenta));
+            }
+        }
+    }
 
-
+    private string _AdresaKlijenta;
+    public string AdresaKlijenta
+    {
+        get { return _AdresaKlijenta; }
+        set
+        {
+            if (_AdresaKlijenta != value)
+            {
+                _AdresaKlijenta = value;
+                OnPropertyChanged(nameof(AdresaKlijenta));
+            }
+        }
+    }
 
     public KlijentiViewModel()
 	{
         Contacts = new ObservableCollection<ContactItem>();
         GenerateFiles();
+        NazivKlijenta = Preferences.Get("SelectedName", "");
+        OIBklijenta = Preferences.Get("SelectedOIB", "");
+        AdresaKlijenta = Preferences.Get("SelectedAddress", "");
         var timer = Application.Current.Dispatcher.CreateTimer();
         timer.Interval = TimeSpan.FromMilliseconds(200);
         timer.Tick += (s, e) => Refresh();
@@ -206,10 +228,10 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-         
-
-
-        }
+            NazivKlijenta = Preferences.Get("SelectedName", "");
+            OIBklijenta = Preferences.Get("SelectedOIB", "");
+            AdresaKlijenta = Preferences.Get("SelectedAddress", "");
+              }
         );
     }
 }

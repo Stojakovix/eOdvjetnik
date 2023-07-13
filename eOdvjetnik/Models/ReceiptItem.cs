@@ -9,6 +9,8 @@ namespace eOdvjetnik.Models
 
         public string Tbr { get; set; }
         public string Name { get; set; }
+        public string ParentName { get; set; }
+
         public string Points { get; set; }
         
         
@@ -23,10 +25,6 @@ namespace eOdvjetnik.Models
                 OnPropertyChanged(nameof(UkupanIznosVisible));
             }
         }
-
-
-
-
         private int coefficient;
         public int Coefficient
         {
@@ -63,7 +61,7 @@ namespace eOdvjetnik.Models
             {
                 if (float.TryParse(Points, out float points))
                 {
-                    return points * 1.99f * Coefficient;
+                    return points * 2f * Coefficient;
                 }
                 else { return 0f; }
             }
@@ -94,7 +92,6 @@ namespace eOdvjetnik.Models
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

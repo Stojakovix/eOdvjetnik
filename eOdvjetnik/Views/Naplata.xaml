@@ -32,7 +32,7 @@
                 <Label Grid.Column="1" Text="{Binding NazivTvrtke}" FontSize="14" BackgroundColor="White" TextColor="Black" Margin="10,10,0,12"/>
 
                 <Label Grid.Column="0" Grid.Row="1" Text="Klijent:" FontSize="14" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
-                <Label Grid.Column="1" Grid.Row="1" Text="NazivKlijenta" FontSize="14" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12"/>
+                <Label Grid.Column="1" Grid.Row="1" Text="{Binding NazivKlijenta}" FontSize="14" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12"/>
 
                 <Label Grid.Column="0" Grid.Row="2" Text="Tarifni broj:" FontSize="14" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
                 <Label Grid.Column="1" Grid.Row="2" Text="{Binding odabraniTBR}" FontSize="14" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12" />

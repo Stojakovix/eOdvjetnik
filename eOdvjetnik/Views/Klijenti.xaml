@@ -13,8 +13,31 @@
 
     <ScrollView>
         <VerticalStackLayout >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-            <Button 
+                <Label Text="Klijent:" FontSize="14" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="20,10,0,12"/>
+                <Label Grid.Column="1" Text="{Binding NazivKlijenta}" FontSize="14" BackgroundColor="White" TextColor="Black" Margin="10,10,0,12"/>
+
+                <Label Grid.Column="0" Grid.Row="2" Text="OIB:" FontSize="14" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
+                <Label Grid.Column="1" Grid.Row="2" Text="{Binding OIBklijenta}" FontSize="14" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12" />
+
+                <Label Grid.Column="0" Grid.Row="3" Text="Adresa:" FontSize="14" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
+                <Label Grid.Column="1" Grid.Row="3" Text="{Binding AdresaKlijenta}" FontSize="14" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12"  />
+
+            </Grid>
+            <HorizontalStackLayout>
+                <Button 
                 BorderColor="DarkGray"
                 BorderWidth="1"
                 BackgroundColor="#5ac8fa"
@@ -25,8 +48,22 @@
                 Command="{Binding DodajNoviKontakt}" 
                 FontSize="Default"
                 Margin="20,10,10,10"/>
-            
-            
+                
+                <Button 
+                BorderColor="DarkGray"
+                BorderWidth="1"
+                BackgroundColor="#5ac8fa"
+                Text="Dodaj kontakt u račun"
+                FontAttributes="Bold"
+                TextColor="Black"
+                HorizontalOptions="Start"
+                Command="{Binding DodajOdabraniKontatNaRacun}" 
+                FontSize="Default"
+                Margin="20,10,10,10"/>
+            </HorizontalStackLayout>
+           
+
+
             <Label Text="Pretraga po imenu ili OIB-u" HorizontalOptions="Start" FontSize="Default"  Margin="22,10,10,10" FontAttributes="Bold"
  />
             <SearchBar  

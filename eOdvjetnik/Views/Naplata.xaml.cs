@@ -16,73 +16,50 @@ using System.Collections.ObjectModel;
 public partial class Naplata : ContentPage
 {
     public ObservableCollection<ReceiptItem> ReceiptItems  = new ObservableCollection<ReceiptItem>();
-    private NaplataViewModel viewModel;
+    private NaplataViewModel ViewModel;
 
     public event EventHandler onCreateDocument;
 
-    public string nazivTvrtke { get; set; }
-    public string OIBTvrtke { get; set; }
-    public string adresaTvrtke { get; set; }
-    public string nazivKlijenta { get; set; } = "Placeholder Company";
-    public string OIBklijenta { get; set; } = "11111111111";
-    public string adresaKlijenta { get; set; } = "Zagreb 10000, Radnička 1";
-    string current_date { get; set; }
-    string payment_date { get; set; }
+    public string CompanyName { get; set; }
+    public string CompanyOIB { get; set; }
+    public string CompanyAddress { get; set; }
+    public string ClientName { get; set; } = "Klijent nije odabran";
+    public string ClientOIB { get; set; } = "Nema OIB-a";
+    public string ClientAddress { get; set; } = "Nema adrese";
+    string CurrentDate { get; set; }
+    string PaymentDate { get; set; }
+    public string ReceiptItemName { get; set; }
+    public string ReceiptItemPoints { get; set; }
 
-    public string imeUsluge { get; set; }
-    public string tbr { get; set; }
-    public string points { get; set; }
+    public string ReceiptItemParentName { get; set; }
+    public string ReceiptItemTBR { get; set; }
+    public string ReceiptItemAmountEUR { get; set; }
+    public int ReceiptItemCount { get; set; }
+    public float ReceiptItemAmount { get; set; }
+    public float ReceiptItemTotalAmount { get; set; }
+
+
 
     public Naplata()
     {
         InitializeComponent();
-        viewModel = new NaplataViewModel();
-        this.BindingContext = viewModel;
-        nazivTvrtke = Preferences.Get("naziv_tvrtke", "");
-        OIBTvrtke = Preferences.Get("OIBTvrtke", "");
-        adresaTvrtke = Preferences.Get("adresaTvrtke", "");
-        current_date = DateTime.Now.ToString("dd.MM.yyyy.");
+        ViewModel = new NaplataViewModel();
+        this.BindingContext = ViewModel;
+        CompanyName = Preferences.Get("naziv_tvrtke", "");
+        CompanyOIB = Preferences.Get("OIBTvrtke", "");
+        CompanyAddress = Preferences.Get("adresaTvrtke", "");
+        CurrentDate = DateTime.Now.ToString("dd.MM.yyyy.");
         DateTime dateTime = DateTime.Now;
         dateTime = dateTime.AddDays(7);
-        payment_date = dateTime.ToString("dd.MM.yyyy");
-        
-
+        PaymentDate = dateTime.ToString("dd.MM.yyyy");
+        ClientName = Preferences.Get("SelectedName", "");
+        ClientOIB = Preferences.Get("SelectedOIB", "");
+        ClientAddress = Preferences.Get("SelectedAddress", "");
+      
     }
-    public void getReceiptData()
-    {
-        try
-        {
-            ObservableCollection<ReceiptItem> receiptItems = viewModel.ReceiptItems;
 
-            Debug.WriteLine("ulazak u try" + receiptItems);
-            foreach (ReceiptItem item in receiptItems)
-            {
-                if (item != null)
-                {
-                    imeUsluge = item.Name;
-                    tbr = item.Tbr;
-                    points = item.Points;
-                    Debug.WriteLine("name - " + item.Name, "tbr" + item.Tbr, "cijena" + item.Points);
-                }
-                else
-                {
-                    if(item == null)
-                    {
-                        Debug.WriteLine("item is null");
-                    }
-                }
-
-            }
-        }
-        catch (Exception ex)
-        {
-
-            Debug.WriteLine(ex.Message);
-        }
-    }
     private void CreateDocument(object sender, EventArgs e)
     {
-        getReceiptData();
         //Creates a new document.
         using WordDocument document = new();
         //Adds a new section to the document.
@@ -149,13 +126,13 @@ public partial class Naplata : ContentPage
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Bold");
         style.ParagraphFormat.BeforeSpacing = 12;
-        textRange = paragraph.AppendText("\n" + nazivTvrtke + "\n" + adresaTvrtke + "\nOIB: " + OIBTvrtke) as WTextRange;
+        textRange = paragraph.AppendText("\n" + CompanyName + "\n" + CompanyAddress + "\nOIB: " + CompanyOIB) as WTextRange;
          
         //Appends the paragraph.
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Bold");
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
-        textRange = paragraph.AppendText(nazivKlijenta + "\n" + adresaKlijenta + "\nOIB: " + OIBklijenta) as WTextRange;
+        textRange = paragraph.AppendText(ClientName + "\n" + ClientAddress + "\nOIB: " + ClientOIB) as WTextRange;
 
         //Appends the paragraph.
         paragraph = section.AddParagraph();
@@ -168,15 +145,13 @@ public partial class Naplata : ContentPage
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");
         paragraph.BreakCharacterFormat.FontSize = 12f;
-        textRange = paragraph.AppendText("Datum računa\t\tMjesto izdavanja\tDospijeće računa") as WTextRange;
+        textRange = paragraph.AppendText("Datum računa\t\tMjesto izdavanja\t\tDospijeće računa") as WTextRange;
 
         //Appends the paragraph.
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");
         paragraph.BreakCharacterFormat.FontSize = 12f;
-        textRange = paragraph.AppendText(current_date + "\t\tZadar\t\t\t" + payment_date + "\n") as WTextRange;
-
-        //Tablica za stavke računa // binding za item.Count u tarrifitem
+        textRange = paragraph.AppendText(CurrentDate + "\t\tZadar\t\t\t" + PaymentDate + "\n") as WTextRange;
 
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");
@@ -185,72 +160,87 @@ public partial class Naplata : ContentPage
 
         //Appends the paragraph.
         paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal");
+        paragraph.ApplyStyle("Bold");
         paragraph.BreakCharacterFormat.FontSize = 12f;
-        textRange = paragraph.AppendText(imeUsluge + "\t\tTarifa\t\tCijena\t\tPDV iznos\t\tIznos sa PDV") as WTextRange;
+        textRange = paragraph.AppendText("Odvjetnička usluga\tTarifa\tCijena\tPDV iznos\tIznos sa PDV") as WTextRange;
 
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
         textRange = paragraph.AppendText("_____________________________________________________________________________________") as WTextRange;
 
-        //Appends the paragraph.
-        paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal");
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        textRange = paragraph.AppendText(tbr + "\t\tOpis tarife\t\t500,00\t\t125,00\t\t\t625,00 ") as WTextRange;
+
+        ObservableCollection<ReceiptItem> receiptItems = ViewModel.ReceiptItems;
+
+        Debug.WriteLine("Entering try block: " + receiptItems);
+
+        for (int i = 0; i < receiptItems.Count; i++)
+        {
+            ReceiptItem item = receiptItems[i];
+
+            if (item != null)
+            {
+                ReceiptItemCount = receiptItems.Count;
+                ReceiptItemName = item.Name;
+                ReceiptItemTBR = item.Tbr;
+                ReceiptItemAmountEUR = item.Currency;
+                ReceiptItemParentName = item.ParentName;
+                ReceiptItemAmount = item.Amount;
+                ReceiptItemTotalAmount = item.TotalAmount;
+                ReceiptItemPoints = item.Points;
+                Debug.WriteLine(item.ParentName, item.Tbr);
+
+                float amountBeforePDV = (float)Math.Round(ReceiptItemAmount, 2);
+                string AmountBeforePDV = amountBeforePDV.ToString("0.00");
+
+                float PDVamount = (ReceiptItemAmount * 1.25f) - ReceiptItemAmount;
+                string PDVAmount = PDVamount.ToString("0.00");
+
+                float amountAfterPDV = (ReceiptItemAmount*1.25f);
+                string AmountAfterPDV = amountAfterPDV.ToString("0.00");
+
+
+                paragraph = section.AddParagraph();
+                paragraph.ApplyStyle("Normal");
+                paragraph.BreakCharacterFormat.FontSize = 12f;
+
+                int indexNumber = i + 1; // Get the index number (starting from 1)
+                textRange = paragraph.AppendText(indexNumber + ". " + ReceiptItemParentName + "\t" + ReceiptItemTBR + " (" + ReceiptItemPoints + " bodova)\t" + AmountBeforePDV + "\t" + PDVAmount + "\t" + AmountAfterPDV) as WTextRange;
+            }
+            else
+            {
+                if (item == null)
+                {
+                    Debug.WriteLine("Item is null");
+                }
+            }
+        }
 
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
         textRange = paragraph.AppendText("_____________________________________________________________________________________") as WTextRange;
 
+        float totalAmountBeforePDV = (float)Math.Round(ReceiptItemTotalAmount, 2);
+        string TotalAmountBeforePDV = totalAmountBeforePDV.ToString("0.00");
+
+        float totalPDVamount = (ReceiptItemTotalAmount * 1.25f) - ReceiptItemTotalAmount;
+        string TotalPDVAmount = totalPDVamount.ToString("0.00");
+
+        float totalAmountAfterPDV = (ReceiptItemTotalAmount * 1.25f);
+        string TotalAmountAfterPDV = totalAmountAfterPDV.ToString("N2");
+
+        float totalAmountAfterPDVhrk = ((ReceiptItemTotalAmount * 1.25f)* 7.5345f);
+        string TotalAmountAfterPDVhrk = totalAmountAfterPDVhrk.ToString("N2");
+
         //Appends the paragraph.
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");
         paragraph.BreakCharacterFormat.FontSize = 12f;
-        textRange = paragraph.AppendText("\t\t\t\t\t\t" + points + "\t\t125,00\t\t\t625,00 EUR") as WTextRange;
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
+        textRange = paragraph.AppendText( "\t\t\t\t" + TotalAmountBeforePDV + "\t\t"+ TotalPDVAmount+ "\t\t" + TotalAmountAfterPDV + " EUR\n" + TotalAmountAfterPDVhrk + " kn") as WTextRange;
 
-        paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal");
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        textRange = paragraph.AppendText("\t\t\t\t\t\t\t\t\t\t\t4.709,06 kn") as WTextRange;
-
-        //Tablica za PDV
-
-        //Appends the paragraph.
-        paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal2");
-        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("\n\tPDV %\t\tIznos\t\tPDV iznos\tIznos s PDV ") as WTextRange;
-
-        paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal");
-        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("_____________________________________________________________") as WTextRange;
-
-        //Appends the paragraph. //povući ukupnu sumu iz tarrifitem
-        paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal2");
-        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("\t25,00\t\t500,00\t\t125,00\t\t625,00 ") as WTextRange;
-
-        paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal");
-        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("_____________________________________________________________") as WTextRange;
-
-        //Appends the paragraph. //povući ukupnu sumu iz tarrifitem
-        paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal");
-        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("\t\t\t500,00\t\t125,00\t\t625,00 EUR") as WTextRange;
-
-        paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal");
-        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("\t\t\t\t\t\t\t4.709,06 kn") as WTextRange;
-
+       
         //Appends the paragraph.
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal2");
@@ -259,7 +249,7 @@ public partial class Naplata : ContentPage
 
         //Appends the paragraph.
         paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal2");
+        paragraph.ApplyStyle("Normal");
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
         textRange = paragraph.AppendText("Obračun prema naplaćenoj naknadi") as WTextRange;
 
@@ -267,7 +257,7 @@ public partial class Naplata : ContentPage
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal2");
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("Upozorenje:\tU slučaju neispunjenja dospjele obveze po ovom računu vjerovnik je ovlašten zatražiti \t\todređivanje ovrhe na temelju vjerodostojne isprave") as WTextRange;
+        textRange = paragraph.AppendText("Upozorenje:\nU slučaju neispunjenja dospjele obveze po ovom računu vjerovnik je ovlašten zatražiti određivanje ovrhe na temelju vjerodostojne isprave") as WTextRange;
 
         //Appends the paragraph.
         paragraph = section.AddParagraph();
@@ -315,19 +305,22 @@ public partial class Naplata : ContentPage
 
         var selectedTariffItem = (TariffItem)e.SelectedItem;
 
-        await SaveToPreferences(selectedTariffItem.oznaka, selectedTariffItem.bodovi, selectedTariffItem.concatenated_name);
+        await SaveToPreferences(selectedTariffItem.oznaka, selectedTariffItem.bodovi, selectedTariffItem.concatenated_name, selectedTariffItem.parent_name);
 
         ((ListView)sender).SelectedItem = null;
     }
 
 
 
-    private Task SaveToPreferences(string oznaka, string bodovi, string concatenatedName)
+    private Task SaveToPreferences(string oznaka, string bodovi, string concatenatedName, string parent_name)
     {
  
         Preferences.Set("SelectedOznaka", oznaka);
         Preferences.Set("SelectedBodovi", bodovi);
         Preferences.Set("SelectedConcatenatedName", concatenatedName);
+        Preferences.Set("SelectedParentName", parent_name);
+        Debug.WriteLine("parent name je: " + parent_name);
+
 
         return Task.CompletedTask;
     }
