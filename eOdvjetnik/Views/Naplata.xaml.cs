@@ -31,7 +31,7 @@ public partial class Naplata : ContentPage
 
     public string imeUsluge { get; set; }
     public string tbr { get; set; }
-    public string cijena { get; set; }
+    public string points { get; set; }
 
     public Naplata()
     {
@@ -61,8 +61,8 @@ public partial class Naplata : ContentPage
                 {
                     imeUsluge = item.Name;
                     tbr = item.Tbr;
-                    cijena = item.Currency;
-                    Debug.WriteLine(item.Name, item.Tbr, item.Currency);
+                    points = item.Points;
+                    Debug.WriteLine("name - " + item.Name, "tbr" + item.Tbr, "cijena" + item.Points);
                 }
                 else
                 {
@@ -107,7 +107,6 @@ public partial class Naplata : ContentPage
         style.ParagraphFormat.AfterSpacing = 0;
         style.ParagraphFormat.LineSpacing = 12f; //manji spacing
 
-        style = document.AddParagraphStyle("Bold") as WParagraphStyle;
         style.CharacterFormat.FontName = "Calibri";
         style.CharacterFormat.Bold = true;
         style.CharacterFormat.FontSize = 10f;
@@ -116,7 +115,6 @@ public partial class Naplata : ContentPage
         style.ParagraphFormat.LineSpacing = 12f;
 
         style = document.AddParagraphStyle("Heading 1") as WParagraphStyle;
-        style.ApplyBaseStyle("Normal");
         style.CharacterFormat.FontName = "Calibri Light";
         style.CharacterFormat.FontSize = 16f;
         style.CharacterFormat.TextColor = Syncfusion.Drawing.Color.FromArgb(46, 116, 181);
@@ -211,7 +209,7 @@ public partial class Naplata : ContentPage
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");
         paragraph.BreakCharacterFormat.FontSize = 12f;
-        textRange = paragraph.AppendText("\t\t\t\t\t\t" + cijena + "\t\t125,00\t\t\t625,00 EUR") as WTextRange;
+        textRange = paragraph.AppendText("\t\t\t\t\t\t" + points + "\t\t125,00\t\t\t625,00 EUR") as WTextRange;
 
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");

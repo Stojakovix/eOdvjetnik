@@ -10,7 +10,7 @@ namespace eOdvjetnik.Models
         public string Tbr { get; set; }
         public string Name { get; set; }
         public string Points { get; set; }
-        public string Opis { get; set; }
+        
         
         private bool ukupanIznosVisible { get; set; }
 
