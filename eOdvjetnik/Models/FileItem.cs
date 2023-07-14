@@ -24,5 +24,7 @@ namespace eOdvjetnik.Model
         public string ZadnjeUredio { get; set; }
         public string Jezik { get; set; }
         public string BrojPredmeta { get; set; }
+        public string ClientName { get; set; }
+        public string OpponentName { get; set; }
     }
 }

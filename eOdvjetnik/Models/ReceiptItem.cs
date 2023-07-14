@@ -12,7 +12,7 @@ namespace eOdvjetnik.Models
         public string ParentName { get; set; }
 
         public string Points { get; set; }
-        public string Opis { get; set; }
+        
         
         private bool ukupanIznosVisible { get; set; }
 

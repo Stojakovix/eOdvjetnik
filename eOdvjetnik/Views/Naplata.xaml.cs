@@ -84,7 +84,6 @@ public partial class Naplata : ContentPage
         style.ParagraphFormat.AfterSpacing = 0;
         style.ParagraphFormat.LineSpacing = 12f; //manji spacing
 
-        style = document.AddParagraphStyle("Bold") as WParagraphStyle;
         style.CharacterFormat.FontName = "Calibri";
         style.CharacterFormat.Bold = true;
         style.CharacterFormat.FontSize = 10f;
@@ -93,7 +92,6 @@ public partial class Naplata : ContentPage
         style.ParagraphFormat.LineSpacing = 12f;
 
         style = document.AddParagraphStyle("Heading 1") as WParagraphStyle;
-        style.ApplyBaseStyle("Normal");
         style.CharacterFormat.FontName = "Calibri Light";
         style.CharacterFormat.FontSize = 16f;
         style.CharacterFormat.TextColor = Syncfusion.Drawing.Color.FromArgb(46, 116, 181);

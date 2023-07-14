@@ -7,6 +7,8 @@ using System;
 using System.Reflection;
 using SMBLibrary.SMB1;
 using Microsoft.Maui.Controls;
+using System.Diagnostics;
+
 namespace eOdvjetnik.Views;
 
 
@@ -49,7 +51,59 @@ public partial class Dokumenti : ContentPage
         //INICIRAJ SMB KONEKCIJU DA DOHVATI SVE DOKUMENTE
         try
         {
-            //SMB
+
+            //DisplayAlert("Error", "asd","OK");
+
+            SMB2Client client = new SMB2Client();
+            bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP, "")), SMBTransportType.DirectTCPTransport);
+            NTStatus status = client.Login(String.Empty, Preferences.Get(USER, ""), Preferences.Get(PASS, ""));
+            ISMBFileStore fileStore = client.TreeConnect(" ", out status);
+            if (status == NTStatus.STATUS_SUCCESS)
+            {
+                Debug.WriteLine("7777777777777777777");
+                Debug.WriteLine(status);
+                Debug.WriteLine("7777777777777777777");
+                object directoryHandle;
+                FileStatus fileStatus;
+                status = fileStore.CreateFile(out directoryHandle, out fileStatus, String.Empty, AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
+                if (status == NTStatus.STATUS_SUCCESS)
+                {
+                    Debug.WriteLine("8888888888888888888");
+                    Debug.WriteLine(status);
+                    Debug.WriteLine("8888888888888888888");
+                    List<QueryDirectoryFileInformation> fileList;
+                    status = fileStore.QueryDirectory(out fileList, directoryHandle, "*", FileInformationClass.FileDirectoryInformation);
+                    status = fileStore.CloseFile(directoryHandle);
+                    foreach (SMBLibrary.FileDirectoryInformation file in fileList)
+                    {
+                        Debug.WriteLine($"Filename: {file.FileName}");
+                        Debug.WriteLine($"File Attributes: {file.FileAttributes}");
+                        Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
+                        Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
+                        Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
+                        Debug.WriteLine("----------End of Folder/file-----------");
+                        //Debug.WriteLine();
+                        ShareFiles.Add(file.FileName);
+
+
+                    }
+                    status = fileStore.Disconnect();
+                }
+                else {
+                    Debug.WriteLine("9999999999999999999");
+                    Debug.WriteLine(status);
+                    Debug.WriteLine("9999999999999999999");
+                }
+            }
+            else
+            {
+                Debug.WriteLine("10101010010101010101");
+                Debug.WriteLine(status);
+                Debug.WriteLine("10101010010101010101");
+            }
+
+            /*
+            //SMB2
             SMB2Client client = new SMB2Client();
             bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP, "")), SMBTransportType.DirectTCPTransport);
             if (isConnected)
@@ -63,20 +117,20 @@ public partial class Dokumenti : ContentPage
                         status = fileStore.CreateFile(out directoryHandle, out fileStatus, Preferences.Get(SUBFOLDER, ""), AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
                         List<QueryDirectoryFileInformation> fileList;
                         status = fileStore.QueryDirectory(out fileList, directoryHandle, "*", FileInformationClass.FileDirectoryInformation);
-
-                        foreach (SMBLibrary.FileDirectoryInformation file in fileList)
+                    Debug.WriteLine("---------------------Before foreach");
+                    foreach (SMBLibrary.FileDirectoryInformation file in fileList)
                         {
-                            Console.WriteLine($"Filename: {file.FileName}");
-                            Console.WriteLine($"File Attributes: {file.FileAttributes}");
-                            Console.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
-                            Console.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
-                            Console.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
-                            Console.WriteLine("----------End of Folder/file-----------");
-                            Console.WriteLine();
+                            Debug.WriteLine($"Filename: {file.FileName}");
+                            Debug.WriteLine($"File Attributes: {file.FileAttributes}");
+                            Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
+                            Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
+                            Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
+                            Debug.WriteLine("----------End of Folder/file-----------");
+                            Debug.WriteLine("---------------------Before foreach");
                             ShareFiles.Add(file.FileName);
 
                         }
-
+                    Debug.WriteLine("-----------------------After foreach");
                     //var listView = new ListView
                     //{
                     //    ItemsSource = ShareFiles
@@ -95,8 +149,8 @@ public partial class Dokumenti : ContentPage
                         {
                             System.Diagnostics.Debug.WriteLine(file1.Length.ToString());
                             System.Diagnostics.Debug.WriteLine(file1.ToString());
-
-                        }
+                        System.Diagnostics.Debug.WriteLine("44444444444444");
+                    }
                         System.Diagnostics.Debug.WriteLine("44444444444444");
                         System.Diagnostics.Debug.WriteLine(fileList);
                     }
@@ -110,6 +164,7 @@ public partial class Dokumenti : ContentPage
                 }
                 client.Logoff();
                 client.Disconnect();
+            */
         }
         catch (Exception ex)
         {

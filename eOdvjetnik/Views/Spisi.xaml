@@ -18,7 +18,7 @@
                 <ListView ItemsSource="{Binding FileItems}" x:Name="listView" SeparatorColor="DarkRed" SelectionMode="Single" SeparatorVisibility="Default" >
                     <ListView.Header>
                         <VerticalStackLayout>
-                            <Grid Margin="0,0,0,10" Padding="5" BackgroundColor="White" Background="LightGray">
+                            <Grid Margin="0,0,0,10" BackgroundColor="White" Background="LightGray">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*"/>
@@ -41,31 +41,29 @@
                                SearchCommand="{Binding SearchCommand}"
                                Text="{Binding SearchText}"
                                />
-                                <Grid Margin="5" Padding="5" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalOptions="Fill">
+                                <Grid Margin="5" Padding="5" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalOptions="Fill" >
                                     <Grid.Resources>
                                         <Style TargetType="Label">
                                             <Setter Property="TextColor" Value="Black" />
                                         </Style>
                                     </Grid.Resources>
-                                    
+
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="200" />
+                                        <ColumnDefinition Width="300" />
+                                        <ColumnDefinition Width="300" />
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="200" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" MaximumWidthRequest="150" Text="ID" />
-                                    <Label Grid.Column="1" MaximumWidthRequest="150" Text="Broj spisa" />
-                                    <Label Grid.Column="2" MaximumWidthRequest="150" Text="Datum kreiranja" />
-                                    <Label Grid.Column="3" MaximumWidthRequest="150" Text="Datum izmjene" />
-                                    <Label Grid.Column="4" MaximumWidthRequest="150" Text="Klijent" />
-                                    <Label Grid.Column="5" MaximumWidthRequest="150" Text="Protustranka" />
-                                    <Label Grid.Column="6" MaximumWidthRequest="150" Text="Dodao" />
-                                    <Label Grid.Column="7" MaximumWidthRequest="150" Text="Uzrok" />
+                                    <Label Grid.Column="0" HorizontalOptions="Start" Text="Broj spisa" />
+                                    <Label Grid.Column="1" HorizontalOptions="Center" Text="Datum kreiranja" />
+                                    <Label Grid.Column="2" HorizontalOptions="Center" Text="Vrijeme izmjene" />
+                                    <Label Grid.Column="3" HorizontalOptions="Center"  Text="Klijent" />
+                                    <Label Grid.Column="4" HorizontalOptions="Center" Text="Protustranka" />
+                                    <Label Grid.Column="5" HorizontalOptions="Center" Text="Dodao" />
+                                    <Label Grid.Column="6" HorizontalOptions="Start" Margin="30,0,0,0" Text="Uzrok" />
                                 </Grid>
                             </Grid>
                         </VerticalStackLayout>
@@ -74,7 +72,7 @@
 
                         <DataTemplate>
                             <ViewCell>
-                                <Grid Margin="5,0,0,0" Padding="0,0,0,0" BackgroundColor="White">
+                                <Grid Margin="5,0,0,0" Padding="5,0,0,0" BackgroundColor="White">
                                     <Grid.Resources>
                                         <Style TargetType="Label">
                                             <Setter Property="TextColor" Value="Black" />
@@ -95,23 +93,21 @@
 
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="200" />
+                                        <ColumnDefinition Width="300" />
+                                        <ColumnDefinition Width="300" />
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="200" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Row="1" Grid.Column="0" MaximumWidthRequest="150" Text="{Binding Id}" />
-                                    <Label Grid.Row="1" Grid.Column="1" MaximumWidthRequest="150" Text="{Binding BrojSpisa}" />
-                                    <Label Grid.Row="1" Grid.Column="2" MaximumWidthRequest="150" Text="{Binding Created,  StringFormat='{}{0:f}'}"  />
-                                    <Label Grid.Row="1" Grid.Column="3" MaximumWidthRequest="150" Text="{Binding DatumIzmjeneSpisa,  StringFormat='{}{0:f}'}"  />
-                                    <Label Grid.Row="1" Grid.Column="4" MaximumWidthRequest="150" Text="{Binding ClientId}" />
-                                    <Label Grid.Row="1" Grid.Column="5" MaximumWidthRequest="150" Text="{Binding OpponentId}" />
-                                    <Label Grid.Row="1" Grid.Column="6" MaximumWidthRequest="150" Text="{Binding InicijaliDodao}" />
-                                    <Label Grid.Row="1" Grid.Column="7" MaximumWidthRequest="150" Text="{Binding Uzrok}" />
+                                    <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" Padding="0,10,0,0" Text="{Binding BrojSpisa}" />
+                                    <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" Padding="0,10,0,0" Text="{Binding Created,  StringFormat='{}{0: dd/MM/yyyy}'}"  />
+                                    <Label Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" Padding="0,10,0,0" Text="{Binding DatumIzmjeneSpisa,  StringFormat='{}{0:HH:mm dd/MM/yyyy}'}"  />
+                                    <Label Grid.Row="1" Grid.Column="3" HorizontalOptions="Start" Padding="0,10,0,0"  Text="{Binding ClientName}" />
+                                    <Label Grid.Row="1" Grid.Column="4" HorizontalOptions="Start" Margin="20,0,0,0" Padding="0,10,0,0" Text="{Binding OpponentName}" />
+                                    <Label Grid.Row="1" Grid.Column="5" HorizontalOptions="Center" Padding="0,10,0,0" Text="{Binding InicijaliDodao}" />
+                                    <Label Grid.Row="1" Grid.Column="6" HorizontalOptions="Start" Padding="0,10,0,0" Text="{Binding Uzrok}" />
 
 
                                 </Grid>
