@@ -79,6 +79,8 @@
 
             <Label Text="Pretraga po tarifnom broju ili nazivu radnje" HorizontalOptions="Start" FontSize="Default"  Margin="22,10,10,10"
  />
+
+            <HorizontalStackLayout>
             <SearchBar Placeholder="Npr. 1.2 ili podnesak" 
                    BackgroundColor="LightGray"
                    SearchCommand="{Binding SearchCommand}"
@@ -88,7 +90,10 @@
                    Margin="20,0,10,10"
                    FontSize="Default" />
 
-
+                <Label Margin="10,0,0,10" Text="Nema rezultata pretrage!" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}" TextColor="Black" VerticalOptions="Center" />
+                <Label Margin="10,0,0,10" Text="Povezivanje nije uspjelo!" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}" TextColor="Black" VerticalOptions="Center" />
+                
+            </HorizontalStackLayout>
             <Grid Margin="20,0,0,0"  >
                 <Grid.Resources>
                     <Style TargetType="Label">
