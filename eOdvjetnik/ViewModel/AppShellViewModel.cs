@@ -239,7 +239,7 @@ namespace eOdvjetnik.ViewModel
         {
              string ProvjeraAktivacije = Preferences.Get("activation_disable", "");
             Debug.WriteLine(ProvjeraAktivacije);
-            if (ProvjeraAktivacije == "NOP") //promijeniti u "NOPE" da bi radilo
+            if (ProvjeraAktivacije == "Licence") //promijeniti u "LicenceNotActive" 
             {
                 disableMenu = true;
             }

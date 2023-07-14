@@ -48,52 +48,82 @@ namespace eOdvjetnik.ViewModel
                 return searchCommand;
             }
         }
-
+        public bool _NoQueryResult { get; set; }
+        public bool NoQueryResult
+        {
+            get { return _NoQueryResult; }
+            set
+            {
+                if (_NoQueryResult != value)
+                {
+                    _NoQueryResult = value;
+                    OnPropertyChanged(nameof(NoQueryResult));
+                }
+            }
+        }
+        public bool _NoSQLreply { get; set; }
+        public bool NoSQLreply
+        {
+            get { return _NoSQLreply; }
+            set
+            {
+                if (_NoSQLreply != value)
+                {
+                    _NoSQLreply = value;
+                    OnPropertyChanged(nameof(NoSQLreply));
+                }
+            }
+        }
         public void GenerateSearchResults()
         {
+            NoQueryResult = false;
+            NoSQLreply = false;
             Debug.WriteLine(tariffItems);
             try
             {
                 if (tariffItems != null)
                 {
+                    NoQueryResult = false;
                     tariffItems.Clear();
                 }
-                // stari query bez parent_id_name
-                //string query = "SELECT t1.*, CONCAT(t2.name, ' - ', t1.name) AS concatenated_name FROM tariffs t1 LEFT JOIN tariffs t2 ON t1.parent_id = t2.Id WHERE t1.name LIKE '%" + SearchText + "%' OR t1.oznaka LIKE '%" + SearchText + "%'";
-                string query = "SELECT t1.*, CONCAT(t2.name, ' - ', t1.name) AS concatenated_name, t3.name AS parentName FROM tariffs t1 LEFT JOIN tariffs t2 ON t1.parent_id = t2.Id LEFT JOIN tariffs t3 ON t1.parent_id = t3.Id WHERE t1.name LIKE '%1.2%' OR t1.oznaka LIKE '%1.2%'";
+                string query = "SELECT t1.*, CONCAT(t2.name, ' - ', t1.name) AS concatenated_name, t3.name AS parentName FROM tariffs t1 LEFT JOIN tariffs t2 ON t1.parent_id = t2.Id LEFT JOIN tariffs t3 ON t1.parent_id = t3.Id WHERE t1.name LIKE '%" + SearchText + "%' OR t1.oznaka LIKE '%" + SearchText + "%'";
                 Debug.WriteLine(query);
-                Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
-                Debug.WriteLine(query + " u Search resultu");
-                if (filesData != null)
+                try
                 {
-                    foreach (Dictionary<string, string> filesRow in filesData)
+                    Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                    Debug.WriteLine(query + " u Search resultu");
+                    if (filesData != null && filesData.Length > 0)
                     {
-                        int id;
-                        int parent_id;
-                        int.TryParse(filesRow["id"], out id);
-                        int.TryParse(filesRow["parent_id"], out parent_id);
-
-
-                        tariffItems.Add(new TariffItem()
+                        foreach (Dictionary<string, string> filesRow in filesData)
                         {
-                            Id = id,
-                            parent_id = parent_id,
-                            name = filesRow["name"],
-                            oznaka = filesRow["oznaka"],
-                            bodovi = filesRow["bodovi"],
-                            concatenated_name = filesRow["concatenated_name"],
-                            parent_name = filesRow["concatenated_name"].Split("-")[0],
-                            
-                        });
-                        
+                            int id;
+                            int parent_id;
+                            int.TryParse(filesRow["id"], out id);
+                            int.TryParse(filesRow["parent_id"], out parent_id);
 
-                        //Debug.WriteLine(filesRow["concatenated_name"]);
+
+                            tariffItems.Add(new TariffItem()
+                            {
+                                Id = id,
+                                parent_id = parent_id,
+                                name = filesRow["name"],
+                                oznaka = filesRow["oznaka"],
+                                bodovi = filesRow["bodovi"],
+                                concatenated_name = filesRow["concatenated_name"],
+                                parent_name = filesRow["concatenated_name"].Split("-")[0],
+
+                            });
+                        }
                     }
-                    foreach (TariffItem item in TariffItems)
+                    else
                     {
-                        //Debug.WriteLine(item.parent_name);
+                        NoQueryResult = true;
                     }
-
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    NoSQLreply = true;
                 }
             }
             catch (Exception ex)
@@ -214,21 +244,21 @@ namespace eOdvjetnik.ViewModel
         public ICommand OnReciptClickCommand { get; set; }
         public ICommand ReceiptCloseCommand { get; set; }
         public ICommand AddItemCommand { get; }
-        public ICommand RemoveItemCommand { get;  set; }
+        public ICommand RemoveItemCommand { get; set; }
         public ICommand NewReceipt { get; }
 
-         public float totalAmount { get; private set; }
+        public float totalAmount { get; private set; }
 
-         public void CalculateTotalAmount()
-         {
-            totalAmount = 0f; 
-         
-             try
-             {
-                 foreach (ReceiptItem item in _receiptItems)
-                 {
+        public void CalculateTotalAmount()
+        {
+            totalAmount = 0f;
+
+            try
+            {
+                foreach (ReceiptItem item in _receiptItems)
+                {
                     totalAmount += item.Amount;
-                 }
+                }
 
 
                 int itemCount = _receiptItems.Count;
@@ -248,7 +278,7 @@ namespace eOdvjetnik.ViewModel
 
                 }
 
-         
+
             }
             catch (Exception ex)
             {
@@ -274,7 +304,8 @@ namespace eOdvjetnik.ViewModel
         }
 
         private void AddItem()
-        { try
+        {
+            try
             {
                 ReceiptItem newItem = new ReceiptItem
                 {
@@ -309,7 +340,7 @@ namespace eOdvjetnik.ViewModel
                 ReceiptPopupOpen = true;
                 ReceiptVisible = true;
             }
-             catch (Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
@@ -328,13 +359,13 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message);
             }
         }
- 
+
         public void DeleteRecipt()
         {
             ReceiptItems.Clear();
         }
 
-  
+
         private ReceiptItem _selectedReceiptItem;
         public ReceiptItem SelectedReceiptItem
         {
@@ -391,7 +422,7 @@ namespace eOdvjetnik.ViewModel
             timer.Start();
         }
 
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)

@@ -46,9 +46,35 @@ public class KlijentiViewModel : INotifyPropertyChanged
             return searchCommand;
         }
     }
-
+    public bool _NoQueryResult { get; set; }
+    public bool NoQueryResult
+    {
+        get { return _NoQueryResult; }
+        set
+        {
+            if (_NoQueryResult != value)
+            {
+                _NoQueryResult = value;
+                OnPropertyChanged(nameof(NoQueryResult));
+            }
+        }
+    }
+    public bool _NoSQLreply { get; set; }
+    public bool NoSQLreply
+    {
+        get { return _NoSQLreply; }
+        set
+        {
+            if (_NoSQLreply != value)
+            {
+                _NoSQLreply = value;
+                OnPropertyChanged(nameof(NoSQLreply));
+            }
+        }
+    }
     public void GenerateFiles()
     {
+        NoQueryResult = false;
         Debug.WriteLine(contacts);
         try
         {
@@ -58,102 +84,121 @@ public class KlijentiViewModel : INotifyPropertyChanged
             }
             string query = "SELECT * FROM `contacts` ORDER by id desc limit 30;";
             Debug.WriteLine(query);
-            Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
-            Debug.WriteLine(query + " u Search resultu");
-            if (filesData != null)
+            try
             {
-                foreach (Dictionary<string, string> filesRow in filesData)
+                Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                Debug.WriteLine(query + " u Search resultu");
+                if (filesData != null)
                 {
-
-                    int id;
-                    int pravna;
-                    DateTime datum_rodenja;
-
-                    int.TryParse(filesRow["id"], out id);
-                    int.TryParse(filesRow["pravna"], out pravna);
-                    DateTime.TryParse(filesRow["datum_rodenja"], out datum_rodenja);
-
-                    contacts.Add(new ContactItem()
+                    foreach (Dictionary<string, string> filesRow in filesData)
                     {
-                        Id = id,
-                        Ime = filesRow["ime"],
-                        OIB = filesRow["OIB"],
-                        Datum_rodenja = datum_rodenja,
-                        Adresa = filesRow["adresa"],
-                        Boraviste = filesRow["boraviste"],
-                        Telefon = filesRow["telefon"],
-                        Fax = filesRow["fax"],
-                        Mobitel = filesRow["mobitel"],
-                        Email = filesRow["email"],
-                        Ostalo = filesRow["ostalo"],
-                        Drzava = filesRow["drzava"],
-                        Pravna = pravna
 
-                    });
+                        int id;
+                        int pravna;
+                        DateTime datum_rodenja;
 
+                        int.TryParse(filesRow["id"], out id);
+                        int.TryParse(filesRow["pravna"], out pravna);
+                        DateTime.TryParse(filesRow["datum_rodenja"], out datum_rodenja);
+
+                        contacts.Add(new ContactItem()
+                        {
+                            Id = id,
+                            Ime = filesRow["ime"],
+                            OIB = filesRow["OIB"],
+                            Datum_rodenja = datum_rodenja,
+                            Adresa = filesRow["adresa"],
+                            Boraviste = filesRow["boraviste"],
+                            Telefon = filesRow["telefon"],
+                            Fax = filesRow["fax"],
+                            Mobitel = filesRow["mobitel"],
+                            Email = filesRow["email"],
+                            Ostalo = filesRow["ostalo"],
+                            Drzava = filesRow["drzava"],
+                            Pravna = pravna
+
+                        });
+
+
+                    }
+
+                    foreach (ContactItem item in Contacts)
+                    {
+                    }
 
                 }
-                foreach (ContactItem item in Contacts)
-                {
-                }
-
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            
             }
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
+
         }
     }
     public void GenerateSearchResults()
     {
+        NoQueryResult = false;
+        NoSQLreply = false;
         Debug.WriteLine(contacts);
         try
         {
             if (contacts != null)
             {
+                NoQueryResult = false;
                 contacts.Clear();
             }
             string query = "SELECT * FROM `contacts` WHERE ime LIKE '%" + SearchText + "%' OR OIB LIKE '%" + SearchText + "%'";
             Debug.WriteLine(query);
-            Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
-            Debug.WriteLine(query + " u Search resultu");
-            if (filesData != null)
+            try
             {
-                foreach (Dictionary<string, string> filesRow in filesData)
+                Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                Debug.WriteLine(query + " u Search resultu");
+                if (filesData != null && filesData.Length > 0)
                 {
-
-                    int id;
-                    int pravna;
-                    DateTime datum_rodenja;
-     
-                    int.TryParse(filesRow["id"], out id);
-                    int.TryParse(filesRow["pravna"], out pravna);
-                    DateTime.TryParse(filesRow["datum_rodenja"], out datum_rodenja);
-
-                    contacts.Add(new ContactItem()
+                    foreach (Dictionary<string, string> filesRow in filesData)
                     {
-                        Id = id,
-                        Ime = filesRow["ime"],
-                        OIB = filesRow["OIB"],
-                        Datum_rodenja = datum_rodenja,
-                        Adresa = filesRow["adresa"],
-                        Boraviste = filesRow["boraviste"],
-                        Telefon = filesRow["telefon"],
-                        Fax = filesRow["fax"],
-                        Mobitel = filesRow["mobitel"],
-                        Email = filesRow["email"],
-                        Ostalo = filesRow["ostalo"],
-                        Drzava = filesRow["drzava"],
-                        Pravna = pravna
 
-                    });
+                        int id;
+                        int pravna;
+                        DateTime datum_rodenja;
 
+                        int.TryParse(filesRow["id"], out id);
+                        int.TryParse(filesRow["pravna"], out pravna);
+                        DateTime.TryParse(filesRow["datum_rodenja"], out datum_rodenja);
 
+                        contacts.Add(new ContactItem()
+                        {
+                            Id = id,
+                            Ime = filesRow["ime"],
+                            OIB = filesRow["OIB"],
+                            Datum_rodenja = datum_rodenja,
+                            Adresa = filesRow["adresa"],
+                            Boraviste = filesRow["boraviste"],
+                            Telefon = filesRow["telefon"],
+                            Fax = filesRow["fax"],
+                            Mobitel = filesRow["mobitel"],
+                            Email = filesRow["email"],
+                            Ostalo = filesRow["ostalo"],
+                            Drzava = filesRow["drzava"],
+                            Pravna = pravna
+
+                        });
+                    }
                 }
-                foreach (ContactItem item in Contacts)
+                else
                 {
+                    NoQueryResult = true;
                 }
-
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                NoSQLreply = true;
             }
         }
         catch (Exception ex)
@@ -205,7 +250,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
     }
 
     public KlijentiViewModel()
-	{
+    {
         Contacts = new ObservableCollection<ContactItem>();
         GenerateFiles();
         NazivKlijenta = Preferences.Get("SelectedName", "");
@@ -231,7 +276,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
             NazivKlijenta = Preferences.Get("SelectedName", "");
             OIBklijenta = Preferences.Get("SelectedOIB", "");
             AdresaKlijenta = Preferences.Get("SelectedAddress", "");
-              }
+        }
         );
     }
 }
