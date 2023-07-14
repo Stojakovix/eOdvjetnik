@@ -1,7 +1,9 @@
 ﻿using System;
 using MySql.Data.MySqlClient;
 using System.Diagnostics;
-
+using SMBLibrary;
+using SMBLibrary.Client;
+using System.Collections.ObjectModel;
 
 namespace eOdvjetnik.Services
 {
@@ -50,11 +52,125 @@ namespace eOdvjetnik.Services
             Console.WriteLine();
         }
     }
+    public class SMBConnect
+    {
+        //Varijable za SMB preferences
+        private const string IP = "IP";
+        private const string USER = "Korisničko ime2";
+        private const string PASS = "Lozinka2";
+        private const string FOLDER_nas = "databasename";
+        private const string SUBFOLDER_nas = "databasename";
+        private Dictionary<string, string>[] fileList;
 
+        //public ObservableCollection<DocsItem> Items { get; set; } = new();
+        public ObservableCollection<string> ShareFiles { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> ShareFolders { get; set; } = new ObservableCollection<string>();
+
+        public Dictionary<string, string>[] ListPath(string path)
+        {
+            SMB2Client client = new SMB2Client();
+            bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP, "")), SMBTransportType.DirectTCPTransport);
+            NTStatus status = client.Login(String.Empty, Preferences.Get(USER, ""), Preferences.Get(PASS, ""));
+            Debug.WriteLine("6666666666666666666");
+            Debug.WriteLine(status);
+            Debug.WriteLine("6666666666666666666");
+
+
+            ISMBFileStore fileStore = client.TreeConnect(@"\\", out status);
+            if (status == NTStatus.STATUS_SUCCESS)
+            {
+                Debug.WriteLine("7777777777777777777");
+                Debug.WriteLine(status);
+                Debug.WriteLine("7777777777777777777");
+                object directoryHandle;
+                FileStatus fileStatus;
+                status = fileStore.CreateFile(out directoryHandle, out fileStatus, String.Empty, AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
+                //status = fileStore.CreateFile(out directoryHandle, out fileStatus, "*", AccessMask.SYNCHRONIZE | (AccessMask)DirectoryAccessMask.FILE_LIST_DIRECTORY, 0, ShareAccess.Read | ShareAccess.Write | ShareAccess.Delete, CreateDisposition.FILE_OPEN, CreateOptions.FILE_SYNCHRONOUS_IO_NONALERT | CreateOptions.FILE_DIRECTORY_FILE, null);
+
+                if (status == NTStatus.STATUS_SUCCESS)
+                {
+                    Debug.WriteLine("8888888888888888888");
+                    Debug.WriteLine(status);
+                    Debug.WriteLine("8888888888888888888");
+                    List<QueryDirectoryFileInformation> fileList;
+                    status = fileStore.QueryDirectory(out fileList, directoryHandle, "*", FileInformationClass.FileDirectoryInformation);
+                    status = fileStore.CloseFile(directoryHandle);
+                    foreach (SMBLibrary.FileDirectoryInformation file in fileList)
+                    {
+                        Debug.WriteLine($"Filename: {file.FileName}");
+                        Debug.WriteLine($"File Attributes: {file.FileAttributes}");
+                        Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
+                        Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
+                        Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
+                        Debug.WriteLine("----------End of Folder/file-----------");
+                        //Debug.WriteLine();
+                        ShareFiles.Add(file.FileName);
+
+
+                    }
+                    status = fileStore.Disconnect();
+                }
+                else
+                {
+                    Debug.WriteLine("9999999999999999999");
+                    Debug.WriteLine(status);
+                    Debug.WriteLine("9999999999999999999");
+                }
+            }
+            else
+            {
+                Debug.WriteLine("10101010010101010101");
+                Debug.WriteLine(status);
+                //DisplayAlert("Error", string(status), "OK");
+                Debug.WriteLine("10101010010101010101");
+            }
+
+            return fileList;
+
+        }
+            public List<string> getRootShare()
+        {
+            //INICIRAJ SMB KONEKCIJU DA DOHVATI SVE DOKUMENTE
+        
+                SMB2Client client = new SMB2Client(); // SMB2Client can be used as well
+                NTStatus status = client.Login(String.Empty, Preferences.Get(USER, ""), Preferences.Get(PASS, ""));
+                List<string> shares = client.ListShares(out status);
+                bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP, "")), SMBTransportType.DirectTCPTransport);
+                if (isConnected)
+                {
+
+                    Debug.WriteLine("6666666666666666666");
+                    Debug.WriteLine(status);
+                    Debug.WriteLine("6666666666666666666");
+                    if (status == NTStatus.STATUS_SUCCESS)
+                    {
+
+                        Debug.WriteLine("7777777777777777777");
+                        foreach (string nesto in shares)
+                        {
+                            Debug.WriteLine(nesto);
+                            
+                        }
+
+                        Debug.WriteLine("7777777777777777777");
+                        client.Logoff();
+                    }
+                    client.Disconnect();
+
+                }
+                return shares;
+
+            
+
+
+        }
+
+
+    }
 
     public class ExternalSQLConnect
     {
-        
+
         //Varijable za MySQL preferences
         private const string IP_mysql = "IP Adresa2";
         private const string USER_mysql = "Korisničko ime2";
@@ -63,47 +179,45 @@ namespace eOdvjetnik.Services
 
         public Dictionary<string, string>[] sqlQuery(string query)
         {
-            
-            
 
-                Debug.WriteLine("Core.cs -> Dictionary -> Usao u sqlQuerry  *******");
-                // MySQL connection settings
-                string connString = "server=" + Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "") + ";user=" + Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "") + ";password=" + Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "") + ";database=" + Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
+            Debug.WriteLine("Core.cs -> Dictionary -> Usao u sqlQuerry  *******");
+            // MySQL connection settings
+            string connString = "server=" + Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "") + ";user=" + Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "") + ";password=" + Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "") + ";database=" + Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
 
-                // Connect to MySQL database
-                using MySqlConnection conn = new MySqlConnection(connString);
-                conn.Open();
+            // Connect to MySQL database
+            using MySqlConnection conn = new MySqlConnection(connString);
+            conn.Open();
 
-                // Execute query and retrieve data
-                using MySqlCommand cmd = new MySqlCommand(query, conn);
-                using MySqlDataReader reader = cmd.ExecuteReader();
-                List<Dictionary<string, string>> results = new List<Dictionary<string, string>>();
+            // Execute query and retrieve data
+            using MySqlCommand cmd = new MySqlCommand(query, conn);
+            using MySqlDataReader reader = cmd.ExecuteReader();
+            List<Dictionary<string, string>> results = new List<Dictionary<string, string>>();
 
 
-                while (reader.Read())
+            while (reader.Read())
+            {
+                Dictionary<string, string> row = new Dictionary<string, string>();
+
+                for (int i = 0; i < reader.FieldCount; i++)
                 {
-                    Dictionary<string, string> row = new Dictionary<string, string>();
-
-                    for (int i = 0; i < reader.FieldCount; i++)
-                    {
-                        string attributeName = reader.GetName(i);
-                        string attributeValue = reader[i].ToString();
-                        row.Add(attributeName, attributeValue);
-                    }
-
-                    results.Add(row);
+                    string attributeName = reader.GetName(i);
+                    string attributeValue = reader[i].ToString();
+                    row.Add(attributeName, attributeValue);
                 }
 
+                results.Add(row);
+            }
 
-                // Close the reader and the connection
-                reader.Close();
-                conn.Close();
 
-                return results.ToArray();
+            // Close the reader and the connection
+            reader.Close();
+            conn.Close();
 
-            
+            return results.ToArray();
+
+
         }
     }
-    
+
 }
 
