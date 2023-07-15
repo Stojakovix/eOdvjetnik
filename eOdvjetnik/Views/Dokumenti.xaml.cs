@@ -9,6 +9,7 @@ using SMBLibrary.SMB1;
 using Microsoft.Maui.Controls;
 using System.Diagnostics;
 
+
 namespace eOdvjetnik.Views;
 
 
@@ -52,12 +53,58 @@ public partial class Dokumenti : ContentPage
         try
         {
 
+
+            SMB2Client client = new SMB2Client(); // SMB2Client can be used as well
+            bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP, "")), SMBTransportType.DirectTCPTransport);
+            if (isConnected)
+            {
+                NTStatus status = client.Login(String.Empty, "user", "walter");
+                Debug.WriteLine("6666666666666666666");
+                Debug.WriteLine(status);
+                Debug.WriteLine("6666666666666666666");
+                if (status == NTStatus.STATUS_SUCCESS)
+                {
+                    List<string> shares = client.ListShares(out status);
+                    
+                    Debug.WriteLine("7777777777777777777");
+                    foreach (string nesto in shares) {
+                        Debug.WriteLine(nesto);
+                    }
+                    
+                    Debug.WriteLine("7777777777777777777");
+                    client.Logoff();
+                }
+                client.Disconnect();
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+            /*
             //DisplayAlert("Error", "asd","OK");
 
             SMB2Client client = new SMB2Client();
             bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP, "")), SMBTransportType.DirectTCPTransport);
             NTStatus status = client.Login(String.Empty, Preferences.Get(USER, ""), Preferences.Get(PASS, ""));
-            ISMBFileStore fileStore = client.TreeConnect(" ", out status);
+            Debug.WriteLine("6666666666666666666");
+            Debug.WriteLine(status);
+            Debug.WriteLine("6666666666666666666");
+
+
+
+
+
+
+
+            ISMBFileStore fileStore = client.TreeConnect(@"\\", out status);
             if (status == NTStatus.STATUS_SUCCESS)
             {
                 Debug.WriteLine("7777777777777777777");
@@ -66,6 +113,8 @@ public partial class Dokumenti : ContentPage
                 object directoryHandle;
                 FileStatus fileStatus;
                 status = fileStore.CreateFile(out directoryHandle, out fileStatus, String.Empty, AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
+                //status = fileStore.CreateFile(out directoryHandle, out fileStatus, "*", AccessMask.SYNCHRONIZE | (AccessMask)DirectoryAccessMask.FILE_LIST_DIRECTORY, 0, ShareAccess.Read | ShareAccess.Write | ShareAccess.Delete, CreateDisposition.FILE_OPEN, CreateOptions.FILE_SYNCHRONOUS_IO_NONALERT | CreateOptions.FILE_DIRECTORY_FILE, null);
+
                 if (status == NTStatus.STATUS_SUCCESS)
                 {
                     Debug.WriteLine("8888888888888888888");
@@ -99,9 +148,10 @@ public partial class Dokumenti : ContentPage
             {
                 Debug.WriteLine("10101010010101010101");
                 Debug.WriteLine(status);
+                //DisplayAlert("Error", string(status), "OK");
                 Debug.WriteLine("10101010010101010101");
             }
-
+            */
             /*
             //SMB2
             SMB2Client client = new SMB2Client();
