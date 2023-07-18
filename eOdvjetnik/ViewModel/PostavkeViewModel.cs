@@ -47,8 +47,10 @@ public class PostavkeViewModel : INotifyPropertyChanged
         }
     }
     public ICommand GetAllCompanyDevices { get; set; }
+    public ICommand GetAllCompanyEmployees { get; set; }
 
- 
+
+
     private void GetJsonDeviceData()
     {
         JsonDevicesData = Preferences.Get("json_devices", null);
@@ -82,7 +84,11 @@ public class PostavkeViewModel : INotifyPropertyChanged
     {
         try
         {
-            employeeItem.Clear();
+            if (employeeItem != null)
+            {
+                employeeItem.Clear();
+
+            }
 
             string query = "SELECT id, ime, inicijali, hwid, active, type FROM employees;";
 
@@ -174,14 +180,23 @@ public class PostavkeViewModel : INotifyPropertyChanged
     public PostavkeViewModel()
 	{
        GetAllCompanyDevices = new Command(GetJsonDeviceData);
+       GetAllCompanyEmployees = new Command(GetEmployees);
        HWID = Preferences.Get("key", null);
        LicenceType = Preferences.Get("licence_type", "");
        DateTimeString = Preferences.Get("expire_date", "");
        Activation_code = Preferences.Get("activation_code", "");
        HWID64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(HWID));
        ParseDate();
-       #region NAS komande
-       SaveCommandNAS = new Command(OnSaveClickedNas);
+        try
+        {
+            employeeItem = new ObservableCollection<EmployeeItem>();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+        #region NAS komande
+        SaveCommandNAS = new Command(OnSaveClickedNas);
        LoadCommandNAS = new Command(OnLoadClickedNas);
        DeleteCommandNAS = new Command(OnDeleteClickedNas);
         #endregion
@@ -377,4 +392,34 @@ public class PostavkeViewModel : INotifyPropertyChanged
     {
         await Application.Current.MainPage.DisplayAlert(title, message, "OK");
     }
+
+  
+
+    private void UpdateSelectedEmployeeHWID()
+    {
+        // Set the EmployeeHWID property of the currently selected employee
+        if (!string.IsNullOrEmpty(SelectedOpis))
+        {
+            // Assuming you have a property in your EmployeeItem class named EmployeeHWID
+            foreach (var employee in EmployeeItems)
+            {
+                employee.EmployeeHWID = SelectedOpis;
+            }
+        }
+    }
+    private string selectedOpis;
+    public string SelectedOpis
+    {
+        get { return selectedOpis; }
+        set
+        {
+            if (selectedOpis != value)
+            {
+                selectedOpis = value;
+                OnPropertyChanged(nameof(SelectedOpis));
+                UpdateSelectedEmployeeHWID();
+            }
+        }
+    }
+
 }

@@ -179,27 +179,19 @@
 
             <VerticalStackLayout Grid.Column="1" Grid.RowSpan="7"  BackgroundColor="White" 
                     x:Name="Frame6" IsVisible="False" HorizontalOptions="StartAndExpand" >
-                <Button Text="Prikaži sve korisnike" Command="{Binding GetAllCompanyDevices}" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"   />
+                <Button Text="Prikaži sve uređaje" Command="{Binding GetAllCompanyDevices}" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"   />
 
                 <ListView Grid.Row="1" ItemsSource="{Binding DataModel.Devices}">
                     <ListView.Header>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="400"/>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="200"/>
-
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="300"/>
 
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="Device ID" FontAttributes="Bold"/>
-                            <Label Grid.Column="1" Text="Company ID" FontAttributes="Bold" Margin="10,0,0,0"/>
-                            <Label Grid.Column="2" Text="Serijski broj (Base64 encoding)" FontAttributes="Bold" Margin="10,0,0,0" />
-                            <Label Grid.Column="3" Text="License Active" FontAttributes="Bold" Margin="10,0,0,0" />
-                            <Label Grid.Column="4" Text="Device Type ID" FontAttributes="Bold" Margin="10,0,0,0" />
-                            <Label Grid.Column="5" Text="Opis" FontAttributes="Bold" Margin="10,0,0,0" />
+                            <Label Grid.Column="0" Text="Naziv uređaja" FontAttributes="Bold"/>
+                            <Label Grid.Column="1" Text="HWID uređaja" FontAttributes="Bold"/>
+
 
 
                         </Grid>
@@ -209,23 +201,64 @@
                             <ViewCell>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100"/>
-                                        <ColumnDefinition Width="100"/>
-                                        <ColumnDefinition Width="400"/>
-                                        <ColumnDefinition Width="150"/>
-                                        <ColumnDefinition Width="150"/>
-                                        <ColumnDefinition Width="200"/>
-
-
+                                        <ColumnDefinition Width="300"/>
+                                        <ColumnDefinition Width="300"/>
 
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Text="{Binding id}" Margin="10,0,0,0" />
-                                    <Label Grid.Column="1" Text="{Binding company_id}" Margin="10,0,0,0"/>
-                                    <Label Grid.Column="2" Text="{Binding hwid64}" Margin="10,0,0,0"/>
-                                    <Label Grid.Column="3" Text="{Binding licence_active}" Margin="10,0,0,0"/>
-                                    <Label Grid.Column="4" Text="{Binding device_type_id}" Margin="10,0,0,0"/>
-                                    <Label Grid.Column="5" Text="{Binding opis}" Margin="10,0,0,0"/>
+                                    
+                                    <Label Grid.Column="0" Text="{Binding opis}" Margin="10,0,0,0" />
+                                    <Label Grid.Column="1" Text="{Binding hwid}" Margin="10,0,0,0" />
 
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Button Text="Prikaži sve korisnike" Command="{Binding GetAllCompanyEmployees}" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"   />
+
+                <ListView Grid.Row="1" ItemsSource="{Binding EmployeeItems}">
+                    <ListView.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+
+
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="Ime korisnika" FontAttributes="Bold"/>
+                            <Label Grid.Column="1" Text="Inicijali" FontAttributes="Bold" Margin="10,0,0,0"/>
+                            <Label Grid.Column="2" Text="HWID" FontAttributes="Bold" Margin="10,0,0,0"/>
+                            <Label Grid.Column="3" Text="Naziv uređaja" FontAttributes="Bold" Margin="10,0,0,0"/>
+
+                        </Grid>
+                    </ListView.Header>
+                    
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Label Grid.Column="0" Text="{Binding EmployeeName}" Margin="10,0,0,0" />
+                                    <Label Grid.Column="1" Text="{Binding Initals}" Margin="10,0,0,0"/>
+                                    <Label Grid.Column="2" Text="{Binding EmployeeHWID}" Margin="10,0,0,0"/>
+
+
+                                    <Picker Grid.Column="3"
+                                      ItemsSource="{Binding Source={x:Reference Frame6}, Path=BindingContext.DataModel.Devices}"
+                                      SelectedItem="{Binding Source={x:Reference Frame6}, Path=BindingContext.SelectedDevice}"
+                                      ItemDisplayBinding="{Binding opis}" 
+                                      SelectedIndexChanged="OnPickerSelectedIndexChanged">
+                                    </Picker>
 
                                 </Grid>
                             </ViewCell>

@@ -131,5 +131,12 @@ public partial class Postavke : ContentPage
         Frame7.IsVisible = true;
     }
 
-
+    private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (sender is Picker picker && picker.SelectedItem is Device selectedDevice)
+        {
+            var viewModel = BindingContext as PostavkeViewModel;
+            viewModel.SelectedOpis = selectedDevice.opis;
+        }
+    }
 }
