@@ -9,7 +9,7 @@ namespace eOdvjetnik;
 
 public partial class App : Application
 	{
-    static SchedulerDatabase database;
+    
 
 
 	public App(){
@@ -24,16 +24,7 @@ public partial class App : Application
 	}
 
 
-    public static SchedulerDatabase Database
-    {
-        get
-        {
-            if (database == null){
-                database = new SchedulerDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "SchedulerDatabase.db3"));
-            }
-            return database;
-        }
-    }
+    
 
 
 }

@@ -4,6 +4,7 @@ using eOdvjetnik.Models;
 using eOdvjetnik.Services;
 using eOdvjetnik.ViewModel;
 using System.Diagnostics;
+using MySql.Data.MySqlClient;
 
 namespace eOdvjetnik.Views;
 
@@ -38,19 +39,40 @@ public partial class AppointmentDialog : ContentPage
 
     private void DeleteButton_Clicked(object sender, EventArgs e)
     {
-        if (appointment == null)
+        try
         {
-            this.Navigation.PopAsync();
+            ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+            
+            if (appointment == null)
+            {
+                this.Navigation.PopAsync();
 
+            }
+            else
+            {
+                (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Remove(this.appointment);
+                //var todoItem = new Appointment() { From = appointment.StartTime, To = appointment.EndTime, AllDay = appointment.IsAllDay, DescriptionNotes = appointment.Notes, EventName = appointment.Subject, ID = (int)appointment.Id };
+                if(appointment.Id != null)
+                {
+                    string query = "DELETE FROM events WHERE ID = " + appointment.Id;
+                    Debug.WriteLine("Deleted Appointment " + appointment.Id);
+                    externalSQLConnect.sqlQuery(query);
+                }
+                else
+                {
+                    Debug.WriteLine("Appointment id was null");
+                }
+                
+                Shell.Current.GoToAsync("//Kalendar");
+            }
         }
-        else
+        catch (Exception ex)
         {
-            (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Remove(this.appointment);
-            var todoItem = new Appointment() { From = appointment.StartTime, To = appointment.EndTime, AllDay = appointment.IsAllDay, DescriptionNotes = appointment.Notes, EventName = appointment.Subject, ID = (int)appointment.Id };
-            App.Database.DeleteSchedulerAppointmentAsync(todoItem);
-            Shell.Current.GoToAsync("//Kalendar");
+
+            Debug.WriteLine(ex.Message);
         }
     }
+
 
     private void SwitchAllDay_Toggled(object sender, ToggledEventArgs e)
     {
@@ -173,7 +195,6 @@ public partial class AppointmentDialog : ContentPage
             EventName = appointment.Subject,
             ID = (int)appointment.Id
         };
-        App.Database.SaveSchedulerAppointmentAsync(todoItem);
 
         this.Navigation.PopAsync();
 
