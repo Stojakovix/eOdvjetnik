@@ -233,7 +233,7 @@ public partial class MainPage : ContentPage
 
         base.OnAppearing();
         this.Window.MinimumHeight = 620;
-        this.Window.MinimumWidth = 1380;
+        this.Window.MinimumWidth = 860;
         try
         {
             //zakomentirati nakon setanja na null

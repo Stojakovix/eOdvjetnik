@@ -158,7 +158,7 @@ namespace eOdvjetnik.ViewModel
             try
             {
                 fileItems = new ObservableCollection<FileItem>();
-                this.GenerateFiles();
+                CheckCount();
             }
             catch (Exception ex)
             {
@@ -222,7 +222,7 @@ namespace eOdvjetnik.ViewModel
                 fileItems.Clear();
 
                 //string query = "SELECT * FROM files ORDER BY id DESC LIMIT 100;";
-                string query = "SELECT files.*, client.ime AS client_name, opponent.ime AS opponent_name FROM files LEFT JOIN contacts AS client ON files.client_id = client.id LEFT JOIN contacts AS opponent ON files.opponent_id = opponent.id WHERE files.broj_spisa ORDER BY files.broj_predmeta DESC LIMIT 100";
+                string query = "SELECT files.*, client.ime AS client_name, opponent.ime AS opponent_name FROM files LEFT JOIN contacts AS client ON files.client_id = client.id LEFT JOIN contacts AS opponent ON files.opponent_id = opponent.id WHERE files.broj_spisa ORDER BY files.broj_predmeta DESC LIMIT 20";
 
 
                 // Debug.WriteLine(query + "u SpisiViewModelu");

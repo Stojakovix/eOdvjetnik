@@ -10,7 +10,7 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-       
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -19,7 +19,7 @@
 
             <!-- Header -->
             <StackLayout Grid.Row="0">
-                <Grid Margin="0,0,0,10" BackgroundColor="White" Background="LightGray">
+                <Grid  BackgroundColor="White" Background="LightGray">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*"/>
@@ -31,18 +31,19 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Button Grid.Column="0" Grid.Row="0"  Text="Dodaj" Command="{Binding OnDodajClick}" BorderColor="LightBlue" HorizontalOptions="FillAndExpand"/>
-                    <Button Grid.Column="1" Grid.Row="0" Text="Obriši" BorderColor="LightBlue" HorizontalOptions="Fill"/>
-                    <Button Grid.Column="2" Grid.Row="0" Text="Poništi" BorderColor="LightBlue" HorizontalOptions="EndAndExpand" Command="{Binding OnResetClick}"/>
+                    <Button Grid.Column="0" Grid.Row="0"  Text="Dodaj" Command="{Binding OnDodajClick}"  BorderColor="DarkGray" TextColor="Black" BackgroundColor="#5ac8fa" HorizontalOptions="FillAndExpand"/>
+                    <Button Grid.Column="1" Grid.Row="0" Text="Obriši"  BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" HorizontalOptions="Fill"/>
+                    <Button Grid.Column="2" Grid.Row="0" Text="Poništi"  BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black"  HorizontalOptions="EndAndExpand" Command="{Binding OnResetClick}"/>
 
                     <SearchBar Grid.Column="3" Placeholder="Pretraži" 
-                               HorizontalOptions="EndAndExpand" 
+                               HorizontalOptions="EndAndExpand"
+                               MinimumWidthRequest="400"
                                BackgroundColor="LightGray"
                                SearchCommand="{Binding SearchCommand}"
                                Text="{Binding SearchText}"
                                />
 
-                    <Grid Margin="20,0,0,0" Padding="5" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalOptions="Fill" >
+                    <Grid  Padding="5" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalOptions="Fill" >
                         <Grid.Resources>
                             <Style TargetType="Label">
                                 <Setter Property="TextColor" Value="Black" />
@@ -50,32 +51,32 @@
                         </Grid.Resources>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="120" />
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="300" />
-                            <ColumnDefinition Width="300" />
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" HorizontalOptions="Center" Text="Broj spisa" />
-                        <Label Grid.Column="1" HorizontalOptions="Center" Text="Datum kreiranja" />
-                        <Label Grid.Column="2" HorizontalOptions="Center" Text="Vrijeme izmjene" />
-                        <Label Grid.Column="3" HorizontalOptions="Center" Text="Klijent" />
-                        <Label Grid.Column="4" HorizontalOptions="Center" Text="Protustranka" />
-                        <Label Grid.Column="5" HorizontalOptions="Center" Text="Dodao" />
-                        <Label Grid.Column="6" HorizontalOptions="Center" Text="Radi" />
+                        <Label FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Broj spisa" />
+                        <Label FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="Klijent" />
+                        <Label FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Protustranka" />
+                        <Label FontAttributes="Bold" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="Dodao" />
+                        <Label FontAttributes="Bold" Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center" Text="Radi" />
+                        <Label FontAttributes="Bold" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" Text="Kreirano" />
+                        <Label FontAttributes="Bold" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center" Text="Izmjenjeno" />
                     </Grid>
                 </Grid>
             </StackLayout>
 
             <!-- Scrollable ListView -->
             <ScrollView Grid.Row="1">
-                <ListView ItemsSource="{Binding FileItems}" SeparatorColor="DarkRed" SelectionMode="Single" SeparatorVisibility="Default" >
+                <ListView ItemsSource="{Binding FileItems}" SelectionMode="Single" SeparatorVisibility="Default" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Grid  Margin="20,0,0,0" BackgroundColor="White">
+                                <Grid  BackgroundColor="White">
                                     <Grid.Resources>
                                         <Style TargetType="Label">
                                             <Setter Property="TextColor" Value="Black" />
@@ -93,41 +94,25 @@
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100" />
-                                        <ColumnDefinition Width="120" />
-                                        <ColumnDefinition Width="200" />
-                                        <ColumnDefinition Width="300" />
-                                        <ColumnDefinition Width="300" />
-                                        <ColumnDefinition Width="100" />
-                                        <ColumnDefinition Width="200" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="4*" />
+                                        <ColumnDefinition Width="3*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="3*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Border Grid.Row="1" Grid.Column="0" Margin="0" Padding="10" StrokeThickness="0.1" Stroke="Black" >
-                                        <Label  HorizontalOptions="Center"  Text="{Binding BrojSpisa}" VerticalOptions="Center" />
-                                    </Border>
-
-                                    <Border Grid.Row="1" Grid.Column="1" Margin="0" Padding="10" StrokeThickness="0.1" Stroke="Black"   >
-                                        <Label  HorizontalOptions="Center"  Text="{Binding Created,  StringFormat='{}{0: dd/MM/yyyy}'}" VerticalOptions="Center"  />
-                                    </Border>
-
-                                    <Border Grid.Row="1" Grid.Column="2" Margin="0" Padding="10" StrokeThickness="0.1" Stroke="Black"   >
-                                        <Label  HorizontalOptions="Center"  Text="{Binding DatumIzmjeneSpisa,  StringFormat='{}{0:HH:mm dd/MM/yyyy}'}"  VerticalOptions="Center" />
-                                    </Border>
-
-                                    <Border Grid.Row="1" Grid.Column="3" Margin="0" Padding="10" StrokeThickness="0.1" Stroke="Black"   >
-                                        <Label  HorizontalOptions="Center"   Text="{Binding ClientName}" VerticalOptions="Center"  />
-                                    </Border>
-
-                                    <Border Grid.Row="1" Grid.Column="4" Margin="0" Padding="10" StrokeThickness="0.1" Stroke="Black"  >
-                                        <Label  HorizontalOptions="Center" Margin="20,0,0,0"  Text="{Binding OpponentName}"  VerticalOptions="Center"/>
-                                    </Border>
-
-                                    <Border Grid.Row="1" Grid.Column="5" Margin="0" Padding="10" StrokeThickness="0.1" Stroke="Black"   >
-                                        <Label  HorizontalOptions="Center"  Text="{Binding InicijaliDodao}" VerticalOptions="Center"  />
-                                    </Border>
-
-                                    <Border Grid.Row="1" Grid.Column="6" Margin="0" Padding="10" StrokeThickness="0.1" Stroke="Black" >
-                                        <Label  HorizontalOptions="Center"  Text="{Binding Uzrok}" VerticalOptions="Center"   />
-                                    </Border>
+                                   
+                                        <Label Margin="0,8,0,8" FontSize="14"   Grid.Row="1" Grid.Column="0" HorizontalOptions="Center"  Text="{Binding BrojSpisa}" VerticalOptions="Center" LineBreakMode="NoWrap" />
+                                    <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="1" HorizontalOptions="Start"   Text="{Binding ClientName}" VerticalOptions="Center" LineBreakMode="NoWrap" />
+                                    <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="2" HorizontalOptions="Start"  Text="{Binding OpponentName}"  VerticalOptions="Center" LineBreakMode="NoWrap" />
+                                        <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="3"  HorizontalOptions="Center"  Text="{Binding InicijaliDodao}" VerticalOptions="Center" LineBreakMode="NoWrap" />
+                                    <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="4" HorizontalOptions="Start"  Text="{Binding Uzrok}" VerticalOptions="Center" LineBreakMode="NoWrap"  />
+                                        <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="5" HorizontalOptions="Center"  Text="{Binding Created,  StringFormat='{}{0: dd/MM/yyyy}'}" VerticalOptions="Center" LineBreakMode="NoWrap" />
+                                        <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="6" HorizontalOptions="Center"  Text="{Binding DatumIzmjeneSpisa,  StringFormat='{}{0:HH:mm dd/MM/yyyy}'}"  VerticalOptions="Center" LineBreakMode="NoWrap" />
+                                            
+                                    <BoxView Margin="0,30,0,0" Grid.Row="1" Grid.ColumnSpan="7" BackgroundColor="Red" HeightRequest="1"  />
+                                            
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>

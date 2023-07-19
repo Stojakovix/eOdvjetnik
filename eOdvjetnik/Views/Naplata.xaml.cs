@@ -24,8 +24,8 @@ public partial class Naplata : ContentPage
     public string CompanyOIB { get; set; }
     public string CompanyAddress { get; set; }
     public string ClientName { get; set; } = "Klijent nije odabran";
-    public string ClientOIB { get; set; } = "Nema OIB-a";
-    public string ClientAddress { get; set; } = "Nema adrese";
+    public string ClientOIB { get; set; } = "OIB";
+    public string ClientAddress { get; set; } = "Adresa";
     string CurrentDate { get; set; }
     string PaymentDate { get; set; }
     public string ReceiptItemName { get; set; }
@@ -84,21 +84,13 @@ public partial class Naplata : ContentPage
         style.ParagraphFormat.AfterSpacing = 0;
         style.ParagraphFormat.LineSpacing = 12f; //manji spacing
 
+        style = document.AddParagraphStyle("Bold") as WParagraphStyle;
         style.CharacterFormat.FontName = "Calibri";
         style.CharacterFormat.Bold = true;
         style.CharacterFormat.FontSize = 10f;
         style.ParagraphFormat.BeforeSpacing = 0;
         style.ParagraphFormat.AfterSpacing = 0;
         style.ParagraphFormat.LineSpacing = 12f;
-
-        style = document.AddParagraphStyle("Bold") as WParagraphStyle;
-        style.CharacterFormat.FontName = "Calibri";
-        style.CharacterFormat.FontSize = 10f;
-        style.ParagraphFormat.BeforeSpacing = 0;
-        style.ParagraphFormat.AfterSpacing = 0;
-        style.ParagraphFormat.LineSpacing = 18f;
-        style.CharacterFormat.Bold = true;
-
 
         style = document.AddParagraphStyle("Heading 1") as WParagraphStyle;
         style.CharacterFormat.FontName = "Calibri Light";
