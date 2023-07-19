@@ -91,6 +91,15 @@ public partial class Naplata : ContentPage
         style.ParagraphFormat.AfterSpacing = 0;
         style.ParagraphFormat.LineSpacing = 12f;
 
+        style = document.AddParagraphStyle("Bold") as WParagraphStyle;
+        style.CharacterFormat.FontName = "Calibri";
+        style.CharacterFormat.FontSize = 10f;
+        style.ParagraphFormat.BeforeSpacing = 0;
+        style.ParagraphFormat.AfterSpacing = 0;
+        style.ParagraphFormat.LineSpacing = 18f;
+        style.CharacterFormat.Bold = true;
+
+
         style = document.AddParagraphStyle("Heading 1") as WParagraphStyle;
         style.CharacterFormat.FontName = "Calibri Light";
         style.CharacterFormat.FontSize = 16f;

@@ -1,4 +1,7 @@
-﻿using Syncfusion.Maui.Popup;
+﻿using eOdvjetnik.Model;
+using eOdvjetnik.Services;
+using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text;
@@ -8,14 +11,125 @@ namespace eOdvjetnik.ViewModel;
 
 public class PostavkeViewModel : INotifyPropertyChanged
 {
+    ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+
+    private ObservableCollection<EmployeeItem> employeeItem;
+    public ObservableCollection<EmployeeItem> EmployeeItems
+    {
+        get { return employeeItem; }
+        set
+        {
+            if (employeeItem != value)
+            {
+                employeeItem = value;
+                OnPropertyChanged(nameof(EmployeeItems));
+            }
+        }
+    }
+
     public string HWID { get; set; }
     public string HWID64 { get; set; }
-
     public string LicenceType  { get; set; }
-    public string dateTimeString { get; set; }
-    public DateTime expiryDate { get; set; }
+    public string DateTimeString { get; set; }
+    public DateTime ExpiryDateOnly { get; set; }
     public string ExpiryDate { get; set; }
     public string Activation_code { get; set; }
+    public string JsonDevicesData { get; set; }
+
+    private DeviceDataModel _dataModel;
+    public DeviceDataModel DataModel
+    {
+        get { return _dataModel; }
+        set
+        {
+            _dataModel = value;
+            OnPropertyChanged(nameof(DataModel));
+        }
+    }
+    public ICommand GetAllCompanyDevices { get; set; }
+    public ICommand GetAllCompanyEmployees { get; set; }
+
+
+
+    private void GetJsonDeviceData()
+    {
+        JsonDevicesData = Preferences.Get("json_devices", null);
+
+        _dataModel = new DeviceDataModel();
+
+        if (JsonDevicesData != null)
+        {
+            Debug.WriteLine("JsonDevicesData = " + JsonDevicesData);
+            _dataModel = JsonConvert.DeserializeObject<DeviceDataModel>(JsonDevicesData);
+            DataModel = _dataModel;
+
+      
+            foreach (Device device in _dataModel.Devices)
+            {
+                device.ConvertHwidToHwid64();
+
+                Debug.WriteLine($"Device ID: {device.id}");
+                Debug.WriteLine($"Company ID: {device.hwid}");
+                Debug.WriteLine($"Description: {device.opis}");
+                Debug.WriteLine($"Base64 Company ID: {device.hwid64}");
+            }
+        }
+        else
+        {
+            Debug.WriteLine("JsonDevicesData = null");
+        }
+    }
+
+    public void GetEmployees()
+    {
+        try
+        {
+            if (employeeItem != null)
+            {
+                employeeItem.Clear();
+
+            }
+
+            string query = "SELECT id, ime, inicijali, hwid, active, type FROM employees;";
+
+
+            // Debug.WriteLine(query + "u SpisiViewModelu");
+            Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+            if (filesData != null)
+            {
+                foreach (Dictionary<string, string> filesRow in filesData)
+                {
+                    #region Varijable za listu
+                    int id;
+                    int active;
+                    int type;
+
+                    int.TryParse(filesRow["id"], out id);
+                    int.TryParse(filesRow["inicijali"], out active);
+                    int.TryParse(filesRow["active"], out type);
+
+
+                    #endregion
+                    employeeItem.Add(new EmployeeItem()
+                    {
+                        Id = id,
+                        EmployeeName = filesRow["ime"],
+                        EmployeeHWID = filesRow["hwid"],
+                        Initals = filesRow["inicijali"],
+                        Active = active,
+                        Type = type,
+                    }); ;
+             
+
+                }
+                OnPropertyChanged(nameof(employeeItem));
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message + "in viewModel generate files");
+        }
+    }
 
     #region NAS
     //Varijable za NAS preferenceas
@@ -65,14 +179,24 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     public PostavkeViewModel()
 	{
+       GetAllCompanyDevices = new Command(GetJsonDeviceData);
+       GetAllCompanyEmployees = new Command(GetEmployees);
        HWID = Preferences.Get("key", null);
        LicenceType = Preferences.Get("licence_type", "");
-       dateTimeString = Preferences.Get("expire_date", "");
+       DateTimeString = Preferences.Get("expire_date", "");
        Activation_code = Preferences.Get("activation_code", "");
        HWID64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(HWID));
        ParseDate();
-       #region NAS komande
-       SaveCommandNAS = new Command(OnSaveClickedNas);
+        try
+        {
+            employeeItem = new ObservableCollection<EmployeeItem>();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+        #region NAS komande
+        SaveCommandNAS = new Command(OnSaveClickedNas);
        LoadCommandNAS = new Command(OnLoadClickedNas);
        DeleteCommandNAS = new Command(OnDeleteClickedNas);
         #endregion
@@ -107,9 +231,9 @@ public class PostavkeViewModel : INotifyPropertyChanged
     {
         try
         {
-            DateTimeOffset dateTimeOffset = DateTimeOffset.Parse(dateTimeString);
-            expiryDate = dateTimeOffset.Date;
-            ExpiryDate = expiryDate.ToString("D");
+            DateTimeOffset dateTimeOffset = DateTimeOffset.Parse(DateTimeString);
+            ExpiryDateOnly = dateTimeOffset.Date;
+            ExpiryDate = ExpiryDateOnly.ToString("D");
         }
         catch (Exception ex)
         {
@@ -268,4 +392,34 @@ public class PostavkeViewModel : INotifyPropertyChanged
     {
         await Application.Current.MainPage.DisplayAlert(title, message, "OK");
     }
+
+  
+
+    private void UpdateSelectedEmployeeHWID()
+    {
+        // Set the EmployeeHWID property of the currently selected employee
+        if (!string.IsNullOrEmpty(SelectedOpis))
+        {
+            // Assuming you have a property in your EmployeeItem class named EmployeeHWID
+            foreach (var employee in EmployeeItems)
+            {
+                employee.EmployeeHWID = SelectedOpis;
+            }
+        }
+    }
+    private string selectedOpis;
+    public string SelectedOpis
+    {
+        get { return selectedOpis; }
+        set
+        {
+            if (selectedOpis != value)
+            {
+                selectedOpis = value;
+                OnPropertyChanged(nameof(SelectedOpis));
+                UpdateSelectedEmployeeHWID();
+            }
+        }
+    }
+
 }
