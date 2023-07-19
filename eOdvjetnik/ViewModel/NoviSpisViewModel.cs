@@ -328,18 +328,7 @@ namespace eOdvjetnik.ViewModel
                 }
             }
         }
-        //Napravi još bindinge sa svakim entry fieldom za svako polje da dodaje, vjerojatno neće bit dobar i trebat će se nešto konvertat, date time ili slično
-        //public NoviSpisViewModel()
-        //{
-        //    try
-        //    {
-        //        AddFilesToRemoteServer = new Command(() => AddSpisToRemoteServer(fileitem));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine(ex.Message);
-        //    }
-        //}
+
         private void AddSpisToRemoteServer(FileItem fileItem)
         {
             try
@@ -378,7 +367,7 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(query + " in novi spis viewModel");
                 externalSQLConnect.sqlQuery(query);
                 Debug.WriteLine("Appointment added to remote server in novi spis viewModel");
-                //spisiViewModel.RefreshDataFromServer();
+
                 
 
             }

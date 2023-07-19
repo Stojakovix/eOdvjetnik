@@ -34,6 +34,20 @@ public class KlijentiViewModel : INotifyPropertyChanged
             }
         }
     }
+    private ICommand onNoviKlijentClick;
+    public ICommand OnNoviKlijentClick
+    {
+        get
+        {
+            if (onNoviKlijentClick == null)
+            {
+                onNoviKlijentClick = new Command(OnButtonClick);
+            }
+            return onNoviKlijentClick;
+        }
+    }
+
+
     private ICommand searchCommand;
     public ICommand SearchCommand
     {
@@ -118,12 +132,6 @@ public class KlijentiViewModel : INotifyPropertyChanged
                             Pravna = pravna
 
                         });
-
-
-                    }
-
-                    foreach (ContactItem item in Contacts)
-                    {
                     }
 
                 }
@@ -261,6 +269,12 @@ public class KlijentiViewModel : INotifyPropertyChanged
         timer.Tick += (s, e) => Refresh();
         timer.Start();
 
+    }
+
+    public async void OnButtonClick()
+    {
+        await Shell.Current.GoToAsync("/NoviKlijent");
+        Debug.WriteLine("novi spis clicked");
     }
 
     public event PropertyChangedEventHandler PropertyChanged;

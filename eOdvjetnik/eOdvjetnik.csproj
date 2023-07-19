@@ -225,6 +225,9 @@
 	  <MauiXaml Update="Views\Naplata.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\NoviKlijent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Postavke.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

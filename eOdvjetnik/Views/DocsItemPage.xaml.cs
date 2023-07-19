@@ -18,11 +18,7 @@ public partial class DocsItemPage : ContentPage
 	public DocsItemPage(DocsDatabase docsDatabase)
 	{
 		InitializeComponent();
-		database = docsDatabase;
-		
-		
-
-		
+		database = docsDatabase;		
 	}
 	
 	async void OnSaveClicked(object sender, EventArgs e)

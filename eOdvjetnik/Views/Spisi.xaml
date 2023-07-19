@@ -64,7 +64,7 @@
                         <Label Grid.Column="3" HorizontalOptions="Center" Text="Klijent" />
                         <Label Grid.Column="4" HorizontalOptions="Center" Text="Protustranka" />
                         <Label Grid.Column="5" HorizontalOptions="Center" Text="Dodao" />
-                        <Label Grid.Column="6" HorizontalOptions="Center" Text="Uzrok" />
+                        <Label Grid.Column="6" HorizontalOptions="Center" Text="Radi" />
                     </Grid>
                 </Grid>
             </StackLayout>
