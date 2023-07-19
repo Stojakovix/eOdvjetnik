@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Windows.Input;
 using System.Xml.Linq;
 using eOdvjetnik.Models;
@@ -214,56 +215,190 @@ public class KlijentiViewModel : INotifyPropertyChanged
             Debug.WriteLine(ex.Message);
         }
     }
+    #region Selected Client
 
-    private string _NazivKlijenta;
-    public string NazivKlijenta
+    private string _ClientName;
+    public string ClientName
     {
-        get { return _NazivKlijenta; }
+        get { return _ClientName; }
         set
         {
-            if (_NazivKlijenta != value)
+            if (_ClientName != value)
             {
-                _NazivKlijenta = value;
-                OnPropertyChanged(nameof(NazivKlijenta));
+                _ClientName = value;
+                OnPropertyChanged(nameof(ClientName));
             }
         }
     }
 
-    private string OIBKlijenta;
-    public string OIBklijenta
+    private string _ClientOIB;
+    public string ClientOIB
     {
-        get { return OIBKlijenta; }
+        get { return _ClientOIB; }
         set
         {
-            if (OIBKlijenta != value)
+            if (_ClientOIB != value)
             {
-                OIBKlijenta = value;
-                OnPropertyChanged(nameof(OIBklijenta));
+                _ClientOIB = value;
+                OnPropertyChanged(nameof(ClientOIB));
             }
         }
     }
 
-    private string _AdresaKlijenta;
-    public string AdresaKlijenta
+    private string _ClientAddress;
+    public string ClientAddress
     {
-        get { return _AdresaKlijenta; }
+        get { return _ClientAddress; }
         set
         {
-            if (_AdresaKlijenta != value)
+            if (_ClientAddress != value)
             {
-                _AdresaKlijenta = value;
-                OnPropertyChanged(nameof(AdresaKlijenta));
+                _ClientAddress = value;
+                OnPropertyChanged(nameof(ClientAddress));
             }
         }
     }
 
+    private string _ClientBirthDate;
+    public string ClientBirthDate
+    {
+        get { return _ClientBirthDate; }
+        set
+        {
+            if (_ClientBirthDate != value)
+            {
+                _ClientBirthDate = value;
+                OnPropertyChanged(nameof(ClientBirthDate));
+            }
+        }
+    }
+    private string _ClientResidence;
+    public string ClientResidence
+    {
+        get { return _ClientResidence; }
+        set
+        {
+            if (_ClientResidence != value)
+            {
+                _ClientResidence = value;
+                OnPropertyChanged(nameof(ClientResidence));
+            }
+        }
+    }
+    private string _ClientPhone;
+    public string ClientPhone
+    {
+        get { return _ClientResidence; }
+        set
+        {
+            if (_ClientPhone != value)
+            {
+                _ClientPhone = value;
+                OnPropertyChanged(nameof(ClientPhone));
+            }
+        }
+    }
+    private string _ClinetFax;
+    public string ClinetFax
+    {
+        get { return _ClinetFax; }
+        set
+        {
+            if (_ClinetFax != value)
+            {
+                _ClinetFax = value;
+                OnPropertyChanged(nameof(ClinetFax));
+            }
+        }
+    }
+    private string _ClientMobile;
+    public string ClientMobile
+    {
+        get { return _ClientMobile; }
+        set
+        {
+            if (_ClientMobile != value)
+            {
+                _ClientMobile = value;
+                OnPropertyChanged(nameof(ClientMobile));
+            }
+        }
+    }
+    private string _ClientEmail;
+
+    public string ClientEmail
+    {
+        get { return _ClientEmail; }
+        set
+        {
+            if (_ClientEmail != value)
+            {
+                _ClientEmail = value;
+                OnPropertyChanged(nameof(ClientEmail));
+            }
+        }
+    }
+    private string _ClientOther;
+
+    public string ClientOther
+    {
+        get { return _ClientOther; }
+        set
+        {
+            if (_ClientOther != value)
+            {
+                _ClientOther = value;
+                OnPropertyChanged(nameof(ClientOther));
+            }
+        }
+    }
+    private string _ClientCountry;
+
+    public string ClientCountry
+    {
+        get { return _ClientCountry; }
+        set
+        {
+            if (_ClientCountry != value)
+            {
+                _ClientCountry = value;
+                OnPropertyChanged(nameof(ClientCountry));
+            }
+        }
+    }
+    private string _ClientLegalPerson;
+
+    public string ClientLegalPerson
+    {
+        get { return _ClientLegalPerson; }
+        set
+        {
+            if (_ClientLegalPerson != value)
+            {
+                _ClientLegalPerson = value;
+                OnPropertyChanged(nameof(ClientLegalPerson));
+            }
+        }
+    }
+    #endregion
     public KlijentiViewModel()
     {
         Contacts = new ObservableCollection<ContactItem>();
         GenerateFiles();
-        NazivKlijenta = Preferences.Get("SelectedName", "");
-        OIBklijenta = Preferences.Get("SelectedOIB", "");
-        AdresaKlijenta = Preferences.Get("SelectedAddress", "");
+        ClientName = Preferences.Get("SelectedName", "");
+        ClientOIB = Preferences.Get("SelectedOIB", "");
+        ClientAddress = Preferences.Get("SelectedAddress", "");
+        ClientBirthDate = Preferences.Get("SelectedBirthDate", "");
+        ClientResidence = Preferences.Get("SelectedRsidence", "");
+        ClientPhone = Preferences.Get("SelectedPhone", "");
+        ClinetFax = Preferences.Get("SelectedFax", "");
+        ClientMobile = Preferences.Get("SelectedMobile", "");
+        ClientEmail = Preferences.Get("SelectedEmail", "");
+        ClientOther = Preferences.Get("SelectedOther", "");
+        ClientCountry = Preferences.Get("SelectedCountry", "");
+        //ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+        
+
         var timer = Application.Current.Dispatcher.CreateTimer();
         timer.Interval = TimeSpan.FromMilliseconds(200);
         timer.Tick += (s, e) => Refresh();
@@ -287,9 +422,18 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            NazivKlijenta = Preferences.Get("SelectedName", "");
-            OIBklijenta = Preferences.Get("SelectedOIB", "");
-            AdresaKlijenta = Preferences.Get("SelectedAddress", "");
+            ClientName = Preferences.Get("SelectedName", "");
+            ClientOIB = Preferences.Get("SelectedOIB", "");
+            ClientAddress = Preferences.Get("SelectedAddress", "");
+            ClientBirthDate = Preferences.Get("SelectedBirthDate", "");
+            ClientResidence = Preferences.Get("SelectedRsidence", "");
+            ClientPhone = Preferences.Get("SelectedPhone", "");
+            ClinetFax = Preferences.Get("SelectedFax", "");
+            ClientMobile = Preferences.Get("SelectedMobile", "");
+            ClientEmail = Preferences.Get("SelectedEmail", "");
+            ClientOther = Preferences.Get("SelectedOther", "");
+            ClientCountry = Preferences.Get("SelectedCountry", "");
+            //ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
         }
         );
     }
