@@ -64,7 +64,7 @@
             <Entry x:Name="ReferencaEntry" Grid.Row="11" Grid.Column="1" Text="{Binding Referenca}"/>
             <Label Text="DatumPromjeneStatusa" Grid.Row="12" Grid.Column="0" />
             <DatePicker x:Name="DatumPromjeneStatusaDatePicker" Grid.Row="12" Grid.Column="1" Date="{Binding DatumPromjene}"/>
-            <Label Text="Uzrok" Grid.Row="13" Grid.Column="0" />
+            <Label Text="Radi" Grid.Row="13" Grid.Column="0" />
             <Entry x:Name="UzrokEntry" Grid.Row="13" Grid.Column="1" Text="{Binding Uzrok}"/>
             <Label Text="DatumKreiranjaSpisa" Grid.Row="14" Grid.Column="0" />
             <DatePicker x:Name="DatumKreiranjaSpisaDatePicker" Grid.Row="14" Grid.Column="1" Date="{Binding DatumKreiranja}"/>

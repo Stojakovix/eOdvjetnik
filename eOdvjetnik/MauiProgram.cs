@@ -49,6 +49,8 @@ public static class MauiProgram
 
         builder.Services.AddTransient<Spisi>();
 
+        builder.Services.AddTransient<NoviKlijent>();
+
 
         string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Licence.db3");
 

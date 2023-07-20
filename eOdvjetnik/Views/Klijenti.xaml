@@ -9,34 +9,64 @@
         <viewmodel:KlijentiViewModel/>
     </ContentPage.BindingContext>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-
-    <ScrollView>
-        <VerticalStackLayout >
-            <Grid>
+        <StackLayout Grid.Row="0" >
+            <Grid Margin="0,0,0,10" BackgroundColor="LightGray" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+
                 </Grid.ColumnDefinitions>
 
-                <Label Text="Klijent:" FontSize="14" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="20,10,0,12"/>
-                <Label Grid.Column="1" Text="{Binding NazivKlijenta}" FontSize="14" BackgroundColor="White" TextColor="Black" Margin="10,10,0,12"/>
+                <Label Margin="20,12,0,10" Grid.Column="0" Grid.Row="0" Text="Klijent" FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,0,0,0" Grid.Column="0" Grid.Row="1"  Text="{Binding ClientName}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
+                <Label Margin="20,12,0,10" Text="OIB" Grid.Column="1" Grid.Row="0"  FontSize="14" FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,0,0,0" Grid.Column="1" Grid.Row="1" Text="{Binding ClientOIB}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
+                <Label Margin="20,12,0,10" Text="Adresa" Grid.Column="2" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,0,0,0" Grid.Column="2" Grid.Row="1" Text="{Binding ClientAddress}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
+                <Label Margin="20,12,0,10" Text="Boravište:" Grid.Column="3" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,0,0,0" Grid.Column="3" Grid.Row="1" Text="{Binding ClientResidence}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
+                <Label Margin="20,12,0,10" Text="Datum rođenja:" Grid.Column="4" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,0,0,0" Grid.Column="4" Grid.Row="1" Text="{Binding ClientBirthDate}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
+                <Label Margin="20,12,0,10" Text="Ostalo:" Grid.Column="5" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black"  />
+                <Label Margin="20,0,0,0" Grid.Column="5" Grid.Row="1" Text="{Binding ClientOther}" FontSize="14"  TextColor="Black" Padding="0,0,0,10"  />
+                <Label Margin="20,12,0,10" Text="Telefon:" Grid.Column="6" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,0,0,0" Grid.Column="6" Grid.Row="1" Text="{Binding ClientPhone}" FontSize="14"  TextColor="Black"  Padding="0,0,0,10" />
+                <Label Margin="20,12,0,10" Text="Mobitel:" Grid.Column="7" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,0,0,0" Grid.Column="7" Grid.Row="1" Text="{Binding ClientMobile}" FontSize="14"  TextColor="Black" Padding="0,0,0,10"  />
+                <Label Margin="20,12,0,10" Text="Fax:" Grid.Column="8" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,0,0,0" Grid.Column="8" Grid.Row="1" Text="{Binding ClinetFax}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
+                <Label Margin="20,12,0,10" Text="Email:" Grid.Column="9" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,0,0,0" Grid.Column="9" Grid.Row="1" Text="{Binding ClientEmail}" FontSize="14"  TextColor="Black"  Padding="0,0,0,10" />
+                <Label Margin="20,12,0,10" Text="Država:" Grid.Column="10" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,0,0,0" Grid.Column="10" Grid.Row="1" Text="{Binding ClientCountry}" FontSize="14"  TextColor="Black" Padding="0,0,0,10"  />
+                <Label Margin="20,12,0,10" Text="Pravna osoba:" Grid.Column="11" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,0,0,0" Grid.Column="11" Grid.Row="1" Text="{Binding ClientLegalPerson}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
 
-                <Label Grid.Column="0" Grid.Row="2" Text="OIB:" FontSize="14" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
-                <Label Grid.Column="1" Grid.Row="2" Text="{Binding OIBklijenta}" FontSize="14" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12" />
-
-                <Label Grid.Column="0" Grid.Row="3" Text="Adresa:" FontSize="14" BackgroundColor="White" FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
-                <Label Grid.Column="1" Grid.Row="3" Text="{Binding AdresaKlijenta}" FontSize="14" BackgroundColor="White" TextColor="Black" Margin="10,0,0,12"  />
 
             </Grid>
-            <HorizontalStackLayout>
+            
+            <HorizontalStackLayout >
                 <Button 
                 BorderColor="DarkGray"
                 BorderWidth="1"
@@ -44,11 +74,11 @@
                 Text="Dodaj novi kontakt"
                 FontAttributes="Bold"
                 TextColor="Black"
-                HorizontalOptions="Start"
-                Command="{Binding DodajNoviKontakt}" 
+                HorizontalOptions="End"
+                Command="{Binding OnNoviKlijentClick}" 
                 FontSize="Default"
-                Margin="20,10,10,10"/>
-                
+                Margin="10,0,10,10"/>
+
                 <Button 
                 BorderColor="DarkGray"
                 BorderWidth="1"
@@ -56,31 +86,28 @@
                 Text="Dodaj kontakt u račun"
                 FontAttributes="Bold"
                 TextColor="Black"
-                HorizontalOptions="Start"
+                HorizontalOptions="End"
                 Command="{Binding DodajOdabraniKontatNaRacun}" 
                 FontSize="Default"
-                Margin="20,10,10,10"/>
-            </HorizontalStackLayout>
-           
-
-
-            <Label Text="Pretraga po imenu ili OIB-u" HorizontalOptions="Start" FontSize="Default"  Margin="22,10,10,10" FontAttributes="Bold"
- />
-            <HorizontalStackLayout>
-            <SearchBar  
+                Margin="0,0,10,10"/>
+                
+                <SearchBar  
                    BackgroundColor="LightGray"
+                   Placeholder="Pretraga po imenu ili OIB-u"
                    SearchCommand="{Binding SearchCommand}"
                    Text="{Binding SearchText}"
                    WidthRequest="400"
                    HorizontalOptions="Start"
-                   Margin="20,0,10,10"
+                   Margin="10,0,10,10"
                    FontSize="Default" />
-                <Label Margin="10,0,0,10" Text="Nema rezultata pretrage!" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}" TextColor="Black" VerticalOptions="Center" />
-                <Label Margin="10,0,0,10" Text="Povezivanje nije uspjelo!" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}" TextColor="Black" VerticalOptions="Center" />
+
+                <Label Margin="30,0,0,10" Text="Nema rezultata pretrage!" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}" TextColor="Black" VerticalOptions="Center" />
+                <Label Margin="30,0,0,10" Text="Povezivanje nije uspjelo!" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}" TextColor="Black" VerticalOptions="Center" />
+               
             </HorizontalStackLayout>
 
 
-            <Grid Margin="20,0,0,0"  >
+            <Grid Margin="20,0,0,0" >
                 <Grid.Resources>
                     <Style TargetType="Label">
                         <Setter Property="TextColor" Value="Black" />
@@ -88,26 +115,32 @@
                 </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="Auto" />
-
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*"  />
+                    <ColumnDefinition Width="*"  />
+                    <ColumnDefinition Width="*"  />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" FontAttributes="Bold" Text="Tbr." Margin="10,0,0,5" HorizontalOptions="Start" />
-                <Label Grid.Column="1" FontAttributes="Bold" Text="Bodovi"   HorizontalOptions="Center" />
-                <Label Grid.Column="2" FontAttributes="Bold" Text="Radnja" Margin="10,0,0,0" />
-
+                <Label MinimumWidthRequest="300" Grid.Column="0" FontAttributes="Bold" Text="Ime" HorizontalOptions="Start"  />
+                <Label MinimumWidthRequest="300" Grid.Column="1" FontAttributes="Bold" Text="Adresa" HorizontalOptions="Start"  />
+                <Label MinimumWidthRequest="50" Grid.Column="2" FontAttributes="Bold" Text="Telefon" HorizontalOptions="Start"  />
+                <Label MinimumWidthRequest="50" Grid.Column="3" FontAttributes="Bold" Text="Mobitel" HorizontalOptions="Start"  />
+                <Label MinimumWidthRequest="100" Grid.Column="4" FontAttributes="Bold" Text="Email" HorizontalOptions="Start"  />
             </Grid>
+        </StackLayout>
 
 
-            <ListView Margin="20,0,0,0" ItemsSource="{Binding Contacts}" ItemSelected="ListViewItemSelected"  >
+        <ScrollView Grid.Row="1" Grid.ColumnSpan="5" >
+            <ListView ItemsSource="{Binding Contacts}" ItemSelected="ListViewItemSelected"  >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid BackgroundColor="White">
+                            <Grid BackgroundColor="White" Margin="20,0,0,0" >
                                 <Grid.Resources>
                                     <Style TargetType="Label">
                                         <Setter Property="TextColor" Value="Black" />
@@ -115,46 +148,31 @@
                                 </Grid.Resources>
 
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100" />
-                                    <ColumnDefinition Width="100"  />
-                                    <ColumnDefinition Width="100"  />
-                                    <ColumnDefinition Width="100"  />
-                                    <ColumnDefinition Width="100" />
-                                    <ColumnDefinition Width="100" />
-                                    <ColumnDefinition Width="100" />
-                                    <ColumnDefinition Width="100"  />
-                                    <ColumnDefinition Width="100"  />
-                                    <ColumnDefinition Width="100"  />
-                                    <ColumnDefinition Width="100"  />
-                                    <ColumnDefinition Width="100"  />
-
-
-
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*"  />
+                                    <ColumnDefinition Width="*"  />
+                                    <ColumnDefinition Width="*"  />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                 <Label Grid.Row="1" Grid.Column="0" Text="{Binding Ime}" HorizontalOptions="Start" />
-                                 <Label Grid.Row="1" Grid.Column="1" Text="{Binding OIB}" HorizontalOptions="Start" />
-                                 <Label Grid.Row="1" Grid.Column="2" Text="{Binding Adresa}"  HorizontalOptions="Start" />
-                                <Label Grid.Row="1" Grid.Column="3" Text="{Binding Boraviste}"  HorizontalOptions="Start" />
-                                <Label Grid.Row="1" Grid.Column="4" Text="{Binding Telefon}"  HorizontalOptions="Start" />
-                                <Label Grid.Row="1" Grid.Column="5" Text="{Binding Mobitel}"  HorizontalOptions="Start" />
-                                <Label Grid.Row="1" Grid.Column="6" Text="{Binding Fax}"  HorizontalOptions="Start" />
-                                <Label Grid.Row="1" Grid.Column="7" Text="{Binding Email}"  HorizontalOptions="Start" />
-                                <Label Grid.Row="1" Grid.Column="8" Text="{Binding Datum_rodenja}"  HorizontalOptions="Start" />
-                                <Label Grid.Row="1" Grid.Column="9" Text="{Binding Ostalo}"  HorizontalOptions="Start" />
-                                <Label Grid.Row="1" Grid.Column="10" Text="{Binding Pravna}"  HorizontalOptions="Start" />
-                                <Label Grid.Row="1" Grid.Column="11" Text="{Binding Drzava}"  HorizontalOptions="Start" />
+                                <Label MinimumWidthRequest="300" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="0" Text="{Binding Ime}" HorizontalOptions="Start"  />
+                                <Label MinimumWidthRequest="300" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="1" Text="{Binding Adresa}"  HorizontalOptions="Start" />
+                                <Label MinimumWidthRequest="50" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="2" Text="{Binding Telefon}"  HorizontalOptions="Start" />
+                                <Label MinimumWidthRequest="50" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="3" Text="{Binding Mobitel}"  HorizontalOptions="Start" />
+                                <Label MinimumWidthRequest="100" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="4" Text="{Binding Email}"  HorizontalOptions="Start" />
+
+                                <BoxView Margin="0,30,0,0" Grid.Row="1" Grid.ColumnSpan="12" BackgroundColor="Red" HeightRequest="1"  />
+
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+        </ScrollView>
+    </Grid>
 
-            
-        </VerticalStackLayout>
-    </ScrollView>
 </ContentPage>

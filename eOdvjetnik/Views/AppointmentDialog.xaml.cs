@@ -169,7 +169,6 @@ public partial class AppointmentDialog : ContentPage
                 this.scheduler.AppointmentsSource = new ObservableCollection<SchedulerAppointment>();
             }
 
-            //appointment.Id = (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Count;
 
             (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Add(appointment);
         }
@@ -181,9 +180,6 @@ public partial class AppointmentDialog : ContentPage
             appointment.IsAllDay = this.switchAllDay.IsToggled;
             appointment.Notes = this.organizerText.Text;
         }
-
-
-
 
         //// - add or edit the appointment in the database collection
         var todoItem = new Appointment()

@@ -11,7 +11,7 @@ namespace eOdvjetnik.ViewModel
     public class KalendarViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<SchedulerAppointment> appointments;
-        private object odvjetnik_nas;
+
 
         public KalendarViewModel()
         {
@@ -47,10 +47,7 @@ namespace eOdvjetnik.ViewModel
                             Notes = appointmentRow["DescriptionNotes"]
                         });
                     }
-
                 }
-
-
             }
             catch (Exception ex)
             {

@@ -30,7 +30,7 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-        private int broj_spisa { get;set; }
+        private int broj_spisa { get; set; }
         public int brojSpisa { get; set; }
 
         #region Search
@@ -77,20 +77,20 @@ namespace eOdvjetnik.ViewModel
             try
             {
                 fileItems.Clear();
-                
+
                 // parametri za pretragu broj spisa, klijent id, opponent id, referenca, uzrok, broj predmeta
                 string search_term = SearchText;
                 string escaped_search_term = search_term.Replace("/", "\\/");
                 //string query = "SELECT * FROM `files` WHERE `broj_spisa` LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci  or `referenca` LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci or `uzrok` LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci  or `broj_predmeta` LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci ORDER BY `broj_predmeta` DESC";
                 string query = "SELECT files.*, client.ime AS client_name, opponent.ime AS opponent_name FROM files LEFT JOIN contacts AS client ON files.client_id = client.id LEFT JOIN contacts AS opponent ON files.opponent_id = opponent.id WHERE files.broj_spisa LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.referenca LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.uzrok LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.broj_predmeta LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci ORDER BY files.broj_predmeta DESC";
-               // Debug.WriteLine(query);
+                // Debug.WriteLine(query);
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
                 Debug.WriteLine(query + " u Search resultu");
                 if (filesData != null)
                 {
                     foreach (Dictionary<string, string> filesRow in filesData)
                     {
-                        
+
                         #region Varijable za listu
                         int id;
                         int clientId;
@@ -134,18 +134,14 @@ namespace eOdvjetnik.ViewModel
                             BrojPredmeta = filesRow["broj_predmeta"],
                             ClientName = filesRow["client_ime"],
                             OpponentName = filesRow["opponent_ime"]
-                            
+
                         });
 
-                        
+
                     }
-                    //foreach(FileItem item in FileItems)
-                    //{
-                    //    Debug.WriteLine(item.BrojSpisa);
-                    //}
-                    
+
                 }
-            } 
+            }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
@@ -158,11 +154,11 @@ namespace eOdvjetnik.ViewModel
         {
             OnResetClick = new Command(ResetListView);
             OnDodajClick = new Command(onDodajCLick);
-           // ItemSelected = new Command(OnItemSelected);
+            // ItemSelected = new Command(OnItemSelected);
             try
             {
                 fileItems = new ObservableCollection<FileItem>();
-                this.GenerateFiles();
+                CheckCount();
             }
             catch (Exception ex)
             {
@@ -184,7 +180,7 @@ namespace eOdvjetnik.ViewModel
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                 try
+                try
                 {
                     broj_spisa = brojSpisa;
 
@@ -226,7 +222,7 @@ namespace eOdvjetnik.ViewModel
                 fileItems.Clear();
 
                 //string query = "SELECT * FROM files ORDER BY id DESC LIMIT 100;";
-                string query = "SELECT files.*, client.ime AS client_name, opponent.ime AS opponent_name FROM files LEFT JOIN contacts AS client ON files.client_id = client.id LEFT JOIN contacts AS opponent ON files.opponent_id = opponent.id WHERE files.broj_spisa ORDER BY files.broj_predmeta DESC LIMIT 100";
+                string query = "SELECT files.*, client.ime AS client_name, opponent.ime AS opponent_name FROM files LEFT JOIN contacts AS client ON files.client_id = client.id LEFT JOIN contacts AS opponent ON files.opponent_id = opponent.id WHERE files.broj_spisa ORDER BY files.broj_predmeta DESC LIMIT 20";
 
 
                 // Debug.WriteLine(query + "u SpisiViewModelu");
@@ -280,10 +276,6 @@ namespace eOdvjetnik.ViewModel
                             OpponentName = filesRow["opponent_name"]
                         });
                         initialFileItems = new ObservableCollection<FileItem>(fileItems);
-                        //Debug.WriteLine("u foreachu spisiviewModel" + filesRow["broj_spisa"]);
-                        //Debug.WriteLine("u foreachu spisiviewModel" + filesRow["opponent_ime"]);
-                        //Debug.WriteLine("u foreachu spisiviewModel" + filesRow["client_name"]);
-                        //Debug.WriteLine("u foreachu spisiviewModel" + filesRow["opponent_name"]);
 
                     }
                     OnPropertyChanged(nameof(fileItems));
