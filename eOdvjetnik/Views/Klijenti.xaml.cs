@@ -29,13 +29,13 @@ public partial class Klijenti : ContentPage
 
         var selectedTariffItem = (ContactItem)e.SelectedItem;
 
-        await SaveToPreferences(selectedTariffItem.Ime, selectedTariffItem.OIB, selectedTariffItem.Datum_rodenja, selectedTariffItem.Adresa, selectedTariffItem.Boraviste, selectedTariffItem.Telefon, selectedTariffItem.Fax, selectedTariffItem.Mobitel, selectedTariffItem.Email, selectedTariffItem.Ostalo, selectedTariffItem.Drzava, selectedTariffItem.Pravna);
+        await SaveToPreferences(selectedTariffItem.Ime, selectedTariffItem.OIB, selectedTariffItem.Datum_rodenja, selectedTariffItem.Adresa, selectedTariffItem.Boraviste, selectedTariffItem.Telefon, selectedTariffItem.Fax, selectedTariffItem.Mobitel, selectedTariffItem.Email, selectedTariffItem.Ostalo, selectedTariffItem.Drzava, selectedTariffItem.PravnaString);
 
         ((ListView)sender).SelectedItem = null;
     }
 
 
-    private Task SaveToPreferences(string Ime, string OIB, DateTime Datum_rodenja, string Adresa, string Boraviste,  string Telefon, string Fax, string Mobitel, string Email, string Ostalo, string Drzava, int Pravna)
+    private Task SaveToPreferences(string Ime, string OIB, DateTime Datum_rodenja, string Adresa, string Boraviste,  string Telefon, string Fax, string Mobitel, string Email, string Ostalo, string Drzava, string PravnaString)
     {
 
         Preferences.Set("SelectedName", Ime);
@@ -49,7 +49,7 @@ public partial class Klijenti : ContentPage
         Preferences.Set("SelectedEmail", Email);
         Preferences.Set("SelectedOther", Ostalo);
         Preferences.Set("SelectedCountry", Drzava);
-        Preferences.Set("SelectedLegalPerson", Pravna);
+        Preferences.Set("SelectedLegalPerson", PravnaString);
 
 
 

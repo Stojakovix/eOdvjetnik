@@ -109,12 +109,14 @@ public class KlijentiViewModel : INotifyPropertyChanged
                     {
 
                         int id;
-                        int pravna;
+                        int pravnaInt;
                         DateTime datum_rodenja;
 
                         int.TryParse(filesRow["id"], out id);
-                        int.TryParse(filesRow["pravna"], out pravna);
+                        int.TryParse(filesRow["pravna"], out pravnaInt);
                         DateTime.TryParse(filesRow["datum_rodenja"], out datum_rodenja);
+
+                        string pravnaString = pravnaInt == 1 ? "Da" : "Ne";
 
                         contacts.Add(new ContactItem()
                         {
@@ -130,9 +132,12 @@ public class KlijentiViewModel : INotifyPropertyChanged
                             Email = filesRow["email"],
                             Ostalo = filesRow["ostalo"],
                             Drzava = filesRow["drzava"],
-                            Pravna = pravna
+                            PravnaInt = pravnaInt,
+                            PravnaString = pravnaString
 
                         });
+                        Debug.WriteLine("pravna: " + pravnaString);
+
                     }
 
                 }
@@ -173,12 +178,14 @@ public class KlijentiViewModel : INotifyPropertyChanged
                     {
 
                         int id;
-                        int pravna;
+                        int pravnaInt;
                         DateTime datum_rodenja;
 
                         int.TryParse(filesRow["id"], out id);
-                        int.TryParse(filesRow["pravna"], out pravna);
+                        int.TryParse(filesRow["pravna"], out pravnaInt);
                         DateTime.TryParse(filesRow["datum_rodenja"], out datum_rodenja);
+
+                        string pravnaString = pravnaInt == 1 ? "Da" : "Ne";
 
                         contacts.Add(new ContactItem()
                         {
@@ -194,9 +201,10 @@ public class KlijentiViewModel : INotifyPropertyChanged
                             Email = filesRow["email"],
                             Ostalo = filesRow["ostalo"],
                             Drzava = filesRow["drzava"],
-                            Pravna = pravna
-
+                            PravnaInt = pravnaInt,
+                            PravnaString = pravnaString
                         });
+                        Debug.WriteLine("pravna: " + pravnaString);
                     }
                 }
                 else
@@ -396,7 +404,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
         ClientEmail = Preferences.Get("SelectedEmail", "");
         ClientOther = Preferences.Get("SelectedOther", "");
         ClientCountry = Preferences.Get("SelectedCountry", "");
-        //ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+        ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
         
 
         var timer = Application.Current.Dispatcher.CreateTimer();
@@ -433,7 +441,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
             ClientEmail = Preferences.Get("SelectedEmail", "");
             ClientOther = Preferences.Get("SelectedOther", "");
             ClientCountry = Preferences.Get("SelectedCountry", "");
-            //ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+            ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
         }
         );
     }

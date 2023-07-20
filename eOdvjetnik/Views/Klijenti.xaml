@@ -71,7 +71,7 @@
                 BorderColor="DarkGray"
                 BorderWidth="1"
                 BackgroundColor="#5ac8fa"
-                Text="Dodaj novi kontakt"
+                Text="Dodaj novi"
                 FontAttributes="Bold"
                 TextColor="Black"
                 HorizontalOptions="End"
@@ -83,7 +83,7 @@
                 BorderColor="DarkGray"
                 BorderWidth="1"
                 BackgroundColor="#5ac8fa"
-                Text="Dodaj kontakt u račun"
+                Text="Dodaj u račun"
                 FontAttributes="Bold"
                 TextColor="Black"
                 HorizontalOptions="End"
@@ -126,6 +126,9 @@
                     <ColumnDefinition Width="*"  />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="60" />
+
+
 
                 </Grid.ColumnDefinitions>
 
@@ -164,6 +167,10 @@
                                     <ColumnDefinition Width="*"  />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="60" />
+
+
+
 
                                 </Grid.ColumnDefinitions>
 
@@ -173,8 +180,10 @@
                                 <Label MinimumWidthRequest="50" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="4" Text="{Binding Telefon}"  HorizontalOptions="Start" />
                                 <Label MinimumWidthRequest="50" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="5" Text="{Binding Mobitel}"  HorizontalOptions="Start" />
                                 <Label MinimumWidthRequest="100" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="6" Text="{Binding Email}"  HorizontalOptions="Start" />
+                                <ImageButton Source="edit.png" HorizontalOptions="Start"  Grid.Row="1" Grid.Column="7" Aspect="AspectFit" Padding="5" MaximumHeightRequest="6" />
 
-                                <BoxView Margin="0,30,0,0" Grid.Row="1" Grid.ColumnSpan="12" BackgroundColor="Red" HeightRequest="1"  />
+
+                                <BoxView Margin="0,40,0,0" Grid.Row="1" Grid.ColumnSpan="12" BackgroundColor="Red" HeightRequest="1"  />
 
                             </Grid>
                         </ViewCell>

@@ -18,7 +18,9 @@ namespace eOdvjetnik.Models
         public string Email { get; set; }
         public string Ostalo { get; set; }
         public string Drzava { get; set; }
-        public int Pravna { get; set; }
+        public int PravnaInt { get; set; }
+        public string PravnaString { get; set; }
+
 
 
     }
