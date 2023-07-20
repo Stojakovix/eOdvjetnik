@@ -225,6 +225,9 @@
 	  <MauiXaml Update="Views\NoviKlijent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Racun.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Postavke.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -246,6 +249,9 @@
 	  <BundleResource Include="Settings.bundle\Root.plist" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Views\Racun.xaml.cs">
+	    <DependentUpon>Racun.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Postavke.xaml.cs">
 	    <DependentUpon>Postavke.xaml</DependentUpon>
 	  </Compile>

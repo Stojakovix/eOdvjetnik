@@ -388,7 +388,11 @@ public class KlijentiViewModel : INotifyPropertyChanged
             }
         }
     }
+
     #endregion
+
+    public ICommand OnReciptClickCommand { get; set; }
+
     public KlijentiViewModel()
     {
         Contacts = new ObservableCollection<ContactItem>();
@@ -405,7 +409,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
         ClientOther = Preferences.Get("SelectedOther", "");
         ClientCountry = Preferences.Get("SelectedCountry", "");
         ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
-        
+        OnReciptClickCommand = new Command(OpenRecipt);
+
 
         var timer = Application.Current.Dispatcher.CreateTimer();
         timer.Interval = TimeSpan.FromMilliseconds(200);
@@ -426,6 +431,20 @@ public class KlijentiViewModel : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
+    private async void OpenRecipt()
+    {
+        try
+        {
+            await Shell.Current.GoToAsync("/Racun");
+            Debug.WriteLine("Racun clicked");
+
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+
+    }
     void Refresh()
     {
         MainThread.BeginInvokeOnMainThread(() =>
