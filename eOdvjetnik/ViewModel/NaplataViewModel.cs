@@ -224,7 +224,6 @@ namespace eOdvjetnik.ViewModel
 
 
         public ICommand OnReciptClickCommand { get; set; }
-
         public ICommand AddItemCommand { get; }
         public ICommand RemoveItemCommand { get; set; }
         public ICommand NewReceipt { get; }
@@ -267,7 +266,6 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message);
             }
             UpdateTotalAmount();
-
         }
 
         public void UpdateTotalAmount()
@@ -300,6 +298,7 @@ namespace eOdvjetnik.ViewModel
                     UkupanIznosVisible = false
                 };
                 ReceiptItems.Add(newItem);
+                Debug.WriteLine("added new item as ReceptItem: " + newItem.Name);
                 CalculateTotalAmount();
 
             }

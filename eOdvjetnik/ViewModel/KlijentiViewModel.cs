@@ -136,7 +136,6 @@ public class KlijentiViewModel : INotifyPropertyChanged
                             PravnaString = pravnaString
 
                         });
-                        Debug.WriteLine("pravna: " + pravnaString);
 
                     }
 
@@ -166,7 +165,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 NoQueryResult = false;
                 contacts.Clear();
             }
-            string query = "SELECT * FROM `contacts` WHERE ime LIKE '%" + SearchText + "%' OR OIB LIKE '%" + SearchText + "%'";
+            string query = "SELECT * FROM `contacts` WHERE LOWER(ime) LIKE LOWER('%" + SearchText + "%') OR OIB LIKE '%" + SearchText + "%'";
             Debug.WriteLine(query);
             try
             {
@@ -204,7 +203,6 @@ public class KlijentiViewModel : INotifyPropertyChanged
                             PravnaInt = pravnaInt,
                             PravnaString = pravnaString
                         });
-                        Debug.WriteLine("pravna: " + pravnaString);
                     }
                 }
                 else

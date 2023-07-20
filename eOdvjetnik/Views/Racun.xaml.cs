@@ -14,14 +14,45 @@ using System.Collections.ObjectModel;
 
 public partial class Racun : ContentPage
 {
-    public event EventHandler onCreateDocument;
-    NaplataViewModel naplataViewModel;
+    public ObservableCollection<ReceiptItem> ReceiptItems = new ObservableCollection<ReceiptItem>();
 
-    public Racun(NaplataViewModel naplataViewModel)
+    private NaplataViewModel ViewModel;
+
+    public event EventHandler onCreateDocument;
+
+    public string CompanyName { get; set; }
+    public string CompanyOIB { get; set; }
+    public string CompanyAddress { get; set; }
+    public string ClientName { get; set; } = "Klijent nije odabran";
+    public string ClientOIB { get; set; } = "OIB";
+    public string ClientAddress { get; set; } = "Adresa";
+    string CurrentDate { get; set; }
+    string PaymentDate { get; set; }
+    public string ReceiptItemName { get; set; }
+    public string ReceiptItemPoints { get; set; }
+
+    public string ReceiptItemParentName { get; set; }
+    public string ReceiptItemTBR { get; set; }
+    public string ReceiptItemAmountEUR { get; set; }
+    public int ReceiptItemCount { get; set; }
+    public float ReceiptItemAmount { get; set; }
+    public float ReceiptItemTotalAmount { get; set; }
+
+    public Racun()
 	{
         InitializeComponent();
-        this.naplataViewModel = naplataViewModel;
-        BindingContext = naplataViewModel;
+        ViewModel = new NaplataViewModel();
+        this.BindingContext = ViewModel;
+        CompanyName = Preferences.Get("naziv_tvrtke", "");
+        CompanyOIB = Preferences.Get("OIBTvrtke", "");
+        CompanyAddress = Preferences.Get("adresaTvrtke", "");
+        CurrentDate = DateTime.Now.ToString("dd.MM.yyyy.");
+        DateTime dateTime = DateTime.Now;
+        dateTime = dateTime.AddDays(7);
+        PaymentDate = dateTime.ToString("dd.MM.yyyy");
+        ClientName = Preferences.Get("SelectedName", "");
+        ClientOIB = Preferences.Get("SelectedOIB", "");
+        ClientAddress = Preferences.Get("SelectedAddress", "");
 
     }
 
@@ -90,7 +121,143 @@ public partial class Racun : ContentPage
         textRange.CharacterFormat.FontName = "Calibri";
         textRange.CharacterFormat.TextColor = Syncfusion.Drawing.Color.Black;
 
-      
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Bold");
+        style.ParagraphFormat.BeforeSpacing = 12;
+        textRange = paragraph.AppendText("\n" + CompanyName + "\n" + CompanyAddress + "\nOIB: " + CompanyOIB) as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Bold");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
+        textRange = paragraph.AppendText(ClientName + "\n" + ClientAddress + "\nOIB: " + ClientOIB) as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("Broj računa: 123/5") as WTextRange;
+
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.BreakCharacterFormat.FontSize = 12f;
+        textRange = paragraph.AppendText("Datum računa\t\tMjesto izdavanja\t\tDospijeće računa") as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.BreakCharacterFormat.FontSize = 12f;
+        textRange = paragraph.AppendText(CurrentDate + "\t\tZadar\t\t\t" + PaymentDate + "\n") as WTextRange;
+
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("_____________________________________________________________________________________") as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Bold");
+        paragraph.BreakCharacterFormat.FontSize = 12f;
+        textRange = paragraph.AppendText("Odvjetnička usluga\tTarifa\tCijena\tPDV iznos\tIznos sa PDV") as WTextRange;
+
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("_____________________________________________________________________________________") as WTextRange;
+
+
+        ObservableCollection<ReceiptItem> receiptItems = ViewModel.ReceiptItems;
+
+        Debug.WriteLine("Entering try block: " + receiptItems);
+
+        for (int i = 0; i < receiptItems.Count; i++)
+        {
+            ReceiptItem item = receiptItems[i];
+
+            if (item != null)
+            {
+                ReceiptItemCount = receiptItems.Count;
+                ReceiptItemName = item.Name;
+                ReceiptItemTBR = item.Tbr;
+                ReceiptItemAmountEUR = item.Currency;
+                ReceiptItemParentName = item.ParentName;
+                ReceiptItemAmount = item.Amount;
+                ReceiptItemTotalAmount = item.TotalAmount;
+                ReceiptItemPoints = item.Points;
+                Debug.WriteLine(item.ParentName, item.Tbr);
+
+                float amountBeforePDV = (float)Math.Round(ReceiptItemAmount, 2);
+                string AmountBeforePDV = amountBeforePDV.ToString("0.00");
+
+                float PDVamount = (ReceiptItemAmount * 1.25f) - ReceiptItemAmount;
+                string PDVAmount = PDVamount.ToString("0.00");
+
+                float amountAfterPDV = (ReceiptItemAmount * 1.25f);
+                string AmountAfterPDV = amountAfterPDV.ToString("0.00");
+
+
+                paragraph = section.AddParagraph();
+                paragraph.ApplyStyle("Normal");
+                paragraph.BreakCharacterFormat.FontSize = 12f;
+
+                int indexNumber = i + 1; // Get the index number (starting from 1)
+                textRange = paragraph.AppendText(indexNumber + ". " + ReceiptItemParentName + "\t" + ReceiptItemTBR + " (" + ReceiptItemPoints + " bodova)\t" + AmountBeforePDV + "\t" + PDVAmount + "\t" + AmountAfterPDV) as WTextRange;
+            }
+            else
+            {
+                if (item == null)
+                {
+                    Debug.WriteLine("Item is null");
+                }
+            }
+        }
+
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("_____________________________________________________________________________________") as WTextRange;
+
+        float totalAmountBeforePDV = (float)Math.Round(ReceiptItemTotalAmount, 2);
+        string TotalAmountBeforePDV = totalAmountBeforePDV.ToString("0.00");
+
+        float totalPDVamount = (ReceiptItemTotalAmount * 1.25f) - ReceiptItemTotalAmount;
+        string TotalPDVAmount = totalPDVamount.ToString("0.00");
+
+        float totalAmountAfterPDV = (ReceiptItemTotalAmount * 1.25f);
+        string TotalAmountAfterPDV = totalAmountAfterPDV.ToString("N2");
+
+        float totalAmountAfterPDVhrk = ((ReceiptItemTotalAmount * 1.25f) * 7.5345f);
+        string TotalAmountAfterPDVhrk = totalAmountAfterPDVhrk.ToString("N2");
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.BreakCharacterFormat.FontSize = 12f;
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
+        textRange = paragraph.AppendText("\t\t\t\t" + TotalAmountBeforePDV + "\t\t" + TotalPDVAmount + "\t\t" + TotalAmountAfterPDV + " EUR\n" + TotalAmountAfterPDVhrk + " kn") as WTextRange;
+
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal2");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("Konverzija u euro izvršena po fiksnom tečaju konverzije: 7,53450 HRK = 1 EUR.") as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("Obračun prema naplaćenoj naknadi") as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal2");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("Upozorenje:\nU slučaju neispunjenja dospjele obveze po ovom računu vjerovnik je ovlašten zatražiti određivanje ovrhe na temelju vjerodostojne isprave") as WTextRange;
+
         //Appends the paragraph.
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal2");
@@ -119,4 +286,5 @@ public partial class Racun : ContentPage
         SaveService saveService = new();
         saveService.SaveAndView("Sample.docx", "application/msword", ms);
     }
+
 }
