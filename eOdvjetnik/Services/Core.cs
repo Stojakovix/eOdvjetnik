@@ -58,8 +58,8 @@ namespace eOdvjetnik.Services
         private const string IP = "IP";
         private const string USER = "Korisničko ime2";
         private const string PASS = "Lozinka2";
-        private const string FOLDER_nas = "databasename";
-        private const string SUBFOLDER_nas = "databasename";
+        private const string FOLDER_nas = "folder";
+        private const string SUBFOLDER_nas = "subfolder";
         private Dictionary<string, string>[] fileList;
 
         //public ObservableCollection<DocsItem> Items { get; set; } = new();
