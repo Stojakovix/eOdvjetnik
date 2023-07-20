@@ -31,9 +31,9 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Button Grid.Column="0" Grid.Row="0"  Text="Dodaj" Command="{Binding OnDodajClick}"  BorderColor="DarkGray" TextColor="Black" BackgroundColor="#5ac8fa" HorizontalOptions="FillAndExpand"/>
-                    <Button Grid.Column="1" Grid.Row="0" Text="Obriši"  BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" HorizontalOptions="Fill"/>
-                    <Button Grid.Column="2" Grid.Row="0" Text="Poništi"  BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black"  HorizontalOptions="EndAndExpand" Command="{Binding OnResetClick}"/>
+                    <Button Grid.Column="0" Grid.Row="0" FontSize="Default" FontAttributes="Bold"  Text="Dodaj" Command="{Binding OnDodajClick}"  BorderColor="DarkGray" TextColor="Black" BackgroundColor="#5ac8fa" HorizontalOptions="FillAndExpand" Margin="5,2,10,2"/>
+                    <Button Grid.Column="1" Grid.Row="0" FontSize="Default" FontAttributes="Bold" Text="Obriši"  BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" HorizontalOptions="Fill" Margin="5,2,10,2" />
+                    <Button Grid.Column="2" Grid.Row="0" FontSize="Default" FontAttributes="Bold" Text="Poništi"  BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black"  HorizontalOptions="EndAndExpand" Command="{Binding OnResetClick}" Margin="5,2,10,2"/>
 
                     <SearchBar Grid.Column="3" Placeholder="Pretraži" 
                                HorizontalOptions="EndAndExpand"
