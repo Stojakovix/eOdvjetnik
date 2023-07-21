@@ -406,7 +406,15 @@ public class KlijentiViewModel : INotifyPropertyChanged
         ClientEmail = Preferences.Get("SelectedEmail", "");
         ClientOther = Preferences.Get("SelectedOther", "");
         ClientCountry = Preferences.Get("SelectedCountry", "");
-        ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+        try
+        {
+            ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            
+        }
         OnReciptClickCommand = new Command(OpenRecipt);
 
 
@@ -458,7 +466,15 @@ public class KlijentiViewModel : INotifyPropertyChanged
             ClientEmail = Preferences.Get("SelectedEmail", "");
             ClientOther = Preferences.Get("SelectedOther", "");
             ClientCountry = Preferences.Get("SelectedCountry", "");
-            ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+            try
+            {
+                ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+            }
         }
         );
     }
