@@ -16,7 +16,6 @@ using System.Collections.ObjectModel;
 public partial class Naplata : ContentPage
 {
     public ObservableCollection<ReceiptItem> ReceiptItems  = new ObservableCollection<ReceiptItem>();
-    private NaplataViewModel ViewModel;
 
     public event EventHandler onCreateDocument;
 
@@ -31,8 +30,7 @@ public partial class Naplata : ContentPage
     public Naplata()
     {
         InitializeComponent();
-        ViewModel = new NaplataViewModel();
-        this.BindingContext = ViewModel;
+        this.BindingContext = App.SharedNaplataViewModel;
         CompanyName = Preferences.Get("naziv_tvrtke", "");
         CompanyOIB = Preferences.Get("OIBTvrtke", "");
         CompanyAddress = Preferences.Get("adresaTvrtke", "");

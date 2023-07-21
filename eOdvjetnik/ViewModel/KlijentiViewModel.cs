@@ -433,7 +433,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         try
         {
-            await Shell.Current.GoToAsync("/Racun");
+            await Shell.Current.GoToAsync("///Naplata");
             Debug.WriteLine("Racun clicked");
 
         }

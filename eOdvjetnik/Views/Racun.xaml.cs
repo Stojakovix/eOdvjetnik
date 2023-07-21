@@ -16,7 +16,6 @@ public partial class Racun : ContentPage
 {
     public ObservableCollection<ReceiptItem> ReceiptItems = new ObservableCollection<ReceiptItem>();
 
-    private NaplataViewModel ViewModel;
 
     public event EventHandler onCreateDocument;
 
@@ -37,12 +36,15 @@ public partial class Racun : ContentPage
     public int ReceiptItemCount { get; set; }
     public float ReceiptItemAmount { get; set; }
     public float ReceiptItemTotalAmount { get; set; }
+    public string IndexNumber { get; set; }
+    public string AmountBeforePDV { get; set; }
+    public string PDVAmount { get; set; }
+    public string AmountAfterPDV { get; set; }
 
     public Racun()
 	{
         InitializeComponent();
-        ViewModel = new NaplataViewModel();
-        this.BindingContext = ViewModel;
+        this.BindingContext = App.SharedNaplataViewModel;
         CompanyName = Preferences.Get("naziv_tvrtke", "");
         CompanyOIB = Preferences.Get("OIBTvrtke", "");
         CompanyAddress = Preferences.Get("adresaTvrtke", "");
@@ -153,58 +155,30 @@ public partial class Racun : ContentPage
         textRange = paragraph.AppendText(CurrentDate + "\t\tZadar\t\t\t" + PaymentDate + "\n") as WTextRange;
 
 
-        ObservableCollection<ReceiptItem> receiptItems = ViewModel.ReceiptItems;
-
-        Debug.WriteLine("Entering try block: " + receiptItems);
-
-        for (int i = 0; i < receiptItems.Count; i++)
-        {
-            ReceiptItem item = receiptItems[i];
-
-            if (item != null)
-            {
-                ReceiptItemCount = receiptItems.Count;
-                ReceiptItemName = item.Name;
-                ReceiptItemTBR = item.Tbr;
-                ReceiptItemAmountEUR = item.Currency;
-                ReceiptItemParentName = item.ParentName;
-                ReceiptItemAmount = item.Amount;
-                ReceiptItemTotalAmount = item.TotalAmount;
-                ReceiptItemPoints = item.Points;
-                Debug.WriteLine(item.ParentName, item.Tbr);
-
-                float amountBeforePDV = (float)Math.Round(ReceiptItemAmount, 2);
-                string AmountBeforePDV = amountBeforePDV.ToString("0.00");
-
-                float PDVamount = (ReceiptItemAmount * 1.25f) - ReceiptItemAmount;
-                string PDVAmount = PDVamount.ToString("0.00");
-
-                float amountAfterPDV = (ReceiptItemAmount * 1.25f);
-                string AmountAfterPDV = amountAfterPDV.ToString("0.00");
-
-
-                paragraph = section.AddParagraph();
-                paragraph.ApplyStyle("Normal");
-                paragraph.BreakCharacterFormat.FontSize = 12f;
-
-                int indexNumber = i + 1; // Get the index number (starting from 1)
-                textRange = paragraph.AppendText(indexNumber + ". " + ReceiptItemParentName + "\t" + ReceiptItemTBR + " (" + ReceiptItemPoints + " bodova)\t" + AmountBeforePDV + "\t" + PDVAmount + "\t" + AmountAfterPDV) as WTextRange;
-            }
-            else
-            {
-                if (item == null)
-                {
-                    Debug.WriteLine("Item is null");
-                }
-            }
-        }
+        
         //////////////////// Tablica
 
         //Appends the table.
         IWTable table = section.AddTable();
         table.ResetCells(2, 5);
         table.TableFormat.Borders.BorderType = BorderStyle.None;
-        table.TableFormat.IsAutoResized = true;
+        table.TableFormat.IsAutoResized = false;
+
+        
+        float[] columnWidths = new float[] { 170, 80, 60, 70, 80 };
+
+    
+        for (int i = 0; i < table.Rows[0].Cells.Count; i++)
+        {
+            table[0, i].Width = columnWidths[i];
+            table[0, i].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+        }
+
+        for (int i = 0; i < table.Rows[1].Cells.Count; i++)
+        {
+            table[1, i].Width = columnWidths[i];
+            table[1, i].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+        }
 
         //Zaglavlje računa
         //Appends the paragraph.
@@ -235,60 +209,112 @@ public partial class Racun : ContentPage
         paragraph = table[0, 4].AddParagraph();
         paragraph.ApplyStyle("Bold");
         textRange = paragraph.AppendText("Iznos s PDV-om") as WTextRange;
-     
+
 
 
         ///////// Stavke računa
-        //Appends the paragraph.
-        paragraph = table[1, 0].AddParagraph();
-        paragraph.ApplyStyle("Normal");
-        textRange = paragraph.AppendText("1. Podnesak") as WTextRange;
-      
-        paragraph = table[1, 0].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
+        ///
+        ObservableCollection<ReceiptItem> receiptItems = App.SharedNaplataViewModel.ReceiptItems;
 
-        //Appends the paragraph.
-        paragraph = table[1, 1].AddParagraph();
-        paragraph.ApplyStyle("Normal");
-        textRange = paragraph.AppendText("1.2 (25 bodova)") as WTextRange;
-            
-        paragraph = table[1, 1].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
+        Debug.WriteLine("Entering try block: " + receiptItems);
 
-        //Appends the paragraph.
-        paragraph = table[1, 2].AddParagraph();
-        paragraph.ApplyStyle("Normal");
-        textRange = paragraph.AppendText("250,00") as WTextRange;
-    
-        paragraph = table[1, 3].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
+        for (int i = 0; i < receiptItems.Count; i++)
+        {
+            ReceiptItem item = receiptItems[i];
 
-        //Appends the paragraph.
-        paragraph = table[1, 3].AddParagraph();
-        paragraph.ApplyStyle("Normal");
-        textRange = paragraph.AppendText("62,50") as WTextRange;
+            if (item != null)
+            {
+                ReceiptItemCount = receiptItems.Count;
+                ReceiptItemName = item.Name;
+                ReceiptItemTBR = item.Tbr;
+                ReceiptItemAmountEUR = item.Currency;
+                ReceiptItemParentName = item.ParentName;
+                ReceiptItemAmount = item.Amount;
+                ReceiptItemTotalAmount = item.TotalAmount;
+                ReceiptItemPoints = item.Points;
+                Debug.WriteLine(item.ParentName, item.Tbr);
 
-        paragraph = table[1, 4].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
+                float amountBeforePDV = (float)Math.Round(ReceiptItemAmount, 2);
+                AmountBeforePDV = amountBeforePDV.ToString("0.00");
 
-        //Appends the paragraph.
-        paragraph = table[1, 4].AddParagraph();
-        paragraph.ApplyStyle("Normal");
-        textRange = paragraph.AppendText("312,5") as WTextRange;
-  
+                float PDVamount = (ReceiptItemAmount * 1.25f) - ReceiptItemAmount;
+                PDVAmount = PDVamount.ToString("0.00");
 
-        paragraph = table[1, 2].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
+                float amountAfterPDV = (ReceiptItemAmount * 1.25f);
+                AmountAfterPDV = amountAfterPDV.ToString("0.00");
+
+
+                paragraph = section.AddParagraph();
+                paragraph.ApplyStyle("Normal");
+                paragraph.BreakCharacterFormat.FontSize = 12f;
+
+                int indexNumber = i + 1; // Get the index number (starting from 1)
+                IndexNumber = indexNumber.ToString();
+
+              
+
+                //Appends the paragraph.
+                paragraph = table[1, 0].AddParagraph();
+                paragraph.ApplyStyle("Normal");
+                textRange = paragraph.AppendText(IndexNumber + ". " + ReceiptItemParentName) as WTextRange;
+
+                paragraph = table[1, 0].AddParagraph();
+                paragraph.ParagraphFormat.AfterSpacing = 0;
+                paragraph.ParagraphFormat.LineSpacing = 12f;
+                paragraph.BreakCharacterFormat.FontSize = 12f;
+
+                //Appends the paragraph.
+                paragraph = table[1, 1].AddParagraph();
+                paragraph.ApplyStyle("Normal");
+                textRange = paragraph.AppendText(ReceiptItemTBR + " (" + ReceiptItemPoints + " bodova)") as WTextRange;
+
+
+                paragraph = table[1, 1].AddParagraph();
+                paragraph.ParagraphFormat.AfterSpacing = 0;
+                paragraph.ParagraphFormat.LineSpacing = 12f;
+                paragraph.BreakCharacterFormat.FontSize = 12f;
+
+                //Appends the paragraph.
+                paragraph = table[1, 2].AddParagraph();
+                paragraph.ApplyStyle("Normal");
+                textRange = paragraph.AppendText(AmountBeforePDV) as WTextRange;
+
+                paragraph = table[1, 3].AddParagraph();
+                paragraph.ParagraphFormat.AfterSpacing = 0;
+                paragraph.ParagraphFormat.LineSpacing = 12f;
+                paragraph.BreakCharacterFormat.FontSize = 12f;
+
+                //Appends the paragraph.
+                paragraph = table[1, 3].AddParagraph();
+                paragraph.ApplyStyle("Normal");
+                textRange = paragraph.AppendText(PDVAmount) as WTextRange;
+
+                paragraph = table[1, 4].AddParagraph();
+                paragraph.ParagraphFormat.AfterSpacing = 0;
+                paragraph.ParagraphFormat.LineSpacing = 12f;
+                paragraph.BreakCharacterFormat.FontSize = 12f;
+
+                //Appends the paragraph.
+                paragraph = table[1, 4].AddParagraph();
+                paragraph.ApplyStyle("Normal");
+                textRange = paragraph.AppendText(AmountAfterPDV) as WTextRange;
+
+
+                paragraph = table[1, 2].AddParagraph();
+                paragraph.ParagraphFormat.AfterSpacing = 0;
+                paragraph.ParagraphFormat.LineSpacing = 12f;
+                paragraph.BreakCharacterFormat.FontSize = 12f;
+            }
+            else
+            {
+                if (item == null)
+                {
+                    Debug.WriteLine("Item is null");
+                }
+            }
+        }
+
+        
         ////////////////////
 
       
