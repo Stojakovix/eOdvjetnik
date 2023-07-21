@@ -40,7 +40,6 @@ public partial class Klijenti : ContentPage
 
         Preferences.Set("SelectedName", Ime);
         Preferences.Set("SelectedOIB", OIB);
-        Preferences.Set("SelectedBirthDate", Datum_rodenja.ToString("d"));
         Preferences.Set("SelectedAddress", Adresa);
         Preferences.Set("SelectedRsidence", Boraviste);
         Preferences.Set("SelectedPhone", Telefon);
