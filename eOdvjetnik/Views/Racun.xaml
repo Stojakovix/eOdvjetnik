@@ -19,39 +19,17 @@
         <!-- Header -->
 
         <VerticalStackLayout Grid.Row="0" >
-            <Grid Margin="45,0,0,10">
-                <Grid.Resources>
-                    <Style TargetType="Label">
-                        <Setter Property="TextColor" Value="Black" />
-                    </Style>
-                </Grid.Resources>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
 
+            <HorizontalStackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    
+                    </Grid.ColumnDefinitions>
 
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="800" />
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="100" />
-
-                </Grid.ColumnDefinitions>
-                <Button Grid.Row="0" Grid.ColumnSpan="5"
-                                    BorderColor="DarkGray"
-                                    BorderWidth="1"
-                                    BackgroundColor="#5ac8fa"
-                                    Text="Izradi račun"
-                                    FontAttributes="Bold"
-                                    TextColor="Black"
-                                    HorizontalOptions="Start"
-                                    Clicked="CreateDocument"
-                                    FontSize="Default"
-                                    Margin="5,20,10,10"/>
-                <Button  Grid.Row="0" Grid.Column="2"
+                    <Button Grid.Column="0" 
                                    BorderColor="DarkGray"
                                    BorderWidth="1"
                                    BackgroundColor="#DC143C"
@@ -59,12 +37,12 @@
                                    FontAttributes="Bold"
                                    TextColor="LightGray"
                                    Command="{Binding NewReceipt}" 
-                                   HorizontalOptions="Start"
+                                   HorizontalOptions="End"
                                    FontSize="Default"
-                                   Margin="10,20,10,10"
-                                     Padding="5,5,5,5"
+                                   Margin="60,20,10,10"
                                      />
-                <Button  Grid.Row="0" Grid.ColumnSpan="5"
+                    
+                    <Button  Grid.Column="1" 
                                    BorderColor="DarkGray"
                                    BorderWidth="1"
                                    BackgroundColor="#DC143C"
@@ -74,20 +52,60 @@
                                    Command="{Binding RemoveItemCommand}" 
                                    HorizontalOptions="End"
                                    FontSize="Default"
-                                   Margin="10,20,0,10"
-                                     Padding="5,5,5,5"
+                                   Margin="20,20,0,10"
                                      />
 
-                <Label Grid.Row="1" Grid.Column="0" FontAttributes="Bold" Text="Tbr." Margin="10,0,0,10"  />
-                <Label Grid.Row="1" Grid.Column="1" FontAttributes="Bold" Text="Radnja" Margin="10,0,0,10"  />
-                <Label Grid.Row="1" Grid.Column="2" FontAttributes="Bold" Text="Bodovi" HorizontalOptions="End" Margin="0,0,5,0"  />
-                <Label Grid.Row="1" Grid.Column="3" FontAttributes="Bold" Text="Koeficijent" HorizontalOptions="End" Margin="0,0,5,0" />
-                <Label Grid.Row="1" Grid.Column="4" FontAttributes="Bold" Text="Iznos" HorizontalOptions="End" Margin="0,0,5,0"  />
+          
+                    <Button Grid.Column="3"
+                                    BorderColor="DarkGray"
+                                    BorderWidth="1"
+                                    BackgroundColor="#5ac8fa"
+                                    Text="Izradi račun"
+                                    FontAttributes="Bold"
+                                    TextColor="Black"
+                                    HorizontalOptions="Start"
+                                    Clicked="CreateDocument"
+                                    FontSize="Default"
+                                    Margin="200,20,10,10"/>
+                </Grid>
+
+            </HorizontalStackLayout>
+            
+            
+            <Grid >
+                <Grid.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="TextColor" Value="Black" />
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="800" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="60" />
+
+                </Grid.ColumnDefinitions>
+               
+
+                <Label Grid.Row="1" Grid.Column="0" FontAttributes="Bold" Text="Tbr." Margin="60,0,0,0"  />
+                <Label Grid.Row="1" Grid.Column="1" FontAttributes="Bold" Text="Radnja" Margin="45,0,0,0" />
+                <Label Grid.Row="1" Grid.Column="2" FontAttributes="Bold" Text="Bodovi" HorizontalOptions="End" />
+                <Label Grid.Row="1" Grid.Column="3" FontAttributes="Bold" Text="Koeficijent" Margin="30,0,0,0" HorizontalOptions="Center"  />
+                <Label Grid.Row="1" Grid.Column="4" FontAttributes="Bold" Text="Iznos" HorizontalOptions="End"  />
             </Grid>
         </VerticalStackLayout>
 
 
-        <ScrollView Grid.Row="1" Grid.ColumnSpan="5" >
+        <ScrollView Grid.Row="1" Margin="60,0,0,0" >
             <ListView ItemsSource="{Binding ReceiptItems, Mode=TwoWay}" Grid.ColumnSpan="6" SelectedItem="{Binding SelectedReceiptItem}"  >
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -102,29 +120,29 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
-
                                 </Grid.RowDefinitions>
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="800" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="60" />
 
                                 </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Row="1" Grid.Column="0" Text="{Binding Tbr}" LineBreakMode="NoWrap" VerticalOptions="Center" />
+                                    <Label Grid.Row="1" Grid.Column="0" Text="{Binding Tbr}" LineBreakMode="NoWrap" VerticalOptions="Center"  />
 
-                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Name}" LineBreakMode="NoWrap" VerticalOptions="Center"  />
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Name}" LineBreakMode="NoWrap" VerticalOptions="Center" HorizontalOptions="Start" />
 
-                                    <Label Grid.Row="1" Grid.Column="2" Text="{Binding Points}" HorizontalTextAlignment="End" VerticalOptions="Center" WidthRequest="100" Padding="0,0,10,0" />
+                                <Label Grid.Row="1" Grid.Column="2" Text="{Binding Points}"  VerticalOptions="Center" HorizontalOptions="Center"  />
 
-                                    <Entry Grid.Row="1" Grid.Column="3" Text="{Binding Coefficient, Mode=TwoWay}" HorizontalTextAlignment="End" VerticalOptions="Center" WidthRequest="100"  />
+                                <Entry Grid.Row="1" Grid.Column="3" Text="{Binding Coefficient, Mode=TwoWay}"  VerticalOptions="Center" HorizontalOptions="CenterAndExpand"   />
 
-                                    <Label Grid.Row="1" Grid.Column="4" Text="{Binding Currency}"  HorizontalTextAlignment="End" VerticalOptions="Center" WidthRequest="100" Padding="0,0,10,0" />
+                                    <Label Grid.Row="1" Grid.Column="4" Text="{Binding Currency}"   VerticalOptions="Center" HorizontalOptions="End" />
 
-                                <BoxView Margin="0,40,0,0" Grid.Row="1" Grid.ColumnSpan="12" BackgroundColor="Red" HeightRequest="1"  />
+                                    <BoxView Margin="0,40,0,0" Grid.Row="1" Grid.ColumnSpan="5" BackgroundColor="Red" HeightRequest="1"  />
 
                             </Grid>
                             
