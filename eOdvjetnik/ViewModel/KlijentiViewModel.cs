@@ -390,6 +390,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
     #endregion
 
     public ICommand OnReciptClickCommand { get; set; }
+    public ICommand RefreshContacts { get; set; }
+
 
     public KlijentiViewModel()
     {
@@ -416,7 +418,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
             
         }
         OnReciptClickCommand = new Command(OpenRecipt);
-
+        RefreshContacts = new Command(GenerateFiles);
 
         var timer = Application.Current.Dispatcher.CreateTimer();
         timer.Interval = TimeSpan.FromMilliseconds(200);

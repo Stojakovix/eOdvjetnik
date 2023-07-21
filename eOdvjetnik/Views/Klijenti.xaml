@@ -90,7 +90,19 @@
                 Command="{Binding OnReciptClickCommand}" 
                 FontSize="Default"
                 Margin="0,0,10,10"/>
-                
+
+                <Button 
+                BorderColor="DarkGray"
+                BorderWidth="1"
+                BackgroundColor="#5ac8fa"
+                Text="Osvježi"
+                FontAttributes="Bold"
+                TextColor="Black"
+                HorizontalOptions="End"
+                Command="{Binding RefreshContacts}" 
+                FontSize="Default"
+                Margin="0,0,10,10"/>
+
                 <SearchBar  
                    BackgroundColor="LightGray"
                    Placeholder="Pretraga po imenu ili OIB-u"
