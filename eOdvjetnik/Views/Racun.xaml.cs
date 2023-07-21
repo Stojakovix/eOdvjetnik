@@ -152,22 +152,6 @@ public partial class Racun : ContentPage
         paragraph.BreakCharacterFormat.FontSize = 12f;
         textRange = paragraph.AppendText(CurrentDate + "\t\tZadar\t\t\t" + PaymentDate + "\n") as WTextRange;
 
-        paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal");
-        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("_____________________________________________________________________________________") as WTextRange;
-
-        //Appends the paragraph.
-        paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Bold");
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        textRange = paragraph.AppendText("Odvjetnička usluga\tTarifa\tCijena\tPDV iznos\tIznos sa PDV") as WTextRange;
-
-        paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal");
-        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("_____________________________________________________________________________________") as WTextRange;
-
 
         ObservableCollection<ReceiptItem> receiptItems = ViewModel.ReceiptItems;
 
@@ -225,67 +209,41 @@ public partial class Racun : ContentPage
         //Zaglavlje računa
         //Appends the paragraph.
         paragraph = table[0, 0].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        paragraph.BreakCharacterFormat.FontName = "Times New Roman";
+        paragraph.ApplyStyle("Bold");
         textRange = paragraph.AppendText("Odvjetnička usluga") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
+      
 
         //Appends the paragraph.
         paragraph = table[0, 1].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        paragraph.BreakCharacterFormat.FontName = "Times New Roman";
+        paragraph.ApplyStyle("Bold");
         textRange = paragraph.AppendText("Tarifa") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
+      
 
         //Appends the paragraph.
         paragraph = table[0, 2].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        paragraph.BreakCharacterFormat.FontName = "Times New Roman";
+        paragraph.ApplyStyle("Bold");
         textRange = paragraph.AppendText("Cijena") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
+      
 
         //Appends the paragraph.
         paragraph = table[0, 3].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        paragraph.BreakCharacterFormat.FontName = "Times New Roman";
+        paragraph.ApplyStyle("Bold");
         textRange = paragraph.AppendText("PDV iznos") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
+      
 
         //Appends the paragraph.
         paragraph = table[0, 4].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        paragraph.BreakCharacterFormat.FontName = "Times New Roman";
+        paragraph.ApplyStyle("Bold");
         textRange = paragraph.AppendText("Iznos s PDV-om") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
+     
 
 
         ///////// Stavke računa
         //Appends the paragraph.
         paragraph = table[1, 0].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        paragraph.BreakCharacterFormat.FontName = "Times New Roman";
+        paragraph.ApplyStyle("Normal");
         textRange = paragraph.AppendText("1. Podnesak") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-
-     
+      
         paragraph = table[1, 0].AddParagraph();
         paragraph.ParagraphFormat.AfterSpacing = 0;
         paragraph.ParagraphFormat.LineSpacing = 12f;
@@ -293,15 +251,9 @@ public partial class Racun : ContentPage
 
         //Appends the paragraph.
         paragraph = table[1, 1].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        paragraph.BreakCharacterFormat.FontName = "Times New Roman";
+        paragraph.ApplyStyle("Normal");
         textRange = paragraph.AppendText("1.2 (25 bodova)") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-
-       
+            
         paragraph = table[1, 1].AddParagraph();
         paragraph.ParagraphFormat.AfterSpacing = 0;
         paragraph.ParagraphFormat.LineSpacing = 12f;
@@ -309,15 +261,9 @@ public partial class Racun : ContentPage
 
         //Appends the paragraph.
         paragraph = table[1, 2].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        paragraph.BreakCharacterFormat.FontName = "Times New Roman";
+        paragraph.ApplyStyle("Normal");
         textRange = paragraph.AppendText("250,00") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-
-
+    
         paragraph = table[1, 3].AddParagraph();
         paragraph.ParagraphFormat.AfterSpacing = 0;
         paragraph.ParagraphFormat.LineSpacing = 12f;
@@ -325,14 +271,8 @@ public partial class Racun : ContentPage
 
         //Appends the paragraph.
         paragraph = table[1, 3].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        paragraph.BreakCharacterFormat.FontName = "Times New Roman";
+        paragraph.ApplyStyle("Normal");
         textRange = paragraph.AppendText("62,50") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-
 
         paragraph = table[1, 4].AddParagraph();
         paragraph.ParagraphFormat.AfterSpacing = 0;
@@ -341,14 +281,9 @@ public partial class Racun : ContentPage
 
         //Appends the paragraph.
         paragraph = table[1, 4].AddParagraph();
-        paragraph.ParagraphFormat.AfterSpacing = 0;
-        paragraph.ParagraphFormat.LineSpacing = 12f;
-        paragraph.BreakCharacterFormat.FontSize = 12f;
-        paragraph.BreakCharacterFormat.FontName = "Times New Roman";
+        paragraph.ApplyStyle("Normal");
         textRange = paragraph.AppendText("312,5") as WTextRange;
-        textRange.CharacterFormat.FontSize = 12f;
-        textRange.CharacterFormat.FontName = "Times New Roman";
-
+  
 
         paragraph = table[1, 2].AddParagraph();
         paragraph.ParagraphFormat.AfterSpacing = 0;
@@ -356,10 +291,7 @@ public partial class Racun : ContentPage
         paragraph.BreakCharacterFormat.FontSize = 12f;
         ////////////////////
 
-        paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal");
-        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("_____________________________________________________________________________________") as WTextRange;
+      
 
         float totalAmountBeforePDV = (float)Math.Round(ReceiptItemTotalAmount, 2);
         string TotalAmountBeforePDV = totalAmountBeforePDV.ToString("0.00");
