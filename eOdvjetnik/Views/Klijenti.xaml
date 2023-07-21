@@ -18,8 +18,8 @@
         <StackLayout Grid.Row="0" >
             <Grid Margin="0,0,0,10" BackgroundColor="LightGray" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="120" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -71,7 +71,7 @@
                 BorderColor="DarkGray"
                 BorderWidth="1"
                 BackgroundColor="#5ac8fa"
-                Text="Dodaj novi kontakt"
+                Text="Dodaj novi"
                 FontAttributes="Bold"
                 TextColor="Black"
                 HorizontalOptions="End"
@@ -83,11 +83,11 @@
                 BorderColor="DarkGray"
                 BorderWidth="1"
                 BackgroundColor="#5ac8fa"
-                Text="Dodaj kontakt u račun"
+                Text="Dodaj u račun"
                 FontAttributes="Bold"
                 TextColor="Black"
                 HorizontalOptions="End"
-                Command="{Binding DodajOdabraniKontatNaRacun}" 
+                Command="{Binding OnReciptClickCommand}" 
                 FontSize="Default"
                 Margin="0,0,10,10"/>
                 
@@ -107,30 +107,38 @@
             </HorizontalStackLayout>
 
 
-            <Grid Margin="20,0,0,0" >
+            <Grid  >
                 <Grid.Resources>
                     <Style TargetType="Label">
                         <Setter Property="TextColor" Value="Black" />
                     </Style>
                 </Grid.Resources>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="25" />
                     <RowDefinition Height="Auto" />
 
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*"  />
                     <ColumnDefinition Width="*"  />
                     <ColumnDefinition Width="*"  />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="60" />
+
+
+
                 </Grid.ColumnDefinitions>
 
-                <Label MinimumWidthRequest="300" Grid.Column="0" FontAttributes="Bold" Text="Ime" HorizontalOptions="Start"  />
-                <Label MinimumWidthRequest="300" Grid.Column="1" FontAttributes="Bold" Text="Adresa" HorizontalOptions="Start"  />
-                <Label MinimumWidthRequest="50" Grid.Column="2" FontAttributes="Bold" Text="Telefon" HorizontalOptions="Start"  />
-                <Label MinimumWidthRequest="50" Grid.Column="3" FontAttributes="Bold" Text="Mobitel" HorizontalOptions="Start"  />
-                <Label MinimumWidthRequest="100" Grid.Column="4" FontAttributes="Bold" Text="Email" HorizontalOptions="Start"  />
+                <Label MinimumWidthRequest="300" Grid.Column="1" FontAttributes="Bold" Text="Ime" HorizontalOptions="Start"  />
+                <Label MinimumWidthRequest="100" Grid.Column="2" FontAttributes="Bold" Text="OIB" HorizontalOptions="Start"  />
+                <Label MinimumWidthRequest="200" Grid.Column="3" FontAttributes="Bold" Text="Adresa" HorizontalOptions="Start"  />
+                <Label MinimumWidthRequest="50" Grid.Column="4" FontAttributes="Bold" Text="Telefon" HorizontalOptions="Start"  />
+                <Label MinimumWidthRequest="50" Grid.Column="5" FontAttributes="Bold" Text="Mobitel" HorizontalOptions="Start"  />
+                <Label MinimumWidthRequest="100" Grid.Column="6" FontAttributes="Bold" Text="Email" HorizontalOptions="Start"  />
+
             </Grid>
         </StackLayout>
 
@@ -140,7 +148,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid BackgroundColor="White" Margin="20,0,0,0" >
+                            <Grid BackgroundColor="White"  >
                                 <Grid.Resources>
                                     <Style TargetType="Label">
                                         <Setter Property="TextColor" Value="Black" />
@@ -152,20 +160,30 @@
                                 </Grid.RowDefinitions>
 
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*"  />
                                     <ColumnDefinition Width="*"  />
                                     <ColumnDefinition Width="*"  />
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="60" />
+
+
+
+
                                 </Grid.ColumnDefinitions>
 
-                                <Label MinimumWidthRequest="300" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="0" Text="{Binding Ime}" HorizontalOptions="Start"  />
-                                <Label MinimumWidthRequest="300" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="1" Text="{Binding Adresa}"  HorizontalOptions="Start" />
-                                <Label MinimumWidthRequest="50" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="2" Text="{Binding Telefon}"  HorizontalOptions="Start" />
-                                <Label MinimumWidthRequest="50" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="3" Text="{Binding Mobitel}"  HorizontalOptions="Start" />
-                                <Label MinimumWidthRequest="100" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="4" Text="{Binding Email}"  HorizontalOptions="Start" />
+                                <Label MinimumWidthRequest="300" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="1" Text="{Binding Ime}" HorizontalOptions="Start"  />
+                                <Label MinimumWidthRequest="100" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="2" Text="{Binding OIB}"  HorizontalOptions="Start" />
+                                <Label MinimumWidthRequest="200" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="3" Text="{Binding Adresa}"  HorizontalOptions="Start" />
+                                <Label MinimumWidthRequest="50" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="4" Text="{Binding Telefon}"  HorizontalOptions="Start" />
+                                <Label MinimumWidthRequest="50" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="5" Text="{Binding Mobitel}"  HorizontalOptions="Start" />
+                                <Label MinimumWidthRequest="100" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="6" Text="{Binding Email}"  HorizontalOptions="Start" />
+                                <ImageButton Source="edit.png" HorizontalOptions="Start"  Grid.Row="1" Grid.Column="7" Aspect="AspectFit" Padding="5" MaximumHeightRequest="6" />
 
-                                <BoxView Margin="0,30,0,0" Grid.Row="1" Grid.ColumnSpan="12" BackgroundColor="Red" HeightRequest="1"  />
+
+                                <BoxView Margin="0,40,0,0" Grid.Row="1" Grid.ColumnSpan="12" BackgroundColor="Red" HeightRequest="1"  />
 
                             </Grid>
                         </ViewCell>

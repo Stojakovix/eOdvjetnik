@@ -109,12 +109,14 @@ public class KlijentiViewModel : INotifyPropertyChanged
                     {
 
                         int id;
-                        int pravna;
+                        int pravnaInt;
                         DateTime datum_rodenja;
 
                         int.TryParse(filesRow["id"], out id);
-                        int.TryParse(filesRow["pravna"], out pravna);
+                        int.TryParse(filesRow["pravna"], out pravnaInt);
                         DateTime.TryParse(filesRow["datum_rodenja"], out datum_rodenja);
+
+                        string pravnaString = pravnaInt == 1 ? "Da" : "Ne";
 
                         contacts.Add(new ContactItem()
                         {
@@ -130,9 +132,11 @@ public class KlijentiViewModel : INotifyPropertyChanged
                             Email = filesRow["email"],
                             Ostalo = filesRow["ostalo"],
                             Drzava = filesRow["drzava"],
-                            Pravna = pravna
+                            PravnaInt = pravnaInt,
+                            PravnaString = pravnaString
 
                         });
+
                     }
 
                 }
@@ -161,7 +165,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 NoQueryResult = false;
                 contacts.Clear();
             }
-            string query = "SELECT * FROM `contacts` WHERE ime LIKE '%" + SearchText + "%' OR OIB LIKE '%" + SearchText + "%'";
+            string query = "SELECT * FROM `contacts` WHERE LOWER(ime) LIKE LOWER('%" + SearchText + "%') OR OIB LIKE '%" + SearchText + "%'";
             Debug.WriteLine(query);
             try
             {
@@ -173,12 +177,14 @@ public class KlijentiViewModel : INotifyPropertyChanged
                     {
 
                         int id;
-                        int pravna;
+                        int pravnaInt;
                         DateTime datum_rodenja;
 
                         int.TryParse(filesRow["id"], out id);
-                        int.TryParse(filesRow["pravna"], out pravna);
+                        int.TryParse(filesRow["pravna"], out pravnaInt);
                         DateTime.TryParse(filesRow["datum_rodenja"], out datum_rodenja);
+
+                        string pravnaString = pravnaInt == 1 ? "Da" : "Ne";
 
                         contacts.Add(new ContactItem()
                         {
@@ -194,8 +200,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
                             Email = filesRow["email"],
                             Ostalo = filesRow["ostalo"],
                             Drzava = filesRow["drzava"],
-                            Pravna = pravna
-
+                            PravnaInt = pravnaInt,
+                            PravnaString = pravnaString
                         });
                     }
                 }
@@ -380,7 +386,11 @@ public class KlijentiViewModel : INotifyPropertyChanged
             }
         }
     }
+
     #endregion
+
+    public ICommand OnReciptClickCommand { get; set; }
+
     public KlijentiViewModel()
     {
         Contacts = new ObservableCollection<ContactItem>();
@@ -396,8 +406,9 @@ public class KlijentiViewModel : INotifyPropertyChanged
         ClientEmail = Preferences.Get("SelectedEmail", "");
         ClientOther = Preferences.Get("SelectedOther", "");
         ClientCountry = Preferences.Get("SelectedCountry", "");
-        //ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
-        
+        ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+        OnReciptClickCommand = new Command(OpenRecipt);
+
 
         var timer = Application.Current.Dispatcher.CreateTimer();
         timer.Interval = TimeSpan.FromMilliseconds(200);
@@ -418,6 +429,20 @@ public class KlijentiViewModel : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
+    private async void OpenRecipt()
+    {
+        try
+        {
+            await Shell.Current.GoToAsync("///Naplata");
+            Debug.WriteLine("Racun clicked");
+
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+
+    }
     void Refresh()
     {
         MainThread.BeginInvokeOnMainThread(() =>
@@ -433,7 +458,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
             ClientEmail = Preferences.Get("SelectedEmail", "");
             ClientOther = Preferences.Get("SelectedOther", "");
             ClientCountry = Preferences.Get("SelectedCountry", "");
-            //ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+            ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
         }
         );
     }

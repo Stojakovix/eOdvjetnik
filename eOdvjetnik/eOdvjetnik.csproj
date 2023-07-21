@@ -113,14 +113,11 @@
 	  <Compile Remove="Services\SaveAndroid.cs" />
 	  <None Remove="Resources\Icons\" />
 	  <EmbeddedResource Remove="Resources\SfScheduler.hr-HR.resx" />
-	  <None Remove="Resources\Images\adventure.jpg" />
+	  <None Remove="Resources\Images\edit.png" />
 	  <None Remove="Resources\Images\Image1.png" />
 	  <None Remove="Resources\Images\logoimg.svg" />
 	  <None Remove="Resources\Images\logotext.svg" />
 	  <None Remove="Resources\Images\main_pozadina.jpg" />
-	  <None Remove="Resources\Images\mountain_200.jpg" />
-	  <None Remove="Resources\Images\mountain_300.jpg" />
-	  <None Remove="Resources\Images\road_550_w.jpg" />
 	  <None Remove="Settings.bundle\" />
 	  <None Remove="Settings.bundle\EmptyTextFile.txt" />
 	</ItemGroup>
@@ -228,6 +225,9 @@
 	  <MauiXaml Update="Views\NoviKlijent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Racun.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Postavke.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -249,6 +249,9 @@
 	  <BundleResource Include="Settings.bundle\Root.plist" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Views\Racun.xaml.cs">
+	    <DependentUpon>Racun.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Postavke.xaml.cs">
 	    <DependentUpon>Postavke.xaml</DependentUpon>
 	  </Compile>

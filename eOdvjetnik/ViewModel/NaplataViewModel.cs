@@ -13,6 +13,7 @@ namespace eOdvjetnik.ViewModel
 {
     public class NaplataViewModel : INotifyPropertyChanged
     {
+     
         #region Pretraga tarifa
 
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
@@ -36,6 +37,7 @@ namespace eOdvjetnik.ViewModel
                 }
             }
         }
+ 
         private ICommand searchCommand;
         public ICommand SearchCommand
         {
@@ -206,28 +208,7 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-        private bool _ReceiptVisible;
-        public bool ReceiptVisible
-        {
-            get { return _ReceiptVisible; }
-            set
-            {
-                _ReceiptVisible = value;
-                OnPropertyChanged(nameof(ReceiptVisible));
-            }
-        }
-
-        private bool _ReceiptPopupOpen;
-
-        public bool ReceiptPopupOpen
-        {
-            get { return _ReceiptPopupOpen; }
-            set
-            {
-                _ReceiptPopupOpen = value;
-                OnPropertyChanged(nameof(ReceiptPopupOpen));
-            }
-        }
+   
 
         private ObservableCollection<ReceiptItem> _receiptItems;
         public ObservableCollection<ReceiptItem> ReceiptItems
@@ -241,8 +222,8 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
+
         public ICommand OnReciptClickCommand { get; set; }
-        public ICommand ReceiptCloseCommand { get; set; }
         public ICommand AddItemCommand { get; }
         public ICommand RemoveItemCommand { get; set; }
         public ICommand NewReceipt { get; }
@@ -285,7 +266,6 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message);
             }
             UpdateTotalAmount();
-
         }
 
         public void UpdateTotalAmount()
@@ -318,6 +298,7 @@ namespace eOdvjetnik.ViewModel
                     UkupanIznosVisible = false
                 };
                 ReceiptItems.Add(newItem);
+                Debug.WriteLine("added new item as ReceptItem: " + newItem.Name);
                 CalculateTotalAmount();
 
             }
@@ -329,36 +310,24 @@ namespace eOdvjetnik.ViewModel
         }
 
 
-
-
-
-        private void OnReceiptClick()
+            private async void OnReceiptClick()
         {
             try
             {
                 CalculateTotalAmount();
-                ReceiptPopupOpen = true;
-                ReceiptVisible = true;
+                await Shell.Current.GoToAsync("/Racun");
+                Debug.WriteLine("Racun clicked");
+
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
+
         }
 
 
-        private void ReceiptPopupClose()
-        {
-            try
-            {
-                ReceiptPopupOpen = false;
-                ReceiptVisible = false;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
+
 
         public void DeleteRecipt()
         {
@@ -392,7 +361,6 @@ namespace eOdvjetnik.ViewModel
         {
 
             OnReciptClickCommand = new Command(OnReceiptClick);
-            ReceiptCloseCommand = new Command(ReceiptPopupClose);
             NewReceipt = new Command(DeleteRecipt);
             AddItemCommand = new Command(AddItem);
             RemoveItemCommand = new Command(DeleteItem);
@@ -422,7 +390,7 @@ namespace eOdvjetnik.ViewModel
             timer.Start();
         }
 
-
+     
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
