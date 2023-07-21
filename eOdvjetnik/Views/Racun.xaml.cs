@@ -84,6 +84,13 @@ public partial class Racun : ContentPage
         style.ParagraphFormat.AfterSpacing = 0;
         style.ParagraphFormat.LineSpacing = 12f; //manji spacing
 
+        style = document.AddParagraphStyle("TableItem") as WParagraphStyle;
+        style.CharacterFormat.FontName = "Calibri";
+        style.CharacterFormat.FontSize = 10f;
+        style.ParagraphFormat.BeforeSpacing = 6;
+        style.ParagraphFormat.AfterSpacing = 6;
+        style.ParagraphFormat.LineSpacing = 12f;
+
         style = document.AddParagraphStyle("Bold") as WParagraphStyle;
         style.CharacterFormat.FontName = "Calibri";
         style.CharacterFormat.Bold = true;
@@ -112,7 +119,7 @@ public partial class Racun : ContentPage
         picture.TextWrappingStyle = TextWrappingStyle.InFrontOfText;
         picture.HorizontalAlignment = ShapeHorizontalAlignment.Center;
         picture.VerticalOrigin = VerticalOrigin.Margin;
-        picture.VerticalPosition = -100;
+        picture.VerticalPosition = -50;
         // 1 cm = 28.35f
         picture.Width = 53.8f;
         picture.Height = 80.8f;
@@ -197,33 +204,38 @@ public partial class Racun : ContentPage
         paragraph = table[0, 2].AddParagraph();
         paragraph.ApplyStyle("Bold");
         textRange = paragraph.AppendText("Cijena") as WTextRange;
-      
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
+
+
 
         //Appends the paragraph.
         paragraph = table[0, 3].AddParagraph();
         paragraph.ApplyStyle("Bold");
         textRange = paragraph.AppendText("PDV iznos") as WTextRange;
-      
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
+
+
 
         //Appends the paragraph.
         paragraph = table[0, 4].AddParagraph();
         paragraph.ApplyStyle("Bold");
         textRange = paragraph.AppendText("Iznos s PDV-om") as WTextRange;
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
 
+
+        table.Rows.RemoveAt(1);
 
 
         ///////// Stavke računa
-        ///
         ObservableCollection<ReceiptItem> receiptItems = App.SharedNaplataViewModel.ReceiptItems;
 
         Debug.WriteLine("Entering try block: " + receiptItems);
 
-        for (int i = 0; i < receiptItems.Count; i++)
+        foreach (ReceiptItem item in receiptItems)
         {
-            ReceiptItem item = receiptItems[i];
-
             if (item != null)
             {
+                int index = receiptItems.IndexOf(item);
                 ReceiptItemCount = receiptItems.Count;
                 ReceiptItemName = item.Name;
                 ReceiptItemTBR = item.Tbr;
@@ -243,67 +255,38 @@ public partial class Racun : ContentPage
                 float amountAfterPDV = (ReceiptItemAmount * 1.25f);
                 AmountAfterPDV = amountAfterPDV.ToString("0.00");
 
+                WTableRow newRow = table.AddRow();
 
-                paragraph = section.AddParagraph();
-                paragraph.ApplyStyle("Normal");
-                paragraph.BreakCharacterFormat.FontSize = 12f;
+                // Appends the paragraph for the first column (ReceiptItemParentName)
+                paragraph = newRow.Cells[0].AddParagraph();
+                paragraph.ApplyStyle("TableItem");
+                textRange = paragraph.AppendText((index+1) + ". " + ReceiptItemParentName) as WTextRange;
 
-                int indexNumber = i + 1; // Get the index number (starting from 1)
-                IndexNumber = indexNumber.ToString();
-
-              
-
-                //Appends the paragraph.
-                paragraph = table[1, 0].AddParagraph();
-                paragraph.ApplyStyle("Normal");
-                textRange = paragraph.AppendText(IndexNumber + ". " + ReceiptItemParentName) as WTextRange;
-
-                paragraph = table[1, 0].AddParagraph();
-                paragraph.ParagraphFormat.AfterSpacing = 0;
-                paragraph.ParagraphFormat.LineSpacing = 12f;
-                paragraph.BreakCharacterFormat.FontSize = 12f;
-
-                //Appends the paragraph.
-                paragraph = table[1, 1].AddParagraph();
-                paragraph.ApplyStyle("Normal");
+                //Appends the paragraph for the second column (ReceiptItemTBR)
+                paragraph = newRow.Cells[1].AddParagraph();
+                paragraph.ApplyStyle("TableItem");
                 textRange = paragraph.AppendText(ReceiptItemTBR + " (" + ReceiptItemPoints + " bodova)") as WTextRange;
 
-
-                paragraph = table[1, 1].AddParagraph();
-                paragraph.ParagraphFormat.AfterSpacing = 0;
-                paragraph.ParagraphFormat.LineSpacing = 12f;
-                paragraph.BreakCharacterFormat.FontSize = 12f;
-
-                //Appends the paragraph.
-                paragraph = table[1, 2].AddParagraph();
-                paragraph.ApplyStyle("Normal");
+                //Appends the paragraph for the third column (AmountBeforePDV)
+                paragraph = newRow.Cells[2].AddParagraph();
+                paragraph.ApplyStyle("TableItem");
                 textRange = paragraph.AppendText(AmountBeforePDV) as WTextRange;
+                paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
 
-                paragraph = table[1, 3].AddParagraph();
-                paragraph.ParagraphFormat.AfterSpacing = 0;
-                paragraph.ParagraphFormat.LineSpacing = 12f;
-                paragraph.BreakCharacterFormat.FontSize = 12f;
-
-                //Appends the paragraph.
-                paragraph = table[1, 3].AddParagraph();
-                paragraph.ApplyStyle("Normal");
+                //Appends the paragraph for the fourth column (PDVAmount)
+                paragraph = newRow.Cells[3].AddParagraph();
+                paragraph.ApplyStyle("TableItem");
                 textRange = paragraph.AppendText(PDVAmount) as WTextRange;
+                paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
 
-                paragraph = table[1, 4].AddParagraph();
-                paragraph.ParagraphFormat.AfterSpacing = 0;
-                paragraph.ParagraphFormat.LineSpacing = 12f;
-                paragraph.BreakCharacterFormat.FontSize = 12f;
-
-                //Appends the paragraph.
-                paragraph = table[1, 4].AddParagraph();
-                paragraph.ApplyStyle("Normal");
+                //Appends the paragraph for the fifth column (AmountAfterPDV)
+                paragraph = newRow.Cells[4].AddParagraph();
+                paragraph.ApplyStyle("TableItem");
                 textRange = paragraph.AppendText(AmountAfterPDV) as WTextRange;
+                paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
 
-
-                paragraph = table[1, 2].AddParagraph();
-                paragraph.ParagraphFormat.AfterSpacing = 0;
-                paragraph.ParagraphFormat.LineSpacing = 12f;
-                paragraph.BreakCharacterFormat.FontSize = 12f;
+                // Add spacing between rows (adjust the value as needed)
+                //newRow.Cells[0].AddParagraph().ParagraphFormat.AfterSpacing = 12f;
             }
             else
             {
@@ -314,10 +297,8 @@ public partial class Racun : ContentPage
             }
         }
 
-        
-        ////////////////////
+        //////////////////// table end
 
-      
 
         float totalAmountBeforePDV = (float)Math.Round(ReceiptItemTotalAmount, 2);
         string TotalAmountBeforePDV = totalAmountBeforePDV.ToString("0.00");
@@ -333,12 +314,62 @@ public partial class Racun : ContentPage
 
         //Appends the paragraph.
         paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal");
+        paragraph.ApplyStyle("Normal2");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("____________________________________________________________________________________________") as WTextRange;
+
+        ////////total amounts table
+        //Appends the table.
+        table = section.AddTable();
+        table.ResetCells(2, 5);
+        table.TableFormat.Borders.BorderType = BorderStyle.None;
+        table.TableFormat.IsAutoResized = false;
+
+
+        float[] columnWidthsB = new float[] { 170, 80, 60, 70, 80 };
+
+
+        for (int i = 0; i < table.Rows[0].Cells.Count; i++)
+        {
+            table[0, i].Width = columnWidthsB[i];
+            table[0, i].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+        }
+
+        for (int i = 0; i < table.Rows[1].Cells.Count; i++)
+        {
+            table[1, i].Width = columnWidthsB[i];
+            table[1, i].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+        }
+
+       
+        //Appends the paragraph.
+        paragraph = table[0, 2].AddParagraph();
+        paragraph.ApplyStyle("TableItem");
         paragraph.BreakCharacterFormat.FontSize = 12f;
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
-        textRange = paragraph.AppendText("\t\t\t\t" + TotalAmountBeforePDV + "\t\t" + TotalPDVAmount + "\t\t" + TotalAmountAfterPDV + " EUR\n" + TotalAmountAfterPDVhrk + " kn") as WTextRange;
+        textRange = paragraph.AppendText(TotalAmountBeforePDV) as WTextRange;
 
+        //Appends the paragraph.
+        paragraph = table[0, 3].AddParagraph();
+        paragraph.ApplyStyle("TableItem");
+        paragraph.BreakCharacterFormat.FontSize = 12f;
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
+        textRange = paragraph.AppendText(TotalPDVAmount) as WTextRange;
 
+        //Appends the paragraph.
+        paragraph = table[0, 4].AddParagraph();
+        paragraph.ApplyStyle("TableItem");
+        paragraph.BreakCharacterFormat.FontSize = 12f;
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
+        textRange = paragraph.AppendText(TotalAmountAfterPDV) as WTextRange;
+        //Appends the paragraph.
+        paragraph = table[1, 4].AddParagraph();
+        paragraph.ApplyStyle("TableItem");
+        paragraph.BreakCharacterFormat.FontSize = 12f;
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
+        textRange = paragraph.AppendText(TotalAmountAfterPDVhrk + " kn") as WTextRange;
+
+   
         //Appends the paragraph.
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal2");
