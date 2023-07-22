@@ -428,15 +428,22 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     private async void ZaposleniciClicked()
     {
-        try
+        string licence_type = Preferences.Get("licence_type", "");
+        int numberOfCharacters = 5;
+        string adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
+        Debug.WriteLine("Zaposlenici button - 'Admin' provjera: " + adminCheck);
+        if (adminCheck == "Admin")
         {
-            await Shell.Current.GoToAsync("/Zaposlenici");
-            Debug.WriteLine("Zaposlenici clicked");
+            try
+            {
+                await Shell.Current.GoToAsync("/Zaposlenici");
+                Debug.WriteLine("Zaposlenici clicked");
 
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
 
     }
