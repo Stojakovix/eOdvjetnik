@@ -29,7 +29,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     public string HWID { get; set; }
     public string HWID64 { get; set; }
-    public string LicenceType  { get; set; }
+    public string LicenceType { get; set; }
     public string DateTimeString { get; set; }
     public DateTime ExpiryDateOnly { get; set; }
     public string ExpiryDate { get; set; }
@@ -48,6 +48,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
     }
     public ICommand GetAllCompanyDevices { get; set; }
     public ICommand GetAllCompanyEmployees { get; set; }
+    public ICommand OpenZaposlenici { get; set; }
+
 
 
 
@@ -63,7 +65,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
             _dataModel = JsonConvert.DeserializeObject<DeviceDataModel>(JsonDevicesData);
             DataModel = _dataModel;
 
-      
+
             foreach (Device device in _dataModel.Devices)
             {
                 device.ConvertHwidToHwid64();
@@ -119,7 +121,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
                         Active = active,
                         Type = type,
                     }); ;
-             
+
 
                 }
                 OnPropertyChanged(nameof(employeeItem));
@@ -178,15 +180,17 @@ public class PostavkeViewModel : INotifyPropertyChanged
     #endregion
 
     public PostavkeViewModel()
-	{
-       GetAllCompanyDevices = new Command(GetJsonDeviceData);
-       GetAllCompanyEmployees = new Command(GetEmployees);
-       HWID = Preferences.Get("key", null);
-       LicenceType = Preferences.Get("licence_type", "");
-       DateTimeString = Preferences.Get("expire_date", "");
-       Activation_code = Preferences.Get("activation_code", "");
-       HWID64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(HWID));
-       ParseDate();
+    {
+        GetAllCompanyDevices = new Command(GetJsonDeviceData);
+        GetAllCompanyEmployees = new Command(GetEmployees);
+        OpenZaposlenici = new Command(ZaposleniciClicked);
+
+        HWID = Preferences.Get("key", null);
+        LicenceType = Preferences.Get("licence_type", "");
+        DateTimeString = Preferences.Get("expire_date", "");
+        Activation_code = Preferences.Get("activation_code", "");
+        HWID64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(HWID));
+        ParseDate();
         try
         {
             employeeItem = new ObservableCollection<EmployeeItem>();
@@ -197,8 +201,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
         }
         #region NAS komande
         SaveCommandNAS = new Command(OnSaveClickedNas);
-       LoadCommandNAS = new Command(OnLoadClickedNas);
-       DeleteCommandNAS = new Command(OnDeleteClickedNas);
+        LoadCommandNAS = new Command(OnLoadClickedNas);
+        DeleteCommandNAS = new Command(OnDeleteClickedNas);
         #endregion
 
         #region SQL komande
@@ -393,7 +397,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         await Application.Current.MainPage.DisplayAlert(title, message, "OK");
     }
 
-  
+
 
     private void UpdateSelectedEmployeeHWID()
     {
@@ -422,4 +426,18 @@ public class PostavkeViewModel : INotifyPropertyChanged
         }
     }
 
+    private async void ZaposleniciClicked()
+    {
+        try
+        {
+            await Shell.Current.GoToAsync("/Zaposlenici");
+            Debug.WriteLine("Zaposlenici clicked");
+
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+
+    }
 }

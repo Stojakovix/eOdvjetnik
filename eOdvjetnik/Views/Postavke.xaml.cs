@@ -8,49 +8,10 @@ public partial class Postavke : ContentPage
     public Postavke()
 	{
 		InitializeComponent();
-        BindingContext = new PostavkeViewModel();
-        FetchCompanyDevices();
+        BindingContext = App.SharedPostavkeViewModel;
     }
 
-    public async void FetchCompanyDevices()
-    {
-        Debug.WriteLine("PostavkeModel - > FetchCompanyDevices");
-        string string1 = "https://cc.eodvjetnik.hr/eodvjetnikadmin/devices/getAll?cpuid=";
-        string string2 = Preferences.Get("key", null);
-        string activationURL = string.Concat(string1, string2);
-        Debug.WriteLine("PostavkeModel - > FetchCompanyDevices - URL: " + activationURL);
-        try
-        {
-            Debug.WriteLine("PostavkeModel - > FetchCompanyDevices -> Try");
-
-            using (var client = new HttpClient())
-            {
-                HttpResponseMessage response = await client.GetAsync(activationURL);
-                Debug.WriteLine("PostavkeModel - > FetchCompanyDevices -> Received a response");
-
-                if (response.IsSuccessStatusCode)
-                {
-                    Debug.WriteLine("PostavkeModel - > FetchCompanyDevices -> Received data");
-
-                    string jsonContent = await response.Content.ReadAsStringAsync();
-                    response.EnsureSuccessStatusCode();
-                    var content = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine("PostavkeModel - > FetchCompanyDevices -> Json string: " + content);
-                    string json_devices = content.ToString();
-                    Preferences.Set("json_devices", json_devices);
-
-                }
-                else
-                {
-                    // 
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine("FetchCompanyDevices error: " + ex.Message);
-        }
-    }
+    
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -65,7 +26,6 @@ public partial class Postavke : ContentPage
         Frame3.IsVisible = false;
         Frame4.IsVisible = false;
         Frame5.IsVisible = false;
-        Frame6.IsVisible = false;
         Frame7.IsVisible = false;
     }
 
@@ -76,7 +36,6 @@ public partial class Postavke : ContentPage
         Frame3.IsVisible = false;
         Frame4.IsVisible = false;
         Frame5.IsVisible = false;
-        Frame6.IsVisible = false;
         Frame7.IsVisible = false;
     }
     private void Button3_Clicked(object sender, EventArgs e)
@@ -86,7 +45,6 @@ public partial class Postavke : ContentPage
         Frame3.IsVisible = true;
         Frame4.IsVisible = false;
         Frame5.IsVisible = false;
-        Frame6.IsVisible = false;
         Frame7.IsVisible = false;
     }
     private void Button4_Clicked(object sender, EventArgs e)
@@ -96,7 +54,6 @@ public partial class Postavke : ContentPage
         Frame3.IsVisible = false;
         Frame4.IsVisible = true;
         Frame5.IsVisible = false;
-        Frame6.IsVisible = false;
         Frame7.IsVisible = false;
     }
     private void Button5_Clicked(object sender, EventArgs e)
@@ -106,7 +63,6 @@ public partial class Postavke : ContentPage
         Frame3.IsVisible = false;
         Frame4.IsVisible = false;
         Frame5.IsVisible = true;
-        Frame6.IsVisible = false;
         Frame7.IsVisible = false;
 
     }
@@ -117,7 +73,6 @@ public partial class Postavke : ContentPage
         Frame3.IsVisible = false;
         Frame4.IsVisible = false;
         Frame5.IsVisible = false;
-        Frame6.IsVisible = true;
         Frame7.IsVisible = false;
     }
     private void Button7_Clicked(object sender, EventArgs e)
@@ -127,16 +82,8 @@ public partial class Postavke : ContentPage
         Frame3.IsVisible = false;
         Frame4.IsVisible = false;
         Frame5.IsVisible = false;
-        Frame6.IsVisible = false;
         Frame7.IsVisible = true;
     }
 
-    private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (sender is Picker picker && picker.SelectedItem is Device selectedDevice)
-        {
-            var viewModel = BindingContext as PostavkeViewModel;
-            viewModel.SelectedOpis = selectedDevice.opis;
-        }
-    }
+ 
 }
