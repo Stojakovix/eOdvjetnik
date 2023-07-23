@@ -130,7 +130,7 @@
                     <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Label Text="Broj mobitela: 222-333" TextColor="Black" FontSize="16" Margin="20,0,0,10"/>
+                            <Label Text="Broj mobitela: +385 99 290 0000" TextColor="Black" FontSize="16" Margin="20,0,0,10"/>
                             <Label Text="Email: podrska@eodvjetnik.hr" TextColor="Black" FontSize="16" Margin="20,0,0,10" />
                             <Label Text="{Binding Version}" TextColor="Black" FontSize="16" Margin="20,0,0,10" />
                         </StackLayout>

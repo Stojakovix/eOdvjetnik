@@ -31,7 +31,6 @@ namespace eOdvjetnik.ViewModel
         public string licence_type { get; set; }
         public DateTime expire_date { get; set; }
         public DateTime current_date { get; set; }
-
         public string expireDate { get; set; }
         public string licenceStatus { get; set; }
         public bool expiredLicence { get; set; }
@@ -39,7 +38,9 @@ namespace eOdvjetnik.ViewModel
         public bool ActivationVisible
         {
             get; set;
-        } 
+        }
+        public double gracePeriod { get; set; }
+
         #endregion
 
 
@@ -51,13 +52,24 @@ namespace eOdvjetnik.ViewModel
             expireDate = Preferences.Get("expire_date", "");
             licenceStatus = Preferences.Get("licence_active", "");
             current_date = DateTime.Now.Date;
-            LicenceCheck();
+        
             RefreshTime();
 
             var timer = Application.Current.Dispatcher.CreateTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += (s, e) => RefreshTime();
             timer.Start();
+            try
+            {
+                ParseDate();
+                LicenceCheck();
+            }
+
+            catch (Exception ex) 
+            {
+                Debug.WriteLine("Cannot ParseDate()" + ex.Message );
+
+            }
         }
 
         public void ParseDate()
@@ -69,7 +81,9 @@ namespace eOdvjetnik.ViewModel
                 TimeSpan difference = expire_date.Subtract(current_date);
                 double days = difference.TotalDays;
                 string daysR = days.ToString();
+                gracePeriod = days + 10;
                 Debug.WriteLine("ParseDate() - days until licence expires: " + daysR);
+                Debug.WriteLine("ParseDate() - grace period after licence expired: " + gracePeriod);
                 Preferences.Set("days_until_expiry", daysR);
             }
             catch (Exception ex)
@@ -91,22 +105,23 @@ namespace eOdvjetnik.ViewModel
 
         private void LicenceCheck() // Provjera isteka licence
         {
-          expiredLicence = true;
+            expiredLicence = true;
+            if (licenceStatus == null)
+            {
+                expiredLicence = true;
 
-          if (licenceStatus == "0" || licenceStatus == null)
-          {
-              expiredLicence = true;
+            }
 
-          }
-          else if (licenceStatus == "1")
-          {
-              expiredLicence = false;
+            else if (licenceStatus == "0" && gracePeriod > 0)
+            {
+                expiredLicence = true;
 
-          }
-            else if (expire_date > current_date)
-          {
-              expiredLicence = true;
-          }
+            }
+            else if (licenceStatus == "1")
+            {
+                expiredLicence = false;
+
+            }
 
 
             ActivationScreen();
@@ -129,7 +144,7 @@ namespace eOdvjetnik.ViewModel
                 Preferences.Set("activation_disable", aktivacija);
 
             }
-            ParseDate();
+            
 
         }
         // Mora bit kad god je INotifyPropertyChanged na pageu

@@ -324,8 +324,13 @@ namespace eOdvjetnik.ViewModel
         #region Support funkcije
         private void OnSupportClick()
         {
-            SupportPopupOpen = true;
-            Supportvisible = true;
+            DisableMenu();
+            if (disableMenu == false)
+            {
+                SupportPopupOpen = true;
+                Supportvisible = true;
+            }
+           
         }
 
         private void PopupClose()
@@ -546,9 +551,15 @@ namespace eOdvjetnik.ViewModel
                     ExpiryPopupOpen = true;
                     Expiryvisible = true;
                 }
-                else if (DaysRemaining == 0)
+                else if (DaysRemaining == 1)
                 {
                     Days_Remaining = "Vaša licenca ističe sutra!";
+                    ExpiryPopupOpen = true;
+                    Expiryvisible = true;
+                }
+                else if (DaysRemaining == 0 || DaysRemaining < 0)
+                {
+                    Days_Remaining = "Vaša licenca je istekla!";
                     ExpiryPopupOpen = true;
                     Expiryvisible = true;
                 }

@@ -179,7 +179,7 @@ public partial class Racun : ContentPage
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("Broj računa: 123/5") as WTextRange;
+        textRange = paragraph.AppendText("Broj računa:  ") as WTextRange;
 
 
         //Appends the paragraph.
@@ -192,7 +192,7 @@ public partial class Racun : ContentPage
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal");
         paragraph.BreakCharacterFormat.FontSize = 12f;
-        textRange = paragraph.AppendText(CurrentDate + "\t\tZadar\t\t\t" + PaymentDate + "\n") as WTextRange;
+        textRange = paragraph.AppendText(CurrentDate + "\t\t \t\t\t" + PaymentDate + "\n") as WTextRange;
 
 
         
@@ -374,7 +374,13 @@ public partial class Racun : ContentPage
             table[1, i].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
         }
 
-       
+        //Appends the paragraph.
+        paragraph = table[0, 1].AddParagraph();
+        paragraph.ApplyStyle("TableItem");
+        paragraph.BreakCharacterFormat.FontSize = 12f;
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
+        textRange = paragraph.AppendText("Ukupno EUR:") as WTextRange;
+
         //Appends the paragraph.
         paragraph = table[0, 2].AddParagraph();
         paragraph.ApplyStyle("TableItem");
@@ -393,8 +399,17 @@ public partial class Racun : ContentPage
         paragraph = table[0, 4].AddParagraph();
         paragraph.ApplyStyle("TableItem");
         paragraph.BreakCharacterFormat.FontSize = 12f;
+        style.CharacterFormat.Bold = true;
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
-        textRange = paragraph.AppendText(TotalAmountAfterPDV) as WTextRange;
+        textRange = paragraph.AppendText(TotalAmountAfterPDV + " EUR") as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = table[1, 3].AddParagraph();
+        paragraph.ApplyStyle("TableItem");
+        paragraph.BreakCharacterFormat.FontSize = 12f;
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
+        textRange = paragraph.AppendText("Ukupno HRK:") as WTextRange;
+
         //Appends the paragraph.
         paragraph = table[1, 4].AddParagraph();
         paragraph.ApplyStyle("TableItem");
@@ -431,7 +446,7 @@ public partial class Racun : ContentPage
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Bold");
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("\nNačin plaćanja: \tTRANSAKCIJSKI RAČUN\nIBAN: \t\t" + ReceiptIBAN + "\nSWIFT CODE: \tPBZGHR2X\nModel: \t\t00\nPoziv na broj:\t303-2-2") as WTextRange;
+        textRange = paragraph.AppendText("\nNačin plaćanja: \tTRANSAKCIJSKI RAČUN\nIBAN: \t\t" + ReceiptIBAN + "\nSWIFT CODE: \tPBZGHR2X\nModel: \t\t00\nPoziv na broj:\t") as WTextRange;
 
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal2");
