@@ -1,4 +1,5 @@
 ﻿using eOdvjetnik.Data;
+using eOdvjetnik.ViewModel;
 using eOdvjetnik.Views;
 using Syncfusion.Maui.Scheduler;
 using System.Globalization;
@@ -10,15 +11,13 @@ using eOdvjetnik.ViewModel;
 namespace eOdvjetnik;
 
 public partial class App : Application
-{
+	{
 
     public static NaplataViewModel SharedNaplataViewModel;
-    public static KlijentiViewModel SharedKlijentiViewModel;
+    public static PostavkeViewModel SharedPostavkeViewModel;
 
 
-
-    public App()
-    {
+	public App(){
         InitializeComponent();
         Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjQ5MTQ1M0AzMjMyMmUzMDJlMzBRT2JkTm1HczFuTmdmNTVFcWNWU29xbGt6Z2lhRDFYYk1GZWppS3pjWnlNPQ==");
 
@@ -26,10 +25,7 @@ public partial class App : Application
         Application.Current.UserAppTheme = AppTheme.Light;
         MainPage = new AppShell();
 
-        SharedKlijentiViewModel = new KlijentiViewModel();
-
-
-    }
+	}
 
 
 

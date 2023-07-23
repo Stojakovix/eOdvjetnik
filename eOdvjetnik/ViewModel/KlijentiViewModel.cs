@@ -401,6 +401,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
     #endregion
 
     public ICommand OnReciptClickCommand { get; set; }
+    public ICommand RefreshContacts { get; set; }
+
 
     public KlijentiViewModel()
     {
@@ -417,9 +419,17 @@ public class KlijentiViewModel : INotifyPropertyChanged
         ClientEmail = Preferences.Get("SelectedEmail", "");
         ClientOther = Preferences.Get("SelectedOther", "");
         ClientCountry = Preferences.Get("SelectedCountry", "");
-        ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+        try
+        {
+            ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            
+        }
         OnReciptClickCommand = new Command(OpenRecipt);
-
+        RefreshContacts = new Command(GenerateFiles);
 
         var timer = Application.Current.Dispatcher.CreateTimer();
         timer.Interval = TimeSpan.FromMilliseconds(200);
@@ -445,7 +455,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         try
         {
-            await Shell.Current.GoToAsync("/Racun");
+            await Shell.Current.GoToAsync("///Naplata");
             Debug.WriteLine("Racun clicked");
 
         }
@@ -470,12 +480,15 @@ public class KlijentiViewModel : INotifyPropertyChanged
             ClientEmail = Preferences.Get("SelectedEmail", "");
             ClientOther = Preferences.Get("SelectedOther", "");
             ClientCountry = Preferences.Get("SelectedCountry", "");
-            ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
-            if (contacts != Contacts)
+            try
             {
-                GenerateFiles();
+                ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
             }
-            
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+            }
         }
         );
     }

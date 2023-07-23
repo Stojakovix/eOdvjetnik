@@ -123,6 +123,7 @@ public partial class MainPage : ContentPage
                     Preferences.Set("adresaTvrtke", adresaTvrtke);
                     Debug.WriteLine("MainPageViewModel - > Company info: " + nazivTvrtke + OIBTvrtke + adresaTvrtke);
 
+
                 }
                 else
                 {
