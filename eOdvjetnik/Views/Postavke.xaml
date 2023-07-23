@@ -31,13 +31,12 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button1_Clicked" Text="Uređaj i licenca" FontSize="Default"  />
-            <Button Grid.Column="1" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button2_Clicked" Text="Prijavi grešku" FontSize="Default"   />
-            <Button Grid.Column="2" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button3_Clicked" Text="Pošalji prijedlog" FontSize="Default"   />
-            <Button Grid.Column="3" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button4_Clicked" Text="NAS postavke"  FontSize="Default"  />
-            <Button Grid.Column="4" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button5_Clicked" Text="SQL postavke"  FontSize="Default"  />
-            <Button Grid.Column="5" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button7_Clicked" Text="Postavke računa" FontSize="Default"   />
-            <Button Grid.Column="6" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Command="{Binding OpenZaposlenici}"  Text="Zaposlenici" FontSize="Default"   />
-
+            <Button Grid.Column="1" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button4_Clicked" Text="NAS postavke"  FontSize="Default"  />
+            <Button Grid.Column="2" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button5_Clicked" Text="SQL postavke"  FontSize="Default"  />
+            <Button Grid.Column="3" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button7_Clicked" Text="Postavke računa" FontSize="Default"   />
+            <Button Grid.Column="4" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Command="{Binding OpenZaposlenici}"  Text="Zaposlenici" FontSize="Default"   />
+            <Button Grid.Column="5" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button2_Clicked" Text="Prijavi grešku" FontSize="Default"   />
+            <Button Grid.Column="6" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button3_Clicked" Text="Pošalji prijedlog" FontSize="Default"   />
 
             <VerticalStackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" Padding="10,10,10,10"  BackgroundColor="White" 
                     x:Name="Frame1" IsVisible="True" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" >
@@ -61,7 +60,7 @@
                     </OnPlatform>
                 </Border.WidthRequest>
                 <ScrollView>
-                    <Editor  AutoSize="TextChanges" MaxLength="300" Placeholder="Opišite grešku u aplikaciji koju je potrebno ispraviti" />
+                    <Editor  AutoSize="TextChanges" MaxLength="300" Placeholder="Opišite grešku u aplikaciji koju je potrebno ispraviti" MinimumHeightRequest="150" />
                 </ScrollView>
             </Border>
             <Border MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" Padding="0,0,0,0"  BackgroundColor="White" 
@@ -73,7 +72,8 @@
                     </OnPlatform>
                 </Border.WidthRequest>
                 <ScrollView>
-                    <Editor AutoSize="TextChanges" MaxLength="300" Placeholder="Navedite funkcionalnost koju biste htjeli vidjeti u idućim verzijama aplikacije" />
+                    <Editor AutoSize="TextChanges" MaxLength="300" Placeholder="Navedite funkcionalnost koju biste htjeli vidjeti u idućim verzijama aplikacije"
+                            MinimumHeightRequest="150" />
                 </ScrollView>
             </Border>
 
@@ -152,38 +152,54 @@
                 </Grid>
             </StackLayout>
 
-          
-        
-            <Border MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7"  BackgroundColor="White" 
-                    x:Name="Frame7" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
-                <Border.WidthRequest>
-                    <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android,iOS" Value="225" />
-                        <On Platform="UWP,MacCatalyst" Value="420" />
-                    </OnPlatform>
-                </Border.WidthRequest>
 
-                <Grid>
+            <StackLayout  Grid.Row="1" Grid.ColumnSpan="7"  BackgroundColor="White" x:Name="Frame7" IsVisible="False" >
+            
+                <Grid >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="400"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="55" />
+                        <RowDefinition Height="55" />
+                        <RowDefinition Height="55" />
+                        <RowDefinition Height="210" />
+                        <RowDefinition Height="55" />
                     </Grid.RowDefinitions>
 
 
-                    <Label Text="Trenutna stopa PDV-a:" Margin="10,10,0,0" />
-                    <Entry Grid.Column="1" TextColor="Black" Placeholder="25"  MaxLength="2" Margin="5,0,0,0" VerticalOptions="Center" 
-                           HorizontalTextAlignment="End"
+                    <Label Grid.Row="0" Grid.Column="0" Text="Stopa PDV-a (%)" Margin="10,15,0,0" VerticalOptions="Start" />
+                    <Entry Grid.Row="0" Grid.Column="1" TextColor="Black" Placeholder="{Binding ReceiptPDVamount}" Margin="5,10,0,0" MaxLength="2"
+                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding ReceiptPDVamount, Mode=TwoWay}" 
+                           />
+                    <Label Grid.Row="1" Grid.Column="0" Text="IBAN" Margin="10,15,0,0" VerticalOptions="Start" />
+                    <Entry Grid.Row="1" Grid.Column="1" TextColor="Black" Placeholder="{Binding ReceiptIBAN}" Margin="5,10,0,0" MaxLength="20"
+                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding ReceiptIBAN, Mode=TwoWay}" 
                            />
 
-                </Grid>
+                    <Label Grid.Row="2" Grid.Column="0" Text="Naziv tvrtke u zaglavlju računa:" Margin="10,15,0,0" VerticalOptions="Start" />
+                    <Entry Grid.Row="2" Grid.Column="1" TextColor="Black" Placeholder="{Binding ReceiptHeaderText}" Margin="5,10,0,0" 
+                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding ReceiptHeaderText, Mode=TwoWay}"
+                           />
 
-            </Border>
+                    <Label Grid.Row="3" Text="Tekst podnožja računa:" Margin="10,15,0,0"   />
+                    <Editor Grid.Row="3" Grid.Column="1" TextColor="Black"  Margin="5,10,0,0" 
+                           MinimumHeightRequest="200"  HorizontalTextAlignment="Start" MaxLength="400"
+                           Text="{Binding ReceiptFooterText, Mode=TwoWay}" 
+                            Placeholder="{Binding ReceiptFooterText}"
+                           />
+                 
+                    
+                    <Button Margin="0,15,0,0" Grid.Row="4" Grid.Column="1" Text="Spremi" BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default" 
+                            HorizontalOptions="Center" MinimumWidthRequest="100" Command="{Binding SaveReceiptCompanyInfo}" />
+
+                </Grid>
+                    
+
+
+            </StackLayout>
 
 
         </Grid>

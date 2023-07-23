@@ -49,13 +49,6 @@ public partial class Zaposlenici : ContentPage
             Debug.WriteLine("FetchCompanyDevices error: " + ex.Message);
         }
     }
-    private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (sender is Picker picker && picker.SelectedItem is Device selectedDevice)
-        {
-            var viewModel = BindingContext as PostavkeViewModel;
-            viewModel.SelectedOpis = selectedDevice.opis;
-        }
-    }
+
 
 }

@@ -11,6 +11,9 @@ namespace eOdvjetnik.ViewModel;
 
 public class PostavkeViewModel : INotifyPropertyChanged
 {
+
+    #region Zaposlenici
+
     ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
 
     private ObservableCollection<EmployeeItem> employeeItem;
@@ -46,6 +49,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(DataModel));
         }
     }
+
+
     public ICommand GetAllCompanyDevices { get; set; }
     public ICommand GetAllCompanyEmployees { get; set; }
     public ICommand OpenZaposlenici { get; set; }
@@ -80,6 +85,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         {
             Debug.WriteLine("JsonDevicesData = null");
         }
+        GetEmployees();
     }
 
     public void GetEmployees()
@@ -133,6 +139,29 @@ public class PostavkeViewModel : INotifyPropertyChanged
         }
     }
 
+    private async void ZaposleniciClicked()
+    {
+        string licence_type = Preferences.Get("licence_type", "");
+        int numberOfCharacters = 5;
+        string adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
+        Debug.WriteLine("Zaposlenici button - 'Admin' provjera: " + adminCheck);
+        if (adminCheck == "Admin")
+        {
+            try
+            {
+                await Shell.Current.GoToAsync("/Zaposlenici");
+                Debug.WriteLine("Zaposlenici clicked");
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+    }
+    #endregion
+
     #region NAS
     //Varijable za NAS preferenceas
     private const string IP_nas = "IP Adresa";
@@ -179,11 +208,37 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     #endregion
 
+    #region Receipt footer & header saving
+    public string ReceiptPDVamount { get; set; }
+    public string ReceiptIBAN { get; set; }
+    public string ReceiptHeaderText { get; set; }
+    public string ReceiptFooterText { get; set; }
+
+    public ICommand SaveReceiptCompanyInfo { get; set; }
+
+    public void ReceiptCompanyInfo()
+    {
+        Preferences.Set("receiptPDVamount", ReceiptPDVamount);
+        Preferences.Set("receiptIBAN", ReceiptIBAN);
+        Preferences.Set("receiptHeaderText", ReceiptHeaderText);
+        Preferences.Set("receiptFooterText", ReceiptFooterText);
+
+    }
+
+    #endregion
+
+
     public PostavkeViewModel()
     {
         GetAllCompanyDevices = new Command(GetJsonDeviceData);
         GetAllCompanyEmployees = new Command(GetEmployees);
         OpenZaposlenici = new Command(ZaposleniciClicked);
+        SaveReceiptCompanyInfo = new Command(ReceiptCompanyInfo);
+
+        ReceiptPDVamount = Preferences.Get("receiptPDVamount", "");
+        ReceiptIBAN = Preferences.Get("receiptIBAN", "");
+        ReceiptHeaderText = Preferences.Get("receiptHeaderText", "");
+        ReceiptFooterText = Preferences.Get("receiptFooterText", "");
 
         HWID = Preferences.Get("key", null);
         LicenceType = Preferences.Get("licence_type", "");
@@ -194,6 +249,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         try
         {
             employeeItem = new ObservableCollection<EmployeeItem>();
+            GetJsonDeviceData();
         }
         catch (Exception ex)
         {
@@ -230,26 +286,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         #endregion
 
     }
-
-    public void ParseDate()
-    {
-        try
-        {
-            DateTimeOffset dateTimeOffset = DateTimeOffset.Parse(DateTimeString);
-            ExpiryDateOnly = dateTimeOffset.Date;
-            ExpiryDate = ExpiryDateOnly.ToString("D");
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine("Date parsing error:" + ex.Message);
-        }
-    }
-
-    public event PropertyChangedEventHandler PropertyChanged;
-    void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+   
 
     #region NAS Funkcije
     private void OnSaveClickedNas()
@@ -397,54 +434,25 @@ public class PostavkeViewModel : INotifyPropertyChanged
         await Application.Current.MainPage.DisplayAlert(title, message, "OK");
     }
 
-
-
-    private void UpdateSelectedEmployeeHWID()
+    public void ParseDate()
     {
-        // Set the EmployeeHWID property of the currently selected employee
-        if (!string.IsNullOrEmpty(SelectedOpis))
+        try
         {
-            // Assuming you have a property in your EmployeeItem class named EmployeeHWID
-            foreach (var employee in EmployeeItems)
-            {
-                employee.EmployeeHWID = SelectedOpis;
-            }
+            DateTimeOffset dateTimeOffset = DateTimeOffset.Parse(DateTimeString);
+            ExpiryDateOnly = dateTimeOffset.Date;
+            ExpiryDate = ExpiryDateOnly.ToString("D");
         }
-    }
-    private string selectedOpis;
-    public string SelectedOpis
-    {
-        get { return selectedOpis; }
-        set
+        catch (Exception ex)
         {
-            if (selectedOpis != value)
-            {
-                selectedOpis = value;
-                OnPropertyChanged(nameof(SelectedOpis));
-                UpdateSelectedEmployeeHWID();
-            }
+            Debug.WriteLine("Date parsing error:" + ex.Message);
         }
     }
 
-    private async void ZaposleniciClicked()
+    public event PropertyChangedEventHandler PropertyChanged;
+    void OnPropertyChanged(string propertyName)
     {
-        string licence_type = Preferences.Get("licence_type", "");
-        int numberOfCharacters = 5;
-        string adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
-        Debug.WriteLine("Zaposlenici button - 'Admin' provjera: " + adminCheck);
-        if (adminCheck == "Admin")
-        {
-            try
-            {
-                await Shell.Current.GoToAsync("/Zaposlenici");
-                Debug.WriteLine("Zaposlenici clicked");
-
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
-
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+
 }

@@ -22,9 +22,9 @@ public partial class Racun : ContentPage
     public string CompanyName { get; set; }
     public string CompanyOIB { get; set; }
     public string CompanyAddress { get; set; }
-    public string ClientName { get; set; } = "Klijent nije odabran";
-    public string ClientOIB { get; set; } = "OIB";
-    public string ClientAddress { get; set; } = "Adresa";
+    public string ClientName { get; set; } 
+    public string ClientOIB { get; set; }
+    public string ClientAddress { get; set; }
     string CurrentDate { get; set; }
     string PaymentDate { get; set; }
     public string ReceiptItemName { get; set; }
@@ -40,6 +40,11 @@ public partial class Racun : ContentPage
     public string AmountBeforePDV { get; set; }
     public string PDVAmount { get; set; }
     public string AmountAfterPDV { get; set; }
+    public string ReceiptPDVamountString { get; set; }
+    public float ReceiptPDVamountFloat { get; set; }
+    public string ReceiptHeaderText { get; set; }
+    public string ReceiptFooterText { get; set; }
+    public string ReceiptIBAN { get; set; }
 
     public Racun()
 	{
@@ -56,10 +61,38 @@ public partial class Racun : ContentPage
         ClientOIB = Preferences.Get("SelectedOIB", "");
         ClientAddress = Preferences.Get("SelectedAddress", "");
 
+
+          
     }
 
     private void CreateDocument(object sender, EventArgs e)
     {
+        try
+        {
+            Debug.WriteLine("Create document ušao u try");
+            ReceiptHeaderText = Preferences.Get("receiptHeaderText", "");
+            Debug.WriteLine("ReceiptHeaderText " + ReceiptHeaderText);
+
+            ReceiptFooterText = Preferences.Get("receiptFooterText", "");
+            Debug.WriteLine("ReceiptFooterTex " + ReceiptFooterText);
+
+            ReceiptPDVamountString = Preferences.Get("receiptPDVamount", "");
+            Debug.WriteLine("receiptPDVamount " + ReceiptPDVamountString);
+
+            ReceiptPDVamountFloat = 1 + (float.Parse(ReceiptPDVamountString) / 100);
+            Preferences.Set("receiptPDVamountFloat", ReceiptPDVamountFloat);
+            Debug.WriteLine("iznos PDV " + ReceiptPDVamountFloat);
+
+            ReceiptIBAN = Preferences.Get("receiptIBAN", "");
+            Debug.WriteLine("receiptIBAN " + ReceiptIBAN);
+
+        }
+
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+
         //Creates a new document.
         using WordDocument document = new();
         //Adds a new section to the document.
@@ -125,7 +158,7 @@ public partial class Racun : ContentPage
         picture.Height = 80.8f;
         paragraph.ApplyStyle("Heading 1");
         paragraph.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
-        WTextRange textRange = paragraph.AppendText("\n\n_____________________ GLUIĆ NINČEVIĆ ODVJETNIČKO DRUŠTVO _____________________") as WTextRange;
+        WTextRange textRange = paragraph.AppendText("\n\n" + ReceiptHeaderText) as WTextRange;
         textRange.CharacterFormat.FontSize = 12f;
         textRange.CharacterFormat.FontName = "Calibri";
         textRange.CharacterFormat.TextColor = Syncfusion.Drawing.Color.Black;
@@ -249,10 +282,10 @@ public partial class Racun : ContentPage
                 float amountBeforePDV = (float)Math.Round(ReceiptItemAmount, 2);
                 AmountBeforePDV = amountBeforePDV.ToString("0.00");
 
-                float PDVamount = (ReceiptItemAmount * 1.25f) - ReceiptItemAmount;
+                float PDVamount = (ReceiptItemAmount * ReceiptPDVamountFloat) - ReceiptItemAmount;
                 PDVAmount = PDVamount.ToString("0.00");
 
-                float amountAfterPDV = (ReceiptItemAmount * 1.25f);
+                float amountAfterPDV = (ReceiptItemAmount * ReceiptPDVamountFloat);
                 AmountAfterPDV = amountAfterPDV.ToString("0.00");
 
                 WTableRow newRow = table.AddRow();
@@ -374,25 +407,31 @@ public partial class Racun : ContentPage
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal2");
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("Konverzija u euro izvršena po fiksnom tečaju konverzije: 7,53450 HRK = 1 EUR.") as WTextRange;
-
-        //Appends the paragraph.
-        paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal");
-        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("Obračun prema naplaćenoj naknadi") as WTextRange;
+        textRange = paragraph.AppendText("\nKonverzija u euro izvršena po fiksnom tečaju konverzije: 7,53450 HRK = 1 EUR.") as WTextRange;
 
         //Appends the paragraph.
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal2");
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("Upozorenje:\nU slučaju neispunjenja dospjele obveze po ovom računu vjerovnik je ovlašten zatražiti određivanje ovrhe na temelju vjerodostojne isprave") as WTextRange;
+        textRange = paragraph.AppendText("\nObračun prema naplaćenoj naknadi") as WTextRange;
+
+        //Appends the paragraph.
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal2");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        style.CharacterFormat.Italic = true;
+        textRange = paragraph.AppendText("\nUpozorenje: U slučaju neispunjenja dospjele obveze po ovom računu vjerovnik je ovlašten zatražiti određivanje ovrhe na temelju vjerodostojne isprave") as WTextRange;
+
+        paragraph = section.AddParagraph();
+        paragraph.ApplyStyle("Normal2");
+        paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
+        textRange = paragraph.AppendText("\nOperater: ") as WTextRange;
 
         //Appends the paragraph.
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Bold");
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
-        textRange = paragraph.AppendText("\nNačin plaćanja: \tTRANSAKCIJSKI RAČUN\nIBAN: \t\tHR76 234 000 9111 077 0402\nSWIFT CODE: \tPBZGHR2X\nModel: \t\t00\nPoziv na broj:\t303-2-2") as WTextRange;
+        textRange = paragraph.AppendText("\nNačin plaćanja: \tTRANSAKCIJSKI RAČUN\nIBAN: \t\t" + ReceiptIBAN + "\nSWIFT CODE: \tPBZGHR2X\nModel: \t\t00\nPoziv na broj:\t303-2-2") as WTextRange;
 
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal2");
@@ -403,7 +442,7 @@ public partial class Racun : ContentPage
         paragraph = section.HeadersFooters.Footer.AddParagraph();
         paragraph.ApplyStyle("Normal2");
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Justify;
-        textRange = paragraph.AppendText("GLUIĆ NINČEVIĆ ODVJETNIČKO DRUŠTVO D.O.O. Špire Brusine 16, HR-2300 Zadar, tel: +385 23 700 750 fax: +385 23700751, ured@gn.hr, www.gn.hr, OIB: 75663620109, PBZ D.D. IBAN: HR7623400091110770402 MBS: 110057936, Trgovački sud u Zadru, Temeljni kapital u iznosu od 350 000,00 HKR uplaćen u cijelosti") as WTextRange;
+        textRange = paragraph.AppendText(ReceiptFooterText) as WTextRange;
         textRange.CharacterFormat.FontSize = 10f;
         textRange.CharacterFormat.FontName = "Calibri";
         textRange.CharacterFormat.TextColor = Syncfusion.Drawing.Color.Black;
