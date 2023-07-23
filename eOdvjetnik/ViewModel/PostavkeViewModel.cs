@@ -244,12 +244,13 @@ public class PostavkeViewModel : INotifyPropertyChanged
         LicenceType = Preferences.Get("licence_type", "");
         DateTimeString = Preferences.Get("expire_date", "");
         Activation_code = Preferences.Get("activation_code", "");
-        HWID64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(HWID));
         ParseDate();
         try
         {
             employeeItem = new ObservableCollection<EmployeeItem>();
             GetJsonDeviceData();
+            HWID64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(HWID));
+
         }
         catch (Exception ex)
         {
