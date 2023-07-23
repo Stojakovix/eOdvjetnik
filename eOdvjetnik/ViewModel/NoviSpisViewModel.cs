@@ -369,6 +369,8 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine("Appointment added to remote server in novi spis viewModel");
 
                 
+                
+
 
             }
             catch (Exception ex)

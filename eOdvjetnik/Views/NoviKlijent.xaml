@@ -28,6 +28,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Label Text="Ime" Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
             <Entry x:Name="ImeEntry" Keyboard="Numeric" Grid.Row="0" Grid.Column="1" Text="{Binding Name }"  />
@@ -64,6 +65,19 @@
 
             <Label Text="Pravna" Grid.Row="11" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
             <Entry x:Name="PravnaEntry" Keyboard="Numeric" Grid.Row="11" Grid.Column="1" Text="{Binding Pravna}"  />
+            <Button 
+                BorderColor="DarkGray"
+                BorderWidth="1"
+                BackgroundColor="#5ac8fa"
+                Text="Dodaj novi"
+                FontAttributes="Bold"
+                TextColor="Black"
+                HorizontalOptions="End"
+                Command="{Binding AddKlijent}" 
+                FontSize="Default"
+                Margin="10,0,10,10"
+                Grid.Row="12"
+                Grid.ColumnSpan="2"/>
         </Grid>
     </ScrollView>
 </ContentPage>

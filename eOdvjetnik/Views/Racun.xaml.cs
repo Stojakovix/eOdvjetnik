@@ -14,7 +14,7 @@ using System.Collections.ObjectModel;
 
 public partial class Racun : ContentPage
 {
-    public ObservableCollection<ReceiptItem> ReceiptItems = new ObservableCollection<ReceiptItem>();
+    
 
     private NaplataViewModel ViewModel;
 
@@ -38,21 +38,33 @@ public partial class Racun : ContentPage
     public float ReceiptItemAmount { get; set; }
     public float ReceiptItemTotalAmount { get; set; }
 
+    
+
     public Racun()
-	{
-        InitializeComponent();
-        ViewModel = new NaplataViewModel();
-        this.BindingContext = ViewModel;
-        CompanyName = Preferences.Get("naziv_tvrtke", "");
-        CompanyOIB = Preferences.Get("OIBTvrtke", "");
-        CompanyAddress = Preferences.Get("adresaTvrtke", "");
-        CurrentDate = DateTime.Now.ToString("dd.MM.yyyy.");
-        DateTime dateTime = DateTime.Now;
-        dateTime = dateTime.AddDays(7);
-        PaymentDate = dateTime.ToString("dd.MM.yyyy");
-        ClientName = Preferences.Get("SelectedName", "");
-        ClientOIB = Preferences.Get("SelectedOIB", "");
-        ClientAddress = Preferences.Get("SelectedAddress", "");
+    {
+        try
+        {
+
+            InitializeComponent();
+            ViewModel = new NaplataViewModel();
+            this.BindingContext = ViewModel;
+
+            CompanyName = Preferences.Get("naziv_tvrtke", "");
+            CompanyOIB = Preferences.Get("OIBTvrtke", "");
+            CompanyAddress = Preferences.Get("adresaTvrtke", "");
+            CurrentDate = DateTime.Now.ToString("dd.MM.yyyy.");
+            DateTime dateTime = DateTime.Now;
+            dateTime = dateTime.AddDays(7);
+            PaymentDate = dateTime.ToString("dd.MM.yyyy");
+            ClientName = Preferences.Get("SelectedName", "");
+            ClientOIB = Preferences.Get("SelectedOIB", "");
+            ClientAddress = Preferences.Get("SelectedAddress", "");
+        }
+        catch (Exception ex)
+        {
+
+            Debug.WriteLine(ex.Message);
+        }
 
     }
 
