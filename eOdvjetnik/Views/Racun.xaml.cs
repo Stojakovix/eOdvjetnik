@@ -119,7 +119,7 @@ public partial class Racun : ContentPage
         picture.TextWrappingStyle = TextWrappingStyle.InFrontOfText;
         picture.HorizontalAlignment = ShapeHorizontalAlignment.Center;
         picture.VerticalOrigin = VerticalOrigin.Margin;
-        picture.VerticalPosition = -50;
+        picture.VerticalPosition = -120;
         // 1 cm = 28.35f
         picture.Width = 53.8f;
         picture.Height = 80.8f;
@@ -390,7 +390,7 @@ public partial class Racun : ContentPage
 
         //Appends the paragraph.
         paragraph = section.AddParagraph();
-        paragraph.ApplyStyle("Normal2");
+        paragraph.ApplyStyle("Bold");
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left;
         textRange = paragraph.AppendText("\nNačin plaćanja: \tTRANSAKCIJSKI RAČUN\nIBAN: \t\tHR76 234 000 9111 077 0402\nSWIFT CODE: \tPBZGHR2X\nModel: \t\t00\nPoziv na broj:\t303-2-2") as WTextRange;
 

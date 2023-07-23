@@ -12,6 +12,8 @@ public partial class App : Application
 	{
 
     public static NaplataViewModel SharedNaplataViewModel;
+    public static PostavkeViewModel SharedPostavkeViewModel;
+
 
 
     public App(){
@@ -23,6 +25,8 @@ public partial class App : Application
         MainPage = new AppShell();
 
         SharedNaplataViewModel = new NaplataViewModel();
+        SharedPostavkeViewModel = new PostavkeViewModel();
+
 
     }
 

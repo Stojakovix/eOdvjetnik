@@ -51,9 +51,9 @@ namespace eOdvjetnik.ViewModel
             expireDate = Preferences.Get("expire_date", "");
             licenceStatus = Preferences.Get("licence_active", "");
             current_date = DateTime.Now.Date;
-            ParseDate();
             LicenceCheck();
             RefreshTime();
+
             var timer = Application.Current.Dispatcher.CreateTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += (s, e) => RefreshTime();
@@ -66,15 +66,15 @@ namespace eOdvjetnik.ViewModel
             {
                 DateTimeOffset dateTimeOffset = DateTimeOffset.Parse(expireDate);
                 expire_date = dateTimeOffset.Date;
-                TimeSpan difference = current_date.Subtract(expire_date);
+                TimeSpan difference = expire_date.Subtract(current_date);
                 double days = difference.TotalDays;
                 string daysR = days.ToString();
-                Debug.WriteLine(daysR);
+                Debug.WriteLine("ParseDate() - days until licence expires: " + daysR);
                 Preferences.Set("days_until_expiry", daysR);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Date parsing error:" + ex.Message);
+                Debug.WriteLine("Licenca vjerojatno nije aktivna: " + ex.Message);
 
             }
         }
@@ -107,9 +107,10 @@ namespace eOdvjetnik.ViewModel
           {
               expiredLicence = true;
           }
-      
+
 
             ActivationScreen();
+
         }
 
         private void ActivationScreen() //Prikaz aktivacije na glavnoj stranici 
@@ -128,6 +129,8 @@ namespace eOdvjetnik.ViewModel
                 Preferences.Set("activation_disable", aktivacija);
 
             }
+            ParseDate();
+
         }
         // Mora bit kad god je INotifyPropertyChanged na pageu
         public event PropertyChangedEventHandler PropertyChanged;
