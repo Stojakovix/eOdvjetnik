@@ -23,7 +23,10 @@ public partial class App : Application
         Application.Current.UserAppTheme = AppTheme.Light;
         MainPage = new AppShell();
 
-	}
+        SharedNaplataViewModel = new NaplataViewModel();
+        SharedPostavkeViewModel = new PostavkeViewModel();
+
+    }
 
 
     

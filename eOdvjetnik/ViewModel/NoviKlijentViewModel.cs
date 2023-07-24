@@ -275,13 +275,13 @@ namespace eOdvjetnik.ViewModel
 
 
 
-        public async void OnButtonCLick()
-        {
-            AddKlijentToRemoteServer(contactItem);
-            await Shell.Current.GoToAsync("///Klijenti");
-            //Debug.WriteLine("Klijent dodan" + klijent.Ime);
-
-        }
+       //public async void OnButtonCLick()
+       //{
+       //    AddKlijentToRemoteServer(contactItem);
+       //    await Shell.Current.GoToAsync("///Klijenti");
+       //    //Debug.WriteLine("Klijent dodan" + klijent.Ime);
+       //
+       //}
         #region Property Changed
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
