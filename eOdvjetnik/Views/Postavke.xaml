@@ -18,51 +18,40 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
-
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button1_Clicked" Text="Uređaj i licenca" FontSize="Default"  />
-            <Button Grid.Column="0" Grid.Row="1" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button2_Clicked" Text="Prijavi grešku" FontSize="Default"   />
-            <Button Grid.Column="0" Grid.Row="2" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button3_Clicked" Text="Pošalji prijedlog" FontSize="Default"   />
-            <Button Grid.Column="0" Grid.Row="3" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button4_Clicked" Text="NAS postavke"  FontSize="Default"  />
-            <Button Grid.Column="0" Grid.Row="4" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button5_Clicked" Text="SQL postavke"  FontSize="Default"  />
-            <Button Grid.Column="0" Grid.Row="5" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button6_Clicked" Text="Zaposlenici" FontSize="Default"   />
-            <Button Grid.Column="0" Grid.Row="6" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Clicked="Button7_Clicked" Text="Stopa PDV-a" FontSize="Default"   />
+            <Button Grid.Column="0" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button1_Clicked" Text="Uređaj i licenca" FontSize="Default"  />
+            <Button Grid.Column="1" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button4_Clicked" Text="NAS postavke"  FontSize="Default"  />
+            <Button Grid.Column="2" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button5_Clicked" Text="SQL postavke"  FontSize="Default"  />
+            <Button Grid.Column="3" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button7_Clicked" Text="Postavke računa" FontSize="Default"   />
+            <Button Grid.Column="4" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Command="{Binding OpenZaposlenici}"  Text="Zaposlenici" FontSize="Default"   />
+            <Button Grid.Column="5" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button2_Clicked" Text="Prijavi grešku" FontSize="Default"   />
+            <Button Grid.Column="6" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button3_Clicked" Text="Pošalji prijedlog" FontSize="Default"   />
+
+            <VerticalStackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" Padding="10,10,10,10"  BackgroundColor="White" 
+                    x:Name="Frame1" IsVisible="True" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" >
+                <Label TextColor="Black" Text="Vrsta licence:" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label TextColor="Black" Text="{Binding LicenceType}" Margin="0,0,0,20" />
+                <Label TextColor="Black" Text="Datum isteka licence:" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label TextColor="Black" Text="{Binding ExpiryDate}" Margin="0,0,0,20" />
+                <Label TextColor="Black" Text="Aktivacijski kod:" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label TextColor="Black" Text="{Binding Activation_code}" Margin="0,0,0,20" />
+                <Label TextColor="Black" Text="Serijski broj:" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Editor TextColor="Black" Text="{Binding HWID64}" IsReadOnly="True"  />
+            </VerticalStackLayout>
 
 
-            <Border MaximumWidthRequest="420" Grid.Column="1" Grid.RowSpan="7" Padding="10,10,10,10"  BackgroundColor="White" 
-                    x:Name="Frame1" IsVisible="True" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
-                <Border.WidthRequest>
-                    <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android,iOS" Value="225" />
-                        <On Platform="UWP,MacCatalyst" Value="420" />
-                    </OnPlatform>
-                </Border.WidthRequest>
-
-                <StackLayout>
-                    <Label TextColor="Black" Text="Vrsta licence:" FontAttributes="Bold" Margin="0,0,0,5" />
-                    <Label TextColor="Black" Text="{Binding LicenceType}" Margin="0,0,0,20" />
-                    <Label TextColor="Black" Text="Datum isteka licence:" FontAttributes="Bold" Margin="0,0,0,5" />
-                    <Label TextColor="Black" Text="{Binding ExpiryDate}" Margin="0,0,0,20" />
-                    <Label TextColor="Black" Text="Aktivacijski kod:" FontAttributes="Bold" Margin="0,0,0,5" />
-                    <Label TextColor="Black" Text="{Binding Activation_code}" Margin="0,0,0,20" />
-                    <Label TextColor="Black" Text="Serijski broj:" FontAttributes="Bold" Margin="0,0,0,5" />
-                    <Editor TextColor="Black" Text="{Binding HWID64}" IsReadOnly="True"  />
-                </StackLayout>
-            </Border>
-
-            <Border MaximumWidthRequest="420" Grid.Column="1" Grid.RowSpan="7" Padding="0,0,0,0"  BackgroundColor="White" 
+            <Border MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" Padding="0,0,0,0"  BackgroundColor="White" 
                     x:Name="Frame2" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
                 <Border.WidthRequest>
                     <OnPlatform x:TypeArguments="x:Double">
@@ -71,10 +60,10 @@
                     </OnPlatform>
                 </Border.WidthRequest>
                 <ScrollView>
-                    <Editor  AutoSize="TextChanges" MaxLength="300" Placeholder="Opišite grešku u aplikaciji koju je potrebno ispraviti" />
+                    <Editor  AutoSize="TextChanges" MaxLength="300" Placeholder="Opišite grešku u aplikaciji koju je potrebno ispraviti" MinimumHeightRequest="150" />
                 </ScrollView>
             </Border>
-            <Border MaximumWidthRequest="420" Grid.Column="1" Grid.RowSpan="7" Padding="0,0,0,0"  BackgroundColor="White" 
+            <Border MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" Padding="0,0,0,0"  BackgroundColor="White" 
                     x:Name="Frame3" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
                 <Border.WidthRequest>
                     <OnPlatform x:TypeArguments="x:Double">
@@ -83,201 +72,134 @@
                     </OnPlatform>
                 </Border.WidthRequest>
                 <ScrollView>
-                    <Editor AutoSize="TextChanges" MaxLength="300" Placeholder="Navedite funkcionalnost koju biste htjeli vidjeti u idućim verzijama aplikacije" />
+                    <Editor AutoSize="TextChanges" MaxLength="300" Placeholder="Navedite funkcionalnost koju biste htjeli vidjeti u idućim verzijama aplikacije"
+                            MinimumHeightRequest="150" />
                 </ScrollView>
             </Border>
-            <Border MaximumWidthRequest="420" Grid.Column="1" Grid.RowSpan="7"  BackgroundColor="White" 
+
+            <StackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7"  BackgroundColor="White" 
                     x:Name="Frame4" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
-                <Border.WidthRequest>
-                    <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android,iOS" Value="225" />
-                        <On Platform="UWP,MacCatalyst" Value="420" />
-                    </OnPlatform>
-                </Border.WidthRequest>
-                <StackLayout>
-                    <Grid Margin="10,10,10,0" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                <Grid Margin="10,10,10,0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
 
-                        </Grid.RowDefinitions>
+                    </Grid.RowDefinitions>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="3*" />
-                        </Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="200" />
+                    </Grid.ColumnDefinitions>
 
 
-                        <Label MinimumWidthRequest="50" Text="IP adresa"  TextColor="Black" LineBreakMode="NoWrap" VerticalOptions="Center" />
-                        <Entry Grid.Column="1"  x:Name="IP_Entry" Text="{Binding IPNas}" TextColor="Black"   />
+                    <Label MinimumWidthRequest="50" Text="IP adresa"  TextColor="Black" LineBreakMode="NoWrap" VerticalOptions="Center" />
+                    <Entry Grid.Column="1"  x:Name="IP_Entry" Text="{Binding IPNas}" TextColor="Black"  VerticalTextAlignment="Center" />
 
-                        <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                        <Entry x:Name="USER_Entry" Text="{Binding UserNas}" Grid.Row="1" Grid.Column="1" TextColor="Black" />
+                    <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Entry x:Name="USER_Entry" Text="{Binding UserNas}" Grid.Row="1" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center" />
 
-                        <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                        <Entry x:Name="PASS_Entry" Text="{Binding PassNas}" Grid.Row="2" Grid.Column="1" TextColor="Black"  />
+                    <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Entry x:Name="PASS_Entry" Text="{Binding PassNas}" Grid.Row="2" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"  />
 
-                        <Label Text="Mapa" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                        <Entry x:Name="FOLDER_Entry" Text="{Binding Folder}" Grid.Row="3" Grid.Column="1" TextColor="Black" />
+                    <Label Text="Mapa" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Entry x:Name="FOLDER_Entry" Text="{Binding Folder}" Grid.Row="3" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center" />
 
-                        <Label Text="Podmapa" Grid.Row="4" Grid.Column="0" TextColor="Black"  VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                        <Entry x:Name="SUBFOLDER_Entry" Text="{Binding SubFolder}" Grid.Row="4" Grid.Column="1" TextColor="Black" VerticalOptions="Center" />
+                    <Label Text="Podmapa" Grid.Row="4" Grid.Column="0" TextColor="Black"  VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Entry x:Name="SUBFOLDER_Entry" Text="{Binding SubFolder}" Grid.Row="4" Grid.Column="1" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center" />
 
-                        <Button Text="Spremi" Command="{Binding SaveCommandNAS}" Grid.Row="5" Grid.Column="1" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"  />
+                    <Button Text="Spremi" Command="{Binding SaveCommandNAS}" Grid.Row="5" Grid.Column="1" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"  />
 
-                    </Grid>
+                </Grid>
+            </StackLayout>
 
 
-                </StackLayout>
-            </Border>
-            <Border MaximumWidthRequest="420" Grid.Column="1" Grid.RowSpan="7"  BackgroundColor="White" 
+            <StackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" BackgroundColor="White" 
                     x:Name="Frame5" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
-                <Border.WidthRequest>
-                    <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android,iOS" Value="225" />
-                        <On Platform="UWP,MacCatalyst" Value="420" />
-                    </OnPlatform>
-                </Border.WidthRequest>
-                <StackLayout>
-                    <Grid Margin="10,10,10,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                <Grid Margin="10,10,10,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
 
-                        </Grid.RowDefinitions>
+                    </Grid.RowDefinitions>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="3*" />
-                        </Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="200" />
+                    </Grid.ColumnDefinitions>
 
-                        <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                        <Entry x:Name="IPEntry" Text="{Binding IP}" Grid.Row="0" Grid.Column="1" TextColor="Black"  />
+                    <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Entry x:Name="IPEntry" Text="{Binding IP}" Grid.Row="0" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
 
-                        <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                        <Entry x:Name="USEREntry" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1" TextColor="Black"  />
+                    <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Entry x:Name="USEREntry" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
 
-                        <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                        <Entry x:Name="PASSEntry" Text="{Binding Password}" Grid.Row="2" Grid.Column="1" TextColor="Black" />
+                    <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Entry x:Name="PASSEntry" Text="{Binding Password}" Grid.Row="2" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"  />
 
-                        <Label Text="Baza podataka" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                        <Entry x:Name="DatabaseEntry" Text="{Binding DatabaseName}" Grid.Row="3" Grid.Column="1" TextColor="Black"   />
+                    <Label Text="Baza podataka" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Entry x:Name="DatabaseEntry" Text="{Binding DatabaseName}" Grid.Row="3" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
 
-                        <Button Text="Spremi" Command="{Binding SQLSaveCommand}" Grid.Row="5" Grid.Column="1" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"   />
+                    <Button Text="Spremi" Command="{Binding SQLSaveCommand}" Grid.Row="5" Grid.Column="1" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"   />
 
-                    </Grid>
-                </StackLayout>
-            </Border>
-
-            <VerticalStackLayout Grid.Column="1" Grid.RowSpan="7"  BackgroundColor="White" 
-                    x:Name="Frame6" IsVisible="False" HorizontalOptions="StartAndExpand" >
-                <Button Text="Prikaži sve uređaje" Command="{Binding GetAllCompanyDevices}" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"   />
-
-                <ListView Grid.Row="1" ItemsSource="{Binding DataModel.Devices}">
-                    <ListView.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="300"/>
-                                <ColumnDefinition Width="300"/>
-
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="Naziv uređaja" FontAttributes="Bold"/>
-                            <Label Grid.Column="1" Text="HWID uređaja" FontAttributes="Bold"/>
+                </Grid>
+            </StackLayout>
 
 
+            <StackLayout  Grid.Row="1" Grid.ColumnSpan="7"  BackgroundColor="White" x:Name="Frame7" IsVisible="False" >
+            
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="400"/>
+                    </Grid.ColumnDefinitions>
 
-                        </Grid>
-                    </ListView.Header>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="300"/>
-                                        <ColumnDefinition Width="300"/>
-
-                                    </Grid.ColumnDefinitions>
-                                    
-                                    <Label Grid.Column="0" Text="{Binding opis}" Margin="10,0,0,0" />
-                                    <Label Grid.Column="1" Text="{Binding hwid}" Margin="10,0,0,0" />
-
-
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-
-                <Button Text="Prikaži sve korisnike" Command="{Binding GetAllCompanyEmployees}" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"   />
-
-                <ListView Grid.Row="1" ItemsSource="{Binding EmployeeItems}">
-                    <ListView.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="55" />
+                        <RowDefinition Height="55" />
+                        <RowDefinition Height="55" />
+                        <RowDefinition Height="210" />
+                        <RowDefinition Height="55" />
+                    </Grid.RowDefinitions>
 
 
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="Ime korisnika" FontAttributes="Bold"/>
-                            <Label Grid.Column="1" Text="Inicijali" FontAttributes="Bold" Margin="10,0,0,0"/>
-                            <Label Grid.Column="2" Text="HWID" FontAttributes="Bold" Margin="10,0,0,0"/>
-                            <Label Grid.Column="3" Text="Naziv uređaja" FontAttributes="Bold" Margin="10,0,0,0"/>
+                    <Label Grid.Row="0" Grid.Column="0" Text="Stopa PDV-a (%)" Margin="10,15,0,0" VerticalOptions="Start" />
+                    <Entry Grid.Row="0" Grid.Column="1" TextColor="Black" Placeholder="{Binding ReceiptPDVamount}" Margin="5,10,0,0" MaxLength="2"
+                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding ReceiptPDVamount, Mode=TwoWay}" 
+                           />
+                    <Label Grid.Row="1" Grid.Column="0" Text="IBAN" Margin="10,15,0,0" VerticalOptions="Start" />
+                    <Entry Grid.Row="1" Grid.Column="1" TextColor="Black" Placeholder="{Binding ReceiptIBAN}" Margin="5,10,0,0" MaxLength="20"
+                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding ReceiptIBAN, Mode=TwoWay}" 
+                           />
 
-                        </Grid>
-                    </ListView.Header>
+                    <Label Grid.Row="2" Grid.Column="0" Text="Naziv tvrtke u zaglavlju računa:" Margin="10,15,0,0" VerticalOptions="Start" />
+                    <Entry Grid.Row="2" Grid.Column="1" TextColor="Black" Placeholder="{Binding ReceiptHeaderText}" Margin="5,10,0,0" 
+                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding ReceiptHeaderText, Mode=TwoWay}"
+                           />
+
+                    <Label Grid.Row="3" Text="Tekst podnožja računa:" Margin="10,15,0,0"   />
+                    <Editor Grid.Row="3" Grid.Column="1" TextColor="Black"  Margin="5,10,0,0" 
+                           MinimumHeightRequest="200"  HorizontalTextAlignment="Start" MaxLength="400"
+                           Text="{Binding ReceiptFooterText, Mode=TwoWay}" 
+                            Placeholder="{Binding ReceiptFooterText}"
+                           />
+                 
                     
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100"/>
-                                        <ColumnDefinition Width="100"/>
-                                        <ColumnDefinition Width="100"/>
-                                        <ColumnDefinition Width="100"/>
-                                    </Grid.ColumnDefinitions>
-                                    
-                                    <Label Grid.Column="0" Text="{Binding EmployeeName}" Margin="10,0,0,0" />
-                                    <Label Grid.Column="1" Text="{Binding Initals}" Margin="10,0,0,0"/>
-                                    <Label Grid.Column="2" Text="{Binding EmployeeHWID}" Margin="10,0,0,0"/>
+                    <Button Margin="0,15,0,0" Grid.Row="4" Grid.Column="1" Text="Spremi" BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default" 
+                            HorizontalOptions="Center" MinimumWidthRequest="100" Command="{Binding SaveReceiptCompanyInfo}" />
+
+                </Grid>
+                    
 
 
-                                    <Picker Grid.Column="3"
-                                      ItemsSource="{Binding Source={x:Reference Frame6}, Path=BindingContext.DataModel.Devices}"
-                                      SelectedItem="{Binding Source={x:Reference Frame6}, Path=BindingContext.SelectedDevice}"
-                                      ItemDisplayBinding="{Binding opis}" 
-                                      SelectedIndexChanged="OnPickerSelectedIndexChanged">
-                                    </Picker>
-
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </VerticalStackLayout>
-        
-        
-            <Border MaximumWidthRequest="420" Grid.Column="1" Grid.RowSpan="7"  BackgroundColor="White" 
-                    x:Name="Frame7" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
-                <Border.WidthRequest>
-                    <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android,iOS" Value="225" />
-                        <On Platform="UWP,MacCatalyst" Value="420" />
-                    </OnPlatform>
-                </Border.WidthRequest>
-                <Label TextColor="Black" Text="PDV placeholder text" Margin="10,10,0,0" />
-            </Border>
+            </StackLayout>
 
 
         </Grid>

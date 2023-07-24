@@ -39,7 +39,7 @@
 		<RunAOTCompilation>false</RunAOTCompilation>
 		<AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
 		<RuntimeIdentifiers Condition="$(TargetFramework.Contains('-android'))">android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
-		<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
+		<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
 		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
 		<PackageCertificateThumbprint>C07B81BDB15FA1C022E6938F8C8923350B7EAB67</PackageCertificateThumbprint>
 		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
@@ -48,6 +48,8 @@
 		<GenerateTestArtifacts>True</GenerateTestArtifacts>
 		<AppInstallerUri>http://eodvjetnik.hr/install</AppInstallerUri>
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+		<GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
+		<DefaultLanguage>hr</DefaultLanguage>
 	</PropertyGroup>
 
 
@@ -182,20 +184,20 @@
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.5">
 			<TreatAsUsed>true</TreatAsUsed>
 		</PackageReference>
-		<PackageReference Include="Syncfusion.DocIO.NET" Version="22.1.37" />
-		<PackageReference Include="Syncfusion.Licensing" Version="22.1.37" />
-		<PackageReference Include="Syncfusion.Maui.Core" Version="22.1.37" />
-		<PackageReference Include="Syncfusion.Maui.DataForm" Version="22.1.37" />
-		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="22.1.37" />
-		<PackageReference Include="Syncfusion.Maui.ListView" Version="22.1.37" />
-		<PackageReference Include="Syncfusion.Maui.Popup" Version="22.1.37" />
-		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="22.1.37" />
+		<PackageReference Include="Syncfusion.DocIO.NET" Version="22.1.39" />
+		<PackageReference Include="Syncfusion.Licensing" Version="22.1.39" />
+		<PackageReference Include="Syncfusion.Maui.Core" Version="22.1.39" />
+		<PackageReference Include="Syncfusion.Maui.DataForm" Version="22.1.39" />
+		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="22.1.39" />
+		<PackageReference Include="Syncfusion.Maui.ListView" Version="22.1.39" />
+		<PackageReference Include="Syncfusion.Maui.Popup" Version="22.1.39" />
+		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="22.1.39" />
 		<PackageReference Include="OpenAI" Version="1.7.2" />
 		<PackageReference Include="OpenVPN" Version="1.0.3" />
 		<PackageReference Include="System.Windows.Extensions" Version="7.0.0" />
-		<PackageReference Include="Utilities" Version="1.0.0" />
+		<PackageReference Include="Utilities" Version="3.3.0.2" />
 		<PackageReference Include="WireGuardNT-PInvoke" Version="1.0.4" />
-		<PackageReference Include="MySql.Data" Version="8.0.33" />
+		<PackageReference Include="MySql.Data" Version="8.1.0" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.8.0-preview1" />
 
 	</ItemGroup>
@@ -235,6 +237,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Spisi.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Zaposlenici.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

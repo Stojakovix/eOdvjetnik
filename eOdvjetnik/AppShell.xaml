@@ -122,29 +122,38 @@
                              HeaderTitle="Korisnička podrška" 
                              IsVisible="{Binding SupportVisible}" 
                              IsOpen="{Binding SupportPopupOpen}"
-                            >
-                <sfPopup:SfPopup.ContentTemplate>
+                             >
+                <sfPopup:SfPopup.PopupStyle>
+                    <sfPopup:PopupStyle MessageBackground="White" HeaderBackground="White" />
+                </sfPopup:SfPopup.PopupStyle>
+                    
+                    <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Label Text="Broj mobitela: 222-333" TextColor="Black" Margin="20,0,0,10"/>
-                            <Label Text="Email: bruno@zadar-ict.hr" TextColor="Black" Margin="20,0,0,10" />
-                            <Label Text="{Binding Version}" TextColor="Black" Margin="20,0,0,10" />
+                            <Label Text="Broj mobitela: +385 99 290 0000" TextColor="Black" FontSize="16" Margin="20,0,0,10"/>
+                            <Label Text="Email: podrska@eodvjetnik.hr" TextColor="Black" FontSize="16" Margin="20,0,0,10" />
+                            <Label Text="{Binding Version}" TextColor="Black" FontSize="16" Margin="20,0,0,10" />
                         </StackLayout>
                     </DataTemplate>
                 </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
 
             <sfPopup:SfPopup x:Name="popupIstek" 
-                             HeaderTitle="Obavijest" HorizontalOptions="Center"
+                             HeaderTitle="Obavijest" 
                              IsVisible="{Binding ExpiryVisible}" 
                              IsOpen="{Binding ExpiryPopupOpen}"
-                             ShowCloseButton="True"
+                             ShowCloseButton="True" 
 
                             >
+
+                <sfPopup:SfPopup.PopupStyle>
+                    <sfPopup:PopupStyle MessageBackground="White" HeaderBackground="White" />
+                </sfPopup:SfPopup.PopupStyle>
+                
                 <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
                         <HorizontalStackLayout>
-                            <Label Text="{Binding days_Remaining}" TextColor="Black" Margin="20,0,0,10" />
+                            <Label Text="{Binding Days_Remaining}" TextColor="Black" FontSize="16" Margin="25,20,0,0" />
                         </HorizontalStackLayout>
                     </DataTemplate>
                 </sfPopup:SfPopup.ContentTemplate>

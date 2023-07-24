@@ -10,6 +10,7 @@ using eOdvjetnik.Model;
 using eOdvjetnik.Models;
 using eOdvjetnik.Services;
 
+
 namespace eOdvjetnik.ViewModel
 {
     public class NoviKlijentViewModel : INotifyPropertyChanged
@@ -228,7 +229,7 @@ namespace eOdvjetnik.ViewModel
 
         #endregion
 
-        private void AddKlijentToRemoteServer(Klijent klijent)
+        private void AddKlijentToRemoteServer(ContactItem contact)
         {
             try
             {
@@ -251,28 +252,35 @@ namespace eOdvjetnik.ViewModel
                 string disableForeignKeyChecksQuery = "SET FOREIGN_KEY_CHECKS = 0";
                 externalSQLConnect.sqlQuery(disableForeignKeyChecksQuery);
 
-                string query = $"INSERT INTO Contacts (id , ime, OIB, datum_rodenja, adresa, ostalo, boraviste, telefon, fax, mobitel, email, drzava, pravna) " +
-                $"VALUES ('{name}', '{oib}', '{datum_rodjenja.ToString("yyyy-MM-dd HH:mm:ss")}', '{adresa}' , '{ostalo}' , '{boraviste}' , '{telefon}' , '{fax}' , '{mobitel}' , '{email}' , '{drzava}' , '{pravna}')";
-                Debug.WriteLine(query + " in novi spis viewModel");
+
+                string query = $"INSERT INTO Contacts (ime, OIB, datum_rodenja, adresa, ostalo, boraviste, telefon, fax, mobitel, email, drzava, pravna) " +
+                $"VALUES ('{name}', '{oib}', '{datum_rodjenja.ToString("yyyy-MM-dd")}', '{adresa}' , '{ostalo}' , '{boraviste}' , '{telefon}' , '{fax}' , '{mobitel}' , '{email}' , '{drzava}' , '{pravna}')";
+                externalSQLConnect.sqlQuery(query);
+
+                Debug.WriteLine(query + " in novi klijent viewModel");
+
             }
 
             catch(Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
+            Debug.WriteLine("prije Bate");
+
+
+            // Call GenerateFiles() on the shared instance
+
+            Debug.WriteLine("Poslije Bate");
         }
 
-        public Klijent Klijent
+
+
+        public async void OnButtonCLick()
         {
-            get { return klijent; }
-            set
-            {
-                if (klijent != value)
-                {
-                    klijent = value;
-                    OnPropertyChanged(nameof(Klijent));
-                }
-            }
+            AddKlijentToRemoteServer(contactItem);
+            await Shell.Current.GoToAsync("///Klijenti");
+            //Debug.WriteLine("Klijent dodan" + klijent.Ime);
+
         }
         #region Property Changed
         public event PropertyChangedEventHandler PropertyChanged;

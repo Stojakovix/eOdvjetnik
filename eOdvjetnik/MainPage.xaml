@@ -94,7 +94,7 @@ padding-right: 30;
 
 
             <Label 
-                        Text="Kontakt informacije: tel: 0800 123 224, email: info@eodvjednik.hr"
+                        Text="Kontakt informacije: tel: +385 99 290 0000, email: info@eodvjednik.hr"
                         HorizontalOptions="Center"
                         FontSize="Small"
                         Margin="10,0,0,10"

@@ -9,8 +9,8 @@ namespace eOdvjetnik.ViewModel
 {
 	public class AppShellViewModel : INotifyPropertyChanged
 	{
-        public int daysRemaining {get;set;}
-        public string days_Remaining { get; set; }
+        public int DaysRemaining {get;set;}
+        public string Days_Remaining { get; set; }
 
         private bool ExpiryisOpen, Expiryvisible;
 
@@ -239,7 +239,7 @@ namespace eOdvjetnik.ViewModel
         {
              string ProvjeraAktivacije = Preferences.Get("activation_disable", "");
             Debug.WriteLine(ProvjeraAktivacije);
-            if (ProvjeraAktivacije == "Licence") //promijeniti u "LicenceNotActive" 
+            if (ProvjeraAktivacije == "Licence") //promijeniti "Licence" u "LicenceNotActive" da se aplikacija onemogući
             {
                 disableMenu = true;
             }
@@ -324,8 +324,13 @@ namespace eOdvjetnik.ViewModel
         #region Support funkcije
         private void OnSupportClick()
         {
-            SupportPopupOpen = true;
-            Supportvisible = true;
+            DisableMenu();
+            if (disableMenu == false)
+            {
+                SupportPopupOpen = true;
+                Supportvisible = true;
+            }
+           
         }
 
         private void PopupClose()
@@ -536,19 +541,25 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                daysRemaining = 11;
+                DaysRemaining = 0;
                 string days_remaining = Preferences.Get("days_until_expiry", "");
-                daysRemaining = Convert.ToInt32(days_remaining);
-                Debug.WriteLine(daysRemaining);
-                if (daysRemaining > 1 && daysRemaining < 10)
+                DaysRemaining = Convert.ToInt32(days_remaining);
+                Debug.WriteLine(DaysRemaining);
+                if (DaysRemaining > 1 && DaysRemaining < 10)
                 {
-                    days_Remaining = string.Concat("Vaša licenca ističe za ", days_remaining, " dana");
+                    Days_Remaining = string.Concat("Vaša licenca ističe za ", days_remaining, " dana");
                     ExpiryPopupOpen = true;
                     Expiryvisible = true;
                 }
-                else if (daysRemaining == 0)
+                else if (DaysRemaining == 1)
                 {
-                    days_Remaining = "Vaša licenca ističe sutra!";
+                    Days_Remaining = "Vaša licenca ističe sutra!";
+                    ExpiryPopupOpen = true;
+                    Expiryvisible = true;
+                }
+                else if (DaysRemaining == 0 || DaysRemaining < 0)
+                {
+                    Days_Remaining = "Vaša licenca je istekla!";
                     ExpiryPopupOpen = true;
                     Expiryvisible = true;
                 }

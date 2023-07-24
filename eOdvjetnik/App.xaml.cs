@@ -1,4 +1,5 @@
 ﻿using eOdvjetnik.Data;
+using eOdvjetnik.ViewModel;
 using eOdvjetnik.Views;
 using Syncfusion.Maui.Scheduler;
 using System.Globalization;
@@ -9,7 +10,9 @@ namespace eOdvjetnik;
 
 public partial class App : Application
 	{
-    
+
+    public static NaplataViewModel SharedNaplataViewModel;
+    public static PostavkeViewModel SharedPostavkeViewModel;
 
 
 	public App(){

@@ -19,7 +19,7 @@
             <Grid Margin="0,0,0,10" BackgroundColor="LightGray" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60" />
-                    <RowDefinition Height="120" />
+                    <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -46,8 +46,8 @@
                 <Label Margin="20,0,0,0" Grid.Column="2" Grid.Row="1" Text="{Binding ClientAddress}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
                 <Label Margin="20,12,0,10" Text="Boravište:" Grid.Column="3" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Margin="20,0,0,0" Grid.Column="3" Grid.Row="1" Text="{Binding ClientResidence}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
-                <Label Margin="20,12,0,10" Text="Datum rođenja:" Grid.Column="4" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
-                <Label Margin="20,0,0,0" Grid.Column="4" Grid.Row="1" Text="{Binding ClientBirthDate}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
+                <Label Margin="20,12,0,10" Text="Datum rođenja:" Grid.Column="4" IsVisible="false"  Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,0,0,0" Grid.Column="4" Grid.Row="1" IsVisible="false" Text="{Binding ClientBirthDate}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
                 <Label Margin="20,12,0,10" Text="Ostalo:" Grid.Column="5" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black"  />
                 <Label Margin="20,0,0,0" Grid.Column="5" Grid.Row="1" Text="{Binding ClientOther}" FontSize="14"  TextColor="Black" Padding="0,0,0,10"  />
                 <Label Margin="20,12,0,10" Text="Telefon:" Grid.Column="6" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
@@ -90,7 +90,19 @@
                 Command="{Binding OnReciptClickCommand}" 
                 FontSize="Default"
                 Margin="0,0,10,10"/>
-                
+
+                <Button 
+                BorderColor="DarkGray"
+                BorderWidth="1"
+                BackgroundColor="#5ac8fa"
+                Text="Osvježi"
+                FontAttributes="Bold"
+                TextColor="Black"
+                HorizontalOptions="End"
+                Command="{Binding RefreshContacts}" 
+                FontSize="Default"
+                Margin="0,0,10,10"/>
+
                 <SearchBar  
                    BackgroundColor="LightGray"
                    Placeholder="Pretraga po imenu ili OIB-u"
