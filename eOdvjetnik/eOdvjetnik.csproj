@@ -224,6 +224,9 @@
 	  <MauiXaml Update="Views\Naplata.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\UrediKlijenta.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\NoviKlijent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -254,6 +257,9 @@
 	  <BundleResource Include="Settings.bundle\Root.plist" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Views\UrediKlijenta.xaml.cs">
+	    <DependentUpon>UrediKlijenta.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Racun.xaml.cs">
 	    <DependentUpon>Racun.xaml</DependentUpon>
 	  </Compile>

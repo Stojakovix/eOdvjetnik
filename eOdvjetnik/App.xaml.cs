@@ -13,9 +13,11 @@ public partial class App : Application
 
     public static NaplataViewModel SharedNaplataViewModel;
     public static PostavkeViewModel SharedPostavkeViewModel;
+    public static KlijentiViewModel SharedKlijentiViewModel;
 
 
-	public App(){
+
+    public App(){
         InitializeComponent();
         Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjQ5MTQ1M0AzMjMyMmUzMDJlMzBRT2JkTm1HczFuTmdmNTVFcWNWU29xbGt6Z2lhRDFYYk1GZWppS3pjWnlNPQ==");
 
@@ -25,7 +27,7 @@ public partial class App : Application
 
         SharedNaplataViewModel = new NaplataViewModel();
         SharedPostavkeViewModel = new PostavkeViewModel();
-
+        SharedKlijentiViewModel = new KlijentiViewModel();
     }
 
 

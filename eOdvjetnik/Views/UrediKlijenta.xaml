@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="eOdvjetnik.Views.NoviKlijent"
+             x:Class="eOdvjetnik.Views.UrediKlijenta"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
-             Title="NoviKlijent">
+             Title="UrediKlijenta">
 
     <ContentPage.BindingContext>
         <viewmodel:NoviKlijentViewModel/>
@@ -32,46 +32,47 @@
 
             </Grid.RowDefinitions>
             <Label Text="Ime" Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="ImeEntry" Keyboard="Numeric" Grid.Row="0" Grid.Column="1" Text="{Binding Name }"  />
+            <Entry x:Name="ImeEntry" Keyboard="Numeric" Grid.Row="0" Grid.Column="1" Text="{Binding ClientName }"  />
 
             <Label Text="OIB" Grid.Row="1" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="OibEntry" Keyboard="Numeric" Grid.Row="1" Grid.Column="1" Text="{Binding Oib}"  />
+            <Entry x:Name="OibEntry" Keyboard="Numeric" Grid.Row="1" Grid.Column="1" Text="{Binding ClientOIB}"  />
 
             <Label Text="Datum Rođenja" Grid.Row="2" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <DatePicker x:Name="BirthDatePicker" Grid.Row="2" Grid.Column="1" Date="{Binding DatumRodjenja}"/>
+            <DatePicker x:Name="BirthDatePicker" Grid.Row="2" Grid.Column="1" Date="{Binding ClientBirthDate}"/>
 
             <Label Text="Adresa" Grid.Row="3" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Editor x:Name="AdresaEntry" Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding Adresa}"  />
+            <Editor x:Name="AdresaEntry" Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding ClientAddress}"  />
 
             <Label Text="Ostalo" Grid.Row="4" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Editor x:Name="OstaloEntry" Keyboard="Numeric" Grid.Row="4" Grid.Column="1" Text="{Binding Ostalo}"  />
+            <Editor x:Name="OstaloEntry" Keyboard="Numeric" Grid.Row="4" Grid.Column="1" Text="{Binding ClientOther}"  />
 
             <Label Text="Boravište" Grid.Row="5" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="BoravišteEntry" Keyboard="Numeric" Grid.Row="5" Grid.Column="1" Text="{Binding Boraviste}"  />
+            <Entry x:Name="BoravišteEntry" Keyboard="Numeric" Grid.Row="5" Grid.Column="1" Text="{Binding ClientResidence}"  />
 
             <Label Text="Telefon" Grid.Row="6" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="TelefonEntry" Keyboard="Numeric" Grid.Row="6" Grid.Column="1" Text="{Binding Telefon}"  />
+            <Entry x:Name="TelefonEntry" Keyboard="Numeric" Grid.Row="6" Grid.Column="1" Text="{Binding ClientPhone}"  />
 
             <Label Text="Fax" Grid.Row="7" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="FaxEntry" Keyboard="Numeric" Grid.Row="7" Grid.Column="1" Text="{Binding Fax}"  />
+            <Entry x:Name="FaxEntry" Keyboard="Numeric" Grid.Row="7" Grid.Column="1" Text="{Binding ClientFax}"  />
 
             <Label Text="Mobitel" Grid.Row="8" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="MobitelEntry" Keyboard="Numeric" Grid.Row="8" Grid.Column="1" Text="{Binding Mobitel}"  />
+            <Entry x:Name="MobitelEntry" Keyboard="Numeric" Grid.Row="8" Grid.Column="1" Text="{Binding ClientMobile}"  />
 
             <Label Text="E-pošta" Grid.Row="9" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="EMailEntry" Keyboard="Numeric" Grid.Row="9" Grid.Column="1" Text="{Binding Email}"  />
+            <Entry x:Name="EMailEntry" Keyboard="Numeric" Grid.Row="9" Grid.Column="1" Text="{Binding ClientEmail}"  />
 
             <Label Text="Država" Grid.Row="10" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="DržavaEntry" Keyboard="Numeric" Grid.Row="10" Grid.Column="1" Text="{Binding Drzava}"  />
+            <Entry x:Name="DržavaEntry" Keyboard="Numeric" Grid.Row="10" Grid.Column="1" Text="{Binding ClientCountry}"  />
 
             <Label Text="Pravna" Grid.Row="11" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="PravnaEntry" Keyboard="Numeric" Grid.Row="11" Grid.Column="1" Text="{Binding Pravna}"  />
+            <Entry x:Name="PravnaEntry" Keyboard="Numeric" Grid.Row="11" Grid.Column="1" Text="PRAVNA PLACEHOLDER"  />
 
-            <Button Text="Spremi" Grid.Row="12" Command="{Binding DodajNovogKlijenta}" BackgroundColor="#5ac8fa"  BorderColor="DarkGray"
-                     FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="10,20,0,0" WidthRequest="100"
-              HorizontalOptions="Start"
-                    />
+            <Button  Text="Spremi" Grid.Row="12" Command="{Binding UpdateClientData}" BackgroundColor="#5ac8fa"  BorderColor="DarkGray"
+                     FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="10,20,0,0" WidthRequest="100" HorizontalOptions="Start" />
 
+
+            <Button  Text="Obriši kontakt" Grid.Row="12" Command="{Binding DeleteClientData}" BackgroundColor="#DC143C"  BorderColor="DarkGray"
+                     FontSize="Default"  FontAttributes="Bold"   TextColor="LightGray" Grid.Column="1" Margin="10,20,30,0" WidthRequest="150" HorizontalOptions="End" />
         </Grid>
     </ScrollView>
 </ContentPage>

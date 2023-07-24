@@ -294,7 +294,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
     private string _ClientPhone;
     public string ClientPhone
     {
-        get { return _ClientResidence; }
+        get { return _ClientPhone; }
         set
         {
             if (_ClientPhone != value)
@@ -304,16 +304,16 @@ public class KlijentiViewModel : INotifyPropertyChanged
             }
         }
     }
-    private string _ClinetFax;
-    public string ClinetFax
+    private string _ClientFax;
+    public string ClientFax
     {
-        get { return _ClinetFax; }
+        get { return _ClientFax; }
         set
         {
-            if (_ClinetFax != value)
+            if (_ClientFax != value)
             {
-                _ClinetFax = value;
-                OnPropertyChanged(nameof(ClinetFax));
+                _ClientFax = value;
+                OnPropertyChanged(nameof(ClientFax));
             }
         }
     }
@@ -391,6 +391,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
     public ICommand OnReciptClickCommand { get; set; }
     public ICommand RefreshContacts { get; set; }
+    public ICommand EditClientButton { get; set; }
 
 
     public KlijentiViewModel()
@@ -403,7 +404,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
         ClientBirthDate = Preferences.Get("SelectedBirthDate", "");
         ClientResidence = Preferences.Get("SelectedRsidence", "");
         ClientPhone = Preferences.Get("SelectedPhone", "");
-        ClinetFax = Preferences.Get("SelectedFax", "");
+        ClientFax = Preferences.Get("SelectedFax", "");
         ClientMobile = Preferences.Get("SelectedMobile", "");
         ClientEmail = Preferences.Get("SelectedEmail", "");
         ClientOther = Preferences.Get("SelectedOther", "");
@@ -419,6 +420,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
         }
         OnReciptClickCommand = new Command(OpenRecipt);
         RefreshContacts = new Command(GenerateFiles);
+        EditClientButton = new Command(EditClient);
+
 
         var timer = Application.Current.Dispatcher.CreateTimer();
         timer.Interval = TimeSpan.FromMilliseconds(200);
@@ -427,6 +430,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
     }
 
+  
     public async void OnButtonClick()
     {
         await Shell.Current.GoToAsync("/NoviKlijent");
@@ -463,7 +467,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
             ClientBirthDate = Preferences.Get("SelectedBirthDate", "");
             ClientResidence = Preferences.Get("SelectedRsidence", "");
             ClientPhone = Preferences.Get("SelectedPhone", "");
-            ClinetFax = Preferences.Get("SelectedFax", "");
+            ClientFax = Preferences.Get("SelectedFax", "");
             ClientMobile = Preferences.Get("SelectedMobile", "");
             ClientEmail = Preferences.Get("SelectedEmail", "");
             ClientOther = Preferences.Get("SelectedOther", "");
@@ -479,5 +483,11 @@ public class KlijentiViewModel : INotifyPropertyChanged
             }
         }
         );
+    }
+
+private async void EditClient()
+    {
+        await Shell.Current.GoToAsync("/UrediKlijenta");
+
     }
 }
