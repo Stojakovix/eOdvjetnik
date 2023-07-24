@@ -51,8 +51,7 @@ public partial class Racun : ContentPage
     public Racun()
 	{
         InitializeComponent();
-        ViewModel = new NaplataViewModel();
-        this.BindingContext = ViewModel;
+        this.BindingContext = App.SharedNaplataViewModel;
         CompanyName = Preferences.Get("naziv_tvrtke", "");
         CompanyOIB = Preferences.Get("OIBTvrtke", "");
         CompanyAddress = Preferences.Get("adresaTvrtke", "");

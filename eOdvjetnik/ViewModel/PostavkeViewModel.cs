@@ -307,7 +307,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
             Preferences.Set(SUBFOLDER_nas, subFolder);
 
             Debug.WriteLine("Nas saved " + Preferences.Default);
-
+            Debug.WriteLine("KLINUTO NA SAVE U NAS POSTAVKAMA");
+                
         }
 
         catch (Exception ex)
@@ -382,6 +383,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
             Debug.WriteLine("Saved");
             Debug.WriteLine(UserName + " " + Password);
+            Debug.WriteLine("KLINUTO NA SAVE U NAS POSTAVKAMA");
 
         }
         catch (Exception ex)

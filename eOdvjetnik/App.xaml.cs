@@ -5,8 +5,6 @@ using Syncfusion.Maui.Scheduler;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
-using eOdvjetnik.ViewModel;
-
 
 namespace eOdvjetnik;
 

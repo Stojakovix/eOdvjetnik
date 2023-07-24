@@ -8,7 +8,7 @@ public partial class Postavke : ContentPage
     public Postavke()
 	{
 		InitializeComponent();
-        BindingContext = App.SharedPostavkeViewModel;
+        BindingContext = new PostavkeViewModel();
     }
 
     

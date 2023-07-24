@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eOdvjetnik.Models;
 using eOdvjetnik.Services;
-using Syncfusion.Maui.Scheduler;
-using Yahoo.Yui.Compressor;
+
 
 namespace eOdvjetnik.ViewModel
 {
@@ -245,7 +244,7 @@ namespace eOdvjetnik.ViewModel
 
         #endregion
 
-        private  void AddKlijentToRemoteServer(ContactItem contact)
+        private void AddKlijentToRemoteServer(ContactItem contact)
         {
             try
             {
@@ -275,34 +274,6 @@ namespace eOdvjetnik.ViewModel
 
                 Debug.WriteLine(query + " in novi klijent viewModel");
 
-
-                //try
-                //{
-                //    if (contactItem == null)
-                //    {
-                //        contact = new ContactItem();
-                //        contact.Ime = name;
-                //        contact.OIB = oib;
-                //        contact.Datum_rodenja = datum_rodjenja;
-                //        contact.Adresa = adresa;
-                //        contact.Boraviste = boraviste;
-                //        contact.Telefon = telefon;
-                //        contact.Fax = fax;
-                //        contact.Mobitel = mobitel;
-                //        contact.Email = email;
-                //        contact.Ostalo = ostalo;
-                //        contact.Drzava = drzava;
-                //        contact.PravnaInt = pravna;
-                //        contact.PravnaString = pravna.ToString();
-                //        Contacts.Add(contact);
-                        
-                //    }
-                //}
-                //catch (Exception ex)
-                //{
-
-                //    Debug.WriteLine(ex.Message);
-                //}
             }
 
             catch (Exception ex)
@@ -310,14 +281,14 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message);
             }
             Debug.WriteLine("prije Bate");
-            var sharedKlijentiViewModel = App.SharedKlijentiViewModel;
+
 
             // Call GenerateFiles() on the shared instance
-            sharedKlijentiViewModel.GenerateFiles();
+
             Debug.WriteLine("Poslije Bate");
         }
 
-  
+
 
         public async void OnButtonCLick()
         {

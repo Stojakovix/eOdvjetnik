@@ -20,14 +20,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
     public ObservableCollection<ContactItem> Contacts
     {
         get { return contacts; }
-        set
-        {
-            if (contacts != value)
-            {
-                contacts = value;
-                OnPropertyChanged(nameof(Contacts));
-            }
-        }
+        set { contacts = value; }
     }
     private string _searchText;
     public string SearchText
@@ -94,8 +87,6 @@ public class KlijentiViewModel : INotifyPropertyChanged
             }
         }
     }
-
-    
     public void GenerateFiles()
     {
         NoQueryResult = false;
@@ -103,9 +94,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
         try
         {
             if (contacts != null)
-            { 
-                var sharedKlijentiViewModel = App.SharedKlijentiViewModel;
-                sharedKlijentiViewModel.contacts.Clear();
+            {
+                contacts.Clear();
             }
             string query = "SELECT * FROM `contacts` ORDER by id desc limit 30;";
             Debug.WriteLine(query);
@@ -143,11 +133,10 @@ public class KlijentiViewModel : INotifyPropertyChanged
                             Ostalo = filesRow["ostalo"],
                             Drzava = filesRow["drzava"],
                             PravnaInt = pravnaInt,
-                            PravnaString = pravnaString,
-                            
+                            PravnaString = pravnaString
+
                         });
 
-                        Debug.WriteLine(id);   
                     }
 
                 }
@@ -155,7 +144,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-            
+
             }
         }
         catch (Exception ex)
@@ -426,7 +415,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
-            
+
         }
         OnReciptClickCommand = new Command(OpenRecipt);
         RefreshContacts = new Command(GenerateFiles);
@@ -450,7 +439,6 @@ public class KlijentiViewModel : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    
     private async void OpenRecipt()
     {
         try
