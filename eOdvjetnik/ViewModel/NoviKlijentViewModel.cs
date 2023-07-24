@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using eOdvjetnik.Model;
 using eOdvjetnik.Models;
 using eOdvjetnik.Services;
@@ -16,18 +17,38 @@ namespace eOdvjetnik.ViewModel
     public class NoviKlijentViewModel : INotifyPropertyChanged
     {
         Klijent klijent;
+        ContactItem contactItem;
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+
+        public ICommand DodajNovogKlijenta { get; set; }
+        public ICommand UpdateClientData { get; set; }
+        public ICommand DeleteClientData { get; set; }
 
         public NoviKlijentViewModel()
         {
+            
             try
             {
-
+                ClientName = Preferences.Get("SelectedName", "");
+                ClientOIB = Preferences.Get("SelectedOIB", "");
+                ClientAddress = Preferences.Get("SelectedAddress", "");
+                ClientBirthDate = Preferences.Get("SelectedBirthDate", "");
+                ClientResidence = Preferences.Get("SelectedRsidence", "");
+                ClientPhone = Preferences.Get("SelectedPhone", "");
+                ClientFax = Preferences.Get("SelectedFax", "");
+                ClientMobile = Preferences.Get("SelectedMobile", "");
+                ClientEmail = Preferences.Get("SelectedEmail", "");
+                ClientOther = Preferences.Get("SelectedOther", "");
+                ClientCountry = Preferences.Get("SelectedCountry", "");
+                ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
+
             }
+            DodajNovogKlijenta = new Command(OnButtonCLick);
+      
         }
 
         private ObservableCollection<Klijent> klijenti;
@@ -233,6 +254,8 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
+              
+
                 #region VarijableZaServer
                 string name = Name ?? string.Empty;
                 string oib = Oib ?? string.Empty;
@@ -275,13 +298,13 @@ namespace eOdvjetnik.ViewModel
 
 
 
-       //public async void OnButtonCLick()
-       //{
-       //    AddKlijentToRemoteServer(contactItem);
-       //    await Shell.Current.GoToAsync("///Klijenti");
-       //    //Debug.WriteLine("Klijent dodan" + klijent.Ime);
-       //
-       //}
+        public async void OnButtonCLick()
+        {
+            AddKlijentToRemoteServer(contactItem);
+            await Shell.Current.GoToAsync("///Klijenti");
+            //Debug.WriteLine("Klijent dodan" + klijent.Ime);
+        
+        }
         #region Property Changed
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
@@ -289,5 +312,178 @@ namespace eOdvjetnik.ViewModel
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+
+        #region Selected Client
+
+        private string _ClientName;
+        public string ClientName
+        {
+            get { return _ClientName; }
+            set
+            {
+                if (_ClientName != value)
+                {
+                    _ClientName = value;
+                    OnPropertyChanged(nameof(ClientName));
+                }
+            }
+        }
+
+        private string _ClientOIB;
+        public string ClientOIB
+        {
+            get { return _ClientOIB; }
+            set
+            {
+                if (_ClientOIB != value)
+                {
+                    _ClientOIB = value;
+                    OnPropertyChanged(nameof(ClientOIB));
+                }
+            }
+        }
+
+        private string _ClientAddress;
+        public string ClientAddress
+        {
+            get { return _ClientAddress; }
+            set
+            {
+                if (_ClientAddress != value)
+                {
+                    _ClientAddress = value;
+                    OnPropertyChanged(nameof(ClientAddress));
+                }
+            }
+        }
+
+        private string _ClientBirthDate;
+        public string ClientBirthDate
+        {
+            get { return _ClientBirthDate; }
+            set
+            {
+                if (_ClientBirthDate != value)
+                {
+                    _ClientBirthDate = value;
+                    OnPropertyChanged(nameof(ClientBirthDate));
+                }
+            }
+        }
+        private string _ClientResidence;
+        public string ClientResidence
+        {
+            get { return _ClientResidence; }
+            set
+            {
+                if (_ClientResidence != value)
+                {
+                    _ClientResidence = value;
+                    OnPropertyChanged(nameof(ClientResidence));
+                }
+            }
+        }
+        private string _ClientPhone;
+        public string ClientPhone
+        {
+            get { return _ClientPhone; }
+            set
+            {
+                if (_ClientPhone != value)
+                {
+                    _ClientPhone = value;
+                    OnPropertyChanged(nameof(ClientPhone));
+                }
+            }
+        }
+        private string _ClientFax;
+        public string ClientFax
+        {
+            get { return _ClientFax; }
+            set
+            {
+                if (_ClientFax != value)
+                {
+                    _ClientFax = value;
+                    OnPropertyChanged(nameof(ClientFax));
+                }
+            }
+        }
+        private string _ClientMobile;
+        public string ClientMobile
+        {
+            get { return _ClientMobile; }
+            set
+            {
+                if (_ClientMobile != value)
+                {
+                    _ClientMobile = value;
+                    OnPropertyChanged(nameof(ClientMobile));
+                }
+            }
+        }
+        private string _ClientEmail;
+
+        public string ClientEmail
+        {
+            get { return _ClientEmail; }
+            set
+            {
+                if (_ClientEmail != value)
+                {
+                    _ClientEmail = value;
+                    OnPropertyChanged(nameof(ClientEmail));
+                }
+            }
+        }
+        private string _ClientOther;
+
+        public string ClientOther
+        {
+            get { return _ClientOther; }
+            set
+            {
+                if (_ClientOther != value)
+                {
+                    _ClientOther = value;
+                    OnPropertyChanged(nameof(ClientOther));
+                }
+            }
+        }
+        private string _ClientCountry;
+
+        public string ClientCountry
+        {
+            get { return _ClientCountry; }
+            set
+            {
+                if (_ClientCountry != value)
+                {
+                    _ClientCountry = value;
+                    OnPropertyChanged(nameof(ClientCountry));
+                }
+            }
+        }
+        private string _ClientLegalPerson;
+
+        public string ClientLegalPerson
+        {
+            get { return _ClientLegalPerson; }
+            set
+            {
+                if (_ClientLegalPerson != value)
+                {
+                    _ClientLegalPerson = value;
+                    OnPropertyChanged(nameof(ClientLegalPerson));
+                }
+            }
+        }
+
+        #endregion
+
+
+  
+
+        
     }
 }

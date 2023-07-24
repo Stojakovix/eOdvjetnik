@@ -35,6 +35,8 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+
 
                 </Grid.ColumnDefinitions>
 
@@ -55,13 +57,18 @@
                 <Label Margin="20,12,0,10" Text="Mobitel:" Grid.Column="7" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Margin="20,0,0,0" Grid.Column="7" Grid.Row="1" Text="{Binding ClientMobile}" FontSize="14"  TextColor="Black" Padding="0,0,0,10"  />
                 <Label Margin="20,12,0,10" Text="Fax:" Grid.Column="8" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
-                <Label Margin="20,0,0,0" Grid.Column="8" Grid.Row="1" Text="{Binding ClinetFax}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
+                <Label Margin="20,0,0,0" Grid.Column="8" Grid.Row="1" Text="{Binding ClientFax}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
                 <Label Margin="20,12,0,10" Text="Email:" Grid.Column="9" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Margin="20,0,0,0" Grid.Column="9" Grid.Row="1" Text="{Binding ClientEmail}" FontSize="14"  TextColor="Black"  Padding="0,0,0,10" />
                 <Label Margin="20,12,0,10" Text="Država:" Grid.Column="10" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Margin="20,0,0,0" Grid.Column="10" Grid.Row="1" Text="{Binding ClientCountry}" FontSize="14"  TextColor="Black" Padding="0,0,0,10"  />
                 <Label Margin="20,12,0,10" Text="Pravna osoba:" Grid.Column="11" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Margin="20,0,0,0" Grid.Column="11" Grid.Row="1" Text="{Binding ClientLegalPerson}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
+
+                <Label Margin="20,12,0,10" Text="Uredi kontakt" Grid.Column="12" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+
+                <ImageButton Source="edit.png" HorizontalOptions="Center"  Grid.Row="1" Grid.Column="12" Aspect="AspectFit" BackgroundColor="LightGray"
+                             Margin="0,0,0,15" VerticalOptions="CenterAndExpand" Command="{Binding EditClientButton}"  />
 
 
             </Grid>
@@ -71,7 +78,7 @@
                 BorderColor="DarkGray"
                 BorderWidth="1"
                 BackgroundColor="#5ac8fa"
-                Text="Dodaj novi"
+                Text="Dodaj novi kontakt"
                 FontAttributes="Bold"
                 TextColor="Black"
                 HorizontalOptions="End"
@@ -179,7 +186,7 @@
                                     <ColumnDefinition Width="*"  />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="60" />
+                                    <ColumnDefinition Width="20" />
 
 
 
@@ -192,7 +199,6 @@
                                 <Label MinimumWidthRequest="50" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="4" Text="{Binding Telefon}"  HorizontalOptions="Start" />
                                 <Label MinimumWidthRequest="50" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="5" Text="{Binding Mobitel}"  HorizontalOptions="Start" />
                                 <Label MinimumWidthRequest="100" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="6" Text="{Binding Email}"  HorizontalOptions="Start" />
-                                <ImageButton Source="edit.png" HorizontalOptions="Start"  Grid.Row="1" Grid.Column="7" Aspect="AspectFit" Padding="5" MaximumHeightRequest="6" />
 
 
                                 <BoxView Margin="0,40,0,0" Grid.Row="1" Grid.ColumnSpan="12" BackgroundColor="Red" HeightRequest="1"  />
