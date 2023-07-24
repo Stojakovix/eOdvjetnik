@@ -10,7 +10,7 @@ namespace eOdvjetnik.ViewModel
 {
     public class KalendarViewModel : INotifyPropertyChanged
     {
-        
+        private ObservableCollection<SchedulerAppointment> appointments;
 
 
         public KalendarViewModel()
@@ -59,8 +59,6 @@ namespace eOdvjetnik.ViewModel
         /// Property changed event handler
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private ObservableCollection<SchedulerAppointment> appointments;
 
         public ObservableCollection<SchedulerAppointment> Appointments
         {

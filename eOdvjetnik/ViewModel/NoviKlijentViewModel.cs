@@ -6,39 +6,22 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
+using eOdvjetnik.Model;
 using eOdvjetnik.Models;
 using eOdvjetnik.Services;
-using Syncfusion.Maui.Scheduler;
-using Yahoo.Yui.Compressor;
 
 namespace eOdvjetnik.ViewModel
 {
     public class NoviKlijentViewModel : INotifyPropertyChanged
     {
-
-        ContactItem contactItem;
-
-        public ContactItem ContactItem
-        {
-            get { return contactItem; }
-            set
-            {
-                if (contactItem != value)
-                {
-                    contactItem = value;
-                    OnPropertyChanged(nameof(ContactItem));
-                }
-            }
-        }
+        Klijent klijent;
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
-        public ICommand AddKlijent { get; set; }
 
         public NoviKlijentViewModel()
         {
             try
             {
-                AddKlijent = new Command(OnButtonCLick);
+
             }
             catch (Exception ex)
             {
@@ -46,16 +29,16 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-        private ObservableCollection<ContactItem> contacts;
-        public ObservableCollection<ContactItem> Contacts
+        private ObservableCollection<Klijent> klijenti;
+        public ObservableCollection<Klijent> Klijenti
         {
-            get { return contacts; }
+            get { return klijenti; }
             set
             {
-                if (contacts != value)
+                if (klijenti != value)
                 {
-                    contacts = value;
-                    OnPropertyChanged(nameof(Contacts));
+                    klijenti = value;
+                    OnPropertyChanged(nameof(Klijenti));
                 }
             }
         }
@@ -245,7 +228,7 @@ namespace eOdvjetnik.ViewModel
 
         #endregion
 
-        private  void AddKlijentToRemoteServer(ContactItem contact)
+        private void AddKlijentToRemoteServer(Klijent klijent)
         {
             try
             {
@@ -268,68 +251,29 @@ namespace eOdvjetnik.ViewModel
                 string disableForeignKeyChecksQuery = "SET FOREIGN_KEY_CHECKS = 0";
                 externalSQLConnect.sqlQuery(disableForeignKeyChecksQuery);
 
-
-                string query = $"INSERT INTO Contacts (ime, OIB, datum_rodenja, adresa, ostalo, boraviste, telefon, fax, mobitel, email, drzava, pravna) " +
-                $"VALUES ('{name}', '{oib}', '{datum_rodjenja.ToString("yyyy-MM-dd")}', '{adresa}' , '{ostalo}' , '{boraviste}' , '{telefon}' , '{fax}' , '{mobitel}' , '{email}' , '{drzava}' , '{pravna}')";
-                externalSQLConnect.sqlQuery(query);
-
-                Debug.WriteLine(query + " in novi klijent viewModel");
-
-
-                //try
-                //{
-                //    if (contactItem == null)
-                //    {
-                //        contact = new ContactItem();
-                //        contact.Ime = name;
-                //        contact.OIB = oib;
-                //        contact.Datum_rodenja = datum_rodjenja;
-                //        contact.Adresa = adresa;
-                //        contact.Boraviste = boraviste;
-                //        contact.Telefon = telefon;
-                //        contact.Fax = fax;
-                //        contact.Mobitel = mobitel;
-                //        contact.Email = email;
-                //        contact.Ostalo = ostalo;
-                //        contact.Drzava = drzava;
-                //        contact.PravnaInt = pravna;
-                //        contact.PravnaString = pravna.ToString();
-                //        Contacts.Add(contact);
-                        
-                //    }
-                //}
-                //catch (Exception ex)
-                //{
-
-                //    Debug.WriteLine(ex.Message);
-                //}
+                string query = $"INSERT INTO Contacts (id , ime, OIB, datum_rodenja, adresa, ostalo, boraviste, telefon, fax, mobitel, email, drzava, pravna) " +
+                $"VALUES ('{name}', '{oib}', '{datum_rodjenja.ToString("yyyy-MM-dd HH:mm:ss")}', '{adresa}' , '{ostalo}' , '{boraviste}' , '{telefon}' , '{fax}' , '{mobitel}' , '{email}' , '{drzava}' , '{pravna}')";
+                Debug.WriteLine(query + " in novi spis viewModel");
             }
 
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
-            Debug.WriteLine("prije Bate");
-            var sharedKlijentiViewModel = App.SharedKlijentiViewModel;
-
-            // Call GenerateFiles() on the shared instance
-            sharedKlijentiViewModel.GenerateFiles();
-            Debug.WriteLine("Poslije Bate");
         }
 
-  
-
-        public async void OnButtonCLick()
+        public Klijent Klijent
         {
-            AddKlijentToRemoteServer(contactItem);
-            await Shell.Current.GoToAsync("///Klijenti");
-            //Debug.WriteLine("Klijent dodan" + klijent.Ime);
-
+            get { return klijent; }
+            set
+            {
+                if (klijent != value)
+                {
+                    klijent = value;
+                    OnPropertyChanged(nameof(Klijent));
+                }
+            }
         }
-
-
-
-
         #region Property Changed
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
