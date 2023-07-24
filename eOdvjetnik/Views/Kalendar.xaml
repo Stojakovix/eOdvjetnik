@@ -14,11 +14,6 @@
         <local:KalendarViewModel x:Name="viewmodel"/>
     </ContentPage.BindingContext>
 
-
-    
-
-
-    
         <ContentPage.Resources>
             <DataTemplate x:Key="AppointmentTemplate"
                           >
@@ -38,6 +33,7 @@
                        FontFamily="Bold"
                        Padding="5,5,5,5"
                        LineBreakMode="WordWrap"
+                       
                        MaxLines="2"/>
                     
                    
