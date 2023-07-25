@@ -18,8 +18,8 @@
         <StackLayout Grid.Row="0" >
             <Grid Margin="0,0,0,10" BackgroundColor="LightGray" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60" />
-                    <RowDefinition Height="60" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="80" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -48,8 +48,8 @@
                 <Label Margin="20,0,0,0" Grid.Column="2" Grid.Row="1" Text="{Binding ClientAddress}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
                 <Label Margin="20,12,0,10" Text="Boravište:" Grid.Column="3" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Margin="20,0,0,0" Grid.Column="3" Grid.Row="1" Text="{Binding ClientResidence}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
-                <Label Margin="20,12,0,10" Text="Datum rođenja:" Grid.Column="4" IsVisible="false"  Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
-                <Label Margin="20,0,0,0" Grid.Column="4" Grid.Row="1" IsVisible="false" Text="{Binding ClientBirthDate}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
+                <Label Margin="20,12,0,10" Text="Datum rođenja:" Grid.Column="4"   Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,0,0,0" Grid.Column="4" Grid.Row="1"  Text="{Binding ClientBirthDate, StringFormat='{}{0: dd/MM/yyyy}'}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
                 <Label Margin="20,12,0,10" Text="Ostalo:" Grid.Column="5" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black"  />
                 <Label Margin="20,0,0,0" Grid.Column="5" Grid.Row="1" Text="{Binding ClientOther}" FontSize="14"  TextColor="Black" Padding="0,0,0,10"  />
                 <Label Margin="20,12,0,10" Text="Telefon:" Grid.Column="6" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
@@ -65,10 +65,10 @@
                 <Label Margin="20,12,0,10" Text="Pravna osoba:" Grid.Column="11" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Margin="20,0,0,0" Grid.Column="11" Grid.Row="1" Text="{Binding ClientLegalPerson}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
 
-                <Label Margin="20,12,0,10" Text="Uredi kontakt" Grid.Column="12" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,12,0,10" Text=" " Grid.Column="12" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
 
                 <ImageButton Source="edit.png" HorizontalOptions="Center"  Grid.Row="1" Grid.Column="12" Aspect="AspectFit" BackgroundColor="LightGray"
-                             Margin="0,0,0,15" VerticalOptions="CenterAndExpand" Command="{Binding EditClientButton}"  />
+                             Margin="0,20,0,15" VerticalOptions="CenterAndExpand" Command="{Binding EditClientButton}"  />
 
 
             </Grid>
@@ -122,7 +122,9 @@
 
                 <Label Margin="30,0,0,10" Text="Nema rezultata pretrage!" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}" TextColor="Black" VerticalOptions="Center" />
                 <Label Margin="30,0,0,10" Text="Povezivanje nije uspjelo!" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}" TextColor="Black" VerticalOptions="Center" />
-               
+                <Label Margin="30,0,0,10" Text="{Binding ContactDeletedText}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding ContactDeleted}" TextColor="Black" VerticalOptions="Center" />
+
+
             </HorizontalStackLayout>
 
 

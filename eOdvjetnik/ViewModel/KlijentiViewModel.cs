@@ -8,6 +8,8 @@ using System.Xml.Linq;
 using eOdvjetnik.Models;
 using eOdvjetnik.Services;
 using Vanara.PInvoke;
+using CommunityToolkit.Mvvm.Messaging;
+using System.Globalization;
 
 namespace eOdvjetnik.ViewModel;
 
@@ -22,6 +24,9 @@ public class KlijentiViewModel : INotifyPropertyChanged
         get { return contacts; }
         set { contacts = value; }
     }
+
+    public string ContactDeletedText { get; set; }
+
     private string _searchText;
     public string SearchText
     {
@@ -61,6 +66,21 @@ public class KlijentiViewModel : INotifyPropertyChanged
             return searchCommand;
         }
     }
+
+    public bool _ContactDeleted { get; set; }
+    public bool ContactDeleted
+    {
+        get { return _ContactDeleted; }
+        set
+        {
+            if (_ContactDeleted != value)
+            {
+                _ContactDeleted = value;
+                OnPropertyChanged(nameof(ContactDeleted));
+            }
+        }
+    }
+
     public bool _NoQueryResult { get; set; }
     public bool NoQueryResult
     {
@@ -90,6 +110,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
     public void GenerateFiles()
     {
         NoQueryResult = false;
+        ContactDeleted = false;
         Debug.WriteLine(contacts);
         try
         {
@@ -157,6 +178,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         NoQueryResult = false;
         NoSQLreply = false;
+        ContactDeleted = false;
         Debug.WriteLine(contacts);
         try
         {
@@ -223,6 +245,19 @@ public class KlijentiViewModel : INotifyPropertyChanged
     }
     #region Selected Client
 
+    private string _ClientID;
+    public string ClientID
+    {
+        get { return _ClientID; }
+        set
+        {
+            if (_ClientID != value)
+            {
+                _ClientID = value;
+                OnPropertyChanged(nameof(ClientID));
+            }
+        }
+    }
     private string _ClientName;
     public string ClientName
     {
@@ -265,8 +300,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
         }
     }
 
-    private string _ClientBirthDate;
-    public string ClientBirthDate
+    private DateTime _ClientBirthDate;
+    public DateTime ClientBirthDate
     {
         get { return _ClientBirthDate; }
         set
@@ -396,22 +431,29 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
     public KlijentiViewModel()
     {
+        WeakReferenceMessenger.Default.Register<RefreshContacts>(this, NewContactAddedReceived);
+        WeakReferenceMessenger.Default.Register<ContactDeleted>(this, ContactDeletedReceived);
+
         Contacts = new ObservableCollection<ContactItem>();
         GenerateFiles();
-        ClientName = Preferences.Get("SelectedName", "");
-        ClientOIB = Preferences.Get("SelectedOIB", "");
-        ClientAddress = Preferences.Get("SelectedAddress", "");
-        ClientBirthDate = Preferences.Get("SelectedBirthDate", "");
-        ClientResidence = Preferences.Get("SelectedRsidence", "");
-        ClientPhone = Preferences.Get("SelectedPhone", "");
-        ClientFax = Preferences.Get("SelectedFax", "");
-        ClientMobile = Preferences.Get("SelectedMobile", "");
-        ClientEmail = Preferences.Get("SelectedEmail", "");
-        ClientOther = Preferences.Get("SelectedOther", "");
-        ClientCountry = Preferences.Get("SelectedCountry", "");
+      
         try
         {
+            ClientID = Preferences.Get("SelectedID", "");
+            ClientName = Preferences.Get("SelectedName", "");
+            ClientOIB = Preferences.Get("SelectedOIB", "");
+            ClientAddress = Preferences.Get("SelectedAddress", "");
+            ClientResidence = Preferences.Get("SelectedRsidence", "");
+            ClientPhone = Preferences.Get("SelectedPhone", "");
+            ClientFax = Preferences.Get("SelectedFax", "");
+            ClientMobile = Preferences.Get("SelectedMobile", "");
+            ClientEmail = Preferences.Get("SelectedEmail", "");
+            ClientOther = Preferences.Get("SelectedOther", "");
+            ClientCountry = Preferences.Get("SelectedCountry", "");
             ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+
+            string brithDateString = Preferences.Get("SelectedBrithDateString", "");
+            ClientBirthDate = DateTime.ParseExact(brithDateString, "dd-MM-yyyy", null);
         }
         catch (Exception ex)
         {
@@ -461,20 +503,26 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            ClientName = Preferences.Get("SelectedName", "");
-            ClientOIB = Preferences.Get("SelectedOIB", "");
-            ClientAddress = Preferences.Get("SelectedAddress", "");
-            ClientBirthDate = Preferences.Get("SelectedBirthDate", "");
-            ClientResidence = Preferences.Get("SelectedRsidence", "");
-            ClientPhone = Preferences.Get("SelectedPhone", "");
-            ClientFax = Preferences.Get("SelectedFax", "");
-            ClientMobile = Preferences.Get("SelectedMobile", "");
-            ClientEmail = Preferences.Get("SelectedEmail", "");
-            ClientOther = Preferences.Get("SelectedOther", "");
-            ClientCountry = Preferences.Get("SelectedCountry", "");
+         
             try
             {
+                ClientID = Preferences.Get("SelectedID", "");
+                ClientName = Preferences.Get("SelectedName", "");
+                ClientOIB = Preferences.Get("SelectedOIB", "");
+                ClientAddress = Preferences.Get("SelectedAddress", "");
+                ClientResidence = Preferences.Get("SelectedRsidence", "");
+                ClientPhone = Preferences.Get("SelectedPhone", "");
+                ClientFax = Preferences.Get("SelectedFax", "");
+                ClientMobile = Preferences.Get("SelectedMobile", "");
+                ClientEmail = Preferences.Get("SelectedEmail", "");
+                ClientOther = Preferences.Get("SelectedOther", "");
+                ClientCountry = Preferences.Get("SelectedCountry", "");
+
                 ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+
+                string brithDateString = Preferences.Get("SelectedBrithDateString", "");
+                ClientBirthDate = DateTime.ParseExact(brithDateString, "dd-MM-yyyy", null);
+
             }
             catch (Exception ex)
             {
@@ -490,4 +538,16 @@ private async void EditClient()
         await Shell.Current.GoToAsync("/UrediKlijenta");
 
     }
+
+    private void NewContactAddedReceived(object recipient, RefreshContacts message)
+    {
+        GenerateFiles();
+    }
+
+    private void ContactDeletedReceived(object recipient, ContactDeleted message)
+    {
+        ContactDeletedText = Preferences.Get("ContactDeleted", "");
+        ContactDeleted = true;
+    }
+    
 }

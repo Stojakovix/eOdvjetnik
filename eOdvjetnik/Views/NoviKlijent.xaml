@@ -32,7 +32,7 @@
 
             </Grid.RowDefinitions>
             <Label Text="Ime" Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="ImeEntry" Keyboard="Numeric" Grid.Row="0" Grid.Column="1" Text="{Binding Name }"  />
+            <Entry x:Name="ImeEntry" Keyboard="Numeric" Grid.Row="0" Grid.Column="1" Text="{Binding Name}"  />
 
             <Label Text="OIB" Grid.Row="1" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
             <Entry x:Name="OibEntry" Keyboard="Numeric" Grid.Row="1" Grid.Column="1" Text="{Binding Oib}"  />

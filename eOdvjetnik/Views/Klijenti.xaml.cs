@@ -6,6 +6,7 @@ using Microsoft.Maui.Controls;
 using System;
 using eOdvjetnik.Model;
 using eOdvjetnik.Models;
+using System.Diagnostics;
 
 public partial class Klijenti : ContentPage
 {
@@ -29,15 +30,14 @@ public partial class Klijenti : ContentPage
 
         var selectedTariffItem = (ContactItem)e.SelectedItem;
 
-        await SaveToPreferences(selectedTariffItem.Ime, selectedTariffItem.OIB, selectedTariffItem.Datum_rodenja, selectedTariffItem.Adresa, selectedTariffItem.Boraviste, selectedTariffItem.Telefon, selectedTariffItem.Fax, selectedTariffItem.Mobitel, selectedTariffItem.Email, selectedTariffItem.Ostalo, selectedTariffItem.Drzava, selectedTariffItem.PravnaString);
+        await SaveToPreferences(selectedTariffItem.Id, selectedTariffItem.Ime, selectedTariffItem.OIB, selectedTariffItem.Datum_rodenja, selectedTariffItem.Adresa, selectedTariffItem.Boraviste, selectedTariffItem.Telefon, selectedTariffItem.Fax, selectedTariffItem.Mobitel, selectedTariffItem.Email, selectedTariffItem.Ostalo, selectedTariffItem.Drzava, selectedTariffItem.PravnaString);
 
         ((ListView)sender).SelectedItem = null;
     }
 
 
-    private Task SaveToPreferences(string Ime, string OIB, DateTime Datum_rodenja, string Adresa, string Boraviste,  string Telefon, string Fax, string Mobitel, string Email, string Ostalo, string Drzava, string PravnaString)
+    private Task SaveToPreferences(int Id, string Ime, string OIB, DateTime Datum_rodenja, string Adresa, string Boraviste,  string Telefon, string Fax, string Mobitel, string Email, string Ostalo, string Drzava, string PravnaString)
     {
-
         Preferences.Set("SelectedName", Ime);
         Preferences.Set("SelectedOIB", OIB);
         Preferences.Set("SelectedAddress", Adresa);
@@ -49,6 +49,22 @@ public partial class Klijenti : ContentPage
         Preferences.Set("SelectedOther", Ostalo);
         Preferences.Set("SelectedCountry", Drzava);
         Preferences.Set("SelectedLegalPerson", PravnaString);
+
+        try
+        {
+            string IDstring = Id.ToString();
+            Preferences.Set("SelectedID", IDstring);
+
+            string brithDateString = Datum_rodenja.ToString("dd-MM-yyyy");
+            Preferences.Set("SelectedBrithDateString", brithDateString);
+
+      
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+
+        }
 
 
 

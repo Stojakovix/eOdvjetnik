@@ -32,7 +32,7 @@
 
             </Grid.RowDefinitions>
             <Label Text="Ime" Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="ImeEntry" Keyboard="Numeric" Grid.Row="0" Grid.Column="1" Text="{Binding ClientName }"  />
+            <Entry x:Name="ImeEntry" Keyboard="Numeric" Grid.Row="0" Grid.Column="1" Text="{Binding ClientName}"  />
 
             <Label Text="OIB" Grid.Row="1" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
             <Entry x:Name="OibEntry" Keyboard="Numeric" Grid.Row="1" Grid.Column="1" Text="{Binding ClientOIB}"  />
@@ -56,13 +56,13 @@
             <Entry x:Name="FaxEntry" Keyboard="Numeric" Grid.Row="7" Grid.Column="1" Text="{Binding ClientFax}"  />
 
             <Label Text="Mobitel" Grid.Row="8" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="MobitelEntry" Keyboard="Numeric" Grid.Row="8" Grid.Column="1" Text="{Binding ClientMobile}"  />
+            <Entry x:Name="MobitelEntry" Keyboard="Numeric" Grid.Row="8" Grid.Column="1" Text="{Binding ClientMobile, Mode=TwoWay}"  />
 
             <Label Text="E-pošta" Grid.Row="9" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="EMailEntry" Keyboard="Numeric" Grid.Row="9" Grid.Column="1" Text="{Binding ClientEmail}"  />
+            <Entry x:Name="EMailEntry" Keyboard="Numeric" Grid.Row="9" Grid.Column="1" Text="{Binding ClientEmail, Mode=TwoWay}"  />
 
             <Label Text="Država" Grid.Row="10" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="DržavaEntry" Keyboard="Numeric" Grid.Row="10" Grid.Column="1" Text="{Binding ClientCountry}"  />
+            <Entry x:Name="DržavaEntry" Keyboard="Numeric" Grid.Row="10" Grid.Column="1" Text="{Binding ClientCountry, Mode=TwoWay}"  />
 
             <Label Text="Pravna" Grid.Row="11" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
             <Entry x:Name="PravnaEntry" Keyboard="Numeric" Grid.Row="11" Grid.Column="1" Text="PRAVNA PLACEHOLDER"  />
