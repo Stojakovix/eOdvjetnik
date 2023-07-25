@@ -132,8 +132,8 @@ namespace eOdvjetnik.ViewModel
                             ZadnjeUredio = filesRow["zadnje_uredio"],
                             Jezik = filesRow["jezik"],
                             BrojPredmeta = filesRow["broj_predmeta"],
-                            ClientName = filesRow["client_ime"],
-                            OpponentName = filesRow["opponent_ime"]
+                            ClientName = filesRow["client_name"],
+                            OpponentName = filesRow["opponent_name"]
 
                         });
 
