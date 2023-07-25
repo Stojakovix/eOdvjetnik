@@ -64,7 +64,7 @@
     <scheduler:SfScheduler x:Name="Scheduler" 
                            View="Day"
                            FirstDayOfWeek="Monday"
-                           DoubleTapped="Scheduler_DoubleTapped"
+                           Tapped="Scheduler_DoubleTapped"
                            SelectedCellBackground="transparent"
                            AppointmentsSource="{Binding Appointments}"
                            ShowWeekNumber="True"
@@ -73,6 +73,7 @@
                            TodayHighlightBrush="Red"
                            EnableReminder="True"
                            SelectedAppointmentBackground="transparent"
+                           
                            
                            >
         <scheduler:SfScheduler.DaysView>

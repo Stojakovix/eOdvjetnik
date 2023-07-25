@@ -82,7 +82,7 @@ public partial class Kalendar : ContentPage
         return timeRegions;
     }
 
-    private void Scheduler_DoubleTapped(object sender, SchedulerDoubleTappedEventArgs e)
+    private void Scheduler_DoubleTapped(object sender, SchedulerTappedEventArgs e)
     {
        
         if (e.Element == SchedulerElement.SchedulerCell || e.Element == SchedulerElement.Appointment)
