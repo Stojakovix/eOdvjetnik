@@ -25,7 +25,33 @@ public class KlijentiViewModel : INotifyPropertyChanged
         set { contacts = value; }
     }
 
-    public string ContactDeletedText { get; set; }
+    private string contactDeletedText;
+    public string ContactDeletedText
+    {
+        get { return contactDeletedText; }
+        set
+        {
+            if (contactDeletedText != value)
+            {
+                contactDeletedText = value;
+                OnPropertyChanged(nameof(ContactDeletedText));
+            }
+        }
+    }
+
+    private string contactEditedText;
+    public string ContactEditedText
+    {
+        get { return contactEditedText; }
+        set
+        {
+            if (contactEditedText != value)
+            {
+                contactEditedText = value;
+                OnPropertyChanged(nameof(ContactEditedText));
+            }
+        }
+    }
 
     private string _searchText;
     public string SearchText
@@ -81,6 +107,20 @@ public class KlijentiViewModel : INotifyPropertyChanged
         }
     }
 
+    public bool _ContactEdited { get; set; }
+    public bool ContactEdited
+    {
+        get { return _ContactEdited; }
+        set
+        {
+            if (_ContactEdited != value)
+            {
+                _ContactEdited = value;
+                OnPropertyChanged(nameof(ContactEdited));
+            }
+        }
+    }
+
     public bool _NoQueryResult { get; set; }
     public bool NoQueryResult
     {
@@ -109,8 +149,10 @@ public class KlijentiViewModel : INotifyPropertyChanged
     }
     public void GenerateFiles()
     {
-        NoQueryResult = false;
+        ContactEdited = false;
         ContactDeleted = false;
+        NoSQLreply = false;
+        NoQueryResult = false;
         Debug.WriteLine(contacts);
         try
         {
@@ -137,7 +179,6 @@ public class KlijentiViewModel : INotifyPropertyChanged
                         int.TryParse(filesRow["pravna"], out pravnaInt);
                         DateTime.TryParse(filesRow["datum_rodenja"], out datum_rodenja);
 
-                        string pravnaString = pravnaInt == 1 ? "Da" : "Ne";
 
                         contacts.Add(new ContactItem()
                         {
@@ -153,18 +194,22 @@ public class KlijentiViewModel : INotifyPropertyChanged
                             Email = filesRow["email"],
                             Ostalo = filesRow["ostalo"],
                             Drzava = filesRow["drzava"],
-                            PravnaInt = pravnaInt,
-                            PravnaString = pravnaString
+                            Pravna = pravnaInt.ToString()
 
                         });
 
                     }
 
                 }
+                else
+                {
+                    NoQueryResult = true;
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
+                NoSQLreply = true;
 
             }
         }
@@ -176,6 +221,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
     }
     public void GenerateSearchResults()
     {
+        ContactEdited = false;
         NoQueryResult = false;
         NoSQLreply = false;
         ContactDeleted = false;
@@ -206,7 +252,6 @@ public class KlijentiViewModel : INotifyPropertyChanged
                         int.TryParse(filesRow["pravna"], out pravnaInt);
                         DateTime.TryParse(filesRow["datum_rodenja"], out datum_rodenja);
 
-                        string pravnaString = pravnaInt == 1 ? "Da" : "Ne";
 
                         contacts.Add(new ContactItem()
                         {
@@ -222,8 +267,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
                             Email = filesRow["email"],
                             Ostalo = filesRow["ostalo"],
                             Drzava = filesRow["drzava"],
-                            PravnaInt = pravnaInt,
-                            PravnaString = pravnaString
+                            Pravna = pravnaInt.ToString(),
                         });
                     }
                 }
@@ -407,9 +451,9 @@ public class KlijentiViewModel : INotifyPropertyChanged
             }
         }
     }
-    private string _ClientLegalPerson;
+    private bool _ClientLegalPerson;
 
-    public string ClientLegalPerson
+    public bool ClientLegalPerson
     {
         get { return _ClientLegalPerson; }
         set
@@ -421,6 +465,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
             }
         }
     }
+    public string ClientLegalPersonString { get; set; }
 
     #endregion
 
@@ -433,10 +478,13 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         WeakReferenceMessenger.Default.Register<RefreshContacts>(this, NewContactAddedReceived);
         WeakReferenceMessenger.Default.Register<ContactDeleted>(this, ContactDeletedReceived);
+        WeakReferenceMessenger.Default.Register<ContactEdited>(this, ContactEditedReceived);
+
 
         Contacts = new ObservableCollection<ContactItem>();
         GenerateFiles();
-      
+        ContactDeleted = false;
+
         try
         {
             ClientID = Preferences.Get("SelectedID", "");
@@ -450,7 +498,16 @@ public class KlijentiViewModel : INotifyPropertyChanged
             ClientEmail = Preferences.Get("SelectedEmail", "");
             ClientOther = Preferences.Get("SelectedOther", "");
             ClientCountry = Preferences.Get("SelectedCountry", "");
-            ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+            ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
+
+            if (ClientLegalPersonString == "1")
+            {
+                ClientLegalPerson = true;
+            }
+            else
+            {
+                ClientLegalPerson = false;
+            }
 
             string brithDateString = Preferences.Get("SelectedBrithDateString", "");
             ClientBirthDate = DateTime.ParseExact(brithDateString, "dd-MM-yyyy", null);
@@ -517,12 +574,22 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 ClientEmail = Preferences.Get("SelectedEmail", "");
                 ClientOther = Preferences.Get("SelectedOther", "");
                 ClientCountry = Preferences.Get("SelectedCountry", "");
+                ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
 
-                ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+                if (ClientLegalPersonString == "1")
+                {
+                    ClientLegalPerson = true;
+                }
+                else
+                {
+                    ClientLegalPerson = false;
+                }
 
                 string brithDateString = Preferences.Get("SelectedBrithDateString", "");
                 ClientBirthDate = DateTime.ParseExact(brithDateString, "dd-MM-yyyy", null);
 
+                ContactDeletedText = Preferences.Get("ContactDeleted", "");
+                ContactEditedText = "Uspješno ste izmijenili kontakt: " + ClientName;
             }
             catch (Exception ex)
             {
@@ -536,7 +603,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
 private async void EditClient()
     {
         await Shell.Current.GoToAsync("/UrediKlijenta");
-
+        
     }
 
     private void NewContactAddedReceived(object recipient, RefreshContacts message)
@@ -546,8 +613,79 @@ private async void EditClient()
 
     private void ContactDeletedReceived(object recipient, ContactDeleted message)
     {
+        GenerateFiles();
         ContactDeletedText = Preferences.Get("ContactDeleted", "");
         ContactDeleted = true;
     }
-    
+
+    private void ContactEditedReceived(object recipient, ContactEdited message)
+    {
+
+        NoQueryResult = false;
+        NoSQLreply = false;
+        ContactDeleted = false;
+       
+        Debug.WriteLine(contacts);
+        try
+        {
+            if (contacts != null)
+            {
+                NoQueryResult = false;
+                contacts.Clear();
+            }
+            string query = "SELECT * FROM contacts WHERE id = " + ClientID;
+            Debug.WriteLine(query);
+            try
+            {
+                Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                Debug.WriteLine(query + " u Search resultu");
+                if (filesData != null && filesData.Length > 0)
+                {
+                    foreach (Dictionary<string, string> filesRow in filesData)
+                    {
+
+                        int id;
+                        int pravnaInt;
+                        DateTime datum_rodenja;
+
+                        int.TryParse(filesRow["id"], out id);
+                        int.TryParse(filesRow["pravna"], out pravnaInt);
+                        DateTime.TryParse(filesRow["datum_rodenja"], out datum_rodenja);
+
+
+                        contacts.Add(new ContactItem()
+                        {
+                            Id = id,
+                            Ime = filesRow["ime"],
+                            OIB = filesRow["OIB"],
+                            Datum_rodenja = datum_rodenja,
+                            Adresa = filesRow["adresa"],
+                            Boraviste = filesRow["boraviste"],
+                            Telefon = filesRow["telefon"],
+                            Fax = filesRow["fax"],
+                            Mobitel = filesRow["mobitel"],
+                            Email = filesRow["email"],
+                            Ostalo = filesRow["ostalo"],
+                            Drzava = filesRow["drzava"],
+                            Pravna = pravnaInt.ToString()
+                        });
+                    }
+                    ContactEdited = true;
+                }
+                else
+                {
+                    NoQueryResult = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                NoSQLreply = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+    }
 }

@@ -42,10 +42,20 @@ namespace eOdvjetnik.ViewModel
                 ClientEmail = Preferences.Get("SelectedEmail", "");
                 ClientOther = Preferences.Get("SelectedOther", "");
                 ClientCountry = Preferences.Get("SelectedCountry", "");
-                ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+                ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
+
+                if (ClientLegalPersonString == "1")
+                {
+                    ClientLegalPerson = true;
+                }
+                else
+                {
+                    ClientLegalPerson = false;
+                }
 
                 string brithDateString = Preferences.Get("SelectedBrithDateString", "");
                 ClientBirthDate = DateTime.ParseExact(brithDateString, "dd-MM-yyyy", null);
+
             }
             catch (Exception ex)
             {
@@ -241,8 +251,8 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-        private string pravna;
-        public string Pravna
+        private bool pravna;
+        public bool Pravna
         {
             get { return pravna; }
             set
@@ -254,7 +264,7 @@ namespace eOdvjetnik.ViewModel
                 }
             }
         }
-
+        public string PravnaString { get; set; }
 
         #endregion
 
@@ -276,7 +286,15 @@ namespace eOdvjetnik.ViewModel
                 string mobitel = Mobitel ?? string.Empty;
                 string email = Email ?? string.Empty;
                 string drzava = Drzava ?? string.Empty;
-                int pravna = int.Parse(Pravna ?? "0");
+                
+                if (Pravna == true)
+                {
+                    PravnaString = "1";
+                }
+                else
+                {
+                    PravnaString = "0";
+                }
 
                 #endregion
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
@@ -284,10 +302,9 @@ namespace eOdvjetnik.ViewModel
                 externalSQLConnect.sqlQuery(disableForeignKeyChecksQuery);
 
 
-                string query = $"INSERT INTO Contacts (ime, OIB, datum_rodenja, adresa, ostalo, boraviste, telefon, fax, mobitel, email, drzava, pravna) " +
-                $"VALUES ('{name}', '{oib}', '{datum_rodjenja.ToString("yyyy-MM-dd")}', '{adresa}' , '{ostalo}' , '{boraviste}' , '{telefon}' , '{fax}' , '{mobitel}' , '{email}' , '{drzava}' , '{pravna}')";
+                string query = $"INSERT INTO contacts (ime, OIB, datum_rodenja, adresa, ostalo, boraviste, telefon, fax, mobitel, email, drzava, pravna) " +
+                $"VALUES ('{name}', '{oib}', '{datum_rodjenja.ToString("yyyy-MM-dd")}', '{adresa}' , '{ostalo}' , '{boraviste}' , '{telefon}' , '{fax}' , '{mobitel}' , '{email}' , '{drzava}' , '{PravnaString}')";
                 externalSQLConnect.sqlQuery(query);
-
             }
 
             catch (Exception ex)
@@ -322,11 +339,10 @@ namespace eOdvjetnik.ViewModel
                     Preferences.Set("ContactDeleted", contactDeleted);
 
 
-                    string DeleteQuery = "DELETE FROM Contacts WHERE ID = " + ClientID;
+                    string DeleteQuery = "DELETE FROM contacts WHERE ID = " + ClientID;
                     externalSQLConnect.sqlQuery(DeleteQuery);
 
                     Debug.WriteLine(contactDeleted);
-
                 }
                 else
                 {
@@ -349,6 +365,7 @@ namespace eOdvjetnik.ViewModel
             DeleteContactOnRemoteServer(contactItem);
             await Shell.Current.GoToAsync("///Klijenti");
             ContactDeletedMessage();
+
         }
 
         private void UpdateContactOnRemoteServer(ContactItem contact)
@@ -356,35 +373,18 @@ namespace eOdvjetnik.ViewModel
             try
             {
 
-
-                #region VarijableZaServer
-                string name = ClientName ?? string.Empty;
-                string oib = ClientOIB ?? string.Empty;
-                DateTime datum_rodenja = ClientBirthDate;
-                string adresa = ClientAddress ?? string.Empty;
-                string ostalo = ClientOther ?? string.Empty;
-                string boraviste = ClientResidence ?? string.Empty;
-                string telefon = ClientPhone ?? string.Empty;
-                string fax = ClientFax ?? string.Empty;
-                string mobitel = ClientMobile ?? string.Empty;
-                string email = ClientEmail ?? string.Empty;
-                string drzava = ClientCountry ?? string.Empty;
-                int pravna = int.Parse(ClientLegalPerson ?? "0");
-
-                #endregion
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 string disableForeignKeyChecksQuery = "SET FOREIGN_KEY_CHECKS = 0";
                 externalSQLConnect.sqlQuery(disableForeignKeyChecksQuery);
 
 
-                string UpdateQuery = "ROBI ĆE NAPRAVIT"; // ažurirati ID 
+                string UpdateQuery = $"UPDATE contacts SET ime = '{ClientName}', datum_rodenja = '{ClientBirthDate.ToString("yyyy-MM-dd")}', adresa = '{ClientAddress}', ostalo = '{ClientOther}', boraviste = '{ClientResidence}', telefon = '{ClientPhone}', fax = '{ClientFax}', mobitel = '{ClientMobile}', email = '{ClientEmail}', drzava = '{ClientCountry}' WHERE id = " + ClientID;
 
                 externalSQLConnect.sqlQuery(UpdateQuery);
 
                 Debug.WriteLine("Update contact query: " + UpdateQuery);
 
                 externalSQLConnect.sqlQuery(UpdateQuery);
-
             }
 
             catch (Exception ex)
@@ -400,7 +400,7 @@ namespace eOdvjetnik.ViewModel
         {
             UpdateContactOnRemoteServer(contactItem);
             await Shell.Current.GoToAsync("///Klijenti");
-            
+            ContactEditedMessage();
             Debug.WriteLine("Klijent je ažuriran: " + ClientName);
 
         }
@@ -576,9 +576,9 @@ namespace eOdvjetnik.ViewModel
                 }
             }
         }
-        private string _ClientLegalPerson;
+        private bool _ClientLegalPerson;
 
-        public string ClientLegalPerson
+        public bool ClientLegalPerson
         {
             get { return _ClientLegalPerson; }
             set
@@ -591,6 +591,8 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
+        public string ClientLegalPersonString { get; set; }
+
         #endregion
 
 
@@ -602,7 +604,11 @@ namespace eOdvjetnik.ViewModel
 
         private void ContactDeletedMessage()
         {
-            WeakReferenceMessenger.Default.Send(new RefreshContacts("Contact deleted!"));
+            WeakReferenceMessenger.Default.Send(new ContactDeleted("Contact deleted!"));
+        }
+        private void ContactEditedMessage()
+        {
+            WeakReferenceMessenger.Default.Send(new ContactEdited("Contact edited!"));
         }
     }
 }
