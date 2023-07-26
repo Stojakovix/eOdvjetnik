@@ -10,6 +10,8 @@ using System.Windows.Input;
 using eOdvjetnik.Model;
 using eOdvjetnik.Models;
 using eOdvjetnik.Services;
+using CommunityToolkit.Mvvm.Messaging;
+
 
 
 namespace eOdvjetnik.ViewModel
@@ -26,13 +28,13 @@ namespace eOdvjetnik.ViewModel
 
         public NoviKlijentViewModel()
         {
-            
+
             try
             {
+                ClientID = Preferences.Get("SelectedID", "");
                 ClientName = Preferences.Get("SelectedName", "");
                 ClientOIB = Preferences.Get("SelectedOIB", "");
                 ClientAddress = Preferences.Get("SelectedAddress", "");
-                ClientBirthDate = Preferences.Get("SelectedBirthDate", "");
                 ClientResidence = Preferences.Get("SelectedRsidence", "");
                 ClientPhone = Preferences.Get("SelectedPhone", "");
                 ClientFax = Preferences.Get("SelectedFax", "");
@@ -41,6 +43,9 @@ namespace eOdvjetnik.ViewModel
                 ClientOther = Preferences.Get("SelectedOther", "");
                 ClientCountry = Preferences.Get("SelectedCountry", "");
                 ClientLegalPerson = Preferences.Get("SelectedLegalPerson", "");
+
+                string brithDateString = Preferences.Get("SelectedBrithDateString", "");
+                ClientBirthDate = DateTime.ParseExact(brithDateString, "dd-MM-yyyy", null);
             }
             catch (Exception ex)
             {
@@ -48,7 +53,10 @@ namespace eOdvjetnik.ViewModel
 
             }
             DodajNovogKlijenta = new Command(OnButtonCLick);
-      
+            UpdateClientData = new Command(OnUpdateCLick);
+            DeleteClientData = new Command(OnDeleteCLick);
+
+
         }
 
         private ObservableCollection<Klijent> klijenti;
@@ -254,7 +262,7 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-              
+
 
                 #region VarijableZaServer
                 string name = Name ?? string.Empty;
@@ -280,20 +288,15 @@ namespace eOdvjetnik.ViewModel
                 $"VALUES ('{name}', '{oib}', '{datum_rodjenja.ToString("yyyy-MM-dd")}', '{adresa}' , '{ostalo}' , '{boraviste}' , '{telefon}' , '{fax}' , '{mobitel}' , '{email}' , '{drzava}' , '{pravna}')";
                 externalSQLConnect.sqlQuery(query);
 
-                Debug.WriteLine(query + " in novi klijent viewModel");
-
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
-            Debug.WriteLine("prije Bate");
 
 
-            // Call GenerateFiles() on the shared instance
 
-            Debug.WriteLine("Poslije Bate");
         }
 
 
@@ -302,8 +305,104 @@ namespace eOdvjetnik.ViewModel
         {
             AddKlijentToRemoteServer(contactItem);
             await Shell.Current.GoToAsync("///Klijenti");
+            NewContactAdded();
             //Debug.WriteLine("Klijent dodan" + klijent.Ime);
-        
+
+        }
+
+        private void DeleteContactOnRemoteServer(ContactItem contact)
+        {
+            try
+            {
+                if (ClientID != null)
+                {
+                    ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+                    Debug.WriteLine("Client ID " + ClientID);
+                    string contactDeleted = "Obrisali ste kontakt: " + ClientName;
+                    Preferences.Set("ContactDeleted", contactDeleted);
+
+
+                    string DeleteQuery = "DELETE FROM Contacts WHERE ID = " + ClientID;
+                    externalSQLConnect.sqlQuery(DeleteQuery);
+
+                    Debug.WriteLine(contactDeleted);
+
+                }
+                else
+                {
+                    Debug.WriteLine("Client ID is null " + ClientID);
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
+
+
+        }
+
+        public async void OnDeleteCLick()
+        {
+            DeleteContactOnRemoteServer(contactItem);
+            await Shell.Current.GoToAsync("///Klijenti");
+            ContactDeletedMessage();
+        }
+
+        private void UpdateContactOnRemoteServer(ContactItem contact)
+        {
+            try
+            {
+
+
+                #region VarijableZaServer
+                string name = ClientName ?? string.Empty;
+                string oib = ClientOIB ?? string.Empty;
+                DateTime datum_rodenja = ClientBirthDate;
+                string adresa = ClientAddress ?? string.Empty;
+                string ostalo = ClientOther ?? string.Empty;
+                string boraviste = ClientResidence ?? string.Empty;
+                string telefon = ClientPhone ?? string.Empty;
+                string fax = ClientFax ?? string.Empty;
+                string mobitel = ClientMobile ?? string.Empty;
+                string email = ClientEmail ?? string.Empty;
+                string drzava = ClientCountry ?? string.Empty;
+                int pravna = int.Parse(ClientLegalPerson ?? "0");
+
+                #endregion
+                ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+                string disableForeignKeyChecksQuery = "SET FOREIGN_KEY_CHECKS = 0";
+                externalSQLConnect.sqlQuery(disableForeignKeyChecksQuery);
+
+
+                string UpdateQuery = "ROBI ĆE NAPRAVIT"; // ažurirati ID 
+
+                externalSQLConnect.sqlQuery(UpdateQuery);
+
+                Debug.WriteLine("Update contact query: " + UpdateQuery);
+
+                externalSQLConnect.sqlQuery(UpdateQuery);
+
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
+
+
+        }
+
+        public async void OnUpdateCLick()
+        {
+            UpdateContactOnRemoteServer(contactItem);
+            await Shell.Current.GoToAsync("///Klijenti");
+            
+            Debug.WriteLine("Klijent je ažuriran: " + ClientName);
+
         }
         #region Property Changed
         public event PropertyChangedEventHandler PropertyChanged;
@@ -315,6 +414,19 @@ namespace eOdvjetnik.ViewModel
 
         #region Selected Client
 
+        private string _ClientID;
+        public string ClientID
+        {
+            get { return _ClientID; }
+            set
+            {
+                if (_ClientID != value)
+                {
+                    _ClientID = value;
+                    OnPropertyChanged(nameof(ClientID));
+                }
+            }
+        }
         private string _ClientName;
         public string ClientName
         {
@@ -357,8 +469,8 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-        private string _ClientBirthDate;
-        public string ClientBirthDate
+        private DateTime _ClientBirthDate;
+        public DateTime ClientBirthDate
         {
             get { return _ClientBirthDate; }
             set
@@ -482,8 +594,15 @@ namespace eOdvjetnik.ViewModel
         #endregion
 
 
-  
 
-        
+        private void NewContactAdded()
+        {
+            WeakReferenceMessenger.Default.Send(new RefreshContacts("Refresh contacts!"));
+        }
+
+        private void ContactDeletedMessage()
+        {
+            WeakReferenceMessenger.Default.Send(new RefreshContacts("Contact deleted!"));
+        }
     }
 }

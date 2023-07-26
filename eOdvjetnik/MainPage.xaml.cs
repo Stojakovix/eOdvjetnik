@@ -109,11 +109,16 @@ public partial class MainPage : ContentPage
                     // int licenceIsActive = jsonObject.GetProperty("Devices")[0].GetProperty("licence_active").GetInt32(); 
 
                     string licenceIsActive = jsonObject.GetProperty("Devices")[0].GetProperty("licence_active").GetString();
+                    int companyID = jsonObject.GetProperty("Devices")[0].GetProperty("company_id").GetInt32();
+                    string company_ID = companyID.ToString();
+                    int devicetypeID = jsonObject.GetProperty("Devices")[0].GetProperty("device_type_id").GetInt32();
+                    string devicetype_ID = devicetypeID.ToString();
                     string licenceType = jsonObject.GetProperty("LicenceTypes")[0].GetProperty("naziv").GetString();
                     string expireDate = jsonObject.GetProperty("Licences")[0].GetProperty("expire_date").GetString();
                     string nazivTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("naziv").GetString();
                     string OIBTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("OIB").GetString();
                     string adresaTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("adresa").GetString();
+
 
                     Preferences.Set("expire_date", expireDate);
                     Preferences.Set("licence_type", licenceType);
@@ -121,6 +126,10 @@ public partial class MainPage : ContentPage
                     Preferences.Set("naziv_tvrtke", nazivTvrtke);
                     Preferences.Set("OIBTvrtke", OIBTvrtke);
                     Preferences.Set("adresaTvrtke", adresaTvrtke);
+                    Preferences.Set("company_id", company_ID);
+                    Preferences.Set("device_type_id", devicetype_ID);
+
+
                     Debug.WriteLine("MainPageViewModel - > Company info: " + nazivTvrtke + OIBTvrtke + adresaTvrtke);
 
 
