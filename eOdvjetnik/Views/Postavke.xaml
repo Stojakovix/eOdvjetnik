@@ -35,8 +35,7 @@
             <Button Grid.Column="2" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button5_Clicked" Text="SQL postavke"  FontSize="Default"  />
             <Button Grid.Column="3" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button7_Clicked" Text="Postavke računa" FontSize="Default"   />
             <Button Grid.Column="4" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Command="{Binding OpenZaposlenici}"  Text="Zaposlenici" FontSize="Default"   />
-            <Button Grid.Column="5" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button2_Clicked" Text="Prijavi grešku" FontSize="Default"   />
-            <Button Grid.Column="6" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button3_Clicked" Text="Pošalji prijedlog" FontSize="Default"   />
+            <Button Grid.Column="5" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button2_Clicked" Text="Feedback" FontSize="Default"   />
 
             <VerticalStackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" Padding="10,10,10,10"  BackgroundColor="White" 
                     x:Name="Frame1" IsVisible="True" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" >
@@ -50,9 +49,10 @@
                 <Editor TextColor="Black" Text="{Binding HWID64}" IsReadOnly="True"  />
             </VerticalStackLayout>
 
-
-            <Border MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" Padding="0,0,0,0"  BackgroundColor="White" 
+            <StackLayout Grid.Row="1" Grid.ColumnSpan="7" Padding="0,0,0,0"  BackgroundColor="White" 
                     x:Name="Frame2" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
+
+            <Border MaximumWidthRequest="420" >
                 <Border.WidthRequest>
                     <OnPlatform x:TypeArguments="x:Double">
                         <On Platform="Android,iOS" Value="225" />
@@ -60,22 +60,21 @@
                     </OnPlatform>
                 </Border.WidthRequest>
                 <ScrollView>
-                    <Editor  AutoSize="TextChanges" MaxLength="300" Placeholder="Opišite grešku u aplikaciji koju je potrebno ispraviti" MinimumHeightRequest="150" />
+                    <Editor  AutoSize="TextChanges" MaxLength="380" Placeholder="Opišite grešku koju je potrebno ispraviti ili pošaljite prijedlog željenih funkcinalnosti" MinimumHeightRequest="150"
+                             Text="{Binding FeedbackText}"
+                             />
                 </ScrollView>
             </Border>
-            <Border MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" Padding="0,0,0,0"  BackgroundColor="White" 
-                    x:Name="Frame3" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
-                <Border.WidthRequest>
-                    <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android,iOS" Value="225" />
-                        <On Platform="UWP,MacCatalyst" Value="420" />
-                    </OnPlatform>
-                </Border.WidthRequest>
-                <ScrollView>
-                    <Editor AutoSize="TextChanges" MaxLength="300" Placeholder="Navedite funkcionalnost koju biste htjeli vidjeti u idućim verzijama aplikacije"
-                            MinimumHeightRequest="150" />
-                </ScrollView>
-            </Border>
+
+                <Button Grid.Column="0" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,20,0,20" 
+                        TextColor="Black" Text="Pošalji" FontSize="Default" WidthRequest="120" HorizontalOptions="Center" Command="{Binding SendFeedback}" />
+                
+                <Label Margin="0,10,0,0"  TextColor="Black" Text="Vaša je uplata uspješno zaprimljena" FontAttributes="Bold" HorizontalOptions="Center"
+                       IsVisible="{Binding FeedbackVisible}"
+                       />
+
+
+            </StackLayout>
 
             <StackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7"  BackgroundColor="White" 
                     x:Name="Frame4" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">

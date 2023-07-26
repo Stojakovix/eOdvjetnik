@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text;
+using System.Text.Json;
 using System.Windows.Input;
 
 namespace eOdvjetnik.ViewModel;
@@ -227,9 +228,84 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     #endregion
 
+    #region Feedback
+
+    public string FeedbackText { get; set; }
+    public ICommand SendFeedback { get; set; }
+    private bool feedbackVisible;
+
+    public bool FeedbackVisible
+    {
+        get { return feedbackVisible; }
+        set
+        {
+            if (feedbackVisible != value)
+            {
+                feedbackVisible = value;
+                OnPropertyChanged(nameof(FeedbackVisible));
+            }
+        }
+    }
+    public string company_id { get; set; }
+    public string employee_id { get; set; }
+    public string datum_slanja { get; set; }
+
+
+    public async void OnFeedbackClicked()
+    {
+
+        string url = "https://cc.eodvjetnik.hr/eodvjetnikadmin/waiting-lists/feedback?cpuid=";
+        company_id = Preferences.Get("company_id", "");
+        employee_id = Preferences.Get("device_type_id", "");
+        datum_slanja = DateTime.Now.ToString("d");
+
+        string encodedFeedbackText = ReplaceSpacesAndSectionBreaks(FeedbackText);
+
+        string feedbackURL = string.Concat(url, "&", HWID64, "&", company_id, "&", employee_id, "&", datum_slanja, "&", encodedFeedbackText);
+
+        Debug.WriteLine(feedbackURL);
+        Debug.WriteLine(HWID64);
+        Debug.WriteLine(company_id);
+        Debug.WriteLine(employee_id);
+        Debug.WriteLine(datum_slanja);
+        Debug.WriteLine(FeedbackText);
+        try
+        {
+            Debug.WriteLine("Feedback -> usao u try");
+
+            using (var client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(feedbackURL);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    
+
+                }
+                else
+                {
+                    
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Feedback error:" + ex.Message);
+        }
+
+        FeedbackVisible = true;
+    }
+
+    public static string ReplaceSpacesAndSectionBreaks(string text)
+    {
+        return text.Replace(" ", "%20").Replace("\r\n", "%20").Replace("\n", "%20").Replace("\t", "%20").Replace("\r", "%20");
+    }
+
+    #endregion
 
     public PostavkeViewModel()
     {
+        #region Devic&Licence
         GetAllCompanyDevices = new Command(GetJsonDeviceData);
         GetAllCompanyEmployees = new Command(GetEmployees);
         OpenZaposlenici = new Command(ZaposleniciClicked);
@@ -256,6 +332,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         {
             Debug.WriteLine(ex.Message);
         }
+        #endregion
         #region NAS komande
         SaveCommandNAS = new Command(OnSaveClickedNas);
         LoadCommandNAS = new Command(OnLoadClickedNas);
@@ -286,8 +363,13 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
         #endregion
 
+        #region Feedback
+        FeedbackVisible = false;
+        SendFeedback = new Command(OnFeedbackClicked);
+        #endregion
+
     }
-   
+
 
     #region NAS Funkcije
     private void OnSaveClickedNas()
@@ -431,6 +513,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
 
     #endregion
+
+  
 
     private async void ShowAlert(string title, string message)
     {

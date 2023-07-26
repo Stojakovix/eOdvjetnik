@@ -56,13 +56,13 @@
             <Entry x:Name="FaxEntry" Keyboard="Numeric" Grid.Row="7" Grid.Column="1" Text="{Binding ClientFax}"  />
 
             <Label Text="Mobitel" Grid.Row="8" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="MobitelEntry" Keyboard="Numeric" Grid.Row="8" Grid.Column="1" Text="{Binding ClientMobile, Mode=TwoWay}"  />
+            <Entry x:Name="MobitelEntry" Keyboard="Numeric" Grid.Row="8" Grid.Column="1" Text="{Binding ClientMobile}"  />
 
             <Label Text="E-pošta" Grid.Row="9" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="EMailEntry" Keyboard="Numeric" Grid.Row="9" Grid.Column="1" Text="{Binding ClientEmail, Mode=TwoWay}"  />
+            <Entry x:Name="EMailEntry" Keyboard="Numeric" Grid.Row="9" Grid.Column="1" Text="{Binding ClientEmail}"  />
 
             <Label Text="Država" Grid.Row="10" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="DržavaEntry" Keyboard="Numeric" Grid.Row="10" Grid.Column="1" Text="{Binding ClientCountry, Mode=TwoWay}"  />
+            <Entry x:Name="DržavaEntry" Keyboard="Numeric" Grid.Row="10" Grid.Column="1" Text="{Binding ClientCountry}"  />
 
             <Label Text="Pravna" Grid.Row="11" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
             <Entry x:Name="PravnaEntry" Keyboard="Numeric" Grid.Row="11" Grid.Column="1" Text="PRAVNA PLACEHOLDER"  />

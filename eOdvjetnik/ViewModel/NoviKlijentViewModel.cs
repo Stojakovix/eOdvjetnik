@@ -376,7 +376,7 @@ namespace eOdvjetnik.ViewModel
                 externalSQLConnect.sqlQuery(disableForeignKeyChecksQuery);
 
 
-                string UpdateQuery = "ROBI ĆE NAPRAVIT"; 
+                string UpdateQuery = "ROBI ĆE NAPRAVIT"; // ažurirati ID 
 
                 externalSQLConnect.sqlQuery(UpdateQuery);
 
@@ -399,7 +399,7 @@ namespace eOdvjetnik.ViewModel
         {
             UpdateContactOnRemoteServer(contactItem);
             await Shell.Current.GoToAsync("///Klijenti");
-            // dodati query da prikaže baš taj kontakt
+            
             Debug.WriteLine("Klijent je ažuriran: " + ClientName);
 
         }

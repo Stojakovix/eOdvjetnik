@@ -23,7 +23,6 @@ public partial class Postavke : ContentPage
     {
         Frame1.IsVisible = true;
         Frame2.IsVisible = false;
-        Frame3.IsVisible = false;
         Frame4.IsVisible = false;
         Frame5.IsVisible = false;
         Frame7.IsVisible = false;
@@ -33,7 +32,6 @@ public partial class Postavke : ContentPage
     {
         Frame1.IsVisible = false;
         Frame2.IsVisible = true;
-        Frame3.IsVisible = false;
         Frame4.IsVisible = false;
         Frame5.IsVisible = false;
         Frame7.IsVisible = false;
@@ -42,7 +40,6 @@ public partial class Postavke : ContentPage
     {
         Frame1.IsVisible = false;
         Frame2.IsVisible = false;
-        Frame3.IsVisible = true;
         Frame4.IsVisible = false;
         Frame5.IsVisible = false;
         Frame7.IsVisible = false;
@@ -51,7 +48,6 @@ public partial class Postavke : ContentPage
     {
         Frame1.IsVisible = false;
         Frame2.IsVisible = false;
-        Frame3.IsVisible = false;
         Frame4.IsVisible = true;
         Frame5.IsVisible = false;
         Frame7.IsVisible = false;
@@ -60,7 +56,6 @@ public partial class Postavke : ContentPage
     {
         Frame1.IsVisible = false;
         Frame2.IsVisible = false;
-        Frame3.IsVisible = false;
         Frame4.IsVisible = false;
         Frame5.IsVisible = true;
         Frame7.IsVisible = false;
@@ -70,7 +65,6 @@ public partial class Postavke : ContentPage
     {
         Frame1.IsVisible = false;
         Frame2.IsVisible = false;
-        Frame3.IsVisible = false;
         Frame4.IsVisible = false;
         Frame5.IsVisible = false;
         Frame7.IsVisible = false;
@@ -79,7 +73,6 @@ public partial class Postavke : ContentPage
     {
         Frame1.IsVisible = false;
         Frame2.IsVisible = false;
-        Frame3.IsVisible = false;
         Frame4.IsVisible = false;
         Frame5.IsVisible = false;
         Frame7.IsVisible = true;
