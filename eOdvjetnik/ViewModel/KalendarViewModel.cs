@@ -39,7 +39,7 @@ namespace eOdvjetnik.ViewModel
                         // Add new appointment
                         Appointments.Add(new SchedulerAppointment()
                         {
-                            Id = int.Parse(appointmentRow["ID"]),
+                            Id = int.Parse(appointmentRow["internal_event_id"]),
                             StartTime = DateTime.Parse(appointmentRow["TimeFrom"]),
                             EndTime = DateTime.Parse(appointmentRow["TimeTo"]),
                             Subject = appointmentRow["EventName"],

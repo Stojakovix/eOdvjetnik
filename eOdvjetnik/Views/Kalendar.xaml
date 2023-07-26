@@ -21,7 +21,7 @@
                 <Border BackgroundColor="LightBlue"
                         x:Name="border"
                         Opacity="0.5"
-                        Padding="5,15,10,5"                     
+                                            
                         StrokeShape="RoundRectangle 5,5,5,5"
                         Stroke="Transparent"
                         
@@ -31,12 +31,12 @@
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        FontFamily="Bold"
-                       Padding="5,5,5,5"
                        LineBreakMode="WordWrap"
+                       MaxLines="2"
                        
-                       MaxLines="2"/>
-                    
-                   
+                       />
+
+
 
             </Border>
 
@@ -52,7 +52,9 @@
                            MaxLines="2"
                            FontSize="Caption"
                            FontAttributes="Bold"
-                           HorizontalOptions="Center">
+                           HorizontalOptions="Center"
+                           
+                           >
                         
                     </Label>
                 </Grid>
