@@ -324,9 +324,11 @@ namespace eOdvjetnik.ViewModel
 
                     string DeleteQuery = "DELETE FROM Contacts WHERE ID = " + ClientID;
                     externalSQLConnect.sqlQuery(DeleteQuery);
-                    
+
+                    Debug.WriteLine(contactDeleted);
+
                 }
-               else
+                else
                 {
                     Debug.WriteLine("Client ID is null " + ClientID);
 
@@ -346,7 +348,6 @@ namespace eOdvjetnik.ViewModel
         {
             DeleteContactOnRemoteServer(contactItem);
             await Shell.Current.GoToAsync("///Klijenti");
-            Debug.WriteLine("Klijent obrisan: " + ClientName);
             ContactDeletedMessage();
         }
 

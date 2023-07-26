@@ -298,7 +298,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     public static string ReplaceSpacesAndSectionBreaks(string text)
     {
-        return text.Replace(" ", "%20").Replace("\r\n", "%20").Replace("\n", "%20").Replace("\t", "%20").Replace("\r", "%20");
+        return text.Replace(Environment.NewLine, "%20").Replace(" ", "%20").Replace("\r\n", "%20").Replace("\n", "%20").Replace("\t", "%20").Replace("\r", "%20").Replace("š", "s").Replace("đ", "dj").Replace("ž", "z").Replace("č", "c").Replace("ć", "c").Replace("ž", "z");
     }
 
     #endregion
