@@ -93,6 +93,33 @@ public class KlijentiViewModel : INotifyPropertyChanged
         }
     }
 
+    private bool clientLegalPerson;
+    public bool ClientLegalPerson
+    {
+        get { return clientLegalPerson; }
+        set
+        {
+            if (clientLegalPerson != value)
+            {
+                clientLegalPerson = value;
+                OnPropertyChanged(nameof(ClientLegalPerson));
+            }
+        }
+    }
+
+    public bool _IsNotLegalPerson { get; set; }
+    public bool IsNotLegalPerson
+    {
+        get { return _IsNotLegalPerson; }
+        set
+        {
+            if (_IsNotLegalPerson != value)
+            {
+                _IsNotLegalPerson = value;
+                OnPropertyChanged(nameof(IsNotLegalPerson));
+            }
+        }
+    }
     public bool _ContactDeleted { get; set; }
     public bool ContactDeleted
     {
@@ -172,13 +199,10 @@ public class KlijentiViewModel : INotifyPropertyChanged
                     {
 
                         int id;
-                        int pravnaInt;
                         DateTime datum_rodenja;
 
                         int.TryParse(filesRow["id"], out id);
-                        int.TryParse(filesRow["pravna"], out pravnaInt);
                         DateTime.TryParse(filesRow["datum_rodenja"], out datum_rodenja);
-
 
                         contacts.Add(new ContactItem()
                         {
@@ -194,8 +218,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
                             Email = filesRow["email"],
                             Ostalo = filesRow["ostalo"],
                             Drzava = filesRow["drzava"],
-                            Pravna = pravnaInt.ToString()
-
+                            Pravna = filesRow["pravna"],
                         });
 
                     }
@@ -245,13 +268,10 @@ public class KlijentiViewModel : INotifyPropertyChanged
                     {
 
                         int id;
-                        int pravnaInt;
                         DateTime datum_rodenja;
 
                         int.TryParse(filesRow["id"], out id);
-                        int.TryParse(filesRow["pravna"], out pravnaInt);
                         DateTime.TryParse(filesRow["datum_rodenja"], out datum_rodenja);
-
 
                         contacts.Add(new ContactItem()
                         {
@@ -267,7 +287,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
                             Email = filesRow["email"],
                             Ostalo = filesRow["ostalo"],
                             Drzava = filesRow["drzava"],
-                            Pravna = pravnaInt.ToString(),
+                            Pravna = filesRow["pravna"],
                         });
                     }
                 }
@@ -451,21 +471,22 @@ public class KlijentiViewModel : INotifyPropertyChanged
             }
         }
     }
-    private bool _ClientLegalPerson;
 
-    public bool ClientLegalPerson
+
+    private string _ClientLegalPersonString;
+
+    public string ClientLegalPersonString
     {
-        get { return _ClientLegalPerson; }
+        get { return _ClientLegalPersonString; }
         set
         {
-            if (_ClientLegalPerson != value)
+            if (_ClientLegalPersonString != value)
             {
-                _ClientLegalPerson = value;
-                OnPropertyChanged(nameof(ClientLegalPerson));
+                _ClientLegalPersonString = value;
+                OnPropertyChanged(nameof(ClientLegalPersonString));
             }
         }
     }
-    public string ClientLegalPersonString { get; set; }
 
     #endregion
 
@@ -500,13 +521,16 @@ public class KlijentiViewModel : INotifyPropertyChanged
             ClientCountry = Preferences.Get("SelectedCountry", "");
             ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
 
-            if (ClientLegalPersonString == "1")
+            if (ClientLegalPersonString == "True")
             {
+                IsNotLegalPerson = false;
                 ClientLegalPerson = true;
             }
             else
             {
+                IsNotLegalPerson = true;
                 ClientLegalPerson = false;
+
             }
 
             string brithDateString = Preferences.Get("SelectedBrithDateString", "");
@@ -576,12 +600,14 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 ClientCountry = Preferences.Get("SelectedCountry", "");
                 ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
 
-                if (ClientLegalPersonString == "1")
+                if (ClientLegalPersonString == "True")
                 {
+                    IsNotLegalPerson = false;
                     ClientLegalPerson = true;
                 }
                 else
                 {
+                    IsNotLegalPerson = true;
                     ClientLegalPerson = false;
                 }
 
@@ -645,13 +671,10 @@ private async void EditClient()
                     {
 
                         int id;
-                        int pravnaInt;
                         DateTime datum_rodenja;
 
                         int.TryParse(filesRow["id"], out id);
-                        int.TryParse(filesRow["pravna"], out pravnaInt);
                         DateTime.TryParse(filesRow["datum_rodenja"], out datum_rodenja);
-
 
                         contacts.Add(new ContactItem()
                         {
@@ -667,7 +690,7 @@ private async void EditClient()
                             Email = filesRow["email"],
                             Ostalo = filesRow["ostalo"],
                             Drzava = filesRow["drzava"],
-                            Pravna = pravnaInt.ToString()
+                            Pravna = filesRow["pravna"],
                         });
                     }
                     ContactEdited = true;

@@ -49,6 +49,7 @@ public partial class Klijenti : ContentPage
         Preferences.Set("SelectedOther", Ostalo);
         Preferences.Set("SelectedCountry", Drzava);
         Preferences.Set("SelectedLegalPersonString", Pravna);
+        Debug.WriteLine("pravna tekst: " + Pravna);
 
         try
         {

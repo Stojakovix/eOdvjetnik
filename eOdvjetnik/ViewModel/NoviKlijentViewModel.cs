@@ -44,13 +44,14 @@ namespace eOdvjetnik.ViewModel
                 ClientCountry = Preferences.Get("SelectedCountry", "");
                 ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
 
-                if (ClientLegalPersonString == "1")
+                if (ClientLegalPersonString == "True")
                 {
                     ClientLegalPerson = true;
                 }
                 else
                 {
                     ClientLegalPerson = false;
+
                 }
 
                 string brithDateString = Preferences.Get("SelectedBrithDateString", "");
@@ -377,14 +378,42 @@ namespace eOdvjetnik.ViewModel
                 string disableForeignKeyChecksQuery = "SET FOREIGN_KEY_CHECKS = 0";
                 externalSQLConnect.sqlQuery(disableForeignKeyChecksQuery);
 
+                if (Pravna == true)
+                {
+                    PravnaString = "1";
+                }
+                else
+                {
+                    PravnaString = "0";
+                }
 
-                string UpdateQuery = $"UPDATE contacts SET ime = '{ClientName}', datum_rodenja = '{ClientBirthDate.ToString("yyyy-MM-dd")}', adresa = '{ClientAddress}', ostalo = '{ClientOther}', boraviste = '{ClientResidence}', telefon = '{ClientPhone}', fax = '{ClientFax}', mobitel = '{ClientMobile}', email = '{ClientEmail}', drzava = '{ClientCountry}' WHERE id = " + ClientID;
+                string UpdateQuery = $"UPDATE contacts SET ime = '{ClientName}', datum_rodenja = '{ClientBirthDate.ToString("yyyy-MM-dd")}', oib = '{ClientOIB}', adresa = '{ClientAddress}', ostalo = '{ClientOther}', boraviste = '{ClientResidence}', telefon = '{ClientPhone}', fax = '{ClientFax}', mobitel = '{ClientMobile}', email = '{ClientEmail}', drzava = '{ClientCountry}', pravna = '{PravnaString}' WHERE id = " + ClientID;
 
                 externalSQLConnect.sqlQuery(UpdateQuery);
 
                 Debug.WriteLine("Update contact query: " + UpdateQuery);
 
                 externalSQLConnect.sqlQuery(UpdateQuery);
+
+
+                Preferences.Set("SelectedName", ClientName);
+                Preferences.Set("SelectedOIB", ClientOIB);
+                Preferences.Set("SelectedAddress", ClientAddress);
+                Preferences.Set("SelectedRsidence", ClientResidence);
+                Preferences.Set("SelectedPhone", ClientPhone);
+                Preferences.Set("SelectedFax", ClientFax);
+                Preferences.Set("SelectedMobile", ClientMobile);
+                Preferences.Set("SelectedEmail", ClientEmail);
+                Preferences.Set("SelectedOther", ClientOther);
+                Preferences.Set("SelectedCountry", ClientCountry);
+
+                string brithDateString = ClientBirthDate.ToString("dd-MM-yyyy");
+                Preferences.Set("SelectedBrithDateString", brithDateString);
+              
+
+
+
+
             }
 
             catch (Exception ex)

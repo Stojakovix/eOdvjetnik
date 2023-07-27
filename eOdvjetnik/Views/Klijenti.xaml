@@ -18,8 +18,8 @@
         <StackLayout Grid.Row="0" >
             <Grid Margin="0,0,0,10" BackgroundColor="LightGray" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="83" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -40,31 +40,31 @@
 
                 </Grid.ColumnDefinitions>
 
-                <Label Margin="20,12,0,10" Grid.Column="0" Grid.Row="0" Text="Klijent" FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,12,0,0" Grid.Column="0" Grid.Row="0" Text="Klijent" FontSize="14"  FontAttributes="Bold" TextColor="Black"  />
                 <Label Margin="20,0,0,0" Grid.Column="0" Grid.Row="1"  Text="{Binding ClientName}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
-                <Label Margin="20,12,0,10" Text="OIB" Grid.Column="1" Grid.Row="0"  FontSize="14" FontAttributes="Bold" TextColor="Black" />
-                <Label Margin="20,0,0,0" Grid.Column="1" Grid.Row="1" Text="{Binding ClientOIB}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
-                <Label Margin="20,12,0,10" Text="Adresa" Grid.Column="2" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,12,0,0" Text="OIB" Grid.Column="1" Grid.Row="0"  FontSize="14" FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,0,0,0" Grid.Column="1" Grid.Row="1" Text="{Binding ClientOIB}" FontSize="14"  TextColor="Black" Padding="0,0,0,10"  />
+                <Label Margin="20,12,0,0" Text="Adresa" Grid.Column="2" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Margin="20,0,0,0" Grid.Column="2" Grid.Row="1" Text="{Binding ClientAddress}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
-                <Label Margin="20,12,0,10" Text="Boravište:" Grid.Column="3" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,12,0,0" Text="Boravište:" Grid.Column="3" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Margin="20,0,0,0" Grid.Column="3" Grid.Row="1" Text="{Binding ClientResidence}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
-                <Label Margin="20,12,0,10" Text="Datum rođenja:" Grid.Column="4"   Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
-                <Label Margin="20,0,0,0" Grid.Column="4" Grid.Row="1"  Text="{Binding ClientBirthDate, StringFormat='{}{0: dd/MM/yyyy}'}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
-                <Label Margin="20,12,0,10" Text="Ostalo:" Grid.Column="5" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black"  />
-                <Label Margin="20,0,0,0" Grid.Column="5" Grid.Row="1" Text="{Binding ClientOther}" FontSize="14"  TextColor="Black" Padding="0,0,0,10"  />
-                <Label Margin="20,12,0,10" Text="Telefon:" Grid.Column="6" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,12,0,0" Text="Datum rođenja:" Grid.Column="4"   Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" LineBreakMode="WordWrap" />
+                <Label Margin="20,0,0,0" Grid.Column="4" Grid.Row="1"  Text="{Binding ClientBirthDate, StringFormat='{}{0: dd/MM/yyyy}'}" FontSize="14"  
+                       TextColor="Black" Padding="0,0,0,10" IsVisible="{Binding IsNotLegalPerson}" IsEnabled="{Binding IsNotLegalPerson}" />
+                <Label Margin="20,12,0,0" Text="Ostalo:" Grid.Column="5" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black"  />
+                <Label Margin="20,0,0,0" Grid.Column="5" Grid.Row="1" Text="{Binding ClientOther}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" LineBreakMode="WordWrap"  />
+                <Label Margin="20,12,0,0" Text="Telefon:" Grid.Column="6" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Margin="20,0,0,0" Grid.Column="6" Grid.Row="1" Text="{Binding ClientPhone}" FontSize="14"  TextColor="Black"  Padding="0,0,0,10" />
-                <Label Margin="20,12,0,10" Text="Mobitel:" Grid.Column="7" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,12,0,0" Text="Mobitel:" Grid.Column="7" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Margin="20,0,0,0" Grid.Column="7" Grid.Row="1" Text="{Binding ClientMobile}" FontSize="14"  TextColor="Black" Padding="0,0,0,10"  />
-                <Label Margin="20,12,0,10" Text="Fax:" Grid.Column="8" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,12,0,0" Text="Fax:" Grid.Column="8" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Margin="20,0,0,0" Grid.Column="8" Grid.Row="1" Text="{Binding ClientFax}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
-                <Label Margin="20,12,0,10" Text="Email:" Grid.Column="9" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,12,0,0" Text="Email:" Grid.Column="9" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Margin="20,0,0,0" Grid.Column="9" Grid.Row="1" Text="{Binding ClientEmail}" FontSize="14"  TextColor="Black"  Padding="0,0,0,10" />
-                <Label Margin="20,12,0,10" Text="Država:" Grid.Column="10" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
-                <Label Margin="20,0,0,0" Grid.Column="10" Grid.Row="1" Text="{Binding ClientCountry}" FontSize="14"  TextColor="Black" Padding="0,0,0,10"  />
-                <Label Margin="20,12,0,10" Text="Pravna osoba:" Grid.Column="11" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,12,0,0" Text="Država:" Grid.Column="10" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Margin="20,0,0,0" Grid.Column="10" Grid.Row="1" Text="{Binding ClientCountry}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" LineBreakMode="WordWrap" />
+                <Label Margin="20,12,0,0" Text="Pravna osoba:" Grid.Column="11" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <CheckBox Margin="20,0,0,0" Grid.Column="11" Grid.Row="1" IsChecked="{Binding ClientLegalPerson}"  />
-
                 <Label Margin="20,12,0,10" Text=" " Grid.Column="12" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
 
                 <ImageButton Source="edit.png" HorizontalOptions="Center"  Grid.Row="1" Grid.Column="12" Aspect="AspectFit" BackgroundColor="LightGray"
