@@ -287,7 +287,7 @@ namespace eOdvjetnik.ViewModel
                 string mobitel = Mobitel ?? string.Empty;
                 string email = Email ?? string.Empty;
                 string drzava = Drzava ?? string.Empty;
-                
+
                 if (Pravna == true)
                 {
                     PravnaString = "1";
@@ -378,7 +378,7 @@ namespace eOdvjetnik.ViewModel
                 string disableForeignKeyChecksQuery = "SET FOREIGN_KEY_CHECKS = 0";
                 externalSQLConnect.sqlQuery(disableForeignKeyChecksQuery);
 
-                if (Pravna == true)
+                if (ClientLegalPerson == true)
                 {
                     PravnaString = "1";
                 }
@@ -407,9 +407,15 @@ namespace eOdvjetnik.ViewModel
                 Preferences.Set("SelectedOther", ClientOther);
                 Preferences.Set("SelectedCountry", ClientCountry);
 
+
                 string brithDateString = ClientBirthDate.ToString("dd-MM-yyyy");
                 Preferences.Set("SelectedBrithDateString", brithDateString);
-              
+
+                if (ClientLegalPerson == true)
+                 {
+                    Preferences.Set("SelectedLegalPersonString", "True");
+
+                }
 
 
 
