@@ -256,7 +256,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 NoQueryResult = false;
                 contacts.Clear();
             }
-            string query = "SELECT * FROM `contacts` WHERE LOWER(ime) LIKE LOWER('%" + SearchText + "%') OR OIB LIKE '%" + SearchText + "%'";
+            string query = "SELECT * FROM `contacts` WHERE LOWER(ime) LIKE LOWER('%" + SearchText + "%') OR OIB LIKE '%" + SearchText + "%' limit 30";
             Debug.WriteLine(query);
             try
             {
