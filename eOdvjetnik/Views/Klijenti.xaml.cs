@@ -49,7 +49,6 @@ public partial class Klijenti : ContentPage
         Preferences.Set("SelectedOther", Ostalo);
         Preferences.Set("SelectedCountry", Drzava);
         Preferences.Set("SelectedLegalPersonString", Pravna);
-        Debug.WriteLine("pravna tekst: " + Pravna);
 
         try
         {
@@ -58,7 +57,8 @@ public partial class Klijenti : ContentPage
 
             string brithDateString = Datum_rodenja.ToString("dd-MM-yyyy");
             Preferences.Set("SelectedBrithDateString", brithDateString);
-      
+            Debug.WriteLine(brithDateString);
+
 
         }
         catch (Exception ex)

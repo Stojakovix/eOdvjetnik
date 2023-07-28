@@ -18,7 +18,6 @@ namespace eOdvjetnik.ViewModel
 {
     public class NoviKlijentViewModel : INotifyPropertyChanged
     {
-        Klijent klijent;
         ContactItem contactItem;
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
 
@@ -70,19 +69,7 @@ namespace eOdvjetnik.ViewModel
 
         }
 
-        private ObservableCollection<Klijent> klijenti;
-        public ObservableCollection<Klijent> Klijenti
-        {
-            get { return klijenti; }
-            set
-            {
-                if (klijenti != value)
-                {
-                    klijenti = value;
-                    OnPropertyChanged(nameof(Klijenti));
-                }
-            }
-        }
+    
         #region Varijable za klijente
         private string id;
         public string Id

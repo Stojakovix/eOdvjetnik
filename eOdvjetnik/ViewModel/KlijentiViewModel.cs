@@ -107,16 +107,16 @@ public class KlijentiViewModel : INotifyPropertyChanged
         }
     }
 
-    public bool _IsNotLegalPerson { get; set; }
-    public bool IsNotLegalPerson
+    public bool _BirthDateVisible { get; set; }
+    public bool BirthDateVisible
     {
-        get { return _IsNotLegalPerson; }
+        get { return _BirthDateVisible; }
         set
         {
-            if (_IsNotLegalPerson != value)
+            if (_BirthDateVisible != value)
             {
-                _IsNotLegalPerson = value;
-                OnPropertyChanged(nameof(IsNotLegalPerson));
+                _BirthDateVisible = value;
+                OnPropertyChanged(nameof(BirthDateVisible));
             }
         }
     }
@@ -520,21 +520,30 @@ public class KlijentiViewModel : INotifyPropertyChanged
             ClientOther = Preferences.Get("SelectedOther", "");
             ClientCountry = Preferences.Get("SelectedCountry", "");
             ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
+            
+            string brithDateString = Preferences.Get("SelectedBrithDateString", "");
+            if (brithDateString == "01-01-0001")
+            {
+                BirthDateVisible = false;
 
+            }
+            else
+            {
+                ClientBirthDate = DateTime.ParseExact(brithDateString, "dd-MM-yyyy", null);
+                BirthDateVisible = true;
+
+            }
             if (ClientLegalPersonString == "True")
             {
-                IsNotLegalPerson = false;
+                BirthDateVisible = false;
                 ClientLegalPerson = true;
             }
             else
             {
-                IsNotLegalPerson = true;
+                BirthDateVisible = true;
                 ClientLegalPerson = false;
 
             }
-
-            string brithDateString = Preferences.Get("SelectedBrithDateString", "");
-            ClientBirthDate = DateTime.ParseExact(brithDateString, "dd-MM-yyyy", null);
         }
         catch (Exception ex)
         {
@@ -600,19 +609,30 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 ClientCountry = Preferences.Get("SelectedCountry", "");
                 ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
 
+                string brithDateString = Preferences.Get("SelectedBrithDateString", "");
+                if (brithDateString == "01-01-0001")
+                {
+                    BirthDateVisible = false;
+
+                }
+                else
+                {
+                    ClientBirthDate = DateTime.ParseExact(brithDateString, "dd-MM-yyyy", null);
+                    BirthDateVisible = true;
+
+                }
                 if (ClientLegalPersonString == "True")
                 {
-                    IsNotLegalPerson = false;
+                    BirthDateVisible = false;
                     ClientLegalPerson = true;
                 }
                 else
                 {
-                    IsNotLegalPerson = true;
+                    BirthDateVisible = true;
                     ClientLegalPerson = false;
+
                 }
 
-                string brithDateString = Preferences.Get("SelectedBrithDateString", "");
-                ClientBirthDate = DateTime.ParseExact(brithDateString, "dd-MM-yyyy", null);
 
                 ContactDeletedText = Preferences.Get("ContactDeleted", "");
                 ContactEditedText = "Uspješno ste izmijenili kontakt: " + ClientName;
