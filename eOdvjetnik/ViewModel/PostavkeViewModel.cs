@@ -302,11 +302,12 @@ public class PostavkeViewModel : INotifyPropertyChanged
         string url = "https://cc.eodvjetnik.hr/eodvjetnikadmin/feedbacks/feedback?cpuid=";
         company_id = Preferences.Get("company_id", "");
         employee_id = Preferences.Get("device_type_id", "");
-        datum_slanja = DateTime.Now.ToString("d");
+        datum_slanja = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
         string encodedFeedbackText = ReplaceSpacesAndSectionBreaks(FeedbackText);
+        string datetimeRazmak = ReplaceSpacesAndSectionBreaks(datum_slanja);
 
-        string feedbackURL = string.Concat(url, HWID64, "&company=", company_id, "&employee=", employee_id, "&date=", datum_slanja, "&text=", encodedFeedbackText);
+        string feedbackURL = string.Concat(url, HWID64, "&company=", company_id, "&employee=", employee_id, "&date=", datetimeRazmak, "&text=", encodedFeedbackText);
 
         Debug.WriteLine(feedbackURL);
         Debug.WriteLine(HWID64);
@@ -324,7 +325,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
                 if (response.IsSuccessStatusCode)
                 {
-
+                    // prikaži da je uspješno
 
                 }
                 else
