@@ -102,7 +102,7 @@
                     <Entry x:Name="USER_Entry" Text="{Binding UserNas}" Grid.Row="1" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center" />
 
                     <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                    <Entry x:Name="PASS_Entry" Text="{Binding PassNas}" Grid.Row="2" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"  />
+                    <Entry x:Name="PASS_Entry" Text="{Binding PassNas}" IsPassword="True" Grid.Row="2" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"  />
 
                     <Label Text="Mapa" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                     <Entry x:Name="FOLDER_Entry" Text="{Binding Folder}" Grid.Row="3" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center" />
@@ -141,7 +141,7 @@
                     <Entry x:Name="USEREntry" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
 
                     <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                    <Entry x:Name="PASSEntry" Text="{Binding Password}" Grid.Row="2" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"  />
+                    <Entry x:Name="PASSEntry" Text="{Binding Password}" IsPassword="True" Grid.Row="2" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"  />
 
                     <Label Text="Baza podataka" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                     <Entry x:Name="DatabaseEntry" Text="{Binding DatabaseName}" Grid.Row="3" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />

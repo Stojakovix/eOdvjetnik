@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
              x:Class="eOdvjetnik.Views.Zaposlenici"
              xmlns:local ="clr-namespace:eOdvjetnik.ViewModel"
              Title="Zaposlenici">
@@ -10,63 +11,90 @@
     </ContentPage.BindingContext>
 
     <ScrollView>
-            <StackLayout >
-                <VerticalStackLayout  >
+        <StackLayout >
 
-                    <ListView  BackgroundColor="LightGray" Grid.Row="1" HorizontalOptions="Start" MaximumWidthRequest="400" ItemsSource="{Binding DataModel.Devices}">
-                        <ListView.Header>
-                            <Grid  >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="300"/>
+            <HorizontalStackLayout>
+                <Button Text="Get Devices" Command="{Binding GetAllCompanyDevices}" />
+                <Button Text="Get Employees" Command="{Binding GetAllCompanyEmployees}" />
+                <Button Text="Provjeri dupliće" Command="{Binding CheckHWIDs}" />
+                
+                <sfPopup:SfPopup x:Name="ZaposleniciPopup" 
+                             HeaderTitle="Upozorenje" ShowHeader="False"
+                             IsVisible="{Binding ZaposleniciVisible}" 
+                             IsOpen="{Binding ZaposleniciOpen}"
+                             MinimumWidthRequest="400"
+                             >
+                    <sfPopup:SfPopup.PopupStyle>
+                        <sfPopup:PopupStyle MessageBackground="White" HeaderBackground="White"   />
+                    </sfPopup:SfPopup.PopupStyle>
 
-                                </Grid.ColumnDefinitions>
+                    <sfPopup:SfPopup.ContentTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Text="Upozorenje! Uređaj je moguće dodijeliti samo jednom korisniku. Korisnici s istim uređajem:" TextColor="Red" FontSize="16" Margin="20,20,0,0" FontAttributes="Bold" />
+                                <Label Text="{Binding ZaposleniciText}" TextColor="Black" FontSize="16" Margin="12,0,0,0" Padding="0,10,0,10" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </sfPopup:SfPopup.ContentTemplate>
+                </sfPopup:SfPopup>
+
+            </HorizontalStackLayout>
+            <VerticalStackLayout  >
+
+                <ListView  BackgroundColor="LightGray" Grid.Row="1" HorizontalOptions="Start" MaximumWidthRequest="400" ItemsSource="{Binding DataModel.Devices}">
+                    <ListView.Header>
+                        <Grid  >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"/>
+
+                            </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Text="Uređaji s aktivnom licencom (placeholder)" FontSize="Default" Margin="20,20,0,10" FontAttributes="Bold"/>
-                            </Grid>
-                        </ListView.Header>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
+                        </Grid>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
                                 <Grid >
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="300"/>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="300"/>
 
-                                        </Grid.ColumnDefinitions>
+                                    </Grid.ColumnDefinitions>
 
                                     <Label Grid.Column="0" Text="{Binding opis}" Margin="20,10,0,0" FontSize="Default"  />
 
 
 
                                 </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
 
-                    <ListView Margin="20,20,0,0" Grid.Row="1" ItemsSource="{Binding EmployeeItems}" MaximumWidthRequest="600" HorizontalOptions="Start" >
-                        <ListView.Header>
-                            <Grid >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="200"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="300"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Text="Korisnik" FontAttributes="Bold" Margin="0,0,0,10" />
+                <ListView Margin="20,20,0,0" Grid.Row="1" ItemsSource="{Binding EmployeeItems}" MaximumWidthRequest="600" HorizontalOptions="Start" >
+                    <ListView.Header>
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="300"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="Korisnik" FontAttributes="Bold" Margin="0,0,0,10" />
                             <Label Grid.Column="1" Text="Inicijali" FontAttributes="Bold" Margin="0,0,0,10" />
                             <Label Grid.Column="2" Text="Naziv uređaja" FontAttributes="Bold" Margin="0,0,0,10" />
 
-                            </Grid>
-                        </ListView.Header>
+                        </Grid>
+                    </ListView.Header>
 
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="200"/>
-                                            <ColumnDefinition Width="100"/>
-                                            <ColumnDefinition Width="200"/>
-                                        </Grid.ColumnDefinitions>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="200"/>
+                                    </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
@@ -74,21 +102,20 @@
                                     <Label Grid.Column="0" Text="{Binding EmployeeName}" VerticalTextAlignment="Center" FontSize="Default" />
                                     <Label Grid.Column="1" Text="{Binding Initals}" VerticalTextAlignment="Center" FontSize="Default" />
 
+                                    <Picker HorizontalOptions="Start" WidthRequest="200" Grid.Column="2"
+                                          ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type local:PostavkeViewModel}}, Path=DataModel.Devices}"
+                                         ItemDisplayBinding="{Binding opis}" SelectedIndexChanged="Picker_SelectedIndexChanged"  />
 
-                                    <Picker HorizontalOptions="Start"  WidthRequest="200" Grid.Column="2" ItemsSource="{Binding Source={x:Reference Frame6}, Path=BindingContext.DataModel.Devices}"
-                                        SelectedItem="{Binding Source={x:Reference Frame6}, Path=BindingContext.SelectedDevices[EmployeeName]}"
-                                                    ItemDisplayBinding="{Binding opis}" VerticalTextAlignment="Center"  FontSize="Default" />
-                                
 
                                 </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
-                </VerticalStackLayout>
-    </StackLayout>
+            </VerticalStackLayout>
+        </StackLayout>
     </ScrollView>
-    
-    
+
+
 </ContentPage>

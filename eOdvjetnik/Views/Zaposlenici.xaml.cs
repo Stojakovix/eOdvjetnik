@@ -1,54 +1,31 @@
+using eOdvjetnik.Model;
 using eOdvjetnik.ViewModel;
 using System.Diagnostics;
 
 namespace eOdvjetnik.Views;
 public partial class Zaposlenici : ContentPage
 {
-	public Zaposlenici()
-	{
+    public Zaposlenici()
+    {
         InitializeComponent();
         BindingContext = App.SharedPostavkeViewModel;
     }
 
-    public async void FetchCompanyDevices()
+    private void Picker_SelectedIndexChanged(object sender, EventArgs e)
     {
-        Debug.WriteLine("PostavkeModel - > FetchCompanyDevices");
-        string string1 = "https://cc.eodvjetnik.hr/eodvjetnikadmin/devices/getAll?cpuid=";
-        string string2 = Preferences.Get("key", null);
-        string activationURL = string.Concat(string1, string2);
-        Debug.WriteLine("PostavkeModel - > FetchCompanyDevices - URL: " + activationURL);
-        try
-        {
-            Debug.WriteLine("PostavkeModel - > FetchCompanyDevices -> Try");
+        var picker = (Picker)sender;
+        var selectedDevice = (Device)picker.SelectedItem;
+        var selectedEmployee = (EmployeeItem)picker.BindingContext;
 
-            using (var client = new HttpClient())
-            {
-                HttpResponseMessage response = await client.GetAsync(activationURL);
-                Debug.WriteLine("PostavkeModel - > FetchCompanyDevices -> Received a response");
+        selectedEmployee.EmployeeHWID = selectedDevice.hwid;
 
-                if (response.IsSuccessStatusCode)
-                {
-                    Debug.WriteLine("PostavkeModel - > FetchCompanyDevices -> Received data");
-
-                    string jsonContent = await response.Content.ReadAsStringAsync();
-                    response.EnsureSuccessStatusCode();
-                    var content = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine("PostavkeModel - > FetchCompanyDevices -> Json string: " + content);
-                    string json_devices = content.ToString();
-                    Preferences.Set("json_devices", json_devices);
-
-                }
-                else
-                {
-                    // 
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine("FetchCompanyDevices error: " + ex.Message);
-        }
+        string zaposlenik = selectedEmployee.EmployeeName;
+        string computer = selectedDevice.hwid;
+        Debug.WriteLine("Licenca dodana korisniku: " + zaposlenik + ", hwid: " + computer);
     }
 
 
+
 }
+
+

@@ -31,6 +31,49 @@ public class PostavkeViewModel : INotifyPropertyChanged
         }
     }
 
+    private bool _ZaposleniciVisible;
+
+    public bool ZaposleniciVisible
+    {
+        get { return _ZaposleniciVisible; }
+        set
+        {
+            if (_ZaposleniciVisible != value)
+            {
+                _ZaposleniciVisible = value;
+                OnPropertyChanged(nameof(ZaposleniciVisible));
+            }
+        }
+    }
+
+    private bool _ZaposleniciOpen;
+
+    public bool ZaposleniciOpen
+    {
+        get { return _ZaposleniciOpen; }
+        set
+        {
+            if (_ZaposleniciOpen != value)
+            {
+                _ZaposleniciOpen = value;
+                OnPropertyChanged(nameof(ZaposleniciOpen));
+            }
+        }
+    }
+    private string _ZaposleniciText;
+
+    public string ZaposleniciText
+    {
+        get { return _ZaposleniciText; }
+        set
+        {
+            if (_ZaposleniciText != value)
+            {
+                _ZaposleniciText = value;
+                OnPropertyChanged(nameof(ZaposleniciText));
+            }
+        }
+    }
     public string HWID { get; set; }
     public string HWID64 { get; set; }
     public string LicenceType { get; set; }
@@ -55,6 +98,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
     public ICommand GetAllCompanyDevices { get; set; }
     public ICommand GetAllCompanyEmployees { get; set; }
     public ICommand OpenZaposlenici { get; set; }
+    public ICommand CheckHWIDs { get; set; }
 
 
 
@@ -62,6 +106,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
     private void GetJsonDeviceData()
     {
         JsonDevicesData = Preferences.Get("json_devices", null);
+        Debug.WriteLine("JsonDevicesData = " + JsonDevicesData);
 
         _dataModel = new DeviceDataModel();
 
@@ -86,7 +131,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
         {
             Debug.WriteLine("JsonDevicesData = null");
         }
-        GetEmployees();
+        _dataModel.Devices.Insert(0, new Device { opis = "Bez uređaja" });
+
     }
 
     public void GetEmployees()
@@ -250,18 +296,17 @@ public class PostavkeViewModel : INotifyPropertyChanged
     public string employee_id { get; set; }
     public string datum_slanja { get; set; }
 
-
     public async void OnFeedbackClicked()
     {
 
-        string url = "https://cc.eodvjetnik.hr/eodvjetnikadmin/waiting-lists/feedback?cpuid=";
+        string url = "https://cc.eodvjetnik.hr/eodvjetnikadmin/feedbacks/feedback?cpuid=";
         company_id = Preferences.Get("company_id", "");
         employee_id = Preferences.Get("device_type_id", "");
         datum_slanja = DateTime.Now.ToString("d");
 
         string encodedFeedbackText = ReplaceSpacesAndSectionBreaks(FeedbackText);
 
-        string feedbackURL = string.Concat(url, "&", HWID64, "&", company_id, "&", employee_id, "&", datum_slanja, "&", encodedFeedbackText);
+        string feedbackURL = string.Concat(url, HWID64, "&company=", company_id, "&employee=", employee_id, "&date=", datum_slanja, "&text=", encodedFeedbackText);
 
         Debug.WriteLine(feedbackURL);
         Debug.WriteLine(HWID64);
@@ -279,12 +324,12 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
                 if (response.IsSuccessStatusCode)
                 {
-                    
+
 
                 }
                 else
                 {
-                    
+
                 }
             }
         }
@@ -306,11 +351,15 @@ public class PostavkeViewModel : INotifyPropertyChanged
     public PostavkeViewModel()
     {
         #region Devic&Licence
+        ZaposleniciVisible = false;
+        ZaposleniciOpen = false;
+
         GetAllCompanyDevices = new Command(GetJsonDeviceData);
         GetAllCompanyEmployees = new Command(GetEmployees);
         OpenZaposlenici = new Command(ZaposleniciClicked);
         SaveReceiptCompanyInfo = new Command(ReceiptCompanyInfo);
-
+        CheckHWIDs = new Command(CheckDuplicates);
+        
         ReceiptPDVamount = Preferences.Get("receiptPDVamount", "");
         ReceiptIBAN = Preferences.Get("receiptIBAN", "");
         ReceiptHeaderText = Preferences.Get("receiptHeaderText", "");
@@ -323,6 +372,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         ParseDate();
         try
         {
+            FetchCompanyDevices();
             employeeItem = new ObservableCollection<EmployeeItem>();
             GetJsonDeviceData();
             HWID64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(HWID));
@@ -390,7 +440,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
             Debug.WriteLine("Nas saved " + Preferences.Default);
             Debug.WriteLine("KLINUTO NA SAVE U NAS POSTAVKAMA");
-                
+
         }
 
         catch (Exception ex)
@@ -514,7 +564,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     #endregion
 
-  
+
 
     private async void ShowAlert(string title, string message)
     {
@@ -541,5 +591,126 @@ public class PostavkeViewModel : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
+    public async void FetchCompanyDevices()
+    {
+        ZaposleniciVisible = false;
+        ZaposleniciOpen = false;
 
+
+        Debug.WriteLine("PostavkeModel - > FetchCompanyDevices");
+        string string1 = "https://cc.eodvjetnik.hr/eodvjetnikadmin/devices/getAll?cpuid=";
+        string string2 = Preferences.Get("key", null);
+        string activationURL = string.Concat(string1, string2);
+        Debug.WriteLine("PostavkeModel - > FetchCompanyDevices - URL: " + activationURL);
+        try
+        {
+            Debug.WriteLine("PostavkeModel - > FetchCompanyDevices -> Try");
+
+            using (var client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(activationURL);
+                Debug.WriteLine("PostavkeModel - > FetchCompanyDevices -> Received a response");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("PostavkeModel - > FetchCompanyDevices -> Received data");
+
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
+                    var content = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine("PostavkeModel - > FetchCompanyDevices -> Json string: " + content);
+                    string json_devices = content.ToString();
+                    Preferences.Set("json_devices", json_devices);
+
+                }
+                else
+                {
+                    // 
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("FetchCompanyDevices error: " + ex.Message);
+        }
+    }
+
+
+    private void CheckDuplicates()
+    {
+        ZaposleniciVisible = false;
+        ZaposleniciOpen = false;
+
+
+        if (EmployeeItems == null || EmployeeItems.Count <= 1)
+            return;
+
+        var duplicateHWIDGroups = EmployeeItems
+            .Where(e => !string.IsNullOrEmpty(e.EmployeeHWID))
+            .GroupBy(e => e.EmployeeHWID)
+            .Where(g => g.Count() > 1)
+            .ToList();
+
+        if (duplicateHWIDGroups.Any())
+        {
+            //Debug.WriteLine("Više korisnika ima isti HWID:");
+            foreach (var group in duplicateHWIDGroups)
+            {
+                var employeeNames = group.Select(e => e.EmployeeName).ToList();
+                var employeeHWID = group.Key;
+
+                //Debug.WriteLine($"Korisnici povezani s istim uređajem: {string.Join(", ", employeeNames)}");
+            }
+            ZaposleniciVisible = true;
+            ZaposleniciOpen = true;
+
+        }
+        else
+        {
+            ZaposleniciVisible = false;
+            ZaposleniciOpen = true;
+
+            //Debug.WriteLine("Nema duplih HWID.");
+        }
+        GetDuplicateEmployeesString();
+        Debug.WriteLine(GetDuplicateEmployeesString());
+    }
+
+    private string GetDuplicateEmployeesString()
+    {
+        if (EmployeeItems == null || EmployeeItems.Count <= 1)
+            return string.Empty;
+
+        var duplicateHWIDGroups = EmployeeItems
+            .Where(e => !string.IsNullOrEmpty(e.EmployeeHWID))
+            .GroupBy(e => e.EmployeeHWID)
+            .Where(g => g.Count() > 1)
+            .ToList();
+
+        if (duplicateHWIDGroups.Any())
+        {
+            var duplicatesStringBuilder = new StringBuilder();
+            //duplicatesStringBuilder.AppendLine("\n");
+
+            foreach (var group in duplicateHWIDGroups)
+            {
+                var employeeNames = group.Select(e => e.EmployeeName);
+                var employeeHWID = group.Key;
+
+                duplicatesStringBuilder.AppendLine($" {string.Join(", ", employeeNames)}\n");
+            }
+            string zaposleniciPopupString = duplicatesStringBuilder.ToString();
+            ZaposleniciText = zaposleniciPopupString;
+
+            return duplicatesStringBuilder.ToString();
+
+        }
+        else
+        {
+            ZaposleniciVisible = false;
+            ZaposleniciOpen = false;
+
+            return "Nema duplih HWID.";
+        }
+    }
 }
