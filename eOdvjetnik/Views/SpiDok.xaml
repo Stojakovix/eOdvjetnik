@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="eOdvjetnik.Views.Dokumenti"
-             xmlns:viewmodel ="clr-namespace:eOdvjetnik.ViewModel"
-             Title="Dokumenti">
+             x:Class="eOdvjetnik.Views.SpiDok"
+             xmlns:viewModel="clr-namespace:eOdvjetnik.ViewModel"
+             Title="SpiDok">
+
     <ContentPage.BindingContext>
-        <viewmodel:DocsViewModel/>
+        <viewModel:SpiDokViewModel/>
     </ContentPage.BindingContext>
     <ScrollView>
         <VerticalStackLayout>
             <Grid RowDefinitions="*,Auto">
-                <ListView ItemsSource="{Binding Items}"
+                <ListView ItemsSource="{Binding SpiDokItems}"
                           Margin="20"
                           x:Name="listaDokumenata"
                           >
@@ -19,12 +20,8 @@
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal" Padding="2" >
                                     <Image Source="folder_1484.png" WidthRequest="50" HeightRequest="50" Aspect="Fill"/>
-                                    <Label x:Name="DocumentLabel" Text="{Binding Name}" VerticalTextAlignment="Center" Margin="10,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" TextColor="Black"/>
+                                    <Label x:Name="DocumentLabel" Text="{Binding Referenca}" VerticalTextAlignment="Center" Margin="10,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" TextColor="Black"/>
 
-
-                                    <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnLabelTapped" NumberOfTapsRequired="1"/>
-                                    </StackLayout.GestureRecognizers>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

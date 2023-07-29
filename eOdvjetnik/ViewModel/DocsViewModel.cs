@@ -14,7 +14,18 @@ namespace eOdvjetnik.ViewModel
     public class DocsViewModel : INotifyPropertyChanged
     {
         DocsDatabase database;
-        SMBConnect sMBConnect;
+        SMBConnect sMBConnect = new SMBConnect();
+
+        private ObservableCollection<RootShare> rootShares;
+        public ObservableCollection<RootShare> RootShares
+        {
+            get => rootShares;
+            set
+            {
+                rootShares = value;
+                OnPropertyChanged(nameof(RootShares));
+            }
+        }
 
         private ObservableCollection<DocsItem> items;
         public ObservableCollection<DocsItem> Items
@@ -37,65 +48,73 @@ namespace eOdvjetnik.ViewModel
         {
 
             Items = new ObservableCollection<DocsItem>();
-            GetDocuments();
-            SMBConnect sMBConnect = new SMBConnect();
+            RootShares = new ObservableCollection<RootShare>();
+            ConnectAndFetchDocumentsAsync();
+            SMBConnect sMBConnect;
 
         }
-        public async void GetDocuments()
+        public void GetDocuments()
         {
             try
             {
-                await ConnectAndFetchDocumentsAsync();
+                ConnectAndFetchDocumentsAsync();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
         }
-        public async Task ConnectAndFetchDocumentsAsync()
+        public void ConnectAndFetchDocumentsAsync()
         {
             try
             {
                 //Ispis svega na putanji
-                List<QueryDirectoryFileInformation> fileList = sMBConnect.ListPath("Users");
+                List<QueryDirectoryFileInformation> fileList = sMBConnect.ListPath("users");
 
                 //Root share list
                 List<string> shares = sMBConnect.getRootShare();
 
 
-                foreach (SMBLibrary.FileDirectoryInformation file in fileList)
+                foreach (FileDirectoryInformation file in fileList)
                 {
-                    Debug.WriteLine($"Filename: {file.FileName}");
-                    Debug.WriteLine($"File Attributes: {file.FileAttributes}");
-                    Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
-                    Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
-                    Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
-                    Debug.WriteLine("----------End of Folder/file-----------");
-                    Debug.WriteLine("---------------------Before foreach");
+                    //Debug.WriteLine($"Filename: {file.FileName}");
+                    //Debug.WriteLine($"File Attributes: {file.FileAttributes}");
+                    //Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
+                    //Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
+                    //Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
+                    //Debug.WriteLine("----------End of Folder/file-----------");
+                    //Debug.WriteLine("---------------------Before foreach");
                     DocsItem fileData = new DocsItem
                     {
                         Name = file.FileName,
-                        Changed = file.ChangeTime,
+                        Changed = file.CreationTime,
                     };
-                    Items.Add(fileData);
-                    Debug.Write(Items.ToString() + "----------+++++++++++++++++++++++++++++++++++------------");
+                    items.Add(fileData);
+                    Debug.Write(items.Count + " BROJ ITEMA MBRAALEEEE");
 
                 }
 
                 foreach (var file1 in shares)
                 {
-                    System.Diagnostics.Debug.WriteLine(file1.Length.ToString());
-                    System.Diagnostics.Debug.WriteLine(file1.ToString());
+                    Debug.WriteLine(file1.Length.ToString());
+                    Debug.WriteLine(file1.ToString());
                     //ShareFiles.Add(file1.ToString());
-                    System.Diagnostics.Debug.WriteLine("44444444444444");
+                    Debug.WriteLine("44444444444444");
+
+                    RootShare fileData = new RootShare
+                    {
+                        Name = file1.ToString(),
+
+                    };
+                    rootShares.Add(fileData);
                 }
 
-                System.Diagnostics.Debug.WriteLine("----------------------------------------------------------------");
+                Debug.WriteLine("----------------------------------------------------------------");
 
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.StackTrace);
 
             }
 

@@ -294,7 +294,6 @@ namespace eOdvjetnik.ViewModel
         }
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
         #region Komande
 
         private async void onDodajCLick()
@@ -303,6 +302,7 @@ namespace eOdvjetnik.ViewModel
             Debug.WriteLine("novi spis clicked");
         }
         #endregion
+        public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

@@ -41,6 +41,7 @@ namespace eOdvjetnik.ViewModel
         public ICommand NaplataClickCommand { get; set; }
         public ICommand SpisiClickCommand { get; set; }
         public ICommand PostavkeClickCommand { get; set; }
+        public ICommand SpiDokClickCommand { get; set; }
 
         #endregion
         // popup komande
@@ -185,6 +186,7 @@ namespace eOdvjetnik.ViewModel
             NaplataClickCommand = new Command(OnNaplataClick);
             SpisiClickCommand = new Command(OnSpisiClick);
             PostavkeClickCommand = new Command(OnPostavkeClick);
+            SpiDokClickCommand = new Command(OnSpiDokClick);
             #endregion
 
             #region Support komande
@@ -317,6 +319,15 @@ namespace eOdvjetnik.ViewModel
             {
                 await Shell.Current.GoToAsync("///Postavke");
                 Debug.WriteLine("KLIKNO Postavke");
+            }
+        }
+        private async void OnSpiDokClick()
+        {
+            DisableMenu();
+            if (disableMenu == false)
+            {
+                await Shell.Current.GoToAsync("/SpiDok");
+                Debug.WriteLine("KLIKNO SpiDok");
             }
         }
         #endregion

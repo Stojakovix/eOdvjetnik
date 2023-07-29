@@ -90,15 +90,6 @@
                     />
 
 
-
-
-
-            <!--kontakti-->
-
-
-
-
-
             <Button Grid.Column="6" 
                     Text="Korisnička Podrška" 
                     IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
@@ -115,6 +106,15 @@
                     IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
                     BorderWidth="0"
                     Command="{Binding PostavkeClickCommand}" 
+                    FontSize="Default"
+                    TextColor="White"
+ />
+            <Button Grid.Column="10" 
+                    Text="SpiDok" 
+                    BackgroundColor="Transparent"
+                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
+                    BorderWidth="0"
+                    Command="{Binding SpiDokClickCommand}" 
                     FontSize="Default"
                     TextColor="White"
  />
