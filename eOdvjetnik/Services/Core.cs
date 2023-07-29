@@ -99,20 +99,6 @@ namespace eOdvjetnik.Services
 
                     status = fileStore.QueryDirectory(out fileList, directoryHandle, "*", FileInformationClass.FileDirectoryInformation);
                     status = fileStore.CloseFile(directoryHandle);
-                    
-                    foreach (SMBLibrary.FileDirectoryInformation file in fileList)
-                    {
-                        Debug.WriteLine($"Filename: {file.FileName}");
-                        Debug.WriteLine($"File Attributes: {file.FileAttributes}");
-                        Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
-                        Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
-                        Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
-                        Debug.WriteLine("----------End of Folder/file-----------");
-                        //Debug.WriteLine();
-                        ShareFiles.Add(file.FileName);
-
-
-                    }
                     status = fileStore.Disconnect();
                     return fileList;
                 }
@@ -163,7 +149,7 @@ namespace eOdvjetnik.Services
                     Debug.WriteLine("7777777777777777777");
                     foreach (string nesto in shares)
                     {
-                        Debug.WriteLine(nesto);
+                        //Debug.WriteLine(nesto);
                             
                     }
 
