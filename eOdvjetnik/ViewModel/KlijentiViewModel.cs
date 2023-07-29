@@ -107,19 +107,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
         }
     }
 
-    public bool _BirthDateVisible { get; set; }
-    public bool BirthDateVisible
-    {
-        get { return _BirthDateVisible; }
-        set
-        {
-            if (_BirthDateVisible != value)
-            {
-                _BirthDateVisible = value;
-                OnPropertyChanged(nameof(BirthDateVisible));
-            }
-        }
-    }
+
     public bool _ContactDeleted { get; set; }
     public bool ContactDeleted
     {
@@ -202,14 +190,13 @@ public class KlijentiViewModel : INotifyPropertyChanged
                         DateTime datum_rodenja;
 
                         int.TryParse(filesRow["id"], out id);
-                        DateTime.TryParse(filesRow["datum_rodenja"], out datum_rodenja);
 
                         contacts.Add(new ContactItem()
                         {
                             Id = id,
                             Ime = filesRow["ime"],
                             OIB = filesRow["OIB"],
-                            Datum_rodenja = datum_rodenja,
+                            Datum_rodenja = filesRow["datum_rodenja"],
                             Adresa = filesRow["adresa"],
                             Boraviste = filesRow["boraviste"],
                             Telefon = filesRow["telefon"],
@@ -278,7 +265,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
                             Id = id,
                             Ime = filesRow["ime"],
                             OIB = filesRow["OIB"],
-                            Datum_rodenja = datum_rodenja,
+                            Datum_rodenja = filesRow["datum_rodenja"],
                             Adresa = filesRow["adresa"],
                             Boraviste = filesRow["boraviste"],
                             Telefon = filesRow["telefon"],
@@ -364,8 +351,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
         }
     }
 
-    private DateTime _ClientBirthDate;
-    public DateTime ClientBirthDate
+    private string _ClientBirthDate;
+    public string ClientBirthDate
     {
         get { return _ClientBirthDate; }
         set
@@ -520,30 +507,9 @@ public class KlijentiViewModel : INotifyPropertyChanged
             ClientOther = Preferences.Get("SelectedOther", "");
             ClientCountry = Preferences.Get("SelectedCountry", "");
             ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
-            
-            string brithDateString = Preferences.Get("SelectedBrithDateString", "");
-            if (brithDateString == "01-01-0001")
-            {
-                BirthDateVisible = false;
+            ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
 
-            }
-            else
-            {
-                ClientBirthDate = DateTime.ParseExact(brithDateString, "dd-MM-yyyy", null);
-                BirthDateVisible = true;
-
-            }
-            if (ClientLegalPersonString == "True")
-            {
-                BirthDateVisible = false;
-                ClientLegalPerson = true;
-            }
-            else
-            {
-                BirthDateVisible = true;
-                ClientLegalPerson = false;
-
-            }
+                     
         }
         catch (Exception ex)
         {
@@ -608,31 +574,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 ClientOther = Preferences.Get("SelectedOther", "");
                 ClientCountry = Preferences.Get("SelectedCountry", "");
                 ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
-
-                string brithDateString = Preferences.Get("SelectedBrithDateString", "");
-                if (brithDateString == "01-01-0001")
-                {
-                    BirthDateVisible = false;
-
-                }
-                else
-                {
-                    ClientBirthDate = DateTime.ParseExact(brithDateString, "dd-MM-yyyy", null);
-                    BirthDateVisible = true;
-
-                }
-                if (ClientLegalPersonString == "True")
-                {
-                    BirthDateVisible = false;
-                    ClientLegalPerson = true;
-                }
-                else
-                {
-                    BirthDateVisible = true;
-                    ClientLegalPerson = false;
-
-                }
-
+                ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
+             
 
                 ContactDeletedText = Preferences.Get("ContactDeleted", "");
                 ContactEditedText = "Uspješno ste izmijenili kontakt: " + ClientName;
@@ -701,7 +644,7 @@ private async void EditClient()
                             Id = id,
                             Ime = filesRow["ime"],
                             OIB = filesRow["OIB"],
-                            Datum_rodenja = datum_rodenja,
+                            Datum_rodenja = filesRow["datum_rodenja"],
                             Adresa = filesRow["adresa"],
                             Boraviste = filesRow["boraviste"],
                             Telefon = filesRow["telefon"],

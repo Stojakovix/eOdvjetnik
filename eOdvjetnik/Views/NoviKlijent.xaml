@@ -32,37 +32,37 @@
 
             </Grid.RowDefinitions>
             <Label Text="Ime" Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="ImeEntry" Keyboard="Numeric" Grid.Row="0" Grid.Column="1" Text="{Binding Name}"  />
+            <Entry x:Name="ImeEntry"  Grid.Row="0" Grid.Column="1" Text="{Binding Name}"  />
 
             <Label Text="OIB" Grid.Row="1" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
             <Entry x:Name="OibEntry" Keyboard="Numeric" Grid.Row="1" Grid.Column="1" Text="{Binding Oib}"  />
 
             <Label Text="Datum Rođenja" Grid.Row="2" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <DatePicker x:Name="BirthDatePicker" Grid.Row="2" Grid.Column="1" Date="{Binding DatumRodjenja}"/>
+            <Entry x:Name="DatumRodjenjaEntry"  Grid.Row="2" Grid.Column="1" Text="{Binding DatumRodjenja}"  />
 
             <Label Text="Adresa" Grid.Row="3" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Editor x:Name="AdresaEntry" Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding Adresa}"  />
+            <Editor x:Name="AdresaEntry"  Grid.Row="3" Grid.Column="1" Text="{Binding Adresa}"  />
 
             <Label Text="Ostalo" Grid.Row="4" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Editor x:Name="OstaloEntry" Keyboard="Numeric" Grid.Row="4" Grid.Column="1" Text="{Binding Ostalo}"  />
+            <Editor x:Name="OstaloEntry"  Grid.Row="4" Grid.Column="1" Text="{Binding Ostalo}"  />
 
             <Label Text="Boravište" Grid.Row="5" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="BoravišteEntry" Keyboard="Numeric" Grid.Row="5" Grid.Column="1" Text="{Binding Boraviste}"  />
+            <Entry x:Name="BoravišteEntry"  Grid.Row="5" Grid.Column="1" Text="{Binding Boraviste}"  />
 
             <Label Text="Telefon" Grid.Row="6" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="TelefonEntry" Keyboard="Numeric" Grid.Row="6" Grid.Column="1" Text="{Binding Telefon}"  />
+            <Entry x:Name="TelefonEntry"  Grid.Row="6" Grid.Column="1" Text="{Binding Telefon}"  />
 
             <Label Text="Fax" Grid.Row="7" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="FaxEntry" Keyboard="Numeric" Grid.Row="7" Grid.Column="1" Text="{Binding Fax}"  />
+            <Entry x:Name="FaxEntry"  Grid.Row="7" Grid.Column="1" Text="{Binding Fax}"  />
 
             <Label Text="Mobitel" Grid.Row="8" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="MobitelEntry" Keyboard="Numeric" Grid.Row="8" Grid.Column="1" Text="{Binding Mobitel}"  />
+            <Entry x:Name="MobitelEntry"  Grid.Row="8" Grid.Column="1" Text="{Binding Mobitel}"  />
 
             <Label Text="E-pošta" Grid.Row="9" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="EMailEntry" Keyboard="Numeric" Grid.Row="9" Grid.Column="1" Text="{Binding Email}"  />
+            <Entry x:Name="EMailEntry"  Grid.Row="9" Grid.Column="1" Text="{Binding Email}"  />
 
             <Label Text="Država" Grid.Row="10" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="DržavaEntry" Keyboard="Numeric" Grid.Row="10" Grid.Column="1" Text="{Binding Drzava}"  />
+            <Entry x:Name="DržavaEntry" Grid.Row="10" Grid.Column="1" Text="{Binding Drzava}"  />
 
             <Label Text="Pravna" Grid.Row="11" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
             <CheckBox x:Name="PravnaEntry"  Grid.Row="11" Grid.Column="1" IsChecked="{Binding Pravna, Mode=TwoWay}"  />
