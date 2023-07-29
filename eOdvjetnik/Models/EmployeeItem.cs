@@ -10,6 +10,7 @@ namespace eOdvjetnik.Model
         public string? Initals { get; set; }
         public int Active { get; set; }
         public int Type { get; set; }
+        public string HasLicence { get; set; }
 
     }
 }
