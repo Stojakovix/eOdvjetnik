@@ -41,10 +41,10 @@
             <Entry x:Name="BirthDatePicker" Grid.Row="2" Grid.Column="1" Text="{Binding ClientBirthDate}"/>
 
             <Label Text="Adresa" Grid.Row="3" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Editor x:Name="AdresaEntry" Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding ClientAddress}"  />
+            <Entry x:Name="AdresaEntry" Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding ClientAddress}"  />
 
             <Label Text="Ostalo" Grid.Row="4" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Editor x:Name="OstaloEntry" Keyboard="Numeric" Grid.Row="4" Grid.Column="1" Text="{Binding ClientOther}"  />
+            <Entry x:Name="OstaloEntry" Keyboard="Numeric" Grid.Row="4" Grid.Column="1" Text="{Binding ClientOther}"  />
 
             <Label Text="Boravište" Grid.Row="5" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
             <Entry x:Name="BoravišteEntry" Keyboard="Numeric" Grid.Row="5" Grid.Column="1" Text="{Binding ClientResidence}"  />

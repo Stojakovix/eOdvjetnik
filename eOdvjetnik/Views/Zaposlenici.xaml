@@ -73,7 +73,7 @@
                 </ListView>
 
 
-                <ListView Margin="20,20,0,0" Grid.Row="1" ItemsSource="{Binding EmployeeItems}" MaximumWidthRequest="700" HorizontalOptions="Start" >
+                <ListView Margin="20,20,0,0" BackgroundColor="White" Grid.Row="1" ItemsSource="{Binding EmployeeItems}" MaximumWidthRequest="700" HorizontalOptions="Start" >
                     <ListView.Header>
                         <Grid >
                             <Grid.ColumnDefinitions>
@@ -110,7 +110,7 @@
                                     <Label Grid.Column="2" Text="{Binding HasLicence}" HorizontalOptions="Center" VerticalTextAlignment="Center" FontSize="Default" />
 
 
-                                    <Picker HorizontalOptions="Start" WidthRequest="200" Grid.Column="3"
+                                    <Picker HorizontalOptions="Start" WidthRequest="200" Grid.Column="3" BackgroundColor="#F8F8F8" TextColor="Black"
                                           ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type local:PostavkeViewModel}}, Path=DataModel.Devices}"
                                          ItemDisplayBinding="{Binding opis}" SelectedIndexChanged="Picker_SelectedIndexChanged"  />
 

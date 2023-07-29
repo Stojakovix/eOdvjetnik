@@ -41,10 +41,10 @@
             <Entry x:Name="DatumRodjenjaEntry"  Grid.Row="2" Grid.Column="1" Text="{Binding DatumRodjenja}"  />
 
             <Label Text="Adresa" Grid.Row="3" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Editor x:Name="AdresaEntry"  Grid.Row="3" Grid.Column="1" Text="{Binding Adresa}"  />
+            <Entry x:Name="AdresaEntry"  Grid.Row="3" Grid.Column="1" Text="{Binding Adresa}"  />
 
             <Label Text="Ostalo" Grid.Row="4" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Editor x:Name="OstaloEntry"  Grid.Row="4" Grid.Column="1" Text="{Binding Ostalo}"  />
+            <Entry x:Name="OstaloEntry"  Grid.Row="4" Grid.Column="1" Text="{Binding Ostalo}"  />
 
             <Label Text="Boravište" Grid.Row="5" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
             <Entry x:Name="BoravišteEntry"  Grid.Row="5" Grid.Column="1" Text="{Binding Boraviste}"  />
