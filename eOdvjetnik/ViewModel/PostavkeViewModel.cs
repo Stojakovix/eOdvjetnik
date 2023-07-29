@@ -217,9 +217,9 @@ public class PostavkeViewModel : INotifyPropertyChanged
                     int.TryParse(filesRow["inicijali"], out active);
                     int.TryParse(filesRow["active"], out type);
 
-
                     #endregion
-                    employeeItem.Add(new EmployeeItem()
+
+                    var employee = new EmployeeItem()
                     {
                         Id = id,
                         EmployeeName = filesRow["ime"],
@@ -227,9 +227,19 @@ public class PostavkeViewModel : INotifyPropertyChanged
                         Initals = filesRow["inicijali"],
                         Active = active,
                         Type = type,
-                    }); ;
+                    };
 
+                    if (!string.IsNullOrEmpty(employee.EmployeeHWID))
+                    {
+                        employee.HasLicence = "DA";
+                    }
+                    else
+                    {
+                        employee.HasLicence = "NE";
 
+                    }
+
+                    employeeItem.Add(employee);
                 }
                 OnPropertyChanged(nameof(employeeItem));
             }
@@ -830,6 +840,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
                         externalSQLConnect.sqlQuery(UpdateQuery);
                         Debug.WriteLine("Update contact query: " + UpdateQuery);
                     }
+                    GetEmployees();
                 }
                 catch (Exception ex)
                 {

@@ -43,7 +43,7 @@
             </HorizontalStackLayout>
             <VerticalStackLayout  >
 
-                <ListView IsVisible="false"  BackgroundColor="LightGray" Grid.Row="1" HorizontalOptions="Start" MaximumWidthRequest="400" ItemsSource="{Binding DataModel.Devices}">
+                <ListView IsVisible="false"  BackgroundColor="LightGray" Grid.Row="1" HorizontalOptions="Start"  ItemsSource="{Binding DataModel.Devices}">
                     <ListView.Header>
                         <Grid  >
                             <Grid.ColumnDefinitions>
@@ -73,17 +73,20 @@
                 </ListView>
 
 
-                <ListView Margin="20,20,0,0" Grid.Row="1" ItemsSource="{Binding EmployeeItems}" MaximumWidthRequest="600" HorizontalOptions="Start" >
+                <ListView Margin="20,20,0,0" Grid.Row="1" ItemsSource="{Binding EmployeeItems}" MaximumWidthRequest="700" HorizontalOptions="Start" >
                     <ListView.Header>
                         <Grid >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="200"/>
                                 <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="200"/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Text="Korisnik" FontAttributes="Bold" Margin="0,0,0,10" />
                             <Label Grid.Column="1" Text="Inicijali" FontAttributes="Bold" Margin="0,0,0,10" />
-                            <Label Grid.Column="2" Text="Naziv uređaja" FontAttributes="Bold" Margin="0,0,0,10" />
+                            <Label Grid.Column="2" Text="Licenca aktivna?" FontAttributes="Bold" Margin="0,0,0,10" />
+                            <Label Grid.Column="3" Text="Naziv uređaja" FontAttributes="Bold" Margin="0,0,0,10" />
+
 
                         </Grid>
                     </ListView.Header>
@@ -95,6 +98,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="200"/>
                                         <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="120"/>
                                         <ColumnDefinition Width="200"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
@@ -103,8 +107,10 @@
 
                                     <Label Grid.Column="0" Text="{Binding EmployeeName}" VerticalTextAlignment="Center" FontSize="Default" />
                                     <Label Grid.Column="1" Text="{Binding Initals}" VerticalTextAlignment="Center" FontSize="Default" />
+                                    <Label Grid.Column="2" Text="{Binding HasLicence}" HorizontalOptions="Center" VerticalTextAlignment="Center" FontSize="Default" />
 
-                                    <Picker HorizontalOptions="Start" WidthRequest="200" Grid.Column="2"
+
+                                    <Picker HorizontalOptions="Start" WidthRequest="200" Grid.Column="3"
                                           ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type local:PostavkeViewModel}}, Path=DataModel.Devices}"
                                          ItemDisplayBinding="{Binding opis}" SelectedIndexChanged="Picker_SelectedIndexChanged"  />
 
