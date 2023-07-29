@@ -46,6 +46,8 @@ public partial class Racun : ContentPage
     public string ReceiptHeaderText { get; set; }
     public string ReceiptFooterText { get; set; }
     public string ReceiptIBAN { get; set; }
+    public string ReceiptSignature { get; set; }
+
 
     public Racun()
 	{
@@ -71,6 +73,7 @@ public partial class Racun : ContentPage
         try
         {
             Debug.WriteLine("Create document ušao u try");
+
             ReceiptHeaderText = Preferences.Get("receiptHeaderText", "");
             Debug.WriteLine("ReceiptHeaderText " + ReceiptHeaderText);
 
@@ -87,6 +90,8 @@ public partial class Racun : ContentPage
             ReceiptIBAN = Preferences.Get("receiptIBAN", "");
             Debug.WriteLine("receiptIBAN " + ReceiptIBAN);
 
+            ReceiptSignature = Preferences.Get("receiptSignature", "");
+            Debug.WriteLine("receiptSignature " + ReceiptSignature);
         }
 
         catch (Exception ex)
@@ -150,16 +155,16 @@ public partial class Racun : ContentPage
         //Gets the image stream.
         Stream imageStream = assembly.GetManifestResourceStream(resourcePath);
         IWPicture picture = paragraph.AppendPicture(imageStream);
-        picture.TextWrappingStyle = TextWrappingStyle.InFrontOfText;
+        picture.TextWrappingStyle = TextWrappingStyle.Inline;
         picture.HorizontalAlignment = ShapeHorizontalAlignment.Center;
         picture.VerticalOrigin = VerticalOrigin.Margin;
-        picture.VerticalPosition = -120;
+        //picture.VerticalPosition = -120;
         // 1 cm = 28.35f
         picture.Width = 53.8f;
         picture.Height = 80.8f;
         paragraph.ApplyStyle("Heading 1");
         paragraph.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
-        WTextRange textRange = paragraph.AppendText("\n\n" + ReceiptHeaderText) as WTextRange;
+        WTextRange textRange = paragraph.AppendText("\n" + ReceiptHeaderText) as WTextRange;
         textRange.CharacterFormat.FontSize = 12f;
         textRange.CharacterFormat.FontName = "Calibri";
         textRange.CharacterFormat.TextColor = Syncfusion.Drawing.Color.Black;
@@ -337,13 +342,13 @@ public partial class Racun : ContentPage
         float totalAmountBeforePDV = (float)Math.Round(ReceiptItemTotalAmount, 2);
         string TotalAmountBeforePDV = totalAmountBeforePDV.ToString("0.00");
 
-        float totalPDVamount = (ReceiptItemTotalAmount * 1.25f) - ReceiptItemTotalAmount;
+        float totalPDVamount = (ReceiptItemTotalAmount * ReceiptPDVamountFloat) - ReceiptItemTotalAmount;
         string TotalPDVAmount = totalPDVamount.ToString("0.00");
 
-        float totalAmountAfterPDV = (ReceiptItemTotalAmount * 1.25f);
+        float totalAmountAfterPDV = (ReceiptItemTotalAmount * ReceiptPDVamountFloat);
         string TotalAmountAfterPDV = totalAmountAfterPDV.ToString("N2");
 
-        float totalAmountAfterPDVhrk = ((ReceiptItemTotalAmount * 1.25f) * 7.5345f);
+        float totalAmountAfterPDVhrk = ((ReceiptItemTotalAmount * ReceiptPDVamountFloat) * 7.5345f);
         string TotalAmountAfterPDVhrk = totalAmountAfterPDVhrk.ToString("N2");
 
         //Appends the paragraph.
@@ -452,7 +457,7 @@ public partial class Racun : ContentPage
         paragraph = section.AddParagraph();
         paragraph.ApplyStyle("Normal2");
         paragraph.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Right;
-        textRange = paragraph.AppendText("Ante Gluić, odvjetnik") as WTextRange;
+        textRange = paragraph.AppendText(ReceiptSignature) as WTextRange;
 
         //Footer
         paragraph = section.HeadersFooters.Footer.AddParagraph();

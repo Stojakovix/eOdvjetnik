@@ -113,9 +113,9 @@
 
             </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Tbr." Margin="10,0,0,5" HorizontalOptions="Start" Padding="20,0,0,0" />
+                <Label Grid.Column="0" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Tbr." Margin="0,0,0,5" HorizontalOptions="Start" Padding="20,0,0,0" />
                 <Label Grid.Column="1" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Bodovi"   HorizontalOptions="Center" />
-                <Label Grid.Column="2" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Radnja" Margin="10,0,0,0" />
+                <Label Grid.Column="2" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Radnja" Margin="0,0,0,0" />
 
         </Grid>
         </VerticalStackLayout>

@@ -36,7 +36,7 @@ public partial class Klijenti : ContentPage
     }
 
 
-    private Task SaveToPreferences(int Id, string Ime, string OIB, DateTime Datum_rodenja, string Adresa, string Boraviste,  string Telefon, string Fax, string Mobitel, string Email, string Ostalo, string Drzava, string Pravna)
+    private Task SaveToPreferences(int Id, string Ime, string OIB, string Datum_rodenja, string Adresa, string Boraviste,  string Telefon, string Fax, string Mobitel, string Email, string Ostalo, string Drzava, string Pravna)
     {
         Preferences.Set("SelectedName", Ime);
         Preferences.Set("SelectedOIB", OIB);
@@ -49,22 +49,16 @@ public partial class Klijenti : ContentPage
         Preferences.Set("SelectedOther", Ostalo);
         Preferences.Set("SelectedCountry", Drzava);
         Preferences.Set("SelectedLegalPersonString", Pravna);
+        Preferences.Set("SelectedBrithDateString", Datum_rodenja);
 
         try
         {
             string IDstring = Id.ToString();
             Preferences.Set("SelectedID", IDstring);
-
-            string brithDateString = Datum_rodenja.ToString("dd-MM-yyyy");
-            Preferences.Set("SelectedBrithDateString", brithDateString);
-            Debug.WriteLine(brithDateString);
-
-
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
-
         }
 
 

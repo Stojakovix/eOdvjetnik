@@ -225,6 +225,9 @@
 	  <MauiXaml Update="Views\Naplata.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\NoviZaposlenik.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\UrediKlijenta.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

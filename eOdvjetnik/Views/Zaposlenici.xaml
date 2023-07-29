@@ -14,10 +14,12 @@
         <StackLayout >
 
             <HorizontalStackLayout>
-                <Button Text="Get Devices" Command="{Binding GetAllCompanyDevices}" />
-                <Button Text="Get Employees" Command="{Binding GetAllCompanyEmployees}" />
-                <Button Text="Provjeri dupliće" Command="{Binding CheckHWIDs}" />
-                
+                <!--<Button Text="Get Devices" Command="{Binding GetAllCompanyDevices}" />-->
+                <!--<Button Text="Prikaži sve zaposlenike" Command="{Binding GetAllCompanyEmployees}" />-->
+                <!--<Button Text="Provjeri dupliće" Command="{Binding CheckHWIDs}" />-->
+             
+
+
                 <sfPopup:SfPopup x:Name="ZaposleniciPopup" 
                              HeaderTitle="Upozorenje" ShowHeader="False"
                              IsVisible="{Binding ZaposleniciVisible}" 
@@ -41,7 +43,7 @@
             </HorizontalStackLayout>
             <VerticalStackLayout  >
 
-                <ListView  BackgroundColor="LightGray" Grid.Row="1" HorizontalOptions="Start" MaximumWidthRequest="400" ItemsSource="{Binding DataModel.Devices}">
+                <ListView IsVisible="false"  BackgroundColor="LightGray" Grid.Row="1" HorizontalOptions="Start" MaximumWidthRequest="400" ItemsSource="{Binding DataModel.Devices}">
                     <ListView.Header>
                         <Grid  >
                             <Grid.ColumnDefinitions>
@@ -112,7 +114,13 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
+                <HorizontalStackLayout>
+                    <Button Text="Spremi" Command="{Binding UpdateHWIDs}"
+                        BackgroundColor="#5ac8fa" Margin="20,20,0,10" TextColor="Black" WidthRequest="100" FontSize="Default" HorizontalOptions="Start" />
+                    <Button Text="Dodaj novog" Command="{Binding OpenNewEmployee}"
+                        BackgroundColor="#5ac8fa" Margin="150,20,0,10" TextColor="Black" WidthRequest="150" FontSize="Default" HorizontalOptions="Start" />
+                    
+                </HorizontalStackLayout>
             </VerticalStackLayout>
         </StackLayout>
     </ScrollView>

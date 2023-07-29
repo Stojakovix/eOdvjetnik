@@ -9,7 +9,7 @@ namespace eOdvjetnik.Models
         public int Id { get; set; }
         public string Ime { get; set; }
         public string OIB { get; set; }
-        public DateTime Datum_rodenja { get; set; }
+        public string Datum_rodenja { get; set; }
         public string Adresa { get; set; }
         public string Boraviste { get; set; }
         public string Telefon { get; set; }
