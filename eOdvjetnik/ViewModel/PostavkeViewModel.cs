@@ -159,34 +159,43 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     private void GetJsonDeviceData()
     {
-        JsonDevicesData = Preferences.Get("json_devices", null);
-        Debug.WriteLine("JsonDevicesData = " + JsonDevicesData);
-
-        _dataModel = new DeviceDataModel();
-
-        if (JsonDevicesData != null)
+        try
         {
+            JsonDevicesData = Preferences.Get("json_devices", null);
             Debug.WriteLine("JsonDevicesData = " + JsonDevicesData);
-            _dataModel = JsonConvert.DeserializeObject<DeviceDataModel>(JsonDevicesData);
-            DataModel = _dataModel;
 
+            _dataModel = new DeviceDataModel();
 
-            foreach (Device device in _dataModel.Devices)
+            if (JsonDevicesData != null)
             {
-                device.ConvertHwidToHwid64();
+                Debug.WriteLine("JsonDevicesData = " + JsonDevicesData);
+                _dataModel = JsonConvert.DeserializeObject<DeviceDataModel>(JsonDevicesData);
+                DataModel = _dataModel;
 
-                Debug.WriteLine($"Device ID: {device.id}");
-                Debug.WriteLine($"Company ID: {device.hwid}");
-                Debug.WriteLine($"Description: {device.opis}");
-                Debug.WriteLine($"Base64 Company ID: {device.hwid64}");
+
+                foreach (Device device in _dataModel.Devices)
+                {
+                    device.ConvertHwidToHwid64();
+
+                    Debug.WriteLine($"Device ID: {device.id}");
+                    Debug.WriteLine($"Company ID: {device.hwid}");
+                    Debug.WriteLine($"Description: {device.opis}");
+                    Debug.WriteLine($"Base64 Company ID: {device.hwid64}");
+                }
+                _dataModel.Devices.Insert(0, new Device { opis = "Bez uređaja" });
             }
-        }
-        else
-        {
-            Debug.WriteLine("JsonDevicesData = null");
-        }
-        _dataModel.Devices.Insert(0, new Device { opis = "Bez uređaja" });
+            else
+            {
+                Debug.WriteLine("JsonDevicesData = null");
+            }
+            
 
+        }
+        catch (Exception ex)
+        {
+
+            Debug.WriteLine(ex.Message); ;
+        }
     }
 
     public void GetEmployees()

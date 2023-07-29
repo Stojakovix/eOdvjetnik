@@ -43,7 +43,7 @@ namespace eOdvjetnik.ViewModel
                             StartTime = DateTime.Parse(appointmentRow["TimeFrom"]),
                             EndTime = DateTime.Parse(appointmentRow["TimeTo"]),
                             Subject = appointmentRow["EventName"],
-                            //IsAllDay = bool.Parse(appointmentRow["AllDay"]),
+                            IsAllDay = bool.Parse(appointmentRow["AllDay"]),
                             Notes = appointmentRow["DescriptionNotes"]
                         });
                     }
