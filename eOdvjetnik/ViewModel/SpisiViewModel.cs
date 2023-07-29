@@ -159,7 +159,7 @@ namespace eOdvjetnik.ViewModel
             try
             {
                 fileItems = new ObservableCollection<FileItem>();
-                CheckCount();
+                LoadEmptyRows();
             }
             catch (Exception ex)
             {
@@ -176,6 +176,41 @@ namespace eOdvjetnik.ViewModel
         //{
 
         //}
+        public void LoadEmptyRows()
+        {
+
+            FileItems = new ObservableCollection<FileItem>();
+
+            for (int i = 0; i < 30; i++)
+            {
+                FileItems.Add(new FileItem
+                {
+                    Id = i + 1,
+                    BrojSpisa = " ",
+                    Spisicol = " ",
+                    ClientId = null,
+                    OpponentId = null,
+                    InicijaliVoditeljId = null,
+                    InicijaliDodao = " ",
+                    Filescol = " ",
+                    InicijaliDodjeljeno = " ",
+                    Created = null,
+                    AktivnoPasivno = " ",
+                    Referenca = " ",
+                    DatumPromjeneStatusa = null,
+                    Uzrok = " ",
+                    DatumKreiranjaSpisa = null,
+                    DatumIzmjeneSpisa = null,
+                    Kreirao = " ",
+                    ZadnjeUredio = " ",
+                    Jezik = " ",
+                    BrojPredmeta = " ",
+                    ClientName = " ",
+                    OpponentName = " "
+                });
+            }
+
+        }
 
         void CheckCount()
         {
