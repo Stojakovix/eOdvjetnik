@@ -4,6 +4,9 @@ using System.Diagnostics;
 using SMBLibrary;
 using SMBLibrary.Client;
 using System.Collections.ObjectModel;
+using Syncfusion.DocIO.DLS;
+using System.Collections.Generic;
+using Vanara.Extensions;
 
 namespace eOdvjetnik.Services
 {
@@ -66,7 +69,7 @@ namespace eOdvjetnik.Services
         public ObservableCollection<string> ShareFiles { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<string> ShareFolders { get; set; } = new ObservableCollection<string>();
 
-        public Dictionary<string, string>[] ListPath(string path)
+        public List<QueryDirectoryFileInformation> ListPath(string path)
         {
             Debug.WriteLine("Core.cs -> ListPath -> Usao u ListPath  ****"+ Preferences.Get(IP_nas, "") + "***");
             SMB2Client client = new SMB2Client();
@@ -75,7 +78,6 @@ namespace eOdvjetnik.Services
             Debug.WriteLine("6666666666666666666");
             Debug.WriteLine(status);
             Debug.WriteLine("6666666666666666666");
-
 
             ISMBFileStore fileStore = client.TreeConnect(path, out status);
             if (status == NTStatus.STATUS_SUCCESS)
@@ -94,28 +96,20 @@ namespace eOdvjetnik.Services
                     Debug.WriteLine(status);
                     Debug.WriteLine("8888888888888888888");
                     List<QueryDirectoryFileInformation> fileList;
+
                     status = fileStore.QueryDirectory(out fileList, directoryHandle, "*", FileInformationClass.FileDirectoryInformation);
                     status = fileStore.CloseFile(directoryHandle);
-                    foreach (SMBLibrary.FileDirectoryInformation file in fileList)
-                    {
-                        Debug.WriteLine($"Filename: {file.FileName}");
-                        Debug.WriteLine($"File Attributes: {file.FileAttributes}");
-                        Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
-                        Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
-                        Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
-                        Debug.WriteLine("----------End of Folder/file-----------");
-                        //Debug.WriteLine();
-                        ShareFiles.Add(file.FileName);
-
-
-                    }
                     status = fileStore.Disconnect();
+                    return fileList;
                 }
                 else
                 {
                     Debug.WriteLine("9999999999999999999");
                     Debug.WriteLine(status);
                     Debug.WriteLine("9999999999999999999");
+                    List<QueryDirectoryFileInformation> fileList = new List<QueryDirectoryFileInformation>();
+                    return fileList;
+
                 }
             }
             else
@@ -124,9 +118,12 @@ namespace eOdvjetnik.Services
                 Debug.WriteLine(status);
                 //DisplayAlert("Error", string(status), "OK");
                 Debug.WriteLine("10101010010101010101");
+                List<QueryDirectoryFileInformation> fileList = new List<QueryDirectoryFileInformation>();
+                return fileList;
+
             }
 
-            return fileList;
+            
 
         }
             public List<string> getRootShare()
@@ -152,7 +149,7 @@ namespace eOdvjetnik.Services
                     Debug.WriteLine("7777777777777777777");
                     foreach (string nesto in shares)
                     {
-                        Debug.WriteLine(nesto);
+                        //Debug.WriteLine(nesto);
                             
                     }
 
