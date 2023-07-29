@@ -55,11 +55,11 @@ namespace eOdvjetnik.Services
     public class SMBConnect
     {
         //Varijable za SMB preferences
-        private const string IP = "IP";
-        private const string USER = "Korisničko ime2";
-        private const string PASS = "Lozinka2";
-        private const string FOLDER_nas = "folder";
-        private const string SUBFOLDER_nas = "subfolder";
+        private const string IP_nas = "IP Adresa";
+        private const string USER_nas = "Korisničko ime";
+        private const string PASS_nas = "Lozinka";
+        private const string FOLDER_nas = "Folder";
+        private const string SUBFOLDER_nas = "SubFolder";
         private Dictionary<string, string>[] fileList;
 
         //public ObservableCollection<DocsItem> Items { get; set; } = new();
@@ -68,15 +68,16 @@ namespace eOdvjetnik.Services
 
         public Dictionary<string, string>[] ListPath(string path)
         {
+            Debug.WriteLine("Core.cs -> ListPath -> Usao u ListPath  ****"+ Preferences.Get(IP_nas, "") + "***");
             SMB2Client client = new SMB2Client();
-            bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP, "")), SMBTransportType.DirectTCPTransport);
-            NTStatus status = client.Login(String.Empty, Preferences.Get(USER, ""), Preferences.Get(PASS, ""));
+            bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP_nas, "")), SMBTransportType.DirectTCPTransport);
+            NTStatus status = client.Login(String.Empty, Preferences.Get(USER_nas, ""), Preferences.Get(PASS_nas, ""));
             Debug.WriteLine("6666666666666666666");
             Debug.WriteLine(status);
             Debug.WriteLine("6666666666666666666");
 
 
-            ISMBFileStore fileStore = client.TreeConnect(@"\\", out status);
+            ISMBFileStore fileStore = client.TreeConnect(path, out status);
             if (status == NTStatus.STATUS_SUCCESS)
             {
                 Debug.WriteLine("7777777777777777777");
@@ -131,34 +132,37 @@ namespace eOdvjetnik.Services
             public List<string> getRootShare()
         {
             //INICIRAJ SMB KONEKCIJU DA DOHVATI SVE DOKUMENTE
-        
-                SMB2Client client = new SMB2Client(); // SMB2Client can be used as well
-                NTStatus status = client.Login(String.Empty, Preferences.Get(USER, ""), Preferences.Get(PASS, ""));
-                List<string> shares = client.ListShares(out status);
-                bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP, "")), SMBTransportType.DirectTCPTransport);
-                if (isConnected)
+            Debug.WriteLine("Core.cs -> getRootShare -> INICIRAJ SMB KONEKCIJU  ****" + Preferences.Get(IP_nas, "") + "***");
+
+            SMB2Client client = new SMB2Client();
+            Debug.WriteLine("Core.cs -> getRootShare -> new SMB2Client()  *******");
+            bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP_nas, "")), SMBTransportType.DirectTCPTransport);
+
+            NTStatus status = client.Login(String.Empty, Preferences.Get(USER_nas, ""), Preferences.Get(PASS_nas, ""));
+            List<string> shares = client.ListShares(out status);
+            if (isConnected)
+            {
+
+                Debug.WriteLine("6666666666666666666");
+                Debug.WriteLine(status);
+                Debug.WriteLine("6666666666666666666");
+                if (status == NTStatus.STATUS_SUCCESS)
                 {
 
-                    Debug.WriteLine("6666666666666666666");
-                    Debug.WriteLine(status);
-                    Debug.WriteLine("6666666666666666666");
-                    if (status == NTStatus.STATUS_SUCCESS)
+                    Debug.WriteLine("7777777777777777777");
+                    foreach (string nesto in shares)
                     {
-
-                        Debug.WriteLine("7777777777777777777");
-                        foreach (string nesto in shares)
-                        {
-                            Debug.WriteLine(nesto);
+                        Debug.WriteLine(nesto);
                             
-                        }
-
-                        Debug.WriteLine("7777777777777777777");
-                        client.Logoff();
                     }
-                    client.Disconnect();
 
+                    Debug.WriteLine("7777777777777777777");
+                    client.Logoff();
                 }
-                return shares;
+                client.Disconnect();
+
+            }
+            return shares;
 
             
 
