@@ -328,6 +328,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
     public string ReceiptIBAN { get; set; }
     public string ReceiptHeaderText { get; set; }
     public string ReceiptFooterText { get; set; }
+    public string ReceiptSignature { get; set; }
+
 
     public ICommand SaveReceiptCompanyInfo { get; set; }
 
@@ -337,6 +339,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         Preferences.Set("receiptIBAN", ReceiptIBAN);
         Preferences.Set("receiptHeaderText", ReceiptHeaderText);
         Preferences.Set("receiptFooterText", ReceiptFooterText);
+        Preferences.Set("receiptSignature", ReceiptSignature);
 
     }
 

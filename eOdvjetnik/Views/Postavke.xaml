@@ -169,6 +169,8 @@
                         <RowDefinition Height="55" />
                         <RowDefinition Height="210" />
                         <RowDefinition Height="55" />
+                        <RowDefinition Height="55" />
+
                     </Grid.RowDefinitions>
 
 
@@ -192,9 +194,12 @@
                            Text="{Binding ReceiptFooterText, Mode=TwoWay}" 
                             Placeholder="{Binding ReceiptFooterText}"
                            />
-                 
-                    
-                    <Button Margin="0,15,0,0" Grid.Row="4" Grid.Column="1" Text="Spremi" BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default" 
+                    <Label Grid.Row="4" Grid.Column="0" Text="Osoba u potpisu računa:" Margin="10,15,0,0" VerticalOptions="Start" />
+                    <Entry Grid.Row="4" Grid.Column="1" TextColor="Black" Placeholder="{Binding ReceiptSignature}" Margin="5,10,0,0" 
+                           HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding ReceiptSignature, Mode=TwoWay}"
+                           />
+
+                    <Button Margin="0,15,0,0" Grid.Row="5" Grid.Column="1" Text="Spremi" BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default" 
                             HorizontalOptions="Center" MinimumWidthRequest="100" Command="{Binding SaveReceiptCompanyInfo}" />
 
                 </Grid>
