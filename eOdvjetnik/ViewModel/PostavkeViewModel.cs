@@ -1,5 +1,7 @@
 ﻿using eOdvjetnik.Model;
 using eOdvjetnik.Services;
+using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -7,6 +9,8 @@ using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 using System.Windows.Input;
+using System.Xml.Linq;
+using Utilities;
 
 namespace eOdvjetnik.ViewModel;
 
@@ -94,14 +98,64 @@ public class PostavkeViewModel : INotifyPropertyChanged
         }
     }
 
+    private string _NewEmployeeName;
+
+    public string NewEmployeeName
+    {
+        get { return _NewEmployeeName; }
+        set
+        {
+            if (_NewEmployeeName != value)
+            {
+                _NewEmployeeName = value;
+                OnPropertyChanged(nameof(NewEmployeeName));
+            }
+        }
+    }
+    private string _NewEmployeeInitials;
+
+    public string NewEmployeeInitials
+    {
+        get { return _NewEmployeeInitials; }
+        set
+        {
+            if (_NewEmployeeInitials != value)
+            {
+                _NewEmployeeInitials = value;
+                OnPropertyChanged(nameof(NewEmployeeInitials));
+            }
+        }
+    }
+    private bool _NewEmployeeEntryIncomplete;
+
+    public bool NewEmployeeEntryIncomplete
+    {
+        get { return _NewEmployeeEntryIncomplete; }
+        set
+        {
+            if (_NewEmployeeEntryIncomplete != value)
+            {
+                _NewEmployeeEntryIncomplete = value;
+                OnPropertyChanged(nameof(NewEmployeeEntryIncomplete));
+            }
+        }
+    }
 
     public ICommand GetAllCompanyDevices { get; set; }
     public ICommand GetAllCompanyEmployees { get; set; }
     public ICommand OpenZaposlenici { get; set; }
     public ICommand CheckHWIDs { get; set; }
+    public ICommand UpdateHWIDs { get; set; }
+    public ICommand OpenNewEmployee { get; set; }
+    public ICommand SaveNewEmployee { get; set; }
 
-
-
+    public async void OnNoviZaposlenikClick()
+    {
+        await Shell.Current.GoToAsync("/NoviZaposlenik");
+        Debug.WriteLine("novi zaposlenik clicked");
+        NewEmployeeName = "";
+        NewEmployeeInitials = "";
+    }
 
     private void GetJsonDeviceData()
     {
@@ -207,6 +261,20 @@ public class PostavkeViewModel : INotifyPropertyChanged
         }
 
     }
+    private bool employeeDuplicates;
+
+    public bool EmployeeDuplicates
+    {
+        get { return employeeDuplicates; }
+        set
+        {
+            if (employeeDuplicates != value)
+            {
+                employeeDuplicates = value;
+                OnPropertyChanged(nameof(EmployeeDuplicates));
+            }
+        }
+    }
     #endregion
 
     #region NAS
@@ -292,6 +360,20 @@ public class PostavkeViewModel : INotifyPropertyChanged
             }
         }
     }
+    private bool feedbackErrorVisible;
+
+    public bool FeedbackErrorVisible
+    {
+        get { return feedbackErrorVisible; }
+        set
+        {
+            if (feedbackErrorVisible != value)
+            {
+                feedbackErrorVisible = value;
+                OnPropertyChanged(nameof(FeedbackErrorVisible));
+            }
+        }
+    }
     public string company_id { get; set; }
     public string employee_id { get; set; }
     public string datum_slanja { get; set; }
@@ -325,21 +407,22 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
                 if (response.IsSuccessStatusCode)
                 {
-                    // prikaži da je uspješno
+                    FeedbackVisible = true;
 
                 }
                 else
                 {
-
+                    //
                 }
             }
         }
         catch (Exception ex)
         {
             Debug.WriteLine("Feedback error:" + ex.Message);
+            FeedbackErrorVisible = true;
         }
 
-        FeedbackVisible = true;
+
     }
 
     public static string ReplaceSpacesAndSectionBreaks(string text)
@@ -351,6 +434,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     public PostavkeViewModel()
     {
+
         #region Devic&Licence
         ZaposleniciVisible = false;
         ZaposleniciOpen = false;
@@ -360,7 +444,10 @@ public class PostavkeViewModel : INotifyPropertyChanged
         OpenZaposlenici = new Command(ZaposleniciClicked);
         SaveReceiptCompanyInfo = new Command(ReceiptCompanyInfo);
         CheckHWIDs = new Command(CheckDuplicates);
-        
+        UpdateHWIDs = new Command(UpdateEmployeeHWID);
+        OpenNewEmployee = new Command(OnNoviZaposlenikClick);
+        SaveNewEmployee = new Command(AddNewEmployee);
+
         ReceiptPDVamount = Preferences.Get("receiptPDVamount", "");
         ReceiptIBAN = Preferences.Get("receiptIBAN", "");
         ReceiptHeaderText = Preferences.Get("receiptHeaderText", "");
@@ -370,19 +457,21 @@ public class PostavkeViewModel : INotifyPropertyChanged
         LicenceType = Preferences.Get("licence_type", "");
         DateTimeString = Preferences.Get("expire_date", "");
         Activation_code = Preferences.Get("activation_code", "");
-        ParseDate();
         try
         {
+            ParseDate();
             FetchCompanyDevices();
             employeeItem = new ObservableCollection<EmployeeItem>();
             GetJsonDeviceData();
             HWID64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(HWID));
+            GetEmployees();
 
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
         }
+
         #endregion
         #region NAS komande
         SaveCommandNAS = new Command(OnSaveClickedNas);
@@ -416,6 +505,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
         #region Feedback
         FeedbackVisible = false;
+        FeedbackErrorVisible = false;
         SendFeedback = new Command(OnFeedbackClicked);
         #endregion
 
@@ -637,11 +727,11 @@ public class PostavkeViewModel : INotifyPropertyChanged
     }
 
 
-    private void CheckDuplicates()
+    public void CheckDuplicates()
     {
         ZaposleniciVisible = false;
         ZaposleniciOpen = false;
-
+        EmployeeDuplicates = false;
 
         if (EmployeeItems == null || EmployeeItems.Count <= 1)
             return;
@@ -664,12 +754,14 @@ public class PostavkeViewModel : INotifyPropertyChanged
             }
             ZaposleniciVisible = true;
             ZaposleniciOpen = true;
+            EmployeeDuplicates = true;
 
         }
         else
         {
             ZaposleniciVisible = false;
-            ZaposleniciOpen = true;
+            ZaposleniciOpen = false;
+            EmployeeDuplicates = false;
 
             //Debug.WriteLine("Nema duplih HWID.");
         }
@@ -677,7 +769,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         Debug.WriteLine(GetDuplicateEmployeesString());
     }
 
-    private string GetDuplicateEmployeesString()
+    public string GetDuplicateEmployeesString()
     {
         if (EmployeeItems == null || EmployeeItems.Count <= 1)
             return string.Empty;
@@ -714,4 +806,96 @@ public class PostavkeViewModel : INotifyPropertyChanged
             return "Nema duplih HWID.";
         }
     }
+
+    public void UpdateEmployeeHWID()
+    {
+        try
+        {
+            CheckDuplicates();
+
+            if (EmployeeDuplicates == false)
+            {
+                try
+                {
+                    ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+                    string disableForeignKeyChecksQuery = "SET FOREIGN_KEY_CHECKS = 0";
+                    externalSQLConnect.sqlQuery(disableForeignKeyChecksQuery);
+
+                    foreach (EmployeeItem item in EmployeeItems)
+                    {
+                        string UpdateQuery = $"UPDATE employees SET hwid = '{item.EmployeeHWID}' WHERE id = {item.Id}";
+                        externalSQLConnect.sqlQuery(UpdateQuery);
+                        Debug.WriteLine("Update contact query: " + UpdateQuery);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+    }
+
+    public void EntryIncompleteCheck()
+    {
+        if (NewEmployeeName == "")
+        {
+            NewEmployeeEntryIncomplete = true;
+        }
+        else if (NewEmployeeInitials == "")
+        {
+            NewEmployeeEntryIncomplete = true;
+
+        }
+        else
+        {
+            NewEmployeeEntryIncomplete = false;
+
+        }
+
+
+    }
+    public async void AddNewEmployee()
+    {
+        try
+        {
+            EntryIncompleteCheck();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+
+        if (NewEmployeeEntryIncomplete == false)
+        {
+            try
+            {
+
+                ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+                string disableForeignKeyChecksQuery = "SET FOREIGN_KEY_CHECKS = 0";
+                externalSQLConnect.sqlQuery(disableForeignKeyChecksQuery);
+
+                string query = $"INSERT INTO employees (ime, inicijali) " +
+                               $"VALUES ('{NewEmployeeName}', '{NewEmployeeInitials}')";
+                externalSQLConnect.sqlQuery(query);
+
+                await Shell.Current.GoToAsync("/Zaposlenici");
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+        GetEmployees();
+
+    }
+
+    
+   
+
 }

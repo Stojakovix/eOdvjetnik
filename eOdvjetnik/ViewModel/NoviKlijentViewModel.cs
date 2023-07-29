@@ -66,10 +66,25 @@ namespace eOdvjetnik.ViewModel
             UpdateClientData = new Command(OnUpdateCLick);
             DeleteClientData = new Command(OnDeleteCLick);
 
+            ClientHasNoName = false;
 
         }
 
-    
+        private bool clientHasNoName;
+
+        public bool ClientHasNoName
+        {
+            get { return clientHasNoName; }
+            set
+            {
+                if (clientHasNoName != value)
+                {
+                    clientHasNoName = value;
+                    OnPropertyChanged(nameof(ClientHasNoName));
+                }
+            }
+        }
+
         #region Varijable za klijente
         private string id;
         public string Id
@@ -258,47 +273,50 @@ namespace eOdvjetnik.ViewModel
 
         private void AddKlijentToRemoteServer(ContactItem contact)
         {
-            try
-            {
-
-
-                #region VarijableZaServer
-                string name = Name ?? string.Empty;
-                string oib = Oib ?? string.Empty;
-                DateTime datum_rodjenja = DatumRodjenja;
-                string adresa = Adresa ?? string.Empty;
-                string ostalo = Ostalo ?? string.Empty;
-                string boraviste = Boraviste ?? string.Empty;
-                string telefon = Telefon ?? string.Empty;
-                string fax = Fax ?? string.Empty;
-                string mobitel = Mobitel ?? string.Empty;
-                string email = Email ?? string.Empty;
-                string drzava = Drzava ?? string.Empty;
-
-                if (Pravna == true)
+            
+                try
                 {
-                    PravnaString = "1";
+
+
+                    #region VarijableZaServer
+                    string name = Name ?? string.Empty;
+                    string oib = Oib ?? string.Empty;
+                    DateTime datum_rodjenja = DatumRodjenja;
+                    string adresa = Adresa ?? string.Empty;
+                    string ostalo = Ostalo ?? string.Empty;
+                    string boraviste = Boraviste ?? string.Empty;
+                    string telefon = Telefon ?? string.Empty;
+                    string fax = Fax ?? string.Empty;
+                    string mobitel = Mobitel ?? string.Empty;
+                    string email = Email ?? string.Empty;
+                    string drzava = Drzava ?? string.Empty;
+
+                    if (Pravna == true)
+                    {
+                        PravnaString = "1";
+                    }
+                    else
+                    {
+                        PravnaString = "0";
+                    }
+
+                    #endregion
+                    ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+                    string disableForeignKeyChecksQuery = "SET FOREIGN_KEY_CHECKS = 0";
+                    externalSQLConnect.sqlQuery(disableForeignKeyChecksQuery);
+
+
+                    string query = $"INSERT INTO contacts (ime, OIB, datum_rodenja, adresa, ostalo, boraviste, telefon, fax, mobitel, email, drzava, pravna) " +
+                    $"VALUES ('{name}', '{oib}', '{datum_rodjenja.ToString("yyyy-MM-dd")}', '{adresa}' , '{ostalo}' , '{boraviste}' , '{telefon}' , '{fax}' , '{mobitel}' , '{email}' , '{drzava}' , '{PravnaString}')";
+                    externalSQLConnect.sqlQuery(query);
                 }
-                else
+
+                catch (Exception ex)
                 {
-                    PravnaString = "0";
+                    Debug.WriteLine(ex.Message);
                 }
-
-                #endregion
-                ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
-                string disableForeignKeyChecksQuery = "SET FOREIGN_KEY_CHECKS = 0";
-                externalSQLConnect.sqlQuery(disableForeignKeyChecksQuery);
-
-
-                string query = $"INSERT INTO contacts (ime, OIB, datum_rodenja, adresa, ostalo, boraviste, telefon, fax, mobitel, email, drzava, pravna) " +
-                $"VALUES ('{name}', '{oib}', '{datum_rodjenja.ToString("yyyy-MM-dd")}', '{adresa}' , '{ostalo}' , '{boraviste}' , '{telefon}' , '{fax}' , '{mobitel}' , '{email}' , '{drzava}' , '{PravnaString}')";
-                externalSQLConnect.sqlQuery(query);
-            }
-
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+           
+           
 
 
 
@@ -308,10 +326,20 @@ namespace eOdvjetnik.ViewModel
 
         public async void OnButtonCLick()
         {
-            AddKlijentToRemoteServer(contactItem);
-            await Shell.Current.GoToAsync("///Klijenti");
-            NewContactAdded();
-            //Debug.WriteLine("Klijent dodan" + klijent.Ime);
+            ClientHasNoName = false;
+
+            if (Name != null)
+            {
+                AddKlijentToRemoteServer(contactItem);
+                await Shell.Current.GoToAsync("///Klijenti");
+                NewContactAdded();
+                //Debug.WriteLine("Klijent dodan" + klijent.Ime);
+            }
+            else
+            {
+                ClientHasNoName = true;
+
+            }
 
         }
 
@@ -358,6 +386,7 @@ namespace eOdvjetnik.ViewModel
 
         private void UpdateContactOnRemoteServer(ContactItem contact)
         {
+            
             try
             {
 
@@ -413,17 +442,26 @@ namespace eOdvjetnik.ViewModel
             {
                 Debug.WriteLine(ex.Message);
             }
-
-
+          
 
         }
 
         public async void OnUpdateCLick()
         {
-            UpdateContactOnRemoteServer(contactItem);
-            await Shell.Current.GoToAsync("///Klijenti");
-            ContactEditedMessage();
-            Debug.WriteLine("Klijent je ažuriran: " + ClientName);
+            ClientHasNoName = false;
+            if (ClientName != null)
+            {
+                UpdateContactOnRemoteServer(contactItem);
+                await Shell.Current.GoToAsync("///Klijenti");
+                ContactEditedMessage();
+                Debug.WriteLine("Klijent je ažuriran: " + ClientName);
+            }
+            else
+            {
+                ClientHasNoName = true;
+
+            }
+
 
         }
         #region Property Changed

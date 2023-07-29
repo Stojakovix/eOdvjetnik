@@ -150,16 +150,16 @@ public partial class Racun : ContentPage
         //Gets the image stream.
         Stream imageStream = assembly.GetManifestResourceStream(resourcePath);
         IWPicture picture = paragraph.AppendPicture(imageStream);
-        picture.TextWrappingStyle = TextWrappingStyle.InFrontOfText;
+        picture.TextWrappingStyle = TextWrappingStyle.Inline;
         picture.HorizontalAlignment = ShapeHorizontalAlignment.Center;
         picture.VerticalOrigin = VerticalOrigin.Margin;
-        picture.VerticalPosition = -120;
+        //picture.VerticalPosition = -120;
         // 1 cm = 28.35f
         picture.Width = 53.8f;
         picture.Height = 80.8f;
         paragraph.ApplyStyle("Heading 1");
         paragraph.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
-        WTextRange textRange = paragraph.AppendText("\n\n" + ReceiptHeaderText) as WTextRange;
+        WTextRange textRange = paragraph.AppendText("\n" + ReceiptHeaderText) as WTextRange;
         textRange.CharacterFormat.FontSize = 12f;
         textRange.CharacterFormat.FontName = "Calibri";
         textRange.CharacterFormat.TextColor = Syncfusion.Drawing.Color.Black;

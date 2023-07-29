@@ -72,6 +72,9 @@
                 <Label Margin="0,10,0,0"  TextColor="Black" Text="Uspješno poslano" FontAttributes="Bold" HorizontalOptions="Center"
                        IsVisible="{Binding FeedbackVisible}"
                        />
+                <Label Margin="0,10,0,0"  TextColor="Black" Text="Povezivanje nije uspjelo" FontAttributes="Bold" HorizontalOptions="Center"
+                       IsVisible="{Binding FeedbackErrorVisible}"
+                       />
 
 
             </StackLayout>
