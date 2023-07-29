@@ -187,7 +187,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
                     {
 
                         int id;
-                        DateTime datum_rodenja;
+                        
 
                         int.TryParse(filesRow["id"], out id);
 
@@ -490,7 +490,6 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
 
         Contacts = new ObservableCollection<ContactItem>();
-        GenerateFiles();
         ContactDeleted = false;
 
         try
@@ -525,10 +524,46 @@ public class KlijentiViewModel : INotifyPropertyChanged
         timer.Interval = TimeSpan.FromMilliseconds(200);
         timer.Tick += (s, e) => Refresh();
         timer.Start();
+        Tester = 1;
+        EmptyContactRows();
+        Test();
 
     }
 
-  
+    public void EmptyContactRows()
+    {
+    
+        Contacts = new ObservableCollection<ContactItem>();
+
+        for (int i = 0; i < 30; i++)
+        {
+            Contacts.Add(new ContactItem
+            {
+                Id = i + 1,
+                Ime = " ",
+                OIB = " ",
+                Datum_rodenja = " ",
+                Adresa = " ",
+                Boraviste = " ",
+                Telefon = " ",
+                Fax = " ",
+                Mobitel = " ",
+                Email = " ",
+                Ostalo = " ",
+                Drzava = " ",
+                Pravna = " "
+            });
+        }
+    }
+
+    public int Tester { get; set; } 
+    public void Test()
+    {
+        if (Tester == 5)
+        {
+            GenerateFiles();
+         }
+    }
     public async void OnButtonClick()
     {
         await Shell.Current.GoToAsync("/NoviKlijent");
@@ -559,7 +594,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-         
+            Tester = Tester + 1;
+            Test();
             try
             {
                 ClientID = Preferences.Get("SelectedID", "");
@@ -575,10 +611,10 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 ClientCountry = Preferences.Get("SelectedCountry", "");
                 ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
                 ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
-             
+                
 
                 ContactDeletedText = Preferences.Get("ContactDeleted", "");
-                ContactEditedText = "Uspješno ste izmijenili kontakt: " + ClientName;
+                ContactEditedText = "Uspjeï¿½no ste izmijenili kontakt: " + ClientName;
             }
             catch (Exception ex)
             {
