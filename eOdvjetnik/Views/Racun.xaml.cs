@@ -16,7 +16,7 @@ public partial class Racun : ContentPage
 {
     public ObservableCollection<ReceiptItem> ReceiptItems = new ObservableCollection<ReceiptItem>();
 
-    private NaplataViewModel ViewModel;
+    
 
     public event EventHandler onCreateDocument;
 

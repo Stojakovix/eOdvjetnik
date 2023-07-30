@@ -8,7 +8,7 @@ namespace eOdvjetnik.Data
 {
     public class DeviceIdDatabase
     {
-        SQLiteAsyncConnection Database;
+        
         private SQLiteConnection conn;
         
         string _dbPath;

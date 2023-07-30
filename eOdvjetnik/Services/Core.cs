@@ -63,7 +63,7 @@ namespace eOdvjetnik.Services
         private const string PASS_nas = "Lozinka";
         private const string FOLDER_nas = "Folder";
         private const string SUBFOLDER_nas = "SubFolder";
-        private Dictionary<string, string>[] fileList;
+        
 
         //public ObservableCollection<DocsItem> Items { get; set; } = new();
         public ObservableCollection<string> ShareFiles { get; set; } = new ObservableCollection<string>();

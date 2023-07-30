@@ -326,7 +326,7 @@ namespace eOdvjetnik.ViewModel
             DisableMenu();
             if (disableMenu == false)
             {
-                await Shell.Current.GoToAsync("/SpiDok");
+                await Shell.Current.GoToAsync("///SpiDok");
                 Debug.WriteLine("KLIKNO SpiDok");
             }
         }

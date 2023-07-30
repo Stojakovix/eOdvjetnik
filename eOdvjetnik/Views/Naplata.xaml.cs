@@ -17,7 +17,7 @@ public partial class Naplata : ContentPage
 {
     public ObservableCollection<ReceiptItem> ReceiptItems  = new ObservableCollection<ReceiptItem>();
 
-    public event EventHandler onCreateDocument;
+    
 
     public string CompanyName { get; set; }
     public string CompanyOIB { get; set; }

@@ -13,7 +13,7 @@ namespace eOdvjetnik.ViewModel
 {
     public class DocsViewModel : INotifyPropertyChanged
     {
-        DocsDatabase database;
+        
         SMBConnect sMBConnect = new SMBConnect();
 
         private ObservableCollection<RootShare> rootShares;
@@ -50,7 +50,7 @@ namespace eOdvjetnik.ViewModel
             Items = new ObservableCollection<DocsItem>();
             RootShares = new ObservableCollection<RootShare>();
             ConnectAndFetchDocumentsAsync();
-            SMBConnect sMBConnect;
+            
 
         }
         public void GetDocuments()

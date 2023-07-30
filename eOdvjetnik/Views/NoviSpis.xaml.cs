@@ -5,7 +5,7 @@ using eOdvjetnik.Model;
 
 public partial class NoviSpis : ContentPage
 {
-	FileItem FileItem;
+	
     
     public NoviSpis()
 	{

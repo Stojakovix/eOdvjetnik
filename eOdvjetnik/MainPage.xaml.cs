@@ -19,7 +19,7 @@ public partial class MainPage : ContentPage
     //int count = 0;
     private const string url = "https://cc.eodvjetnik.hr/token.json?token=";
     private HttpClient _Client = new HttpClient();
-    DeviceIdDatabase database;
+    
 
     public string activation_code { get; set; }
     public string licence_type { get; set; }

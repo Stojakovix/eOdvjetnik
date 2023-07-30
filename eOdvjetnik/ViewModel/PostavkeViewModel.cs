@@ -269,7 +269,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         {
             try
             {
-                await Shell.Current.GoToAsync("/Zaposlenici");
+                await Shell.Current.GoToAsync("///Zaposlenici");
                 Debug.WriteLine("Zaposlenici clicked");
 
             }

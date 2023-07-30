@@ -10,7 +10,7 @@ namespace eOdvjetnik.ViewModel
     {
 
         //DateTime
-        private Timer timer;
+        
         private string currenttime { get; set; }
         public string datetime
         {
