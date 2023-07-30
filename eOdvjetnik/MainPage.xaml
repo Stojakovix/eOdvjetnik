@@ -55,37 +55,7 @@ padding-right: 30;
 
     </ContentPage.ToolbarItems>
 
-    <ContentPage.MenuBarItems >
-
-        <MenuBarItem Text="Početna">
-            
-        </MenuBarItem>
-
-        <MenuBarItem Text="Ročišnik"  >
-           
-        </MenuBarItem>
-
-        <MenuBarItem Text="Upisnik"  >       
-        </MenuBarItem>
-
-  
-
-        <MenuBarItem Text="Tarifa">
-          
-        </MenuBarItem>
-
-        <MenuBarItem Text="Dokumenti"  >       
-        </MenuBarItem>
-
-        <MenuBarItem Text="Kontakti"  >       
-        </MenuBarItem>
-
-        <MenuBarItem Text="Korisnička podrška"  >       
-        </MenuBarItem>
-
-        <MenuBarItem Text="Postavke"  >       
-        </MenuBarItem>
-    </ContentPage.MenuBarItems>
+    
     
     <Grid>
 
