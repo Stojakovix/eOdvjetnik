@@ -120,6 +120,7 @@
 	  <None Remove="Resources\Images\logoimg.svg" />
 	  <None Remove="Resources\Images\logotext.svg" />
 	  <None Remove="Resources\Images\main_pozadina.jpg" />
+	  <None Remove="Resources\Images\main_pozadina.png" />
 	  <None Remove="Settings.bundle\" />
 	  <None Remove="Settings.bundle\EmptyTextFile.txt" />
 	</ItemGroup>
