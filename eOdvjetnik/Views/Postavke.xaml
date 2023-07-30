@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.Postavke"
@@ -10,7 +10,16 @@
     <ContentPage.BindingContext>
         <local:PostavkeViewModel x:Name="viewmodel"/>
     </ContentPage.BindingContext>
-
+        <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Početna" Command="{Binding PocetnaClick}" />
+        <ToolbarItem Text="Ročišnik" Command="{Binding KalendarClick}" />
+        <ToolbarItem Text="Upisnik" Command="{Binding SpisiClick}" />
+        <ToolbarItem Text="Tarifa" Command="{Binding TarifaClick}" />
+        <ToolbarItem Text="Dokumenti" Command="{Binding DokumentiClick}"/>
+        <ToolbarItem Text="Kontakti" Command="{Binding KontaktiClick}" />
+        <ToolbarItem Text="Korisnička Podrška" Command="{Binding KorisnickaClick}" />
+        <ToolbarItem Text="Postavke" Command="{Binding PostavkeClick}" />
+    </ContentPage.ToolbarItems>
     <VerticalStackLayout >
         <Grid Margin="10,10,10,10" RowSpacing="5" ColumnSpacing="5">
 

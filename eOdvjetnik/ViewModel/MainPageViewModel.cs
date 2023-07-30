@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 using Timer = System.Timers.Timer;
+using eOdvjetnik.Services;
 
 
 namespace eOdvjetnik.ViewModel
@@ -10,6 +11,8 @@ namespace eOdvjetnik.ViewModel
     {
 
         //DateTime
+        private Navigacija navigacija;
+
         
         private string currenttime { get; set; }
         public string datetime
@@ -46,12 +49,16 @@ namespace eOdvjetnik.ViewModel
 
         public MainPageViewModel()
         {
+
+            navigacija = new Navigacija();
             Version = $"Verzija {AppInfo.VersionString}";
             Activation_code = Preferences.Get("activation_code", "");
             licence_type = Preferences.Get("licence_type", "");
             expireDate = Preferences.Get("expire_date", "");
             licenceStatus = Preferences.Get("licence_active", "");
             current_date = DateTime.Now.Date;
+
+
         
             RefreshTime();
 
@@ -71,6 +78,15 @@ namespace eOdvjetnik.ViewModel
 
             }
         }
+        public ICommand PocetnaClick => navigacija.PocetnaClick;
+        public ICommand KalendarClick => navigacija.KalendarClick;
+        public ICommand SpisiClick => navigacija.SpisiClick;
+        public ICommand TarifaClick => navigacija.TarifaClick;
+        public ICommand DokumentiClick => navigacija.DokumentiClick;
+        public ICommand KontaktiClick => navigacija.KontaktiClick;
+        public ICommand KorisnickaClick => navigacija.KorisnickaPodrskaClick;
+        public ICommand PostavkeClick => navigacija.PostavkeClick;
+
 
         public void ParseDate()
         {

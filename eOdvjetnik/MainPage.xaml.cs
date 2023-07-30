@@ -6,6 +6,7 @@ using eOdvjetnik.ViewModel;
 using System.Globalization;
 using System.Text.Json;
 using eOdvjetnik.Models;
+using System.Windows.Input;
 
 namespace eOdvjetnik;
 
@@ -26,6 +27,15 @@ public partial class MainPage : ContentPage
     public string expire_date { get; set; }
 
     //KRAJ NAS
+
+
+    private void RočišnikMenuItem_Clicked(object sender, EventArgs e)
+    {
+        Shell.Current.GoToAsync("///Kalendar");
+
+    }
+
+
 
     public async void ActivationLoop()
     {

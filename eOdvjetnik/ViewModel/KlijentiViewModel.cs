@@ -15,7 +15,13 @@ namespace eOdvjetnik.ViewModel;
 
 public class KlijentiViewModel : INotifyPropertyChanged
 {
+    private Navigacija navigacija;
 
+    private void RočišnikMenuItem_Clicked(object sender, EventArgs e)
+    {
+        Debug.WriteLine("MainPageViewModel - > ActivationLoop");
+
+    }
     ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
 
     private ObservableCollection<ContactItem> contacts;
@@ -484,6 +490,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
     public KlijentiViewModel()
     {
+        navigacija = new Navigacija();
         WeakReferenceMessenger.Default.Register<RefreshContacts>(this, NewContactAddedReceived);
         WeakReferenceMessenger.Default.Register<ContactDeleted>(this, ContactDeletedReceived);
         WeakReferenceMessenger.Default.Register<ContactEdited>(this, ContactEditedReceived);
@@ -529,7 +536,14 @@ public class KlijentiViewModel : INotifyPropertyChanged
         Test();
 
     }
-
+    public ICommand PocetnaClick => navigacija.PocetnaClick;
+    public ICommand KalendarClick => navigacija.KalendarClick;
+    public ICommand SpisiClick => navigacija.SpisiClick;
+    public ICommand TarifaClick => navigacija.TarifaClick;
+    public ICommand DokumentiClick => navigacija.DokumentiClick;
+    public ICommand KontaktiClick => navigacija.KontaktiClick;
+    public ICommand KorisnickaClick => navigacija.KorisnickaPodrskaClick;
+    public ICommand PostavkeClick => navigacija.PostavkeClick;
     public void EmptyContactRows()
     {
     

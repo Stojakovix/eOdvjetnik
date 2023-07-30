@@ -18,6 +18,8 @@ namespace eOdvjetnik.ViewModel
 {
     public class NoviKlijentViewModel : INotifyPropertyChanged
     {
+        private Navigacija navigacija;
+
         ContactItem contactItem;
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
 
@@ -30,6 +32,7 @@ namespace eOdvjetnik.ViewModel
 
             try
             {
+                navigacija = new Navigacija();
                 ClientID = Preferences.Get("SelectedID", "");
                 ClientName = Preferences.Get("SelectedName", "");
                 ClientOIB = Preferences.Get("SelectedOIB", "");
@@ -68,7 +71,14 @@ namespace eOdvjetnik.ViewModel
             ClientHasNoName = false;
 
         }
-
+        public ICommand PocetnaClick => navigacija.PocetnaClick;
+        public ICommand KalendarClick => navigacija.KalendarClick;
+        public ICommand SpisiClick => navigacija.SpisiClick;
+        public ICommand TarifaClick => navigacija.TarifaClick;
+        public ICommand DokumentiClick => navigacija.DokumentiClick;
+        public ICommand KontaktiClick => navigacija.KontaktiClick;
+        public ICommand KorisnickaClick => navigacija.KorisnickaPodrskaClick;
+        public ICommand PostavkeClick => navigacija.PostavkeClick;
         private bool clientHasNoName;
 
         public bool ClientHasNoName

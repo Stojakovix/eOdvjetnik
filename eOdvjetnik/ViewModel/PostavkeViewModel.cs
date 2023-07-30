@@ -17,6 +17,8 @@ namespace eOdvjetnik.ViewModel;
 public class PostavkeViewModel : INotifyPropertyChanged
 {
 
+    private Navigacija navigacija;
+
     #region Zaposlenici
 
     ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
@@ -150,6 +152,14 @@ public class PostavkeViewModel : INotifyPropertyChanged
     public ICommand SaveNewEmployee { get; set; }
     public ICommand BackButtonCommand { get; set; }
 
+    public ICommand PocetnaClick => navigacija.PocetnaClick;
+    public ICommand KalendarClick => navigacija.KalendarClick;
+    public ICommand SpisiClick => navigacija.SpisiClick;
+    public ICommand TarifaClick => navigacija.TarifaClick;
+    public ICommand DokumentiClick => navigacija.DokumentiClick;
+    public ICommand KontaktiClick => navigacija.KontaktiClick;
+    public ICommand KorisnickaClick => navigacija.KorisnickaPodrskaClick;
+    public ICommand PostavkeClick => navigacija.PostavkeClick;
 
     public async void OnNoviZaposlenikClick()
     {
@@ -458,6 +468,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     public PostavkeViewModel()
     {
+
+        navigacija = new Navigacija();
 
         #region Devic&Licence
         ZaposleniciVisible = false;

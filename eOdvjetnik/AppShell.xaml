@@ -6,7 +6,7 @@
        xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
        xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"  
        Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
-       Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Android=True, iOS=True}"
+       Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True , Android=True, iOS=True}"
 
        >
 
@@ -17,8 +17,8 @@
 
 
     <Shell.TitleView>
-        <HorizontalStackLayout  Spacing="-10">
-            <HorizontalStackLayout.Margin>
+        <HorizontalStackLayout  Spacing="-10"   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+            <HorizontalStackLayout.Margin   >
                 <OnPlatform x:TypeArguments="Thickness" Default="0,0,0,0">
                     <On Platform="MacCatalyst" Value="0,0,0,-50" />
                 </OnPlatform>
@@ -27,7 +27,7 @@
 
 
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}" 
                     Grid.Column="0" Text="Početna" 
                     Command="{Binding MainClickCommand}" 
                     x:Name="PočetnaButton"
@@ -38,7 +38,7 @@
                     BorderWidth="0"                    
                     />
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}" 
                     Grid.Column="1" Text="Ročišnik" 
                     Command="{Binding KalendarClickCommand}" 
                     x:Name="KalendarButton" 
@@ -48,7 +48,7 @@
                     TextColor="White"
                     />
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}" 
                     Grid.Column="5" Text="Upisnik" 
                     Command="{Binding SpisiClickCommand}" 
                     x:Name="SpisiButton"
@@ -59,7 +59,7 @@
                     TextColor="White"
                     />
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}" 
                     Grid.Column="4" Text="Tarifa" 
                     Command="{Binding NaplataClickCommand}" 
                     x:Name="NaplataButton"
@@ -69,7 +69,7 @@
                     TextColor="White"
                     />
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}" 
                     Grid.Column="2" Text="Dokumenti" 
                     Command="{Binding DokumentiClickCommand}" 
                     x:Name="DokumentiButton"
@@ -79,7 +79,7 @@
                     TextColor="White"
                     />
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}" 
                     Grid.Column="3" Text="Kontakti" 
                     Command="{Binding KlijentiClickCommand}" 
                     x:Name="KlijentiButton"
@@ -92,7 +92,7 @@
 
             <Button Grid.Column="6" 
                     Text="Korisnička Podrška" 
-                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
+                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}"  
                     BackgroundColor="Transparent" 
                     BorderWidth="0" 
                     Command="{Binding OnSupportClickCommand}"
@@ -103,7 +103,7 @@
             <Button Grid.Column="9" 
                     Text="Postavke" 
                     BackgroundColor="Transparent"
-                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
+                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}"  
                     BorderWidth="0"
                     Command="{Binding PostavkeClickCommand}" 
                     FontSize="Default"
@@ -112,7 +112,7 @@
             <Button Grid.Column="10" 
                     Text="SpiDok" 
                     BackgroundColor="Transparent"
-                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
+                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}"  
                     BorderWidth="0"
                     Command="{Binding SpiDokClickCommand}" 
                     FontSize="Default"

@@ -7,8 +7,12 @@ using eOdvjetnik.Services;
 namespace eOdvjetnik.Views;
 
 public partial class Kalendar : ContentPage
-{  
-    
+{
+    private void RočišnikMenuItem_Clicked(object sender, EventArgs e)
+    {
+        Debug.WriteLine("MainPageViewModel - > ActivationLoop");
+
+    }
     public Kalendar()
     {
         

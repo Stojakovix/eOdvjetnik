@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using eOdvjetnik.Data;
 using eOdvjetnik.Models;
 using eOdvjetnik.Services;
+using System.Windows.Input;
 
 
 
@@ -16,6 +17,8 @@ namespace eOdvjetnik.ViewModel
 {
     public class SpiDokViewModel : INotifyPropertyChanged
     {
+        private Navigacija navigacija;
+
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
 
         private ObservableCollection<SpiDokItem> spiDokItems;
@@ -36,6 +39,7 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
+                navigacija = new Navigacija();
                 spiDokItems = new ObservableCollection<SpiDokItem>();
                 GenerateFiles();
             }
@@ -44,7 +48,14 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message);
             }
         }
-
+        public ICommand PocetnaClick => navigacija.PocetnaClick;
+        public ICommand KalendarClick => navigacija.KalendarClick;
+        public ICommand SpisiClick => navigacija.SpisiClick;
+        public ICommand TarifaClick => navigacija.TarifaClick;
+        public ICommand DokumentiClick => navigacija.DokumentiClick;
+        public ICommand KontaktiClick => navigacija.KontaktiClick;
+        public ICommand KorisnickaClick => navigacija.KorisnickaPodrskaClick;
+        public ICommand PostavkeClick => navigacija.PostavkeClick;
         public void GenerateFiles()
         {
             try

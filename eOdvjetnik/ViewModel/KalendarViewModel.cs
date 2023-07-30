@@ -4,12 +4,13 @@ using System.ComponentModel;
 using eOdvjetnik.Models;
 using System.Diagnostics;
 using eOdvjetnik.Services;
-
+using System.Windows.Input;
 
 namespace eOdvjetnik.ViewModel
 {
     public class KalendarViewModel : INotifyPropertyChanged
     {
+        private Navigacija navigacija;
         private ObservableCollection<SchedulerAppointment> appointments;
 
 
@@ -17,6 +18,8 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
+                navigacija = new Navigacija();
+
                 Appointments = new ObservableCollection<SchedulerAppointment>(); // Initialize the Appointments collection
                 var hardware_id = Preferences.Get("key", "default_value");
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
@@ -55,6 +58,15 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message + "in kalendarViewModel init");
             }
         }
+        public ICommand PocetnaClick => navigacija.PocetnaClick;
+        public ICommand KalendarClick => navigacija.KalendarClick;
+        public ICommand SpisiClick => navigacija.SpisiClick;
+        public ICommand TarifaClick => navigacija.TarifaClick;
+        public ICommand DokumentiClick => navigacija.DokumentiClick;
+        public ICommand KontaktiClick => navigacija.KontaktiClick;
+        public ICommand KorisnickaClick => navigacija.KorisnickaPodrskaClick;
+        public ICommand PostavkeClick => navigacija.PostavkeClick;
+
         /// <summary>
         /// Property changed event handler
         /// </summary>

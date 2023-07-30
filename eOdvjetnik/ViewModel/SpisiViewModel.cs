@@ -10,6 +10,8 @@ namespace eOdvjetnik.ViewModel
 {
     public class SpisiViewModel : INotifyPropertyChanged
     {
+        private Navigacija navigacija;
+
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
 
         public ICommand OnDodajClick { get; set; }
@@ -153,6 +155,7 @@ namespace eOdvjetnik.ViewModel
 
         public SpisiViewModel()
         {
+            navigacija = new Navigacija();
             OnResetClick = new Command(ResetListView);
             OnDodajClick = new Command(onDodajCLick);
             // ItemSelected = new Command(OnItemSelected);
@@ -171,7 +174,14 @@ namespace eOdvjetnik.ViewModel
             timer.Tick += (s, e) => CheckCount();
             timer.Start();
         }
-
+        public ICommand PocetnaClick => navigacija.PocetnaClick;
+        public ICommand KalendarClick => navigacija.KalendarClick;
+        public ICommand SpisiClick => navigacija.SpisiClick;
+        public ICommand TarifaClick => navigacija.TarifaClick;
+        public ICommand DokumentiClick => navigacija.DokumentiClick;
+        public ICommand KontaktiClick => navigacija.KontaktiClick;
+        public ICommand KorisnickaClick => navigacija.KorisnickaPodrskaClick;
+        public ICommand PostavkeClick => navigacija.PostavkeClick;
         //private void OnItemSelected(FileItem selectedItem)
         //{
 

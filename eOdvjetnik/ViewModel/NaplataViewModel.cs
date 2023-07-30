@@ -13,7 +13,8 @@ namespace eOdvjetnik.ViewModel
 {
     public class NaplataViewModel : INotifyPropertyChanged
     {
-     
+        private Navigacija navigacija;
+
         #region Pretraga tarifa
 
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
@@ -359,7 +360,7 @@ namespace eOdvjetnik.ViewModel
 
         public NaplataViewModel()
         {
-
+            navigacija = new Navigacija();
             OnReciptClickCommand = new Command(OnReceiptClick);
             NewReceipt = new Command(DeleteRecipt);
             AddItemCommand = new Command(AddItem);
@@ -390,7 +391,14 @@ namespace eOdvjetnik.ViewModel
             timer.Start();
         }
 
-     
+        public ICommand PocetnaClick => navigacija.PocetnaClick;
+        public ICommand KalendarClick => navigacija.KalendarClick;
+        public ICommand SpisiClick => navigacija.SpisiClick;
+        public ICommand TarifaClick => navigacija.TarifaClick;
+        public ICommand DokumentiClick => navigacija.DokumentiClick;
+        public ICommand KontaktiClick => navigacija.KontaktiClick;
+        public ICommand KorisnickaClick => navigacija.KorisnickaPodrskaClick;
+        public ICommand PostavkeClick => navigacija.PostavkeClick;
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)

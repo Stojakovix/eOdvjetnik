@@ -13,7 +13,26 @@
     <ContentPage.BindingContext>
         <local:KalendarViewModel x:Name="viewmodel"/>
     </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Početna" Command="{Binding PocetnaClick}" />
+        <ToolbarItem Text="Ročišnik" Command="{Binding KalendarClick}" />
+        <ToolbarItem Text="Upisnik" Command="{Binding SpisiClick}" />
+        <ToolbarItem Text="Tarifa" Command="{Binding TarifaClick}" />
+        <ToolbarItem Text="Dokumenti" Command="{Binding DokumentiClick}"/>
+        <ToolbarItem Text="Kontakti" Command="{Binding KontaktiClick}" />
+        <ToolbarItem Text="Korisnička Podrška" Command="{Binding KorisnickaClick}" />
+        <ToolbarItem Text="Postavke" Command="{Binding PostavkeClick}" />
 
+    </ContentPage.ToolbarItems>
+
+
+
+        <!--<ContentPage.ToolbarItems>
+        <ToolbarItem Text="Ročišnik">
+
+
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>-->
         <ContentPage.Resources>
             <DataTemplate x:Key="AppointmentTemplate"
                           >
