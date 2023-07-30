@@ -148,6 +148,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
     public ICommand UpdateHWIDs { get; set; }
     public ICommand OpenNewEmployee { get; set; }
     public ICommand SaveNewEmployee { get; set; }
+    public ICommand BackButtonCommand { get; set; }
+
 
     public async void OnNoviZaposlenikClick()
     {
@@ -469,6 +471,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         UpdateHWIDs = new Command(UpdateEmployeeHWID);
         OpenNewEmployee = new Command(OnNoviZaposlenikClick);
         SaveNewEmployee = new Command(AddNewEmployee);
+        BackButtonCommand = new Command(OnBackButtonClick);
 
         ReceiptPDVamount = Preferences.Get("receiptPDVamount", "");
         ReceiptIBAN = Preferences.Get("receiptIBAN", "");
@@ -702,6 +705,10 @@ public class PostavkeViewModel : INotifyPropertyChanged
     void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    public async void OnBackButtonClick() {
+        await Shell.Current.GoToAsync("///Postavke"); 
     }
 
     public async void FetchCompanyDevices()

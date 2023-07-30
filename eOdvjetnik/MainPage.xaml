@@ -55,8 +55,8 @@ padding-right: 30;
             <ColumnDefinition Width="*" />
 
         </Grid.ColumnDefinitions>
-        <Image Opacity="0.5" HorizontalOptions="Center" Grid.ColumnSpan="7" Grid.Row="0" Source="main_pozadina.jpg"  
-               Aspect="AspectFill" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=False}"  />
+        <Image Opacity="0.5" HorizontalOptions="FillAndExpand" MaximumHeightRequest="1600" MaximumWidthRequest="1800" Grid.ColumnSpan="7" Grid.Row="0" Source="main_pozadina.jpg"  
+               Aspect="Fill"  IsVisible="{OnPlatform Android=True, iOS=True, WinUI=True, MacCatalyst=True}"  />
 
         <VerticalStackLayout   Grid.ColumnSpan="5"  IsVisible="{Binding ActivationVisible}" >
 
