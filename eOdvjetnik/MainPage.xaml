@@ -5,18 +5,10 @@
              x:Class="eOdvjetnik.MainPage"
              xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
              xmlns:local ="clr-namespace:eOdvjetnik.ViewModel"
+             
              >
 
-    <!--Crasha se CSS kad implementiraš ->
-    font-size: 15px;
-                    left: 1;
-                width: 99%;
-padding-right: 30;
-    border-radius: 5;
-    padding: 5 5;
-    min-height: 65;
-    height: 100%;
-    -->
+
 
 
     <ContentPage.Resources>
@@ -74,7 +66,7 @@ padding-right: 30;
             <ColumnDefinition Width="*" />
 
         </Grid.ColumnDefinitions>
-        <Image Opacity="0.5" HorizontalOptions="FillAndExpand" MaximumHeightRequest="1600" MaximumWidthRequest="1800" Grid.ColumnSpan="7" Grid.Row="0" Source="main_pozadina.jpg"  
+        <Image Opacity="0.5" HorizontalOptions="FillAndExpand" MaximumHeightRequest="1000" MaximumWidthRequest="1800" Grid.ColumnSpan="7" Grid.Row="0" Source="main_pozadina.jpg"  
                Aspect="Fill"  IsVisible="{OnPlatform Android=True, iOS=True, WinUI=True, MacCatalyst=True}"  />
 
         <VerticalStackLayout   Grid.ColumnSpan="5"  IsVisible="{Binding ActivationVisible}" >

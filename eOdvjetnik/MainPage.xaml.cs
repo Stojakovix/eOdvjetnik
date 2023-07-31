@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Text.Json;
 using eOdvjetnik.Models;
 using System.Windows.Input;
+using CoreGraphics;
 
 namespace eOdvjetnik;
 
@@ -179,6 +180,11 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+
+
+
+
+
         ReadDeviceInfo();
         GetMicroSeconds();
         AskForWiFiPermission();
@@ -252,7 +258,7 @@ public partial class MainPage : ContentPage
     {
 
         base.OnAppearing();
-        this.Window.MinimumHeight = 620;
+        this.Window.MinimumHeight = 680;
         this.Window.MinimumWidth = 860;
         try
         {
