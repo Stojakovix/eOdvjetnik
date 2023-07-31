@@ -262,7 +262,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\SfScheduler.hr-HR.resx" />
-	  <BundleResource Include="Settings.bundle\Root.plist" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Compile Update="Views\UrediKlijenta.xaml.cs">
