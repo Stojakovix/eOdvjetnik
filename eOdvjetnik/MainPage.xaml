@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              x:Class="eOdvjetnik.MainPage"
@@ -73,7 +72,7 @@
 
             <Image Source="text_only.png" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
 
-            <Label 
+            <Label Style="{StaticResource ShadowLabelStyle}" 
                         Text="AKTIVACIJSKI KOD" 
                         VerticalOptions="Center" 
                         HorizontalOptions="Center"
@@ -82,7 +81,7 @@
                         TextColor="Black"
                     />
 
-            <Label 
+            <Label Style="{StaticResource ShadowLabelStyle}" 
                         Text="{Binding Activation_code}"
                         VerticalOptions="Center" 
                         HorizontalOptions="Center"
@@ -92,7 +91,7 @@
                     />
 
 
-            <Label  
+            <Label  Style="{StaticResource ShadowLabelStyle}" 
                         Text="Za aktivaciju aplikacije obratite se voditelju vašeg odvjetničkog društva."
                         HorizontalOptions="Center"
                         FontSize="Small"
@@ -104,7 +103,7 @@
 
 
 
-            <Label 
+            <Label Style="{StaticResource ShadowLabelStyle}" 
                         Text="Kontakt informacije: tel: +385 99 290 0000, email: info@eodvjednik.hr"
                         HorizontalOptions="Center"
                         FontSize="Small"
@@ -118,10 +117,10 @@
 
         <Label BackgroundColor="#dbdbdb" Grid.Row="1" Grid.ColumnSpan="5" />
         <Image Source="text_only.png" Margin="5" HeightRequest="20" HorizontalOptions="Start" Grid.Row="1"  />
-        <Label TextColor="Black" Text="{Binding datetime}"  FontSize="Small" Margin="5" HorizontalOptions="End" Grid.Row="1" Grid.ColumnSpan="5"/>
-        <Label TextColor="Black" Text="{Binding Version}" FontSize="Small" Margin="5" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1" 
+        <Label Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding datetime}"  FontSize="Small" Margin="5" HorizontalOptions="End" Grid.Row="1" Grid.ColumnSpan="5"/>
+        <Label Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding Version}" FontSize="Small" Margin="5" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1" 
                IsVisible="{OnPlatform Android=False, iOS=False}" />
-        <Label TextColor="Black" Text="{Binding licence_type, StringFormat='Licenca: {0}'}" FontSize="Small" Margin="5" HorizontalOptions="Start" 
+        <Label Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding licence_type, StringFormat='Licenca: {0}'}" FontSize="Small" Margin="5" HorizontalOptions="Start" 
                Grid.Row="1" Grid.Column="3" IsVisible="{OnPlatform Android=False, iOS=False}" />
 
 

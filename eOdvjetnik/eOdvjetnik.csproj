@@ -135,8 +135,8 @@
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\SF-Pro-Display-Black.otf" />
 	  <None Remove="Resources\Fonts\SF-Pro-Display-BlackItalic.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-Bold.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-BoldItalic.otf" />
+	  <None Remove="Resources\Fonts\SFUIDisplay-Thin.otf" />
+	  <None Remove="Resources\Fonts\SFUIDisplay-ThinItalic.otf" />
 	  <None Remove="Resources\Fonts\SF-Pro-Display-Heavy.otf" />
 	  <None Remove="Resources\Fonts\SF-Pro-Display-HeavyItalic.otf" />
 	  <None Remove="Resources\Fonts\SF-Pro-Display-Light.otf" />
