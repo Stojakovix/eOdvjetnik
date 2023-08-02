@@ -5,6 +5,9 @@
              xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              x:Class="eOdvjetnik.Views.Naplata"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
+
+             
+             
              Title="Naplata">
 
     <ContentPage.BindingContext>
@@ -33,7 +36,7 @@
         <!-- Header -->
 
         <VerticalStackLayout Grid.Row="0" >
-        <Grid BackgroundColor="LightGray" >
+            <Grid  Background="{StaticResource GridGradientBackground}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -45,21 +48,21 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
+                <Label Style="{StaticResource ShadowLabelStyle}"  Text="Zastupnik:" FontSize="14"  FontAttributes="Bold" TextColor="Black" Margin="20,10,0,12"/>
+                
+                <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="1"  Text="{Binding NazivTvrtke}" FontSize="14" TextColor="Black" Margin="10,10,0,12"/>
 
-            <Label Text="Zastupnik:" FontSize="14"  FontAttributes="Bold" TextColor="Black" Margin="20,10,0,12"/>
-            <Label Grid.Column="1" Text="{Binding NazivTvrtke}" FontSize="14" TextColor="Black" Margin="10,10,0,12"/>
+                <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="0"  Grid.Row="1" Text="Klijent:" FontSize="14"  FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
+                <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="1"  Grid.Row="1" Text="{Binding NazivKlijenta}" FontSize="14"  TextColor="Black" Margin="10,0,0,12"/>
 
-            <Label Grid.Column="0" Grid.Row="1" Text="Klijent:" FontSize="14"  FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
-            <Label Grid.Column="1" Grid.Row="1" Text="{Binding NazivKlijenta}" FontSize="14"  TextColor="Black" Margin="10,0,0,12"/>
+                <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="0"  Grid.Row="2" Text="Tarifni broj:" FontSize="14"  FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
+                <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="1"  Grid.Row="2" Text="{Binding odabraniTBR}" FontSize="14"  TextColor="Black" Margin="10,0,0,12" />
 
-            <Label Grid.Column="0" Grid.Row="2" Text="Tarifni broj:" FontSize="14"  FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
-            <Label Grid.Column="1" Grid.Row="2" Text="{Binding odabraniTBR}" FontSize="14"  TextColor="Black" Margin="10,0,0,12" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="0"  Grid.Row="3" Text="Radnja:" FontSize="14"  FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
+                <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="1"  Grid.Row="3" Text="{Binding odabraniNaziv}" FontSize="14" TextColor="Black" Margin="10,0,0,12"  />
 
-            <Label Grid.Column="0" Grid.Row="3" Text="Radnja:" FontSize="14"  FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
-            <Label Grid.Column="1" Grid.Row="3" Text="{Binding odabraniNaziv}" FontSize="14" TextColor="Black" Margin="10,0,0,12"  />
-
-            <Label Grid.Column="0" Grid.Row="4" Text="Bodovi:" FontSize="14"  FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
-            <Label Grid.Column="1" Grid.Row="4" Text="{Binding odabraniBodovi}" FontSize="14"  TextColor="Black" Margin="10,0,0,12" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="0"  Grid.Row="4" Text="Bodovi:" FontSize="14"  FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
+                <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="1"  Grid.Row="4" Text="{Binding odabraniBodovi}" FontSize="14"  TextColor="Black" Margin="10,0,0,12" />
 
         </Grid>
         <HorizontalStackLayout>
@@ -98,8 +101,8 @@
                    Margin="10,10,10,10"
                    FontSize="Default" />
 
-                <Label Margin="10,0,0,10" Text="Nema rezultata pretrage!" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}" TextColor="Black" VerticalOptions="Center" />
-                <Label Margin="10,0,0,10" Text="Povezivanje nije uspjelo!" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}" TextColor="Black" VerticalOptions="Center" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="10,0,0,10" Text="Nema rezultata pretrage!" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}" TextColor="Black" VerticalOptions="Center" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="10,0,0,10" Text="Povezivanje nije uspjelo!" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}" TextColor="Black" VerticalOptions="Center" />
 
              
             </HorizontalStackLayout>
@@ -122,9 +125,9 @@
 
             </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Tbr." Margin="0,0,0,5" HorizontalOptions="Start" Padding="20,0,0,0" />
-                <Label Grid.Column="1" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Bodovi"   HorizontalOptions="Center" />
-                <Label Grid.Column="2" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Radnja" Margin="0,0,0,0" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="0" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Tbr." Margin="0,0,0,5" HorizontalOptions="Start" Padding="20,0,0,0" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="1" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Bodovi"   HorizontalOptions="Center" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="2" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Radnja" Margin="0,0,0,0" />
 
         </Grid>
         </VerticalStackLayout>
@@ -152,9 +155,9 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <Label Margin="0,5,0,5" VerticalOptions="Center" Grid.Row="1" Grid.Column="0" FontSize="Default" Text="{Binding oznaka}" HorizontalOptions="Start"  Padding="20,0,0,0" />
-                                <Label Margin="0,5,0,5" VerticalOptions="Center" Grid.Row="1" Grid.Column="1" FontSize="Default" Text="{Binding bodovi}" HorizontalOptions="Center" />
-                                <Label Margin="0,5,0,5" VerticalOptions="Center" Grid.Row="1" Grid.Column="2" FontSize="Default" Text="{Binding concatenated_name}" WidthRequest="2000" HorizontalOptions="Start" />
+                                <Label Style="{StaticResource ShadowLabelStyle}" Margin="0,5,0,5" VerticalOptions="Center" Grid.Row="1" Grid.Column="0" FontSize="Default" Text="{Binding oznaka}" HorizontalOptions="Start"  Padding="20,0,0,0" />
+                                <Label Style="{StaticResource ShadowLabelStyle}" Margin="0,5,0,5" VerticalOptions="Center" Grid.Row="1" Grid.Column="1" FontSize="Default" Text="{Binding bodovi}" HorizontalOptions="Center" />
+                                <Label Style="{StaticResource ShadowLabelStyle}" Margin="0,5,0,5" VerticalOptions="Center" Grid.Row="1" Grid.Column="2" FontSize="Default" Text="{Binding concatenated_name}" WidthRequest="2000" HorizontalOptions="Start" />
 
                                 <BoxView Margin="0,24,0,0" Grid.Row="1" Grid.ColumnSpan="7" BackgroundColor="Red" HeightRequest="1"  />
 

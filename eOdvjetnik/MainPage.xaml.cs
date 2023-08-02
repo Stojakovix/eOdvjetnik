@@ -179,6 +179,11 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+
+
+
+
+
         ReadDeviceInfo();
         GetMicroSeconds();
         AskForWiFiPermission();
@@ -252,7 +257,7 @@ public partial class MainPage : ContentPage
     {
 
         base.OnAppearing();
-        this.Window.MinimumHeight = 620;
+        this.Window.MinimumHeight = 680;
         this.Window.MinimumWidth = 860;
         try
         {
