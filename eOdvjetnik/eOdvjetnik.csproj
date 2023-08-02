@@ -114,7 +114,6 @@
 	  <None Remove="NewFolder1\**" />
 	  <Compile Remove="Services\SaveAndroid.cs" />
 	  <None Remove="Resources\Icons\" />
-	  <EmbeddedResource Remove="Resources\SfScheduler.hr-HR.resx" />
 	  <None Remove="Resources\Images\edit.png" />
 	  <None Remove="Resources\Images\Image1.png" />
 	  <None Remove="Resources\Images\logoimg.svg" />
@@ -261,7 +260,6 @@
 	  <Folder Include="Templates\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <BundleResource Include="Resources\SfScheduler.hr-HR.resx" />
 	  <BundleResource Include="Settings.bundle\Root.plist" />
 	</ItemGroup>
 	<ItemGroup>
