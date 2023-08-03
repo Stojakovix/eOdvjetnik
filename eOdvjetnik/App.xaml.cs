@@ -22,7 +22,17 @@ public partial class App : Application
         InitializeComponent();
         Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjQ5MTQ1M0AzMjMyMmUzMDJlMzBRT2JkTm1HczFuTmdmNTVFcWNWU29xbGt6Z2lhRDFYYk1GZWppS3pjWnlNPQ==");
 
-        var CultureString = CultureInfo.CurrentUICulture.Name;
+        string currentCulture = Preferences.Get("CurrentCulture", null);
+        if (currentCulture == null)
+        {
+            // CurrentCulture is not set, save it in preferences
+            //string cultureName = CultureInfo.CurrentCulture.Name;
+            Preferences.Set("CurrentCulture", "hr-HR");
+        }
+
+
+        //var CultureString = CultureInfo.CurrentUICulture.Name;
+        var CultureString = Preferences.Get("CurrentCulture", null);
 
         CultureInfo.CurrentCulture = new CultureInfo(CultureString);
         CultureInfo.CurrentUICulture = new CultureInfo(CultureString);

@@ -41,7 +41,9 @@ public partial class MainPage : ContentPage
     }
 
 
-    private void OnLanguageSelected(object sender, EventArgs e)
+
+
+private void OnLanguageSelected(object sender, EventArgs e)
     {
         // Get the selected language from the dropdown
         var selectedLanguage = ((Picker)sender).SelectedItem.ToString();
@@ -50,7 +52,7 @@ public partial class MainPage : ContentPage
         Thread.CurrentThread.CurrentCulture = new CultureInfo(selectedLanguage);
         Thread.CurrentThread.CurrentUICulture = new CultureInfo(selectedLanguage);
 
-
+        Preferences.Set("CurrentCulture", selectedLanguage);
         // Refresh the UI to reflect the changes in language
         InitializeComponent();
     }
@@ -220,9 +222,15 @@ public MainPage()
         ActivationLoop();
 
 
+
+
+
+
+
+
     }
-  
-   
+
+
     public static void ReadDeviceInfo()
     {
 
@@ -282,8 +290,8 @@ public MainPage()
     {
 
         base.OnAppearing();
-       //this.Window.MinimumHeight = 680;
-        //this.Window.MinimumWidth = 860;
+        this.Window.MinimumHeight = 680;
+        this.Window.MinimumWidth = 860;
         try
         {
             //zakomentirati nakon setanja na null
