@@ -261,9 +261,6 @@
 	  <Folder Include="Templates\" />
 	</ItemGroup>
 	<ItemGroup>
-    <BundleResource Include="Resources\SfScheduler.hr-HR.resx" />
-    <BundleResource Include="Resources\SfScheduler.sr-SR.resx" />
-    <BundleResource Include="Resources\SfScheduler.sr-Cyrl-RS.resx" />
 	  <BundleResource Include="Settings.bundle\Root.plist" />
 	</ItemGroup>
 	<ItemGroup>

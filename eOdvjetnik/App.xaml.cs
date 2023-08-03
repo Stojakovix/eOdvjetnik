@@ -22,7 +22,7 @@ public partial class App : Application
         InitializeComponent();
         Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjQ5MTQ1M0AzMjMyMmUzMDJlMzBRT2JkTm1HczFuTmdmNTVFcWNWU29xbGt6Z2lhRDFYYk1GZWppS3pjWnlNPQ==");
 
-        var CultureString = "hr-HR";
+        var CultureString = CultureInfo.CurrentUICulture.Name;
 
         CultureInfo.CurrentCulture = new CultureInfo(CultureString);
         CultureInfo.CurrentUICulture = new CultureInfo(CultureString);
@@ -37,14 +37,9 @@ public partial class App : Application
         //CultureInfo.CurrentCulture = new CultureInfo("sr-SR");
         //CultureInfo.CurrentUICulture = new CultureInfo("sr-SR");
 
-        Debug.WriteLine("\n");
-        Debug.WriteLine("\n");
-        Debug.WriteLine("\n");
-        Debug.WriteLine(CultureInfo.CurrentUICulture);
-        SfSchedulerResources.ResourceManager = new ResourceManager("eOdvjetnik.Resources.SfScheduler", Application.Current.GetType().Assembly);
-        Debug.WriteLine("\n");
-        Debug.WriteLine("\n");
-        Debug.WriteLine("\n");
+  
+        SfSchedulerResources.ResourceManager = new ResourceManager("eOdvjetnik.Resources.Strings.AppResources", Application.Current.GetType().Assembly);
+
 
 
 

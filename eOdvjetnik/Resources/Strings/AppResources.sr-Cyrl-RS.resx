@@ -117,8 +117,56 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Agenda" xml:space="preserve">
+    <value>дневни ред</value>
+    <comment>дневни ред</comment>
+  </data>
+  <data name="AllDay" xml:space="preserve">
+    <value>Цијели дан</value>
+    <comment>Цијели дан</comment>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Дан</value>
+    <comment>Дан</comment>
+  </data>
   <data name="Hello" xml:space="preserve">
     <value>HelloSR</value>
     <comment>Hello na Srpski</comment>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Мјесец</value>
+    <comment>Мјесец</comment>
+  </data>
+  <data name="NoEvents" xml:space="preserve">
+    <value>Нема догађаја</value>
+    <comment>Нема догађаја</comment>
+  </data>
+  <data name="TimelineDay" xml:space="preserve">
+    <value>Временска трака Дан</value>
+    <comment>Временска трака Дан</comment>
+  </data>
+  <data name="TimelineMonth" xml:space="preserve">
+    <value>Временска црта Мјесец</value>
+    <comment>Временска црта Мјесец</comment>
+  </data>
+  <data name="TimelineWeek" xml:space="preserve">
+    <value>Тједан временске траке</value>
+    <comment>Тједан временске траке</comment>
+  </data>
+  <data name="TimelineWorkWeek" xml:space="preserve">
+    <value>Временска црта Радни тједан</value>
+    <comment>Временска црта Радни тједан</comment>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Данас</value>
+    <comment>Данас</comment>
+  </data>
+  <data name="Week" xml:space="preserve">
+    <value>Тједан</value>
+    <comment>Тједан</comment>
+  </data>
+  <data name="WorkWeek" xml:space="preserve">
+    <value>Радни тједан</value>
+    <comment>Радни тједан</comment>
   </data>
 </root>
