@@ -7,12 +7,17 @@ using System.Globalization;
 using System.Text.Json;
 using eOdvjetnik.Models;
 using System.Windows.Input;
-
+using System.Threading;
+using System;
+using System.Resources;
+using Microsoft.Maui.Controls;
 namespace eOdvjetnik;
 
 public partial class MainPage : ContentPage
 {
-    
+
+
+
     //MySQL varijable
     public string query;
 
@@ -36,6 +41,19 @@ public partial class MainPage : ContentPage
     }
 
 
+    private void OnLanguageSelected(object sender, EventArgs e)
+    {
+        // Get the selected language from the dropdown
+        var selectedLanguage = ((Picker)sender).SelectedItem.ToString();
+
+        // Set the current culture to the selected language
+        Thread.CurrentThread.CurrentCulture = new CultureInfo(selectedLanguage);
+        Thread.CurrentThread.CurrentUICulture = new CultureInfo(selectedLanguage);
+
+
+        // Refresh the UI to reflect the changes in language
+        InitializeComponent();
+    }
 
     public async void ActivationLoop()
     {
@@ -176,10 +194,17 @@ public partial class MainPage : ContentPage
         }
     }
 
-    public MainPage()
+
+    //Translate
+
+
+
+//Translate
+
+
+public MainPage()
     {
         InitializeComponent();
-
 
 
 
@@ -257,8 +282,8 @@ public partial class MainPage : ContentPage
     {
 
         base.OnAppearing();
-        this.Window.MinimumHeight = 680;
-        this.Window.MinimumWidth = 860;
+       //this.Window.MinimumHeight = 680;
+        //this.Window.MinimumWidth = 860;
         try
         {
             //zakomentirati nakon setanja na null

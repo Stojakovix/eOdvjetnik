@@ -257,15 +257,21 @@
 
 	<ItemGroup>
 	  <Folder Include="Resources\Icons\" />
-	  <Folder Include="Resources\Translations\" />
 	  <Folder Include="Settings.bundle\" />
 	  <Folder Include="Templates\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <BundleResource Include="Resources\SfScheduler.hr-HR.resx" />
+    <BundleResource Include="Resources\SfScheduler.hr-HR.resx" />
+    <BundleResource Include="Resources\SfScheduler.sr-SR.resx" />
+    <BundleResource Include="Resources\SfScheduler.sr-Cyrl-RS.resx" />
 	  <BundleResource Include="Settings.bundle\Root.plist" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Resources\Strings\AppResources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>AppResources.resx</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\UrediKlijenta.xaml.cs">
 	    <DependentUpon>UrediKlijenta.xaml</DependentUpon>
 	  </Compile>
@@ -275,6 +281,15 @@
 	  <Compile Update="Views\Postavke.xaml.cs">
 	    <DependentUpon>Postavke.xaml</DependentUpon>
 	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Update="Resources\Strings\AppResources.hr-HR.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\Strings\AppResources.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
 	</ItemGroup>
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptioneOdvjetnikHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 </Project>

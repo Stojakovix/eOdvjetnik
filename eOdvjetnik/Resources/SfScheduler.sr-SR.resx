@@ -118,51 +118,51 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Agenda" xml:space="preserve">
-    <value>дневни ред</value>
-    <comment>дневни ред</comment>
+    <value>Dnevni red</value>
+    <comment>Dnevni red</comment>
   </data>
   <data name="AllDay" xml:space="preserve">
-    <value>Цијели дан</value>
-    <comment>Цијели дан</comment>
+    <value>Cijeli dan</value>
+    <comment>Cijeli dan</comment>
   </data>
   <data name="Day" xml:space="preserve">
-    <value>Дан</value>
-    <comment>Дан</comment>
+    <value>Dan</value>
+    <comment>Dan</comment>
   </data>
   <data name="Month" xml:space="preserve">
     <value>Мјесец</value>
-    <comment>Мјесец</comment>
+    <comment>Mjesec</comment>
   </data>
   <data name="NoEvents" xml:space="preserve">
     <value>Нема догађаја</value>
-    <comment>Нема догађаја</comment>
+    <comment>Nema događaja</comment>
   </data>
   <data name="TimelineDay" xml:space="preserve">
     <value>Временска трака Дан</value>
-    <comment>Временска трака Дан</comment>
+    <comment>Vremenska traka Dan</comment>
   </data>
   <data name="TimelineMonth" xml:space="preserve">
-    <value>Временска црта Мјесец</value>
-    <comment>Временска црта Мјесец</comment>
+    <value>Vremenska crta Mjesec</value>
+    <comment>Vremenska crta Mjesec</comment>
   </data>
   <data name="TimelineWeek" xml:space="preserve">
-    <value>Тједан временске траке</value>
-    <comment>Тједан временске траке</comment>
+    <value>Временска црта Мјесец</value>
+    <comment>Tjedan vremenske trake</comment>
   </data>
   <data name="TimelineWorkWeek" xml:space="preserve">
     <value>Временска црта Радни тједан</value>
-    <comment>Временска црта Радни тједан</comment>
+    <comment>Vremenska crta Radni tjedan</comment>
   </data>
   <data name="Today" xml:space="preserve">
     <value>Данас</value>
-    <comment>Данас</comment>
+    <comment>Danas</comment>
   </data>
   <data name="Week" xml:space="preserve">
     <value>Тједан</value>
-    <comment>Тједан</comment>
+    <comment>Tjedan</comment>
   </data>
   <data name="WorkWeek" xml:space="preserve">
     <value>Радни тједан</value>
-    <comment>Радни тједан</comment>
+    <comment>Radni tjedan</comment>
   </data>
 </root>

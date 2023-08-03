@@ -118,51 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Agenda" xml:space="preserve">
-    <value>Dnevni red</value>
-    <comment>Dnevni red</comment>
+    <value>Dnevni redHR</value>
+    <comment>u kalendaru</comment>
   </data>
-  <data name="AllDay" xml:space="preserve">
-    <value>Cijeli dan</value>
-    <comment>Cijeli dan</comment>
-  </data>
-  <data name="Day" xml:space="preserve">
-    <value>Dan</value>
-    <comment>Dan</comment>
-  </data>
-  <data name="Month" xml:space="preserve">
-    <value>Mjesec</value>
-    <comment>Mjesec</comment>
-  </data>
-  <data name="NoEvents" xml:space="preserve">
-    <value>Nema događaja</value>
-    <comment>Nema događaja</comment>
-  </data>
-  <data name="TimelineDay" xml:space="preserve">
-    <value>Vremenska traka Dan</value>
-    <comment>Vremenska traka Dan</comment>
-  </data>
-  <data name="TimelineMonth" xml:space="preserve">
-    <value>Vremenska crta Mjesec</value>
-    <comment>Vremenska crta Mjesec</comment>
-  </data>
-  <data name="TimelineWeek" xml:space="preserve">
-    <value>Tjedan vremenske trake</value>
-    <comment>Tjedan vremenske trake</comment>
-  </data>
-  <data name="TimelineWorkWeek" xml:space="preserve">
-    <value>Vremenska crta Radni tjedan</value>
-    <comment>Vremenska crta Radni tjedan</comment>
-  </data>
-  <data name="Today" xml:space="preserve">
-    <value>Danas</value>
-    <comment>Danas</comment>
-  </data>
-  <data name="Week" xml:space="preserve">
-    <value>Tjedan</value>
-    <comment>Tjedan</comment>
-  </data>
-  <data name="WorkWeek" xml:space="preserve">
-    <value>Radni tjedan</value>
-    <comment>Radni tjedan</comment>
+  <data name="Hello" xml:space="preserve">
+    <value>HelloHR</value>
+    <comment>Hello na hrvatski</comment>
   </data>
 </root>
