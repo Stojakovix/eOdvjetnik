@@ -175,6 +175,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="banditoth.MAUI.Multilanguage" Version="1.0.5" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="LocalizationResourceManager.Maui" Version="1.0.4" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
@@ -256,6 +257,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Resources\Icons\" />
+	  <Folder Include="Resources\Translations\" />
 	  <Folder Include="Settings.bundle\" />
 	  <Folder Include="Templates\" />
 	</ItemGroup>
