@@ -16,5 +16,6 @@ namespace eOdvjetnik.Models
         public bool AllDay { get; set; }
         public string EventName { get; set; }
         public string DescriptionNotes { get; set; }
+        public Brush Background { get; set; }
     }
 }

@@ -26,6 +26,9 @@ namespace eOdvjetnik.ViewModel
         public ICommand DodajNovogKlijenta { get; set; }
         public ICommand UpdateClientData { get; set; }
         public ICommand DeleteClientData { get; set; }
+        public ICommand ConfirmDelete { get; set; }
+        public ICommand CancelDelete { get; set; }
+        
 
         public NoviKlijentViewModel()
         {
@@ -56,8 +59,9 @@ namespace eOdvjetnik.ViewModel
                     ClientLegalPerson = false;
 
                 }
+                DeleteClientPopupEnabled = false;
+                DeleteClientPopupVisible = false;
 
-              
             }
             catch (Exception ex)
             {
@@ -66,11 +70,14 @@ namespace eOdvjetnik.ViewModel
             }
             DodajNovogKlijenta = new Command(OnButtonCLick);
             UpdateClientData = new Command(OnUpdateCLick);
-            DeleteClientData = new Command(OnDeleteCLick);
+            DeleteClientData = new Command(DeletePopup);
+            ConfirmDelete = new Command(OnDeleteCLick);
+            CancelDelete = new Command(OnCancelCLick);
 
             ClientHasNoName = false;
 
         }
+        #region Navigacija
         public ICommand PocetnaClick => navigacija.PocetnaClick;
         public ICommand KalendarClick => navigacija.KalendarClick;
         public ICommand SpisiClick => navigacija.SpisiClick;
@@ -80,7 +87,7 @@ namespace eOdvjetnik.ViewModel
         public ICommand KorisnickaClick => navigacija.KorisnickaPodrskaClick;
         public ICommand PostavkeClick => navigacija.PostavkeClick;
         private bool clientHasNoName;
-
+        #endregion
         public bool ClientHasNoName
         {
             get { return clientHasNoName; }
@@ -93,7 +100,34 @@ namespace eOdvjetnik.ViewModel
                 }
             }
         }
+        private bool _DeleteClientPopupVisible;
 
+        public bool DeleteClientPopupVisible
+        {
+            get { return _DeleteClientPopupVisible; }
+            set
+            {
+                if (_DeleteClientPopupVisible != value)
+                {
+                    _DeleteClientPopupVisible = value;
+                    OnPropertyChanged(nameof(DeleteClientPopupVisible));
+                }
+            }
+        }
+        private bool _DeleteClientPopupEnabled;
+
+        public bool DeleteClientPopupEnabled
+        {
+            get { return _DeleteClientPopupEnabled; }
+            set
+            {
+                if (_DeleteClientPopupEnabled != value)
+                {
+                    _DeleteClientPopupEnabled = value;
+                    OnPropertyChanged(nameof(DeleteClientPopupEnabled));
+                }
+            }
+        }
         #region Varijable za klijente
         private string id;
         public string Id
@@ -385,8 +419,21 @@ namespace eOdvjetnik.ViewModel
 
         }
 
+        public void DeletePopup()
+        {
+            DeleteClientPopupEnabled = true;
+            DeleteClientPopupVisible = true;
+                    }
+        public void OnCancelCLick()
+        {
+            DeleteClientPopupEnabled = false;
+            DeleteClientPopupVisible = false;
+        }
+        
         public async void OnDeleteCLick()
         {
+            DeleteClientPopupEnabled = false;
+            DeleteClientPopupVisible = false;
             DeleteContactOnRemoteServer(contactItem);
             await Shell.Current.GoToAsync("///Klijenti");
             ContactDeletedMessage();

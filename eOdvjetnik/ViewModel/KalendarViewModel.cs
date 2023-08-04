@@ -5,6 +5,8 @@ using eOdvjetnik.Models;
 using System.Diagnostics;
 using eOdvjetnik.Services;
 using System.Windows.Input;
+using Newtonsoft.Json;
+using eOdvjetnik.Model;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -13,9 +15,78 @@ namespace eOdvjetnik.ViewModel
         private Navigacija navigacija;
         private ObservableCollection<SchedulerAppointment> appointments;
 
+        ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+        #region Colors
+        private ObservableCollection<ColorItem> _CategoryColor;
+        public ObservableCollection<ColorItem> CategoryColor
+        {
+            get { return _CategoryColor; }
+            set { _CategoryColor = value; }
+        }
+    
+        public void GetColors()
+        {
+            try
+            {
+                if (_CategoryColor != null)
+                {
+                    _CategoryColor.Clear();
+                }
+                string query = "SELECT * FROM `event_colors`";
+                Debug.WriteLine(query);
+                try
+                {
+                    Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                    Debug.WriteLine(query + " u Search resultu");
+                    if (filesData != null)
+                    {
+                        foreach (Dictionary<string, string> filesRow in filesData)
+                        {
+
+                            int id;
+                            int.TryParse(filesRow["id"], out id);
+
+                            _CategoryColor.Add(new ColorItem()
+                            {
+                                Id = id,
+                                NazivBoje = filesRow["naziv_boje"],
+                                Boja = filesRow["boja"],
+                                VrstaDogadaja = filesRow["vrsta_dogadaja"],
+
+                            });
+                            Debug.WriteLine("Dohvatio boje");
+
+                        }
+
+                    }
+                    ColorsToJSON();
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+            }
+        }
+
+        public void ColorsToJSON()
+        {
+            string colorsJSON = JsonConvert.SerializeObject(CategoryColor);
+            Preferences.Set("colorItems", colorsJSON);
+        }
+        #endregion
 
         public KalendarViewModel()
         {
+            CategoryColor = new ObservableCollection<ColorItem>();
+
+            GetColors();
             try
             {
                 navigacija = new Navigacija();
@@ -92,6 +163,11 @@ namespace eOdvjetnik.ViewModel
         private void RaiseOnPropertyChanged(string propertyName)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

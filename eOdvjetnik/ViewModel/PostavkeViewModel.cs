@@ -19,6 +19,130 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     private Navigacija navigacija;
 
+    #region Boje
+
+    public ICommand LoadColors { get; set; }
+    public ICommand SaveColors { get; set; }
+
+    private ObservableCollection<ColorItem> _Colors;
+    public ObservableCollection<ColorItem> Colors
+    {
+        get { return _Colors; }
+        set { _Colors = value; }
+    }
+
+    private bool _AdminColorPopup;
+
+    public bool AdminColorPopup
+    {
+        get { return _AdminColorPopup; }
+        set
+        {
+            if (_AdminColorPopup != value)
+            {
+                _AdminColorPopup = value;
+                OnPropertyChanged(nameof(AdminColorPopup));
+            }
+        }
+    }
+    public void GetColors()
+    {
+        try
+        {
+            if (_Colors != null)
+            {
+                _Colors.Clear();
+            }
+            string query = "SELECT * FROM `event_colors`";
+            Debug.WriteLine(query);
+            try
+            {
+                Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                Debug.WriteLine(query + " u Search resultu");
+                if (filesData != null)
+                {
+                    foreach (Dictionary<string, string> filesRow in filesData)
+                    {
+
+                        int id;
+                        int.TryParse(filesRow["id"], out id);
+
+                        _Colors.Add(new ColorItem()
+                        {
+                            Id = id,
+                            NazivBoje = filesRow["naziv_boje"],
+                            Boja = filesRow["boja"],
+                            VrstaDogadaja = filesRow["vrsta_dogadaja"],
+
+                        });
+                        Debug.WriteLine("Dohvatio boje");
+
+                    }
+
+                }
+                ColorsToJSON();
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+
+        }
+    }
+
+
+    public void SetColors()
+    {
+        string licence_type = Preferences.Get("licence_type", "");
+        int numberOfCharacters = 5;
+        string adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
+        Debug.WriteLine("Spremi boje - 'Admin' provjera: " + adminCheck);
+        AdminColorPopup = false;
+
+        if (adminCheck == "Admin")
+        {
+            AdminColorPopup = false;
+
+            try
+            {
+                ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+                string disableForeignKeyChecksQuery = "SET FOREIGN_KEY_CHECKS = 0";
+                externalSQLConnect.sqlQuery(disableForeignKeyChecksQuery);
+
+                foreach (ColorItem item in Colors)
+                {
+                    string UpdateQuery = $"UPDATE event_colors SET vrsta_dogadaja = '{item.VrstaDogadaja}' WHERE id = {item.Id}";
+                    externalSQLConnect.sqlQuery(UpdateQuery);
+                    Debug.WriteLine("Update colors query: " + UpdateQuery);
+                }
+                GetColors();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+        else
+        {
+            AdminColorPopup = true;
+        }
+    }
+
+    public void ColorsToJSON()
+    {
+        string colorsJSON = JsonConvert.SerializeObject(Colors);
+        Preferences.Set("colorItems", colorsJSON);
+    }
+
+    #endregion
+
+
     #region Zaposlenici
 
     ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
@@ -200,7 +324,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
             {
                 Debug.WriteLine("JsonDevicesData = null");
             }
-            
+
 
         }
         catch (Exception ex)
@@ -470,6 +594,11 @@ public class PostavkeViewModel : INotifyPropertyChanged
     {
 
         navigacija = new Navigacija();
+        LoadColors = new Command(GetColors);
+        SaveColors = new Command(SetColors);
+        AdminColorPopup = false;
+
+        Colors = new ObservableCollection<ColorItem>();
 
         #region Devic&Licence
         ZaposleniciVisible = false;
@@ -719,8 +848,9 @@ public class PostavkeViewModel : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    public async void OnBackButtonClick() {
-        await Shell.Current.GoToAsync("///Postavke"); 
+    public async void OnBackButtonClick()
+    {
+        await Shell.Current.GoToAsync("///Postavke");
     }
 
     public async void FetchCompanyDevices()
@@ -937,7 +1067,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     }
 
-    
-   
+
+
 
 }

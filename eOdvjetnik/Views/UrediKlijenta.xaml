@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
              x:Class="eOdvjetnik.Views.UrediKlijenta"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
              Title="UrediKlijenta">
@@ -19,6 +20,34 @@
         <ToolbarItem Text="Postavke" Command="{Binding PostavkeClick}" />
     </ContentPage.ToolbarItems>
     <ScrollView>
+        <StackLayout>
+
+        <sfPopup:SfPopup x:Name="BrisanjePopup" 
+                             HeaderTitle="Upozorenje" ShowHeader="False" ShowCloseButton="True"
+                             IsVisible="{Binding DeleteClientPopupVisible}" 
+                             IsOpen="{Binding DeleteClientPopupEnabled}"
+                             MinimumWidthRequest="400" 
+                             >
+            <sfPopup:SfPopup.PopupStyle>
+                <sfPopup:PopupStyle MessageBackground="White" HeaderBackground="White"   />
+            </sfPopup:SfPopup.PopupStyle>
+
+            <sfPopup:SfPopup.ContentTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="Jeste li sigurni da želite obrisati odabrani kontakt?" TextColor="black" FontSize="20" Margin="20,20,0,0" FontAttributes="Bold"  />
+                            <HorizontalStackLayout>
+                                <Button  Text="Natrag" Grid.Row="12" Command="{Binding CancelDelete}" BackgroundColor="LightGray"  BorderColor="DarkGray"
+                     FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="20,30,0,0" WidthRequest="150" HorizontalOptions="Start" />
+                                <Button  Text="Obriši" Grid.Row="12" Command="{Binding ConfirmDelete}" BackgroundColor="#DC143C"  BorderColor="DarkGray"
+                     FontSize="Default"  FontAttributes="Bold"   TextColor="LightGray" Grid.Column="1" Margin="50,30,0,0" WidthRequest="150" HorizontalOptions="End" />
+                            </HorizontalStackLayout>
+                        </StackLayout>
+                </DataTemplate>
+            </sfPopup:SfPopup.ContentTemplate>
+        </sfPopup:SfPopup>
+
+
         <Grid BackgroundColor="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
@@ -83,5 +112,6 @@
             <Button  Text="Obriši kontakt" Grid.Row="12" Command="{Binding DeleteClientData}" BackgroundColor="#DC143C"  BorderColor="DarkGray"
                      FontSize="Default"  FontAttributes="Bold"   TextColor="LightGray" Grid.Column="1" Margin="10,20,30,0" WidthRequest="150" HorizontalOptions="End" />
         </Grid>
+        </StackLayout>
     </ScrollView>
 </ContentPage>

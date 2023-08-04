@@ -5,14 +5,33 @@ using eOdvjetnik.Services;
 using eOdvjetnik.ViewModel;
 using System.Diagnostics;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using eOdvjetnik.Model;
+using System.ComponentModel;
 
 namespace eOdvjetnik.Views;
 
 public partial class AppointmentDialog : ContentPage
 {
+
     SchedulerAppointment appointment;
     DateTime selectedDate;
     SfScheduler scheduler;
+
+
+    public Brush appointmentBackgroundBrush;
+    public Brush AppointmentBackgroundBrush
+    {
+        get => appointmentBackgroundBrush;
+        set
+        {
+            if (appointmentBackgroundBrush != value)
+            {
+                appointmentBackgroundBrush = value;
+                OnPropertyChanged(nameof(AppointmentBackgroundBrush));
+            }
+        }
+    }
 
     public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler)
     {
@@ -20,10 +39,8 @@ public partial class AppointmentDialog : ContentPage
         this.appointment = appointment;
         this.selectedDate = selectedDate;
         this.scheduler = scheduler;
-        cancelButton.BackgroundColor = Color.FromArgb("#E5E5E5");
-        saveButton.BackgroundColor = Color.FromArgb("#2196F3");
-        eventNameText.Placeholder = "Event name";
-        organizerText.Placeholder = "update the notes";
+        eventNameText.Placeholder = "Unesite naziv...";
+        organizerText.Placeholder = "Unesite opis...";
 
         UpdateEditor();
         saveButton.Clicked += SaveButton_Clicked;
@@ -31,12 +48,21 @@ public partial class AppointmentDialog : ContentPage
         switchAllDay.Toggled += SwitchAllDay_Toggled;
         DeleteButton.Clicked += DeleteButton_Clicked;
 
-
-        //MySQL Query
-        // Instantiate the service
+        categoryPicker.SelectedIndexChanged += OnCategoryPickerSelectedIndexChanged;
 
     }
+    private void OnCategoryPickerSelectedIndexChanged(object sender, EventArgs e)
+    {
+        var selectedColorItem = (ColorItem)categoryPicker.SelectedItem;
+        eventNameText.BackgroundColor = selectedColorItem.BojaPozadine;
 
+        Color backgroundColor = selectedColorItem.BojaPozadine;
+        Debug.WriteLine(backgroundColor.ToArgbHex());
+        AppointmentBackgroundBrush = new SolidColorBrush(backgroundColor);
+        Debug.WriteLine(AppointmentBackgroundBrush);
+
+
+    }
     private void DeleteButton_Clicked(object sender, EventArgs e)
     {
         try
@@ -54,7 +80,7 @@ public partial class AppointmentDialog : ContentPage
                 //var todoItem = new Appointment() { From = appointment.StartTime, To = appointment.EndTime, AllDay = appointment.IsAllDay, DescriptionNotes = appointment.Notes, EventName = appointment.Subject, ID = (int)appointment.Id };
                 if(appointment.Id != null)
                 {
-                    string query = "DELETE FROM events WHERE ID = " + appointment.Id;
+                    string query = "DELETE FROM events WHERE internal_event_id = " + appointment.Id;
                     Debug.WriteLine("Deleted Appointment " + appointment.Id);
                     externalSQLConnect.sqlQuery(query);
                 }
@@ -146,14 +172,12 @@ public partial class AppointmentDialog : ContentPage
             Debug.WriteLine(getIDQuery);
             Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(getIDQuery);
             
-
             if (filesData.Length == 0)
             {
-                // ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 try
                 {
                     var hardware_id = Preferences.Get("key", "default_value");
-                    string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}' , '{hardware_id}')";
+                    string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, hardwareid, color) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}' , '{hardware_id}', '{AppointmentBackgroundBrush}')";
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine(query);
                     Debug.WriteLine("Appointment added to remote server.");
@@ -170,7 +194,7 @@ public partial class AppointmentDialog : ContentPage
                 {
                     AppointmentDetails();
                     var hardware_id = Preferences.Get("key", "default_value");
-                    string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
+                    string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', hardwareid = '{hardware_id}', color = '{AppointmentBackgroundBrush}' WHERE internal_event_id = " + appointment.Id;
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine(query);
                     Debug.WriteLine("Appointment updated in the server");
@@ -199,6 +223,8 @@ public partial class AppointmentDialog : ContentPage
             appointment.EndTime = this.endDate_picker.Date.Add(this.endTime_picker.Time);
             appointment.IsAllDay = this.switchAllDay.IsToggled;
             appointment.Notes = this.organizerText.Text;
+       
+
 
             if (this.scheduler.AppointmentsSource == null)
             {
@@ -225,7 +251,8 @@ public partial class AppointmentDialog : ContentPage
             AllDay = appointment.IsAllDay,
             DescriptionNotes = appointment.Notes,
             EventName = appointment.Subject,
-            ID = (int)appointment.Id
+            ID = (int)appointment.Id,
+            Background = AppointmentBackgroundBrush
         };
 
         this.Navigation.PopAsync();
@@ -239,6 +266,7 @@ public partial class AppointmentDialog : ContentPage
             organizerText.Text = appointment.Notes;
             startDate_picker.Date = appointment.StartTime;
             endDate_picker.Date = appointment.EndTime;
+
 
             if (!appointment.IsAllDay)
             {

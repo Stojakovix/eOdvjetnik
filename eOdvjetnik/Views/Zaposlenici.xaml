@@ -50,6 +50,19 @@
                 </sfPopup:SfPopup>
 
             </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+            
+                    <Button Text="Natrag" Command="{Binding BackButtonCommand}"
+                       BorderColor="DarkGray" BackgroundColor="LightGray" Margin="20,20,0,10" TextColor="Black" WidthRequest="100" FontSize="Default" HorizontalOptions="Start" />
+                    <Button Text="Spremi" Command="{Binding UpdateHWIDs}"
+                       BorderColor="DarkGray" BackgroundColor="#5ac8fa" Margin="120,20,0,10" TextColor="Black" WidthRequest="100" FontSize="Default" HorizontalOptions="Start" />
+                    <Button Text="Dodaj novog" Command="{Binding OpenNewEmployee}"
+                       BorderColor="DarkGray" BackgroundColor="#5ac8fa" Margin="120,20,0,10" TextColor="Black" WidthRequest="150" FontSize="Default" HorizontalOptions="Start" />
+               
+       
+            </HorizontalStackLayout>
+            
             <VerticalStackLayout  >
 
                 <ListView IsVisible="false"  BackgroundColor="LightGray" Grid.Row="1" HorizontalOptions="Start"  ItemsSource="{Binding DataModel.Devices}">
@@ -129,15 +142,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <HorizontalStackLayout>
-                    <Button Text="Spremi" Command="{Binding UpdateHWIDs}"
-                        BackgroundColor="#5ac8fa" Margin="20,20,0,10" TextColor="Black" WidthRequest="100" FontSize="Default" HorizontalOptions="Start" />
-                    <Button Text="Dodaj novog" Command="{Binding OpenNewEmployee}"
-                        BackgroundColor="#5ac8fa" Margin="150,20,0,10" TextColor="Black" WidthRequest="150" FontSize="Default" HorizontalOptions="Start" />
-                    <Button Text="Natrag" Command="{Binding BackButtonCommand}"
-                        BackgroundColor="#5ac8fa" Margin="150,20,0,10" TextColor="Black" WidthRequest="150" FontSize="Default" HorizontalOptions="Start" />
-                    
-                </HorizontalStackLayout>
+           
             </VerticalStackLayout>
         </StackLayout>
     </ScrollView>

@@ -549,6 +549,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
     
         Contacts = new ObservableCollection<ContactItem>();
 
+
         for (int i = 0; i < 30; i++)
         {
             Contacts.Add(new ContactItem
