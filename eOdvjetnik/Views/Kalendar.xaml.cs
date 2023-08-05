@@ -10,7 +10,7 @@ public partial class Kalendar : ContentPage
 {
     private void RočišnikMenuItem_Clicked(object sender, EventArgs e)
     {
-        Debug.WriteLine("MainPageViewModel - > ActivationLoop");
+        Debug.WriteLine("RočišnikMenuItem_Clicked");
 
     }
     public Kalendar()
@@ -28,27 +28,28 @@ public partial class Kalendar : ContentPage
         var odvjetnik_nas = new ExternalSQLConnect();
         var hardware_id = Preferences.Get("key", "default_value");
 
-        try
-        {
-            //Call the function
-            Dictionary<string, string>[] resultArray = odvjetnik_nas.sqlQuery("Select * from events where hardwareid = '"+ hardware_id + "' and TimeFrom > '2023-05-25 20:00:00'");//
-            Debug.WriteLine("Usao usqlQuery 11------------------------------------------------**");
-
-            // Print the attribute names
-
-            foreach (Dictionary<string, string> row in resultArray)
-            {
-                foreach (KeyValuePair<string, string> pair in row)
-                {
-                    Debug.WriteLine(pair.Key + ": " + pair.Value);
-                }
-                Debug.WriteLine("Print the attribute names");
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message + "u Kalendar.xaml.csu");
-        }
+        //zakomenitrao DD, ovo samo ispisuje sve Evente u debug
+       //try
+       //{
+       //    //Call the function
+       //    Dictionary<string, string>[] resultArray = odvjetnik_nas.sqlQuery("Select * from events where hardwareid = '"+ hardware_id + "' and TimeFrom > '2023-05-25 20:00:00'");//
+       //    Debug.WriteLine("Usao usqlQuery 11------------------------------------------------**");
+       //
+       //    // Print the attribute names
+       //
+       //    foreach (Dictionary<string, string> row in resultArray)
+       //    {
+       //        foreach (KeyValuePair<string, string> pair in row)
+       //        {
+       //            Debug.WriteLine(pair.Key + ": " + pair.Value);
+       //        }
+       //        Debug.WriteLine("Print the attribute names");
+       //    }
+       //}
+       //catch (Exception ex)
+       //{
+       //    Debug.WriteLine(ex.Message + "u Kalendar.xaml.csu");
+       //}
 
     }
 

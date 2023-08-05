@@ -7,6 +7,8 @@ using eOdvjetnik.Services;
 using System.Windows.Input;
 using Newtonsoft.Json;
 using eOdvjetnik.Model;
+using System.Drawing;
+using Color = Microsoft.Maui.Graphics.Color;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -24,6 +26,7 @@ namespace eOdvjetnik.ViewModel
             set { _CategoryColor = value; }
         }
     
+
         public void GetColors()
         {
             try
@@ -45,6 +48,7 @@ namespace eOdvjetnik.ViewModel
 
                             int id;
                             int.TryParse(filesRow["id"], out id);
+                          
 
                             _CategoryColor.Add(new ColorItem()
                             {
@@ -54,11 +58,11 @@ namespace eOdvjetnik.ViewModel
                                 VrstaDogadaja = filesRow["vrsta_dogadaja"],
 
                             });
-                            Debug.WriteLine("Dohvatio boje");
 
                         }
 
                     }
+                    Debug.WriteLine("Dohvatio boje");
                     ColorsToJSON();
 
                 }
@@ -103,7 +107,7 @@ namespace eOdvjetnik.ViewModel
                 Dictionary<string, string>[] appointmentData = externalSQLConnect.sqlQuery(query);
                 if (appointmentData != null)
                 {
-                    Debug.WriteLine("Usao usqlQuery *-*-**-*-*---------------DOHVAĆENI EVENTI iz MySQL----------------------------------**");
+                    Debug.WriteLine("Dohvatio evente ----------------------------------**");
 
                     //Externa lista bez internih
                     List<int> ExtDifference = ExternalEventIDs.Except(InternalEventIDs).ToList();
@@ -111,6 +115,11 @@ namespace eOdvjetnik.ViewModel
                     foreach (Dictionary<string, string> appointmentRow in appointmentData)
                     {
                         // Add new appointment
+
+                        string colorName = appointmentRow["color"];
+                        Color backgroundColor = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(colorName);
+
+
                         Appointments.Add(new SchedulerAppointment()
                         {
                             Id = int.Parse(appointmentRow["internal_event_id"]),
@@ -118,8 +127,9 @@ namespace eOdvjetnik.ViewModel
                             EndTime = DateTime.Parse(appointmentRow["TimeTo"]),
                             Subject = appointmentRow["EventName"],
                             IsAllDay = bool.Parse(appointmentRow["AllDay"]),
-                            Notes = appointmentRow["DescriptionNotes"]
-                        });
+                            Notes = appointmentRow["DescriptionNotes"],
+                            Background = backgroundColor,
+                    }); 
                     }
                 }
             }

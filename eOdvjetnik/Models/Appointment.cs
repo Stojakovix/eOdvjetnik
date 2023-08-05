@@ -1,9 +1,4 @@
-﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Color = Microsoft.Maui.Graphics.Color;
 
 namespace eOdvjetnik.Models
 {
@@ -16,6 +11,7 @@ namespace eOdvjetnik.Models
         public bool AllDay { get; set; }
         public string EventName { get; set; }
         public string DescriptionNotes { get; set; }
+        public string CategoryColor { get; set; }
         public Brush Background { get; set; }
     }
 }

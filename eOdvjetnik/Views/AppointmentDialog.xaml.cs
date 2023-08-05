@@ -2,10 +2,7 @@ using Syncfusion.Maui.Scheduler;
 using System.Collections.ObjectModel;
 using eOdvjetnik.Models;
 using eOdvjetnik.Services;
-using eOdvjetnik.ViewModel;
 using System.Diagnostics;
-using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
 using eOdvjetnik.Model;
 using System.ComponentModel;
 
@@ -18,21 +15,34 @@ public partial class AppointmentDialog : ContentPage
     DateTime selectedDate;
     SfScheduler scheduler;
 
+    private string _appoitmentColorName;
 
-    public Brush appointmentBackgroundBrush;
-    public Brush AppointmentBackgroundBrush
+    public string AppoitmentColorName
     {
-        get => appointmentBackgroundBrush;
+        get => _appoitmentColorName;
         set
         {
-            if (appointmentBackgroundBrush != value)
+            if (_appoitmentColorName != value)
             {
-                appointmentBackgroundBrush = value;
-                OnPropertyChanged(nameof(AppointmentBackgroundBrush));
+                _appoitmentColorName = value;
+                OnPropertyChanged(nameof(AppoitmentColorName));
             }
         }
     }
+    private Color _appoitmentColor;
 
+    public Color AppoitmentColor
+    {
+        get => _appoitmentColor;
+        set
+        {
+            if (_appoitmentColor != value)
+            {
+                _appoitmentColor = value;
+                OnPropertyChanged(nameof(AppoitmentColor));
+            }
+        }
+    }
     public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler)
     {
         InitializeComponent();
@@ -55,13 +65,9 @@ public partial class AppointmentDialog : ContentPage
     {
         var selectedColorItem = (ColorItem)categoryPicker.SelectedItem;
         eventNameText.BackgroundColor = selectedColorItem.BojaPozadine;
-
-        Color backgroundColor = selectedColorItem.BojaPozadine;
-        Debug.WriteLine(backgroundColor.ToArgbHex());
-        AppointmentBackgroundBrush = new SolidColorBrush(backgroundColor);
-        Debug.WriteLine(AppointmentBackgroundBrush);
-
-
+        AppoitmentColor = selectedColorItem.BojaPozadine;
+        AppoitmentColorName = selectedColorItem.NazivBoje;
+        Debug.WriteLine(AppoitmentColorName);
     }
     private void DeleteButton_Clicked(object sender, EventArgs e)
     {
@@ -176,8 +182,9 @@ public partial class AppointmentDialog : ContentPage
             {
                 try
                 {
+
                     var hardware_id = Preferences.Get("key", "default_value");
-                    string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, hardwareid, color) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}' , '{hardware_id}', '{AppointmentBackgroundBrush}')";
+                    string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, color, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}', '{AppoitmentColorName}' , '{hardware_id}')";
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine(query);
                     Debug.WriteLine("Appointment added to remote server.");
@@ -194,7 +201,7 @@ public partial class AppointmentDialog : ContentPage
                 {
                     AppointmentDetails();
                     var hardware_id = Preferences.Get("key", "default_value");
-                    string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', hardwareid = '{hardware_id}', color = '{AppointmentBackgroundBrush}' WHERE internal_event_id = " + appointment.Id;
+                    string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', color = '{AppoitmentColorName}', hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine(query);
                     Debug.WriteLine("Appointment updated in the server");
@@ -223,8 +230,7 @@ public partial class AppointmentDialog : ContentPage
             appointment.EndTime = this.endDate_picker.Date.Add(this.endTime_picker.Time);
             appointment.IsAllDay = this.switchAllDay.IsToggled;
             appointment.Notes = this.organizerText.Text;
-       
-
+            appointment.Background = AppoitmentColor;
 
             if (this.scheduler.AppointmentsSource == null)
             {
@@ -241,6 +247,8 @@ public partial class AppointmentDialog : ContentPage
             appointment.EndTime = this.endDate_picker.Date.Add(this.endTime_picker.Time);
             appointment.IsAllDay = this.switchAllDay.IsToggled;
             appointment.Notes = this.organizerText.Text;
+            appointment.Background = AppoitmentColor;
+
         }
 
         //// - add or edit the appointment in the database collection
@@ -252,7 +260,8 @@ public partial class AppointmentDialog : ContentPage
             DescriptionNotes = appointment.Notes,
             EventName = appointment.Subject,
             ID = (int)appointment.Id,
-            Background = AppointmentBackgroundBrush
+            CategoryColor = AppoitmentColorName,
+
         };
 
         this.Navigation.PopAsync();
@@ -295,4 +304,6 @@ public partial class AppointmentDialog : ContentPage
             endTime_picker.Time = new TimeSpan(selectedDate.Hour + 1, selectedDate.Minute, selectedDate.Second);
         }
     }
+
+  
 }
