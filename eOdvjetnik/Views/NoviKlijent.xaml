@@ -81,9 +81,7 @@
                      FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="10,20,0,0" WidthRequest="100"
               HorizontalOptions="Start"
                     />
-                <Label Margin="10,20,0,0" Grid.Row="12" TextColor="Black" Text="Unesite ime/naziv kontakta!" FontAttributes="Bold" HorizontalOptions="Center"
-                       IsVisible="{Binding ClientHasNoName}" VerticalTextAlignment="Center"
-                       />
+           
             </HorizontalStackLayout>
         </Grid>
     </ScrollView>

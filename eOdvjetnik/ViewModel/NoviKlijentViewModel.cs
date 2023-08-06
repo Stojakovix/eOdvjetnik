@@ -371,7 +371,7 @@ namespace eOdvjetnik.ViewModel
         {
             ClientHasNoName = false;
 
-            if (Name != null)
+            if (Name != null && Name != "")
             {
                 AddKlijentToRemoteServer(contactItem);
                 await Shell.Current.GoToAsync("///Klijenti");
@@ -381,6 +381,7 @@ namespace eOdvjetnik.ViewModel
             else
             {
                 ClientHasNoName = true;
+                await Application.Current.MainPage.DisplayAlert("Upozorenje", "Potrebno je unijeti ime (naziv) klijenta.", "OK");
 
             }
 
@@ -503,7 +504,7 @@ namespace eOdvjetnik.ViewModel
         public async void OnUpdateCLick()
         {
             ClientHasNoName = false;
-            if (ClientName != null)
+            if (ClientName != null && ClientName != "")
             {
                 UpdateContactOnRemoteServer(contactItem);
                 await Shell.Current.GoToAsync("///Klijenti");
@@ -513,6 +514,7 @@ namespace eOdvjetnik.ViewModel
             else
             {
                 ClientHasNoName = true;
+                await Application.Current.MainPage.DisplayAlert("Upozorenje", "Potrebno je unijeti ime (naziv) klijenta.", "OK");
 
             }
 
