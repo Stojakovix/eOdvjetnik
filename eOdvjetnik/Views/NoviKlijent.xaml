@@ -67,12 +67,16 @@
             <Label Text="Pravna" Grid.Row="11" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
             <CheckBox x:Name="PravnaEntry"  Grid.Row="11" Grid.Column="1" IsChecked="{Binding Pravna, Mode=TwoWay}" HorizontalOptions="Start"  />
 
-            <HorizontalStackLayout Grid.Row="12"  >
-            <Button Text="Spremi" Command="{Binding DodajNovogKlijenta}" BackgroundColor="#5ac8fa"  BorderColor="DarkGray"
-                     FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="10,20,0,0" WidthRequest="100"
+            <HorizontalStackLayout Grid.Row="12" Grid.Column="1"  >
+                <Button Text="Spremi" Command="{Binding DodajNovogKlijenta}" BackgroundColor="#5ac8fa"  BorderColor="DarkGray"
+                     FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="0,20,0,0" WidthRequest="100"
               HorizontalOptions="Start"
                     />
-           
+                <Button Text="Odustani" Command="{Binding BackButtonCommand}" BackgroundColor="LightGray"  BorderColor="DarkGray"
+                     FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="50,20,0,0" WidthRequest="100"
+              HorizontalOptions="Start"
+                    />
+
             </HorizontalStackLayout>
         </Grid>
     </ScrollView>

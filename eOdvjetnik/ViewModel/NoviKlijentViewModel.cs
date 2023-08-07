@@ -28,7 +28,8 @@ namespace eOdvjetnik.ViewModel
         public ICommand DeleteClientData { get; set; }
         public ICommand ConfirmDelete { get; set; }
         public ICommand CancelDelete { get; set; }
-        
+        public ICommand BackButtonCommand { get; set; }
+
 
         public NoviKlijentViewModel()
         {
@@ -73,10 +74,12 @@ namespace eOdvjetnik.ViewModel
             DeleteClientData = new Command(DeletePopup);
             ConfirmDelete = new Command(OnDeleteCLick);
             CancelDelete = new Command(OnCancelCLick);
-
+            BackButtonCommand = new Command(OnBackButtonClick);
             ClientHasNoName = false;
 
         }
+
+
         #region Navigacija
         public ICommand PocetnaClick => navigacija.PocetnaClick;
         public ICommand KalendarClick => navigacija.KalendarClick;
@@ -500,7 +503,10 @@ namespace eOdvjetnik.ViewModel
           
 
         }
-
+        public async void OnBackButtonClick()
+        {
+            await Shell.Current.GoToAsync("///Klijenti");
+        }
         public async void OnUpdateCLick()
         {
             ClientHasNoName = false;

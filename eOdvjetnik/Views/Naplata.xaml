@@ -84,7 +84,8 @@
 
                 <SearchBar Placeholder="Pretraga po tarifi broju ili nazivu radnje" 
                    BackgroundColor="LightGray"
-                           
+                             Opacity="0.7"
+                    PlaceholderColor="Black"
                    SearchCommand="{Binding SearchCommand}"
                    Text="{Binding SearchText}"
                    WidthRequest="400"

@@ -114,6 +114,8 @@
 
                 <SearchBar  
                    BackgroundColor="LightGray"
+                    Opacity="0.5"
+                    PlaceholderColor="Black"
                    Placeholder="Pretraga po imenu ili OIB-u"
                    SearchCommand="{Binding SearchCommand}"
                    Text="{Binding SearchText}"
@@ -122,10 +124,10 @@
                    Margin="10,10,10,10"
                    FontSize="Default" />
 
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="Nema rezultata pretrage!" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}"   TextColor="Black" VerticalOptions="Center" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="Povezivanje nije uspjelo!" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}"  TextColor="Black" VerticalOptions="Center" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="{Binding ContactDeletedText}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding ContactDeleted}"  TextColor="Black" VerticalOptions="Center" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="{Binding ContactEditedText}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding ContactEdited}"  TextColor="Black" VerticalOptions="Center" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="Nema rezultata pretrage!" FontSize="16" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}"   TextColor="Black" VerticalOptions="Center" Padding="0,10,0,0"/>
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="Povezivanje nije uspjelo!" FontSize="16" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}"  TextColor="Black" VerticalOptions="Center" Padding="0,10,0,0" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="{Binding ContactDeletedText}" FontSize="16" FontAttributes="Bold" IsVisible="{Binding ContactDeleted}"  TextColor="Black" VerticalOptions="Center" Padding="0,10,0,0" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="{Binding ContactEditedText}" FontSize="16" FontAttributes="Bold" IsVisible="{Binding ContactEdited}"  TextColor="Black" VerticalOptions="Center" Padding="0,10,0,0" />
 
 
 

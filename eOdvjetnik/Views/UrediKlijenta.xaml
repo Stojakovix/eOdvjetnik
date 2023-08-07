@@ -13,20 +13,20 @@
     <ScrollView>
         <StackLayout>
 
-        <sfPopup:SfPopup x:Name="BrisanjePopup" 
+            <sfPopup:SfPopup x:Name="BrisanjePopup" 
                              HeaderTitle="Upozorenje" ShowHeader="False" ShowCloseButton="True"
                              IsVisible="{Binding DeleteClientPopupVisible}" 
                              IsOpen="{Binding DeleteClientPopupEnabled}"
                              MinimumWidthRequest="400" 
                              >
-            <sfPopup:SfPopup.PopupStyle>
-                <sfPopup:PopupStyle MessageBackground="White" HeaderBackground="White"   />
-            </sfPopup:SfPopup.PopupStyle>
+                <sfPopup:SfPopup.PopupStyle>
+                    <sfPopup:PopupStyle MessageBackground="White" HeaderBackground="White"   />
+                </sfPopup:SfPopup.PopupStyle>
 
-            <sfPopup:SfPopup.ContentTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <Label Text="Jeste li sigurni da želite obrisati odabrani kontakt?" TextColor="black" FontSize="20" Margin="20,20,0,0" FontAttributes="Bold"  />
+                <sfPopup:SfPopup.ContentTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="Jeste li sigurni da želite obrisati odabrani kontakt?" TextColor="black" FontSize="20" Margin="20,20,0,0" FontAttributes="Bold"  />
                             <HorizontalStackLayout>
                                 <Button  Text="Natrag" Grid.Row="12" Command="{Binding CancelDelete}" BackgroundColor="LightGray"  BorderColor="DarkGray"
                      FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="20,30,0,0" WidthRequest="150" HorizontalOptions="Start" />
@@ -34,75 +34,79 @@
                      FontSize="Default"  FontAttributes="Bold"   TextColor="LightGray" Grid.Column="1" Margin="50,30,0,0" WidthRequest="150" HorizontalOptions="End" />
                             </HorizontalStackLayout>
                         </StackLayout>
-                </DataTemplate>
-            </sfPopup:SfPopup.ContentTemplate>
-        </sfPopup:SfPopup>
+                    </DataTemplate>
+                </sfPopup:SfPopup.ContentTemplate>
+            </sfPopup:SfPopup>
 
 
-        <Grid BackgroundColor="White">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+            <Grid BackgroundColor="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
 
-            </Grid.RowDefinitions>
-            <Label Text="Ime" Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="ImeEntry" Keyboard="Numeric" Grid.Row="0" Grid.Column="1" Text="{Binding ClientName, Mode=TwoWay}"  />
+                </Grid.RowDefinitions>
+                <Label Text="Ime" Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
+                <Entry x:Name="ImeEntry" Keyboard="Numeric" Grid.Row="0" Grid.Column="1" Text="{Binding ClientName, Mode=TwoWay}"  />
 
-            <Label Text="OIB" Grid.Row="1" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="OibEntry" Keyboard="Numeric" Grid.Row="1" Grid.Column="1" Text="{Binding ClientOIB}"  />
+                <Label Text="OIB" Grid.Row="1" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
+                <Entry x:Name="OibEntry" Keyboard="Numeric" Grid.Row="1" Grid.Column="1" Text="{Binding ClientOIB}"  />
 
-            <Label Text="Datum Rođenja" Grid.Row="2" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="BirthDatePicker" Grid.Row="2" Grid.Column="1" Text="{Binding ClientBirthDate}"/>
+                <Label Text="Datum Rođenja" Grid.Row="2" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
+                <Entry x:Name="BirthDatePicker" Grid.Row="2" Grid.Column="1" Text="{Binding ClientBirthDate}"/>
 
-            <Label Text="Adresa" Grid.Row="3" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="AdresaEntry" Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding ClientAddress}"  />
+                <Label Text="Adresa" Grid.Row="3" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
+                <Entry x:Name="AdresaEntry" Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding ClientAddress}"  />
 
-            <Label Text="Ostalo" Grid.Row="4" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="OstaloEntry" Keyboard="Numeric" Grid.Row="4" Grid.Column="1" Text="{Binding ClientOther}"  />
+                <Label Text="Ostalo" Grid.Row="4" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
+                <Entry x:Name="OstaloEntry" Keyboard="Numeric" Grid.Row="4" Grid.Column="1" Text="{Binding ClientOther}"  />
 
-            <Label Text="Boravište" Grid.Row="5" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="BoravišteEntry" Keyboard="Numeric" Grid.Row="5" Grid.Column="1" Text="{Binding ClientResidence}"  />
+                <Label Text="Boravište" Grid.Row="5" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
+                <Entry x:Name="BoravišteEntry" Keyboard="Numeric" Grid.Row="5" Grid.Column="1" Text="{Binding ClientResidence}"  />
 
-            <Label Text="Telefon" Grid.Row="6" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="TelefonEntry" Keyboard="Numeric" Grid.Row="6" Grid.Column="1" Text="{Binding ClientPhone}"  />
+                <Label Text="Telefon" Grid.Row="6" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
+                <Entry x:Name="TelefonEntry" Keyboard="Numeric" Grid.Row="6" Grid.Column="1" Text="{Binding ClientPhone}"  />
 
-            <Label Text="Fax" Grid.Row="7" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="FaxEntry" Keyboard="Numeric" Grid.Row="7" Grid.Column="1" Text="{Binding ClientFax}"  />
+                <Label Text="Fax" Grid.Row="7" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
+                <Entry x:Name="FaxEntry" Keyboard="Numeric" Grid.Row="7" Grid.Column="1" Text="{Binding ClientFax}"  />
 
-            <Label Text="Mobitel" Grid.Row="8" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="MobitelEntry" Keyboard="Numeric" Grid.Row="8" Grid.Column="1" Text="{Binding ClientMobile}"  />
+                <Label Text="Mobitel" Grid.Row="8" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
+                <Entry x:Name="MobitelEntry" Keyboard="Numeric" Grid.Row="8" Grid.Column="1" Text="{Binding ClientMobile}"  />
 
-            <Label Text="E-pošta" Grid.Row="9" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="EMailEntry" Keyboard="Numeric" Grid.Row="9" Grid.Column="1" Text="{Binding ClientEmail}"  />
+                <Label Text="E-pošta" Grid.Row="9" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
+                <Entry x:Name="EMailEntry" Keyboard="Numeric" Grid.Row="9" Grid.Column="1" Text="{Binding ClientEmail}"  />
 
-            <Label Text="Država" Grid.Row="10" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="DržavaEntry" Keyboard="Numeric" Grid.Row="10" Grid.Column="1" Text="{Binding ClientCountry}"  />
+                <Label Text="Država" Grid.Row="10" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
+                <Entry x:Name="DržavaEntry" Keyboard="Numeric" Grid.Row="10" Grid.Column="1" Text="{Binding ClientCountry}"  />
 
-            <Label Text="Pravna" Grid.Row="11" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
+                <Label Text="Pravna" Grid.Row="11" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
                 <CheckBox x:Name="PravnaEntry"  Grid.Row="11" Grid.Column="1" IsChecked="{Binding ClientLegalPerson}" HorizontalOptions="Start" />
 
-            <Button  Text="Spremi" Grid.Row="12" Command="{Binding UpdateClientData}" BackgroundColor="#5ac8fa"  BorderColor="DarkGray"
-                     FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="10,20,0,0" WidthRequest="100" HorizontalOptions="Start" />
+                <HorizontalStackLayout Grid.Row="12" Grid.Column="1">
+                    <Button  Text="Spremi" Command="{Binding UpdateClientData}" BackgroundColor="#5ac8fa"  BorderColor="DarkGray"
+                     FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="0,20,0,0" WidthRequest="100"  />
 
+                    <Button Text="Odustani" Grid.Row="12" Command="{Binding BackButtonCommand}" BackgroundColor="LightGray"  BorderColor="DarkGray"
+                     FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="50,20,0,0" WidthRequest="100" />
 
-            <Button  Text="Obriši kontakt" Grid.Row="12" Command="{Binding DeleteClientData}" BackgroundColor="#DC143C"  BorderColor="DarkGray"
-                     FontSize="Default"  FontAttributes="Bold"   TextColor="LightGray" Grid.Column="1" Margin="10,20,30,0" WidthRequest="150" HorizontalOptions="End" />
-        </Grid>
+                    <Button  Text="Obriši kontakt"  Command="{Binding DeleteClientData}" BackgroundColor="#DC143C"  BorderColor="DarkGray"
+                     FontSize="Default"  FontAttributes="Bold"   TextColor="LightGray" Grid.Column="1" Margin="50,20,30,0" WidthRequest="150"  />
+                </HorizontalStackLayout>
+            </Grid>
         </StackLayout>
     </ScrollView>
 </ContentPage>
