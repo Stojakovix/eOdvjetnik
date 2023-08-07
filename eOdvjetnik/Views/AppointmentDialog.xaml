@@ -61,13 +61,13 @@
             </HorizontalStackLayout>
 
             <Label Grid.Row="5" Grid.Column="0" FontSize="Default"  VerticalTextAlignment="Center"  Text="Cjelodnevni događaj"   TextColor="Black" />
-            <Switch Grid.Row="5" Grid.Column="1" x:Name="switchAllDay" HorizontalOptions="Start"  VerticalOptions="Center" BackgroundColor="White" ThumbColor="#DC143C" />
+            <Switch Grid.Row="5" Grid.Column="1" x:Name="switchAllDay" HorizontalOptions="Start"  VerticalOptions="Center" BackgroundColor="White" ThumbColor="#DC143C"  />
 
 
             <HorizontalStackLayout Grid.Row="6" Grid.ColumnSpan="1" >
-                <Button x:Name="DeleteButton" Text="Obriši" BorderColor="DarkGray" Background="#DC143C" TextColor="LightGray"  WidthRequest="120" FontSize="Default" Margin="10,20,20,0" />
-                <Button x:Name="cancelButton" Text="Odustani" BorderColor="DarkGray" BackgroundColor="LightGray"  TextColor="#3B3B3B" WidthRequest="120" FontSize="Default" Margin="10,20,20,0" />
-                <Button x:Name="saveButton" Text="Spremi" BorderColor="DarkGray"  BackgroundColor="#5ac8fa" TextColor="Black" WidthRequest="100" FontSize="Default" Margin="10,20,20,0" />
+                <Button x:Name="DeleteButton" Clicked="DeleteButton_Clicked" Text="Obriši" BorderColor="DarkGray" Background="#DC143C" TextColor="LightGray"  WidthRequest="120" FontSize="Default" Margin="10,20,20,0" />
+                <Button x:Name="cancelButton" Clicked="CancelButton_Clicked" Text="Odustani" BorderColor="DarkGray" BackgroundColor="LightGray"  TextColor="#3B3B3B" WidthRequest="120" FontSize="Default" Margin="10,20,20,0" />
+                <Button x:Name="saveButton" Clicked="SaveButton_Clicked" Text="Spremi" BorderColor="DarkGray"  BackgroundColor="#5ac8fa" TextColor="Black" WidthRequest="100" FontSize="Default" Margin="10,20,20,0" />
             </HorizontalStackLayout>
             
         </Grid>
