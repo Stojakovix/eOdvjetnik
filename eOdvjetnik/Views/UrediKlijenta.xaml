@@ -103,7 +103,7 @@
             <Entry x:Name="DržavaEntry" Keyboard="Numeric" Grid.Row="10" Grid.Column="1" Text="{Binding ClientCountry}"  />
 
             <Label Text="Pravna" Grid.Row="11" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <CheckBox x:Name="PravnaEntry"  Grid.Row="11" Grid.Column="1" IsChecked="{Binding ClientLegalPerson}"  />
+                <CheckBox x:Name="PravnaEntry"  Grid.Row="11" Grid.Column="1" IsChecked="{Binding ClientLegalPerson}" HorizontalOptions="Start" />
 
             <Button  Text="Spremi" Grid.Row="12" Command="{Binding UpdateClientData}" BackgroundColor="#5ac8fa"  BorderColor="DarkGray"
                      FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="10,20,0,0" WidthRequest="100" HorizontalOptions="Start" />

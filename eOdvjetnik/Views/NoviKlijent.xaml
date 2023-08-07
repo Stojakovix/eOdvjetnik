@@ -74,7 +74,7 @@
             <Entry x:Name="DržavaEntry" Grid.Row="10" Grid.Column="1" Text="{Binding Drzava}"  />
 
             <Label Text="Pravna" Grid.Row="11" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <CheckBox x:Name="PravnaEntry"  Grid.Row="11" Grid.Column="1" IsChecked="{Binding Pravna, Mode=TwoWay}"  />
+            <CheckBox x:Name="PravnaEntry"  Grid.Row="11" Grid.Column="1" IsChecked="{Binding Pravna, Mode=TwoWay}" HorizontalOptions="Start"  />
 
             <HorizontalStackLayout Grid.Row="12"  >
             <Button Text="Spremi" Command="{Binding DodajNovogKlijenta}" BackgroundColor="#5ac8fa"  BorderColor="DarkGray"
