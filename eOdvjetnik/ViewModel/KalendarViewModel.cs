@@ -139,14 +139,7 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message + "in kalendarViewModel init");
             }
         }
-        public ICommand PocetnaClick => navigacija.PocetnaClick;
-        public ICommand KalendarClick => navigacija.KalendarClick;
-        public ICommand SpisiClick => navigacija.SpisiClick;
-        public ICommand TarifaClick => navigacija.TarifaClick;
-        public ICommand DokumentiClick => navigacija.DokumentiClick;
-        public ICommand KontaktiClick => navigacija.KontaktiClick;
-        public ICommand KorisnickaClick => navigacija.KorisnickaPodrskaClick;
-        public ICommand PostavkeClick => navigacija.PostavkeClick;
+
 
         /// <summary>
         /// Property changed event handler

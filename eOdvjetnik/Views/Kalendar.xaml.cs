@@ -93,11 +93,11 @@ public partial class Kalendar : ContentPage
         {
             if (e.Appointments != null)
             {
-                Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
+                Navigation.PushModalAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
             }
             else
             {
-                Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
+                Navigation.PushModalAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
             }
         }
     }

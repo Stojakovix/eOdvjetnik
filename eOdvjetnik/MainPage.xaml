@@ -31,17 +31,6 @@
         <local:MainPageViewModel/>
     </ContentPage.BindingContext>
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Početna" Command="{Binding PocetnaClick}" />
-        <ToolbarItem Text="Ročišnik" Command="{Binding KalendarClick}" />
-        <ToolbarItem Text="Upisnik" Command="{Binding SpisiClick}" />
-        <ToolbarItem Text="Tarifa" Command="{Binding TarifaClick}" />
-        <ToolbarItem Text="Dokumenti" Command="{Binding DokumentiClick}"/>
-        <ToolbarItem Text="Kontakti" Command="{Binding KontaktiClick}" />
-        <ToolbarItem Text="Korisnička Podrška" Command="{Binding KorisnickaClick}" />
-        <ToolbarItem Text="Postavke" Command="{Binding PostavkeClick}" />
-
-    </ContentPage.ToolbarItems>
 
     
     
@@ -112,9 +101,9 @@
 
 
         </VerticalStackLayout>
-        <StackLayout>
+        <StackLayout Grid.Column="4" HorizontalOptions="EndAndExpand" Padding="0,0,10,0">
             <Label x:Uid="greetingLabel" />
-            <Picker x:Name="languagePicker" Title="Select Language" SelectedIndexChanged="OnLanguageSelected">
+            <Picker x:Name="languagePicker" Title="Select Language" SelectedIndexChanged="OnLanguageSelected" >
                 <Picker.Items>
                     <x:String>hr-HR</x:String>
                     <x:String>sr-Cyrl-RS</x:String>
