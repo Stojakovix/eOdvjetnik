@@ -11,6 +11,7 @@
         <local:PostavkeViewModel x:Name="viewmodel"/>
     </ContentPage.BindingContext>
 
+    
     <VerticalStackLayout >
         <Grid Margin="10,10,10,10" RowSpacing="5" ColumnSpacing="5">
 
@@ -170,7 +171,9 @@
                         <RowDefinition Height="55" />
                         <RowDefinition Height="210" />
                         <RowDefinition Height="55" />
-                        <RowDefinition Height="55" />
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="65" />
+
 
                     </Grid.RowDefinitions>
 
@@ -200,8 +203,15 @@
                            HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding ReceiptSignature, Mode=TwoWay}"
                            />
 
-                    <Button Margin="0,15,0,0" Grid.Row="5" Grid.Column="1" Text="Spremi" BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default" 
+                    <Button Margin="10,20,0,0" Grid.Row="5" Grid.Column="0" Text="Odabir logotipa za račun" VerticalOptions="Start" BorderColor="DarkGray" BackgroundColor="LightGray"
+                            TextColor="Black" FontSize="Default" Clicked="OnLogoImageClicked"/>
+
+                    <Image Margin="0,20,0,0" Grid.Row="5" Grid.Column="1" HeightRequest="100"  x:Name="CompanyLogo"  />
+
+
+                    <Button Margin="0,30,0,0" Grid.Row="6" Grid.Column="0" Text="Spremi" BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default" 
                             HorizontalOptions="Center" MinimumWidthRequest="100" Command="{Binding SaveReceiptCompanyInfo}" />
+
 
                 </Grid>
                     

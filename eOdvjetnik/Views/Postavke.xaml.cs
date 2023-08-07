@@ -12,7 +12,34 @@ public partial class Postavke : ContentPage
         BindingContext = new PostavkeViewModel();
     }
 
-    
+    private async void OnLogoImageClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            var result = await FilePicker.PickAsync(new PickOptions
+            {
+                PickerTitle = "Odaberite sliku logotipa",
+                FileTypes = FilePickerFileType.Images
+            });
+
+            if (result != null)
+            {
+                var stream = await result.OpenReadAsync();
+                CompanyLogo.Source = ImageSource.FromStream(() => stream);
+                string filePath = result.FullPath;
+                Preferences.Set("LogoImagePath", filePath);
+            }
+            else
+            {
+                // User canceled the file picking, do nothing.
+            }
+        }
+        catch (Exception ex)
+        {
+       
+            Console.WriteLine($"Error picking image: {ex.Message}");
+        }
+    }
     protected override void OnAppearing()
     {
         base.OnAppearing();
