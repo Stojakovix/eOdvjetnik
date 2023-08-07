@@ -52,10 +52,10 @@ public partial class AppointmentDialog : ContentPage
         organizerText.Placeholder = "Unesite opis...";
 
         UpdateEditor();
-        saveButton.Clicked += SaveButton_Clicked;
-        cancelButton.Clicked += CancelButton_Clicked;
+        //saveButton.Clicked += SaveButton_Clicked;
+        //cancelButton.Clicked += CancelButton_Clicked;
         switchAllDay.Toggled += SwitchAllDay_Toggled;
-        DeleteButton.Clicked += DeleteButton_Clicked;
+        //DeleteButton.Clicked += DeleteButton_Clicked;
 
         categoryPicker.SelectedIndexChanged += OnCategoryPickerSelectedIndexChanged;
 
