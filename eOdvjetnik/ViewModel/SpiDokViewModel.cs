@@ -48,14 +48,7 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message);
             }
         }
-        public ICommand PocetnaClick => navigacija.PocetnaClick;
-        public ICommand KalendarClick => navigacija.KalendarClick;
-        public ICommand SpisiClick => navigacija.SpisiClick;
-        public ICommand TarifaClick => navigacija.TarifaClick;
-        public ICommand DokumentiClick => navigacija.DokumentiClick;
-        public ICommand KontaktiClick => navigacija.KontaktiClick;
-        public ICommand KorisnickaClick => navigacija.KorisnickaPodrskaClick;
-        public ICommand PostavkeClick => navigacija.PostavkeClick;
+
         public void GenerateFiles()
         {
             try
