@@ -28,28 +28,27 @@ public partial class Kalendar : ContentPage
         var odvjetnik_nas = new ExternalSQLConnect();
         var hardware_id = Preferences.Get("key", "default_value");
 
-        //zakomenitrao DD, ovo samo ispisuje sve Evente u debug
-       //try
-       //{
-       //    //Call the function
-       //    Dictionary<string, string>[] resultArray = odvjetnik_nas.sqlQuery("Select * from events where hardwareid = '"+ hardware_id + "' and TimeFrom > '2023-05-25 20:00:00'");//
-       //    Debug.WriteLine("Usao usqlQuery 11------------------------------------------------**");
-       //
-       //    // Print the attribute names
-       //
-       //    foreach (Dictionary<string, string> row in resultArray)
-       //    {
-       //        foreach (KeyValuePair<string, string> pair in row)
-       //        {
-       //            Debug.WriteLine(pair.Key + ": " + pair.Value);
-       //        }
-       //        Debug.WriteLine("Print the attribute names");
-       //    }
-       //}
-       //catch (Exception ex)
-       //{
-       //    Debug.WriteLine(ex.Message + "u Kalendar.xaml.csu");
-       //}
+       try
+       {
+           //Call the function
+           Dictionary<string, string>[] resultArray = odvjetnik_nas.sqlQuery("Select * from events where hardwareid = '"+ hardware_id + "' and TimeFrom > '2023-05-25 20:00:00'");//
+           Debug.WriteLine("Usao usqlQuery 11------------------------------------------------**");
+       
+           // Print the attribute names
+       
+           foreach (Dictionary<string, string> row in resultArray)
+           {
+               foreach (KeyValuePair<string, string> pair in row)
+               {
+                   Debug.WriteLine(pair.Key + ": " + pair.Value);
+               }
+               Debug.WriteLine("Print the attribute names");
+           }
+       }
+       catch (Exception ex)
+       {
+           Debug.WriteLine(ex.Message + "u Kalendar.xaml.csu");
+       }
 
     }
 
@@ -94,11 +93,11 @@ public partial class Kalendar : ContentPage
         {
             if (e.Appointments != null)
             {
-                Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
+                Navigation.PushModalAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
             }
             else
             {
-                Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
+                Navigation.PushModalAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
             }
         }
     }

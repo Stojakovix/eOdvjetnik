@@ -13,16 +13,7 @@
     <ContentPage.BindingContext>
         <viewmodel:NaplataViewModel/>
     </ContentPage.BindingContext>
-        <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Početna" Command="{Binding PocetnaClick}" />
-        <ToolbarItem Text="Ročišnik" Command="{Binding KalendarClick}" />
-        <ToolbarItem Text="Upisnik" Command="{Binding SpisiClick}" />
-        <ToolbarItem Text="Tarifa" Command="{Binding TarifaClick}" />
-        <ToolbarItem Text="Dokumenti" Command="{Binding DokumentiClick}"/>
-        <ToolbarItem Text="Kontakti" Command="{Binding KontaktiClick}" />
-        <ToolbarItem Text="Korisnička Podrška" Command="{Binding KorisnickaClick}" />
-        <ToolbarItem Text="Postavke" Command="{Binding PostavkeClick}" />
-    </ContentPage.ToolbarItems>
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -93,7 +84,8 @@
 
                 <SearchBar Placeholder="Pretraga po tarifi broju ili nazivu radnje" 
                    BackgroundColor="LightGray"
-                           
+                             Opacity="0.7"
+                    PlaceholderColor="Black"
                    SearchCommand="{Binding SearchCommand}"
                    Text="{Binding SearchText}"
                    WidthRequest="400"

@@ -8,16 +8,7 @@
     <ContentPage.BindingContext>
         <viewmodel:NoviKlijentViewModel/>
     </ContentPage.BindingContext>
-        <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Početna" Command="{Binding PocetnaClick}" />
-        <ToolbarItem Text="Ročišnik" Command="{Binding KalendarClick}" />
-        <ToolbarItem Text="Upisnik" Command="{Binding SpisiClick}" />
-        <ToolbarItem Text="Tarifa" Command="{Binding TarifaClick}" />
-        <ToolbarItem Text="Dokumenti" Command="{Binding DokumentiClick}"/>
-        <ToolbarItem Text="Kontakti" Command="{Binding KontaktiClick}" />
-        <ToolbarItem Text="Korisnička Podrška" Command="{Binding KorisnickaClick}" />
-        <ToolbarItem Text="Postavke" Command="{Binding PostavkeClick}" />
-    </ContentPage.ToolbarItems>
+
     <ScrollView>
         <Grid BackgroundColor="White">
             <Grid.ColumnDefinitions>
@@ -74,16 +65,18 @@
             <Entry x:Name="DržavaEntry" Grid.Row="10" Grid.Column="1" Text="{Binding Drzava}"  />
 
             <Label Text="Pravna" Grid.Row="11" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <CheckBox x:Name="PravnaEntry"  Grid.Row="11" Grid.Column="1" IsChecked="{Binding Pravna, Mode=TwoWay}"  />
+            <CheckBox x:Name="PravnaEntry"  Grid.Row="11" Grid.Column="1" IsChecked="{Binding Pravna, Mode=TwoWay}" HorizontalOptions="Start"  />
 
-            <HorizontalStackLayout Grid.Row="12"  >
-            <Button Text="Spremi" Command="{Binding DodajNovogKlijenta}" BackgroundColor="#5ac8fa"  BorderColor="DarkGray"
-                     FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="10,20,0,0" WidthRequest="100"
+            <HorizontalStackLayout Grid.Row="12" Grid.Column="1"  >
+                <Button Text="Spremi" Command="{Binding DodajNovogKlijenta}" BackgroundColor="#5ac8fa"  BorderColor="DarkGray"
+                     FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="0,20,0,0" WidthRequest="100"
               HorizontalOptions="Start"
                     />
-                <Label Margin="10,20,0,0" Grid.Row="12" TextColor="Black" Text="Unesite ime/naziv kontakta!" FontAttributes="Bold" HorizontalOptions="Center"
-                       IsVisible="{Binding ClientHasNoName}" VerticalTextAlignment="Center"
-                       />
+                <Button Text="Odustani" Command="{Binding BackButtonCommand}" BackgroundColor="LightGray"  BorderColor="DarkGray"
+                     FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="50,20,0,0" WidthRequest="100"
+              HorizontalOptions="Start"
+                    />
+
             </HorizontalStackLayout>
         </Grid>
     </ScrollView>

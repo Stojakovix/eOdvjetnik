@@ -21,7 +21,7 @@
         <HorizontalStackLayout  Spacing="-10"   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
             <HorizontalStackLayout.Margin   >
                 <OnPlatform x:TypeArguments="Thickness" Default="0,0,0,0">
-                    <On Platform="MacCatalyst" Value="0,0,0,-50" />
+                    <On Platform="MacCatalyst" Value="0,0,0,0" />
                 </OnPlatform>
 
             </HorizontalStackLayout.Margin>
@@ -104,7 +104,7 @@
             <Button Grid.Column="9" 
                     Text="{x:Static resx:AppResources.Postavke}" 
                     BackgroundColor="Transparent"
-                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}"  
+                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
                     BorderWidth="0"
                     Command="{Binding PostavkeClickCommand}" 
                     FontSize="Default"
@@ -113,7 +113,7 @@
             <Button Grid.Column="10" 
                     Text="SpiDok" 
                     BackgroundColor="Transparent"
-                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}"  
+                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
                     BorderWidth="0"
                     Command="{Binding SpiDokClickCommand}" 
                     FontSize="Default"

@@ -1,10 +1,9 @@
-using Syncfusion.Maui.Scheduler;
+﻿using Syncfusion.Maui.Scheduler;
 using System.Collections.ObjectModel;
 using eOdvjetnik.Models;
 using eOdvjetnik.Services;
 using System.Diagnostics;
 using eOdvjetnik.Model;
-using System.ComponentModel;
 
 namespace eOdvjetnik.Views;
 
@@ -53,10 +52,10 @@ public partial class AppointmentDialog : ContentPage
         organizerText.Placeholder = "Unesite opis...";
 
         UpdateEditor();
-        saveButton.Clicked += SaveButton_Clicked;
-        cancelButton.Clicked += CancelButton_Clicked;
+        //saveButton.Clicked += SaveButton_Clicked;
+        //cancelButton.Clicked += CancelButton_Clicked;
         switchAllDay.Toggled += SwitchAllDay_Toggled;
-        DeleteButton.Clicked += DeleteButton_Clicked;
+        //DeleteButton.Clicked += DeleteButton_Clicked;
 
         categoryPicker.SelectedIndexChanged += OnCategoryPickerSelectedIndexChanged;
 
@@ -67,8 +66,9 @@ public partial class AppointmentDialog : ContentPage
         eventNameText.BackgroundColor = selectedColorItem.BojaPozadine;
         AppoitmentColor = selectedColorItem.BojaPozadine;
         AppoitmentColorName = selectedColorItem.NazivBoje;
-        Debug.WriteLine(AppoitmentColorName);
     }
+
+
     private void DeleteButton_Clicked(object sender, EventArgs e)
     {
         try
@@ -137,29 +137,46 @@ public partial class AppointmentDialog : ContentPage
             var endTime = endTime_picker.Time;
             var startTime = startTime_picker.Time;
 
+            if(AppoitmentColorName == null || AppoitmentColorName == "")
+            {
+                Application.Current.MainPage.DisplayAlert("", "Potrebno je odabrati kategoriju.", "OK");
 
-            if (endDate < startDate)
-            {
-                Application.Current.MainPage.DisplayAlert("", "End time should be greater than start time", "OK");
             }
-            else if (endDate == startDate)
+            else
             {
-                if (endTime < startTime)
+                Debug.WriteLine("Ima kategoriju");
+            if (eventNameText.Text == null || eventNameText.Text == "")
+            {
+                Application.Current.MainPage.DisplayAlert("", "Potrebno je unijeti naziv događaja.", "OK");
+
+            }
+            else
+            {
+
+                if (endDate < startDate)
                 {
                     Application.Current.MainPage.DisplayAlert("", "End time should be greater than start time", "OK");
+                }
+                else if (endDate == startDate)
+                {
+                    if (endTime < startTime)
+                    {
+                        Application.Current.MainPage.DisplayAlert("", "End time should be greater than start time", "OK");
+                    }
+                    else
+                    {
+                        AppointmentDetails();
+                        AddAppointmentToRemoteServer(appointment);
+                        Shell.Current.GoToAsync("///Kalendar");
+                    }
                 }
                 else
                 {
                     AppointmentDetails();
                     AddAppointmentToRemoteServer(appointment);
-                    Shell.Current.GoToAsync("///Kalendar");
+                    Navigation.PopAsync();
                 }
             }
-            else
-            {
-                AppointmentDetails();
-                AddAppointmentToRemoteServer(appointment);
-                Navigation.PopAsync();
             }
         }
         catch (Exception ex)
@@ -195,13 +212,30 @@ public partial class AppointmentDialog : ContentPage
                     Debug.WriteLine(ex.Message + " in AppointmentDialog AddAppointmentToServer if");
                 }
             }
-            else
+            else if (AppoitmentColorName != null)
             {
                 try
                 {
                     AppointmentDetails();
                     var hardware_id = Preferences.Get("key", "default_value");
                     string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', color = '{AppoitmentColorName}', hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
+                    externalSQLConnect.sqlQuery(query);
+                    Debug.WriteLine(query);
+                    Debug.WriteLine("Appointment updated in the server");
+                }
+                catch (Exception ex)
+                {
+
+                    Debug.WriteLine(ex.Message + " in AppointmentDialog AddAppointmentToServer else");
+                }
+            }
+            else
+            {
+                try
+                {
+                    AppointmentDetails();
+                    var hardware_id = Preferences.Get("key", "default_value");
+                    string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine(query);
                     Debug.WriteLine("Appointment updated in the server");
@@ -247,6 +281,7 @@ public partial class AppointmentDialog : ContentPage
             appointment.EndTime = this.endDate_picker.Date.Add(this.endTime_picker.Time);
             appointment.IsAllDay = this.switchAllDay.IsToggled;
             appointment.Notes = this.organizerText.Text;
+            AppoitmentColorName = appointment.Location;
             appointment.Background = AppoitmentColor;
 
         }
@@ -275,6 +310,20 @@ public partial class AppointmentDialog : ContentPage
             organizerText.Text = appointment.Notes;
             startDate_picker.Date = appointment.StartTime;
             endDate_picker.Date = appointment.EndTime;
+
+            var appointmentColor = (appointment.Background as SolidColorBrush)?.Color;
+            Debug.WriteLine("Tražena boja: " + appointmentColor.ToArgbHex());
+
+            for (int i = 0; i < categoryPicker.Items.Count; i++)
+            {
+                var colorItem = (ColorItem)categoryPicker.ItemsSource[i];
+                if (appointmentColor.ToArgbHex() == colorItem.BojaPozadine.ToArgbHex())
+                {
+                    categoryPicker.SelectedIndex = i;
+                    OnCategoryPickerSelectedIndexChanged(categoryPicker, EventArgs.Empty); 
+                    break;
+                }
+            }
 
 
             if (!appointment.IsAllDay)

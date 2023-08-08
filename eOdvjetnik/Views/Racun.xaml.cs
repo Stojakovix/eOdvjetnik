@@ -16,8 +16,8 @@ public partial class Racun : ContentPage
 {
     public ObservableCollection<ReceiptItem> ReceiptItems = new ObservableCollection<ReceiptItem>();
 
-    
-
+    string savedImagePath { get; set; } 
+    Stream imageStream { get; set; }
     public event EventHandler onCreateDocument;
 
     public string CompanyName { get; set; }
@@ -64,8 +64,22 @@ public partial class Racun : ContentPage
         ClientOIB = Preferences.Get("SelectedOIB", "");
         ClientAddress = Preferences.Get("SelectedAddress", "");
 
+        savedImagePath = Preferences.Get("LogoImagePath", string.Empty);
 
-          
+        // Get the image stream from the saved image path
+         imageStream = null;
+        if (!string.IsNullOrEmpty(savedImagePath))
+        {
+            try
+            {
+                imageStream = File.OpenRead(savedImagePath);
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions that may occur while opening the file stream.
+                Debug.WriteLine("Error while opening image stream: " + ex.Message);
+            }
+        }
     }
 
     private void CreateDocument(object sender, EventArgs e)
@@ -151,9 +165,9 @@ public partial class Racun : ContentPage
         IWParagraph paragraph = section.HeadersFooters.Header.AddParagraph();
 
         Assembly assembly = typeof(MainPage).GetTypeInfo().Assembly;
-        string resourcePath = "eOdvjetnik.Resources.DocIO.logoNincevic.png";
+        string resourcePath = savedImagePath;
         //Gets the image stream.
-        Stream imageStream = assembly.GetManifestResourceStream(resourcePath);
+        //Stream imageStream = assembly.GetManifestResourceStream(resourcePath);
         IWPicture picture = paragraph.AppendPicture(imageStream);
         picture.TextWrappingStyle = TextWrappingStyle.Inline;
         picture.HorizontalAlignment = ShapeHorizontalAlignment.Center;

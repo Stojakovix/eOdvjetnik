@@ -28,7 +28,8 @@ namespace eOdvjetnik.ViewModel
         public ICommand DeleteClientData { get; set; }
         public ICommand ConfirmDelete { get; set; }
         public ICommand CancelDelete { get; set; }
-        
+        public ICommand BackButtonCommand { get; set; }
+
 
         public NoviKlijentViewModel()
         {
@@ -73,10 +74,12 @@ namespace eOdvjetnik.ViewModel
             DeleteClientData = new Command(DeletePopup);
             ConfirmDelete = new Command(OnDeleteCLick);
             CancelDelete = new Command(OnCancelCLick);
-
+            BackButtonCommand = new Command(OnBackButtonClick);
             ClientHasNoName = false;
 
         }
+
+
         #region Navigacija
         public ICommand PocetnaClick => navigacija.PocetnaClick;
         public ICommand KalendarClick => navigacija.KalendarClick;
@@ -371,7 +374,7 @@ namespace eOdvjetnik.ViewModel
         {
             ClientHasNoName = false;
 
-            if (Name != null)
+            if (Name != null && Name != "")
             {
                 AddKlijentToRemoteServer(contactItem);
                 await Shell.Current.GoToAsync("///Klijenti");
@@ -381,6 +384,7 @@ namespace eOdvjetnik.ViewModel
             else
             {
                 ClientHasNoName = true;
+                await Application.Current.MainPage.DisplayAlert("Upozorenje", "Potrebno je unijeti ime (naziv) klijenta.", "OK");
 
             }
 
@@ -499,11 +503,14 @@ namespace eOdvjetnik.ViewModel
           
 
         }
-
+        public async void OnBackButtonClick()
+        {
+            await Shell.Current.GoToAsync("///Klijenti");
+        }
         public async void OnUpdateCLick()
         {
             ClientHasNoName = false;
-            if (ClientName != null)
+            if (ClientName != null && ClientName != "")
             {
                 UpdateContactOnRemoteServer(contactItem);
                 await Shell.Current.GoToAsync("///Klijenti");
@@ -513,6 +520,7 @@ namespace eOdvjetnik.ViewModel
             else
             {
                 ClientHasNoName = true;
+                await Application.Current.MainPage.DisplayAlert("Upozorenje", "Potrebno je unijeti ime (naziv) klijenta.", "OK");
 
             }
 
