@@ -7,6 +7,7 @@
        xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"  
        Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
        Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True , Android=True, iOS=True}"
+       xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
 
        >
 
@@ -27,8 +28,8 @@
 
 
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="0" Text="Početna" 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}" 
+                    Grid.Column="0" Text="{x:Static resx:AppResources.Pocetna}" 
                     Command="{Binding MainClickCommand}" 
                     x:Name="PočetnaButton"
                     BackgroundColor="Transparent" 
@@ -38,8 +39,8 @@
                     BorderWidth="0"                    
                     />
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="1" Text="Ročišnik" 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}" 
+                    Grid.Column="1" Text="{x:Static resx:AppResources.Rocisnik}" 
                     Command="{Binding KalendarClickCommand}" 
                     x:Name="KalendarButton" 
                     BackgroundColor="Transparent" 
@@ -48,8 +49,8 @@
                     TextColor="White"
                     />
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="5" Text="Upisnik" 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}" 
+                    Grid.Column="5" Text="{x:Static resx:AppResources.Upisnik}" 
                     Command="{Binding SpisiClickCommand}" 
                     x:Name="SpisiButton"
                     BackgroundColor="Transparent"
@@ -59,8 +60,8 @@
                     TextColor="White"
                     />
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="4" Text="Tarifa" 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}" 
+                    Grid.Column="4" Text="{x:Static resx:AppResources.Tarifa}" 
                     Command="{Binding NaplataClickCommand}" 
                     x:Name="NaplataButton"
                     BackgroundColor="Transparent"
@@ -69,8 +70,8 @@
                     TextColor="White"
                     />
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="2" Text="Dokumenti" 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}" 
+                    Grid.Column="2" Text="{x:Static resx:AppResources.Dokumenti}" 
                     Command="{Binding DokumentiClickCommand}" 
                     x:Name="DokumentiButton"
                     BackgroundColor="Transparent"
@@ -79,8 +80,8 @@
                     TextColor="White"
                     />
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="3" Text="Kontakti" 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}" 
+                    Grid.Column="3" Text="{x:Static resx:AppResources.Kontakti}" 
                     Command="{Binding KlijentiClickCommand}" 
                     x:Name="KlijentiButton"
                     BackgroundColor="Transparent"
@@ -91,8 +92,8 @@
 
 
             <Button Grid.Column="6" 
-                    Text="Korisnička Podrška" 
-                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
+                    Text="{x:Static resx:AppResources.KorisnickaPodrska}" 
+                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}"  
                     BackgroundColor="Transparent" 
                     BorderWidth="0" 
                     Command="{Binding OnSupportClickCommand}"
@@ -101,7 +102,7 @@
  />
 
             <Button Grid.Column="9" 
-                    Text="Postavke" 
+                    Text="{x:Static resx:AppResources.Postavke}" 
                     BackgroundColor="Transparent"
                     IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
                     BorderWidth="0"
@@ -119,7 +120,7 @@
                     TextColor="White"
  />
             <sfPopup:SfPopup x:Name="popup" 
-                             HeaderTitle="Korisnička podrška" 
+                             HeaderTitle="{x:Static resx:AppResources.KorisnickaPodrska}" 
                              IsVisible="{Binding SupportVisible}" 
                              IsOpen="{Binding SupportPopupOpen}"
                              >
@@ -130,8 +131,8 @@
                     <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Label Text="Broj mobitela: +385 99 290 0000" TextColor="Black" FontSize="16" Margin="20,0,0,10"/>
-                            <Label Text="Email: podrska@eodvjetnik.hr" TextColor="Black" FontSize="16" Margin="20,0,0,10" />
+                            <Label Text="{x:Static resx:AppResources.MainMobBroj}" TextColor="Black" FontSize="16" Margin="20,0,0,10"/>
+                            <Label Text="{x:Static resx:AppResources.MainEmail}" TextColor="Black" FontSize="16" Margin="20,0,0,10" />
                             <Label Text="{Binding Version}" TextColor="Black" FontSize="16" Margin="20,0,0,10" />
                         </StackLayout>
                     </DataTemplate>
@@ -139,7 +140,7 @@
             </sfPopup:SfPopup>
 
             <sfPopup:SfPopup x:Name="popupIstek" 
-                             HeaderTitle="Obavijest" 
+                             HeaderTitle="{x:Static resx:AppResources.Obavijest}" 
                              IsVisible="{Binding ExpiryVisible}" 
                              IsOpen="{Binding ExpiryPopupOpen}"
                              ShowCloseButton="True" 
@@ -164,19 +165,19 @@
 
         </HorizontalStackLayout>
     </Shell.TitleView>
-    
-        <ShellContent Title="Početna" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"  />
-        <ShellContent Title="Ročišnik" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
-        <ShellContent Title="Spisi" ContentTemplate="{DataTemplate views:Spisi}" Route="Spisi" />
-        <ShellContent Title="Kontakti" ContentTemplate="{DataTemplate views:Klijenti}" Route="Klijenti" />
-        <ShellContent Title="Tarife i Naplata" ContentTemplate="{DataTemplate views:Naplata}" Route="Naplata" />
-        <ShellContent Title="Svi Dokumenti" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
 
-        <ShellContent Title="Korisnička podrška" ContentTemplate="{DataTemplate sfPopup:SfPopup}" />
-    <ShellContent Title="Postavke" ContentTemplate="{DataTemplate views:Postavke}" Route="Postavke" />
+    <ShellContent Title="{x:Static resx:AppResources.Pocetna}" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"  />
+    <ShellContent Title="{x:Static resx:AppResources.Rocisnik}" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
+    <ShellContent Title="{x:Static resx:AppResources.Upisnik}" ContentTemplate="{DataTemplate views:Spisi}" Route="Spisi" />
+    <ShellContent Title="{x:Static resx:AppResources.Kontakti}" ContentTemplate="{DataTemplate views:Klijenti}" Route="Klijenti" />
+    <ShellContent Title="{x:Static resx:AppResources.Tarifa}" ContentTemplate="{DataTemplate views:Naplata}" Route="Naplata" />
+    <ShellContent Title="{x:Static resx:AppResources.Dokumenti}" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
+
+    <ShellContent Title="{x:Static resx:AppResources.KorisnickaPodrska}" ContentTemplate="{DataTemplate sfPopup:SfPopup}" />
+    <ShellContent Title="{x:Static resx:AppResources.Postavke}" ContentTemplate="{DataTemplate views:Postavke}" Route="Postavke" />
     <ShellContent  ContentTemplate="{DataTemplate views:Zaposlenici}" Route="Zaposlenici" />
-    
-    <MenuItem Text="Korisnička podrška"
+
+    <MenuItem Text="{x:Static resx:AppResources.KorisnickaPodrska}"
               Command="{Binding OnSupportClickCommand}"/>
    
 

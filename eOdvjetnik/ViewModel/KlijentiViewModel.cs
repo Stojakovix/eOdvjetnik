@@ -515,6 +515,13 @@ public class KlijentiViewModel : INotifyPropertyChanged
             ClientCountry = Preferences.Get("SelectedCountry", "");
             ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
             ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
+            if (ClientLegalPersonString == "True")
+            {
+                ClientLegalPerson = true;
+            }
+            else {
+                ClientLegalPerson = false;
+            }
 
             if (ClientLegalPersonString == "True")
             {
@@ -631,7 +638,6 @@ public void EmptyContactRows()
                 {
                     ClientLegalPerson = false;
                 }
-
                 ContactDeletedText = Preferences.Get("ContactDeleted", "");
                 ContactEditedText = "Uspješno ste izmijenili kontakt: " + ClientName;
             }

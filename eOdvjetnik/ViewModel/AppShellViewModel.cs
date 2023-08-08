@@ -4,6 +4,7 @@ using eOdvjetnik.Views;
 using System.Diagnostics;
 using Syncfusion.Maui.Popup;
 using System.ComponentModel;
+using eOdvjetnik.Resources.Strings;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -190,8 +191,8 @@ namespace eOdvjetnik.ViewModel
             #endregion
 
             #region Support komande
-            Version = $"Version {AppInfo.VersionString}";
-            
+            Version = $"{AppResources.Version} {AppInfo.VersionString}";
+
             //Popup pozivanje
             PopupCloseCommand = new Command(PopupClose);
             OnSupportClickCommand = new Command(OnSupportClick);

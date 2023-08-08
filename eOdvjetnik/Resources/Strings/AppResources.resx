@@ -117,11 +117,103 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="greetingLabel" xml:space="preserve">
-    <value>HelloEN</value>
+  <data name="Agenda" xml:space="preserve">
+    <value>Agenda</value>
+    <comment>u kalendaru</comment>
   </data>
-  <data name="Hello" xml:space="preserve">
-    <value>HelloEN</value>
-    <comment>Hello na engleski</comment>
+  <data name="AKTIVACIJSKIKOD" xml:space="preserve">
+    <value>Activation code</value>
+  </data>
+  <data name="AllDay" xml:space="preserve">
+    <value>All day</value>
+    <comment>Cijeli dan</comment>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Day</value>
+    <comment>Dan</comment>
+  </data>
+  <data name="Dokumenti" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="Kontakti" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="KontaktMain" xml:space="preserve">
+    <value>Contact information: tel: +385 99 290 0000, email: info@eodvjednik.hr</value>
+  </data>
+  <data name="KorisnickaPodrska" xml:space="preserve">
+    <value>Customer support</value>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>License: {0}</value>
+  </data>
+  <data name="MainEmail" xml:space="preserve">
+    <value>Email: podrska@eodvjetnik.hr</value>
+  </data>
+  <data name="MainMobBroj" xml:space="preserve">
+    <value>Phone number: +385 99 290 0000</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Month</value>
+    <comment>Mjesec</comment>
+  </data>
+  <data name="NoEvents" xml:space="preserve">
+    <value>No events</value>
+    <comment>Nema događaja</comment>
+  </data>
+  <data name="Obavijest" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="OdaberiJezik" xml:space="preserve">
+    <value>Language selection</value>
+  </data>
+  <data name="Pocetna" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Postavke" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Rocisnik" xml:space="preserve">
+    <value>Agenda</value>
+  </data>
+  <data name="Tarifa" xml:space="preserve">
+    <value>Tariff</value>
+  </data>
+  <data name="TimelineDay" xml:space="preserve">
+    <value>Timeline Day</value>
+    <comment>Vremenska traka Dan</comment>
+  </data>
+  <data name="TimelineMonth" xml:space="preserve">
+    <value>Timeline Month</value>
+    <comment>Vremenska crta Mjesec</comment>
+  </data>
+  <data name="TimelineWeek" xml:space="preserve">
+    <value>Timeline Week</value>
+    <comment>Tjedan vremenske trake</comment>
+  </data>
+  <data name="TimelineWorkWeek" xml:space="preserve">
+    <value>Timeline Workweek</value>
+    <comment>Vremenska crta Radni tjedan</comment>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Today</value>
+    <comment>Danas</comment>
+  </data>
+  <data name="Upisnik" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Week" xml:space="preserve">
+    <value>Week</value>
+    <comment>Tjedan</comment>
+  </data>
+  <data name="WorkWeek" xml:space="preserve">
+    <value>Workweek</value>
+    <comment>Radni tjedan</comment>
+  </data>
+  <data name="ZaAktivaciju" xml:space="preserve">
+    <value>For application activation, please contact the manager of your law firm.</value>
   </data>
 </root>
