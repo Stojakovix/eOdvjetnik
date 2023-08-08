@@ -4,6 +4,7 @@ using eOdvjetnik.Models;
 using eOdvjetnik.Services;
 using System.Diagnostics;
 using eOdvjetnik.Model;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace eOdvjetnik.Views;
 
@@ -94,8 +95,9 @@ public partial class AppointmentDialog : ContentPage
                 {
                     Debug.WriteLine("Appointment id was null");
                 }
-                
-                Shell.Current.GoToAsync("//Kalendar");
+
+                MacWorkaround();
+                Shell.Current.GoToAsync("//LoadingPage");
             }
         }
         catch (Exception ex)
@@ -124,8 +126,13 @@ public partial class AppointmentDialog : ContentPage
     }
     private void CancelButton_Clicked(object sender, EventArgs e)
     {
-        Shell.Current.GoToAsync("//Kalendar");
+        MacWorkaround();
+        Shell.Current.GoToAsync("//LoadingPage");
         Debug.WriteLine("Cancel Clicked");
+    }
+    private void MacWorkaround()
+    {
+        WeakReferenceMessenger.Default.Send(new MacWorkaround("Test!"));
     }
 
     private void SaveButton_Clicked(object sender, EventArgs e)
@@ -167,15 +174,17 @@ public partial class AppointmentDialog : ContentPage
                     {
                         AppointmentDetails();
                         AddAppointmentToRemoteServer(appointment);
-                        Shell.Current.GoToAsync("///Kalendar");
-                    }
+                            MacWorkaround();
+                            Shell.Current.GoToAsync("//LoadingPage");
+                        }
                 }
                 else
                 {
                     AppointmentDetails();
                     AddAppointmentToRemoteServer(appointment);
-                    Navigation.PopAsync();
-                }
+                        MacWorkaround();
+                        Shell.Current.GoToAsync("//LoadingPage");
+                    }
             }
             }
         }

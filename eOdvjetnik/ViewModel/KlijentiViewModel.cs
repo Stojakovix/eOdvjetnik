@@ -614,7 +614,6 @@ public void EmptyContactRows()
                 {
                 EmptyContactRows();
                   }
-            Debug.WriteLine(FilesCounter);
             try
             {
                 ClientID = Preferences.Get("SelectedID", "");
