@@ -32,14 +32,14 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Početna" Command="{Binding PocetnaClick}" />
-        <ToolbarItem Text="Ročišnik" Command="{Binding KalendarClick}" />
-        <ToolbarItem Text="Upisnik" Command="{Binding SpisiClick}" />
-        <ToolbarItem Text="Tarifa" Command="{Binding TarifaClick}" />
-        <ToolbarItem Text="Dokumenti" Command="{Binding DokumentiClick}"/>
-        <ToolbarItem Text="Kontakti" Command="{Binding KontaktiClick}" />
-        <ToolbarItem Text="Korisnička Podrška" Command="{Binding KorisnickaClick}" />
-        <ToolbarItem Text="Postavke" Command="{Binding PostavkeClick}" />
+        <ToolbarItem Text="{x:Static resx:AppResources.Pocetna}" Command="{Binding PocetnaClick}" />
+        <ToolbarItem Text="{x:Static resx:AppResources.Rocisnik}" Command="{Binding KalendarClick}" />
+        <ToolbarItem Text="{x:Static resx:AppResources.Upisnik}" Command="{Binding SpisiClick}" />
+        <ToolbarItem Text="{x:Static resx:AppResources.Tarifa}" Command="{Binding TarifaClick}" />
+        <ToolbarItem Text="{x:Static resx:AppResources.Dokumenti}" Command="{Binding DokumentiClick}"/>
+        <ToolbarItem Text="{x:Static resx:AppResources.Kontakti}" Command="{Binding KontaktiClick}" />
+        <ToolbarItem Text="{x:Static resx:AppResources.KorisnickaPodrska}" Command="{Binding KorisnickaClick}" />
+        <ToolbarItem Text="{x:Static resx:AppResources.Postavke}" Command="{Binding PostavkeClick}" />
 
     </ContentPage.ToolbarItems>
 
@@ -71,7 +71,7 @@
             <Image Source="text_only.png" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
 
             <Label Style="{StaticResource ShadowLabelStyle}" 
-                        Text="AKTIVACIJSKI KOD" 
+                        Text="{x:Static resx:AppResources.AKTIVACIJSKIKOD}" 
                         VerticalOptions="Center" 
                         HorizontalOptions="Center"
                         FontSize="Large"
@@ -90,7 +90,7 @@
 
 
             <Label  Style="{StaticResource ShadowLabelStyle}" 
-                        Text="Za aktivaciju aplikacije obratite se voditelju vašeg odvjetničkog društva."
+                        Text="{x:Static resx:AppResources.ZaAktivaciju}"
                         HorizontalOptions="Center"
                         FontSize="Small"
                         Margin="10,0,0,10"
@@ -102,7 +102,7 @@
 
 
             <Label Style="{StaticResource ShadowLabelStyle}" 
-                        Text="Kontakt informacije: tel: +385 99 290 0000, email: info@eodvjednik.hr"
+                        Text="{x:Static resx:AppResources.KontaktMain}"
                         HorizontalOptions="Center"
                         FontSize="Small"
                         Margin="10,0,0,10"
@@ -114,7 +114,7 @@
         </VerticalStackLayout>
         <StackLayout>
             <Label x:Uid="greetingLabel" />
-            <Picker x:Name="languagePicker" Title="Select Language" SelectedIndexChanged="OnLanguageSelected">
+            <Picker x:Name="languagePicker" Title="{x:Static resx:AppResources.OdaberiJezik}" SelectedIndexChanged="OnLanguageSelected">
                 <Picker.Items>
                     <x:String>hr-HR</x:String>
                     <x:String>sr-Cyrl-RS</x:String>
@@ -125,17 +125,17 @@
         <Label BackgroundColor="#dbdbdb" Grid.Row="1" Grid.ColumnSpan="5" />
         <Image Source="text_only.png" Margin="5" HeightRequest="20" HorizontalOptions="Start" Grid.Row="1"  />
         <Label Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding datetime}"  FontSize="Small" Margin="5" HorizontalOptions="End" Grid.Row="1" Grid.ColumnSpan="5"/>
-        <Label Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{x:Static resx:AppResources.Hello}" FontSize="Small" Margin="5" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1" 
+        <Label Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding Version}" FontSize="Small" Margin="5" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1" 
                IsVisible="{OnPlatform Android=False, iOS=False}" />
-        <Label Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding licence_type, StringFormat='Licenca: {0}'}" FontSize="Small" Margin="5" HorizontalOptions="Start" 
-               Grid.Row="1" Grid.Column="3" IsVisible="{OnPlatform Android=False, iOS=False}" />
+        <Label Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding licence_type, StringFormat={x:Static resx:AppResources.License}}" FontSize="Small" Margin="5" HorizontalOptions="Start" Grid.Row="1" Grid.Column="3" IsVisible="{OnPlatform Android=False, iOS=False}" />
+
 
 
 
 
     </Grid>
 
-
+    
 
 
 </ContentPage>

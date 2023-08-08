@@ -118,59 +118,90 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Agenda" xml:space="preserve">
-    <value>Dnevni redHR</value>
-    <comment>u kalendaru</comment>
-  </data>
-  <data name="Agenda1" xml:space="preserve">
     <value>Dnevni red</value>
-    <comment>Dnevni red</comment>
+  </data>
+  <data name="AKTIVACIJSKIKOD" xml:space="preserve">
+    <value>AKTIVACIJSKI KOD</value>
   </data>
   <data name="AllDay" xml:space="preserve">
     <value>Cijeli dan</value>
-    <comment>Cijeli dan</comment>
   </data>
   <data name="Day" xml:space="preserve">
     <value>Dan</value>
-    <comment>Dan</comment>
   </data>
-  <data name="Hello" xml:space="preserve">
-    <value>HelloHR</value>
-    <comment>Hello na hrvatski</comment>
+  <data name="Dokumenti" xml:space="preserve">
+    <value>Dokumenti</value>
+  </data>
+  <data name="Kontakti" xml:space="preserve">
+    <value>Kontakti</value>
+  </data>
+  <data name="KontaktMain" xml:space="preserve">
+    <value>Kontakt informacije: tel: +385 99 290 0000, email: info@eodvjednik.hr</value>
+  </data>
+  <data name="KorisnickaPodrska" xml:space="preserve">
+    <value>Korisnička podrška</value>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>Licenca: {0}</value>
+  </data>
+  <data name="MainEmail" xml:space="preserve">
+    <value>Email: podrska@eodvjetnik.hr</value>
+  </data>
+  <data name="MainMobBroj" xml:space="preserve">
+    <value>Kontakt broj: +385 99 290 0000</value>
   </data>
   <data name="Month" xml:space="preserve">
     <value>Mjesec</value>
-    <comment>Mjesec</comment>
   </data>
   <data name="NoEvents" xml:space="preserve">
     <value>Nema događaja</value>
-    <comment>Nema događaja</comment>
+  </data>
+  <data name="Obavijest" xml:space="preserve">
+    <value>Obavijest</value>
+  </data>
+  <data name="OdaberiJezik" xml:space="preserve">
+    <value>Odabir jezika</value>
+  </data>
+  <data name="Pocetna" xml:space="preserve">
+    <value>Početna</value>
+  </data>
+  <data name="Postavke" xml:space="preserve">
+    <value>Postavke</value>
+  </data>
+  <data name="Rocisnik" xml:space="preserve">
+    <value>Ročišnik</value>
+  </data>
+  <data name="Tarifa" xml:space="preserve">
+    <value>Tarifa</value>
   </data>
   <data name="TimelineDay" xml:space="preserve">
     <value>Vremenska traka Dan</value>
-    <comment>Vremenska traka Dan</comment>
   </data>
   <data name="TimelineMonth" xml:space="preserve">
     <value>Vremenska crta Mjesec</value>
-    <comment>Vremenska crta Mjesec</comment>
   </data>
   <data name="TimelineWeek" xml:space="preserve">
     <value>Tjedan vremenske trake</value>
-    <comment>Tjedan vremenske trake</comment>
   </data>
   <data name="TimelineWorkWeek" xml:space="preserve">
     <value>Vremenska crta Radni tjedan</value>
-    <comment>Vremenska crta Radni tjedan</comment>
   </data>
   <data name="Today" xml:space="preserve">
     <value>Danas</value>
-    <comment>Danas</comment>
+  </data>
+  <data name="Upisnik" xml:space="preserve">
+    <value>Upisnik</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Verzija</value>
   </data>
   <data name="Week" xml:space="preserve">
     <value>Tjedan</value>
-    <comment>Tjedan</comment>
   </data>
   <data name="WorkWeek" xml:space="preserve">
     <value>Radni tjedan</value>
-    <comment>Radni tjedan</comment>
+  </data>
+  <data name="ZaAktivaciju" xml:space="preserve">
+    <value>Za aktivaciju aplikacije obratite se voditelju vašeg odvjetničkog društva.</value>
   </data>
 </root>

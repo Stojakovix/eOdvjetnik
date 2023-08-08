@@ -121,6 +121,9 @@
     <value>дневни ред</value>
     <comment>дневни ред</comment>
   </data>
+  <data name="AKTIVACIJSKIKOD" xml:space="preserve">
+    <value>АКТИВАЦИЈСКИ КОД</value>
+  </data>
   <data name="AllDay" xml:space="preserve">
     <value>Цијели дан</value>
     <comment>Цијели дан</comment>
@@ -129,9 +132,26 @@
     <value>Дан</value>
     <comment>Дан</comment>
   </data>
-  <data name="Hello" xml:space="preserve">
-    <value>HelloSR</value>
-    <comment>Hello na Srpski</comment>
+  <data name="Dokumenti" xml:space="preserve">
+    <value>Документи</value>
+  </data>
+  <data name="Kontakti" xml:space="preserve">
+    <value>Контакти</value>
+  </data>
+  <data name="KontaktMain" xml:space="preserve">
+    <value>Контакт информације: тел: +387 66 499 000, емаил: info@eodvjednik.hr</value>
+  </data>
+  <data name="KorisnickaPodrska" xml:space="preserve">
+    <value>Корисничка подршка</value>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>Лиценца: {0}</value>
+  </data>
+  <data name="MainEmail" xml:space="preserve">
+    <value>Електронска пошта: podrska@eodvjetnik.hr</value>
+  </data>
+  <data name="MainMobBroj" xml:space="preserve">
+    <value>Контакт број: +387 66 499 000</value>
   </data>
   <data name="Month" xml:space="preserve">
     <value>Мјесец</value>
@@ -140,6 +160,24 @@
   <data name="NoEvents" xml:space="preserve">
     <value>Нема догађаја</value>
     <comment>Нема догађаја</comment>
+  </data>
+  <data name="Obavijest" xml:space="preserve">
+    <value>Oбавештење</value>
+  </data>
+  <data name="OdaberiJezik" xml:space="preserve">
+    <value>Одабери језик</value>
+  </data>
+  <data name="Pocetna" xml:space="preserve">
+    <value>Почетна</value>
+  </data>
+  <data name="Postavke" xml:space="preserve">
+    <value>Поставке</value>
+  </data>
+  <data name="Rocisnik" xml:space="preserve">
+    <value>Рочишник</value>
+  </data>
+  <data name="Tarifa" xml:space="preserve">
+    <value>Тарифа</value>
   </data>
   <data name="TimelineDay" xml:space="preserve">
     <value>Временска трака Дан</value>
@@ -161,6 +199,12 @@
     <value>Данас</value>
     <comment>Данас</comment>
   </data>
+  <data name="Upisnik" xml:space="preserve">
+    <value>Уписник</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Верзија</value>
+  </data>
   <data name="Week" xml:space="preserve">
     <value>Тједан</value>
     <comment>Тједан</comment>
@@ -168,5 +212,8 @@
   <data name="WorkWeek" xml:space="preserve">
     <value>Радни тједан</value>
     <comment>Радни тједан</comment>
+  </data>
+  <data name="ZaAktivaciju" xml:space="preserve">
+    <value>За активацију апликације обратите се водитељу вашег одвојеничког друштва</value>
   </data>
 </root>

@@ -514,6 +514,13 @@ public class KlijentiViewModel : INotifyPropertyChanged
             ClientCountry = Preferences.Get("SelectedCountry", "");
             ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
             ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
+            if (ClientLegalPersonString == "True")
+            {
+                ClientLegalPerson = true;
+            }
+            else {
+                ClientLegalPerson = false;
+            }
 
                      
         }
@@ -626,10 +633,16 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 ClientCountry = Preferences.Get("SelectedCountry", "");
                 ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
                 ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
-                
-
+                if (ClientLegalPersonString == "True")
+                {
+                    ClientLegalPerson = true;
+                }
+                else
+                {
+                    ClientLegalPerson = false;
+                }
                 ContactDeletedText = Preferences.Get("ContactDeleted", "");
-                ContactEditedText = "Uspje�no ste izmijenili kontakt: " + ClientName;
+                ContactEditedText = "Uspješno ste izmijenili kontakt: " + ClientName;
             }
             catch (Exception ex)
             {

@@ -61,20 +61,263 @@ namespace eOdvjetnik.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HelloEN.
+        ///   Looks up a localized string similar to Agenda.
         /// </summary>
-        internal static string greetingLabel {
+        internal static string Agenda {
             get {
-                return ResourceManager.GetString("greetingLabel", resourceCulture);
+                return ResourceManager.GetString("Agenda", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HelloEN.
+        ///   Looks up a localized string similar to Activation code.
         /// </summary>
-        internal static string Hello {
+        internal static string AKTIVACIJSKIKOD {
             get {
-                return ResourceManager.GetString("Hello", resourceCulture);
+                return ResourceManager.GetString("AKTIVACIJSKIKOD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All day.
+        /// </summary>
+        internal static string AllDay {
+            get {
+                return ResourceManager.GetString("AllDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Day.
+        /// </summary>
+        internal static string Day {
+            get {
+                return ResourceManager.GetString("Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Documents.
+        /// </summary>
+        internal static string Dokumenti {
+            get {
+                return ResourceManager.GetString("Dokumenti", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contacts.
+        /// </summary>
+        internal static string Kontakti {
+            get {
+                return ResourceManager.GetString("Kontakti", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact information: tel: +385 99 290 0000, email: info@eodvjednik.hr.
+        /// </summary>
+        internal static string KontaktMain {
+            get {
+                return ResourceManager.GetString("KontaktMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer support.
+        /// </summary>
+        internal static string KorisnickaPodrska {
+            get {
+                return ResourceManager.GetString("KorisnickaPodrska", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License: {0}.
+        /// </summary>
+        internal static string License {
+            get {
+                return ResourceManager.GetString("License", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email: podrska@eodvjetnik.hr.
+        /// </summary>
+        internal static string MainEmail {
+            get {
+                return ResourceManager.GetString("MainEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone number: +385 99 290 0000.
+        /// </summary>
+        internal static string MainMobBroj {
+            get {
+                return ResourceManager.GetString("MainMobBroj", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        internal static string Month {
+            get {
+                return ResourceManager.GetString("Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No events.
+        /// </summary>
+        internal static string NoEvents {
+            get {
+                return ResourceManager.GetString("NoEvents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Info.
+        /// </summary>
+        internal static string Obavijest {
+            get {
+                return ResourceManager.GetString("Obavijest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language selection.
+        /// </summary>
+        internal static string OdaberiJezik {
+            get {
+                return ResourceManager.GetString("OdaberiJezik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        internal static string Pocetna {
+            get {
+                return ResourceManager.GetString("Pocetna", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string Postavke {
+            get {
+                return ResourceManager.GetString("Postavke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agenda.
+        /// </summary>
+        internal static string Rocisnik {
+            get {
+                return ResourceManager.GetString("Rocisnik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tariff.
+        /// </summary>
+        internal static string Tarifa {
+            get {
+                return ResourceManager.GetString("Tarifa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeline Day.
+        /// </summary>
+        internal static string TimelineDay {
+            get {
+                return ResourceManager.GetString("TimelineDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeline Month.
+        /// </summary>
+        internal static string TimelineMonth {
+            get {
+                return ResourceManager.GetString("TimelineMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeline Week.
+        /// </summary>
+        internal static string TimelineWeek {
+            get {
+                return ResourceManager.GetString("TimelineWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeline Workweek.
+        /// </summary>
+        internal static string TimelineWorkWeek {
+            get {
+                return ResourceManager.GetString("TimelineWorkWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Today.
+        /// </summary>
+        internal static string Today {
+            get {
+                return ResourceManager.GetString("Today", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files.
+        /// </summary>
+        internal static string Upisnik {
+            get {
+                return ResourceManager.GetString("Upisnik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        internal static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Week.
+        /// </summary>
+        internal static string Week {
+            get {
+                return ResourceManager.GetString("Week", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Workweek.
+        /// </summary>
+        internal static string WorkWeek {
+            get {
+                return ResourceManager.GetString("WorkWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For application activation, please contact the manager of your law firm..
+        /// </summary>
+        internal static string ZaAktivaciju {
+            get {
+                return ResourceManager.GetString("ZaAktivaciju", resourceCulture);
             }
         }
     }

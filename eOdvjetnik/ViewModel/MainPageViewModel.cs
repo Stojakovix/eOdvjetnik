@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows.Input;
 using Timer = System.Timers.Timer;
 using eOdvjetnik.Services;
+using eOdvjetnik.Resources.Strings;
 
 
 namespace eOdvjetnik.ViewModel
@@ -51,7 +52,7 @@ namespace eOdvjetnik.ViewModel
         {
 
             navigacija = new Navigacija();
-            Version = $"Verzija {AppInfo.VersionString}";
+            Version = $"{AppResources.Version} {AppInfo.VersionString}";
             Activation_code = Preferences.Get("activation_code", "");
             licence_type = Preferences.Get("licence_type", "");
             expireDate = Preferences.Get("expire_date", "");
@@ -155,7 +156,7 @@ namespace eOdvjetnik.ViewModel
             }
             else
             {
-                ActivationVisible = false;
+                ActivationVisible = true;
                 string aktivacija = "LicenceActive";
                 Preferences.Set("activation_disable", aktivacija);
 

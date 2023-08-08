@@ -11,7 +11,16 @@ using System.Threading;
 using System;
 using System.Resources;
 using Microsoft.Maui.Controls;
+using Xamarin.Essentials;
+using Preferences = Microsoft.Maui.Storage.Preferences;
+using Permissions = Microsoft.Maui.ApplicationModel.Permissions;
+using PermissionStatus = Microsoft.Maui.ApplicationModel.PermissionStatus;
+using DeviceType = Microsoft.Maui.Devices.DeviceType;
+using DeviceInfo = Microsoft.Maui.Devices.DeviceInfo;
+
 namespace eOdvjetnik;
+
+
 
 public partial class MainPage : ContentPage
 {
@@ -207,27 +216,11 @@ private void OnLanguageSelected(object sender, EventArgs e)
 public MainPage()
     {
         InitializeComponent();
-
-
-
-
         ReadDeviceInfo();
         GetMicroSeconds();
         AskForWiFiPermission();
         BindingContext = new MainPageViewModel();
-        string input = "24. 04. 2023. 09:00:00";
-        DateTime parsedDateTime = DateTime.ParseExact(input, "dd. MM. yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
-        string output = parsedDateTime.ToString("yyyy-MM-dd HH:mm:ss");
-        Console.WriteLine(output);
         ActivationLoop();
-
-
-
-
-
-
-
-
     }
 
 
@@ -235,7 +228,6 @@ public MainPage()
     {
 
         StringBuilder sb = new();
-
         sb.AppendLine($"Model: {Microsoft.Maui.Devices.DeviceInfo.Current.Model}");
         sb.AppendLine($"Manufacturer: {Microsoft.Maui.Devices.DeviceInfo.Current.Manufacturer}");
         sb.AppendLine($"Name: {Microsoft.Maui.Devices.DeviceInfo.Current.Name}");
@@ -288,6 +280,31 @@ public MainPage()
 
     protected override void OnAppearing()
     {
+
+
+
+        // Get the current device information
+        var deviceInfo = DeviceInfo.Current;
+        Debug.WriteLine(deviceInfo);
+        // Get the culture information
+
+
+
+        // Get the current culture information
+        var cultureInfo = CultureInfo.CurrentCulture;
+        Debug.WriteLine(cultureInfo);
+        // Get the language code
+        var languageCode = cultureInfo.TwoLetterISOLanguageName;
+        Debug.WriteLine(languageCode);
+        // Get the country/region code
+        var countryCode = cultureInfo.ThreeLetterISOLanguageName;
+        Debug.WriteLine(countryCode);
+        // Get the country/region code
+        var countryCode2 = cultureInfo.ThreeLetterWindowsLanguageName;
+        Debug.WriteLine(countryCode2);
+
+
+
 
         base.OnAppearing();
         this.Window.MinimumHeight = 680;
