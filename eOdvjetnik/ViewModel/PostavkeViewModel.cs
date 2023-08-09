@@ -538,7 +538,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     public async void OnFeedbackClicked()
     {
-
+        FeedbackVisible = false;
+        FeedbackErrorVisible = false;
         string url = "https://cc.eodvjetnik.hr/eodvjetnikadmin/feedbacks/feedback?cpuid=";
         company_id = Preferences.Get("company_id", "");
         employee_id = Preferences.Get("device_type_id", "");
@@ -566,11 +567,12 @@ public class PostavkeViewModel : INotifyPropertyChanged
                 if (response.IsSuccessStatusCode)
                 {
                     FeedbackVisible = true;
-
+                    FeedbackNotification();
                 }
                 else
                 {
-                    //
+                    FeedbackErrorVisible = true;
+                    FeedbackNotification();
                 }
             }
         }
@@ -578,9 +580,23 @@ public class PostavkeViewModel : INotifyPropertyChanged
         {
             Debug.WriteLine("Feedback error:" + ex.Message);
             FeedbackErrorVisible = true;
+            FeedbackNotification();
         }
 
 
+    }
+    public void FeedbackNotification()
+    {
+        if (FeedbackVisible == true)
+        {
+            Application.Current.MainPage.DisplayAlert("", "Feedback uspješno poslan.", "OK");
+
+        }
+        else if (FeedbackErrorVisible == true)
+        {
+            Application.Current.MainPage.DisplayAlert("", "Povezivanje nije uspjelo.", "OK");
+
+        }
     }
 
     public static string ReplaceSpacesAndSectionBreaks(string text)

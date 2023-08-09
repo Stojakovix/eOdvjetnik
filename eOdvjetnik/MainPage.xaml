@@ -56,7 +56,8 @@
         <Image Opacity="0.5" HorizontalOptions="FillAndExpand" MaximumHeightRequest="1000" MaximumWidthRequest="1800" Grid.ColumnSpan="7" Grid.Row="0" Source="main_pozadina.jpg"  
                Aspect="Fill"  IsVisible="{OnPlatform Android=True, iOS=True, WinUI=True, MacCatalyst=True}"  />
 
-        <VerticalStackLayout   Grid.ColumnSpan="5"  IsVisible="{Binding ActivationVisible}" >
+        <VerticalStackLayout   Grid.ColumnSpan="5"  IsVisible="{Binding ActivationVisible
+            }" >
 
             <Image Source="text_only.png" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
 
@@ -99,6 +100,9 @@
                         LineBreakMode="WordWrap"
                         TextColor="Black"        
                 />
+            <Button Margin="0,30,0,0" HorizontalOptions="Center" Text="Provjeri status licence" TextColor="Black" FontSize="Default" BorderColor="DarkGray" 
+                    BackgroundColor="#5ac8fa" Clicked="OnRefreshLicenceClick" />
+
 
 
         </VerticalStackLayout>
