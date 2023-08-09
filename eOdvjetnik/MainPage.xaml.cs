@@ -17,6 +17,7 @@ using Permissions = Microsoft.Maui.ApplicationModel.Permissions;
 using PermissionStatus = Microsoft.Maui.ApplicationModel.PermissionStatus;
 using DeviceType = Microsoft.Maui.Devices.DeviceType;
 using DeviceInfo = Microsoft.Maui.Devices.DeviceInfo;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace eOdvjetnik;
 
@@ -43,16 +44,14 @@ public partial class MainPage : ContentPage
     //KRAJ NAS
 
 
-    private void RočišnikMenuItem_Clicked(object sender, EventArgs e)
+    private void OnRefreshLicenceClick(object sender, EventArgs e)
     {
-        Shell.Current.GoToAsync("///Kalendar");
-
+        LicenceCheck();
     }
 
 
 
-
-private void OnLanguageSelected(object sender, EventArgs e)
+    private void OnLanguageSelected(object sender, EventArgs e)
     {
         // Get the selected language from the dropdown
         var selectedLanguage = ((Picker)sender).SelectedItem.ToString();
@@ -171,6 +170,7 @@ private void OnLanguageSelected(object sender, EventArgs e)
 
                     Debug.WriteLine("MainPageViewModel - > Company info: " + nazivTvrtke + OIBTvrtke + adresaTvrtke);
 
+                    WeakReferenceMessenger.Default.Send(new CheckLicence("CheckLicence!"));
 
                 }
                 else
@@ -183,6 +183,9 @@ private void OnLanguageSelected(object sender, EventArgs e)
         {
             Debug.WriteLine("Activation error:" + ex.Message);
         }
+       
+        
+
     }
 
 
