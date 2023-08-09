@@ -228,6 +228,7 @@ namespace eOdvjetnik.ViewModel
         public ICommand AddItemCommand { get; }
         public ICommand RemoveItemCommand { get; set; }
         public ICommand NewReceipt { get; }
+        public ICommand BackToTariffs { get; set; }
 
         public float totalAmount { get; private set; }
 
@@ -309,9 +310,13 @@ namespace eOdvjetnik.ViewModel
             }
 
         }
+        private async void OnBackClick()
+        {
+           await Shell.Current.GoToAsync("//Naplata");
+            
+        }
 
-
-            private async void OnReceiptClick()
+        private async void OnReceiptClick()
         {
             try
             {
@@ -365,7 +370,7 @@ namespace eOdvjetnik.ViewModel
             NewReceipt = new Command(DeleteRecipt);
             AddItemCommand = new Command(AddItem);
             RemoveItemCommand = new Command(DeleteItem);
-
+            BackToTariffs = new Command(OnBackClick);
             ReceiptItems = new ObservableCollection<ReceiptItem>();
             try
             {
