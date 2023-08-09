@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Adresa" xml:space="preserve">
+    <value>Address</value>
+  </data>
   <data name="Agenda" xml:space="preserve">
     <value>Agenda</value>
     <comment>u kalendaru</comment>
@@ -124,16 +127,76 @@
   <data name="AKTIVACIJSKIKOD" xml:space="preserve">
     <value>Activation code</value>
   </data>
+  <data name="AktivacijskuKod" xml:space="preserve">
+    <value>Aktivacijski kod:</value>
+  </data>
   <data name="AllDay" xml:space="preserve">
     <value>All day</value>
     <comment>Cijeli dan</comment>
+  </data>
+  <data name="Baza" xml:space="preserve">
+    <value>Baza podataka</value>
+  </data>
+  <data name="Bodovi" xml:space="preserve">
+    <value>Credits</value>
+  </data>
+  <data name="BoravisteD" xml:space="preserve">
+    <value>Residence:</value>
+  </data>
+  <data name="BrojSpisa" xml:space="preserve">
+    <value>File nr.</value>
+  </data>
+  <data name="DatumIstekaLicence" xml:space="preserve">
+    <value>Datum isteka licence:</value>
+  </data>
+  <data name="DatumRodenja" xml:space="preserve">
+    <value>Date of birth:</value>
   </data>
   <data name="Day" xml:space="preserve">
     <value>Day</value>
     <comment>Dan</comment>
   </data>
+  <data name="Dodaj" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="DodajNaRacun" xml:space="preserve">
+    <value>Add on Invoice</value>
+  </data>
+  <data name="DodajNovi" xml:space="preserve">
+    <value>Add new</value>
+  </data>
+  <data name="Dodao" xml:space="preserve">
+    <value>Added by</value>
+  </data>
   <data name="Dokumenti" xml:space="preserve">
     <value>Documents</value>
+  </data>
+  <data name="Drzava" xml:space="preserve">
+    <value>Country:</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="Fax" xml:space="preserve">
+    <value>Fax:</value>
+  </data>
+  <data name="IBAN" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="Ime" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="IPAdresa" xml:space="preserve">
+    <value>IP adresa</value>
+  </data>
+  <data name="Izmjenjeno" xml:space="preserve">
+    <value>Edited</value>
+  </data>
+  <data name="KatDog" xml:space="preserve">
+    <value>Kategorije događaja</value>
+  </data>
+  <data name="Klijent" xml:space="preserve">
+    <value>Client</value>
   </data>
   <data name="Kontakti" xml:space="preserve">
     <value>Contacts</value>
@@ -144,8 +207,20 @@
   <data name="KorisnickaPodrska" xml:space="preserve">
     <value>Customer support</value>
   </data>
+  <data name="KorisnickoIme" xml:space="preserve">
+    <value>Korisničko ime</value>
+  </data>
+  <data name="KosisnickoIme" xml:space="preserve">
+    <value>Korisničko ime</value>
+  </data>
+  <data name="Kreirano" xml:space="preserve">
+    <value>Created</value>
+  </data>
   <data name="License" xml:space="preserve">
     <value>License: {0}</value>
+  </data>
+  <data name="Lozinka" xml:space="preserve">
+    <value>Lozinka</value>
   </data>
   <data name="MainEmail" xml:space="preserve">
     <value>Email: podrska@eodvjetnik.hr</value>
@@ -153,9 +228,27 @@
   <data name="MainMobBroj" xml:space="preserve">
     <value>Phone number: +385 99 290 0000</value>
   </data>
+  <data name="Mapa" xml:space="preserve">
+    <value>Mapa</value>
+  </data>
+  <data name="Mobitel" xml:space="preserve">
+    <value>Mobile:</value>
+  </data>
   <data name="Month" xml:space="preserve">
     <value>Month</value>
     <comment>Mjesec</comment>
+  </data>
+  <data name="NAS" xml:space="preserve">
+    <value>NAS</value>
+  </data>
+  <data name="NazivZaglavlje" xml:space="preserve">
+    <value>Naziv tvrtke u zaglavlju računa:</value>
+  </data>
+  <data name="NedavnoDodani" xml:space="preserve">
+    <value>Recently added</value>
+  </data>
+  <data name="NemaRPretrage" xml:space="preserve">
+    <value>No results found!</value>
   </data>
   <data name="NoEvents" xml:space="preserve">
     <value>No events</value>
@@ -164,20 +257,114 @@
   <data name="Obavijest" xml:space="preserve">
     <value>Info</value>
   </data>
+  <data name="Obrisi" xml:space="preserve">
+    <value>Delete</value>
+  </data>
   <data name="OdaberiJezik" xml:space="preserve">
     <value>Language selection</value>
+  </data>
+  <data name="OdabirLogotipa" xml:space="preserve">
+    <value>Odabir logotipa za račun</value>
+  </data>
+  <data name="OIB" xml:space="preserve">
+    <value>Personal ID</value>
+  </data>
+  <data name="OpisGreske" xml:space="preserve">
+    <value>Opišite grešku koju je potrebno ispraviti ili pošaljite prijedlog željenih funkcinalnosti</value>
+  </data>
+  <data name="OsobaUPotpisuR" xml:space="preserve">
+    <value>Osoba u potpisu računa:</value>
+  </data>
+  <data name="Ostalo" xml:space="preserve">
+    <value>Other:</value>
   </data>
   <data name="Pocetna" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="Podmapa" xml:space="preserve">
+    <value>Podmapa</value>
+  </data>
+  <data name="Ponisti" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Posalji" xml:space="preserve">
+    <value>Pošalji</value>
+  </data>
   <data name="Postavke" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="PovezivanjeFalse" xml:space="preserve">
+    <value>Connection failed!</value>
+  </data>
+  <data name="PovezivanjeNijeUspjelo" xml:space="preserve">
+    <value>Povezivanje nije uspjelo</value>
+  </data>
+  <data name="PovInfo" xml:space="preserve">
+    <value>Povratna informacija</value>
+  </data>
+  <data name="Pravna" xml:space="preserve">
+    <value>Legal Entity:</value>
+  </data>
+  <data name="PregledRacuna" xml:space="preserve">
+    <value>Show Invoice</value>
+  </data>
+  <data name="PretragaO" xml:space="preserve">
+    <value>Search by name or ID number.</value>
+  </data>
+  <data name="PretragaTarifa" xml:space="preserve">
+    <value>Search by tariff number or name.</value>
+  </data>
+  <data name="Pretrazi" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Protustranka" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="Racun" xml:space="preserve">
+    <value>Račun</value>
+  </data>
+  <data name="Radi" xml:space="preserve">
+    <value>Cause</value>
+  </data>
+  <data name="Radnja" xml:space="preserve">
+    <value>Work: </value>
+    <comment>Radnja u Naplata view</comment>
+  </data>
+  <data name="Radnja2" xml:space="preserve">
+    <value>Work</value>
   </data>
   <data name="Rocisnik" xml:space="preserve">
     <value>Agenda</value>
   </data>
+  <data name="SamoAdminKAtegorija" xml:space="preserve">
+    <value>Samo administrator može mijenjati nazive kategorija!</value>
+  </data>
+  <data name="SerijskiBroj" xml:space="preserve">
+    <value>Serijski broj:</value>
+  </data>
+  <data name="Spremi" xml:space="preserve">
+    <value>Spremi</value>
+  </data>
+  <data name="SQL" xml:space="preserve">
+    <value>SQL</value>
+  </data>
+  <data name="StopaPDV" xml:space="preserve">
+    <value>Stopa PDV-a (%)</value>
+  </data>
   <data name="Tarifa" xml:space="preserve">
     <value>Tariff</value>
+  </data>
+  <data name="TarifniBroj" xml:space="preserve">
+    <value>Tariff Code: </value>
+  </data>
+  <data name="Tbr" xml:space="preserve">
+    <value>Tariff nr.</value>
+  </data>
+  <data name="TekstPodnozjaR" xml:space="preserve">
+    <value>Tekst podnožja računa:</value>
+  </data>
+  <data name="Telefon" xml:space="preserve">
+    <value>Telefon:</value>
   </data>
   <data name="TimelineDay" xml:space="preserve">
     <value>Timeline Day</value>
@@ -202,8 +389,20 @@
   <data name="Upisnik" xml:space="preserve">
     <value>Files</value>
   </data>
+  <data name="UredajLicenca" xml:space="preserve">
+    <value>Uređaj i licenca</value>
+  </data>
+  <data name="Uredi" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="UspjesnoPoslano" xml:space="preserve">
+    <value>Uspješno poslano</value>
+  </data>
   <data name="Version" xml:space="preserve">
     <value>Version</value>
+  </data>
+  <data name="VrstaLicence" xml:space="preserve">
+    <value>Vrsta licence:</value>
   </data>
   <data name="Week" xml:space="preserve">
     <value>Week</value>
@@ -215,5 +414,11 @@
   </data>
   <data name="ZaAktivaciju" xml:space="preserve">
     <value>For application activation, please contact the manager of your law firm.</value>
+  </data>
+  <data name="Zaposlenici" xml:space="preserve">
+    <value>Zaposlenici</value>
+  </data>
+  <data name="Zastupnik" xml:space="preserve">
+    <value>Representative: </value>
   </data>
 </root>

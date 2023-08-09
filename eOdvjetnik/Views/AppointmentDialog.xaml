@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
@@ -64,7 +64,7 @@
             <Switch Grid.Row="5" Grid.Column="1" x:Name="switchAllDay" HorizontalOptions="Start"  VerticalOptions="Center" BackgroundColor="White" ThumbColor="#DC143C"  />
 
 
-            <HorizontalStackLayout Grid.Row="6" Grid.ColumnSpan="1" >
+            <HorizontalStackLayout Grid.Row="6" Grid.ColumnSpan="3" >
                 <Button x:Name="DeleteButton" Clicked="DeleteButton_Clicked" Text="Obriši" BorderColor="DarkGray" Background="#DC143C" TextColor="LightGray"  WidthRequest="120" FontSize="Default" Margin="10,20,20,0" />
                 <Button x:Name="cancelButton" Clicked="CancelButton_Clicked" Text="Odustani" BorderColor="DarkGray" BackgroundColor="LightGray"  TextColor="#3B3B3B" WidthRequest="120" FontSize="Default" Margin="10,20,20,0" />
                 <Button x:Name="saveButton" Clicked="SaveButton_Clicked" Text="Spremi" BorderColor="DarkGray"  BackgroundColor="#5ac8fa" TextColor="Black" WidthRequest="100" FontSize="Default" Margin="10,20,20,0" />
