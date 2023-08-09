@@ -223,6 +223,9 @@
 	  <MauiXaml Update="Views\Klijenti.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\LoadingPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Naplata.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

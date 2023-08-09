@@ -8,7 +8,7 @@
        Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
        Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True , Android=True, iOS=True}"
        xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
-
+       Shell.PresentationMode="NotAnimated"
        >
 
 
@@ -165,6 +165,8 @@
     <ShellContent Title="{x:Static resx:AppResources.Kontakti}" ContentTemplate="{DataTemplate views:Klijenti}" Route="Klijenti" />
     <ShellContent Title="{x:Static resx:AppResources.Tarifa}" ContentTemplate="{DataTemplate views:Naplata}" Route="Naplata" />
     <ShellContent Title="{x:Static resx:AppResources.Dokumenti}" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
+    
+    <ShellContent ContentTemplate="{DataTemplate views:LoadingPage}" Route="LoadingPage" />
 
     <ShellContent Title="{x:Static resx:AppResources.KorisnickaPodrska}" ContentTemplate="{DataTemplate sfPopup:SfPopup}" />
     <ShellContent Title="{x:Static resx:AppResources.Postavke}" ContentTemplate="{DataTemplate views:Postavke}" Route="Postavke" />

@@ -10,6 +10,8 @@ using eOdvjetnik.Services;
 using Vanara.PInvoke;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Globalization;
+using System.Diagnostics.Metrics;
+using System.Reflection;
 
 namespace eOdvjetnik.ViewModel;
 
@@ -182,7 +184,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 contacts.Clear();
             }
             string query = "SELECT * FROM `contacts` ORDER by id desc limit 30;";
-            Debug.WriteLine(query);
+            Debug.WriteLine("Generate contacts query: " + query);
             try
             {
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
@@ -193,7 +195,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
                     {
 
                         int id;
-                        
+
 
                         int.TryParse(filesRow["id"], out id);
 
@@ -486,8 +488,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
     public ICommand OnReciptClickCommand { get; set; }
     public ICommand RefreshContacts { get; set; }
     public ICommand EditClientButton { get; set; }
-
-
+    public int FilesCounter { get; set; }
     public KlijentiViewModel()
     {
         navigacija = new Navigacija();
@@ -529,8 +530,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
             else
             {
                 ClientLegalPerson = false;
-            }    
-            
+            }
+
         }
         catch (Exception ex)
         {
@@ -541,20 +542,19 @@ public class KlijentiViewModel : INotifyPropertyChanged
         RefreshContacts = new Command(GenerateFiles);
         EditClientButton = new Command(EditClient);
 
-
         var timer = Application.Current.Dispatcher.CreateTimer();
         timer.Interval = TimeSpan.FromMilliseconds(200);
         timer.Tick += (s, e) => Refresh();
         timer.Start();
-        Tester = 1;
-        EmptyContactRows();
-        Test();
-
+        //EmptyContactRows();
+        GenerateFiles();
+        FilesCounter = 1;
     }
+   
 
-    public void EmptyContactRows()
+public void EmptyContactRows()
     {
-    
+        FilesCounter++;
         Contacts = new ObservableCollection<ContactItem>();
 
 
@@ -579,14 +579,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
         }
     }
 
-    public int Tester { get; set; } 
-    public void Test()
-    {
-        if (Tester == 5)
-        {
-            GenerateFiles();
-         }
-    }
+  
     public async void OnButtonClick()
     {
         await Shell.Current.GoToAsync("/NoviKlijent");
@@ -617,8 +610,10 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            Tester = Tester + 1;
-            Test();
+            if (FilesCounter == 1)
+                {
+                EmptyContactRows();
+                  }
             try
             {
                 ClientID = Preferences.Get("SelectedID", "");
@@ -654,7 +649,9 @@ public class KlijentiViewModel : INotifyPropertyChanged
         );
     }
 
-private async void EditClient()
+ 
+
+    private async void EditClient()
     {
         await Shell.Current.GoToAsync("/UrediKlijenta");
         
@@ -663,6 +660,7 @@ private async void EditClient()
     private void NewContactAddedReceived(object recipient, RefreshContacts message)
     {
         GenerateFiles();
+        Debug.WriteLine("Generating files after adding a new contact");
     }
 
     private void ContactDeletedReceived(object recipient, ContactDeleted message)
@@ -670,6 +668,8 @@ private async void EditClient()
         GenerateFiles();
         ContactDeletedText = Preferences.Get("ContactDeleted", "");
         ContactDeleted = true;
+        Debug.WriteLine("Generating files after deleting a contact");
+
     }
 
     private void ContactEditedReceived(object recipient, ContactEdited message)
