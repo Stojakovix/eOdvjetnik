@@ -61,6 +61,15 @@ namespace eOdvjetnik.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        internal static string Adresa {
+            get {
+                return ResourceManager.GetString("Adresa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Agenda.
         /// </summary>
         internal static string Agenda {
@@ -79,11 +88,74 @@ namespace eOdvjetnik.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aktivacijski kod:.
+        /// </summary>
+        internal static string AktivacijskuKod {
+            get {
+                return ResourceManager.GetString("AktivacijskuKod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All day.
         /// </summary>
         internal static string AllDay {
             get {
                 return ResourceManager.GetString("AllDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Baza podataka.
+        /// </summary>
+        internal static string Baza {
+            get {
+                return ResourceManager.GetString("Baza", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credits.
+        /// </summary>
+        internal static string Bodovi {
+            get {
+                return ResourceManager.GetString("Bodovi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Residence:.
+        /// </summary>
+        internal static string BoravisteD {
+            get {
+                return ResourceManager.GetString("BoravisteD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File nr..
+        /// </summary>
+        internal static string BrojSpisa {
+            get {
+                return ResourceManager.GetString("BrojSpisa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datum isteka licence:.
+        /// </summary>
+        internal static string DatumIstekaLicence {
+            get {
+                return ResourceManager.GetString("DatumIstekaLicence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date of birth:.
+        /// </summary>
+        internal static string DatumRodenja {
+            get {
+                return ResourceManager.GetString("DatumRodenja", resourceCulture);
             }
         }
         
@@ -97,11 +169,128 @@ namespace eOdvjetnik.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        internal static string Dodaj {
+            get {
+                return ResourceManager.GetString("Dodaj", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add on Invoice.
+        /// </summary>
+        internal static string DodajNaRacun {
+            get {
+                return ResourceManager.GetString("DodajNaRacun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new.
+        /// </summary>
+        internal static string DodajNovi {
+            get {
+                return ResourceManager.GetString("DodajNovi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Added by.
+        /// </summary>
+        internal static string Dodao {
+            get {
+                return ResourceManager.GetString("Dodao", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Documents.
         /// </summary>
         internal static string Dokumenti {
             get {
                 return ResourceManager.GetString("Dokumenti", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Country:.
+        /// </summary>
+        internal static string Drzava {
+            get {
+                return ResourceManager.GetString("Drzava", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email:.
+        /// </summary>
+        internal static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fax:.
+        /// </summary>
+        internal static string Fax {
+            get {
+                return ResourceManager.GetString("Fax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IBAN.
+        /// </summary>
+        internal static string IBAN {
+            get {
+                return ResourceManager.GetString("IBAN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Ime {
+            get {
+                return ResourceManager.GetString("Ime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP adresa.
+        /// </summary>
+        internal static string IPAdresa {
+            get {
+                return ResourceManager.GetString("IPAdresa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edited.
+        /// </summary>
+        internal static string Izmjenjeno {
+            get {
+                return ResourceManager.GetString("Izmjenjeno", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kategorije događaja.
+        /// </summary>
+        internal static string KatDog {
+            get {
+                return ResourceManager.GetString("KatDog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client.
+        /// </summary>
+        internal static string Klijent {
+            get {
+                return ResourceManager.GetString("Klijent", resourceCulture);
             }
         }
         
@@ -133,11 +322,47 @@ namespace eOdvjetnik.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Korisničko ime.
+        /// </summary>
+        internal static string KorisnickoIme {
+            get {
+                return ResourceManager.GetString("KorisnickoIme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Korisničko ime.
+        /// </summary>
+        internal static string KosisnickoIme {
+            get {
+                return ResourceManager.GetString("KosisnickoIme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created.
+        /// </summary>
+        internal static string Kreirano {
+            get {
+                return ResourceManager.GetString("Kreirano", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to License: {0}.
         /// </summary>
         internal static string License {
             get {
                 return ResourceManager.GetString("License", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lozinka.
+        /// </summary>
+        internal static string Lozinka {
+            get {
+                return ResourceManager.GetString("Lozinka", resourceCulture);
             }
         }
         
@@ -160,11 +385,65 @@ namespace eOdvjetnik.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mapa.
+        /// </summary>
+        internal static string Mapa {
+            get {
+                return ResourceManager.GetString("Mapa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mobile:.
+        /// </summary>
+        internal static string Mobitel {
+            get {
+                return ResourceManager.GetString("Mobitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Month.
         /// </summary>
         internal static string Month {
             get {
                 return ResourceManager.GetString("Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NAS.
+        /// </summary>
+        internal static string NAS {
+            get {
+                return ResourceManager.GetString("NAS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Naziv tvrtke u zaglavlju računa:.
+        /// </summary>
+        internal static string NazivZaglavlje {
+            get {
+                return ResourceManager.GetString("NazivZaglavlje", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recently added.
+        /// </summary>
+        internal static string NedavnoDodani {
+            get {
+                return ResourceManager.GetString("NedavnoDodani", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No results found!.
+        /// </summary>
+        internal static string NemaRPretrage {
+            get {
+                return ResourceManager.GetString("NemaRPretrage", resourceCulture);
             }
         }
         
@@ -187,11 +466,65 @@ namespace eOdvjetnik.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string Obrisi {
+            get {
+                return ResourceManager.GetString("Obrisi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language selection.
         /// </summary>
         internal static string OdaberiJezik {
             get {
                 return ResourceManager.GetString("OdaberiJezik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odabir logotipa za račun.
+        /// </summary>
+        internal static string OdabirLogotipa {
+            get {
+                return ResourceManager.GetString("OdabirLogotipa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Personal ID.
+        /// </summary>
+        internal static string OIB {
+            get {
+                return ResourceManager.GetString("OIB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opišite grešku koju je potrebno ispraviti ili pošaljite prijedlog željenih funkcinalnosti.
+        /// </summary>
+        internal static string OpisGreske {
+            get {
+                return ResourceManager.GetString("OpisGreske", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Osoba u potpisu računa:.
+        /// </summary>
+        internal static string OsobaUPotpisuR {
+            get {
+                return ResourceManager.GetString("OsobaUPotpisuR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other:.
+        /// </summary>
+        internal static string Ostalo {
+            get {
+                return ResourceManager.GetString("Ostalo", resourceCulture);
             }
         }
         
@@ -205,11 +538,155 @@ namespace eOdvjetnik.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Podmapa.
+        /// </summary>
+        internal static string Podmapa {
+            get {
+                return ResourceManager.GetString("Podmapa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        internal static string Ponisti {
+            get {
+                return ResourceManager.GetString("Ponisti", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pošalji.
+        /// </summary>
+        internal static string Posalji {
+            get {
+                return ResourceManager.GetString("Posalji", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         internal static string Postavke {
             get {
                 return ResourceManager.GetString("Postavke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection failed!.
+        /// </summary>
+        internal static string PovezivanjeFalse {
+            get {
+                return ResourceManager.GetString("PovezivanjeFalse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Povezivanje nije uspjelo.
+        /// </summary>
+        internal static string PovezivanjeNijeUspjelo {
+            get {
+                return ResourceManager.GetString("PovezivanjeNijeUspjelo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Povratna informacija.
+        /// </summary>
+        internal static string PovInfo {
+            get {
+                return ResourceManager.GetString("PovInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Legal Entity:.
+        /// </summary>
+        internal static string Pravna {
+            get {
+                return ResourceManager.GetString("Pravna", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Invoice.
+        /// </summary>
+        internal static string PregledRacuna {
+            get {
+                return ResourceManager.GetString("PregledRacuna", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search by name or ID number..
+        /// </summary>
+        internal static string PretragaO {
+            get {
+                return ResourceManager.GetString("PretragaO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search by tariff number or name..
+        /// </summary>
+        internal static string PretragaTarifa {
+            get {
+                return ResourceManager.GetString("PretragaTarifa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        internal static string Pretrazi {
+            get {
+                return ResourceManager.GetString("Pretrazi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Counterparty.
+        /// </summary>
+        internal static string Protustranka {
+            get {
+                return ResourceManager.GetString("Protustranka", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Račun.
+        /// </summary>
+        internal static string Racun {
+            get {
+                return ResourceManager.GetString("Racun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cause.
+        /// </summary>
+        internal static string Radi {
+            get {
+                return ResourceManager.GetString("Radi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work: .
+        /// </summary>
+        internal static string Radnja {
+            get {
+                return ResourceManager.GetString("Radnja", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work.
+        /// </summary>
+        internal static string Radnja2 {
+            get {
+                return ResourceManager.GetString("Radnja2", resourceCulture);
             }
         }
         
@@ -223,11 +700,92 @@ namespace eOdvjetnik.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Samo administrator može mijenjati nazive kategorija!.
+        /// </summary>
+        internal static string SamoAdminKAtegorija {
+            get {
+                return ResourceManager.GetString("SamoAdminKAtegorija", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Serijski broj:.
+        /// </summary>
+        internal static string SerijskiBroj {
+            get {
+                return ResourceManager.GetString("SerijskiBroj", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spremi.
+        /// </summary>
+        internal static string Spremi {
+            get {
+                return ResourceManager.GetString("Spremi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SQL.
+        /// </summary>
+        internal static string SQL {
+            get {
+                return ResourceManager.GetString("SQL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopa PDV-a (%).
+        /// </summary>
+        internal static string StopaPDV {
+            get {
+                return ResourceManager.GetString("StopaPDV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tariff.
         /// </summary>
         internal static string Tarifa {
             get {
                 return ResourceManager.GetString("Tarifa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tariff Code: .
+        /// </summary>
+        internal static string TarifniBroj {
+            get {
+                return ResourceManager.GetString("TarifniBroj", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tariff nr..
+        /// </summary>
+        internal static string Tbr {
+            get {
+                return ResourceManager.GetString("Tbr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tekst podnožja računa:.
+        /// </summary>
+        internal static string TekstPodnozjaR {
+            get {
+                return ResourceManager.GetString("TekstPodnozjaR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefon:.
+        /// </summary>
+        internal static string Telefon {
+            get {
+                return ResourceManager.GetString("Telefon", resourceCulture);
             }
         }
         
@@ -286,11 +844,47 @@ namespace eOdvjetnik.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Uređaj i licenca.
+        /// </summary>
+        internal static string UredajLicenca {
+            get {
+                return ResourceManager.GetString("UredajLicenca", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string Uredi {
+            get {
+                return ResourceManager.GetString("Uredi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uspješno poslano.
+        /// </summary>
+        internal static string UspjesnoPoslano {
+            get {
+                return ResourceManager.GetString("UspjesnoPoslano", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Version.
         /// </summary>
         internal static string Version {
             get {
                 return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vrsta licence:.
+        /// </summary>
+        internal static string VrstaLicence {
+            get {
+                return ResourceManager.GetString("VrstaLicence", resourceCulture);
             }
         }
         
@@ -318,6 +912,24 @@ namespace eOdvjetnik.Resources.Strings {
         internal static string ZaAktivaciju {
             get {
                 return ResourceManager.GetString("ZaAktivaciju", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zaposlenici.
+        /// </summary>
+        internal static string Zaposlenici {
+            get {
+                return ResourceManager.GetString("Zaposlenici", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Representative: .
+        /// </summary>
+        internal static string Zastupnik {
+            get {
+                return ResourceManager.GetString("Zastupnik", resourceCulture);
             }
         }
     }
