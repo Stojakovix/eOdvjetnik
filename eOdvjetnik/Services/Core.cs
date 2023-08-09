@@ -6,7 +6,6 @@ using SMBLibrary.Client;
 using System.Collections.ObjectModel;
 using Syncfusion.DocIO.DLS;
 using System.Collections.Generic;
-using Vanara.Extensions;
 using Microsoft.Maui.Storage;
 using Microsoft.Maui.Networking;
 
