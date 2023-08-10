@@ -3,6 +3,7 @@
              x:Class="eOdvjetnik.Views.Spisi"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
              BackgroundColor="White"
+             xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              Title="Spisi">
 
     <ContentPage.BindingContext>
@@ -31,11 +32,11 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Button Grid.Column="0" Grid.Row="0" FontSize="Default" FontAttributes="Bold"  Text="Dodaj" Command="{Binding OnDodajClick}"  BorderColor="DarkGray" TextColor="Black" BackgroundColor="#5ac8fa" HorizontalOptions="FillAndExpand" Margin="5,2,10,2"/>
-                    <Button Grid.Column="1" Grid.Row="0" FontSize="Default" FontAttributes="Bold" Text="Obriši"  BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" HorizontalOptions="Fill" Margin="5,2,10,2" />
-                    <Button Grid.Column="2" Grid.Row="0" FontSize="Default" FontAttributes="Bold" Text="Poništi"  BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black"  HorizontalOptions="EndAndExpand" Command="{Binding OnResetClick}" Margin="5,2,10,2"/>
+                    <Button Grid.Column="0" Grid.Row="0" FontSize="Default" FontAttributes="Bold"  Text="{x:Static resx:AppResources.Dodaj}" Command="{Binding OnDodajClick}"  BorderColor="DarkGray" TextColor="Black" BackgroundColor="#5ac8fa" HorizontalOptions="FillAndExpand" Margin="5,2,10,2"/>
+                    <Button Grid.Column="1" Grid.Row="0" FontSize="Default" FontAttributes="Bold" Text="{x:Static resx:AppResources.Obrisi}"  BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" HorizontalOptions="Fill" Margin="5,2,10,2" />
+                    <Button Grid.Column="2" Grid.Row="0" FontSize="Default" FontAttributes="Bold" Text="{x:Static resx:AppResources.Ponisti}"  BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black"  HorizontalOptions="EndAndExpand" Command="{Binding OnResetClick}" Margin="5,2,10,2"/>
 
-                    <SearchBar Grid.Column="3" Placeholder="Pretraži" 
+                    <SearchBar Grid.Column="3" Placeholder="{x:Static resx:AppResources.Pretrazi}" 
                                HorizontalOptions="EndAndExpand"
                                MinimumWidthRequest="400"
                                BackgroundColor="LightGray"
@@ -61,13 +62,13 @@
                             <ColumnDefinition Width="10" />
 
                         </Grid.ColumnDefinitions>
-                        <Label FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Broj spisa" Padding="5,0,0,0" />
-                        <Label FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="Klijent" />
-                        <Label FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Protustranka" />
-                        <Label FontAttributes="Bold" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="Dodao" />
-                        <Label FontAttributes="Bold" Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center" Text="Radi" />
-                        <Label FontAttributes="Bold" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" Text="Kreirano" />
-                        <Label FontAttributes="Bold" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center" Text="Izmjenjeno" />
+                        <Label FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{x:Static resx:AppResources.BrojSpisa}" Padding="5,0,0,0" />
+                        <Label FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="{x:Static resx:AppResources.Klijent}" />
+                        <Label FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Text="{x:Static resx:AppResources.Protustranka}" />
+                        <Label FontAttributes="Bold" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="{x:Static resx:AppResources.Dodao}" />
+                        <Label FontAttributes="Bold" Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center" Text="{x:Static resx:AppResources.Radi}" />
+                        <Label FontAttributes="Bold" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" Text="{x:Static resx:AppResources.Kreirano}" />
+                        <Label FontAttributes="Bold" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center" Text="{x:Static resx:AppResources.Izmjenjeno}" />
                     </Grid>
                 </Grid>
             </StackLayout>

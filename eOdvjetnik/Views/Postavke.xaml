@@ -4,6 +4,7 @@
              x:Class="eOdvjetnik.Views.Postavke"
              xmlns:local ="clr-namespace:eOdvjetnik.ViewModel"
              Title="Postavke"
+             xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              BackgroundColor="White" >
 
 
@@ -31,23 +32,23 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button1_Clicked" Text="Uređaj i licenca" FontSize="Default"  />
-            <Button Grid.Column="1" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button4_Clicked" Text="NAS postavke"  FontSize="Default"  />
-            <Button Grid.Column="2" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button5_Clicked" Text="SQL postavke"  FontSize="Default"  />
-            <Button Grid.Column="3" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button7_Clicked" Text="Postavke računa" FontSize="Default"   />
-            <Button Grid.Column="4" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Command="{Binding OpenZaposlenici}"  Text="Zaposlenici" FontSize="Default"   />
-            <Button Grid.Column="5" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button2_Clicked" Text="Feedback" FontSize="Default"   />
-            <Button Grid.Column="6" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button3_Clicked" Command="{Binding LoadColors}" Text="Kategorije događaja" FontSize="Default"   />
+            <Button Grid.Column="0" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button1_Clicked" Text="{x:Static resx:AppResources.UredajLicenca}" FontSize="Default"  />
+            <Button Grid.Column="1" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button4_Clicked" Text="{x:Static resx:AppResources.NAS}"  FontSize="Default"  />
+            <Button Grid.Column="2" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button5_Clicked" Text="{x:Static resx:AppResources.SQL}"  FontSize="Default"  />
+            <Button Grid.Column="3" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button7_Clicked" Text="{x:Static resx:AppResources.Racun}" FontSize="Default"   />
+            <Button Grid.Column="4" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Command="{Binding OpenZaposlenici}"  Text="{x:Static resx:AppResources.Zaposlenici}" FontSize="Default"   />
+            <Button Grid.Column="5" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button2_Clicked" Text="{x:Static resx:AppResources.PovInfo}" FontSize="Default"   />
+            <Button Grid.Column="6" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button3_Clicked" Command="{Binding LoadColors}" Text="{x:Static resx:AppResources.KatDog}" FontSize="Default"   />
 
             <VerticalStackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" Padding="10,10,10,10"  BackgroundColor="White" 
                     x:Name="Frame1" IsVisible="True" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" >
-                <Label TextColor="Black" Text="Vrsta licence:" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label TextColor="Black" Text="{x:Static resx:AppResources.VrstaLicence}" FontAttributes="Bold" Margin="0,0,0,5" />
                 <Label TextColor="Black" Text="{Binding LicenceType}" Margin="0,0,0,20" />
-                <Label TextColor="Black" Text="Datum isteka licence:" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label TextColor="Black" Text="{x:Static resx:AppResources.DatumIstekaLicence}" FontAttributes="Bold" Margin="0,0,0,5" />
                 <Label TextColor="Black" Text="{Binding ExpiryDate}" Margin="0,0,0,20" />
-                <Label TextColor="Black" Text="Aktivacijski kod:" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label TextColor="Black" Text="{x:Static resx:AppResources.AktivacijskuKod}" FontAttributes="Bold" Margin="0,0,0,5" />
                 <Label TextColor="Black" Text="{Binding Activation_code}" Margin="0,0,0,20" />
-                <Label TextColor="Black" Text="Serijski broj:" FontAttributes="Bold" Margin="0,0,0,5" />
+                <Label TextColor="Black" Text="{x:Static resx:AppResources.SerijskiBroj}" FontAttributes="Bold" Margin="0,0,0,5" />
                 <Editor TextColor="Black" Text="{Binding HWID64}" IsReadOnly="True"  />
             </VerticalStackLayout>
 
@@ -62,14 +63,14 @@
                     </OnPlatform>
                 </Border.WidthRequest>
                 <ScrollView>
-                    <Editor  AutoSize="TextChanges" MaxLength="380" Placeholder="Opišite grešku koju je potrebno ispraviti ili pošaljite prijedlog željenih funkcinalnosti" MinimumHeightRequest="150"
+                        <Editor  AutoSize="TextChanges" MaxLength="380" Placeholder="{x:Static resx:AppResources.OpisGreske}" MinimumHeightRequest="150"
                              Text="{Binding FeedbackText}"
                              />
                 </ScrollView>
             </Border>
 
                 <Button Grid.Column="0" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,20,0,20" 
-                        TextColor="Black" Text="Pošalji" FontSize="Default" WidthRequest="120" HorizontalOptions="Center" Command="{Binding SendFeedback}" />
+                        TextColor="Black" Text="{x:Static resx:AppResources.Posalji}" FontSize="Default" WidthRequest="120" HorizontalOptions="Center" Command="{Binding SendFeedback}" />
                 
              
 
@@ -95,22 +96,22 @@
                     </Grid.ColumnDefinitions>
 
 
-                    <Label MinimumWidthRequest="50" Text="IP adresa"  TextColor="Black" LineBreakMode="NoWrap" VerticalOptions="Center" />
+                    <Label MinimumWidthRequest="50" Text="{x:Static resx:AppResources.IPAdresa}"  TextColor="Black" LineBreakMode="NoWrap" VerticalOptions="Center" />
                     <Entry Grid.Column="1"  x:Name="IP_Entry" Text="{Binding IPNas}" TextColor="Black"  VerticalTextAlignment="Center" />
 
-                    <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Label Text="{x:Static resx:AppResources.KorisnickoIme}" Grid.Row="1" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                     <Entry x:Name="USER_Entry" Text="{Binding UserNas}" Grid.Row="1" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center" />
 
-                    <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Label Text="{x:Static resx:AppResources.Lozinka}" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                     <Entry x:Name="PASS_Entry" Text="{Binding PassNas}" IsPassword="True" Grid.Row="2" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"  />
 
-                    <Label Text="Mapa" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Label Text="{x:Static resx:AppResources.Mapa}" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                     <Entry x:Name="FOLDER_Entry" Text="{Binding Folder}" Grid.Row="3" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center" />
 
-                    <Label Text="Podmapa" Grid.Row="4" Grid.Column="0" TextColor="Black"  VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Label Text="{x:Static resx:AppResources.Podmapa}" Grid.Row="4" Grid.Column="0" TextColor="Black"  VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                     <Entry x:Name="SUBFOLDER_Entry" Text="{Binding SubFolder}" Grid.Row="4" Grid.Column="1" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center" />
 
-                    <Button Text="Spremi" Command="{Binding SaveCommandNAS}" Grid.Row="5" Grid.Column="1" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"  />
+                    <Button Text="{x:Static resx:AppResources.Spremi}" Command="{Binding SaveCommandNAS}" Grid.Row="5" Grid.Column="1" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"  />
 
                 </Grid>
             </StackLayout>
@@ -134,19 +135,19 @@
                         <ColumnDefinition Width="200" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Text="IP adresa" Grid.Row="0" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Label Text="{x:Static resx:AppResources.IPAdresa}" Grid.Row="0" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                     <Entry x:Name="IPEntry" Text="{Binding IP}" Grid.Row="0" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
 
-                    <Label Text="Korisničko ime" Grid.Row="1" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Label Text="{x:Static resx:AppResources.KorisnickoIme}" Grid.Row="1" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                     <Entry x:Name="USEREntry" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
 
-                    <Label Text="Lozinka" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Label Text="{x:Static resx:AppResources.Lozinka}" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                     <Entry x:Name="PASSEntry" Text="{Binding Password}" IsPassword="True" Grid.Row="2" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"  />
 
-                    <Label Text="Baza podataka" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                    <Label Text="{x:Static resx:AppResources.Baza}" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                     <Entry x:Name="DatabaseEntry" Text="{Binding DatabaseName}" Grid.Row="3" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
 
-                    <Button Text="Spremi" Command="{Binding SQLSaveCommand}" Grid.Row="5" Grid.Column="1" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"   />
+                    <Button Text="{x:Static resx:AppResources.Spremi}" Command="{Binding SQLSaveCommand}" Grid.Row="5" Grid.Column="1" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"   />
 
                 </Grid>
             </StackLayout>
@@ -173,38 +174,38 @@
                     </Grid.RowDefinitions>
 
 
-                    <Label Grid.Row="0" Grid.Column="0" Text="Stopa PDV-a (%)" Margin="10,15,0,0" VerticalOptions="Start" />
+                    <Label Grid.Row="0" Grid.Column="0" Text="{x:Static resx:AppResources.StopaPDV}" Margin="10,15,0,0" VerticalOptions="Start" />
                     <Entry Grid.Row="0" Grid.Column="1" TextColor="Black" Placeholder="{Binding ReceiptPDVamount}" Margin="5,10,0,0" MaxLength="2"
                            HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding ReceiptPDVamount, Mode=TwoWay}" 
                            />
-                    <Label Grid.Row="1" Grid.Column="0" Text="IBAN" Margin="10,15,0,0" VerticalOptions="Start" />
+                    <Label Grid.Row="1" Grid.Column="0" Text="{x:Static resx:AppResources.IBAN}" Margin="10,15,0,0" VerticalOptions="Start" />
                     <Entry Grid.Row="1" Grid.Column="1" TextColor="Black" Placeholder="{Binding ReceiptIBAN}" Margin="5,10,0,0" MaxLength="20"
                            HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding ReceiptIBAN, Mode=TwoWay}" 
                            />
 
-                    <Label Grid.Row="2" Grid.Column="0" Text="Naziv tvrtke u zaglavlju računa:" Margin="10,15,0,0" VerticalOptions="Start" />
+                    <Label Grid.Row="2" Grid.Column="0" Text="{x:Static resx:AppResources.NazivZaglavlje}" Margin="10,15,0,0" VerticalOptions="Start" />
                     <Entry Grid.Row="2" Grid.Column="1" TextColor="Black" Placeholder="{Binding ReceiptHeaderText}" Margin="5,10,0,0" 
                            HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding ReceiptHeaderText, Mode=TwoWay}"
                            />
 
-                    <Label Grid.Row="3" Text="Tekst podnožja računa:" Margin="10,15,0,0"   />
+                    <Label Grid.Row="3" Text="{x:Static resx:AppResources.TekstPodnozjaR}" Margin="10,15,0,0"   />
                     <Editor Grid.Row="3" Grid.Column="1" TextColor="Black"  Margin="5,10,0,0" 
                            MinimumHeightRequest="200"  HorizontalTextAlignment="Start" MaxLength="400"
                            Text="{Binding ReceiptFooterText, Mode=TwoWay}" 
                             Placeholder="{Binding ReceiptFooterText}"
                            />
-                    <Label Grid.Row="4" Grid.Column="0" Text="Osoba u potpisu računa:" Margin="10,15,0,0" VerticalOptions="Start" />
+                    <Label Grid.Row="4" Grid.Column="0" Text="{x:Static resx:AppResources.OsobaUPotpisuR}" Margin="10,15,0,0" VerticalOptions="Start" />
                     <Entry Grid.Row="4" Grid.Column="1" TextColor="Black" Placeholder="{Binding ReceiptSignature}" Margin="5,10,0,0" 
                            HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding ReceiptSignature, Mode=TwoWay}"
                            />
 
-                    <Button Margin="10,20,0,0" Grid.Row="5" Grid.Column="0" Text="Odabir logotipa za račun" VerticalOptions="Start" BorderColor="DarkGray" BackgroundColor="LightGray"
+                    <Button Margin="10,20,0,0" Grid.Row="5" Grid.Column="0" Text="{x:Static resx:AppResources.OdabirLogotipa}" VerticalOptions="Start" BorderColor="DarkGray" BackgroundColor="LightGray"
                             TextColor="Black" FontSize="Default" Clicked="OnLogoImageClicked"/>
 
                     <Image Margin="0,20,0,0" Grid.Row="5" Grid.Column="1" HeightRequest="100"  x:Name="CompanyLogo"  />
 
 
-                    <Button Margin="0,30,0,0" Grid.Row="6" Grid.Column="0" Text="Spremi" BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default" 
+                    <Button Margin="0,30,0,0" Grid.Row="6" Grid.Column="0" Text="{x:Static resx:AppResources.Spremi}" BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default" 
                             HorizontalOptions="Center" MinimumWidthRequest="100" Command="{Binding SaveReceiptCompanyInfo}" />
 
 
@@ -238,9 +239,9 @@
 
 
 
-                <Button Text="Spremi" Command="{Binding SaveColors}" Grid.Row="11" Grid.Column="1" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default" WidthRequest="120"  />
+                <Button Text="{x:Static resx:AppResources.Spremi}" Command="{Binding SaveColors}" Grid.Row="11" Grid.Column="1" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default" WidthRequest="120"  />
 
-                <Label Margin="20,10,0,0"  TextColor="Black" Text="Samo administrator može mijenjati nazive kategorija!" FontAttributes="Bold" IsVisible="{Binding AdminColorPopup}"   />
+                <Label Margin="20,10,0,0"  TextColor="Black" Text="{x:Static resx:AppResources.SamoAdminKAtegorija}" FontAttributes="Bold" IsVisible="{Binding AdminColorPopup}"   />
 
 
 

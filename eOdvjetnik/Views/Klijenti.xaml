@@ -4,6 +4,7 @@
              x:Class="eOdvjetnik.Views.Klijenti"
              xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
+             xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              Title="Datoteka Osoba">
     <ContentPage.BindingContext>
         <viewmodel:KlijentiViewModel/>
@@ -38,29 +39,29 @@
 
                 </Grid.ColumnDefinitions>
 
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Grid.Column="0" Grid.Row="0" Text="Klijent" FontSize="14"  FontAttributes="Bold" TextColor="Black"  />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Grid.Column="0" Grid.Row="0" Text="{x:Static resx:AppResources.Klijent}" FontSize="14"  FontAttributes="Bold" TextColor="Black"  />
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Grid.Column="0" Grid.Row="1"  Text="{Binding ClientName}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="OIB" Grid.Column="1" Grid.Row="0"  FontSize="14" FontAttributes="Bold" TextColor="Black" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="{x:Static resx:AppResources.OIB}" Grid.Column="1" Grid.Row="0"  FontSize="14" FontAttributes="Bold" TextColor="Black" />
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Grid.Column="1" Grid.Row="1" Text="{Binding ClientOIB}" FontSize="14"  TextColor="Black" Padding="0,0,0,10"  />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="Adresa" Grid.Column="2" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="{x:Static resx:AppResources.Adresa}" Grid.Column="2" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Grid.Column="2" Grid.Row="1" Text="{Binding ClientAddress}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="Boravište:" Grid.Column="3" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="{x:Static resx:AppResources.BoravisteD}" Grid.Column="3" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Grid.Column="3" Grid.Row="1" Text="{Binding ClientResidence}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="Datum rođenja:" Grid.Column="4"   Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" LineBreakMode="WordWrap" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="{x:Static resx:AppResources.DatumRodenja}" Grid.Column="4"   Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" LineBreakMode="WordWrap" />
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Grid.Column="4" Grid.Row="1"  Text="{Binding ClientBirthDate}" FontSize="14" TextColor="Black" Padding="0,0,0,10"  />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="Ostalo:" Grid.Column="5" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black"  />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="{x:Static resx:AppResources.Ostalo}" Grid.Column="5" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black"  />
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Grid.Column="5" Grid.Row="1" Text="{Binding ClientOther}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" LineBreakMode="WordWrap"  />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="Telefon:" Grid.Column="6" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="{x:Static resx:AppResources.Telefon}" Grid.Column="6" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Grid.Column="6" Grid.Row="1" Text="{Binding ClientPhone}" FontSize="14"  TextColor="Black"  Padding="0,0,0,10" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="Mobitel:" Grid.Column="7" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="{x:Static resx:AppResources.Mobitel}" Grid.Column="7" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Grid.Column="7" Grid.Row="1" Text="{Binding ClientMobile}" FontSize="14"  TextColor="Black" Padding="0,0,0,10"  />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="Fax:" Grid.Column="8" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="{x:Static resx:AppResources.Fax}" Grid.Column="8" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Grid.Column="8" Grid.Row="1" Text="{Binding ClientFax}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="Email:" Grid.Column="9" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="{x:Static resx:AppResources.Email}" Grid.Column="9" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Grid.Column="9" Grid.Row="1" Text="{Binding ClientEmail}" FontSize="14"  TextColor="Black"  Padding="0,0,0,10" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="Država:" Grid.Column="10" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="{x:Static resx:AppResources.Drzava}" Grid.Column="10" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Grid.Column="10" Grid.Row="1" Text="{Binding ClientCountry}" FontSize="14"  TextColor="Black" Padding="0,0,0,10" LineBreakMode="WordWrap" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="Pravna osoba:" Grid.Column="11" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,12,0,0" Text="{x:Static resx:AppResources.Pravna}" Grid.Column="11" Grid.Row="0"  FontSize="14"  FontAttributes="Bold" TextColor="Black" />
                 <CheckBox Margin="20,0,0,0" Grid.Column="11" Grid.Row="1" IsChecked="{Binding ClientLegalPerson}"  />
 
             </Grid>
@@ -71,7 +72,7 @@
                 BorderColor="DarkGray"
                 BorderWidth="1"
                 BackgroundColor="#5ac8fa"
-                Text="Dodaj u račun"
+                Text="{x:Static resx:AppResources.DodajNaRacun}"
                 FontAttributes="Bold"
                 TextColor="Black"
                 HorizontalOptions="End"
@@ -82,7 +83,7 @@
                 BorderColor="DarkGray"
                 BorderWidth="1"
                 BackgroundColor="#5ac8fa"
-                Text="Dodaj novi"
+                Text="{x:Static resx:AppResources.DodajNovi}"
                 FontAttributes="Bold"
                 TextColor="Black"
                 HorizontalOptions="End"
@@ -93,7 +94,7 @@
                 BorderColor="DarkGray"
                 BorderWidth="1"
                 BackgroundColor="#5ac8fa"
-                Text="Nedavno dodani"
+                Text="{x:Static resx:AppResources.NedavnoDodani}"
                 FontAttributes="Bold"
                 TextColor="Black"
                 HorizontalOptions="End"
@@ -104,7 +105,7 @@
                 BorderColor="DarkGray"
                 BorderWidth="1"
                 BackgroundColor="#5ac8fa"
-                Text="Uredi"
+                Text="{x:Static resx:AppResources.Uredi}"
                 FontAttributes="Bold"
                 TextColor="Black"
                 HorizontalOptions="End"
@@ -116,7 +117,7 @@
                    BackgroundColor="LightGray"
                     Opacity="0.5"
                     PlaceholderColor="Black"
-                   Placeholder="Pretraga po imenu ili OIB-u"
+                   Placeholder="{x:Static resx:AppResources.PretragaO}"
                    SearchCommand="{Binding SearchCommand}"
                    Text="{Binding SearchText}"
                    WidthRequest="400"
@@ -124,8 +125,8 @@
                    Margin="10,10,10,10"
                    FontSize="Default" />
 
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="Nema rezultata pretrage!" FontSize="16" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}"   TextColor="Black" VerticalOptions="Center" Padding="0,10,0,0"/>
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="Povezivanje nije uspjelo!" FontSize="16" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}"  TextColor="Black" VerticalOptions="Center" Padding="0,10,0,0" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="{x:Static resx:AppResources.NemaRPretrage}" FontSize="16" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}"   TextColor="Black" VerticalOptions="Center" Padding="0,10,0,0"/>
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="{x:Static resx:AppResources.PovezivanjeFalse}" FontSize="16" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}"  TextColor="Black" VerticalOptions="Center" Padding="0,10,0,0" />
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="{Binding ContactDeletedText}" FontSize="16" FontAttributes="Bold" IsVisible="{Binding ContactDeleted}"  TextColor="Black" VerticalOptions="Center" Padding="0,10,0,0" />
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="{Binding ContactEditedText}" FontSize="16" FontAttributes="Bold" IsVisible="{Binding ContactEdited}"  TextColor="Black" VerticalOptions="Center" Padding="0,10,0,0" />
 
@@ -156,12 +157,12 @@
                     <ColumnDefinition Width="20" />
                 </Grid.ColumnDefinitions>
 
-                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="300" Grid.Column="1" FontAttributes="Bold" Text="Ime" HorizontalOptions="Start"  />
-                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="100" Grid.Column="2" FontAttributes="Bold" Text="OIB" HorizontalOptions="Start"  />
-                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="200" Grid.Column="3" FontAttributes="Bold" Text="Adresa" HorizontalOptions="Start"  />
-                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="50" Grid.Column="4" FontAttributes="Bold" Text="Telefon" HorizontalOptions="Start" Padding="10,0,0,0" />
-                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="50" Grid.Column="5" FontAttributes="Bold" Text="Mobitel" HorizontalOptions="Start"   />
-                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="100" Grid.Column="6" FontAttributes="Bold" Text="Email" HorizontalOptions="Start"  />
+                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="300" Grid.Column="1" FontAttributes="Bold" Text="{x:Static resx:AppResources.Ime}" HorizontalOptions="Start"  />
+                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="100" Grid.Column="2" FontAttributes="Bold" Text="{x:Static resx:AppResources.OIB}" HorizontalOptions="Start"  />
+                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="200" Grid.Column="3" FontAttributes="Bold" Text="{x:Static resx:AppResources.Adresa}" HorizontalOptions="Start"  />
+                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="50" Grid.Column="4" FontAttributes="Bold" Text="{x:Static resx:AppResources.Telefon}" HorizontalOptions="Start" Padding="10,0,0,0" />
+                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="50" Grid.Column="5" FontAttributes="Bold" Text="{x:Static resx:AppResources.Mobitel}" HorizontalOptions="Start"   />
+                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="100" Grid.Column="6" FontAttributes="Bold" Text="{x:Static resx:AppResources.Email}" HorizontalOptions="Start"  />
 
             </Grid>
         </StackLayout>

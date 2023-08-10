@@ -128,14 +128,14 @@
     <value>АКТИВАЦИЈСКИ КОД</value>
   </data>
   <data name="AktivacijskuKod" xml:space="preserve">
-    <value>Aktivacijski kod:</value>
+    <value>Активацијски код:</value>
   </data>
   <data name="AllDay" xml:space="preserve">
     <value>Цијели дан</value>
     <comment>Цијели дан</comment>
   </data>
   <data name="Baza" xml:space="preserve">
-    <value>Baza podataka</value>
+    <value>База података</value>
   </data>
   <data name="Bodovi" xml:space="preserve">
     <value>Бодови</value>
@@ -147,7 +147,7 @@
     <value>Број списа</value>
   </data>
   <data name="DatumIstekaLicence" xml:space="preserve">
-    <value>Datum isteka licence:</value>
+    <value>Датум истека лиценце:</value>
   </data>
   <data name="DatumRodenja" xml:space="preserve">
     <value>Датум рођења:</value>
@@ -181,19 +181,19 @@
     <value>Факс:</value>
   </data>
   <data name="IBAN" xml:space="preserve">
-    <value>IBAN</value>
+    <value>ИБАН</value>
   </data>
   <data name="Ime" xml:space="preserve">
     <value>Име</value>
   </data>
   <data name="IPAdresa" xml:space="preserve">
-    <value>IP adresa</value>
+    <value>ИП адреса</value>
   </data>
   <data name="Izmjenjeno" xml:space="preserve">
     <value>Измјењено</value>
   </data>
   <data name="KatDog" xml:space="preserve">
-    <value>Kategorije događaja</value>
+    <value>Категорије догађаја</value>
   </data>
   <data name="Klijent" xml:space="preserve">
     <value>Клијент</value>
@@ -208,10 +208,10 @@
     <value>Корисничка подршка</value>
   </data>
   <data name="KorisnickoIme" xml:space="preserve">
-    <value>Korisničko ime</value>
+    <value>Корисничко име</value>
   </data>
   <data name="KosisnickoIme" xml:space="preserve">
-    <value>Korisničko ime</value>
+    <value>Корисничко име</value>
   </data>
   <data name="Kreirano" xml:space="preserve">
     <value>Креирано</value>
@@ -220,7 +220,7 @@
     <value>Лиценца: {0}</value>
   </data>
   <data name="Lozinka" xml:space="preserve">
-    <value>Lozinka</value>
+    <value>Лозинка</value>
   </data>
   <data name="MainEmail" xml:space="preserve">
     <value>Електронска пошта: podrska@eodvjetnik.hr</value>
@@ -229,7 +229,7 @@
     <value>Контакт број: +387 66 499 000</value>
   </data>
   <data name="Mapa" xml:space="preserve">
-    <value>Mapa</value>
+    <value>Мапа</value>
   </data>
   <data name="Mobitel" xml:space="preserve">
     <value>Мобител:</value>
@@ -239,10 +239,10 @@
     <comment>Мјесец</comment>
   </data>
   <data name="NAS" xml:space="preserve">
-    <value>NAS</value>
+    <value>НАС</value>
   </data>
   <data name="NazivZaglavlje" xml:space="preserve">
-    <value>Naziv tvrtke u zaglavlju računa:</value>
+    <value>Назив твртке у заглављу рачуна:</value>
   </data>
   <data name="NedavnoDodani" xml:space="preserve">
     <value>Недавно додани</value>
@@ -264,16 +264,16 @@
     <value>Одабери језик</value>
   </data>
   <data name="OdabirLogotipa" xml:space="preserve">
-    <value>Odabir logotipa za račun</value>
+    <value>Одабир логотипа за рачун</value>
   </data>
   <data name="OIB" xml:space="preserve">
     <value>ЈМБГ</value>
   </data>
   <data name="OpisGreske" xml:space="preserve">
-    <value>Opišite grešku koju je potrebno ispraviti ili pošaljite prijedlog željenih funkcinalnosti</value>
+    <value>Опишите грешку коју је потребно исправити или пошаљите приједлог жељених функциналности</value>
   </data>
   <data name="OsobaUPotpisuR" xml:space="preserve">
-    <value>Osoba u potpisu računa:</value>
+    <value>Особа у потпису рачуна:</value>
   </data>
   <data name="Ostalo" xml:space="preserve">
     <value>Остало:</value>
@@ -282,13 +282,13 @@
     <value>Почетна</value>
   </data>
   <data name="Podmapa" xml:space="preserve">
-    <value>Podmapa</value>
+    <value>Подмапа</value>
   </data>
   <data name="Ponisti" xml:space="preserve">
     <value>Поништи</value>
   </data>
   <data name="Posalji" xml:space="preserve">
-    <value>Pošalji</value>
+    <value>Пошаљи</value>
   </data>
   <data name="Postavke" xml:space="preserve">
     <value>Поставке</value>
@@ -297,10 +297,10 @@
     <value>Повезивање није успјело!</value>
   </data>
   <data name="PovezivanjeNijeUspjelo" xml:space="preserve">
-    <value>Povezivanje nije uspjelo</value>
+    <value>Повезивање није успјело</value>
   </data>
   <data name="PovInfo" xml:space="preserve">
-    <value>Povratna informacija</value>
+    <value>Повратна информација</value>
   </data>
   <data name="Pravna" xml:space="preserve">
     <value>Правна особа:</value>
@@ -321,7 +321,7 @@
     <value>Протустранка</value>
   </data>
   <data name="Racun" xml:space="preserve">
-    <value>Račun</value>
+    <value>Рачун</value>
   </data>
   <data name="Radi" xml:space="preserve">
     <value>Ради</value>
@@ -336,19 +336,19 @@
     <value>Рочишник</value>
   </data>
   <data name="SamoAdminKAtegorija" xml:space="preserve">
-    <value>Samo administrator može mijenjati nazive kategorija!</value>
+    <value>Само администратор може мијењати називе категорија!</value>
   </data>
   <data name="SerijskiBroj" xml:space="preserve">
-    <value>Serijski broj:</value>
+    <value>Серијски број:</value>
   </data>
   <data name="Spremi" xml:space="preserve">
-    <value>Spremi</value>
+    <value>Спреми</value>
   </data>
   <data name="SQL" xml:space="preserve">
-    <value>SQL</value>
+    <value>СQЛ</value>
   </data>
   <data name="StopaPDV" xml:space="preserve">
-    <value>Stopa PDV-a (%)</value>
+    <value>Стопа ПДВ-а (%)</value>
   </data>
   <data name="Tarifa" xml:space="preserve">
     <value>Тарифа</value>
@@ -360,7 +360,7 @@
     <value>Тбр.</value>
   </data>
   <data name="TekstPodnozjaR" xml:space="preserve">
-    <value>Tekst podnožja računa:</value>
+    <value>Текст подножја рачуна</value>
   </data>
   <data name="Telefon" xml:space="preserve">
     <value>Телефон:</value>
@@ -389,19 +389,19 @@
     <value>Уписник</value>
   </data>
   <data name="UredajLicenca" xml:space="preserve">
-    <value>Uređaj i licenca</value>
+    <value>Уређај и лиценца</value>
   </data>
   <data name="Uredi" xml:space="preserve">
     <value>Уреди</value>
   </data>
   <data name="UspjesnoPoslano" xml:space="preserve">
-    <value>Uspješno poslano</value>
+    <value>Успјешно послано</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Верзија</value>
   </data>
   <data name="VrstaLicence" xml:space="preserve">
-    <value>Vrsta licence:</value>
+    <value>Врста лиценце:</value>
   </data>
   <data name="Week" xml:space="preserve">
     <value>Тједан</value>
@@ -415,7 +415,7 @@
     <value>За активацију апликације обратите се водитељу вашег одвојеничког друштва</value>
   </data>
   <data name="Zaposlenici" xml:space="preserve">
-    <value>Zaposlenici</value>
+    <value>Запосленици</value>
   </data>
   <data name="Zastupnik" xml:space="preserve">
     <value>Заступник</value>

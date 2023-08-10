@@ -7,6 +7,7 @@
              xmlns:local="clr-namespace:eOdvjetnik.ViewModel"
              Title="AppointmentDialog"
              xmlns:models="clr-namespace:eOdvjetnik.Models"
+             xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              x:DataType="models:Appointment"   >
     
     <ContentPage.BindingContext>

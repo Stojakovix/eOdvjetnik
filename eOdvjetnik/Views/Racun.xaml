@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.Racun"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
+             xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              Title="Naplata">
 
     <ContentPage.BindingContext>

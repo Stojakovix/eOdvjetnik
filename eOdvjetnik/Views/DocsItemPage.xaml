@@ -4,6 +4,7 @@
              x:Class="eOdvjetnik.Views.DocsItemPage"
              Title="{Binding Name}"
              xmlns:models="clr-namespace:eOdvjetnik.Models"
+             xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              x:DataType="models:DocsItem">
 
     <ScrollView>
