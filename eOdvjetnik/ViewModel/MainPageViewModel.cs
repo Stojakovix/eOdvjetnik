@@ -10,6 +10,8 @@ namespace eOdvjetnik.ViewModel
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
+        
+
 
         //DateTime
         private Navigacija navigacija;
@@ -86,6 +88,11 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine("Cannot ParseDate()" + ex.Message );
 
             }
+
+            DevicePlatform check_platform = DeviceInfo.Current.Platform;
+            Debug.WriteLine("VRSTA PLATVORME " + check_platform);
+            string vrstaPlatfrome = check_platform.ToString();
+            Preferences.Set("vrsta_platforme", vrstaPlatfrome);
         }
 
         private void RefreshLicenceData(object recipient, CheckLicence message)

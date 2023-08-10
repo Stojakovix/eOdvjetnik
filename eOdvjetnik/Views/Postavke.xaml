@@ -218,7 +218,7 @@
                     x:Name="Frame3" IsVisible="False" HorizontalOptions="Start" VerticalOptions="Start">
 
 
-                <ListView  MinimumHeightRequest="500" Grid.Row="1" ItemsSource="{Binding Colors}" HorizontalOptions="Start" >
+                <ListView WidthRequest="400"  MinimumHeightRequest="500" Grid.Row="1" ItemsSource="{Binding Colors}" HorizontalOptions="Start" >
 
                         <ListView.ItemTemplate>
                             <DataTemplate>

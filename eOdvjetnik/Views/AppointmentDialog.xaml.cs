@@ -43,6 +43,7 @@ public partial class AppointmentDialog : ContentPage
             }
         }
     }
+    public string DevicePlatform { get; set; }
     public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler)
     {
         InitializeComponent();
@@ -59,6 +60,7 @@ public partial class AppointmentDialog : ContentPage
         //DeleteButton.Clicked += DeleteButton_Clicked;
 
         categoryPicker.SelectedIndexChanged += OnCategoryPickerSelectedIndexChanged;
+        DevicePlatform = Preferences.Get("vrsta_platforme", "");
 
     }
     private void OnCategoryPickerSelectedIndexChanged(object sender, EventArgs e)
@@ -97,7 +99,17 @@ public partial class AppointmentDialog : ContentPage
                 }
 
                 MacWorkaround();
-                Shell.Current.GoToAsync("//LoadingPage");
+
+                if (DevicePlatform == "MacCatalyst")
+                {
+                    Shell.Current.GoToAsync("//LoadingPage");
+
+                }
+                else
+                {
+                    Shell.Current.GoToAsync("//Kalendar");
+
+                }
             }
         }
         catch (Exception ex)
@@ -126,8 +138,17 @@ public partial class AppointmentDialog : ContentPage
     }
     private void CancelButton_Clicked(object sender, EventArgs e)
     {
-        MacWorkaround();
-        Shell.Current.GoToAsync("//LoadingPage");
+        if (DevicePlatform == "MacCatalyst")
+        {
+            MacWorkaround();
+            Shell.Current.GoToAsync("//LoadingPage");
+        }
+        else
+        {
+            Shell.Current.GoToAsync("//Kalendar");
+        }
+       
+       
         Debug.WriteLine("Cancel Clicked");
     }
     private void MacWorkaround()
@@ -174,16 +195,33 @@ public partial class AppointmentDialog : ContentPage
                     {
                         AppointmentDetails();
                         AddAppointmentToRemoteServer(appointment);
-                            MacWorkaround();
-                            Shell.Current.GoToAsync("//LoadingPage");
+
+                            if (DevicePlatform == "MacCatalyst")
+                            {
+                                MacWorkaround();
+                                Shell.Current.GoToAsync("//LoadingPage");
+                            }
+                            else
+                            {
+                                Shell.Current.GoToAsync("//Kalendar");
+                            }
+
+                          
                         }
                 }
                 else
                 {
                     AppointmentDetails();
                     AddAppointmentToRemoteServer(appointment);
-                        MacWorkaround();
-                        Shell.Current.GoToAsync("//LoadingPage");
+                        if (DevicePlatform == "MacCatalyst")
+                        {
+                            MacWorkaround();
+                            Shell.Current.GoToAsync("//LoadingPage");
+                        }
+                        else
+                        {
+                            Shell.Current.GoToAsync("//Kalendar");
+                        }
                     }
             }
             }
