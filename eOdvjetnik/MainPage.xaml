@@ -53,7 +53,7 @@
 
         </Grid.ColumnDefinitions>
         
-        <Image Opacity="0.5" HorizontalOptions="FillAndExpand" MaximumHeightRequest="1000" MaximumWidthRequest="1800" Grid.ColumnSpan="7" Grid.Row="0" Source="main_pozadina.jpg"  
+        <Image Opacity="0.5" HorizontalOptions="FillAndExpand" MaximumHeightRequest="4000" MaximumWidthRequest="4000" Grid.ColumnSpan="7" Grid.Row="0" Source="main_pozadina.jpg"  
                Aspect="Fill"  IsVisible="{OnPlatform Android=True, iOS=True, WinUI=True, MacCatalyst=True}"  />
 
         <VerticalStackLayout   Grid.ColumnSpan="5"  IsVisible="{Binding ActivationVisible
