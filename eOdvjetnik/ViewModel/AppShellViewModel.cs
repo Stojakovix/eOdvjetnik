@@ -277,11 +277,19 @@ namespace eOdvjetnik.ViewModel
 
         private async void OnKalendarClick()
         {
-            DisableMenu();
-            if (disableMenu == false)
+            try
             {
-                await Shell.Current.GoToAsync("///Kalendar");
-                Debug.WriteLine("KLIKNO");
+                DisableMenu();
+                if (disableMenu == false)
+                {
+                    await Shell.Current.GoToAsync("///Kalendar");
+                    Debug.WriteLine("KLIKNO");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine(ex.Message);
             }
         }
 

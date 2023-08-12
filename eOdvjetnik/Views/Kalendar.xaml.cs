@@ -19,10 +19,11 @@ public partial class Kalendar : ContentPage
         InitializeComponent();
         Debug.WriteLine("inicijalizirano");
         _ = new SfScheduler();
-  
-        Scheduler.View = SchedulerView.Day;
-        Scheduler.DaysView.TimeRegions = GetTimeRegion();
 
+        this.Scheduler.DragDropSettings.TimeIndicatorTextFormat = "HH:mm";
+        Scheduler.DaysView.TimeRegions = GetTimeRegion();
+        
+        
 
         //MySQL Query;
         var odvjetnik_nas = new ExternalSQLConnect();
@@ -88,17 +89,25 @@ public partial class Kalendar : ContentPage
 
     private void Scheduler_DoubleTapped(object sender, SchedulerTappedEventArgs e)
     {
-       
-        if (e.Element == SchedulerElement.SchedulerCell || e.Element == SchedulerElement.Appointment)
+
+        try
         {
-            if (e.Appointments != null)
+            if (e.Element == SchedulerElement.SchedulerCell || e.Element == SchedulerElement.Appointment)
             {
-                Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
+                if (e.Appointments != null)
+                {
+                    Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
+                }
+                else
+                {
+                    Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
+                }
             }
-            else
-            {
-                Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
-            }
+        }
+        catch ( Exception ex)
+        {
+
+            Debug.WriteLine(ex.Message);
         }
     }
 

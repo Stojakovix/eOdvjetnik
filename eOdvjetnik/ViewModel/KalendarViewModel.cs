@@ -17,6 +17,19 @@ namespace eOdvjetnik.ViewModel
         private Navigacija navigacija;
         private ObservableCollection<SchedulerAppointment> appointments;
 
+        public ObservableCollection<SchedulerAppointment> SchedulerAppointments
+        {
+            get
+            {
+                return Appointments;
+            }
+            set
+            {
+                Appointments = value;
+                this.RaiseOnPropertyChanged(nameof(SchedulerAppointments));
+            }
+        }
+
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
         #region Colors
         private ObservableCollection<ColorItem> _CategoryColor;
@@ -25,8 +38,10 @@ namespace eOdvjetnik.ViewModel
             get { return _CategoryColor; }
             set { _CategoryColor = value; }
         }
-    
 
+
+    
+        
         public void GetColors()
         {
             try
@@ -88,14 +103,16 @@ namespace eOdvjetnik.ViewModel
 
         public KalendarViewModel()
         {
-            CategoryColor = new ObservableCollection<ColorItem>();
-
-            GetColors();
-            try
+      try
             {
                 navigacija = new Navigacija();
 
                 Appointments = new ObservableCollection<SchedulerAppointment>(); // Initialize the Appointments collection
+                CategoryColor = new ObservableCollection<ColorItem>();
+                SchedulerAppointments = new ObservableCollection<SchedulerAppointment>();
+
+
+                GetColors();
                 var hardware_id = Preferences.Get("key", "default_value");
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 List<int> ExternalEventIDs = new List<int>();
