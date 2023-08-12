@@ -25,7 +25,7 @@
 
         <DataTemplate x:Key="MonthAppointmentTemplate"  >
             <!--Ne koristit Frame, nema podršku za dynamic data binding, koristi border-->
-            <Border Background="{Binding Background}" StrokeShape="RoundRectangle 5,5,5,5" >
+            <Border Background="{Binding Background}"  StrokeShape="RoundRectangle 5,5,5,5" >
                 <Label Text="{Binding Subject}" TextColor="Black"  HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Bold" LineBreakMode="WordWrap" MaxLines="2"  />
             </Border>
         </DataTemplate>
@@ -74,10 +74,10 @@
                                AppointmentsSource="{Binding Appointments}"
                                TodayHighlightBrush="Red"
                                EnableReminder="True"  
-                               ShowWeekNumber="True"
                                
                                AllowedViews="Day,Week,WorkWeek,Month,Agenda"
                                >
+
 
             <scheduler:SfScheduler.BindingContext>
                 <local:KalendarViewModel/>

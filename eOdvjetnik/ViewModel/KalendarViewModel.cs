@@ -40,8 +40,8 @@ namespace eOdvjetnik.ViewModel
         }
 
 
-    
-        
+
+
         public void GetColors()
         {
             try
@@ -63,7 +63,7 @@ namespace eOdvjetnik.ViewModel
 
                             int id;
                             int.TryParse(filesRow["id"], out id);
-                          
+
 
                             _CategoryColor.Add(new ColorItem()
                             {
@@ -103,7 +103,7 @@ namespace eOdvjetnik.ViewModel
 
         public KalendarViewModel()
         {
-      try
+            try
             {
                 navigacija = new Navigacija();
 
@@ -134,6 +134,7 @@ namespace eOdvjetnik.ViewModel
                         // Add new appointment
 
                         string colorName = appointmentRow["color"];
+                        Debug.WriteLine(colorName + "--------------------------------------------------------------");
                         Color backgroundColor = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(colorName);
 
 
@@ -146,7 +147,7 @@ namespace eOdvjetnik.ViewModel
                             IsAllDay = bool.Parse(appointmentRow["AllDay"]),
                             Notes = appointmentRow["DescriptionNotes"],
                             Background = backgroundColor,
-                    }); 
+                        });
                     }
                 }
             }

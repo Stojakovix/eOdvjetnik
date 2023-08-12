@@ -2,7 +2,8 @@ using Syncfusion.Maui.Scheduler;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
 using eOdvjetnik.Services;
-
+using eOdvjetnik.ViewModel;
+using eOdvjetnik.Models;
 
 namespace eOdvjetnik.Views;
 
@@ -22,8 +23,9 @@ public partial class Kalendar : ContentPage
 
         this.Scheduler.DragDropSettings.TimeIndicatorTextFormat = "HH:mm";
         Scheduler.DaysView.TimeRegions = GetTimeRegion();
-        
-        
+        this.BindingContext = new KalendarViewModel();
+        Scheduler.AppointmentDrop += OnSchedulerAppointmentDrop;
+
 
         //MySQL Query;
         var odvjetnik_nas = new ExternalSQLConnect();
@@ -52,6 +54,36 @@ public partial class Kalendar : ContentPage
        }
 
     }
+
+    private void OnSchedulerAppointmentDrop(object? sender, AppointmentDropEventArgs eventArgs)
+    {
+        try
+        {
+            ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+            var appointment = eventArgs.Appointment;
+            var droptime = eventArgs.DropTime;
+            var timeLength = appointment.EndTime - appointment.StartTime;
+            
+            if(eventArgs.Appointment != null)
+            {
+                appointment.StartTime = eventArgs.DropTime;
+                appointment.EndTime = appointment.StartTime + timeLength;
+            }
+            
+            Debug.WriteLine(appointment.StartTime + " " + appointment.EndTime);
+
+            string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}' WHERE internal_event_id = " + appointment.Id;
+            externalSQLConnect.sqlQuery(query);
+
+        }
+        catch (Exception ex)
+        {
+
+            Debug.WriteLine(ex.Message);
+        }
+    }
+
+
 
     private ObservableCollection<SchedulerTimeRegion> GetTimeRegion()
     {
