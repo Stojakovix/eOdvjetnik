@@ -4,12 +4,14 @@ using System.Windows.Input;
 using Timer = System.Timers.Timer;
 using eOdvjetnik.Services;
 using eOdvjetnik.Resources.Strings;
-
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace eOdvjetnik.ViewModel
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
+        
+
 
         //DateTime
         private Navigacija navigacija;
@@ -38,13 +40,20 @@ namespace eOdvjetnik.ViewModel
         public string expireDate { get; set; }
         public string licenceStatus { get; set; }
         public bool expiredLicence { get; set; }
-
-        public bool ActivationVisible
-        {
-            get; set;
-        }
         public double gracePeriod { get; set; }
-
+        private bool IsActivationVisible;
+        public bool ActivationVisible
+    {
+            get { return IsActivationVisible; }
+            set
+            {
+                if (IsActivationVisible != value)
+                {
+                    IsActivationVisible = value;
+                    OnPropertyChanged(nameof(ActivationVisible));
+                }
+            }
+        }
         #endregion
 
 
@@ -59,8 +68,9 @@ namespace eOdvjetnik.ViewModel
             licenceStatus = Preferences.Get("licence_active", "");
             current_date = DateTime.Now.Date;
 
+            WeakReferenceMessenger.Default.Register<CheckLicence>(this, RefreshLicenceData);
 
-        
+
             RefreshTime();
 
             var timer = Application.Current.Dispatcher.CreateTimer();
@@ -78,8 +88,27 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine("Cannot ParseDate()" + ex.Message );
 
             }
+
+            DevicePlatform check_platform = DeviceInfo.Current.Platform;
+            Debug.WriteLine("VRSTA PLATVORME " + check_platform);
+            string vrstaPlatfrome = check_platform.ToString();
+            Preferences.Set("vrsta_platforme", vrstaPlatfrome);
         }
 
+        private void RefreshLicenceData(object recipient, CheckLicence message)
+        {
+            try
+            {
+                LicenceCheck();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+            }
+            ActivationScreen();
+        }
+     
 
 
         public void ParseDate()
@@ -115,14 +144,15 @@ namespace eOdvjetnik.ViewModel
 
         private void LicenceCheck() // Provjera isteka licence
         {
+            licenceStatus = Preferences.Get("licence_active", "");
+
             expiredLicence = true;
             if (licenceStatus == null)
             {
                 expiredLicence = true;
-
             }
 
-            else if (licenceStatus == "0" && gracePeriod > 0)
+            else if (licenceStatus == "0" && gracePeriod > 0 && gracePeriod < 11)
             {
                 expiredLicence = true;
 
@@ -141,6 +171,7 @@ namespace eOdvjetnik.ViewModel
         private void ActivationScreen() //Prikaz aktivacije na glavnoj stranici 
         {
 
+
             if (expiredLicence == true)
             {
                 ActivationVisible = true;
@@ -149,12 +180,10 @@ namespace eOdvjetnik.ViewModel
             }
             else
             {
-                ActivationVisible = true;
+                ActivationVisible = false;
                 string aktivacija = "LicenceActive";
                 Preferences.Set("activation_disable", aktivacija);
-
             }
-            
 
         }
         // Mora bit kad god je INotifyPropertyChanged na pageu

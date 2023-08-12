@@ -4,6 +4,7 @@
              xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
              x:Class="eOdvjetnik.Views.UrediKlijenta"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
+             xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              Title="UrediKlijenta">
 
     <ContentPage.BindingContext>

@@ -6,6 +6,7 @@
              x:Class="eOdvjetnik.Views.Kalendar"
              xmlns:local="clr-namespace:eOdvjetnik.ViewModel"
              Title="Kalendar"
+             xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
              
              

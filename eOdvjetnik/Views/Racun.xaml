@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.Racun"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
+             xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              Title="Naplata">
 
     <ContentPage.BindingContext>
@@ -26,37 +27,24 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
 
                     </Grid.ColumnDefinitions>
 
                     <Button Grid.Column="0" 
-                                   BorderColor="DarkGray"
-                                   BorderWidth="1"
-                                   BackgroundColor="#DC143C"
-                                   Text="Obriši sve"
-                                   FontAttributes="Bold"
-                                   TextColor="LightGray"
-                                   Command="{Binding NewReceipt}" 
-                                   HorizontalOptions="End"
-                                   FontSize="Default"
-                                   Margin="60,20,10,10"
-                                     />
+                            BorderColor="DarkGray"
+                            BorderWidth="1"
+                            BackgroundColor="LightGray"
+                            Text="Nazad"
+                            FontAttributes="Bold"
+                            TextColor="Black"
+                            HorizontalOptions="Start"
+                            Command="{Binding BackToTariffs}"
+                            FontSize="Default"
+                            Margin="60,20,50,0"
+                         />
 
-                    <Button  Grid.Column="1" 
-                                   BorderColor="DarkGray"
-                                   BorderWidth="1"
-                                   BackgroundColor="#DC143C"
-                                   Text="Obriši odabranu stavku"
-                                   FontAttributes="Bold"
-                                   TextColor="LightGray"
-                                   Command="{Binding RemoveItemCommand}" 
-                                   HorizontalOptions="End"
-                                   FontSize="Default"
-                                   Margin="20,20,0,10"
-                                     />
-
-
-                    <Button Grid.Column="3"
+                    <Button Grid.Column="1"
                                     BorderColor="DarkGray"
                                     BorderWidth="1"
                                     BackgroundColor="#5ac8fa"
@@ -66,7 +54,39 @@
                                     HorizontalOptions="Start"
                                     Clicked="CreateDocument"
                                     FontSize="Default"
-                                    Margin="200,20,10,10"/>
+                                     Margin="0,20,100,0"
+
+                                />
+                    
+
+                    <Button Grid.Column="2" 
+                                   BorderColor="DarkGray"
+                                   BorderWidth="1"
+                                   BackgroundColor="#DC143C"
+                                   Text="Obriši sve"
+                                   FontAttributes="Bold"
+                                   TextColor="LightGray"
+                                   Command="{Binding NewReceipt}" 
+                                   HorizontalOptions="Start"
+                                   FontSize="Default"
+                                   Margin="0,20,100,0"
+                                     />
+
+                    <Button  Grid.Column="3" 
+                                   BorderColor="DarkGray"
+                                   BorderWidth="1"
+                                   BackgroundColor="#DC143C"
+                                   Text="Obriši odabranu stavku"
+                                   FontAttributes="Bold"
+                                   TextColor="LightGray"
+                                   Command="{Binding RemoveItemCommand}" 
+                                   HorizontalOptions="Start"
+                                   FontSize="Default"
+                                   Margin="0,20,0,0"
+                                     />
+
+
+                 
                 </Grid>
 
             </HorizontalStackLayout>
