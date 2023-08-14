@@ -72,30 +72,31 @@ namespace eOdvjetnik.Services
 
         public List<QueryDirectoryFileInformation> ListPath(string path)
         {
-            Debug.WriteLine("Core.cs -> ListPath -> Usao u ListPath  ****"+ Preferences.Get(IP_nas, "") + "***");
+            //Debug.WriteLine("Core.cs -> ListPath -> Usao u ListPath  ****"+ Preferences.Get(IP_nas, "") + "***");
             SMB2Client client = new SMB2Client();
             bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP_nas, "")), SMBTransportType.DirectTCPTransport);
             NTStatus status = client.Login(String.Empty, Preferences.Get(USER_nas, ""), Preferences.Get(PASS_nas, ""));
-            Debug.WriteLine("6666666666666666666");
-            Debug.WriteLine(status);
-            Debug.WriteLine("6666666666666666666");
+            //Debug.WriteLine("6666666666666666666");
+            //Debug.WriteLine(status);
+            //Debug.WriteLine("6666666666666666666");
 
             ISMBFileStore fileStore = client.TreeConnect(path, out status);
             if (status == NTStatus.STATUS_SUCCESS)
             {
-                Debug.WriteLine("7777777777777777777");
-                Debug.WriteLine(status);
-                Debug.WriteLine("7777777777777777777");
+                //Debug.WriteLine("7777777777777777777");
+                //Debug.WriteLine(status);
+                //Debug.WriteLine("7777777777777777777");
                 object directoryHandle;
                 FileStatus fileStatus;
-                status = fileStore.CreateFile(out directoryHandle, out fileStatus, String.Empty, AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
+                //status = fileStore.CreateFile(out directoryHandle, out fileStatus, String.Empty, AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
+                status = fileStore.CreateFile(out directoryHandle, out fileStatus, @"user\Documents", AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
                 //status = fileStore.CreateFile(out directoryHandle, out fileStatus, "*", AccessMask.SYNCHRONIZE | (AccessMask)DirectoryAccessMask.FILE_LIST_DIRECTORY, 0, ShareAccess.Read | ShareAccess.Write | ShareAccess.Delete, CreateDisposition.FILE_OPEN, CreateOptions.FILE_SYNCHRONOUS_IO_NONALERT | CreateOptions.FILE_DIRECTORY_FILE, null);
 
                 if (status == NTStatus.STATUS_SUCCESS)
                 {
-                    Debug.WriteLine("8888888888888888888");
-                    Debug.WriteLine(status);
-                    Debug.WriteLine("8888888888888888888");
+                    //Debug.WriteLine("8888888888888888888");
+                    //Debug.WriteLine(status);
+                    //Debug.WriteLine("8888888888888888888");
                     List<QueryDirectoryFileInformation> fileList;
 
                     status = fileStore.QueryDirectory(out fileList, directoryHandle, "*", FileInformationClass.FileDirectoryInformation);
@@ -105,9 +106,9 @@ namespace eOdvjetnik.Services
                 }
                 else
                 {
-                    Debug.WriteLine("9999999999999999999");
-                    Debug.WriteLine(status);
-                    Debug.WriteLine("9999999999999999999");
+                    //Debug.WriteLine("9999999999999999999");
+                    //Debug.WriteLine(status);
+                    //Debug.WriteLine("9999999999999999999");
                     List<QueryDirectoryFileInformation> fileList = new List<QueryDirectoryFileInformation>();
                     return fileList;
 
@@ -115,10 +116,10 @@ namespace eOdvjetnik.Services
             }
             else
             {
-                Debug.WriteLine("10101010010101010101");
-                Debug.WriteLine(status);
+                //Debug.WriteLine("10101010010101010101");
+                //Debug.WriteLine(status);
                 //DisplayAlert("Error", string(status), "OK");
-                Debug.WriteLine("10101010010101010101");
+                //Debug.WriteLine("10101010010101010101");
                 List<QueryDirectoryFileInformation> fileList = new List<QueryDirectoryFileInformation>();
                 return fileList;
 
@@ -130,10 +131,10 @@ namespace eOdvjetnik.Services
             public List<string> getRootShare()
         {
             //INICIRAJ SMB KONEKCIJU DA DOHVATI SVE DOKUMENTE
-            Debug.WriteLine("Core.cs -> getRootShare -> INICIRAJ SMB KONEKCIJU  ****" + Preferences.Get(IP_nas, "") + "***");
+            //Debug.WriteLine("Core.cs -> getRootShare -> INICIRAJ SMB KONEKCIJU  ****" + Preferences.Get(IP_nas, "") + "***");
 
             SMB2Client client = new SMB2Client();
-            Debug.WriteLine("Core.cs -> getRootShare -> new SMB2Client()  *******");
+            //Debug.WriteLine("Core.cs -> getRootShare -> new SMB2Client()  *******");
             bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP_nas, "")), SMBTransportType.DirectTCPTransport);
 
             NTStatus status = client.Login(String.Empty, Preferences.Get(USER_nas, ""), Preferences.Get(PASS_nas, ""));
@@ -141,20 +142,20 @@ namespace eOdvjetnik.Services
             if (isConnected)
             {
 
-                Debug.WriteLine("6666666666666666666");
-                Debug.WriteLine(status);
-                Debug.WriteLine("6666666666666666666");
+                //Debug.WriteLine("6666666666666666666");
+                //Debug.WriteLine(status);
+                //Debug.WriteLine("6666666666666666666");
                 if (status == NTStatus.STATUS_SUCCESS)
                 {
 
-                    Debug.WriteLine("7777777777777777777");
+                    //Debug.WriteLine("7777777777777777777");
                     foreach (string nesto in shares)
                     {
-                        //Debug.WriteLine(nesto);
+                        ////Debug.WriteLine(nesto);
                             
                     }
 
-                    Debug.WriteLine("7777777777777777777");
+                    //Debug.WriteLine("7777777777777777777");
                     client.Logoff();
                 }
                 client.Disconnect();
@@ -182,7 +183,7 @@ namespace eOdvjetnik.Services
         public Dictionary<string, string>[] sqlQuery(string query)
         {
 
-            Debug.WriteLine("Core.cs -> Dictionary -> Usao u sqlQuerry  *******");
+            //Debug.WriteLine("Core.cs -> Dictionary -> Usao u sqlQuerry  *******");
             // MySQL connection settings
             string connString = "server=" + Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "") + ";user=" + Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "") + ";password=" + Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "") + ";database=" + Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
 

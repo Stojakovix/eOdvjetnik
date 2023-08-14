@@ -12,6 +12,7 @@ namespace eOdvjetnik.Models
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         public string Name { get; set; }
+        public string Icon { get; set; }
         public string Notes { get; set; }
         public DateTime? Changed { get; set; }
         public bool Done { get; set; }

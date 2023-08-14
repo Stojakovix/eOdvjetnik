@@ -9,6 +9,14 @@ using SMBLibrary;
 using eOdvjetnik.Services;
 using Microsoft.Maui.Storage;
 using System.Windows.Input;
+using System.Linq;
+using System.Reflection;
+using System;
+using System.IO;
+using Microsoft.Maui.Controls;
+
+
+
 
 namespace eOdvjetnik.ViewModel
 {
@@ -71,7 +79,7 @@ namespace eOdvjetnik.ViewModel
             try
             {
                 //Ispis svega na putanji
-                List<QueryDirectoryFileInformation> fileList = sMBConnect.ListPath("users");
+                List<QueryDirectoryFileInformation> fileList = sMBConnect.ListPath(@"Users");
 
                 //Root share list
                 List<string> shares = sMBConnect.getRootShare();
@@ -79,20 +87,63 @@ namespace eOdvjetnik.ViewModel
 
                 foreach (FileDirectoryInformation file in fileList)
                 {
-                    //Debug.WriteLine($"Filename: {file.FileName}");
-                    //Debug.WriteLine($"File Attributes: {file.FileAttributes}");
-                    //Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
-                    //Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
-                    //Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
-                    //Debug.WriteLine("----------End of Folder/file-----------");
-                    //Debug.WriteLine("---------------------Before foreach");
-                    DocsItem fileData = new DocsItem
+                    Debug.WriteLine($"Filename: {file.FileName}");
+                    Debug.WriteLine($"File Attributes: {file.FileAttributes}");
+                    Debug.WriteLine($"File -------: {file.NextEntryOffset}");
+                    Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
+                    Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
+                    Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
+                    Debug.WriteLine("----------End of Folder/file-----------");
+                    Debug.WriteLine("---------------------Before foreach");
+
+                    if (file.FileName == "." || file.FileName == "..") 
                     {
-                        Name = file.FileName,
-                        Changed = file.CreationTime,
-                    };
-                    items.Add(fileData);
-                    Debug.Write(items.Count + " BROJ ITEMA MBRAALEEEE");
+
+                    }
+                    else { 
+                        var icon = "blank.png";
+
+                        if (file.FileAttributes.ToString("f") == "Directory")
+                        {
+                            icon = "folder_1484.png";
+                        }
+                        else {
+
+                                icon = Path.GetExtension(file.FileName).TrimStart('.') + ".scale-100.png";
+                            string imagePath = Path.Combine(AppContext.BaseDirectory, icon);
+                            Debug.WriteLine("Checking image path: " + imagePath);
+
+                            bool imageExists = File.Exists(imagePath);
+
+                            if (imageExists)
+                            {
+                                // Image exists, do something
+                                icon = Path.GetExtension(file.FileName).TrimStart('.') + ".png";
+                                Debug.WriteLine("Image exists!");
+                            }
+                            else
+                            {
+                                // Image doesn't exist, do something else
+                                icon = "blank.png";
+                                Debug.WriteLine("Image does not exist!");
+                            }
+
+
+
+
+                        }
+
+                        DocsItem fileData = new DocsItem
+                        {
+                            Name = file.FileName,
+                            Changed = file.CreationTime,
+                            Icon = icon,
+
+                        };
+                        items.Add(fileData);
+
+                    }
+                  
 
                 }
 
