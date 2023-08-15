@@ -134,7 +134,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
         }
         else
         {
-            AdminColorPopup = true;
+            Application.Current.MainPage.DisplayAlert("", "Samo administrator može mijenjati nazive kategorija.", "OK");
+            AdminColorPopup = false;
         }
     }
 
