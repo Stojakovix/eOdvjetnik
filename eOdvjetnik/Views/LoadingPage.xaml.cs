@@ -8,37 +8,38 @@ namespace eOdvjetnik.Views;
 
 public partial class LoadingPage : ContentPage
 {
-    int Counter { get; set; }
+    
     public LoadingPage()
 	{
-		InitializeComponent();
-        Counter = 0;
-        var timer = Application.Current.Dispatcher.CreateTimer();
-        timer.Interval = TimeSpan.FromSeconds(1);
-        timer.Tick += (s, e) => RefreshTime();
-        timer.Start();
+        InitializeComponent();
     }
 
-    protected override void OnAppearing()
+    //protected override void OnAppearing()
+    //{
+    //    try
+    //    {
+    //        InitializeComponent();
+    //        base.OnAppearing();
+    //        Debug.WriteLine("Usao u loading");
+    //        IdiNaKalendar();
+    //    }
+    //    catch(Exception ex)
+    //    {
+    //        Debug.WriteLine(ex.Message);
+    //    }
+        
+    //}
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        Counter = 0;
-        base.OnAppearing();
-        Shell.Current.GoToAsync("//Kalendar");
-        Debug.WriteLine("Ušao u loading");
+        base.OnNavigatedTo(args);
+        Debug.WriteLine("Usao u loading");
+        IdiNaKalendar();
     }
 
-
-    void RefreshTime()
+    public async void IdiNaKalendar()
     {
-        MainThread.BeginInvokeOnMainThread(() =>
-        {
-            Counter++;
-            if ( Counter == 1)
-            {
-                Shell.Current.GoToAsync("//Kalendar");
-                Debug.WriteLine("otvorio kalendar");
-            }
-        }
-        );
+       await Shell.Current.GoToAsync("///Kalendar");
     }
+    
 }
