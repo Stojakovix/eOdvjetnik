@@ -30,7 +30,11 @@ public class KlijentiViewModel : INotifyPropertyChanged
     public ObservableCollection<ContactItem> Contacts
     {
         get { return contacts; }
-        set { contacts = value; }
+        set
+        {
+            contacts = value;
+            OnPropertyChanged(nameof(Contacts));
+        }
     }
 
     private string contactDeletedText;
@@ -547,8 +551,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
         timer.Tick += (s, e) => Refresh();
         timer.Start();
         //EmptyContactRows();
-        GenerateFiles();
         FilesCounter = 1;
+
     }
    
 
@@ -577,9 +581,16 @@ public void EmptyContactRows()
                 Pravna = " "
             });
         }
+        DelayGenerateFiles();
     }
 
-  
+    private async void DelayGenerateFiles()
+    {
+        await Task.Delay(TimeSpan.FromSeconds(1)); // Wait for 2 seconds
+
+        GenerateFiles();
+    }
+
     public async void OnButtonClick()
     {
         await Shell.Current.GoToAsync("/NoviKlijent");
@@ -614,6 +625,7 @@ public void EmptyContactRows()
                 {
                 EmptyContactRows();
                   }
+           
             try
             {
                 ClientID = Preferences.Get("SelectedID", "");
