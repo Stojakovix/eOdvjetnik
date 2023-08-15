@@ -246,13 +246,13 @@
 		<PackageReference Include="SMBLibrary" Version="1.5.0.1" />
 		<PackageReference Include="SQLite" Version="3.13.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
-		<PackageReference Include="Syncfusion.DocIO.NET" Version="22.2.8" />
-		<PackageReference Include="Syncfusion.Licensing" Version="22.2.8" />
-		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="22.2.8" />
-		<PackageReference Include="Syncfusion.Maui.Popup" Version="22.2.8" />
-		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="22.2.8" />
+		<PackageReference Include="Syncfusion.DocIO.NET" Version="22.2.9" />
+		<PackageReference Include="Syncfusion.Licensing" Version="22.2.9" />
+		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="22.2.9" />
+		<PackageReference Include="Syncfusion.Maui.Popup" Version="22.2.9" />
+		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="22.2.9" />
 		<PackageReference Include="MySql.Data" Version="8.1.0" />
-		<PackageReference Include="Xamarin.Essentials" Version="1.8.0-preview2" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
 
 	</ItemGroup>
 
