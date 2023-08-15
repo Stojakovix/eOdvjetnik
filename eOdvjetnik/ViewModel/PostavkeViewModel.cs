@@ -122,10 +122,14 @@ public class PostavkeViewModel : INotifyPropertyChanged
                     Debug.WriteLine("Update colors query: " + UpdateQuery);
                 }
                 GetColors();
+                Application.Current.MainPage.DisplayAlert("", "Uspješno ažurirano.", "OK");
+
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
+                Application.Current.MainPage.DisplayAlert("", "Povezivanje nije uspjelo.", "OK");
+
             }
         }
         else
@@ -1015,16 +1019,21 @@ public class PostavkeViewModel : INotifyPropertyChanged
                         Debug.WriteLine("Update contact query: " + UpdateQuery);
                     }
                     GetEmployees();
+                    Application.Current.MainPage.DisplayAlert("", "Uspješno ažurirano.", "OK");
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message);
+                    Application.Current.MainPage.DisplayAlert("", "Povezivanje nije uspjelo.", "OK");
+
                 }
             }
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
+            Application.Current.MainPage.DisplayAlert("", "Povezivanje nije uspjelo.", "OK");
+
         }
     }
 
