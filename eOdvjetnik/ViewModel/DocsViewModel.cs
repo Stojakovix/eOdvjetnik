@@ -71,7 +71,7 @@ namespace eOdvjetnik.ViewModel
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                //Debug.WriteLine(ex.Message);
             }
         }
         public void ConnectAndFetchDocumentsAsync()
@@ -111,7 +111,7 @@ namespace eOdvjetnik.ViewModel
 
                                 icon = Path.GetExtension(file.FileName).TrimStart('.') + ".scale-100.png";
                             string imagePath = Path.Combine(AppContext.BaseDirectory, icon);
-                            Debug.WriteLine("Checking image path: " + imagePath);
+                            //Debug.WriteLine("Checking image path: " + imagePath);
 
                             bool imageExists = File.Exists(imagePath);
 
@@ -119,13 +119,13 @@ namespace eOdvjetnik.ViewModel
                             {
                                 // Image exists, do something
                                 icon = Path.GetExtension(file.FileName).TrimStart('.') + ".png";
-                                Debug.WriteLine("Image exists!");
+                                //Debug.WriteLine("Image exists!");
                             }
                             else
                             {
                                 // Image doesn't exist, do something else
                                 icon = "blank.png";
-                                Debug.WriteLine("Image does not exist!");
+                                //Debug.WriteLine("Image does not exist!");
                             }
 
 
@@ -149,10 +149,10 @@ namespace eOdvjetnik.ViewModel
 
                 foreach (var file1 in shares)
                 {
-                    Debug.WriteLine(file1.Length.ToString());
-                    Debug.WriteLine(file1.ToString());
+                    //Debug.WriteLine(file1.Length.ToString());
+                    //Debug.WriteLine(file1.ToString());
                     //ShareFiles.Add(file1.ToString());
-                    Debug.WriteLine("44444444444444");
+                    //Debug.WriteLine("44444444444444");
 
                     RootShare fileData = new RootShare
                     {
@@ -162,12 +162,12 @@ namespace eOdvjetnik.ViewModel
                     rootShares.Add(fileData);
                 }
 
-                Debug.WriteLine("----------------------------------------------------------------");
+                //Debug.WriteLine("----------------------------------------------------------------");
 
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.StackTrace);
+                //Debug.WriteLine(ex.StackTrace);
 
             }
 
