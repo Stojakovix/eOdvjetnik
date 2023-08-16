@@ -124,7 +124,7 @@ namespace eOdvjetnik.ViewModel
                 Dictionary<string, string>[] appointmentData = externalSQLConnect.sqlQuery(query);
                 if (appointmentData != null)
                 {
-                    Debug.WriteLine("Dohvatio evente ----------------------------------**");
+                    //Debug.WriteLine("Dohvatio evente ----------------------------------**");
 
                     //Externa lista bez internih
                     List<int> ExtDifference = ExternalEventIDs.Except(InternalEventIDs).ToList();
@@ -134,8 +134,13 @@ namespace eOdvjetnik.ViewModel
                         // Add new appointment
 
                         string colorName = appointmentRow["color"];
-                        Debug.WriteLine(colorName + "--------------------------------------------------------------");
+                        if (colorName == null || colorName == "")
+                        {
+                            colorName = "LightGray";
+                        }
+                        //Debug.WriteLine("-------------------------------------------------------------- " + colorName + " 0000000000000000");
                         Color backgroundColor = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(colorName);
+                       
 
 
                         Appointments.Add(new SchedulerAppointment()
