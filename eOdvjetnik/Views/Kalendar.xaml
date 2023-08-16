@@ -29,7 +29,16 @@
                 <Label Text="{Binding Subject}" TextColor="Black"  HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Bold" LineBreakMode="WordWrap" MaxLines="2"  />
             </Border>
         </DataTemplate>
-
+        <DataTemplate x:Key="WeekAppointmentTemplate">
+            <Border Background="{Binding Background}" StrokeShape="RoundRectangle 5,5,5,5">
+                <Label Text="{Binding Subject}" TextColor="Red" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Bold" LineBreakMode="WordWrap" MaxLines="2" />
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="ResourceViewAppointmentTemplate">
+            <Border Background="{Binding Background}" StrokeShape="RoundRectangle 5,5,5,5">
+                <Label Text="{Binding Subject}" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Bold" LineBreakMode="WordWrap" MaxLines="2" />
+            </Border>
+        </DataTemplate>
         <DataTemplate x:Key="AllDayAppointmentTemplate">
             <Grid Background="{Binding Background}"   Opacity="0.5">
                 <Label Text="{Binding Subject}"   VerticalOptions="Center" TextColor="Black" MaxLines="2" FontSize="Caption" FontAttributes="Bold" HorizontalOptions="Center" />
@@ -65,7 +74,6 @@
     </scheduler:SfScheduler>-->
     <Grid ColumnDefinitions="0.8*, 0.2*">
         <scheduler:SfScheduler x:Name="Scheduler" 
-                               View="Day" 
                                FirstDayOfWeek="Monday" 
                                Tapped="Scheduler_DoubleTapped" 
                                SelectedCellBackground="transparent" 
@@ -74,8 +82,8 @@
                                AppointmentsSource="{Binding Appointments}"
                                TodayHighlightBrush="Red"
                                EnableReminder="True"  
-                               
-                               AllowedViews="Day,Week,WorkWeek,Month,Agenda"
+                               SelectedAppointmentBackground="transparent"
+                               AllowedViews="Day,Week,WorkWeek,Month,Agenda,TimelineWorkWeek,TimelineWeek,TimelineMonth"
                                >
 
 
@@ -86,7 +94,7 @@
                 <scheduler:SchedulerDaysView TimeFormat="HH:mm" 
                                              TimeInterval="1:0:0" 
                                              CurrentTimeIndicatorBrush="Red" 
-                                             AppointmentTemplate="{DynamicResource AppointmentTemplate}" 
+                                             AppointmentTemplate="{StaticResource AppointmentTemplate}" 
                                              AllDayAppointmentTemplate="{StaticResource AllDayAppointmentTemplate}" >
                     <scheduler:SchedulerDaysView.TimeRegionTemplate>
                         <DataTemplate>
@@ -96,14 +104,20 @@
 
                 </scheduler:SchedulerDaysView>
             </scheduler:SfScheduler.DaysView>
+            
+
             <scheduler:SfScheduler.MonthView>
-                <scheduler:SchedulerMonthView AppointmentTemplate="{StaticResource MonthAppointmentTemplate}"
-                                              
-                                              
-                                              >
-                    
+                <scheduler:SchedulerMonthView AppointmentTemplate="{StaticResource MonthAppointmentTemplate}">
                 </scheduler:SchedulerMonthView>
             </scheduler:SfScheduler.MonthView>
+
+ 
+
+
+            <scheduler:SfScheduler.TimelineView>
+                <scheduler:SchedulerTimelineView AppointmentTemplate="{StaticResource ResourceViewAppointmentTemplate}">
+                </scheduler:SchedulerTimelineView>
+            </scheduler:SfScheduler.TimelineView>
         </scheduler:SfScheduler>
         
         <!--Skontat zašto ne radi-->

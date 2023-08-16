@@ -22,6 +22,9 @@ public partial class App : Application
         InitializeComponent();
         Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjQ5MTQ1M0AzMjMyMmUzMDJlMzBRT2JkTm1HczFuTmdmNTVFcWNWU29xbGt6Z2lhRDFYYk1GZWppS3pjWnlNPQ==");
 
+
+
+
         string currentCulture = Preferences.Get("CurrentCulture", null);
         if (currentCulture == null)
         {
@@ -60,6 +63,8 @@ public partial class App : Application
         SharedNaplataViewModel = new NaplataViewModel();
         SharedPostavkeViewModel = new PostavkeViewModel();
         SharedKlijentiViewModel = new KlijentiViewModel();
+
+
     }
 
 

@@ -90,10 +90,11 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\logo.svg" Color="#0080FF" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\logo.svg" />
+		<MauiIcon Include="Resources\AppIcon\logo.svg" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash_new.svg" Color="#0080FF" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash_new.svg" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -113,6 +114,7 @@
 	  <MauiXaml Remove="NewFolder1\**" />
 	  <None Remove="NewFolder1\**" />
 	  <Compile Remove="Services\SaveAndroid.cs" />
+	  <None Remove="Resources\AppIcon\logo.svg" />
 	  <None Remove="Resources\Icons\" />
 	  <None Remove="Resources\Images\aac.png" />
 	  <None Remove="Resources\Images\ai.png" />
@@ -341,6 +343,11 @@
 	    <Generator>ResXFileCodeGenerator</Generator>
 	    <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="Resources\Splash\splash.svg">
+	    <CopyToOutputDirectory>MauiSplashScreen</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptioneOdvjetnikHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 </Project>
