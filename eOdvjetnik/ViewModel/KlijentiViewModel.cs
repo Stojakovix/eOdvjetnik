@@ -120,56 +120,56 @@ public class KlijentiViewModel : INotifyPropertyChanged
     }
 
 
-    public bool _ContactDeleted { get; set; }
+    public bool LocalContactDeleted { get; set; }
     public bool ContactDeleted
     {
-        get { return _ContactDeleted; }
+        get { return LocalContactDeleted; }
         set
         {
-            if (_ContactDeleted != value)
+            if (LocalContactDeleted != value)
             {
-                _ContactDeleted = value;
+                LocalContactDeleted = value;
                 OnPropertyChanged(nameof(ContactDeleted));
             }
         }
     }
 
-    public bool _ContactEdited { get; set; }
+    public bool LocalContactEdited { get; set; }
     public bool ContactEdited
     {
-        get { return _ContactEdited; }
+        get { return LocalContactEdited; }
         set
         {
-            if (_ContactEdited != value)
+            if (LocalContactEdited != value)
             {
-                _ContactEdited = value;
+                LocalContactEdited = value;
                 OnPropertyChanged(nameof(ContactEdited));
             }
         }
     }
 
-    public bool _NoQueryResult { get; set; }
+    public bool LocalNoQueryResult { get; set; }
     public bool NoQueryResult
     {
-        get { return _NoQueryResult; }
+        get { return LocalNoQueryResult; }
         set
         {
-            if (_NoQueryResult != value)
+            if (LocalNoQueryResult != value)
             {
-                _NoQueryResult = value;
+                LocalNoQueryResult = value;
                 OnPropertyChanged(nameof(NoQueryResult));
             }
         }
     }
-    public bool _NoSQLreply { get; set; }
+    public bool LocalNoSQLreply { get; set; }
     public bool NoSQLreply
     {
-        get { return _NoSQLreply; }
+        get { return LocalNoSQLreply; }
         set
         {
-            if (_NoSQLreply != value)
+            if (LocalNoSQLreply != value)
             {
-                _NoSQLreply = value;
+                LocalNoSQLreply = value;
                 OnPropertyChanged(nameof(NoSQLreply));
             }
         }
@@ -523,7 +523,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
             {
                 ClientLegalPerson = true;
             }
-            else {
+            else
+            {
                 ClientLegalPerson = false;
             }
 
@@ -554,9 +555,9 @@ public class KlijentiViewModel : INotifyPropertyChanged
         FilesCounter = 1;
 
     }
-   
 
-public void EmptyContactRows()
+
+    public void EmptyContactRows()
     {
         FilesCounter++;
         Contacts = new ObservableCollection<ContactItem>();
@@ -622,10 +623,10 @@ public void EmptyContactRows()
         MainThread.BeginInvokeOnMainThread(() =>
         {
             if (FilesCounter == 1)
-                {
+            {
                 EmptyContactRows();
-                  }
-           
+            }
+
             try
             {
                 ClientID = Preferences.Get("SelectedID", "");
@@ -661,12 +662,12 @@ public void EmptyContactRows()
         );
     }
 
- 
+
 
     private async void EditClient()
     {
         await Shell.Current.GoToAsync("/UrediKlijenta");
-        
+
     }
 
     private void NewContactAddedReceived(object recipient, RefreshContacts message)
@@ -690,7 +691,7 @@ public void EmptyContactRows()
         NoQueryResult = false;
         NoSQLreply = false;
         ContactDeleted = false;
-       
+
         Debug.WriteLine(contacts);
         try
         {

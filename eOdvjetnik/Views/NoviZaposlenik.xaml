@@ -35,9 +35,7 @@
                      FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="10,20,0,0" WidthRequest="100"
               HorizontalOptions="Start"
                     />
-                <Label Margin="10,20,0,0" TextColor="Black" Text="Niste unijeli ime ili inicijale!" FontAttributes="Bold" HorizontalOptions="Center"
-                       IsVisible="{Binding NewEmployeeEntryIncomplete}" VerticalTextAlignment="Center"
-                       />
+               
             </HorizontalStackLayout>
         </Grid>
     </ScrollView>

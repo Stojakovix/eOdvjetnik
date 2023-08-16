@@ -109,7 +109,7 @@ namespace eOdvjetnik.ViewModel
                         }
                         else {
 
-                                icon = Path.GetExtension(file.FileName).TrimStart('.') + ".scale-100.png";
+                                icon = Path.GetExtension(file.FileName).TrimStart('.') + ".png";
                             string imagePath = Path.Combine(AppContext.BaseDirectory, icon);
                             //Debug.WriteLine("Checking image path: " + imagePath);
 
