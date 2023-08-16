@@ -37,9 +37,9 @@ public partial class MainPage : ContentPage
     private HttpClient _Client = new HttpClient();
     
 
-    public string activation_code { get; set; }
-    public string licence_type { get; set; }
-    public string expire_date { get; set; }
+    public string ActivationCode { get; set; }
+    public string LicenceType { get; set; }
+    public string ExpireDateString { get; set; }
 
     //KRAJ NAS
 
@@ -93,8 +93,8 @@ public partial class MainPage : ContentPage
                     var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                     var data = System.Text.Json.JsonSerializer.Deserialize<ActivationData[]>(content, options);
 
-                    activation_code = data[0].activation_code;
-                    Preferences.Set("activation_code", activation_code);
+                    ActivationCode = data[0].activation_code;
+                    Preferences.Set("activation_code", ActivationCode);
 
                     Debug.WriteLine($"Received data: {data[0].id}, {data[0].created}, {data[0].hwid}, {data[0].IP}, {data[0].activation_code}");
                 }

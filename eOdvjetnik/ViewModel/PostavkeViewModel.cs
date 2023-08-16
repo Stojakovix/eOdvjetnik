@@ -24,11 +24,11 @@ public class PostavkeViewModel : INotifyPropertyChanged
     public ICommand LoadColors { get; set; }
     public ICommand SaveColors { get; set; }
 
-    private ObservableCollection<ColorItem> _Colors;
+    private ObservableCollection<ColorItem> LocalColors;
     public ObservableCollection<ColorItem> Colors
     {
-        get { return _Colors; }
-        set { _Colors = value; }
+        get { return LocalColors; }
+        set { LocalColors = value; }
     }
 
     private bool _AdminColorPopup;
@@ -49,9 +49,9 @@ public class PostavkeViewModel : INotifyPropertyChanged
     {
         try
         {
-            if (_Colors != null)
+            if (LocalColors != null)
             {
-                _Colors.Clear();
+                LocalColors.Clear();
             }
             string query = "SELECT * FROM `event_colors`";
             Debug.WriteLine(query);
@@ -67,7 +67,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
                         int id;
                         int.TryParse(filesRow["id"], out id);
 
-                        _Colors.Add(new ColorItem()
+                        LocalColors.Add(new ColorItem()
                         {
                             Id = id,
                             NazivBoje = filesRow["naziv_boje"],
@@ -537,30 +537,30 @@ public class PostavkeViewModel : INotifyPropertyChanged
             }
         }
     }
-    public string company_id { get; set; }
-    public string employee_id { get; set; }
-    public string datum_slanja { get; set; }
+    public string CompanyID { get; set; }
+    public string EmployeeID { get; set; }
+    public string DateSentString { get; set; }
 
     public async void OnFeedbackClicked()
     {
         FeedbackVisible = false;
         FeedbackErrorVisible = false;
         string url = "https://cc.eodvjetnik.hr/eodvjetnikadmin/feedbacks/feedback?cpuid=";
-        company_id = Preferences.Get("company_id", "");
-        employee_id = Preferences.Get("device_type_id", "");
-        datum_slanja = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        CompanyID = Preferences.Get("company_id", "");
+        EmployeeID = Preferences.Get("device_type_id", "");
+        DateSentString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-        string encodedFeedbackText = ReplaceSpacesAndSectionBreaks(FeedbackText);
-        string datetimeRazmak = ReplaceSpacesAndSectionBreaks(datum_slanja);
+        string TextWithNoSpaces = ReplaceSpacesAndSectionBreaks(FeedbackText);
+        string DateWithNoSpaces = ReplaceSpacesAndSectionBreaks(DateSentString);
 
-        string feedbackURL = string.Concat(url, HWID64, "&company=", company_id, "&employee=", employee_id, "&date=", datetimeRazmak, "&text=", encodedFeedbackText);
+        string feedbackURL = string.Concat(url, HWID64, "&company=", CompanyID, "&employee=", EmployeeID, "&date=", DateWithNoSpaces, "&text=", TextWithNoSpaces);
 
-        Debug.WriteLine(feedbackURL);
-        Debug.WriteLine(HWID64);
-        Debug.WriteLine(company_id);
-        Debug.WriteLine(employee_id);
-        Debug.WriteLine(datum_slanja);
-        Debug.WriteLine(FeedbackText);
+        //Debug.WriteLine(feedbackURL);
+        //Debug.WriteLine(HWID64);
+        //Debug.WriteLine(CompanyID);
+        //Debug.WriteLine(EmployeeID);
+        //Debug.WriteLine(DateSentString);
+        //Debug.WriteLine(FeedbackText);
         try
         {
             Debug.WriteLine("Feedback -> usao u try");
@@ -1043,10 +1043,14 @@ public class PostavkeViewModel : INotifyPropertyChanged
         if (NewEmployeeName == "")
         {
             NewEmployeeEntryIncomplete = true;
+            Application.Current.MainPage.DisplayAlert("", "Potrebno je unijeti ime.", "OK");
+
         }
         else if (NewEmployeeInitials == "")
         {
             NewEmployeeEntryIncomplete = true;
+            Application.Current.MainPage.DisplayAlert("", "Potrebno je unijeti inicijale", "OK");
+
 
         }
         else
@@ -1081,7 +1085,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
                                $"VALUES ('{NewEmployeeName}', '{NewEmployeeInitials}')";
                 externalSQLConnect.sqlQuery(query);
 
-                await Shell.Current.GoToAsync("/Zaposlenici");
+                await Shell.Current.GoToAsync("//Zaposlenici");
             }
 
             catch (Exception ex)

@@ -17,14 +17,14 @@ namespace eOdvjetnik.ViewModel
         private Navigacija navigacija;
 
         
-        private string currenttime { get; set; }
-        public string datetime
+        private string LocalCurrentDateTimeString { get; set; }
+        public string CurrentDateTimeString
         {
-            get { return currenttime; }
+            get { return LocalCurrentDateTimeString; }
             set
             {
-                currenttime = value;
-                OnPropertyChanged(nameof(datetime));
+                LocalCurrentDateTimeString = value;
+                OnPropertyChanged(nameof(CurrentDateTimeString));
             }
         }
         public string Version { get; set; }
@@ -34,13 +34,13 @@ namespace eOdvjetnik.ViewModel
         /// Varijable za aktivaciju i licencu
         public string hardwareID = Preferences.Get("key", null);
         public string Activation_code { get; set; }
-        public string licence_type { get; set; }
-        public DateTime expire_date { get; set; }
-        public DateTime current_date { get; set; }
-        public string expireDate { get; set; }
-        public string licenceStatus { get; set; }
-        public bool expiredLicence { get; set; }
-        public double gracePeriod { get; set; }
+        public string LicenceType { get; set; }
+        public DateTime ExpireDateDT { get; set; }
+        public DateTime CurrentDateDT { get; set; }
+        public string ExpireDateString { get; set; }
+        public string LicenceStatus { get; set; }
+        public bool ExpiredLicence { get; set; }
+        public double GracePeriod { get; set; }
         private bool IsActivationVisible;
         public bool ActivationVisible
     {
@@ -63,10 +63,10 @@ namespace eOdvjetnik.ViewModel
             navigacija = new Navigacija();
             Version = $"{AppResources.Version} {AppInfo.VersionString}";
             Activation_code = Preferences.Get("activation_code", "");
-            licence_type = Preferences.Get("licence_type", "");
-            expireDate = Preferences.Get("expire_date", "");
-            licenceStatus = Preferences.Get("licence_active", "");
-            current_date = DateTime.Now.Date;
+            LicenceType = Preferences.Get("licence_type", "");
+            ExpireDateString = Preferences.Get("expire_date", "");
+            LicenceStatus = Preferences.Get("licence_active", "");
+            CurrentDateDT = DateTime.Now.Date;
 
             WeakReferenceMessenger.Default.Register<CheckLicence>(this, RefreshLicenceData);
 
@@ -115,14 +115,14 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                DateTimeOffset dateTimeOffset = DateTimeOffset.Parse(expireDate);
-                expire_date = dateTimeOffset.Date;
-                TimeSpan difference = expire_date.Subtract(current_date);
+                DateTimeOffset dateTimeOffset = DateTimeOffset.Parse(ExpireDateString);
+                ExpireDateDT = dateTimeOffset.Date;
+                TimeSpan difference = ExpireDateDT.Subtract(CurrentDateDT);
                 double days = difference.TotalDays;
                 string daysR = days.ToString();
-                gracePeriod = days + 10;
+                GracePeriod = days + 10;
                 Debug.WriteLine("ParseDate() - days until licence expires: " + daysR);
-                Debug.WriteLine("ParseDate() - grace period after licence expired: " + gracePeriod);
+                Debug.WriteLine("ParseDate() - grace period after licence expired: " + GracePeriod);
                 Preferences.Set("days_until_expiry", daysR);
             }
             catch (Exception ex)
@@ -136,7 +136,7 @@ namespace eOdvjetnik.ViewModel
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                datetime = DateTime.Now.ToString("f");
+                CurrentDateTimeString = DateTime.Now.ToString("f");
 
             }
             );
@@ -144,22 +144,22 @@ namespace eOdvjetnik.ViewModel
 
         private void LicenceCheck() // Provjera isteka licence
         {
-            licenceStatus = Preferences.Get("licence_active", "");
+            LicenceStatus = Preferences.Get("licence_active", "");
 
-            expiredLicence = true;
-            if (licenceStatus == null)
+            ExpiredLicence = true;
+            if (LicenceStatus == null)
             {
-                expiredLicence = true;
+                ExpiredLicence = true;
             }
 
-            else if (licenceStatus == "0" && gracePeriod > 0 && gracePeriod < 11)
+            else if (LicenceStatus == "0" && GracePeriod > 0 && GracePeriod < 11)
             {
-                expiredLicence = true;
+                ExpiredLicence = true;
 
             }
-            else if (licenceStatus == "1")
+            else if (LicenceStatus == "1")
             {
-                expiredLicence = false;
+                ExpiredLicence = false;
 
             }
 
@@ -172,7 +172,7 @@ namespace eOdvjetnik.ViewModel
         {
 
 
-            if (expiredLicence == true)
+            if (ExpiredLicence == true)
             {
                 ActivationVisible = true;
                 string aktivacija = "LicenceNotActive";
