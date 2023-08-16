@@ -80,7 +80,16 @@ public partial class AppointmentDialog : ContentPage
             
             if (appointment == null)
             {
-                this.Navigation.PopAsync();
+                if (DevicePlatform == "MacCatalyst")
+                {
+                    Shell.Current.GoToAsync("///LoadingPage");
+
+                }
+                else
+                {
+                    Shell.Current.GoToAsync("///Kalendar");
+
+                }
 
             }
             else
@@ -89,27 +98,34 @@ public partial class AppointmentDialog : ContentPage
                 //var todoItem = new Appointment() { From = appointment.StartTime, To = appointment.EndTime, AllDay = appointment.IsAllDay, DescriptionNotes = appointment.Notes, EventName = appointment.Subject, ID = (int)appointment.Id };
                 if(appointment.Id != null)
                 {
-                    string query = "DELETE FROM events WHERE internal_event_id = " + appointment.Id;
-                    Debug.WriteLine("Deleted Appointment " + appointment.Id);
-                    externalSQLConnect.sqlQuery(query);
+                    
+                    try
+                    {
+                        string query = "DELETE FROM events WHERE internal_event_id = " + appointment.Id;
+                        Debug.WriteLine("Deleted Appointment " + appointment.Id);
+                        externalSQLConnect.sqlQuery(query);
+                    }
+                    catch(Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                    }
+                    if (DevicePlatform == "MacCatalyst")
+                    {
+                        Shell.Current.GoToAsync("///LoadingPage");
+
+                    }
+                    else
+                    {
+                        Shell.Current.GoToAsync("///Kalendar");
+
+                    }
+
                 }
                 else
                 {
                     Debug.WriteLine("Appointment id was null");
                 }
 
-                MacWorkaround();
-
-                if (DevicePlatform == "MacCatalyst")
-                {
-                    Shell.Current.GoToAsync("//LoadingPage");
-
-                }
-                else
-                {
-                    Shell.Current.GoToAsync("//Kalendar");
-
-                }
             }
         }
         catch (Exception ex)
@@ -140,7 +156,7 @@ public partial class AppointmentDialog : ContentPage
     {
         if (DevicePlatform == "MacCatalyst")
         {
-            MacWorkaround();
+            
             Shell.Current.GoToAsync("//LoadingPage");
         }
         else
@@ -151,10 +167,7 @@ public partial class AppointmentDialog : ContentPage
        
         Debug.WriteLine("Cancel Clicked");
     }
-    private void MacWorkaround()
-    {
-        WeakReferenceMessenger.Default.Send(new MacWorkaround("Test!"));
-    }
+   
 
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
@@ -198,7 +211,6 @@ public partial class AppointmentDialog : ContentPage
 
                             if (DevicePlatform == "MacCatalyst")
                             {
-                                MacWorkaround();
                                 Shell.Current.GoToAsync("//LoadingPage");
                             }
                             else
@@ -215,7 +227,6 @@ public partial class AppointmentDialog : ContentPage
                     AddAppointmentToRemoteServer(appointment);
                         if (DevicePlatform == "MacCatalyst")
                         {
-                            MacWorkaround();
                             Shell.Current.GoToAsync("//LoadingPage");
                         }
                         else
@@ -346,7 +357,7 @@ public partial class AppointmentDialog : ContentPage
 
         };
 
-        this.Navigation.PopAsync();
+
 
     }
     private void UpdateEditor()
