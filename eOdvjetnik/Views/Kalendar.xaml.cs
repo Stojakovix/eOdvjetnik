@@ -35,53 +35,9 @@ public partial class Kalendar : ContentPage
         var viewModel = new KalendarViewModel();
         var Resources = viewModel.Resources;
 
-
-
         // Adding the scheduler resource collection to the schedule resources of SfSchedule.
         this.Scheduler.ResourceView.Resources = Resources;
 
-        var appointment = new ObservableCollection<SchedulerAppointment>();
-
-        //Adding scheduler appointment in the scheduler appointment collection. 
-        appointment.Add(new SchedulerAppointment()
-        {
-            StartTime = DateTime.Today.AddHours(9),
-            EndTime = DateTime.Today.AddHours(11),
-            Subject = "Client Meeting",
-            Location = "Hutchison road",
-            ResourceIds = new ObservableCollection<object>() { "1000" }
-        });
-
-        //Adding the scheduler appointment collection to the AppointmentsSource of .NET MAUI Scheduler.
-        this.Scheduler.AppointmentsSource = appointment;
-
-
-
-
-
-
-
-        try
-       {
-           //Call the function
-           Dictionary<string, string>[] resultArray = odvjetnik_nas.sqlQuery("Select * from events where hardwareid = '"+ hardware_id + "' and TimeFrom > '2023-05-25 20:00:00'");//
-           Debug.WriteLine("Usao usqlQuery 11------------------------------------------------**");
-       
-           // Print the attribute names
-       
-           foreach (Dictionary<string, string> row in resultArray)
-           {
-               foreach (KeyValuePair<string, string> pair in row)
-               {
-                   Debug.WriteLine(pair.Key + ": " + pair.Value);
-               }
-               Debug.WriteLine("Print the attribute names");
-           }
-       }
-       catch (Exception ex)
-       {
-           Debug.WriteLine(ex.Message + "u Kalendar.xaml.csu");
-       }
 
     }
 

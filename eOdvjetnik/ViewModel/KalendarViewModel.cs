@@ -143,7 +143,8 @@ namespace eOdvjetnik.ViewModel
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 List<int> ExternalEventIDs = new List<int>();
                 List<int> InternalEventIDs = new List<int>();
-                string query = "Select * from events where hardwareid = '" + hardware_id + "' and TimeFrom > '2023-05-25 20:00:00'";
+                string query = "Select * from events;";
+                
                 Debug.WriteLine(query);
 
                 //Rezultat query-ja u apointmentData
@@ -175,6 +176,10 @@ namespace eOdvjetnik.ViewModel
                             StartTime = DateTime.Parse(appointmentRow["TimeFrom"]),
                             EndTime = DateTime.Parse(appointmentRow["TimeTo"]),
                             Subject = appointmentRow["EventName"],
+                            ResourceIds = new ObservableCollection<object>
+                            {
+                                (object)int.Parse(appointmentRow["user_id"]) // Boxing the integer into an object
+                            },
                             IsAllDay = bool.Parse(appointmentRow["AllDay"]),
                             Notes = appointmentRow["DescriptionNotes"],
                             Background = backgroundColor,

@@ -84,6 +84,7 @@
                                EnableReminder="True"  
                                SelectedAppointmentBackground="transparent"
                                AllowedViews="Day,Week,WorkWeek,Month,Agenda,TimelineWorkWeek,TimelineWeek,TimelineMonth"
+                               View="TimelineMonth"
                                >
 
             <scheduler:SfScheduler.ResourceView>
@@ -118,7 +119,8 @@
 
 
             <scheduler:SfScheduler.TimelineView>
-                <scheduler:SchedulerTimelineView AppointmentTemplate="{StaticResource ResourceViewAppointmentTemplate}">
+                <scheduler:SchedulerTimelineView AppointmentTemplate="{StaticResource ResourceViewAppointmentTemplate}"
+                                                 TimeFormat="HH:mm">
                 </scheduler:SchedulerTimelineView>
             </scheduler:SfScheduler.TimelineView>
         </scheduler:SfScheduler>
