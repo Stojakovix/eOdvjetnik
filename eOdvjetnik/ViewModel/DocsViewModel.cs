@@ -84,17 +84,30 @@ namespace eOdvjetnik.ViewModel
                 //Root share list
                 List<string> shares = sMBConnect.getRootShare();
 
+                //List png
+                List<string> resourceNames = new List<string>();
+
+                Assembly assembly = typeof(DocsViewModel).Assembly;
+                string resourceNamePrefix = "eOdvjetnik.Resources."; // Replace with your app's actual namespace and "Resources." prefix
+
+                string[] allResourceNames = assembly.GetManifestResourceNames();
+                resourceNames.AddRange(allResourceNames.Where(name => name.StartsWith(resourceNamePrefix)));
+                //foreach (string resourceName in resourceNames)
+                //{
+                //    Debug.WriteLine(resourceName);
+                //}
+                //Kraj List png
 
                 foreach (FileDirectoryInformation file in fileList)
                 {
-                    Debug.WriteLine($"Filename: {file.FileName}");
-                    Debug.WriteLine($"File Attributes: {file.FileAttributes}");
-                    Debug.WriteLine($"File -------: {file.NextEntryOffset}");
-                    Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
-                    Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
-                    Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
-                    Debug.WriteLine("----------End of Folder/file-----------");
-                    Debug.WriteLine("---------------------Before foreach");
+                   //Debug.WriteLine($"Filename: {file.FileName}");
+                   //Debug.WriteLine($"File Attributes: {file.FileAttributes}");
+                   //Debug.WriteLine($"File -------: {file.NextEntryOffset}");
+                   //Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
+                   //Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
+                   //Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
+                   //Debug.WriteLine("----------End of Folder/file-----------");
+                   //Debug.WriteLine("---------------------Before foreach");
 
                     if (file.FileName == "." || file.FileName == "..") 
                     {
@@ -109,11 +122,9 @@ namespace eOdvjetnik.ViewModel
                         }
                         else {
 
-                                icon = Path.GetExtension(file.FileName).TrimStart('.') + ".png";
-                            string imagePath = Path.Combine(AppContext.BaseDirectory, icon);
-                            //Debug.WriteLine("Checking image path: " + imagePath);
+                            icon = Path.GetExtension(file.FileName).TrimStart('.') + ".png";
 
-                            bool imageExists = File.Exists(imagePath);
+                            bool imageExists = resourceNames.Contains("eOdvjetnik.Resources.Images." + icon);
 
                             if (imageExists)
                             {
