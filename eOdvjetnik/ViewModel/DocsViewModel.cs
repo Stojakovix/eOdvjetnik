@@ -128,15 +128,11 @@ namespace eOdvjetnik.ViewModel
 
                             if (imageExists)
                             {
-                                // Image exists, do something
                                 icon = Path.GetExtension(file.FileName).TrimStart('.') + ".png";
-                                //Debug.WriteLine("Image exists!");
                             }
                             else
                             {
-                                // Image doesn't exist, do something else
                                 icon = "blank.png";
-                                //Debug.WriteLine("Image does not exist!");
                             }
 
 
@@ -147,8 +143,10 @@ namespace eOdvjetnik.ViewModel
                         DocsItem fileData = new DocsItem
                         {
                             Name = file.FileName,
-                            Changed = file.CreationTime,
+                            Changed = file.LastWriteTime,
                             Icon = icon,
+                            Created = file.CreationTime,
+                            Size = $"{ file.AllocationSize / 1024 } KB",
 
                         };
                         items.Add(fileData);
