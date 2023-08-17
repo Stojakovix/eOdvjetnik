@@ -16,7 +16,8 @@ namespace eOdvjetnik.ViewModel
     {
         private Navigacija navigacija;
         private ObservableCollection<SchedulerAppointment> appointments;
-
+        //Resources - 1
+        public ObservableCollection<SchedulerResource> Resources { get; set; }
         public ObservableCollection<SchedulerAppointment> SchedulerAppointments
         {
             get
@@ -103,6 +104,14 @@ namespace eOdvjetnik.ViewModel
 
         public KalendarViewModel()
         {
+
+            //Resources - 2 
+            Resources = new ObservableCollection<SchedulerResource>()
+            {
+                new SchedulerResource() { Name = "Sophia", Foreground = Colors.Blue, Background = Colors.Green, Id = "1000" },
+                new SchedulerResource() { Name = "Zoey Addison",  Foreground = Colors.Blue, Background = Colors.Green, Id = "1001" },
+                new SchedulerResource() { Name = "James William",  Foreground = Colors.Blue, Background = Colors.Green, Id = "1002" },
+            };
             try
             {
                 navigacija = new Navigacija();

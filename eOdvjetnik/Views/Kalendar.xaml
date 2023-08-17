@@ -86,7 +86,10 @@
                                AllowedViews="Day,Week,WorkWeek,Month,Agenda,TimelineWorkWeek,TimelineWeek,TimelineMonth"
                                >
 
-
+            <scheduler:SfScheduler.ResourceView>
+                <scheduler:SchedulerResourceView Resources="{Binding Resources}" />
+            </scheduler:SfScheduler.ResourceView>
+            
             <scheduler:SfScheduler.BindingContext>
                 <local:KalendarViewModel/>
             </scheduler:SfScheduler.BindingContext>
