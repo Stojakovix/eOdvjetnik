@@ -119,6 +119,19 @@ namespace eOdvjetnik.ViewModel
         }
         #endregion
 
+        private void AdminLicenceCheck()
+        {
+            string licence_type = Preferences.Get("licence_type", "");
+            int numberOfCharacters = 5;
+            string adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
+            Debug.WriteLine("Kalendar ResourceView - 'Admin' provjera: " + adminCheck);
+            if (adminCheck == "Admin")
+            {
+                GetEmployees();
+            }
+          
+        }
+
         public KalendarViewModel()
         {
 
@@ -136,9 +149,9 @@ namespace eOdvjetnik.ViewModel
                 employeeItem = new ObservableCollection<EmployeeItem>();
                 Resources = new ObservableCollection<SchedulerResource>();
 
-
+                AdminLicenceCheck();
                 GetColors();
-                GetEmployees();
+             
                 var hardware_id = Preferences.Get("key", "default_value");
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 List<int> ExternalEventIDs = new List<int>();
