@@ -9,27 +9,44 @@ using Newtonsoft.Json;
 using eOdvjetnik.Model;
 using System.Drawing;
 using Color = Microsoft.Maui.Graphics.Color;
+using Syncfusion.DocIO.DLS;
+using System.Xml.Linq;
 
 namespace eOdvjetnik.ViewModel
 {
     public class KalendarViewModel : INotifyPropertyChanged
     {
-        private Navigacija navigacija;
         private ObservableCollection<SchedulerAppointment> appointments;
-        //Resources - 1
-        public ObservableCollection<SchedulerResource> Resources { get; set; }
-        public ObservableCollection<SchedulerAppointment> SchedulerAppointments
+
+        public ObservableCollection<SchedulerAppointment> Appointments
         {
             get
             {
-                return Appointments;
+                return appointments;
             }
             set
             {
-                Appointments = value;
-                this.RaiseOnPropertyChanged(nameof(SchedulerAppointments));
+                appointments = value;
+                this.RaiseOnPropertyChanged(nameof(Appointments));
             }
         }
+
+        private ObservableCollection<EmployeeItem> employeeItem;
+        public ObservableCollection<EmployeeItem> EmployeeItems
+        {
+            get { return employeeItem; }
+            set
+            {
+                if (employeeItem != value)
+                {
+                    employeeItem = value;
+                    OnPropertyChanged(nameof(EmployeeItems));
+                }
+            }
+        }
+        //Resources - 1
+        public ObservableCollection<SchedulerResource> Resources { get; set; }
+
 
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
         #region Colors
@@ -106,22 +123,22 @@ namespace eOdvjetnik.ViewModel
         {
 
             //Resources - 2 
-            Resources = new ObservableCollection<SchedulerResource>()
-            {
-                new SchedulerResource() { Name = "Sophia", Foreground = Colors.Blue, Background = Colors.Green, Id = "1000" },
-                new SchedulerResource() { Name = "Zoey Addison",  Foreground = Colors.Blue, Background = Colors.Green, Id = "1001" },
-                new SchedulerResource() { Name = "James William",  Foreground = Colors.Blue, Background = Colors.Green, Id = "1002" },
-            };
+            //Resources = new ObservableCollection<SchedulerResource>()
+            //{
+            //    new SchedulerResource() { Name = "Sophia", Foreground = Colors.Blue, Background = Colors.Green, Id = "1000" },
+            //    new SchedulerResource() { Name = "Zoey Addison",  Foreground = Colors.Blue, Background = Colors.Green, Id = "1001" },
+            //    new SchedulerResource() { Name = "James William",  Foreground = Colors.Blue, Background = Colors.Green, Id = "1002" },
+            //};
             try
             {
-                navigacija = new Navigacija();
-
                 Appointments = new ObservableCollection<SchedulerAppointment>(); // Initialize the Appointments collection
                 CategoryColor = new ObservableCollection<ColorItem>();
-                SchedulerAppointments = new ObservableCollection<SchedulerAppointment>();
+                employeeItem = new ObservableCollection<EmployeeItem>();
+                Resources = new ObservableCollection<SchedulerResource>();
 
 
                 GetColors();
+                GetEmployees();
                 var hardware_id = Preferences.Get("key", "default_value");
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 List<int> ExternalEventIDs = new List<int>();
@@ -149,7 +166,7 @@ namespace eOdvjetnik.ViewModel
                         }
                         //Debug.WriteLine("-------------------------------------------------------------- " + colorName + " 0000000000000000");
                         Color backgroundColor = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(colorName);
-                       
+
 
 
                         Appointments.Add(new SchedulerAppointment()
@@ -172,24 +189,81 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
+        public void GetEmployees()
+        {
+            try
+            {
+                if (employeeItem != null)
+                {
+                    employeeItem.Clear();
+
+                }
+
+                string query = "SELECT id, ime, inicijali, hwid, active, type FROM employees;";
+
+
+                // Debug.WriteLine(query + "u SpisiViewModelu");
+                Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                if (filesData != null)
+                {
+                    foreach (Dictionary<string, string> filesRow in filesData)
+                    {
+                        #region Varijable za listu
+                        int id;
+                        int active;
+                        int type;
+
+                        int.TryParse(filesRow["id"], out id);
+                        int.TryParse(filesRow["inicijali"], out active);
+                        int.TryParse(filesRow["active"], out type);
+
+                        #endregion
+
+                        var employee = new EmployeeItem()
+                        {
+                            Id = id,
+                            EmployeeName = filesRow["ime"],
+                            EmployeeHWID = filesRow["hwid"],
+                            Initals = filesRow["inicijali"],
+                            Active = active,
+                            Type = type,
+                        };
+
+
+
+
+                        employeeItem.Add(employee);
+                    }
+
+                    foreach (EmployeeItem employee in employeeItem)
+                    {
+                        Resources.Add(new SchedulerResource()
+                        {
+                            Name = employee.EmployeeName,
+                            Foreground = Colors.Blue,
+                            Background = Colors.Green,
+                            Id = employee.Id
+                        });
+
+                        Debug.Write(employeeItem);
+                    }
+
+
+                    OnPropertyChanged(nameof(employeeItem));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message + "in viewModel generate files");
+            }
+        }
+
 
         /// <summary>
         /// Property changed event handler
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<SchedulerAppointment> Appointments
-        {
-            get
-            {
-                return appointments;
-            }
-            set
-            {
-                appointments = value;
-                this.RaiseOnPropertyChanged(nameof(Appointments));
-            }
-        }
 
         /// <summary>
         /// Invoke method when property changed.
