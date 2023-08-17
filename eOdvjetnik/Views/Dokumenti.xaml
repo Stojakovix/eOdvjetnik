@@ -11,14 +11,21 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-
+        <HorizontalStackLayout Grid.Row="0">
+            <Button Text="Nazad" Margin="5,5,5,10" BackgroundColor="Blue" />
+            <Button Text="Gumb2" Margin="5,5,5,10"  BackgroundColor="Red" />
+        </HorizontalStackLayout>
+        
+        
+        
         <!-- Header -->
 
-        <VerticalStackLayout Grid.Row="0" >
+        <VerticalStackLayout Grid.Row="1" >
            
             <Grid>
                 <Grid.Resources>
@@ -31,9 +38,7 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80" />
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="*" />
-
+                    <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -42,16 +47,15 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Column="1" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Naziv" Margin="0,0,0,5" HorizontalOptions="Start" />
-                <Label Grid.Column="2" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Lokacija"   HorizontalOptions="Start" />
-                <Label Grid.Column="3" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Veličina"   HorizontalOptions="Start" />
-                <Label Grid.Column="4" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Kreirano" Margin="0,0,0,0" HorizontalOptions="Start"  />
-                <Label Grid.Column="5" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Izmijenjeno" Margin="0,0,0,0" HorizontalOptions="Start"  />
+                <Label Grid.Column="2" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Veličina"   HorizontalOptions="Start" />
+                <Label Grid.Column="3" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Kreirano" Margin="0,0,0,0" HorizontalOptions="Start"  />
+                <Label Grid.Column="4" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="Izmijenjeno" Margin="0,0,0,0" HorizontalOptions="Start"  />
 
             </Grid>
         </VerticalStackLayout>
 
         <!-- Scrollable ListView -->
-        <ScrollView Grid.Row="1">
+        <ScrollView Grid.Row="2">
             <ListView Margin="0,0,0,0" ItemsSource="{Binding Items}" x:Name="listaDokumenata" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -69,8 +73,7 @@
 
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3*"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
@@ -79,10 +82,9 @@
 
                                 <Image Margin="0,0,0,10" Grid.Row="1" Grid.Column="0" Source="{Binding Icon}" WidthRequest="50" HeightRequest="50" Aspect="Fill"/>
                                 <Label Margin="0,0,0,10" Grid.Row="1" Grid.Column="1" VerticalOptions="Center"  FontSize="Default" x:Name="DocumentLabel" Text="{Binding Name}" HorizontalOptions="Start" />
-                                <Label Margin="0,0,0,10" Grid.Row="1" Grid.Column="2" VerticalOptions="Center"  FontSize="Default" Text="LOKACIJA" HorizontalOptions="Start"   />
-                                <Label Margin="0,0,0,10" Grid.Row="1" Grid.Column="3" VerticalOptions="Center"  FontSize="Default" Text="{Binding Size}" HorizontalOptions="Start"   />
-                                <Label Margin="0,0,0,10" Grid.Row="1" Grid.Column="4" VerticalOptions="Center"  FontSize="Default" Text="{Binding Created}" HorizontalOptions="Start"  />
-                                <Label Margin="0,0,0,10" Grid.Row="1" Grid.Column="5" VerticalOptions="Center"  FontSize="Default" Text="{Binding Changed}" HorizontalOptions="Start"  />
+                                <Label Margin="0,0,0,10" Grid.Row="1" Grid.Column="2" VerticalOptions="Center"  FontSize="Default" Text="{Binding Size}" HorizontalOptions="Start"   />
+                                <Label Margin="0,0,0,10" Grid.Row="1" Grid.Column="3" VerticalOptions="Center"  FontSize="Default" Text="{Binding Created}" HorizontalOptions="Start"  />
+                                <Label Margin="0,0,0,10" Grid.Row="1" Grid.Column="4" VerticalOptions="Center"  FontSize="Default" Text="{Binding Changed}" HorizontalOptions="Start"  />
 
 
 
