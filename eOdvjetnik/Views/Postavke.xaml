@@ -12,7 +12,7 @@
         <local:PostavkeViewModel x:Name="viewmodel"/>
     </ContentPage.BindingContext>
 
-    
+    <ScrollView>
     <VerticalStackLayout >
         <Grid Margin="10,10,10,10" RowSpacing="5" ColumnSpacing="5">
 
@@ -249,7 +249,7 @@
 
         </Grid>
     </VerticalStackLayout>
-
+    </ScrollView>
 
 
 </ContentPage>

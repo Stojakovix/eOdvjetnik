@@ -34,13 +34,26 @@ namespace eOdvjetnik.ViewModel
         /// Varijable za aktivaciju i licencu
         public string hardwareID = Preferences.Get("key", null);
         public string Activation_code { get; set; }
-        public string LicenceType { get; set; }
         public DateTime ExpireDateDT { get; set; }
         public DateTime CurrentDateDT { get; set; }
         public string ExpireDateString { get; set; }
         public string LicenceStatus { get; set; }
         public bool ExpiredLicence { get; set; }
         public double GracePeriod { get; set; }
+        private string LocalLicenceType;
+
+        public string LicenceType
+        {
+            get { return LocalLicenceType; }
+            set
+            {
+                if (LocalLicenceType != value)
+                {
+                    LocalLicenceType = value;
+                    OnPropertyChanged(nameof(LicenceType));
+                }
+            }
+        }
         private bool IsActivationVisible;
         public bool ActivationVisible
     {
@@ -54,6 +67,20 @@ namespace eOdvjetnik.ViewModel
                 }
             }
         }
+        private string LocalCompanyName;
+
+        public string CompanyName
+        {
+            get { return LocalCompanyName; }
+            set
+            {
+                if (LocalCompanyName != value)
+                {
+                    LocalCompanyName = value;
+                    OnPropertyChanged(nameof(CompanyName));
+                }
+            }
+        }
         #endregion
 
 
@@ -63,11 +90,10 @@ namespace eOdvjetnik.ViewModel
             navigacija = new Navigacija();
             Version = $"{AppResources.Version} {AppInfo.VersionString}";
             Activation_code = Preferences.Get("activation_code", "");
-            LicenceType = Preferences.Get("licence_type", "");
-            ExpireDateString = Preferences.Get("expire_date", "");
+                        ExpireDateString = Preferences.Get("expire_date", "");
             LicenceStatus = Preferences.Get("licence_active", "");
             CurrentDateDT = DateTime.Now.Date;
-
+            CompanyName = Preferences.Get("naziv_tvrtke", "");
             WeakReferenceMessenger.Default.Register<CheckLicence>(this, RefreshLicenceData);
 
 
@@ -89,10 +115,20 @@ namespace eOdvjetnik.ViewModel
 
             }
 
-            DevicePlatform check_platform = DeviceInfo.Current.Platform;
-            Debug.WriteLine("VRSTA PLATVORME " + check_platform);
-            string vrstaPlatfrome = check_platform.ToString();
-            Preferences.Set("vrsta_platforme", vrstaPlatfrome);
+            DevicePlatform CheckPlatform = DeviceInfo.Current.Platform;
+            Debug.WriteLine("VRSTA PLATFORME " + CheckPlatform);
+            string VrstaPlatforme = CheckPlatform.ToString();
+            Preferences.Set("vrsta_platforme", VrstaPlatforme);
+
+            string TypeOfLicence = Preferences.Get("licence_type", "");
+            if (LicenceStatus == "0" || TypeOfLicence == null || TypeOfLicence == "")
+            {
+                LicenceType = "nije aktivirana";
+            }
+            else
+            {
+                LicenceType = TypeOfLicence;
+            }
         }
 
         private void RefreshLicenceData(object recipient, CheckLicence message)
@@ -107,6 +143,15 @@ namespace eOdvjetnik.ViewModel
 
             }
             ActivationScreen();
+            string TypeOfLicence = Preferences.Get("licence_type", "");
+            if (LicenceStatus == "0" || TypeOfLicence == null || TypeOfLicence == "")
+            {
+                LicenceType = "nije aktivirana";
+            }
+            else
+            {
+                LicenceType = TypeOfLicence;
+            }
         }
      
 
