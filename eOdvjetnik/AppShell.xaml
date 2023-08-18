@@ -5,7 +5,7 @@
        xmlns:views="clr-namespace:eOdvjetnik.Views"
        xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
        xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"  
-       Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
+       Shell.FlyoutBehavior="{OnPlatform WinUI=Flyout, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
        Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True , Android=True, iOS=True}"
        xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
        Shell.PresentationMode="NotAnimated"
@@ -159,22 +159,19 @@
         </HorizontalStackLayout>
     </Shell.TitleView>
 
-    <ShellContent Title="{x:Static resx:AppResources.Pocetna}" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"  />
-    <ShellContent Title="{x:Static resx:AppResources.Rocisnik}" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" />
-    <ShellContent Title="{x:Static resx:AppResources.Upisnik}" ContentTemplate="{DataTemplate views:Spisi}" Route="Spisi" />
-    <ShellContent Title="{x:Static resx:AppResources.Kontakti}" ContentTemplate="{DataTemplate views:Klijenti}" Route="Klijenti" />
-    <ShellContent Title="{x:Static resx:AppResources.Tarifa}" ContentTemplate="{DataTemplate views:Naplata}" Route="Naplata" />
-    <ShellContent Title="{x:Static resx:AppResources.Dokumenti}" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" />
-    
-    <ShellContent ContentTemplate="{DataTemplate views:LoadingPage}" Route="LoadingPage" />
+    <ShellContent Title="{x:Static resx:AppResources.Pocetna}" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" IsVisible="{OnPlatform Android=True , iOS=True , WinUI=True , MacCatalyst=True}"   />
+    <ShellContent Title="{x:Static resx:AppResources.Rocisnik}" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" IsVisible="{OnPlatform Android=True , iOS=True , WinUI=True , MacCatalyst=True}"   />
+    <ShellContent Title="{x:Static resx:AppResources.Upisnik}" ContentTemplate="{DataTemplate views:Spisi}" Route="Spisi" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
+    <ShellContent Title="{x:Static resx:AppResources.Kontakti}" ContentTemplate="{DataTemplate views:Klijenti}" Route="Klijenti" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
+    <ShellContent Title="{x:Static resx:AppResources.Tarifa}" ContentTemplate="{DataTemplate views:Naplata}" Route="Naplata" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
+    <ShellContent Title="{x:Static resx:AppResources.Dokumenti}" ContentTemplate="{DataTemplate views:Dokumenti}" Route="Dokumenti" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
+    <ShellContent ContentTemplate="{DataTemplate views:LoadingPage}" Route="LoadingPage" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
+    <ShellContent Title="{x:Static resx:AppResources.KorisnickaPodrska}" ContentTemplate="{DataTemplate sfPopup:SfPopup}" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
+    <ShellContent Title="{x:Static resx:AppResources.Postavke}" ContentTemplate="{DataTemplate views:Postavke}" Route="Postavke"  IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
+    <ShellContent  ContentTemplate="{DataTemplate views:Zaposlenici}" Route="Zaposlenici" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
+    <MenuItem Text="Korisnička podrška"  Clicked="OnKorisnickaPodrskaClicked" />
 
-    <ShellContent Title="{x:Static resx:AppResources.KorisnickaPodrska}" ContentTemplate="{DataTemplate sfPopup:SfPopup}" />
-    <ShellContent Title="{x:Static resx:AppResources.Postavke}" ContentTemplate="{DataTemplate views:Postavke}" Route="Postavke" />
-    <ShellContent  ContentTemplate="{DataTemplate views:Zaposlenici}" Route="Zaposlenici" />
 
-    <MenuItem Text="{x:Static resx:AppResources.KorisnickaPodrska}"
-              Command="{Binding OnSupportClickCommand}"/>
-   
 
 
 </Shell>

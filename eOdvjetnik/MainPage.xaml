@@ -54,7 +54,7 @@
         </Grid.ColumnDefinitions>
 
         <Image Opacity="0.5" HorizontalOptions="FillAndExpand" MaximumHeightRequest="4000" MaximumWidthRequest="4000" Grid.ColumnSpan="7" Grid.Row="0" Source="main_pozadina.jpg"  
-               Aspect="Fill"  IsVisible="{OnPlatform Android=True, iOS=True, WinUI=True, MacCatalyst=True}"  />
+               Aspect="Fill"  IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"  />
         
         <Label Grid.Row="0" Grid.ColumnSpan="6" Margin="0,0,50,50"
                VerticalOptions="End"
@@ -129,7 +129,7 @@
             </Picker>
         </StackLayout>
         <Label BackgroundColor="#dbdbdb" Grid.Row="1" Grid.ColumnSpan="5" />
-        <Image Source="text_only.png" Margin="5" HeightRequest="20" HorizontalOptions="Start" Grid.Row="1"  />
+        <Image Source="text_only.png" Margin="5" HeightRequest="20" HorizontalOptions="Start" Grid.Row="1" Grid.Column="0"  />
         <Label Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding CurrentDateTimeString}"  FontSize="Small" Margin="5" HorizontalOptions="End" Grid.Row="1" Grid.ColumnSpan="5" IsVisible="{OnPlatform Android=False, iOS=False}" />
         <Label Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding Version}" FontSize="Small" Margin="5" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1" 
                IsVisible="{OnPlatform Android=False, iOS=False}" />

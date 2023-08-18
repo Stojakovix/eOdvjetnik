@@ -17,60 +17,110 @@
     <Shell.NavBarIsVisible>False</Shell.NavBarIsVisible>
     <StackLayout  NavigationPage.HasNavigationBar="False">
 
-        <Grid Margin="20,20,0,0" HorizontalOptions="Start" VerticalOptions="Start" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="200" />
-                <RowDefinition Height="80" />
-                <RowDefinition Height="80" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="1000" />
-            </Grid.ColumnDefinitions>
+        <VerticalStackLayout Margin="20,20,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
 
 
-            <Label Grid.Row="0" Grid.Column="0" Text="Kategorija" FontSize="Default" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" Margin="0,0,0,10"  />
-            <Picker Grid.Row="0" Grid.Column="1"  TextColor="Gray" Margin="0,0,0,10" WidthRequest="300" HorizontalOptions="Start" x:Name="categoryPicker"
-                    VerticalTextAlignment="Center"  ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=CategoryColor}"
-                                         ItemDisplayBinding="{Binding VrstaDogadaja}" SelectedIndexChanged="OnCategoryPickerSelectedIndexChanged"  />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+            
+            <Label Grid.Column="0"  Text="Kategorija" FontSize="Default" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" Margin="0,0,0,20"  />
+                <Picker Grid.Column="1" TextColor="Gray" Margin="0,0,0,20" HorizontalOptions="StartAndExpand" x:Name="categoryPicker"
+            VerticalTextAlignment="Center" ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=CategoryColor}"
+            ItemDisplayBinding="{Binding VrstaDogadaja}" SelectedIndexChanged="OnCategoryPickerSelectedIndexChanged"  >
+                    <Picker.WidthRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android,iOS" Value="200" />
+                            <On Platform="UWP,MacCatalyst" Value="300" />
 
-            <Label Grid.Row="1" Grid.Column="0" Text="Naziv događaja" FontSize="Default" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" Margin="0,0,0,10" />
-            <Entry Grid.Row="1" Grid.Column="1" x:Name="eventNameText"   Placeholder="Unesite naziv" PlaceholderColor="Black"  TextColor="Black" Margin="0,0,0,10" 
-                   BackgroundColor="{Binding SelectedItem.BojaPozadine, Source={x:Reference categoryPicker}}" />
+                        </OnPlatform>
+                    </Picker.WidthRequest>
+                </Picker>
+            </Grid>
 
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label  Grid.Column="0"  Text="Naziv događaja" FontSize="Default" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20" />
+                <Entry Grid.Column="1"  x:Name="eventNameText"   Placeholder="Unesite naziv" PlaceholderColor="Black"  TextColor="Black" Margin="0,0,0,20" 
+                   BackgroundColor="{Binding SelectedItem.BojaPozadine, Source={x:Reference categoryPicker}}" HorizontalOptions="StartAndExpand"
+                     >
+                    <Entry.WidthRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android,iOS" Value="200" />
+                            <On Platform="UWP,MacCatalyst" Value="500" />
+                        </OnPlatform>
+                    </Entry.WidthRequest>
+                    </Entry>
+            </Grid>
 
-            <Label Grid.Row="2" Grid.Column="0" Text="Opis događaja" FontSize="Default" TextColor="Black" VerticalOptions="Start" HorizontalOptions="Start" Margin="0,0,0,10"  />
-            <Editor Grid.Row="2" Grid.Column="1" Placeholder="Unesite opis" x:Name="organizerText" TextColor="Black" Margin="0,0,0,10"  />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="3" Grid.Column="0" FontSize="Default"  Text="Početak" TextColor="Black" Margin="0,0,0,10" VerticalOptions="Center"  />
+                <Label  Grid.Column="0" Text="Opis događaja" FontSize="Default" TextColor="Black" VerticalOptions="Start" HorizontalOptions="Start" Margin="0,0,0,10"  />
+                <Editor  Grid.Column="1" Placeholder="Unesite opis" x:Name="organizerText" TextColor="Black" Margin="0,0,0,10"  HorizontalOptions="Start" BackgroundColor="#F0F0F0"  >
+                    <Editor.WidthRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android,iOS" Value="200" />
+                            <On Platform="UWP,MacCatalyst" Value="1000" />
+                        </OnPlatform>
+                    </Editor.WidthRequest>
 
-            <HorizontalStackLayout Grid.Row="3" Grid.Column="1" Margin="0,0,0,10"  >
+                    <Editor.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android,iOS" Value="300" />
+                            <On Platform="UWP,MacCatalyst" Value="300" />
+                        </OnPlatform>
+                    </Editor.HeightRequest>
+                </Editor>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" FontSize="Default"  Text="Početak" TextColor="Black" Margin="0,0,0,10" VerticalOptions="Center"  />
+                <HorizontalStackLayout Grid.Column="1"  Margin="0,0,0,10"  >
                 <DatePicker x:Name="startDate_picker" Format="dd/MM/yyyy" />
                 <TimePicker x:Name="startTime_picker" Format="HH:mm" VerticalOptions="Center" />
             </HorizontalStackLayout>
+            </Grid>
 
-            <Label Grid.Row="4" Grid.Column="0" FontSize="Default" Text="Završetak" TextColor="Black" Margin="0,0,0,10" VerticalOptions="Center" />
-            <HorizontalStackLayout  Grid.Row="4" Grid.Column="1" Margin="0,0,0,10" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" FontSize="Default" Text="Završetak" TextColor="Black" Margin="0,0,0,10" VerticalOptions="Center" />
+                <HorizontalStackLayout Grid.Column="1" Margin="0,0,0,10" >
                 <DatePicker  x:Name="endDate_picker" Grid.Column="0"  VerticalOptions="Start" Format="dd/MM/yyyy"/>
                 <TimePicker  x:Name="endTime_picker" Format="HH:mm" VerticalOptions="Center" />
             </HorizontalStackLayout>
+            </Grid>
 
-            <Label Grid.Row="5" Grid.Column="0" FontSize="Default"  VerticalTextAlignment="Center"  Text="Cjelodnevni događaj"   TextColor="Black" />
-            <Switch Grid.Row="5" Grid.Column="1" x:Name="switchAllDay" HorizontalOptions="Start"  VerticalOptions="Center" BackgroundColor="White" ThumbColor="#DC143C"  />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" FontSize="Default"  VerticalTextAlignment="Center"  Text="Cjelodnevni događaj"   TextColor="Black" />
+                <Switch  Grid.Column="1" x:Name="switchAllDay" HorizontalOptions="Start"  VerticalOptions="Center" BackgroundColor="White" ThumbColor="#DC143C"  />
+            </Grid>
 
-
-            <HorizontalStackLayout Grid.Row="6" Grid.ColumnSpan="3" >
-                <Button x:Name="DeleteButton" Clicked="DeleteButton_Clicked" Text="Obriši" BorderColor="DarkGray" Background="#DC143C" TextColor="LightGray"  WidthRequest="120" FontSize="Default" Margin="10,20,20,0" />
-                <Button x:Name="cancelButton" Clicked="CancelButton_Clicked" Text="Odustani" BorderColor="DarkGray" BackgroundColor="LightGray"  TextColor="#3B3B3B" WidthRequest="120" FontSize="Default" Margin="10,20,20,0" />
-                <Button x:Name="saveButton" Clicked="SaveButton_Clicked" Text="Spremi" BorderColor="DarkGray"  BackgroundColor="#5ac8fa" TextColor="Black" WidthRequest="100" FontSize="Default" Margin="10,20,20,0" />
+            <HorizontalStackLayout Margin="0,20,0,0" >
+                <Button x:Name="DeleteButton" Clicked="DeleteButton_Clicked" Text="Obriši" BorderColor="DarkGray" Background="#DC143C" TextColor="LightGray"  WidthRequest="120" FontSize="Default" Margin="0,0,10,0" />
+                <Button x:Name="cancelButton" Clicked="CancelButton_Clicked" Text="Odustani" BorderColor="DarkGray" BackgroundColor="LightGray"  TextColor="#3B3B3B" WidthRequest="120" FontSize="Default" Margin="0,0,10,0" />
+                <Button x:Name="saveButton" Clicked="SaveButton_Clicked" Text="Spremi" BorderColor="DarkGray"  BackgroundColor="#5ac8fa" TextColor="Black" WidthRequest="100" FontSize="Default" Margin="0,0,10,0"  />
             </HorizontalStackLayout>
             
-        </Grid>
+        </VerticalStackLayout>
     </StackLayout>
 </ContentPage>

@@ -7,9 +7,9 @@ using eOdvjetnik.ViewModel;
 
 public partial class AppShell : Shell
 {
-	
 
-	public AppShell()
+    AppShellViewModel ViewModel = new AppShellViewModel();
+    public AppShell()
 	{
 		InitializeComponent();
 
@@ -31,11 +31,18 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(SpiDok), typeof(SpiDok));
         Routing.RegisterRoute(nameof(LoadingPage), typeof(LoadingPage));
 
-        BindingContext = new AppShellViewModel();
+        
+        BindingContext = ViewModel;
+        
 
-		SfPopup popup = new SfPopup();
+        SfPopup popup = new SfPopup();
 		
     }
+    private void OnKorisnickaPodrskaClicked(object sender, EventArgs e)
+    {
+        ViewModel.SupportVisible = true;
+        ViewModel.SupportPopupOpen = true;
 
+    }
 
 }
