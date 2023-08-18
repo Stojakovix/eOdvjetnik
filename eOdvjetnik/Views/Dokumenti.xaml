@@ -19,6 +19,8 @@
         <HorizontalStackLayout Grid.Row="0">
             <Button Text="Nazad" Margin="5,5,5,10" BackgroundColor="Blue" />
             <Button Text="Gumb2" Margin="5,5,5,10"  BackgroundColor="Red" />
+            <Entry Margin="5,5,5,10" Text="\Users\user\Spisi" MinimumWidthRequest="400" Placeholder="Enter text here" />
+            <Button Text="Gumb2" Margin="5,5,5,10"  BackgroundColor="Green" />
         </HorizontalStackLayout>
         
         
