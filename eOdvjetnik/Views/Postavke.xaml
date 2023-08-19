@@ -42,6 +42,8 @@
 
                 <VerticalStackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" Padding="10,10,10,10"  BackgroundColor="White" 
                     x:Name="Frame1" IsVisible="True" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" >
+                    <Label TextColor="Black" Text="Korisnik:" FontAttributes="Bold" Margin="0,0,0,5" />
+                    <Label TextColor="Black" Text="{Binding PostavkeUserName}" Margin="0,0,0,20" />
                     <Label TextColor="Black" Text="{x:Static resx:AppResources.VrstaLicence}" FontAttributes="Bold" Margin="0,0,0,5" />
                     <Label TextColor="Black" Text="{Binding LicenceType}" Margin="0,0,0,20" />
                     <Label TextColor="Black" Text="{x:Static resx:AppResources.DatumIstekaLicence}" FontAttributes="Bold" Margin="0,0,0,5" />

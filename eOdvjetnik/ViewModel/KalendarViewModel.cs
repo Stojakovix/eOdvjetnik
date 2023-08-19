@@ -44,6 +44,7 @@ namespace eOdvjetnik.ViewModel
                 }
             }
         }
+        public string SQLUserID { get; set; }
         //Resources - 1
         public ObservableCollection<SchedulerResource> Resources { get; set; }
 
@@ -129,81 +130,30 @@ namespace eOdvjetnik.ViewModel
             {
                 GetEmployees();
             }
+            else
+            {
+                GetUserEvents();
+            }
           
         }
 
         public KalendarViewModel()
         {
 
-            //Resources - 2 
-            //Resources = new ObservableCollection<SchedulerResource>()
-            //{
-            //    new SchedulerResource() { Name = "Sophia", Foreground = Colors.Blue, Background = Colors.Green, Id = "1000" },
-            //    new SchedulerResource() { Name = "Zoey Addison",  Foreground = Colors.Blue, Background = Colors.Green, Id = "1001" },
-            //    new SchedulerResource() { Name = "James William",  Foreground = Colors.Blue, Background = Colors.Green, Id = "1002" },
-            //};
+            SQLUserID = Preferences.Get("UserID", "");
+
             try
             {
                 Appointments = new ObservableCollection<SchedulerAppointment>(); // Initialize the Appointments collection
                 CategoryColor = new ObservableCollection<ColorItem>();
                 employeeItem = new ObservableCollection<EmployeeItem>();
                 Resources = new ObservableCollection<SchedulerResource>();
-
-                AdminLicenceCheck();
                 GetColors();
-             
-                var hardware_id = Preferences.Get("key", "default_value");
-                ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
-                List<int> ExternalEventIDs = new List<int>();
-                List<int> InternalEventIDs = new List<int>();
-                string query = "Select * from events;";
-                
-                Debug.WriteLine(query);
-
-                //Rezultat query-ja u apointmentData
-                Dictionary<string, string>[] appointmentData = externalSQLConnect.sqlQuery(query);
-                if (appointmentData != null)
-                {
-                    //Debug.WriteLine("Dohvatio evente ----------------------------------**");
-
-                    //Externa lista bez internih
-                    List<int> ExtDifference = ExternalEventIDs.Except(InternalEventIDs).ToList();
-
-                    foreach (Dictionary<string, string> appointmentRow in appointmentData)
-                    {
-                        // Add new appointment
-
-                        string colorName = appointmentRow["color"];
-                        if (colorName == null || colorName == "")
-                        {
-                            colorName = "LightGray";
-                        }
-                        //Debug.WriteLine("-------------------------------------------------------------- " + colorName + " 0000000000000000");
-                        Color backgroundColor = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(colorName);
-
-
-
-                        Appointments.Add(new SchedulerAppointment()
-                        {
-                            Id = int.Parse(appointmentRow["internal_event_id"]),
-                            StartTime = DateTime.Parse(appointmentRow["TimeFrom"]),
-                            EndTime = DateTime.Parse(appointmentRow["TimeTo"]),
-                            Subject = appointmentRow["EventName"],
-                            ResourceIds = new ObservableCollection<object>
-                            {
-                                (object)int.Parse(appointmentRow["user_id"]) // Boxing the integer into an object
-                            },
-                            IsAllDay = bool.Parse(appointmentRow["AllDay"]),
-                            Notes = appointmentRow["DescriptionNotes"],
-                            Background = backgroundColor,
-                        });
-                    }
-                }
+                AdminLicenceCheck();
             }
             catch (Exception ex)
             {
-
-                Debug.WriteLine(ex.Message + "in kalendarViewModel init");
+                Debug.WriteLine(ex.Message + "in kalendarViewModel constructor");
             }
         }
 
@@ -268,11 +218,131 @@ namespace eOdvjetnik.ViewModel
 
 
                     OnPropertyChanged(nameof(employeeItem));
+                    GetAllEvents();
+
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message + "in viewModel generate files");
+            }
+        }
+
+        public void GetAllEvents()
+        {
+            try
+            {
+                var hardware_id = Preferences.Get("key", "default_value");
+                ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+                List<int> ExternalEventIDs = new List<int>();
+                List<int> InternalEventIDs = new List<int>();
+                string query = "Select * from events;";
+
+                Debug.WriteLine(query);
+
+                //Rezultat query-ja u apointmentData
+                Dictionary<string, string>[] appointmentData = externalSQLConnect.sqlQuery(query);
+                if (appointmentData != null)
+                {
+                    //Debug.WriteLine("Dohvatio evente ----------------------------------**");
+
+                    //Externa lista bez internih
+                    List<int> ExtDifference = ExternalEventIDs.Except(InternalEventIDs).ToList();
+
+                    foreach (Dictionary<string, string> appointmentRow in appointmentData)
+                    {
+                        // Add new appointment
+
+                        string colorName = appointmentRow["color"];
+                        if (colorName == null || colorName == "")
+                        {
+                            colorName = "LightGray";
+                        }
+                        //Debug.WriteLine("-------------------------------------------------------------- " + colorName + " 0000000000000000");
+                        Color backgroundColor = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(colorName);
+
+
+
+                        Appointments.Add(new SchedulerAppointment()
+                        {
+                            Id = int.Parse(appointmentRow["internal_event_id"]),
+                            StartTime = DateTime.Parse(appointmentRow["TimeFrom"]),
+                            EndTime = DateTime.Parse(appointmentRow["TimeTo"]),
+                            Subject = appointmentRow["EventName"],
+                            ResourceIds = new ObservableCollection<object>
+                            {
+                                (object)int.Parse(appointmentRow["user_id"]) // Boxing the integer into an object
+                            },
+                            IsAllDay = bool.Parse(appointmentRow["AllDay"]),
+                            Notes = appointmentRow["DescriptionNotes"],
+                            Background = backgroundColor,
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine(ex.Message + "in kalendarViewModel GetAllEvents");
+            }
+        }
+
+        public void GetUserEvents()
+        {
+            try
+            {
+                var hardware_id = Preferences.Get("key", "default_value");
+                ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+                List<int> ExternalEventIDs = new List<int>();
+                List<int> InternalEventIDs = new List<int>();
+                string query = "SELECT * FROM `events` WHERE user_id = " + SQLUserID + ";";
+
+                Debug.WriteLine(query);
+
+                //Rezultat query-ja u apointmentData
+                Dictionary<string, string>[] appointmentData = externalSQLConnect.sqlQuery(query);
+                if (appointmentData != null)
+                {
+                    //Debug.WriteLine("Dohvatio evente ----------------------------------**");
+
+                    //Externa lista bez internih
+                    List<int> ExtDifference = ExternalEventIDs.Except(InternalEventIDs).ToList();
+
+                    foreach (Dictionary<string, string> appointmentRow in appointmentData)
+                    {
+                        // Add new appointment
+
+                        string colorName = appointmentRow["color"];
+                        if (colorName == null || colorName == "")
+                        {
+                            colorName = "LightGray";
+                        }
+                        //Debug.WriteLine("-------------------------------------------------------------- " + colorName + " 0000000000000000");
+                        Color backgroundColor = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(colorName);
+
+
+
+                        Appointments.Add(new SchedulerAppointment()
+                        {
+                            Id = int.Parse(appointmentRow["internal_event_id"]),
+                            StartTime = DateTime.Parse(appointmentRow["TimeFrom"]),
+                            EndTime = DateTime.Parse(appointmentRow["TimeTo"]),
+                            Subject = appointmentRow["EventName"],
+                            ResourceIds = new ObservableCollection<object>
+                            {
+                                (object)int.Parse(appointmentRow["user_id"]) // Boxing the integer into an object
+                            },
+                            IsAllDay = bool.Parse(appointmentRow["AllDay"]),
+                            Notes = appointmentRow["DescriptionNotes"],
+                            Background = backgroundColor,
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine(ex.Message + "in kalendarViewModel GetUserEvents");
             }
         }
 

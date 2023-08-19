@@ -18,6 +18,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
 {
 
     private Navigacija navigacija;
+    public string PostavkeUserName { get; set; }
+    public string PostavkeUserID { get; set; }
 
     #region Boje
 
@@ -696,6 +698,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
         SendFeedback = new Command(OnFeedbackClicked);
         #endregion
 
+        PostavkeUserName =  Preferences.Get("UserName", "");
+        PostavkeUserID =  Preferences.Get("UserID", "");
     }
 
 
