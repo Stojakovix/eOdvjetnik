@@ -97,7 +97,6 @@ namespace eOdvjetnik.ViewModel
 
                     }
                     Debug.WriteLine("Dohvatio boje");
-                    ColorsToJSON();
 
                 }
                 catch (Exception ex)
@@ -113,11 +112,6 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-        public void ColorsToJSON()
-        {
-            string colorsJSON = JsonConvert.SerializeObject(CategoryColor);
-            Preferences.Set("colorItems", colorsJSON);
-        }
         #endregion
 
         private void AdminLicenceCheck()
@@ -283,7 +277,7 @@ namespace eOdvjetnik.ViewModel
             catch (Exception ex)
             {
 
-                Debug.WriteLine(ex.Message + "in kalendarViewModel GetAllEvents");
+                Debug.WriteLine("Catch error in kalendarViewModel GetAllEvents(): " + ex.Message);
             }
         }
 

@@ -82,7 +82,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
                     }
 
                 }
-                ColorsToJSON();
+          
 
             }
             catch (Exception ex)
@@ -141,11 +141,6 @@ public class PostavkeViewModel : INotifyPropertyChanged
         }
     }
 
-    public void ColorsToJSON()
-    {
-        string colorsJSON = JsonConvert.SerializeObject(Colors);
-        Preferences.Set("colorItems", colorsJSON);
-    }
 
     #endregion
 
