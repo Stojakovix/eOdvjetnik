@@ -259,7 +259,8 @@ public partial class AppointmentDialog : ContentPage
                 {
 
                     var hardware_id = Preferences.Get("key", "default_value");
-                    string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, color, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}', '{AppoitmentColorName}' , '{hardware_id}')";
+                    //string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, color, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}', '{AppoitmentColorName}' , '{hardware_id}')";
+                    string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, color, hardwareid, user_id) SELECT '2023-08-18 15:56:55.000000', '2023-08-18 15:56:55.000000', 'Subject', 'True', 'Note', '1145425', 'Orange', '6b9dec757ba86264aca18c46ed13990ea85a61f768f109c2299501a162e562fb', employees.id FROM employees WHERE employees.hwid = '6b9dec757ba86264aca18c46ed13990ea85a61f768f109c2299501a162e562fb';";
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine(query);
                     Debug.WriteLine("Appointment added to remote server.");

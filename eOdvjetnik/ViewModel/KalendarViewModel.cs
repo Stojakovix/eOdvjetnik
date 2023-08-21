@@ -258,8 +258,8 @@ namespace eOdvjetnik.ViewModel
                         Resources.Add(new SchedulerResource()
                         {
                             Name = employee.EmployeeName,
-                            Foreground = Colors.Blue,
-                            Background = Colors.Green,
+                            Foreground = Colors.Black,
+                            Background = Colors.LightSkyBlue,
                             Id = employee.Id
                         });
 

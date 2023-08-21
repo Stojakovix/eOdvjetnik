@@ -33,7 +33,6 @@
                     </Grid.RowDefinitions>
 
                     <Button Grid.Column="0" Grid.Row="0" FontSize="Default" FontAttributes="Bold"  Text="{x:Static resx:AppResources.Dodaj}" Command="{Binding OnDodajClick}"  BorderColor="DarkGray" TextColor="Black" BackgroundColor="#5ac8fa" HorizontalOptions="FillAndExpand" Margin="5,2,10,2"/>
-                    <Button Grid.Column="1" Grid.Row="0" FontSize="Default" FontAttributes="Bold" Text="{x:Static resx:AppResources.Obrisi}"  BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" HorizontalOptions="Fill" Margin="5,2,10,2" />
                     <Button Grid.Column="2" Grid.Row="0" FontSize="Default" FontAttributes="Bold" Text="{x:Static resx:AppResources.Ponisti}"  BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black"  HorizontalOptions="EndAndExpand" Command="{Binding OnResetClick}" Margin="5,2,10,2"/>
 
                     <SearchBar Grid.Column="3" Placeholder="{x:Static resx:AppResources.Pretrazi}" 
