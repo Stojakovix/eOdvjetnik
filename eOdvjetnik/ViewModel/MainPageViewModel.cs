@@ -10,13 +10,13 @@ namespace eOdvjetnik.ViewModel
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
-        
 
+        ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
 
         //DateTime
         private Navigacija navigacija;
 
-        
+
         private string LocalCurrentDateTimeString { get; set; }
         public string CurrentDateTimeString
         {
@@ -33,6 +33,21 @@ namespace eOdvjetnik.ViewModel
         #region Varijable za aktivaciju/licencu
         /// Varijable za aktivaciju i licencu
         public string hardwareID = Preferences.Get("key", null);
+        private string LocalUserName;
+        public string UserName
+    {
+            get { return LocalUserName; }
+            set
+            {
+                if (LocalUserName != value)
+                {
+                    LocalUserName = value;
+                    OnPropertyChanged(nameof(UserName));
+                }
+            }
+        }
+        public string UserID { get; set; }
+
         public string Activation_code { get; set; }
         public DateTime ExpireDateDT { get; set; }
         public DateTime CurrentDateDT { get; set; }
@@ -56,7 +71,7 @@ namespace eOdvjetnik.ViewModel
         }
         private bool IsActivationVisible;
         public bool ActivationVisible
-    {
+        {
             get { return IsActivationVisible; }
             set
             {
@@ -90,7 +105,7 @@ namespace eOdvjetnik.ViewModel
             navigacija = new Navigacija();
             Version = $"{AppResources.Version} {AppInfo.VersionString}";
             Activation_code = Preferences.Get("activation_code", "");
-                        ExpireDateString = Preferences.Get("expire_date", "");
+            ExpireDateString = Preferences.Get("expire_date", "");
             LicenceStatus = Preferences.Get("licence_active", "");
             CurrentDateDT = DateTime.Now.Date;
             CompanyName = Preferences.Get("naziv_tvrtke", "");
@@ -109,9 +124,9 @@ namespace eOdvjetnik.ViewModel
                 LicenceCheck();
             }
 
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                Debug.WriteLine("Cannot ParseDate()" + ex.Message );
+                Debug.WriteLine("Cannot ParseDate()" + ex.Message);
 
             }
 
@@ -129,6 +144,7 @@ namespace eOdvjetnik.ViewModel
             {
                 LicenceType = TypeOfLicence;
             }
+            UserNameAndID();
         }
 
         private void RefreshLicenceData(object recipient, CheckLicence message)
@@ -153,7 +169,7 @@ namespace eOdvjetnik.ViewModel
                 LicenceType = TypeOfLicence;
             }
         }
-     
+
 
 
         public void ParseDate()
@@ -237,5 +253,40 @@ namespace eOdvjetnik.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public void UserNameAndID()
+        {
+
+            string query = "SELECT * FROM employees WHERE hwid = '" + hardwareID + "';";
+            Debug.WriteLine(query);
+            try
+            {
+                Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                if (filesData != null && filesData.Length > 0)
+                {
+                    foreach (Dictionary<string, string> filesRow in filesData)
+                    {
+                        int id;
+                        int.TryParse(filesRow["id"], out id);
+                        UserName = filesRow["ime"];
+                        UserID = id.ToString();
+                     }
+                    Preferences.Set("UserName", UserName);
+                    Preferences.Set("UserID", UserID);
+                }
+                else
+                {
+                    UserName = " ";
+                    UserID = " ";
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
     }
 }
+
+

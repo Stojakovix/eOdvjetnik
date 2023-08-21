@@ -18,6 +18,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
 {
 
     private Navigacija navigacija;
+    public string PostavkeUserName { get; set; }
+    public string PostavkeUserID { get; set; }
 
     #region Boje
 
@@ -80,7 +82,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
                     }
 
                 }
-                ColorsToJSON();
+          
 
             }
             catch (Exception ex)
@@ -139,11 +141,6 @@ public class PostavkeViewModel : INotifyPropertyChanged
         }
     }
 
-    public void ColorsToJSON()
-    {
-        string colorsJSON = JsonConvert.SerializeObject(Colors);
-        Preferences.Set("colorItems", colorsJSON);
-    }
 
     #endregion
 
@@ -696,6 +693,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
         SendFeedback = new Command(OnFeedbackClicked);
         #endregion
 
+        PostavkeUserName =  Preferences.Get("UserName", "");
+        PostavkeUserID =  Preferences.Get("UserID", "");
     }
 
 
