@@ -5,15 +5,17 @@ using eOdvjetnik.Services;
 using System.Diagnostics;
 using eOdvjetnik.Model;
 using CommunityToolkit.Mvvm.Messaging;
+using eOdvjetnik.ViewModel;
 
 namespace eOdvjetnik.Views;
 
 public partial class AppointmentDialog : ContentPage
 {
-
+    public static KalendarViewModel kalendarViewModel;
     SchedulerAppointment appointment;
     DateTime selectedDate;
     SfScheduler scheduler;
+
     public string SQLUserID { get; set; }
 
 
@@ -243,7 +245,7 @@ public partial class AppointmentDialog : ContentPage
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(ex.Message + " in KalendarViewModel SaveButtonClicked");
+            Debug.WriteLine(ex.Message + " in AppointmentDialog SaveButtonClicked");
         }
     }
 

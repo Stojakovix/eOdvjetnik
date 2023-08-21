@@ -9,35 +9,43 @@ namespace eOdvjetnik.Views;
 
 public partial class Kalendar : ContentPage
 {
+    public static KalendarViewModel _viewModel;
+
     private void RočišnikMenuItem_Clicked(object sender, EventArgs e)
     {
         Debug.WriteLine("RočišnikMenuItem_Clicked");
 
     }
-    public Kalendar()
+    public Kalendar(KalendarViewModel viewModel)
     {
-        
-        InitializeComponent();
-        Debug.WriteLine("inicijalizirano");
-        _ = new SfScheduler();
-
-        this.Scheduler.DragDropSettings.TimeIndicatorTextFormat = "HH:mm";
-        Scheduler.DaysView.TimeRegions = GetTimeRegion();
-        this.BindingContext = new KalendarViewModel();
-        Scheduler.AppointmentDrop += OnSchedulerAppointmentDrop;
+        try
+        {
+            _viewModel = viewModel;
+            InitializeComponent();
+            Debug.WriteLine("inicijalizirano");
 
 
-        //MySQL Query;
-        var odvjetnik_nas = new ExternalSQLConnect();
-        var hardware_id = Preferences.Get("key", "default_value");
+            this.Scheduler.DragDropSettings.TimeIndicatorTextFormat = "HH:mm";
+            Scheduler.DaysView.TimeRegions = GetTimeRegion();
+            this.BindingContext = viewModel;
+            Scheduler.AppointmentDrop += OnSchedulerAppointmentDrop;
 
-        //Resources -
-        var viewModel = new KalendarViewModel();
-        var Resources = viewModel.Resources;
 
-        // Adding the scheduler resource collection to the schedule resources of SfSchedule.
-        this.Scheduler.ResourceView.Resources = Resources;
+            //MySQL Query;
+            var hardware_id = Preferences.Get("key", "default_value");
 
+            //Resources -
+            var Resources = viewModel.Resources;
+
+            // Adding the scheduler resource collection to the schedule resources of SfSchedule.
+            this.Scheduler.ResourceView.Resources = Resources;
+
+        }
+        catch (Exception ex)
+        {
+
+            Debug.WriteLine(ex.Message);
+        }
 
     }
 

@@ -11,9 +11,9 @@
              
              
              >
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <local:KalendarViewModel x:Name="viewmodel"/>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
 
     <ContentPage.Resources>
         <DataTemplate x:Key="AppointmentTemplate"  >

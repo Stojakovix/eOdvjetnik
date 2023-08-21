@@ -144,6 +144,8 @@ namespace eOdvjetnik.ViewModel
                 Resources = new ObservableCollection<SchedulerResource>();
                 GetColors();
                 AdminLicenceCheck();
+                Debug.WriteLine("---------------------inicijalizirano kalendarViewModel constructor");
+
             }
             catch (Exception ex)
             {
