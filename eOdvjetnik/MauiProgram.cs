@@ -11,7 +11,7 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-
+using eOdvjetnik.ViewModel;
 
 namespace eOdvjetnik;
 public static class MauiProgram
@@ -40,6 +40,7 @@ public static class MauiProgram
         builder.Services.AddTransient<DocsItemPage>();
 
         builder.Services.AddSingleton<Kalendar>();
+        builder.Services.AddSingleton<KalendarViewModel>();
         builder.Services.AddTransient<AppointmentDialog>();
         
 

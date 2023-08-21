@@ -282,7 +282,7 @@ namespace eOdvjetnik.ViewModel
                 DisableMenu();
                 if (disableMenu == false)
                 {
-                    await Shell.Current.GoToAsync("///Kalendar");
+                    await Shell.Current.GoToAsync("//Kalendar");
                     Debug.WriteLine("KLIKNO");
                 }
             }

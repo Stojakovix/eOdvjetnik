@@ -163,6 +163,7 @@ namespace eOdvjetnik.ViewModel
             {
                 fileItems = new ObservableCollection<FileItem>();
                 LoadEmptyRows();
+                Debug.WriteLine("inicijalizirano u spisiViewModel");
             }
             catch (Exception ex)
             {
@@ -173,6 +174,7 @@ namespace eOdvjetnik.ViewModel
             timer.Interval = TimeSpan.FromSeconds(5);
             timer.Tick += (s, e) => CheckCount();
             timer.Start();
+            
         }
 
         //private void OnItemSelected(FileItem selectedItem)
