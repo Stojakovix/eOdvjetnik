@@ -75,20 +75,45 @@
     <Grid>
         <scheduler:SfScheduler x:Name="Scheduler" 
                                FirstDayOfWeek="Monday" 
-                               Tapped="Scheduler_DoubleTapped" 
+                               DoubleTapped="Scheduler_DoubleTapped" 
                                SelectedCellBackground="transparent" 
-                               AllowAppointmentDrag="True" 
+                               AllowAppointmentDrag="False"
                                Grid.Column="0"
                                AppointmentsSource="{Binding Appointments}"
                                TodayHighlightBrush="Red"
                                EnableReminder="True"  
                                SelectedAppointmentBackground="transparent"
-                               AllowedViews="Day,Week,WorkWeek,Month,Agenda,TimelineWorkWeek,TimelineWeek,TimelineMonth"
+                               AllowedViews="Day,Week,WorkWeek,Month,Agenda,TimelineMonth"
                                View="TimelineMonth"
                                >
 
             <scheduler:SfScheduler.ResourceView>
-                <scheduler:SchedulerResourceView Resources="{Binding Resources}" />
+                <scheduler:SchedulerResourceView Resources="{Binding Resources}" >
+                    <scheduler:SchedulerResourceView.HeaderTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="5" Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Fill">
+                                <Border StrokeThickness="5"
+                           Stroke="Blue"
+                           HorizontalOptions="Center"
+                           HeightRequest="{OnIdiom Desktop = 70, Phone = 65}"                                            
+                           WidthRequest="{OnIdiom Desktop= 70, Phone=65}">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="150"/>
+                                    </Border.StrokeShape>
+                                    <Image WidthRequest="{OnIdiom Desktop = 55, Phone = 50}"                                               
+                            HeightRequest="{OnIdiom Desktop = 55, Phone = 50}"
+                            HorizontalOptions="Center"
+                            Source="{Binding DataItem.ImageName,Converter={StaticResource imageConverter}}" 
+                            VerticalOptions="Center"
+                            Aspect="Fill"/>
+                                </Border>
+                                <Label Text="{Binding Name}" TextColor="Black" FontSize="{OnIdiom Desktop= 12, Phone=10}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </scheduler:SchedulerResourceView.HeaderTemplate>
+                </scheduler:SchedulerResourceView>
+                
+            
             </scheduler:SfScheduler.ResourceView>
             
             <scheduler:SfScheduler.BindingContext>
@@ -114,6 +139,7 @@
                 <scheduler:SchedulerMonthView AppointmentTemplate="{StaticResource MonthAppointmentTemplate}">
                 </scheduler:SchedulerMonthView>
             </scheduler:SfScheduler.MonthView>
+            
 
  
 
@@ -123,6 +149,8 @@
                                                  TimeFormat="HH:mm">
                 </scheduler:SchedulerTimelineView>
             </scheduler:SfScheduler.TimelineView>
+
+
         </scheduler:SfScheduler>
         
         <!--Skontat zašto ne radi-->

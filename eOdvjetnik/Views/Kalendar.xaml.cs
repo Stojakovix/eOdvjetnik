@@ -11,23 +11,18 @@ public partial class Kalendar : ContentPage
 {
     public static KalendarViewModel _viewModel;
 
-    private void RočišnikMenuItem_Clicked(object sender, EventArgs e)
-    {
-        Debug.WriteLine("RočišnikMenuItem_Clicked");
-
-    }
-    public Kalendar(KalendarViewModel viewModel)
+    public Kalendar()
     {
         try
         {
-            _viewModel = viewModel;
             InitializeComponent();
+            
             Debug.WriteLine("inicijalizirano");
 
 
             this.Scheduler.DragDropSettings.TimeIndicatorTextFormat = "HH:mm";
             Scheduler.DaysView.TimeRegions = GetTimeRegion();
-            this.BindingContext = viewModel;
+            this.BindingContext = _viewModel;
             Scheduler.AppointmentDrop += OnSchedulerAppointmentDrop;
 
 
@@ -35,10 +30,10 @@ public partial class Kalendar : ContentPage
             var hardware_id = Preferences.Get("key", "default_value");
 
             //Resources -
-            var Resources = viewModel.Resources;
+            //var Resources = viewModel.Resources;
 
             // Adding the scheduler resource collection to the schedule resources of SfSchedule.
-            this.Scheduler.ResourceView.Resources = Resources;
+            //this.Scheduler.ResourceView.Resources = Resources;
 
         }
         catch (Exception ex)
@@ -55,6 +50,7 @@ public partial class Kalendar : ContentPage
         {
             ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
             var appointment = eventArgs.Appointment;
+            
             var droptime = eventArgs.DropTime;
             var timeLength = appointment.EndTime - appointment.StartTime;
             
@@ -62,6 +58,7 @@ public partial class Kalendar : ContentPage
             {
                 appointment.StartTime = eventArgs.DropTime;
                 appointment.EndTime = appointment.StartTime + timeLength;
+                
             }
             
             Debug.WriteLine(appointment.StartTime + " " + appointment.EndTime);
@@ -113,7 +110,7 @@ public partial class Kalendar : ContentPage
         return timeRegions;
     }
 
-    private void Scheduler_DoubleTapped(object sender, SchedulerTappedEventArgs e)
+    private void Scheduler_DoubleTapped(object sender, SchedulerDoubleTappedEventArgs e)
     {
 
         try
@@ -137,15 +134,29 @@ public partial class Kalendar : ContentPage
         }
     }
 
+    //pokušaj da se promjeni border prilikom klika na appointment i nestane nakon klika na neki drugi
+    //private void scheduler_tapped(object sender, schedulertappedeventargs e)
+    //{
+    //    try
+    //    {
+    //        if (e.element == schedulerelement.schedulercell || e.element == schedulerelement.appointment)
+    //        {
+    //            if (e.appointments != null)
+    //            {
+    //                scheduler.selectedappointmentbackground = colors.blue;
+    //            }
+    //            else
+    //            {
+    //                scheduler.selectedappointmentbackground = colors.transparent;
 
-   
+    //            }
+    //        }
+    //    }
+    //    catch (exception ex)
+    //    {
 
-    
-
-   
-
-   
-
-
+    //        debug.writeline(ex.message);
+    //    }
+    //}
 
 }
