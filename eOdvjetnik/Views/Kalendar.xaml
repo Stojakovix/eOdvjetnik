@@ -23,8 +23,8 @@
             </Border>
         </DataTemplate>
 
-        <DataTemplate x:Key="MonthAppointmentTemplate"  >
-            <!--Ne koristit Frame, nema podršku za dynamic data binding, koristi border-->
+        <!--<DataTemplate x:Key="MonthAppointmentTemplate"  >
+            --><!--Ne koristit Frame, nema podršku za dynamic data binding, koristi border--><!--
             <Border Background="{Binding Background}"  StrokeShape="RoundRectangle 5,5,5,5" >
                 <Label Text="{Binding Subject}" TextColor="Black"  HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Bold" LineBreakMode="WordWrap" MaxLines="2"  />
             </Border>
@@ -38,7 +38,7 @@
             <Border Background="{Binding Background}" StrokeShape="RoundRectangle 5,5,5,5">
                 <Label Text="{Binding Subject}" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Bold" LineBreakMode="WordWrap" MaxLines="2" />
             </Border>
-        </DataTemplate>
+        </DataTemplate>-->
         <DataTemplate x:Key="AllDayAppointmentTemplate">
             <Grid Background="{Binding Background}"   Opacity="0.5">
                 <Label Text="{Binding Subject}"   VerticalOptions="Center" TextColor="Black" MaxLines="2" FontSize="Caption" FontAttributes="Bold" HorizontalOptions="Center" />
@@ -91,7 +91,7 @@
                 <scheduler:SchedulerResourceView Resources="{Binding Resources}" >
                     <scheduler:SchedulerResourceView.HeaderTemplate>
                         <DataTemplate>
-                            <StackLayout Padding="5" Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Fill">
+                            <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Fill">
                                 <Border StrokeThickness="5"
                            Stroke="Blue"
                            HorizontalOptions="Center"
@@ -103,7 +103,7 @@
                                     <Image WidthRequest="{OnIdiom Desktop = 55, Phone = 50}"                                               
                             HeightRequest="{OnIdiom Desktop = 55, Phone = 50}"
                             HorizontalOptions="Center"
-                            Source="{Binding DataItem.ImageName,Converter={StaticResource imageConverter}}" 
+                          
                             VerticalOptions="Center"
                             Aspect="Fill"/>
                                 </Border>
@@ -124,7 +124,9 @@
                                              TimeInterval="1:0:0" 
                                              CurrentTimeIndicatorBrush="Red" 
                                              AppointmentTemplate="{StaticResource AppointmentTemplate}" 
-                                             AllDayAppointmentTemplate="{StaticResource AllDayAppointmentTemplate}" >
+                                             AllDayAppointmentTemplate="{StaticResource AllDayAppointmentTemplate}"
+                                             
+                                             >
                     <scheduler:SchedulerDaysView.TimeRegionTemplate>
                         <DataTemplate>
                             <Grid Background="#fafafa"/>
@@ -135,8 +137,8 @@
             </scheduler:SfScheduler.DaysView>
             
 
-            <scheduler:SfScheduler.MonthView>
-                <scheduler:SchedulerMonthView AppointmentTemplate="{StaticResource MonthAppointmentTemplate}">
+            <scheduler:SfScheduler.MonthView >
+                <scheduler:SchedulerMonthView AppointmentTemplate="{StaticResource AppointmentTemplate}" >
                 </scheduler:SchedulerMonthView>
             </scheduler:SfScheduler.MonthView>
             
@@ -145,8 +147,8 @@
 
 
             <scheduler:SfScheduler.TimelineView>
-                <scheduler:SchedulerTimelineView AppointmentTemplate="{StaticResource ResourceViewAppointmentTemplate}"
-                                                 TimeFormat="HH:mm">
+                <scheduler:SchedulerTimelineView AppointmentTemplate="{StaticResource AppointmentTemplate}" 
+                                                TimeFormat="HH:mm">
                 </scheduler:SchedulerTimelineView>
             </scheduler:SfScheduler.TimelineView>
 

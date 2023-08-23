@@ -18,6 +18,19 @@ namespace eOdvjetnik.ViewModel
     {
         private ObservableCollection<SchedulerAppointment> appointments;
 
+        //private bool showBusyIndicator;
+        //private bool AdminTrue { get; set; }
+        //public ICommand QueryAppointmentsCommand { get; set; }
+
+        //public bool ShowBusyIndicator
+        //{
+        //    get { return showBusyIndicator; }
+        //    set
+        //    {
+        //        showBusyIndicator = value;
+        //        this.RaiseOnPropertyChanged(nameof(ShowBusyIndicator));
+        //    }
+        //}
         public ObservableCollection<SchedulerAppointment> Appointments
         {
             get
@@ -144,6 +157,7 @@ namespace eOdvjetnik.ViewModel
                 Resources = new ObservableCollection<SchedulerResource>();
                 GetColors();
                 AdminLicenceCheck();
+                //this.QueryAppointmentsCommand = new Command<Object(LoadMoreAppointments, CanLoadMoreAppointments);
                 Debug.WriteLine("---------------------inicijalizirano kalendarViewModel constructor");
 
             }
@@ -153,6 +167,16 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
+        //private bool CanLoadMoreAppointments(object obj)
+        //{
+        //    return true;
+        //}
+        //private async void LoadMoreAppointments(object obj)
+        //{
+        //    this.ShowBusyIndicator = true;
+        //    await Task.Delay(1500);
+        //    if ()
+        //}
         public void GetEmployees()
         {
             try
@@ -193,9 +217,6 @@ namespace eOdvjetnik.ViewModel
                             Type = type,
                         };
 
-
-
-
                         employeeItem.Add(employee);
                     }
 
@@ -209,7 +230,7 @@ namespace eOdvjetnik.ViewModel
                             Id = employee.Id
                         });
 
-                        Debug.Write(employeeItem);
+                        Debug.Write(employee.EmployeeName + ", ");
                     }
 
 
