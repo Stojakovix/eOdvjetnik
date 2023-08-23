@@ -209,7 +209,7 @@ namespace eOdvjetnik.ViewModel
                             Id = employee.Id
                         });
 
-                        Debug.Write(employeeItem);
+                        Debug.Write(employee.EmployeeName + ", ");
                     }
 
 
