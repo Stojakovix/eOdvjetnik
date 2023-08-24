@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using eOdvjetnik.Services;
 using eOdvjetnik.ViewModel;
 using eOdvjetnik.Models;
+using System.Diagnostics.CodeAnalysis;
 
 namespace eOdvjetnik.Views;
 
@@ -19,7 +20,7 @@ public partial class Kalendar : ContentPage
             
             Debug.WriteLine("inicijalizirano");
 
-
+            
             this.Scheduler.DragDropSettings.TimeIndicatorTextFormat = "HH:mm";
             Scheduler.DaysView.TimeRegions = GetTimeRegion();
             this.BindingContext = _viewModel;
@@ -43,7 +44,7 @@ public partial class Kalendar : ContentPage
         }
 
     }
-
+    
     private void OnSchedulerAppointmentDrop(object? sender, AppointmentDropEventArgs eventArgs)
     {
         try
@@ -75,7 +76,19 @@ public partial class Kalendar : ContentPage
     }
 
 
+    private async void OnSchedulerViewChanged(object sender, SchedulerViewChangedEventArgs e)
+    {
+        try {
 
+            Scheduler.ShowBusyIndicator = true;
+            
+
+        }
+        catch(Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+    }
     private ObservableCollection<SchedulerTimeRegion> GetTimeRegion()
     {
         var startTime = DateTime.UnixEpoch.AddHours(19);
