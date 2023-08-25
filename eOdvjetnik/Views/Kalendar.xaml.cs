@@ -76,7 +76,7 @@ public partial class Kalendar : ContentPage
     }
 
 
-    private async void OnSchedulerViewChanged(object sender, SchedulerViewChangedEventArgs e)
+    private void OnSchedulerViewChanged(object sender, SchedulerViewChangedEventArgs e)
     {
         try {
 
@@ -123,6 +123,21 @@ public partial class Kalendar : ContentPage
         return timeRegions;
     }
 
+    //private void Scheduler_tapped(object sender, SchedulerTappedEventArgs e )
+    //{
+    //    try
+    //    {
+    //        if (e.Element == SchedulerElement.SchedulerCell || e.Element == SchedulerElement.Appointment)
+    //        {
+    //            Debug.WriteLine("------------------" + e.Resource.Id);
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+
+    //        Debug.WriteLine(ex.Message);
+    //    }
+    //}
     private void Scheduler_DoubleTapped(object sender, SchedulerDoubleTappedEventArgs e)
     {
 
@@ -130,13 +145,16 @@ public partial class Kalendar : ContentPage
         {
             if (e.Element == SchedulerElement.SchedulerCell || e.Element == SchedulerElement.Appointment)
             {
+                int resourceId = (int)e.Resource.Id;
+                Debug.WriteLine(resourceId);
                 if (e.Appointments != null)
                 {
-                    Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
+                    Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler, resourceId));
+                    
                 }
                 else
                 {
-                    Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
+                    Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler, resourceId));
                 }
             }
         }

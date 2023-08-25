@@ -76,6 +76,7 @@
         <scheduler:SfScheduler x:Name="Scheduler" 
                                FirstDayOfWeek="Monday" 
                                DoubleTapped="Scheduler_DoubleTapped" 
+                               
                                SelectedCellBackground="transparent" 
                                AllowAppointmentDrag="False"
                                ViewChanged="OnSchedulerViewChanged"

@@ -4,7 +4,6 @@ using eOdvjetnik.Models;
 using eOdvjetnik.Services;
 using System.Diagnostics;
 using eOdvjetnik.Model;
-using CommunityToolkit.Mvvm.Messaging;
 using eOdvjetnik.ViewModel;
 
 namespace eOdvjetnik.Views;
@@ -16,8 +15,12 @@ public partial class AppointmentDialog : ContentPage
     DateTime selectedDate;
     SfScheduler scheduler;
 
+
+
+
     public string SQLUserID { get; set; }
 
+    public int ResourceId { get; set; }
 
     private string _appoitmentColorName;
 
@@ -48,13 +51,16 @@ public partial class AppointmentDialog : ContentPage
         }
     }
     public string DevicePlatform { get; set; }
-    public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler)
+    public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler, int resourceId)
     {
 
         InitializeComponent();
         this.appointment = appointment;
         this.selectedDate = selectedDate;
         this.scheduler = scheduler;
+        ResourceId = resourceId;
+        Debug.WriteLine("Resource id " + resourceId);
+
         eventNameText.Placeholder = "Unesite naziv...";
         organizerText.Placeholder = "Unesite opis...";
 
@@ -66,8 +72,9 @@ public partial class AppointmentDialog : ContentPage
 
         categoryPicker.SelectedIndexChanged += OnCategoryPickerSelectedIndexChanged;
         DevicePlatform = Preferences.Get("vrsta_platforme", "");
-        SQLUserID = Preferences.Get("UserID", "");
 
+        SQLUserID = Preferences.Get("UserID", "");
+        Debug.WriteLine("-------------------------------- " + SQLUserID);
     }
     private void OnCategoryPickerSelectedIndexChanged(object sender, EventArgs e)
     {
@@ -83,7 +90,7 @@ public partial class AppointmentDialog : ContentPage
         try
         {
             ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
-            
+
             if (appointment == null)
             {
                 if (DevicePlatform == "MacCatalyst")
@@ -102,16 +109,16 @@ public partial class AppointmentDialog : ContentPage
             {
                 (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Remove(this.appointment);
                 //var todoItem = new Appointment() { From = appointment.StartTime, To = appointment.EndTime, AllDay = appointment.IsAllDay, DescriptionNotes = appointment.Notes, EventName = appointment.Subject, ID = (int)appointment.Id };
-                if(appointment.Id != null)
+                if (appointment.Id != null)
                 {
-                    
+
                     try
                     {
                         string query = "DELETE FROM events WHERE internal_event_id = " + appointment.Id;
                         Debug.WriteLine("Deleted Appointment " + appointment.Id);
                         externalSQLConnect.sqlQuery(query);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Debug.WriteLine(ex.Message);
                     }
@@ -162,18 +169,18 @@ public partial class AppointmentDialog : ContentPage
     {
         if (DevicePlatform == "MacCatalyst")
         {
-            
+
             Shell.Current.GoToAsync("//LoadingPage");
         }
         else
         {
             Shell.Current.GoToAsync("//Kalendar");
         }
-       
-       
+
+
         Debug.WriteLine("Cancel Clicked");
     }
-   
+
 
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
@@ -184,7 +191,7 @@ public partial class AppointmentDialog : ContentPage
             var endTime = endTime_picker.Time;
             var startTime = startTime_picker.Time;
 
-            if(AppoitmentColorName == null || AppoitmentColorName == "")
+            if (AppoitmentColorName == null || AppoitmentColorName == "")
             {
                 Application.Current.MainPage.DisplayAlert("", "Potrebno je odabrati kategoriju.", "OK");
 
@@ -192,28 +199,28 @@ public partial class AppointmentDialog : ContentPage
             else
             {
                 Debug.WriteLine("Ima kategoriju");
-            if (eventNameText.Text == null || eventNameText.Text == "")
-            {
-                Application.Current.MainPage.DisplayAlert("", "Potrebno je unijeti naziv događaja.", "OK");
-
-            }
-            else
-            {
-
-                if (endDate < startDate)
+                if (eventNameText.Text == null || eventNameText.Text == "")
                 {
-                    Application.Current.MainPage.DisplayAlert("", "End time should be greater than start time", "OK");
+                    Application.Current.MainPage.DisplayAlert("", "Potrebno je unijeti naziv događaja.", "OK");
+
                 }
-                else if (endDate == startDate)
+                else
                 {
-                    if (endTime < startTime)
+
+                    if (endDate < startDate)
                     {
                         Application.Current.MainPage.DisplayAlert("", "End time should be greater than start time", "OK");
                     }
-                    else
+                    else if (endDate == startDate)
                     {
-                        AppointmentDetails();
-                        AddAppointmentToRemoteServer(appointment);
+                        if (endTime < startTime)
+                        {
+                            Application.Current.MainPage.DisplayAlert("", "End time should be greater than start time", "OK");
+                        }
+                        else
+                        {
+                            AppointmentDetails();
+                            AddAppointmentToRemoteServer(appointment);
 
                             if (DevicePlatform == "MacCatalyst")
                             {
@@ -224,13 +231,13 @@ public partial class AppointmentDialog : ContentPage
                                 Shell.Current.GoToAsync("//Kalendar");
                             }
 
-                          
+
                         }
-                }
-                else
-                {
-                    AppointmentDetails();
-                    AddAppointmentToRemoteServer(appointment);
+                    }
+                    else
+                    {
+                        AppointmentDetails();
+                        AddAppointmentToRemoteServer(appointment);
                         if (DevicePlatform == "MacCatalyst")
                         {
                             Shell.Current.GoToAsync("//LoadingPage");
@@ -240,7 +247,7 @@ public partial class AppointmentDialog : ContentPage
                             Shell.Current.GoToAsync("//Kalendar");
                         }
                     }
-            }
+                }
             }
         }
         catch (Exception ex)
@@ -254,11 +261,11 @@ public partial class AppointmentDialog : ContentPage
         try
         {
             ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
-
-            string getIDQuery = $"SELECT * FROM events WHERE internal_event_id = {appointment.Id}";
+            //var appId = Convert.ToInt32(appointment.Id);
+            string getIDQuery = $"SELECT * FROM events WHERE internal_event_id = \"{appointment.Id}\"";
             Debug.WriteLine(getIDQuery);
             Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(getIDQuery);
-            
+
             if (filesData.Length == 0)
             {
                 try
@@ -329,6 +336,11 @@ public partial class AppointmentDialog : ContentPage
             appointment.IsAllDay = this.switchAllDay.IsToggled;
             appointment.Notes = this.organizerText.Text;
             appointment.Background = AppoitmentColor;
+            appointment.ResourceIds = new ObservableCollection<object>
+            {
+                (object)ResourceId // Boxing the integer into an object
+            };
+
 
             if (this.scheduler.AppointmentsSource == null)
             {
@@ -347,21 +359,25 @@ public partial class AppointmentDialog : ContentPage
             appointment.Notes = this.organizerText.Text;
             AppoitmentColorName = appointment.Location;
             appointment.Background = AppoitmentColor;
+            appointment.ResourceIds = new ObservableCollection<object>
+            {
+                (object)ResourceId // Boxing the integer into an object
+            };
 
         }
 
         //// - add or edit the appointment in the database collection
-        var todoItem = new Appointment()
-        {
-            From = appointment.StartTime,
-            To = appointment.EndTime,
-            AllDay = appointment.IsAllDay,
-            DescriptionNotes = appointment.Notes,
-            EventName = appointment.Subject,
-            ID = (int)appointment.Id,
-            CategoryColor = AppoitmentColorName,
+        //var todoItem = new Appointment()
+        //{
+        //    From = appointment.StartTime,
+        //    To = appointment.EndTime,
+        //    AllDay = appointment.IsAllDay,
+        //    DescriptionNotes = appointment.Notes,
+        //    EventName = appointment.Subject,
+        //    ID = (int)appointment.Id,
+        //    CategoryColor = AppoitmentColorName,
 
-        };
+        //};
 
 
 
@@ -384,7 +400,7 @@ public partial class AppointmentDialog : ContentPage
                 if (appointmentColor.ToArgbHex() == colorItem.BojaPozadine.ToArgbHex())
                 {
                     categoryPicker.SelectedIndex = i;
-                    OnCategoryPickerSelectedIndexChanged(categoryPicker, EventArgs.Empty); 
+                    OnCategoryPickerSelectedIndexChanged(categoryPicker, EventArgs.Empty);
                     break;
                 }
             }
@@ -418,5 +434,5 @@ public partial class AppointmentDialog : ContentPage
         }
     }
 
-  
+
 }
