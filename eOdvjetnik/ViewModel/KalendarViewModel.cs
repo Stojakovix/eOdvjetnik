@@ -294,6 +294,14 @@ namespace eOdvjetnik.ViewModel
                             Notes = appointmentRow["DescriptionNotes"],
                             Background = backgroundColor,
                         });
+                        foreach (SchedulerAppointment appointment in Appointments)
+                        {
+                            Debug.WriteLine(appointment.Id + "  " +  appointment.Subject);
+                            foreach(object resourceId in appointment.ResourceIds)
+                            {
+                                Debug.WriteLine("Resource ID: " + resourceId.ToString());
+                            }
+                        }
                     }
                 }
             }
