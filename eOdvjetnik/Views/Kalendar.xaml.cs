@@ -145,16 +145,16 @@ public partial class Kalendar : ContentPage
         {
             if (e.Element == SchedulerElement.SchedulerCell || e.Element == SchedulerElement.Appointment)
             {
-                int resourceId = (int)e.Resource.Id;
-                Debug.WriteLine(resourceId);
+                //int resourceId = (int)e.Resource.Id;
+                //Debug.WriteLine(resourceId);
                 if (e.Appointments != null)
                 {
-                    Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler, resourceId));
+                    Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
                     
                 }
                 else
                 {
-                    Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler, resourceId));
+                    Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
                 }
             }
         }

@@ -40,7 +40,7 @@
                     />
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="1" Text="{x:Static resx:AppResources.Rocisnik}" 
+                    Grid.Column="1" Text="Osobni ročišnik" 
                     Command="{Binding KalendarClickCommand}" 
                     x:Name="KalendarButton" 
                     BackgroundColor="Transparent" 
@@ -48,9 +48,19 @@
                     FontSize="Default"
                     TextColor="White"
                     />
+            
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+           Grid.Column="2" Text="Ročišnik tvrtke" 
+           Command="{Binding AdminKalendarClickCommand}" 
+           x:Name="AdminKalendarButton" 
+           BackgroundColor="Transparent" 
+           BorderWidth="0"
+           FontSize="Default"
+           TextColor="White"
+           />
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="5" Text="{x:Static resx:AppResources.Upisnik}" 
+                    Grid.Column="6" Text="{x:Static resx:AppResources.Upisnik}" 
                     Command="{Binding SpisiClickCommand}" 
                     x:Name="SpisiButton"
                     BackgroundColor="Transparent"
@@ -61,7 +71,7 @@
                     />
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="4" Text="{x:Static resx:AppResources.Tarifa}" 
+                    Grid.Column="5" Text="{x:Static resx:AppResources.Tarifa}" 
                     Command="{Binding NaplataClickCommand}" 
                     x:Name="NaplataButton"
                     BackgroundColor="Transparent"
@@ -71,7 +81,7 @@
                     />
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="2" Text="{x:Static resx:AppResources.Dokumenti}" 
+                    Grid.Column="3" Text="{x:Static resx:AppResources.Dokumenti}" 
                     Command="{Binding DokumentiClickCommand}" 
                     x:Name="DokumentiButton"
                     BackgroundColor="Transparent"
@@ -81,7 +91,7 @@
                     />
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="3" Text="{x:Static resx:AppResources.Kontakti}" 
+                    Grid.Column="4" Text="{x:Static resx:AppResources.Kontakti}" 
                     Command="{Binding KlijentiClickCommand}" 
                     x:Name="KlijentiButton"
                     BackgroundColor="Transparent"
@@ -91,7 +101,7 @@
                     />
 
 
-            <Button Grid.Column="6" 
+            <Button Grid.Column="7" 
                     Text="{x:Static resx:AppResources.KorisnickaPodrska}" 
                     IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
                     BackgroundColor="Transparent" 
@@ -101,7 +111,7 @@
                     TextColor="White"
  />
 
-            <Button Grid.Column="9" 
+            <Button Grid.Column="10" 
                     Text="{x:Static resx:AppResources.Postavke}" 
                     BackgroundColor="Transparent"
                     IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
@@ -161,6 +171,7 @@
 
     <ShellContent Title="{x:Static resx:AppResources.Pocetna}" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" IsVisible="{OnPlatform Android=True , iOS=True , WinUI=True , MacCatalyst=True}"   />
     <ShellContent Title="{x:Static resx:AppResources.Rocisnik}" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" IsVisible="{OnPlatform Android=True , iOS=True , WinUI=True , MacCatalyst=True}"   />
+    <ShellContent Title="Admin Kalendar" ContentTemplate="{DataTemplate views:AdminKalendar}" Route="AdminKalendar" IsVisible="{OnPlatform Android=True , iOS=True , WinUI=True , MacCatalyst=True}"   />
     <ShellContent Title="{x:Static resx:AppResources.Upisnik}" ContentTemplate="{DataTemplate views:Spisi}" Route="Spisi" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
     <ShellContent Title="{x:Static resx:AppResources.Kontakti}" ContentTemplate="{DataTemplate views:Klijenti}" Route="Klijenti" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
     <ShellContent Title="{x:Static resx:AppResources.Tarifa}" ContentTemplate="{DataTemplate views:Naplata}" Route="Naplata" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />

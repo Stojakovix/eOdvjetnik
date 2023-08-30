@@ -85,8 +85,8 @@
                                TodayHighlightBrush="Red"
                                EnableReminder="True"  
                                SelectedAppointmentBackground="transparent"
-                               AllowedViews="Day,Week,WorkWeek,Month,Agenda,TimelineMonth"
-                               View="TimelineMonth"
+                               AllowedViews="Day,Week,WorkWeek,Month,Agenda"
+                               View="Month"
                                >
 
             <scheduler:SfScheduler.ResourceView>

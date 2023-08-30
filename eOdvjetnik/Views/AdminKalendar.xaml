@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eOdvjetnik.Views.AdminKalendar"
+             Title="AdminKalendar"
+             xmlns:models="clr-namespace:eOdvjetnik.Models"
+             xmlns:local="clr-namespace:eOdvjetnik.ViewModel"
+
+>
+    <ContentPage.BindingContext>
+        <local:KalendarViewModel x:Name="viewmodel"/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        
+        
+    <VerticalStackLayout>
+            <HorizontalStackLayout>
+                <Button Text="Prikaz prema korisniku" Command="{Binding AdminViewByName}"  FontSize="Default" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" TextColor="Black" Margin="20,10,10,10" />
+                <Button Text="Prikaz prema datumu" Command="{Binding AdminViewByDate}" FontSize="Default" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Margin="10,10,10,10" />
+            </HorizontalStackLayout>
+
+
+            <ListView ItemsSource="{Binding AdminAppointments}" Margin="20,20,0,0"  >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="400"/>
+
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Column="0" Text="{Binding StartDateString}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Default"  />
+                                <Label Grid.Column="1" Text="{Binding StartTimeString}" VerticalTextAlignment="Center" FontSize="Default" Margin="10,0,10,0"  />
+                                <Label Grid.Column="2" Text="{Binding UserName }" VerticalTextAlignment="Center" FontSize="Default" Margin="10,0,10,0" FontAttributes="Bold" />
+                                <Label Grid.Column="3" Text="{Binding EventType }" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Default" Background="{Binding Type}" Margin="10,0,10,0"  />
+                                <Label Grid.Column="4" Text="{Binding EventName}" VerticalTextAlignment="Center" FontSize="Default" Margin="10,0,10,0" />
+                                <Label Grid.Column="5" Text="{Binding DescriptionNotes}" VerticalTextAlignment="Center" FontSize="Default" Margin="10,0,10,0" />
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+            <ListView IsVisible="{Binding DateSorted}" >
+
+            </ListView>
+        
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

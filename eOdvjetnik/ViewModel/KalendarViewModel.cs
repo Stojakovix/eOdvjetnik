@@ -11,11 +11,29 @@ using System.Drawing;
 using Color = Microsoft.Maui.Graphics.Color;
 using Syncfusion.DocIO.DLS;
 using System.Xml.Linq;
+using Microsoft.Maui.Graphics.Text;
+
 
 namespace eOdvjetnik.ViewModel
 {
     public class KalendarViewModel : INotifyPropertyChanged
     {
+        private ObservableCollection<AdminCalendarItem> adminAppointments;
+        public ObservableCollection<AdminCalendarItem> AdminAppointments
+        {
+            get
+            {
+                return adminAppointments;
+            }
+            set
+            {
+                adminAppointments = value;
+                this.RaiseOnPropertyChanged(nameof(AdminAppointments));
+            }
+        }
+        public ICommand AdminViewByDate { get; set; }
+        public ICommand AdminViewByName { get; set; }
+
         private ObservableCollection<SchedulerAppointment> appointments;
 
         //private bool showBusyIndicator;
@@ -133,19 +151,24 @@ namespace eOdvjetnik.ViewModel
             int numberOfCharacters = 5;
             string adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
             Debug.WriteLine("Kalendar ResourceView - 'Admin' provjera: " + adminCheck);
+
             if (adminCheck == "Admin")
             {
-                GetEmployees();
+                //GetEmployees();
+                GetUserEvents();
             }
             else
             {
                 GetUserEvents();
+                
             }
-          
+
         }
 
         public KalendarViewModel()
         {
+            AdminViewByDate = new Command(GetAdminCalendarEventsByDate);
+            AdminViewByName = new Command(GetAdminCalendarEventsByName);
 
             SQLUserID = Preferences.Get("UserID", "");
 
@@ -155,8 +178,10 @@ namespace eOdvjetnik.ViewModel
                 CategoryColor = new ObservableCollection<ColorItem>();
                 employeeItem = new ObservableCollection<EmployeeItem>();
                 Resources = new ObservableCollection<SchedulerResource>();
+                AdminAppointments = new ObservableCollection<AdminCalendarItem>(); 
                 GetColors();
                 AdminLicenceCheck();
+                GetAdminCalendarEventsByDate();
                 //this.QueryAppointmentsCommand = new Command<Object(LoadMoreAppointments, CanLoadMoreAppointments);
                 Debug.WriteLine("---------------------inicijalizirano kalendarViewModel constructor");
 
@@ -294,14 +319,14 @@ namespace eOdvjetnik.ViewModel
                             Notes = appointmentRow["DescriptionNotes"],
                             Background = backgroundColor,
                         });
-                        foreach (SchedulerAppointment appointment in Appointments)
-                        {
-                            Debug.WriteLine(appointment.Id + "  " +  appointment.Subject);
-                            foreach(object resourceId in appointment.ResourceIds)
-                            {
-                                Debug.WriteLine("Resource ID: " + resourceId.ToString());
-                            }
-                        }
+                       //foreach (SchedulerAppointment appointment in Appointments)
+                       //{
+                       //    Debug.WriteLine(appointment.Id + "  " + appointment.Subject);
+                       //    foreach (object resourceId in appointment.ResourceIds)
+                       //    {
+                       //        Debug.WriteLine("Resource ID: " + resourceId.ToString());
+                       //    }
+                       //}
                     }
                 }
             }
@@ -382,6 +407,125 @@ namespace eOdvjetnik.ViewModel
         /// Invoke method when property changed.
         /// </summary>
         /// <param name="propertyName">property name</param>
+        /// 
+        public void GetAdminCalendarEventsByDate()
+        {
+            if (adminAppointments != null)
+            {
+                adminAppointments.Clear();
+            }
+            string query = "SELECT events.*, employees.ime, event_colors.vrsta_dogadaja FROM events INNER JOIN employees ON events.user_id = employees.id INNER JOIN event_colors ON events.color = event_colors.naziv_boje ORDER BY STR_TO_DATE(events.TimeFrom, '%Y-%m-%d %H:%i:%s') DESC;";
+
+            try
+            {
+
+                Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                Debug.WriteLine(query + " u Admin Kalendaru");
+                if (filesData != null)
+                {
+                    foreach (Dictionary<string, string> filesRow in filesData)
+                    {
+
+                        //int id;
+                        DateTime startTime;
+                        DateTime endTime;
+
+                        //int.TryParse(filesRow["ID"], out id);
+                        DateTime.TryParse(filesRow["TimeFrom"], out startTime);
+                        DateTime.TryParse(filesRow["TimeTo"], out endTime);
+
+                        string colorName = filesRow["color"];
+                        if (colorName == null || colorName == "")
+                        {
+                            colorName = "LightGray";
+                        }
+                        Color backgroundColor = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(colorName);
+
+                        adminAppointments.Add(new AdminCalendarItem()
+                        {
+
+                            StartTime = startTime,
+                            StartDateString = startTime.ToString("d.' 'MMM yyyy"),
+                            StartTimeString = startTime.ToString("HH:mm"),
+                            EndTime = endTime,
+                            EndTimeString = endTime.ToString("f"),
+                            EventName = filesRow["EventName"],
+                            DescriptionNotes = filesRow["DescriptionNotes"],
+                            UserName = filesRow["ime"],
+                            Type = backgroundColor,
+                            EventType = filesRow["vrsta_dogadaja"],
+
+                        });
+
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message + "in viewModel generate files");
+            }
+        }
+
+        public void GetAdminCalendarEventsByName()
+        {
+            if (adminAppointments != null)
+            {
+                adminAppointments.Clear();
+            }
+            string query = "SELECT events.*, employees.ime, event_colors.vrsta_dogadaja FROM events INNER JOIN employees ON events.user_id = employees.id INNER JOIN event_colors ON events.color = event_colors.naziv_boje ORDER BY employees.ime ASC, STR_TO_DATE(events.TimeFrom, '%Y-%m-%d %H:%i:%s') ASC;";
+
+            try
+            {
+
+                Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                Debug.WriteLine(query + " u Admin Kalendaru");
+                if (filesData != null)
+                {
+                    foreach (Dictionary<string, string> filesRow in filesData)
+                    {
+
+                        //int id;
+                        DateTime startTime;
+                        DateTime endTime;
+
+                        //int.TryParse(filesRow["ID"], out id);
+                        DateTime.TryParse(filesRow["TimeFrom"], out startTime);
+                        DateTime.TryParse(filesRow["TimeTo"], out endTime);
+
+                        string colorName = filesRow["color"];
+                        if (colorName == null || colorName == "")
+                        {
+                            colorName = "LightGray";
+                        }
+                        Color backgroundColor = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(colorName);
+
+                        adminAppointments.Add(new AdminCalendarItem()
+                        {
+
+                            StartTime = startTime,
+                            StartDateString = startTime.ToString("d' 'MMM yyyy"),
+                            StartTimeString = startTime.ToString("HH:mm"),
+                            EndTime = endTime,
+                            EndTimeString = endTime.ToString("f"),
+                            EventName = filesRow["EventName"],
+                            DescriptionNotes = filesRow["DescriptionNotes"],
+                            UserName = filesRow["ime"],
+                            Type = backgroundColor,
+                            EventType = filesRow["vrsta_dogadaja"],
+
+                        });
+
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message + "in viewModel generate files");
+            }
+        }
+
         private void RaiseOnPropertyChanged(string propertyName)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
