@@ -5,7 +5,7 @@
        xmlns:views="clr-namespace:eOdvjetnik.Views"
        xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
        xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"  
-       Shell.FlyoutBehavior="{OnPlatform WinUI=Flyout, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
+       Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
        Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True , Android=True, iOS=True}"
        xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
        Shell.PresentationMode="NotAnimated"

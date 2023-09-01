@@ -29,7 +29,12 @@ public static class MauiProgram
             {
                 //fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 //fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                fonts.AddFont("SF - Pro - Display - Bold.otf", "SFUIDisplay-Thin");
+                fonts.AddFont("SF-Pro-Text-Light.otf", "SF-Pro-Text-Light");
+                fonts.AddFont("SFUIDisplay-Ultralight.otf", "SFUIDisplay-Ultralight");
+                fonts.AddFont("SFUIDisplay-Light.otf", "SFUIDisplay-Light");
+                
+
+
 
             });
 

@@ -90,4 +90,18 @@ public partial class Dokumenti : ContentPage
         });
     }
 
+    private void Button_Clicked_home(object sender, EventArgs e)
+    {
+
+    }
+
+    private void Button_Clicked_nazad(object sender, EventArgs e)
+    {
+
+    }
+
+    private void Button_Clicked_otvori(object sender, EventArgs e)
+    {
+
+    }
 }
