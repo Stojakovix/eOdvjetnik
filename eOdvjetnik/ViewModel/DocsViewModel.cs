@@ -34,46 +34,31 @@ namespace eOdvjetnik.ViewModel
         SMBConnect sMBConnect = new SMBConnect();
         public ICommand RefreshButton { get; set; }
 
-        private ObservableCollection<RootShare> rootShares;
+        public ObservableCollection<RootShare> rootShares;
         public ObservableCollection<RootShare> RootShares
         {
             get => rootShares;
-            set
-            {
-                rootShares = value;
-                OnPropertyChanged(nameof(RootShares));
-            }
+            //set
+            //{
+            //    rootShares = value;
+            //    OnPropertyChanged(nameof(RootShares));
+            //}
         }
 
-        private ObservableCollection<DocsItem> items;
+        public ObservableCollection<DocsItem> items;
+
+        
         public ObservableCollection<DocsItem> Items
         {
+
             get => items;
             set
             {
                 items = value;
+                
                 OnPropertyChanged(nameof(Items));
             }
         }
-        private string _textEntry;
-
-        public string TextEntry
-        {
-            get => _textEntry;
-            set
-            {
-                if (_textEntry != value)
-                {
-                    _textEntry = Preferences.Get(FOLDER_nas, "") + "\\" + Preferences.Get(SUBFOLDER_nas, "");
-                    OnPropertyChanged(nameof(TextEntry));
-                }
-            }
-        }
-
-
-
-
-
 
 
         private const string IP = "IP Adresa";
@@ -88,16 +73,18 @@ namespace eOdvjetnik.ViewModel
             
             RefreshButton = new Command(RefreshButtonClick);
             Items = new ObservableCollection<DocsItem>();
-            RootShares = new ObservableCollection<RootShare>();
+            //RootShares = new ObservableCollection<RootShare>();
             ConnectAndFetchDocumentsAsync();
             
 
         }
         public void RefreshButtonClick()
         {
-            RootShares.Clear();
+            
+            //RootShares.Clear();
             ConnectAndFetchDocumentsAsync();
-
+            //Items.Clear();
+            //rootShares.Clear();
 
 
         }
@@ -192,12 +179,16 @@ namespace eOdvjetnik.ViewModel
 
                         };
                         items.Add(fileData);
+                        
 
                     }
                   
 
                 }
-
+                Debug.WriteLine(items.Count());
+                //items.Clear();
+                //Items = new ObservableCollection<DocsItem>();
+                Debug.WriteLine("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
                 foreach (var file1 in shares)
                 {
                     //Debug.WriteLine(file1.Length.ToString());
@@ -210,7 +201,10 @@ namespace eOdvjetnik.ViewModel
                         Name = file1.ToString(),
 
                     };
-                    rootShares.Add(fileData);
+                    //rootShares.Add(fileData);
+                    fileList.Clear();
+                    fileData = null;
+                    
                 }
 
                 //Debug.WriteLine("----------------------------------------------------------------");
@@ -221,7 +215,8 @@ namespace eOdvjetnik.ViewModel
                 //Debug.WriteLine(ex.StackTrace);
 
             }
-
+            //items.Clear();
+            //Items.Clear();
         }
         public async Task OpenFile(string fileName)
         {
@@ -242,6 +237,7 @@ namespace eOdvjetnik.ViewModel
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            
             
 
         }
