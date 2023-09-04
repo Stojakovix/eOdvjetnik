@@ -39,7 +39,6 @@ public partial class Kalendar : ContentPage
         }
         catch (Exception ex)
         {
-
             Debug.WriteLine(ex.Message);
         }
 

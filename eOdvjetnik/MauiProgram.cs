@@ -41,11 +41,12 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>();
 
-        builder.Services.AddSingleton<Dokumenti>();
+        builder.Services.AddTransient<Dokumenti>();
         builder.Services.AddTransient<DocsItemPage>();
+        builder.Services.AddTransient<DocsViewModel>();
 
-        builder.Services.AddSingleton<Kalendar>();
-        builder.Services.AddSingleton<KalendarViewModel>();
+        builder.Services.AddTransient<Kalendar>();
+        builder.Services.AddTransient<KalendarViewModel>();
         builder.Services.AddTransient<AppointmentDialog>();
         
 

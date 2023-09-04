@@ -47,8 +47,9 @@
         <Setter Property="CornerRadius" Value="15"/>
         <Setter Property="Padding" Value="14,10"/>
         <Setter Property="MinimumHeightRequest" Value="25"/>
-        <Setter Property="MinimumWidthRequest" Value="25"/>
-        
+        <Setter Property="MinimumWidthRequest" Value="200"/>
+        <Setter Property="MaximumHeightRequest" Value="35"/>
+
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
@@ -289,8 +290,11 @@
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="SFUIDisplay - Light" />
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="MinimumHeightRequest" Value="44"/>
-        <Setter Property="MinimumWidthRequest" Value="44"/>
+        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray500}}" />
+        <Setter Property="MinimumHeightRequest" Value="35"/>
+        <Setter Property="HeightRequest" Value="40"/>
+        <Setter Property="MinimumWidthRequest" Value="35"/>
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">

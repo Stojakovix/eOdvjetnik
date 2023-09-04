@@ -16,8 +16,20 @@
         
     <VerticalStackLayout>
             <HorizontalStackLayout>
-                <Button Text="Prikaz prema korisniku" Command="{Binding AdminViewByName}"  FontSize="Default" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" TextColor="Black" Margin="20,10,10,10" />
-                <Button Text="Prikaz prema datumu" Command="{Binding AdminViewByDate}" FontSize="Default" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa"  TextColor="Black" Margin="10,10,10,10" />
+
+                <Button HeightRequest="50" Grid.Row="0" HorizontalOptions="Start" WidthRequest="100" Text="Prikaz prema korisniku" Command="{Binding AdminViewByName}" Margin="5,2,10,2">
+                    <Button.ImageSource>
+                        <FileImageSource File="new_window.png" />
+                    </Button.ImageSource>
+
+                </Button>
+                <Button HeightRequest="50" Grid.Row="0" HorizontalOptions="Start" WidthRequest="100" Text="Prikaz prema datumu" Command="{Binding AdminViewByDate}"  Margin="5,2,10,2">
+                    <Button.ImageSource>
+                        <FileImageSource File="new_window.png" />
+                    </Button.ImageSource>
+
+                </Button>
+                
             </HorizontalStackLayout>
 
 

@@ -18,7 +18,7 @@
 
         <HorizontalStackLayout Grid.Row="0" >
             
-            <Button Text="Home" Margin="5,5,5,10" Clicked="Button_Clicked_home">
+            <Button Text="Home" Margin="5,5,5,10" Command="{Binding RefreshButton}">
                 <Button.ImageSource>
                     <FileImageSource File="home.png" />
                 </Button.ImageSource>
@@ -32,7 +32,7 @@
 
             </Button>
 
-            <Entry Margin="5,5,5,10" Text="\Users\user\Spisi" MinimumWidthRequest="400" Placeholder="Enter text here" />
+            <Entry Margin="5,5,5,10" Text="{Binding textEntry}" MinimumWidthRequest="300"  />
             
             <Button Text="Otvori" Margin="5,5,5,10" Clicked="Button_Clicked_otvori">
                 <Button.ImageSource>
