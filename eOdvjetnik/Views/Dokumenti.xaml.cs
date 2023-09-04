@@ -36,8 +36,12 @@ public partial class Dokumenti : ContentPage
         // Do something with the item, such as display it in a message box
         DisplayAlert("Item Tapped", labelText, "OK");
     }
+    protected override void OnDisappearing()
+    {
+        
+    }
 
-    //\Users\user\Spisi
+
     public Dokumenti(DocsDatabase docsdatabase)
     {
         
@@ -48,7 +52,9 @@ public partial class Dokumenti : ContentPage
             InitializeComponent();
             //database = docsdatabase;
             BindingContext = new DocsViewModel();
-          
+            textEntry2.Text = "\\"+ Preferences.Get(FOLDER, "")+"\\"+ Preferences.Get(SUBFOLDER, "");
+
+
         }
         catch (Exception ex)
         {
@@ -65,25 +71,25 @@ public partial class Dokumenti : ContentPage
 
     }
 
-    async void OnItemAdded(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync(nameof(DocsItemPage), true, new Dictionary<string, object>
-
-        {
-            ["Item"] = new DocsItem()
-        });
-    }
-
-    private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (e.CurrentSelection.FirstOrDefault() is not DocsItem item)
-            return;
-        await Shell.Current.GoToAsync(nameof(DocsItemPage), true, new Dictionary<string, object>
-        {
-            ["Item"] = item
-
-        });
-    }
+   // async void OnItemAdded(object sender, EventArgs e)
+   // {
+   //     await Shell.Current.GoToAsync(nameof(DocsItemPage), true, new Dictionary<string, object>
+   //
+   //     {
+   //         ["Item"] = new DocsItem()
+   //     });
+   // }
+    
+   //private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+   //{
+   //    if (e.CurrentSelection.FirstOrDefault() is not DocsItem item)
+   //        return;
+   //    await Shell.Current.GoToAsync(nameof(DocsItemPage), true, new Dictionary<string, object>
+   //    {
+   //        ["Item"] = item
+   //
+   //    });
+   //}
 
     //private async void Button_Clicked_home(object sender, EventArgs e)
     //{

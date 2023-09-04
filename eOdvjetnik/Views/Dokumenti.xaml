@@ -32,7 +32,7 @@
 
             </Button>
 
-            <Entry Margin="5,0,0,0" Text="{Binding textEntry}" MinimumWidthRequest="300"  />
+            <Entry Margin="5,0,0,0" Text="{Binding textEntry}" MinimumWidthRequest="300" x:Name="textEntry2" />
 
             <Button Text="Otvori" Margin="5,0,0,0" Clicked="Button_Clicked_otvori">
                 <Button.ImageSource>
