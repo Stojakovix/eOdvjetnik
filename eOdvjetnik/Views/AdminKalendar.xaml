@@ -17,13 +17,13 @@
     <VerticalStackLayout>
             <HorizontalStackLayout>
 
-                <Button HeightRequest="50" Grid.Row="0" HorizontalOptions="Start" WidthRequest="100" Text="Prikaz prema korisniku" Command="{Binding AdminViewByName}" Margin="5,2,10,2">
+                <Button HeightRequest="50" Grid.Row="0" HorizontalOptions="Start" WidthRequest="200" Text="Prikaz prema korisniku" Command="{Binding AdminViewByName}" Margin="5,2,10,2">
                     <Button.ImageSource>
                         <FileImageSource File="new_window.png" />
                     </Button.ImageSource>
 
                 </Button>
-                <Button HeightRequest="50" Grid.Row="0" HorizontalOptions="Start" WidthRequest="100" Text="Prikaz prema datumu" Command="{Binding AdminViewByDate}"  Margin="5,2,10,2">
+                <Button HeightRequest="50" Grid.Row="0" HorizontalOptions="Start" WidthRequest="200" Text="Prikaz prema datumu" Command="{Binding AdminViewByDate}"  Margin="5,2,10,2">
                     <Button.ImageSource>
                         <FileImageSource File="new_window.png" />
                     </Button.ImageSource>

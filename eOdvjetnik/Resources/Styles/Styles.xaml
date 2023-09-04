@@ -46,10 +46,10 @@
         <Setter Property="FontSize" Value="10"/>
         <Setter Property="CornerRadius" Value="15"/>
         <Setter Property="Padding" Value="14,10"/>
-        <Setter Property="MinimumHeightRequest" Value="25"/>
-        <Setter Property="MinimumWidthRequest" Value="200"/>
+        <Setter Property="MinimumHeightRequest" Value="35"/>
         <Setter Property="MaximumHeightRequest" Value="35"/>
-
+        <Setter Property="MinimumWidthRequest" Value="25"/>
+        <Setter Property="MaximumWidthRequest" Value="200"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">

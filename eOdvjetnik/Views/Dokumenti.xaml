@@ -17,14 +17,14 @@
         </Grid.RowDefinitions>
 
         <HorizontalStackLayout Grid.Row="0" >
-            
-            <Button Text="Home" Margin="5,5,5,10" Command="{Binding RefreshButton}">
+
+            <Button Text="Home" Margin="5,0,0,0" Command="{Binding RefreshButton}">
                 <Button.ImageSource>
                     <FileImageSource File="home.png" />
                 </Button.ImageSource>
                
             </Button>
-            <Button Text="Nazad" Margin="5,5,5,10" Clicked="Button_Clicked_nazad">
+            <Button Text="Nazad" Margin="5,0,0,0" Clicked="Button_Clicked_nazad">
                 <Button.ImageSource>
                     <FileImageSource File="left.png" />
                 </Button.ImageSource>
@@ -32,9 +32,9 @@
 
             </Button>
 
-            <Entry Margin="5,5,5,10" Text="{Binding textEntry}" MinimumWidthRequest="300"  />
-            
-            <Button Text="Otvori" Margin="5,5,5,10" Clicked="Button_Clicked_otvori">
+            <Entry Margin="5,0,0,0" Text="{Binding textEntry}" MinimumWidthRequest="300"  />
+
+            <Button Text="Otvori" Margin="5,0,0,0" Clicked="Button_Clicked_otvori">
                 <Button.ImageSource>
                     <FileImageSource File="new_window.png" />
                 </Button.ImageSource>
