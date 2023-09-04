@@ -7,10 +7,11 @@ namespace eOdvjetnik.Views;
 
 public partial class SpiDok : ContentPage
 {
+	public static SpiDokViewModel viewModel;
 	public SpiDok()
 	{
 		InitializeComponent();
-		this.BindingContext = new SpiDokViewModel();
+		this.BindingContext = viewModel;
 
 	}
 }

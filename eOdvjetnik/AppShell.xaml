@@ -180,6 +180,7 @@
     <ShellContent Title="{x:Static resx:AppResources.KorisnickaPodrska}" ContentTemplate="{DataTemplate sfPopup:SfPopup}" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
     <ShellContent Title="{x:Static resx:AppResources.Postavke}" ContentTemplate="{DataTemplate views:Postavke}" Route="Postavke"  IsVisible="{OnPlatform Android=True , iOS=True , WinUI=True , MacCatalyst=True}"   />
     <ShellContent  ContentTemplate="{DataTemplate views:Zaposlenici}" Route="Zaposlenici" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
+    <ShellContent  ContentTemplate="{DataTemplate views:SpiDok}" Route="SpiDok" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
     <MenuItem Text="Korisnička podrška"  Clicked="OnKorisnickaPodrskaClicked" />
 
 

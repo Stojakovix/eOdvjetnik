@@ -10,11 +10,12 @@ namespace eOdvjetnik.ViewModel
 {
     public class SpisiViewModel : INotifyPropertyChanged
     {
-        private Navigacija navigacija;
+
 
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
 
         public ICommand OnDodajClick { get; set; }
+        public ICommand OnItemClick { get; set; }
 
         private ObservableCollection<FileItem> initialFileItems;
 
@@ -155,9 +156,10 @@ namespace eOdvjetnik.ViewModel
 
         public SpisiViewModel()
         {
-            navigacija = new Navigacija();
+            
             OnResetClick = new Command(ResetListView);
             OnDodajClick = new Command(onDodajCLick);
+            OnItemClick = new Command(ItemClicked);
             // ItemSelected = new Command(OnItemSelected);
             try
             {
@@ -254,6 +256,18 @@ namespace eOdvjetnik.ViewModel
                 }
             }
             );
+        }
+
+        public void ItemClicked()
+        {
+            try
+            {
+                Shell.Current.GoToAsync("///SpiDok");
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message + " in spisiViewModel");
+            }
         }
 
         public void GenerateFiles()
