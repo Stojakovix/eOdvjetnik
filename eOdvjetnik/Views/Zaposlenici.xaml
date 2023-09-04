@@ -39,14 +39,27 @@
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
-            
-                    <Button Text="Natrag" Command="{Binding BackButtonCommand}"
-                       BorderColor="DarkGray" BackgroundColor="LightGray" Margin="20,20,0,10" TextColor="Black" WidthRequest="100" FontSize="Default" HorizontalOptions="Start" />
-                    <Button Text="Spremi" Command="{Binding UpdateHWIDs}"
-                       BorderColor="DarkGray" BackgroundColor="#5ac8fa" Margin="120,20,0,10" TextColor="Black" WidthRequest="100" FontSize="Default" HorizontalOptions="Start" />
-                    <Button Text="Dodaj novog" Command="{Binding OpenNewEmployee}"
-                       BorderColor="DarkGray" BackgroundColor="#5ac8fa" Margin="120,20,0,10" TextColor="Black" WidthRequest="150" FontSize="Default" HorizontalOptions="Start" />
-               
+
+                <Button  WidthRequest="150"  Text="Natrag" Margin="5,0,0,0" Command="{Binding BackButtonCommand}" >
+                    <Button.ImageSource>
+                        <FileImageSource File="home.png" />
+                    </Button.ImageSource>
+                </Button>
+
+                <Button   WidthRequest="150"  Text="Spremi" Margin="5,0,0,0" Command="{Binding UpdateHWIDs}" >
+                    <Button.ImageSource>
+                        <FileImageSource File="home.png" />
+                    </Button.ImageSource>
+                </Button>
+                <Button  WidthRequest="150"  Text="Dodaj novog" Margin="5,0,0,0" Command="{Binding OpenNewEmployee}" >
+                    <Button.ImageSource>
+                        <FileImageSource File="home.png" />
+                    </Button.ImageSource>
+                </Button>
+
+
+
+        
        
             </HorizontalStackLayout>
             

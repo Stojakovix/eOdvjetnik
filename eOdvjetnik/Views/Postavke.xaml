@@ -32,13 +32,44 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button1_Clicked" Text="{x:Static resx:AppResources.UredajLicenca}" FontSize="Default"  />
-                <Button Grid.Column="1" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button4_Clicked" Text="{x:Static resx:AppResources.NAS}"  FontSize="Default"  />
-                <Button Grid.Column="2" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button5_Clicked" Text="{x:Static resx:AppResources.SQL}"  FontSize="Default"  />
-                <Button Grid.Column="3" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button7_Clicked" Text="{x:Static resx:AppResources.Racun}" FontSize="Default" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
-                <Button Grid.Column="4" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Command="{Binding OpenZaposlenici}"  Text="{x:Static resx:AppResources.Zaposlenici}" FontSize="Default"  IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
-                <Button Grid.Column="5" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button2_Clicked" Text="{x:Static resx:AppResources.PovInfo}" FontSize="Default" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
-                <Button Grid.Column="6" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,0,0,20" TextColor="Black" Clicked="Button3_Clicked" Command="{Binding LoadColors}" Text="{x:Static resx:AppResources.KatDog}" FontSize="Default" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" />
+                <Button  Grid.Column="0" Grid.Row="0" WidthRequest="150" Text="{x:Static resx:AppResources.UredajLicenca}" Margin="5,0,0,0" Clicked="Button1_Clicked" ><Button.ImageSource><FileImageSource File="home.png" /></Button.ImageSource></Button>
+
+                <Button  Grid.Column="1" Grid.Row="0" WidthRequest="150" Text="{x:Static resx:AppResources.NAS}" Margin="5,0,0,0" Clicked="Button4_Clicked"  >
+                    <Button.ImageSource>
+                        <FileImageSource File="home.png" />
+                    </Button.ImageSource>
+                </Button>
+
+                <Button  Grid.Column="2" Grid.Row="0" WidthRequest="150"  Text="{x:Static resx:AppResources.SQL}"  Margin="5,0,0,0" Clicked="Button5_Clicked"  >
+                    <Button.ImageSource>
+                        <FileImageSource File="home.png" />
+                    </Button.ImageSource>
+                </Button>
+
+                <Button  Grid.Column="3" Grid.Row="0" WidthRequest="150"  Text="{x:Static resx:AppResources.Racun}"  Margin="5,0,0,0" Clicked="Button7_Clicked"  >
+                    <Button.ImageSource>
+                        <FileImageSource File="home.png" />
+                    </Button.ImageSource>
+                </Button>
+
+                <Button  Grid.Column="4" Grid.Row="0" WidthRequest="150"  Text="{x:Static resx:AppResources.Zaposlenici}" Margin="5,0,0,0" Command="{Binding OpenZaposlenici}"  >
+                    <Button.ImageSource>
+                        <FileImageSource File="home.png" />
+                    </Button.ImageSource>
+                </Button>
+
+                <Button  Grid.Column="5" Grid.Row="0" WidthRequest="150"  Text="{x:Static resx:AppResources.PovInfo}" Margin="5,0,0,0" Clicked="Button2_Clicked" >
+                    <Button.ImageSource>
+                        <FileImageSource File="home.png" />
+                    </Button.ImageSource>
+                </Button>
+
+
+                <Button  Grid.Column="6" Grid.Row="0" WidthRequest="150"  Text="{x:Static resx:AppResources.KatDog}" Margin="5,0,0,0" Command="{Binding LoadColors}" >
+                    <Button.ImageSource>
+                        <FileImageSource File="home.png" />
+                    </Button.ImageSource>
+                </Button>
 
                 <VerticalStackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" Padding="10,10,10,10"  BackgroundColor="White" 
                     x:Name="Frame1" IsVisible="True" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" >
@@ -71,10 +102,14 @@
                         </ScrollView>
                     </Border>
 
-                    <Button Grid.Column="0" Grid.Row="0" BorderColor="DarkGray" BorderWidth="1" BackgroundColor="#5ac8fa" Margin="0,20,0,20" 
-                        TextColor="Black" Text="{x:Static resx:AppResources.Posalji}" FontSize="Default" WidthRequest="120" HorizontalOptions="Center" Command="{Binding SendFeedback}" />
 
+                    <Button   Grid.Column="0" Grid.Row="0" WidthRequest="150"  Text="{x:Static resx:AppResources.Posalji}"  Margin="5,0,0,0" Command="{Binding SendFeedback}"  >
+                        <Button.ImageSource>
+                            <FileImageSource File="home.png" />
+                        </Button.ImageSource>
+                    </Button>
 
+    
 
 
                 </StackLayout>
@@ -113,7 +148,13 @@
                         <Label Text="{x:Static resx:AppResources.Podmapa}" Grid.Row="4" Grid.Column="0" TextColor="Black"  VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                         <Entry x:Name="SUBFOLDER_Entry" Text="{Binding SubFolder}" Grid.Row="4" Grid.Column="1" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center" />
 
-                        <Button Text="{x:Static resx:AppResources.Spremi}" Command="{Binding SaveCommandNAS}" Grid.Row="5" Grid.Column="1" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"  />
+
+                        <Button   WidthRequest="150"  Text="{x:Static resx:AppResources.Spremi}"  Margin="5,0,0,0" Command="{Binding SaveCommandNAS}"  >
+                            <Button.ImageSource>
+                                <FileImageSource File="home.png" />
+                            </Button.ImageSource>
+                        </Button>
+                        
 
                     </Grid>
                 </StackLayout>
@@ -149,7 +190,12 @@
                         <Label Text="{x:Static resx:AppResources.Baza}" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                         <Entry x:Name="DatabaseEntry" Text="{Binding DatabaseName}" Grid.Row="3" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
 
-                        <Button Text="{x:Static resx:AppResources.Spremi}" Command="{Binding SQLSaveCommand}" Grid.Row="5" Grid.Column="1" Margin="0,10,0,10" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"   />
+                        <Button   WidthRequest="150"  Text="{x:Static resx:AppResources.Spremi}"  Margin="5,0,0,0" Command="{Binding SQLSaveCommand}"  >
+                            <Button.ImageSource>
+                                <FileImageSource File="home.png" />
+                            </Button.ImageSource>
+                        </Button>
+
 
                     </Grid>
                 </StackLayout>
@@ -201,14 +247,23 @@
                            HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding ReceiptSignature, Mode=TwoWay}"
                            />
 
-                        <Button Margin="10,20,0,0" Grid.Row="5" Grid.Column="0" Text="{x:Static resx:AppResources.OdabirLogotipa}" VerticalOptions="Start" BorderColor="DarkGray" BackgroundColor="LightGray"
-                            TextColor="Black" FontSize="Default" Clicked="OnLogoImageClicked"/>
+                        <Button Grid.Row="5" Grid.Column="0"  WidthRequest="150"  Text="{x:Static resx:AppResources.OdabirLogotipa}"  Margin="5,0,0,0" Clicked="OnLogoImageClicked"  >
+                            <Button.ImageSource>
+                                <FileImageSource File="home.png" />
+                            </Button.ImageSource>
+                        </Button>
+
+ 
 
                         <Image Margin="0,20,0,0" Grid.Row="5" Grid.Column="1" HeightRequest="100"  x:Name="CompanyLogo"  />
 
 
-                        <Button Margin="0,30,0,0" Grid.Row="6" Grid.Column="0" Text="{x:Static resx:AppResources.Spremi}" BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default" 
-                            HorizontalOptions="Center" MinimumWidthRequest="100" Command="{Binding SaveReceiptCompanyInfo}" />
+                        <Button Grid.Row="6" Grid.Column="0"  WidthRequest="150"  Text="{x:Static resx:AppResources.Spremi}"  Margin="5,0,0,0" Command="{Binding SaveReceiptCompanyInfo}"  >
+                            <Button.ImageSource>
+                                <FileImageSource File="home.png" />
+                            </Button.ImageSource>
+                        </Button>
+
 
 
                     </Grid>
