@@ -5,7 +5,7 @@
        xmlns:views="clr-namespace:eOdvjetnik.Views"
        xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
        xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"  
-       Shell.FlyoutBehavior="{OnPlatform WinUI=Flyout, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
+       Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
        Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True , Android=True, iOS=True}"
        xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
        Shell.PresentationMode="NotAnimated"
@@ -37,8 +37,13 @@
                     TextColor="White"
                     
                     BorderWidth="0"                    
-                    />
+                    >
+                
+                <Button.ImageSource>
+                    <FileImageSource File="new_window.png" />
+                </Button.ImageSource>
 
+            </Button>
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="1" Text="Osobni ročišnik" 
                     Command="{Binding KalendarClickCommand}" 
@@ -171,7 +176,7 @@
 
     <ShellContent Title="{x:Static resx:AppResources.Pocetna}" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" IsVisible="{OnPlatform Android=True , iOS=True , WinUI=True , MacCatalyst=True}"   />
     <ShellContent Title="{x:Static resx:AppResources.Rocisnik}" ContentTemplate="{DataTemplate views:Kalendar}" Route="Kalendar" IsVisible="{OnPlatform Android=True , iOS=True , WinUI=True , MacCatalyst=True}"   />
-    <ShellContent Title="Admin Kalendar" ContentTemplate="{DataTemplate views:AdminKalendar}" Route="AdminKalendar" IsVisible="{OnPlatform Android=True , iOS=True , WinUI=True , MacCatalyst=True}"   />
+    <ShellContent Title="Ročišnik tvrtke" ContentTemplate="{DataTemplate views:AdminKalendar}" Route="AdminKalendar" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
     <ShellContent Title="{x:Static resx:AppResources.Upisnik}" ContentTemplate="{DataTemplate views:Spisi}" Route="Spisi" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
     <ShellContent Title="{x:Static resx:AppResources.Kontakti}" ContentTemplate="{DataTemplate views:Klijenti}" Route="Klijenti" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
     <ShellContent Title="{x:Static resx:AppResources.Tarifa}" ContentTemplate="{DataTemplate views:Naplata}" Route="Naplata" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />

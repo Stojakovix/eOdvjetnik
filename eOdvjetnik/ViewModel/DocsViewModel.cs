@@ -22,8 +22,17 @@ namespace eOdvjetnik.ViewModel
 {
     public class DocsViewModel : INotifyPropertyChanged
     {
-        private Navigacija navigacija;
+
+        //Varijable za SMB preferences
+        private const string IP_nas = "IP Adresa";
+        private const string USER_nas = "Korisničko ime";
+        private const string PASS_nas = "Lozinka";
+        private const string FOLDER_nas = "Folder";
+        private const string SUBFOLDER_nas = "SubFolder";
+
+
         SMBConnect sMBConnect = new SMBConnect();
+        public ICommand RefreshButton { get; set; }
 
         private ObservableCollection<RootShare> rootShares;
         public ObservableCollection<RootShare> RootShares
@@ -46,6 +55,26 @@ namespace eOdvjetnik.ViewModel
                 OnPropertyChanged(nameof(Items));
             }
         }
+        private string _textEntry;
+
+        public string TextEntry
+        {
+            get => _textEntry;
+            set
+            {
+                if (_textEntry != value)
+                {
+                    _textEntry = Preferences.Get(FOLDER_nas, "") + "\\" + Preferences.Get(SUBFOLDER_nas, "");
+                    OnPropertyChanged(nameof(TextEntry));
+                }
+            }
+        }
+
+
+
+
+
+
 
         private const string IP = "IP Adresa";
         private const string USER = "Korisničko ime";
@@ -55,14 +84,23 @@ namespace eOdvjetnik.ViewModel
 
         public DocsViewModel()
         {
-            navigacija = new Navigacija();
+
+            
+            RefreshButton = new Command(RefreshButtonClick);
             Items = new ObservableCollection<DocsItem>();
             RootShares = new ObservableCollection<RootShare>();
             ConnectAndFetchDocumentsAsync();
             
 
         }
+        public void RefreshButtonClick()
+        {
+            RootShares.Clear();
+            ConnectAndFetchDocumentsAsync();
 
+
+
+        }
         public void GetDocuments()
         {
             try
@@ -78,8 +116,12 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                //Ispis svega na putanji
-                List<QueryDirectoryFileInformation> fileList = sMBConnect.ListPath(@"Users");
+
+
+
+
+        //Ispis svega na putanji
+        List<QueryDirectoryFileInformation> fileList = sMBConnect.ListPath(Preferences.Get(SUBFOLDER_nas, ""));
 
                 //Root share list
                 List<string> shares = sMBConnect.getRootShare();
@@ -200,6 +242,8 @@ namespace eOdvjetnik.ViewModel
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            
+
         }
     }
 }

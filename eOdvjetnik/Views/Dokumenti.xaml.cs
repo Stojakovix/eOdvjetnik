@@ -14,16 +14,16 @@ namespace eOdvjetnik.Views;
 
 public partial class Dokumenti : ContentPage
 {
-    DocsDatabase database;
+    //DocsDatabase database;
 
     public ObservableCollection<DocsItem> Items { get; set; } = new();
 
 
-    private const string IP = "IP Adresa";
-    private const string USER = "Korisničko ime";
-    private const string PASS = "Lozinka";
-    private const string FOLDER = "Folder";
-    private const string SUBFOLDER = "SubFolder";
+   public const string IP = "IP Adresa";
+   public const string USER = "Korisničko ime";
+   public const string PASS = "Lozinka";
+   public const string FOLDER = "Folder";
+   public const string SUBFOLDER = "SubFolder";
 
 
     private void OnLabelTapped(object sender, EventArgs e)
@@ -37,15 +37,18 @@ public partial class Dokumenti : ContentPage
         DisplayAlert("Item Tapped", labelText, "OK");
     }
 
-
+    //\Users\user\Spisi
     public Dokumenti(DocsDatabase docsdatabase)
     {
+        
         //INICIRAJ SMB KONEKCIJU DA DOHVATI SVE DOKUMENTE
         try
         {
+
             InitializeComponent();
-            database = docsdatabase;
+            //database = docsdatabase;
             BindingContext = new DocsViewModel();
+          
         }
         catch (Exception ex)
         {
@@ -59,15 +62,7 @@ public partial class Dokumenti : ContentPage
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
-        var items = await database.GetItemsAsync();
-        MainThread.BeginInvokeOnMainThread(() =>
-        {
-            Items.Clear();
-            foreach (var item in items)
-            {
-                Items.Add(item);
-            }
-        });
+
     }
 
     async void OnItemAdded(object sender, EventArgs e)
@@ -90,4 +85,19 @@ public partial class Dokumenti : ContentPage
         });
     }
 
+    //private async void Button_Clicked_home(object sender, EventArgs e)
+    //{
+    //    //await Shell.Current.GoToAsync(new(nameof(Dokumenti)));
+    //    await Shell.Current.GoToAsync("//Dokumenti");
+    //}
+
+    private void Button_Clicked_nazad(object sender, EventArgs e)
+    {
+
+    }
+
+    private void Button_Clicked_otvori(object sender, EventArgs e)
+    {
+
+    }
 }

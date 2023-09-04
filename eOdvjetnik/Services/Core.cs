@@ -80,7 +80,7 @@ namespace eOdvjetnik.Services
             //Debug.WriteLine(status);
             //Debug.WriteLine("6666666666666666666");
 
-            ISMBFileStore fileStore = client.TreeConnect(path, out status);
+            ISMBFileStore fileStore = client.TreeConnect(Preferences.Get(FOLDER_nas, ""), out status);
             if (status == NTStatus.STATUS_SUCCESS)
             {
                 //Debug.WriteLine("7777777777777777777");
@@ -89,7 +89,7 @@ namespace eOdvjetnik.Services
                 object directoryHandle;
                 FileStatus fileStatus;
                 //status = fileStore.CreateFile(out directoryHandle, out fileStatus, String.Empty, AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
-                status = fileStore.CreateFile(out directoryHandle, out fileStatus, @"user\Documents", AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
+                status = fileStore.CreateFile(out directoryHandle, out fileStatus, Preferences.Get(SUBFOLDER_nas, ""), AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
                 //status = fileStore.CreateFile(out directoryHandle, out fileStatus, "*", AccessMask.SYNCHRONIZE | (AccessMask)DirectoryAccessMask.FILE_LIST_DIRECTORY, 0, ShareAccess.Read | ShareAccess.Write | ShareAccess.Delete, CreateDisposition.FILE_OPEN, CreateOptions.FILE_SYNCHRONOUS_IO_NONALERT | CreateOptions.FILE_DIRECTORY_FILE, null);
 
                 if (status == NTStatus.STATUS_SUCCESS)

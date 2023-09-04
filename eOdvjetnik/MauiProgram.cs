@@ -29,18 +29,24 @@ public static class MauiProgram
             {
                 //fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 //fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                fonts.AddFont("SF - Pro - Display - Bold.otf", "SFUIDisplay-Thin");
+                fonts.AddFont("SF-Pro-Text-Light.otf", "SF-Pro-Text-Light");
+                fonts.AddFont("SFUIDisplay-Ultralight.otf", "SFUIDisplay-Ultralight");
+                fonts.AddFont("SFUIDisplay-Light.otf", "SFUIDisplay-Light");
+                
+
+
 
             });
 
         builder
             .UseMauiApp<App>();
 
-        builder.Services.AddSingleton<Dokumenti>();
+        builder.Services.AddTransient<Dokumenti>();
         builder.Services.AddTransient<DocsItemPage>();
+        builder.Services.AddTransient<DocsViewModel>();
 
-        builder.Services.AddSingleton<Kalendar>();
-        builder.Services.AddSingleton<KalendarViewModel>();
+        builder.Services.AddTransient<Kalendar>();
+        builder.Services.AddTransient<KalendarViewModel>();
         builder.Services.AddTransient<AppointmentDialog>();
         builder.Services.AddTransient <SpiDok>();
         builder.Services.AddTransient <SpiDokViewModel>();
