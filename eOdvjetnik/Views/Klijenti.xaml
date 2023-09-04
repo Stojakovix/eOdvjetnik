@@ -68,55 +68,40 @@
             
             <HorizontalStackLayout >
 
-                <Button 
-                BorderColor="DarkGray"
-                BorderWidth="1"
-                BackgroundColor="#5ac8fa"
-                Text="{x:Static resx:AppResources.DodajNaRacun}"
-                FontAttributes="Bold"
-                TextColor="Black"
-                HorizontalOptions="End"
-                Command="{Binding OnReciptClickCommand}" 
-                FontSize="Default"
-                Margin="10,10,10,10"/>
-                <Button 
-                BorderColor="DarkGray"
-                BorderWidth="1"
-                BackgroundColor="#5ac8fa"
-                Text="{x:Static resx:AppResources.DodajNovi}"
-                FontAttributes="Bold"
-                TextColor="Black"
-                HorizontalOptions="End"
-                Command="{Binding OnNoviKlijentClick}" 
-                FontSize="Default"
-                Margin="10,10,10,10"/>
-                <Button 
-                BorderColor="DarkGray"
-                BorderWidth="1"
-                BackgroundColor="#5ac8fa"
-                Text="{x:Static resx:AppResources.NedavnoDodani}"
-                FontAttributes="Bold"
-                TextColor="Black"
-                HorizontalOptions="End"
-                Command="{Binding RefreshContacts}" 
-                FontSize="Default"
-                Margin="10,10,10,10"/>
-                <Button 
-                BorderColor="DarkGray"
-                BorderWidth="1"
-                BackgroundColor="#5ac8fa"
-                Text="{x:Static resx:AppResources.Uredi}"
-                FontAttributes="Bold"
-                TextColor="Black"
-                HorizontalOptions="End"
-                Command="{Binding EditClientButton}" 
-                FontSize="Default"
-                Margin="10,10,10,10"/>
+
+
+                <Button  WidthRequest="150" Text="{x:Static resx:AppResources.DodajNaRacun}" Margin="5,0,0,0" Command="{Binding OnReciptClickCommand}" >
+                    <Button.ImageSource>
+                        <FileImageSource File="home.png" />
+                    </Button.ImageSource>
+
+                </Button>
+
+                <Button WidthRequest="150" Text="{x:Static resx:AppResources.DodajNovi}" Margin="5,0,0,0" Command="{Binding OnNoviKlijentClick}" >
+                    <Button.ImageSource>
+                        <FileImageSource File="home.png" />
+                    </Button.ImageSource>
+
+                </Button>
+
+
+                <Button WidthRequest="150" Text="{x:Static resx:AppResources.NedavnoDodani}" Margin="5,0,0,0" Command="{Binding RefreshContacts}"  >
+                    <Button.ImageSource>
+                        <FileImageSource File="home.png" />
+                    </Button.ImageSource>
+
+                </Button>
+                <Button WidthRequest="150" Text="{x:Static resx:AppResources.Uredi}" Margin="5,0,0,0" HorizontalOptions="End" Command="{Binding EditClientButton}"  >
+                    <Button.ImageSource>
+                        <FileImageSource File="home.png" />
+                    </Button.ImageSource>
+
+                </Button>
+
 
                 <SearchBar  
                    BackgroundColor="LightGray"
-                    Opacity="0.5"
-                    PlaceholderColor="Black"
+                   PlaceholderColor="Black"
                    Placeholder="{x:Static resx:AppResources.PretragaO}"
                    SearchCommand="{Binding SearchCommand}"
                    Text="{Binding SearchText}"

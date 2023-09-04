@@ -37,8 +37,13 @@
                     TextColor="White"
                     
                     BorderWidth="0"                    
-                    />
+                    >
+                
+                <Button.ImageSource>
+                    <FileImageSource File="new_window.png" />
+                </Button.ImageSource>
 
+            </Button>
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="1" Text="Osobni ročišnik" 
                     Command="{Binding KalendarClickCommand}" 
