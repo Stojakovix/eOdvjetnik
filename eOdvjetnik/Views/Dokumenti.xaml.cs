@@ -15,7 +15,7 @@ namespace eOdvjetnik.Views;
 public partial class Dokumenti : ContentPage
 {
     //DocsDatabase database;
-
+    public DocsViewModel viewModel;
     public ObservableCollection<DocsItem> Items { get; set; } = new();
 
 
@@ -51,7 +51,7 @@ public partial class Dokumenti : ContentPage
 
             InitializeComponent();
             //database = docsdatabase;
-            BindingContext = new DocsViewModel();
+            BindingContext = viewModel;
             textEntry2.Text = "\\"+ Preferences.Get(FOLDER, "")+"\\"+ Preferences.Get(SUBFOLDER, "");
 
 
