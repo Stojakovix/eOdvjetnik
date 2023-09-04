@@ -86,7 +86,7 @@
 
             <!-- Scrollable ListView -->
             <ScrollView Grid.Row="1">
-                <ListView ItemsSource="{Binding FileItems}" SelectionMode="Single" SeparatorVisibility="Default" >
+                <ListView ItemsSource="{Binding FileItems}" SelectionMode="Single" SeparatorVisibility="Default" ItemTapped="ListViewItemSelected" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>

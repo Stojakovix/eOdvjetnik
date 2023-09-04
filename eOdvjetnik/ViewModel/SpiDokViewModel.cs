@@ -12,6 +12,7 @@ using eOdvjetnik.Services;
 using System.Windows.Input;
 using System.Reflection;
 
+
 namespace eOdvjetnik.ViewModel
 {
     public class SpiDokViewModel : INotifyPropertyChanged
@@ -43,6 +44,8 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine("inicijalizirano u spidokViewModelu");
                 spiDokItems = new ObservableCollection<SpiDokItem>();
                 GenerateFiles();
+
+
             }
             catch (Exception ex)
             {
@@ -50,10 +53,12 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
+
         public void GenerateFiles()
         {
             try
             {
+
                 spiDokItems.Clear();
                 ListItemId = int.Parse(Preferences.Get("listItemId", ""));
                 Debug.WriteLine(ListItemId);
@@ -84,6 +89,7 @@ namespace eOdvjetnik.ViewModel
                         DateTime.TryParse(filesRow["datum_kreiranja_dokumenta"], out datumKreiranjaDokumenta);
                         DateTime.TryParse(filesRow["datum_izmjene_dokumenta"], out datumIzmjeneDokumenta);
                         #endregion
+                        
                         spiDokItems.Add(new SpiDokItem()
                         {
                             Id = id,
@@ -111,8 +117,10 @@ namespace eOdvjetnik.ViewModel
                             Icon = StringIcon,
                         });
 
+
                         if (SpiDokItems != null)
                         {
+                            //Debug.WriteLine(spiDokItems.ToList());
                             Assembly assembly = typeof(SpiDokViewModel).Assembly;
                             List<string> resourceNames = new List<string>();
                             string resourceNamePrefix = "eOdvjetnik.Resources."; // Replace with your app's actual namespace and "Resources." prefix
@@ -121,7 +129,7 @@ namespace eOdvjetnik.ViewModel
                             resourceNames.AddRange(allResourceNames.Where(name => name.StartsWith(resourceNamePrefix)));
 
 
-                            resourceNames.AddRange(allResourceNames.Where(name => name.StartsWith(resourceNamePrefix)));
+                            //resourceNames.AddRange(allResourceNames.Where(name => name.StartsWith(resourceNamePrefix)));
 
                             StringIcon = "blank.png";
                             //StringIcon = Path.GetExtension(file.FileName).TrimStart('.') + ".png";
@@ -130,22 +138,27 @@ namespace eOdvjetnik.ViewModel
 
                             foreach (var item in spiDokItems)
                             {
-                                if (item.Dokument != null || item.Dokument != "")
+                                if (item.Dokument != null)
                                 {
                                     //Debug.WriteLine(item.Icon + " naziv spidok ikone");
                                     if (imageExists)
                                     {
-                                        StringIcon = Path.GetExtension(item.Dokument);
+                                        StringIcon = Path.GetExtension(item.Dokument).TrimStart('.') + ".png";
+                                        if (item.Icon == null || item.Dokument == null)
+                                        {
+                                            StringIcon = "blank.png";
+                                            Debug.WriteLine("u else ifu " + StringIcon);
+                                        }
                                         //Debug.WriteLine("u ifu " + StringIcon);
-                                        Debug.WriteLine(item.Dokument + item.Kreirao);
+                                        //Debug.WriteLine("u ifu " + item.Dokument);
                                         //Debug.WriteLine(item.Kreirao);
                                     }
 
-                                    else if (item.Icon == "")
-                                    {
-                                        StringIcon = "blank.png";
-                                        Debug.WriteLine("u else ifu " + StringIcon);
-                                    }
+                                    //else if (item.Icon == null)
+                                    //{
+                                    //    StringIcon = "blank.png";
+                                    //    Debug.WriteLine("u else ifu " + StringIcon);
+                                    //}
 
                                     else
                                     {
@@ -153,12 +166,16 @@ namespace eOdvjetnik.ViewModel
                                         Debug.WriteLine("u elseu " + StringIcon);
                                     }
                                 }
+                                else
+                                {
+                                    StringIcon = "blank.png";
+                                    Debug.WriteLine("u elseu " + StringIcon);
+                                }
                             }
-                            
-
-
-
-
+                        }
+                        else
+                        {
+                            Debug.WriteLine("Kolekcija prazna");
                         }
                         //initialFileItems = new ObservableCollection<FileItem>(fileItems);
 
