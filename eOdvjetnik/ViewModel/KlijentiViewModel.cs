@@ -752,4 +752,39 @@ public class KlijentiViewModel : INotifyPropertyChanged
             Debug.WriteLine(ex.Message);
         }
     }
+
+    private ContactItem _selectedItem; //Za SyncfusionListView, za obični je kod u Naplata.xaml.cs
+    public ContactItem SelectedItem
+    {
+        get { return _selectedItem; }
+        set
+        {
+            _selectedItem = value;
+            // Save to preferences
+            try
+            {
+                if (SelectedItem.Ime != null)
+                {
+                    Preferences.Set("SelectedName", SelectedItem.Ime);
+                    Preferences.Set("SelectedOIB", SelectedItem.OIB);
+                    Preferences.Set("SelectedAddress", SelectedItem.Adresa);
+                    Preferences.Set("SelectedRsidence", SelectedItem.Boraviste);
+                    Preferences.Set("SelectedPhone", SelectedItem.Telefon);
+                    Preferences.Set("SelectedFax", SelectedItem.Fax);
+                    Preferences.Set("SelectedMobile", SelectedItem.Mobitel);
+                    Preferences.Set("SelectedEmail", SelectedItem.Email);
+                    Preferences.Set("SelectedOther", SelectedItem.Ostalo);
+                    Preferences.Set("SelectedCountry", SelectedItem.Drzava);
+                    Preferences.Set("SelectedLegalPersonString", SelectedItem.Pravna);
+                    Preferences.Set("SelectedBrithDateString", SelectedItem.Datum_rodenja);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+            }
+            OnPropertyChanged(nameof(SelectedItem));
+        }
+    }
 }

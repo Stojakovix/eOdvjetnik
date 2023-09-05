@@ -421,6 +421,21 @@ namespace eOdvjetnik.ViewModel
             );
         }
 
+        private TariffItem _selectedItem; //Za SyncfusionListView, za obični je kod u Naplata.xaml.cs
+        public TariffItem SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                // Save to preferences
+                Preferences.Set("SelectedNaziv", SelectedItem.name);
+                Preferences.Set("SelectedBodovi", SelectedItem.bodovi);
+                Preferences.Set("SelectedConcatenatedName", SelectedItem.concatenated_name);
+                OnPropertyChanged(nameof(SelectedItem));
+            }
+        }
+
 
     }
 
