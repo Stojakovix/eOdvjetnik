@@ -12,19 +12,7 @@
 
 
     <ContentPage.Resources>
-        <StyleSheet>
-            <![CDATA[
-            ^Button {
-                text-align: left;
-                color: black;
-                position: absolute;
-                background: #5dc1e4;
-                font-size: 15;
-                top: 0;
-  
-            }
-            ]]>
-        </StyleSheet>
+
     </ContentPage.Resources>
 
     <ContentPage.BindingContext>
@@ -119,7 +107,7 @@
 
             <Button Text="Provjeri status licence" Margin="5,0,0,0"  Clicked="OnRefreshLicenceClick">
                 <Button.ImageSource>
-                    <FileImageSource File="home.png" />
+                    <FileImageSource File="refresh.png" />
                 </Button.ImageSource>
 
             </Button>
