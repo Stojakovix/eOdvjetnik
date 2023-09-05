@@ -38,7 +38,7 @@
 
             </HorizontalStackLayout>
 
-            <HorizontalStackLayout>
+            <HorizontalStackLayout Margin="10,10,10,0">
 
                 <Button  WidthRequest="150"  Text="Natrag" Margin="5,0,0,0" Command="{Binding BackButtonCommand}" >
                     <Button.ImageSource>
