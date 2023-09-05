@@ -114,11 +114,15 @@
                         LineBreakMode="WordWrap"
                         TextColor="Black"        
                 />
-            <Button Margin="0,30,0,0" HorizontalOptions="Center" Text="Provjeri status licence" TextColor="Black" FontSize="Default" BorderColor="DarkGray" 
-                    BackgroundColor="#5ac8fa" Clicked="OnRefreshLicenceClick" />
 
 
-         
+
+            <Button Text="Provjeri status licence" Margin="5,0,0,0"  Clicked="OnRefreshLicenceClick">
+                <Button.ImageSource>
+                    <FileImageSource File="home.png" />
+                </Button.ImageSource>
+
+            </Button>
 
         </VerticalStackLayout>
         <StackLayout Grid.Column="4" HorizontalOptions="EndAndExpand" Padding="0,0,10,0">
