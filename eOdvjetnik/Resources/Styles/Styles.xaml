@@ -42,8 +42,8 @@
     <Style TargetType="Button">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}" />
-        <Setter Property="FontFamily" Value="SFUIDisplay - Light"/>
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontFamily" Value="SF-Pro-Display-Black"/>
+        <Setter Property="FontSize" Value="11"/>
         <Setter Property="CornerRadius" Value="15"/>
         <Setter Property="Padding" Value="14,10"/>
         <Setter Property="MinimumHeightRequest" Value="35"/>

@@ -85,7 +85,7 @@
                 </Button>
 
 
-                <Button WidthRequest="150" Text="{x:Static resx:AppResources.NedavnoDodani}" Margin="5,0,0,0" Command="{Binding RefreshContacts}" FontSize="14"  >
+                <Button WidthRequest="150" Text="{x:Static resx:AppResources.NedavnoDodani}" Margin="5,0,0,0" Command="{Binding RefreshContacts}"   >
                     <Button.ImageSource>
                         <FileImageSource File="home.png" />
                     </Button.ImageSource>

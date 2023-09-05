@@ -33,9 +33,9 @@
                     Command="{Binding MainClickCommand}" 
                     x:Name="PočetnaButton"
                     BackgroundColor="Transparent" 
-                    FontSize="Default"
+                    FontFamily="SFUIDisplay - Light"
                     TextColor="White"
-                    
+                    FontSize="Default"
                     BorderWidth="0"                    
                     >
                 
@@ -51,6 +51,7 @@
                     BackgroundColor="Transparent" 
                     BorderWidth="0"
                     FontSize="Default"
+                    FontFamily="SFUIDisplay - Light"
                     TextColor="White"
                     />
             
@@ -61,6 +62,7 @@
            BackgroundColor="Transparent" 
            BorderWidth="0"
            FontSize="Default"
+                    FontFamily="SFUIDisplay - Light"
            TextColor="White"
            />
 
@@ -71,6 +73,7 @@
                     BackgroundColor="Transparent"
                     Margin="10,0" 
                     BorderWidth="0"
+                    FontFamily="SFUIDisplay - Light"
                     FontSize="Default"
                     TextColor="White"
                     />
@@ -81,6 +84,7 @@
                     x:Name="NaplataButton"
                     BackgroundColor="Transparent"
                     BorderWidth="0"
+                    FontFamily="SFUIDisplay - Light"
                     FontSize="Default"
                     TextColor="White"
                     />
@@ -91,6 +95,7 @@
                     x:Name="DokumentiButton"
                     BackgroundColor="Transparent"
                     BorderWidth="0"
+                    FontFamily="SFUIDisplay - Light"
                     FontSize="Default"
                     TextColor="White"
                     />
@@ -101,6 +106,7 @@
                     x:Name="KlijentiButton"
                     BackgroundColor="Transparent"
                     BorderWidth="0"
+                    FontFamily="SFUIDisplay - Light"
                     FontSize="Default"
                     TextColor="White"
                     />
@@ -113,6 +119,7 @@
                     BorderWidth="0" 
                     Command="{Binding OnSupportClickCommand}"
                     FontSize="Default"
+                    FontFamily="SFUIDisplay - Light"
                     TextColor="White"
  />
 
@@ -121,6 +128,7 @@
                     BackgroundColor="Transparent"
                     IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
                     BorderWidth="0"
+                    FontFamily="SFUIDisplay - Light"
                     Command="{Binding PostavkeClickCommand}" 
                     FontSize="Default"
                     TextColor="White"
