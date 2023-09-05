@@ -761,30 +761,37 @@ public class KlijentiViewModel : INotifyPropertyChanged
         {
             _selectedItem = value;
             // Save to preferences
+            SaveSelectedItem();
+
+            OnPropertyChanged(nameof(SelectedItem));
+        }
+    }
+    public void SaveSelectedItem()
+    {
+        if (SelectedItem != null) 
+        { 
             try
             {
-                if (SelectedItem.Ime != null)
-                {
-                    Preferences.Set("SelectedName", SelectedItem.Ime);
-                    Preferences.Set("SelectedOIB", SelectedItem.OIB);
-                    Preferences.Set("SelectedAddress", SelectedItem.Adresa);
-                    Preferences.Set("SelectedRsidence", SelectedItem.Boraviste);
-                    Preferences.Set("SelectedPhone", SelectedItem.Telefon);
-                    Preferences.Set("SelectedFax", SelectedItem.Fax);
-                    Preferences.Set("SelectedMobile", SelectedItem.Mobitel);
-                    Preferences.Set("SelectedEmail", SelectedItem.Email);
-                    Preferences.Set("SelectedOther", SelectedItem.Ostalo);
-                    Preferences.Set("SelectedCountry", SelectedItem.Drzava);
-                    Preferences.Set("SelectedLegalPersonString", SelectedItem.Pravna);
-                    Preferences.Set("SelectedBrithDateString", SelectedItem.Datum_rodenja);
-                }
+                Preferences.Set("SelectedName", SelectedItem.Ime);
+                Preferences.Set("SelectedOIB", SelectedItem.OIB);
+                Preferences.Set("SelectedAddress", SelectedItem.Adresa);
+                Preferences.Set("SelectedRsidence", SelectedItem.Boraviste);
+                Preferences.Set("SelectedPhone", SelectedItem.Telefon);
+                Preferences.Set("SelectedFax", SelectedItem.Fax);
+                Preferences.Set("SelectedMobile", SelectedItem.Mobitel);
+                Preferences.Set("SelectedEmail", SelectedItem.Email);
+                Preferences.Set("SelectedOther", SelectedItem.Ostalo);
+                Preferences.Set("SelectedCountry", SelectedItem.Drzava);
+                Preferences.Set("SelectedLegalPersonString", SelectedItem.Pravna);
+                Preferences.Set("SelectedBrithDateString", SelectedItem.Datum_rodenja);
+                string IDstring = SelectedItem.Id.ToString();
+                Preferences.Set("SelectedID", IDstring);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
 
             }
-            OnPropertyChanged(nameof(SelectedItem));
         }
     }
 }

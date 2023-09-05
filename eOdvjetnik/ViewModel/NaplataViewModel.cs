@@ -38,7 +38,7 @@ namespace eOdvjetnik.ViewModel
                 }
             }
         }
- 
+
         private ICommand searchCommand;
         public ICommand SearchCommand
         {
@@ -209,7 +209,7 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-   
+
 
         private ObservableCollection<ReceiptItem> _receiptItems;
         public ObservableCollection<ReceiptItem> ReceiptItems
@@ -312,8 +312,8 @@ namespace eOdvjetnik.ViewModel
         }
         private async void OnBackClick()
         {
-           await Shell.Current.GoToAsync("//Naplata");
-            
+            await Shell.Current.GoToAsync("//Naplata");
+
         }
 
         private async void OnReceiptClick()
@@ -429,15 +429,29 @@ namespace eOdvjetnik.ViewModel
             {
                 _selectedItem = value;
                 // Save to preferences
-                Preferences.Set("SelectedNaziv", SelectedItem.name);
-                Preferences.Set("SelectedBodovi", SelectedItem.bodovi);
-                Preferences.Set("SelectedConcatenatedName", SelectedItem.concatenated_name);
+                SaveSelectedItem();
                 OnPropertyChanged(nameof(SelectedItem));
             }
         }
 
+        public void SaveSelectedItem()
+        {
+            if (SelectedItem != null)
+            {
+                try
+                {
+                    Preferences.Set("SelectedNaziv", SelectedItem.name);
+                    Preferences.Set("SelectedBodovi", SelectedItem.bodovi);
+                    Preferences.Set("SelectedConcatenatedName", SelectedItem.concatenated_name);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
 
+                }
+            }
+
+        }
     }
-
 
 }
