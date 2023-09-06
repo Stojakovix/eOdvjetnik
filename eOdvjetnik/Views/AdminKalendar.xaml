@@ -5,38 +5,42 @@
              Title="AdminKalendar"
              xmlns:models="clr-namespace:eOdvjetnik.Models"
              xmlns:local="clr-namespace:eOdvjetnik.ViewModel"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             >
 
->
     <ContentPage.BindingContext>
         <local:KalendarViewModel x:Name="viewmodel"/>
     </ContentPage.BindingContext>
 
+
+
     <ScrollView>
-        
-        
-    <VerticalStackLayout>
+        <VerticalStackLayout>
             <HorizontalStackLayout>
 
-                <Button HeightRequest="50" Grid.Row="0" HorizontalOptions="Start" WidthRequest="200" Text="Prikaz prema korisniku" Command="{Binding AdminViewByName}" Margin="5,2,10,2">
+                <Button HeightRequest="50" Grid.Row="0" HorizontalOptions="Start" WidthRequest="200" Text="Prikaz prema korisniku" Command="{Binding AdminViewByName}" Margin="10,10,10,2">
                     <Button.ImageSource>
                         <FileImageSource File="new_window.png" />
                     </Button.ImageSource>
 
                 </Button>
-                <Button HeightRequest="50" Grid.Row="0" HorizontalOptions="Start" WidthRequest="200" Text="Prikaz prema datumu" Command="{Binding AdminViewByDate}"  Margin="5,2,10,2">
+                <Button HeightRequest="50" Grid.Row="0" HorizontalOptions="Start" WidthRequest="200" Text="Prikaz prema datumu" Command="{Binding AdminViewByDate}"  Margin="10,10,10,2">
                     <Button.ImageSource>
                         <FileImageSource File="new_window.png" />
                     </Button.ImageSource>
 
                 </Button>
-                
+
             </HorizontalStackLayout>
 
+      
+            <syncfusion:SfListView x:Name="listView" ItemsSource="{Binding AdminAppointments}" HorizontalOptions="Start" Grid.Row="2" Margin="20,10,0,0"  MinimumHeightRequest="600" MaximumHeightRequest="1200"  >
 
-            <ListView ItemsSource="{Binding AdminAppointments}" Margin="20,20,0,0" WidthRequest="1000" HorizontalOptions="Start" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
+
+                    <syncfusion:SfListView.ItemTemplate>
+
+
+                        <DataTemplate>
                             <Grid Margin="0,0,0,8">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100"/>
@@ -44,27 +48,29 @@
                                     <ColumnDefinition Width="200"/>
                                     <ColumnDefinition Width="150"/>
                                     <ColumnDefinition Width="30"/>
-                                    <ColumnDefinition Width="400"/>
+                                    <ColumnDefinition Width="*"/>
 
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="35"/>
+                                    <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
 
                                 <Label Grid.Column="0" Text="{Binding StartDateString}" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="16"  />
                                 <Label Grid.Column="1" Text="{Binding StartTimeString}" VerticalTextAlignment="Center" FontSize="16" Margin="10,0,10,0"  />
                                 <Label Grid.Column="2" Text="{Binding UserName }" VerticalTextAlignment="Center" FontSize="16" Margin="10,0,10,0" FontAttributes="Bold" />
                                 <Label Grid.Column="3" Text="{Binding EventType }" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Background="{Binding Type}" Margin="20,0,10,0"  />
-                                <Label Grid.Column="5" Text="{Binding EventName}" VerticalTextAlignment="Center" FontSize="16" Margin="10,0,10,0" />
+                                <Label Grid.Column="5" Text="{Binding EventName}" VerticalTextAlignment="Center" FontSize="16" Margin="10,0,10,0" LineBreakMode="NoWrap" />
 
                             </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+                </syncfusion:SfListView>
+   
 
 
-        
-        </VerticalStackLayout>
+
+
+    </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>
