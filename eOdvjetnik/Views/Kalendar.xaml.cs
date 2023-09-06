@@ -145,23 +145,53 @@ public partial class Kalendar : ContentPage
         {
             if (e.Element == SchedulerElement.SchedulerCell || e.Element == SchedulerElement.Appointment)
             {
-                int resourceId = (int)e.Resource.Id;
-                Debug.WriteLine(resourceId);
-                if (e.Appointments != null)
+                if (e.Resource != null)
                 {
-                    Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler, resourceId));
-                    
+                    string resourceId = e.Resource.Id.ToString();
+                    var SQLUserID = Preferences.Get("UserID", "");
+
+                    if (Scheduler.View == SchedulerView.TimelineMonth)
+                    {
+                        Preferences.Set("resourceId", resourceId);
+                        Debug.WriteLine("Izvršen if" + resourceId);
+                    }
+                    else
+                    {
+                        Preferences.Set(SQLUserID, "resourceId");
+                        Debug.WriteLine("Izvršen else" + SQLUserID);
+                    }
+
+                    //Debug.WriteLine(resourceId + "-----------------------------------------------------");
+                    if (e.Appointments != null)
+                    {
+                        Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
+
+                    }
+                    else
+                    {
+                        Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
+                    }
                 }
                 else
                 {
-                    Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler, resourceId));
+
+                    //Debug.WriteLine(resourceId + "-----------------------------------------------------");
+                    if (e.Appointments != null)
+                    {
+                        Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
+
+                    }
+                    else
+                    {
+                        Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
+                    }
                 }
             }
         }
         catch ( Exception ex)
         {
 
-            Debug.WriteLine(ex.Message);
+            Debug.WriteLine(ex.Message + "u scheduler double tappedu");
         }
     }
 

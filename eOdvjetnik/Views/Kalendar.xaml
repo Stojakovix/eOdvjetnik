@@ -78,7 +78,7 @@
                                DoubleTapped="Scheduler_DoubleTapped" 
                                
                                SelectedCellBackground="transparent" 
-                               AllowAppointmentDrag="False"
+                               AllowAppointmentDrag="True"
                                ViewChanged="OnSchedulerViewChanged"
                                Grid.Column="0"
                                AppointmentsSource="{Binding Appointments}"

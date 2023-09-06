@@ -51,30 +51,41 @@ public partial class AppointmentDialog : ContentPage
         }
     }
     public string DevicePlatform { get; set; }
-    public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler, int resourceId)
+    public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler)
     {
+        try
+        {
 
-        InitializeComponent();
-        this.appointment = appointment;
-        this.selectedDate = selectedDate;
-        this.scheduler = scheduler;
-        ResourceId = resourceId;
-        Debug.WriteLine("Resource id " + resourceId);
+            InitializeComponent();
 
-        eventNameText.Placeholder = "Unesite naziv...";
-        organizerText.Placeholder = "Unesite opis...";
 
-        UpdateEditor();
-        //saveButton.Clicked += SaveButton_Clicked;
-        //cancelButton.Clicked += CancelButton_Clicked;
-        switchAllDay.Toggled += SwitchAllDay_Toggled;
-        //DeleteButton.Clicked += DeleteButton_Clicked;
+            this.appointment = appointment;
+            this.selectedDate = selectedDate;
+            this.scheduler = scheduler;
+            string storedResource = Preferences.Get("resourceId", "");
+            Debug.WriteLine("Resource id " + ResourceId);
 
-        categoryPicker.SelectedIndexChanged += OnCategoryPickerSelectedIndexChanged;
-        DevicePlatform = Preferences.Get("vrsta_platforme", "");
+            eventNameText.Placeholder = "Unesite naziv...";
+            organizerText.Placeholder = "Unesite opis...";
 
-        SQLUserID = Preferences.Get("UserID", "");
-        Debug.WriteLine("-------------------------------- " + SQLUserID);
+            UpdateEditor();
+            //saveButton.Clicked += SaveButton_Clicked;
+            //cancelButton.Clicked += CancelButton_Clicked;
+            switchAllDay.Toggled += SwitchAllDay_Toggled;
+            //DeleteButton.Clicked += DeleteButton_Clicked;
+
+            categoryPicker.SelectedIndexChanged += OnCategoryPickerSelectedIndexChanged;
+            DevicePlatform = Preferences.Get("vrsta_platforme", "");
+
+            SQLUserID = Preferences.Get("UserID", "");
+            Debug.WriteLine("-------------------------------- " + SQLUserID);
+        }
+
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message + "U AppointmentDialog konstruktoru");
+            Debug.WriteLine("Resource id " + ResourceId);
+        }
     }
     private void OnCategoryPickerSelectedIndexChanged(object sender, EventArgs e)
     {
