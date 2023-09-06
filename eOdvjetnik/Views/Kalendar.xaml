@@ -7,15 +7,18 @@
              xmlns:local="clr-namespace:eOdvjetnik.ViewModel"
              Title="Kalendar"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
-             xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
-             
-             
-             >
+             xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup">
+    
+    
+    
     <!--<ContentPage.BindingContext>
         <local:KalendarViewModel x:Name="viewmodel"/>
     </ContentPage.BindingContext>-->
 
     <ContentPage.Resources>
+
+
+     
         <DataTemplate x:Key="AppointmentTemplate"  >
             <!--Ne koristit Frame, nema podršku za dynamic data binding, koristi border-->
             <Border Background="{Binding Background}" StrokeShape="RoundRectangle 5,5,5,5" Stroke="Transparent">
@@ -41,9 +44,11 @@
         </DataTemplate>-->
         <DataTemplate x:Key="AllDayAppointmentTemplate">
             <Grid Background="{Binding Background}"   Opacity="0.5">
-                <Label Text="{Binding Subject}"   VerticalOptions="Center" TextColor="Black" MaxLines="2" FontSize="Caption" FontAttributes="Bold" HorizontalOptions="Center" />
+                <Label Text="{Binding Subject}"   VerticalOptions="Center" TextColor="Red" MaxLines="2" FontSize="Caption" FontAttributes="Bold" HorizontalOptions="Center" />
             </Grid>
         </DataTemplate>
+
+
     </ContentPage.Resources>
 
     <!--<scheduler:SfScheduler x:Name="Scheduler" 
@@ -76,7 +81,6 @@
         <scheduler:SfScheduler x:Name="Scheduler" 
                                FirstDayOfWeek="Monday" 
                                DoubleTapped="Scheduler_DoubleTapped" 
-                               
                                SelectedCellBackground="transparent" 
                                AllowAppointmentDrag="False"
                                ViewChanged="OnSchedulerViewChanged"
@@ -102,6 +106,7 @@
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="150"/>
                                     </Border.StrokeShape>
+                                    
                                     <Image WidthRequest="{OnIdiom Desktop = 55, Phone = 50}"                                               
                             HeightRequest="{OnIdiom Desktop = 55, Phone = 50}"
                             HorizontalOptions="Center"
@@ -163,6 +168,9 @@
 
 
 
-</ContentPage>
+
+
+
+    </ContentPage>
     
     
