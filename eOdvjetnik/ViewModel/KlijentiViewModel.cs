@@ -546,51 +546,52 @@ public class KlijentiViewModel : INotifyPropertyChanged
         OnReciptClickCommand = new Command(OpenRecipt);
         RefreshContacts = new Command(GenerateFiles);
         EditClientButton = new Command(EditClient);
+        GenerateFiles();
 
         var timer = Application.Current.Dispatcher.CreateTimer();
         timer.Interval = TimeSpan.FromMilliseconds(200);
         timer.Tick += (s, e) => Refresh();
         timer.Start();
         //EmptyContactRows();
-        FilesCounter = 1;
+        //FilesCounter = 1;
 
     }
 
 
-    public void EmptyContactRows()
-    {
-        FilesCounter++;
-        Contacts = new ObservableCollection<ContactItem>();
+    //public void EmptyContactRows()
+    //{
+    //    FilesCounter++;
+    //    Contacts = new ObservableCollection<ContactItem>();
 
 
-        for (int i = 0; i < 30; i++)
-        {
-            Contacts.Add(new ContactItem
-            {
-                Id = i + 1,
-                Ime = " ",
-                OIB = " ",
-                Datum_rodenja = " ",
-                Adresa = " ",
-                Boraviste = " ",
-                Telefon = " ",
-                Fax = " ",
-                Mobitel = " ",
-                Email = " ",
-                Ostalo = " ",
-                Drzava = " ",
-                Pravna = " "
-            });
-        }
-        DelayGenerateFiles();
-    }
+    //    for (int i = 0; i < 30; i++)
+    //    {
+    //        Contacts.Add(new ContactItem
+    //        {
+    //            Id = i + 1,
+    //            Ime = " ",
+    //            OIB = " ",
+    //            Datum_rodenja = " ",
+    //            Adresa = " ",
+    //            Boraviste = " ",
+    //            Telefon = " ",
+    //            Fax = " ",
+    //            Mobitel = " ",
+    //            Email = " ",
+    //            Ostalo = " ",
+    //            Drzava = " ",
+    //            Pravna = " "
+    //        });
+    //    }
+    //    DelayGenerateFiles();
+    //}
 
-    private async void DelayGenerateFiles()
-    {
-        await Task.Delay(TimeSpan.FromSeconds(1)); // Wait for 2 seconds
+    //private async void DelayGenerateFiles()
+    //{
+    //    await Task.Delay(TimeSpan.FromSeconds(1)); // Wait for 2 seconds
 
-        GenerateFiles();
-    }
+    //    GenerateFiles();
+    //}
 
     public async void OnButtonClick()
     {
@@ -622,10 +623,10 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            if (FilesCounter == 1)
-            {
-                EmptyContactRows();
-            }
+            //if (FilesCounter == 1)
+            //{
+            //    EmptyContactRows();
+            //}
 
             try
             {

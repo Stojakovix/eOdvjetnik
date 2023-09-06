@@ -5,11 +5,18 @@
              xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
+            xmlns:local="clr-namespace:ListViewMaui"
              Title="Datoteka Osoba">
     <ContentPage.BindingContext>
         <viewmodel:KlijentiViewModel/>
     </ContentPage.BindingContext>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:IndexToColorConverter x:Key="IndexToColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -120,27 +127,27 @@
             </HorizontalStackLayout>
 
 
-            <ScrollView Grid.Row="1" Grid.ColumnSpan="5" Margin="20,10,0,0" MinimumHeightRequest="800" MaximumHeightRequest="1200" >
+            <ScrollView Grid.Row="1" Grid.ColumnSpan="5" Margin="0,10,0,0" MinimumHeightRequest="800" MaximumHeightRequest="1200" >
                 <syncfusion:SfListView x:Name="listView" 
-    ItemsSource="{Binding Contacts}" SelectedItem="{Binding SelectedItem}" SelectionMode="Single"  >
+    ItemsSource="{Binding Contacts}" SelectedItem="{Binding SelectedItem}" SelectionMode="Single" IsStickyHeader="True"  >
 
 
                     <syncfusion:SfListView.HeaderTemplate>
                         <DataTemplate>
-                            <Grid >
+                            <Grid  >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="25" />
                                     <RowDefinition Height="Auto" />
 
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="40" />
                                     <ColumnDefinition Width="2*" />
                                     <ColumnDefinition Width="150"  />
                                     <ColumnDefinition Width="3*"  />
                                     <ColumnDefinition Width="*"  />
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="200" />
                                     <ColumnDefinition Width="20" />
                                 </Grid.ColumnDefinitions>
 
@@ -157,29 +164,29 @@
                     <syncfusion:SfListView.ItemTemplate>
 
                         <DataTemplate>
-                            <Grid >
+                            <Grid BackgroundColor="{Binding .,Converter={StaticResource IndexToColorConverter},ConverterParameter={x:Reference Name=listView}}">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="40" />
                                     <ColumnDefinition Width="2*" />
                                     <ColumnDefinition Width="150"  />
                                     <ColumnDefinition Width="3*"  />
                                     <ColumnDefinition Width="*"  />
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="200" />
                                     <ColumnDefinition Width="20" />
                                 </Grid.ColumnDefinitions>
 
 
-                                <Label MinimumWidthRequest="300" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="1" Text="{Binding Ime}" HorizontalOptions="Start"  />
-                                <Label MinimumWidthRequest="150" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="2" Text="{Binding OIB}"  HorizontalOptions="Start" />
-                                <Label MinimumWidthRequest="200" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="3" Text="{Binding Adresa}"  HorizontalOptions="Start" />
-                                <Label MinimumWidthRequest="100" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="4" Text="{Binding Telefon}"  HorizontalOptions="Start" Padding="10,0,0,0" />
-                                <Label MinimumWidthRequest="100" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="5" Text="{Binding Mobitel}"  HorizontalOptions="Start" />
-                                <Label MinimumWidthRequest="200" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="6" Text="{Binding Email}"  HorizontalOptions="Start" />
+                                <Label VerticalOptions="Center" MinimumWidthRequest="300"  LineBreakMode="NoWrap" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="1" Text="{Binding Ime}" HorizontalOptions="Start"  />
+                                <Label VerticalOptions="Center" MinimumWidthRequest="150" LineBreakMode="NoWrap" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="2" Text="{Binding OIB}"  HorizontalOptions="Start" />
+                                <Label VerticalOptions="Center" MinimumWidthRequest="200" LineBreakMode="NoWrap" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="3" Text="{Binding Adresa}"  HorizontalOptions="Start" />
+                                <Label VerticalOptions="Center" MinimumWidthRequest="100" LineBreakMode="NoWrap" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="4" Text="{Binding Telefon}"  HorizontalOptions="Start"  />
+                                <Label VerticalOptions="Center" MinimumWidthRequest="100" LineBreakMode="NoWrap" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="5" Text="{Binding Mobitel}"  HorizontalOptions="Start" />
+                                <Label VerticalOptions="Center" MinimumWidthRequest="200" LineBreakMode="NoWrap" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="6" Text="{Binding Email}"  HorizontalOptions="Start" />
                             </Grid>
                         </DataTemplate>
                     </syncfusion:SfListView.ItemTemplate>
