@@ -112,7 +112,7 @@
             </Button>
 
         </VerticalStackLayout>
-        <StackLayout Grid.Column="4" HorizontalOptions="EndAndExpand" Padding="0,0,10,0">
+        <StackLayout IsVisible="False" Grid.Column="4" HorizontalOptions="EndAndExpand" Padding="0,0,10,0">
             <Label x:Uid="greetingLabel" />
             <Picker x:Name="languagePicker" Title="{x:Static resx:AppResources.OdaberiJezik}" SelectedIndexChanged="OnLanguageSelected">
                 <Picker.Items>
@@ -122,7 +122,7 @@
                 </Picker.Items>
             </Picker>
         </StackLayout>
-        <Label BackgroundColor="#dbdbdb" Grid.Row="1" Grid.ColumnSpan="5" IsVisible="{OnPlatform Android=False, iOS=False}"  />
+        <Label BackgroundColor="#faf9fb" Grid.Row="1" Grid.ColumnSpan="5" IsVisible="{OnPlatform Android=False, iOS=False}"  />
         <Image Source="text_only.png" Margin="5" HeightRequest="20" HorizontalOptions="Start" Grid.Row="1" Grid.Column="0" IsVisible="{OnPlatform Android=False, iOS=False}"  />
         <Label Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding CurrentDateTimeString}"  FontSize="Small" Margin="5" HorizontalOptions="End" Grid.Row="1" Grid.ColumnSpan="5" IsVisible="{OnPlatform Android=False, iOS=False}" />
         <Label Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding Version}" FontSize="Small" Margin="5" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1" 

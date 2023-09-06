@@ -29,16 +29,18 @@
 
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="0" Text="{x:Static resx:AppResources.Pocetna}" 
+                   
                     Command="{Binding MainClickCommand}" 
                     x:Name="PočetnaButton"
-
+                    
                     FontFamily="SFUIDisplay - Light"
                     TextColor="Black"
                     FontSize="18"
                     BorderWidth="0"                    
                     >
-
+                <Button.ImageSource>
+                    <FileImageSource File="home.png" />
+                </Button.ImageSource>
 
             </Button>
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
