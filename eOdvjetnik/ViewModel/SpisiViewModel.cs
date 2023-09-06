@@ -164,7 +164,7 @@ namespace eOdvjetnik.ViewModel
             try
             {
                 fileItems = new ObservableCollection<FileItem>();
-                LoadEmptyRows();
+                //LoadEmptyRows();
                 Debug.WriteLine("inicijalizirano u spisiViewModel");
             }
             catch (Exception ex)
@@ -183,41 +183,41 @@ namespace eOdvjetnik.ViewModel
         //{
 
         //}
-        public void LoadEmptyRows()
-        {
+        //public void LoadEmptyRows()
+        //{
 
-            FileItems = new ObservableCollection<FileItem>();
+        //    FileItems = new ObservableCollection<FileItem>();
 
-            for (int i = 0; i < 30; i++)
-            {
-                FileItems.Add(new FileItem
-                {
-                    Id = i + 1,
-                    BrojSpisa = " ",
-                    Spisicol = " ",
-                    ClientId = null,
-                    OpponentId = null,
-                    InicijaliVoditeljId = null,
-                    InicijaliDodao = " ",
-                    Filescol = " ",
-                    InicijaliDodjeljeno = " ",
-                    Created = null,
-                    AktivnoPasivno = " ",
-                    Referenca = " ",
-                    DatumPromjeneStatusa = null,
-                    Uzrok = " ",
-                    DatumKreiranjaSpisa = null,
-                    DatumIzmjeneSpisa = null,
-                    Kreirao = " ",
-                    ZadnjeUredio = " ",
-                    Jezik = " ",
-                    BrojPredmeta = " ",
-                    ClientName = " ",
-                    OpponentName = " "
-                });
-            }
+        //    for (int i = 0; i < 30; i++)
+        //    {
+        //        FileItems.Add(new FileItem
+        //        {
+        //            Id = i + 1,
+        //            BrojSpisa = " ",
+        //            Spisicol = " ",
+        //            ClientId = null,
+        //            OpponentId = null,
+        //            InicijaliVoditeljId = null,
+        //            InicijaliDodao = " ",
+        //            Filescol = " ",
+        //            InicijaliDodjeljeno = " ",
+        //            Created = null,
+        //            AktivnoPasivno = " ",
+        //            Referenca = " ",
+        //            DatumPromjeneStatusa = null,
+        //            Uzrok = " ",
+        //            DatumKreiranjaSpisa = null,
+        //            DatumIzmjeneSpisa = null,
+        //            Kreirao = " ",
+        //            ZadnjeUredio = " ",
+        //            Jezik = " ",
+        //            BrojPredmeta = " ",
+        //            ClientName = " ",
+        //            OpponentName = " "
+        //        });
+        //    }
 
-        }
+        //}
 
         void CheckCount()
         {
@@ -280,7 +280,7 @@ namespace eOdvjetnik.ViewModel
                 string query = "SELECT files.*, client.ime AS client_name, opponent.ime AS opponent_name FROM files LEFT JOIN contacts AS client ON files.client_id = client.id LEFT JOIN contacts AS opponent ON files.opponent_id = opponent.id ORDER BY files.id DESC LIMIT 20";
 
 
-                // Debug.WriteLine(query + "u SpisiViewModelu");
+                Debug.WriteLine(query + "u SpisiViewModelu");
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
                 if (filesData != null)
                 {
@@ -331,6 +331,10 @@ namespace eOdvjetnik.ViewModel
                             OpponentName = filesRow["opponent_name"]
                         });
                         initialFileItems = new ObservableCollection<FileItem>(fileItems);
+                        foreach(FileItem item in fileItems)
+                        {
+                            Debug.WriteLine(item.BrojSpisa);
+                        }
 
                     }
                     OnPropertyChanged(nameof(fileItems));

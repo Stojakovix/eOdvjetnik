@@ -2,27 +2,50 @@ using eOdvjetnik.ViewModel;
 using eOdvjetnik.Model;
 using Syncfusion.Maui.DataGrid;
 using System.Diagnostics;
+using Syncfusion.Maui.ListView;
 
 namespace eOdvjetnik.Views;
 
 public partial class Spisi : ContentPage
 {
+    public SpisiViewModel viewModel = new SpisiViewModel();
+    private bool isInitialized;
 	public Spisi()
 	{
-		InitializeComponent();
-		this.BindingContext = new SpisiViewModel();
+        InitializeComponent();
+        this.BindingContext = viewModel;
+        isInitialized = false;
 
 	}
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (!isInitialized)
+        {
+            isInitialized = true;
+        }
+        else
+        {
+            viewModel.GenerateFiles();
+        }
+    }
 
-    private async void ListViewItemSelected(object sender, ItemTappedEventArgs e)
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        viewModel.FileItems.Clear();
+
+    }
+
+    private async void ListViewItemTapped(object sender, Syncfusion.Maui.ListView.ItemTappedEventArgs  e)
     {
         try
         {
-
             //var selectedTariffItem = (TariffItem)e.SelectedItem;
-            var selectedFileItem = (FileItem)e.Item;
+            var selectedFileItem = (FileItem)e.DataItem;
             string itemId = selectedFileItem.Id.ToString();
             Preferences.Set("listItemId", itemId);
+            //Debug.WriteLine("Item tapped " + itemId);
             Debug.WriteLine(itemId + " u ListViewItemSelectedu u spisima");
             //await Shell.Current.GoToAsync("//SpiDok");
             await Navigation.PushAsync(new SpiDok());

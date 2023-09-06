@@ -88,7 +88,9 @@
                                AllowedViews="Day,Week,WorkWeek,Month,Agenda,TimelineMonth,TimelineDay"
                                View="Month" AllowViewNavigation="True"
                                >
-
+            
+            
+            
             <scheduler:SfScheduler.ResourceView>
                 <scheduler:SchedulerResourceView Resources="{Binding Resources}" >
                     <scheduler:SchedulerResourceView.HeaderTemplate>

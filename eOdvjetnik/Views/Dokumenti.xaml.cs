@@ -15,7 +15,7 @@ namespace eOdvjetnik.Views;
 public partial class Dokumenti : ContentPage
 {
     //DocsDatabase database;
-    public DocsViewModel viewModel;
+    public DocsViewModel viewModel = new DocsViewModel();
     public ObservableCollection<DocsItem> Items { get; set; } = new();
 
 
