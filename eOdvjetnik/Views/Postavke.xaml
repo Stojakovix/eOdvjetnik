@@ -57,7 +57,7 @@
                 </Button>
 
 
-                <Button  Grid.Column="6" Grid.Row="0"  Text="{x:Static resx:AppResources.KatDog}" Margin="5,0,0,0" Command="{Binding LoadColors}" >
+                <Button  Grid.Column="6" Grid.Row="0"  Text="{x:Static resx:AppResources.KatDog}" Margin="5,0,0,0" Command="{Binding LoadColors}"  Clicked="Button3_Clicked" >
 
                 </Button>
 

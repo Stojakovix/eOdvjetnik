@@ -14,7 +14,7 @@ namespace ListViewMaui
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var listview = parameter as SfListView;
-            return listview.DataSource.DisplayItems.IndexOf(value) % 2 == 0 ? Color.FromArgb("#faf9fb") : Colors.White;
+            return listview.DataSource.DisplayItems.IndexOf(value) % 2 == 0 ? Colors.White :  Color.FromArgb("#faf9fb");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
