@@ -1,4 +1,4 @@
-namespace eOdvjetnik.Views;
+﻿namespace eOdvjetnik.Views;
 using Syncfusion.Maui.Core;
 using System;
 using Syncfusion.DocIO;
@@ -51,30 +51,29 @@ public partial class Naplata : ContentPage
     }
     public double MinWidth { get; set; }
 
-    private async void ListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
-    {
-        if (e.SelectedItem == null)
-            return;
-
-        var selectedTariffItem = (TariffItem)e.SelectedItem;
-
-        await SaveToPreferences(selectedTariffItem.oznaka, selectedTariffItem.bodovi, selectedTariffItem.concatenated_name, selectedTariffItem.parent_name);
-
-        ((ListView)sender).SelectedItem = null;
-    }
-
-
-
-    private Task SaveToPreferences(string oznaka, string bodovi, string concatenatedName, string parent_name)
-    {
- 
-        Preferences.Set("SelectedOznaka", oznaka);
-        Preferences.Set("SelectedBodovi", bodovi);
-        Preferences.Set("SelectedConcatenatedName", concatenatedName);
-        Preferences.Set("SelectedParentName", parent_name);
-
-
-        return Task.CompletedTask;
-    }
+   //private async void ListViewItemSelected(object sender, SelectedItemChangedEventArgs e) //ovo je za obični ListView, za syncfusion je u NaplataViewModel
+   //{
+   //    if (e.SelectedItem == null)
+   //        return;
+   //
+   //    var selectedTariffItem = (TariffItem)e.SelectedItem;
+   //
+   //    await SaveToPreferences(selectedTariffItem.oznaka, selectedTariffItem.bodovi, selectedTariffItem.concatenated_name, selectedTariffItem.parent_name);
+   //
+   //    ((ListView)sender).SelectedItem = null;
+   //}
+   //
+   //
+   //private Task SaveToPreferences(string oznaka, string bodovi, string concatenatedName, string parent_name)
+   //{
+   //
+   //    Preferences.Set("SelectedOznaka", oznaka);
+   //    Preferences.Set("SelectedBodovi", bodovi);
+   //    Preferences.Set("SelectedConcatenatedName", concatenatedName);
+   //    Preferences.Set("SelectedParentName", parent_name);
+   //
+   //
+   //    return Task.CompletedTask;
+   //}
 
 }

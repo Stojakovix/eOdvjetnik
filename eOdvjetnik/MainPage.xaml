@@ -12,19 +12,7 @@
 
 
     <ContentPage.Resources>
-        <StyleSheet>
-            <![CDATA[
-            ^Button {
-                text-align: left;
-                color: black;
-                position: absolute;
-                background: #5dc1e4;
-                font-size: 15;
-                top: 0;
-  
-            }
-            ]]>
-        </StyleSheet>
+
     </ContentPage.Resources>
 
     <ContentPage.BindingContext>
@@ -73,32 +61,18 @@
         <VerticalStackLayout   Grid.ColumnSpan="5"  IsVisible="{Binding ActivationVisible
             }" >
 
-            <Image Source="text_only.png" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
+            <Image Source="text_only.png" HeightRequest="155" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
 
-            <Label Style="{StaticResource ShadowLabelStyle}" 
-                        Text="{x:Static resx:AppResources.AKTIVACIJSKIKOD}" 
-                        VerticalOptions="Center" 
-                        HorizontalOptions="Center"
-                        FontSize="Large"
-                        Margin="0,0,0,20"
-                        TextColor="Black"
-                    />
 
-            <Label Style="{StaticResource ShadowLabelStyle}" 
-                        Text="{Binding Activation_code}"
-                        VerticalOptions="Center" 
-                        HorizontalOptions="Center"
-                        FontSize="Large"
-                        Margin="0,0,0,120"
-                        TextColor="Black"
-                    />
+
+
 
 
             <Label  Style="{StaticResource ShadowLabelStyle}" 
                         Text="{x:Static resx:AppResources.ZaAktivaciju}"
                         HorizontalOptions="Center"
                         FontSize="Small"
-                        Margin="10,0,0,10"
+                        Margin="10,0,0,0"
                         LineBreakMode="WordWrap"
                         TextColor="Black"
                 
@@ -110,15 +84,34 @@
                         Text="{x:Static resx:AppResources.KontaktMain}"
                         HorizontalOptions="Center"
                         FontSize="Small"
-                        Margin="10,0,0,10"
+                        Margin="10,0,0,320"
                         LineBreakMode="WordWrap"
                         TextColor="Black"        
                 />
-            <Button Margin="0,30,0,0" HorizontalOptions="Center" Text="Provjeri status licence" TextColor="Black" FontSize="Default" BorderColor="DarkGray" 
-                    BackgroundColor="#5ac8fa" Clicked="OnRefreshLicenceClick" />
 
 
-         
+            <Label Style="{StaticResource ShadowLabelStyle}" 
+                        Text="{x:Static resx:AppResources.AKTIVACIJSKIKOD}" 
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center"
+                        FontSize="Large"
+                        Margin="0,0,0,10"
+                        TextColor="Black"
+                    />
+            <Label Style="{StaticResource ShadowLabelStyle}" 
+                        Text="{Binding Activation_code}"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center"
+                        FontSize="Large"
+                        Margin="0,0,0,10"
+                        TextColor="Black"
+                    />
+            <Button Text="Provjeri status licence" Margin="5,0,0,0"  Clicked="OnRefreshLicenceClick">
+                <Button.ImageSource>
+                    <FileImageSource File="refresh.png" />
+                </Button.ImageSource>
+
+            </Button>
 
         </VerticalStackLayout>
         <StackLayout Grid.Column="4" HorizontalOptions="EndAndExpand" Padding="0,0,10,0">

@@ -24,8 +24,8 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">29.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
-		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<Configurations>Release;Debug</Configurations>
 		<UseMauiEssentials>true</UseMauiEssentials>
@@ -114,11 +114,6 @@
 	  <MauiXaml Remove="NewFolder1\**" />
 	  <None Remove="NewFolder1\**" />
 	  <Compile Remove="Services\SaveAndroid.cs" />
-	  <MauiImage Remove="Resources\Images\down.png" />
-	  <MauiImage Remove="Resources\Images\home.png" />
-	  <MauiImage Remove="Resources\Images\left.png" />
-	  <MauiImage Remove="Resources\Images\new_window.png" />
-	  <MauiImage Remove="Resources\Images\play.png" />
 	  <Resource Remove="Resources\Images\aac.png" />
 	  <Resource Remove="Resources\Images\ai.png" />
 	  <Resource Remove="Resources\Images\aiff.png" />
@@ -398,6 +393,7 @@
 	  <None Remove="Resources\Images\left.png" />
 	  <None Remove="Resources\Images\new_window.png" />
 	  <None Remove="Resources\Images\play.png" />
+	  <None Remove="Resources\Images\refresh.png" />
 
 	</ItemGroup>
 
@@ -410,11 +406,11 @@
 		<PackageReference Include="SMBLibrary" Version="1.5.0.1" />
 		<PackageReference Include="SQLite" Version="3.13.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
-		<PackageReference Include="Syncfusion.DocIO.NET" Version="22.2.11" />
-		<PackageReference Include="Syncfusion.Licensing" Version="22.2.11" />
-		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="22.2.11" />
-		<PackageReference Include="Syncfusion.Maui.Popup" Version="22.2.11" />
-		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="22.2.11" />
+		<PackageReference Include="Syncfusion.DocIO.NET" Version="22.2.12" />
+		<PackageReference Include="Syncfusion.Licensing" Version="22.2.12" />
+		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="22.2.12" />
+		<PackageReference Include="Syncfusion.Maui.Popup" Version="22.2.12" />
+		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="22.2.12" />
 		<PackageReference Include="MySql.Data" Version="8.1.0" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
 
@@ -938,84 +934,6 @@
 	  <EmbeddedResource Include="Resources\Icons\youtube.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </EmbeddedResource>
-
-	  <EmbeddedResource Include="Resources\Images\aac.png" />
-	  <EmbeddedResource Include="Resources\Images\ai.png" />
-	  <EmbeddedResource Include="Resources\Images\aiff.png" />
-	  <EmbeddedResource Include="Resources\Images\avi.png" />
-	  <EmbeddedResource Include="Resources\Images\blank.png" />
-	  <EmbeddedResource Include="Resources\Images\bmp.png" />
-	  <EmbeddedResource Include="Resources\Images\cpp.png" />
-	  <EmbeddedResource Include="Resources\Images\css.png" />
-	  <EmbeddedResource Include="Resources\Images\csv.png" />
-	  <EmbeddedResource Include="Resources\Images\dat.png" />
-	  <EmbeddedResource Include="Resources\Images\dmg.png" />
-	  <EmbeddedResource Include="Resources\Images\doc.png" />
-	  <EmbeddedResource Include="Resources\Images\docx.png" />
-	  <EmbeddedResource Include="Resources\Images\dotx.png" />
-	  <EmbeddedResource Include="Resources\Images\down.png" />
-	  <EmbeddedResource Include="Resources\Images\dwg.png" />
-	  <EmbeddedResource Include="Resources\Images\home.png" />
-	  <EmbeddedResource Include="Resources\Images\left.png" />
-	  <EmbeddedResource Include="Resources\Images\new_window.png" />
-	  <EmbeddedResource Include="Resources\Images\play.png" />
-    <EmbeddedResource Include="Resources\Images\zoom.png" />
-	  <EmbeddedResource Include="Resources\Images\dxf.png" />
-	  <EmbeddedResource Include="Resources\Images\edit.svg" />
-	  <EmbeddedResource Include="Resources\Images\eps.png" />
-	  <EmbeddedResource Include="Resources\Images\exe.png" />
-	  <EmbeddedResource Include="Resources\Images\e_odvjetnik.svg" />
-	  <EmbeddedResource Include="Resources\Images\flv.png" />
-	  <EmbeddedResource Include="Resources\Images\folder_1484.png" />
-	  <EmbeddedResource Include="Resources\Images\gif.png" />
-	  <EmbeddedResource Include="Resources\Images\hpp.png" />
-	  <EmbeddedResource Include="Resources\Images\html.png" />
-	  <EmbeddedResource Include="Resources\Images\ics.png" />
-	  <EmbeddedResource Include="Resources\Images\iso.png" />
-	  <EmbeddedResource Include="Resources\Images\java.png" />
-	  <EmbeddedResource Include="Resources\Images\jpg.png" />
-	  <EmbeddedResource Include="Resources\Images\js.png" />
-	  <EmbeddedResource Include="Resources\Images\key.png" />
-	  <EmbeddedResource Include="Resources\Images\less.png" />
-	  <EmbeddedResource Include="Resources\Images\logoimg.svg" />
-	  <EmbeddedResource Include="Resources\Images\logotext.svg" />
-	  <EmbeddedResource Include="Resources\Images\main_pozadina.jpg" />
-	  <EmbeddedResource Include="Resources\Images\main_pozadina.png" />
-	  <EmbeddedResource Include="Resources\Images\mid.png" />
-	  <EmbeddedResource Include="Resources\Images\mp3.png" />
-	  <EmbeddedResource Include="Resources\Images\mp4.png" />
-	  <EmbeddedResource Include="Resources\Images\mpg.png" />
-	  <EmbeddedResource Include="Resources\Images\odf.png" />
-	  <EmbeddedResource Include="Resources\Images\ods.png" />
-	  <EmbeddedResource Include="Resources\Images\odt.png" />
-	  <EmbeddedResource Include="Resources\Images\otp.png" />
-	  <EmbeddedResource Include="Resources\Images\ots.png" />
-	  <EmbeddedResource Include="Resources\Images\ott.png" />
-	  <EmbeddedResource Include="Resources\Images\page.png" />
-	  <EmbeddedResource Include="Resources\Images\pdf.png" />
-	  <EmbeddedResource Include="Resources\Images\php.png" />
-	  <EmbeddedResource Include="Resources\Images\png.png" />
-	  <EmbeddedResource Include="Resources\Images\ppt.png" />
-	  <EmbeddedResource Include="Resources\Images\psd.png" />
-	  <EmbeddedResource Include="Resources\Images\py.png" />
-	  <EmbeddedResource Include="Resources\Images\qt.png" />
-	  <EmbeddedResource Include="Resources\Images\rar.png" />
-	  <EmbeddedResource Include="Resources\Images\rb.png" />
-	  <EmbeddedResource Include="Resources\Images\rtf.png" />
-	  <EmbeddedResource Include="Resources\Images\sass.png" />
-	  <EmbeddedResource Include="Resources\Images\scss.png" />
-	  <EmbeddedResource Include="Resources\Images\sql.png" />
-	  <EmbeddedResource Include="Resources\Images\text_only.svg" />
-	  <EmbeddedResource Include="Resources\Images\tga.png" />
-	  <EmbeddedResource Include="Resources\Images\tgz.png" />
-	  <EmbeddedResource Include="Resources\Images\tiff.png" />
-	  <EmbeddedResource Include="Resources\Images\txt.png" />
-	  <EmbeddedResource Include="Resources\Images\wav.png" />
-	  <EmbeddedResource Include="Resources\Images\xls.png" />
-	  <EmbeddedResource Include="Resources\Images\xlsx.png" />
-	  <EmbeddedResource Include="Resources\Images\xml.png" />
-	  <EmbeddedResource Include="Resources\Images\yml.png" />
-	  <EmbeddedResource Include="Resources\Images\zip.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Compile Update="Resources\Strings\AppResources.Designer.cs">

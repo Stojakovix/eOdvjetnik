@@ -22,7 +22,7 @@
         <VerticalStackLayout Grid.Row="0" >
 
             <HorizontalStackLayout>
-                <Grid>
+                <Grid Margin="10,10,0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />

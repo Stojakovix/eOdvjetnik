@@ -47,7 +47,7 @@ namespace eOdvjetnik.ViewModel
 
         public ObservableCollection<DocsItem> items;
 
-        
+
         public ObservableCollection<DocsItem> Items
         {
 
@@ -55,7 +55,7 @@ namespace eOdvjetnik.ViewModel
             set
             {
                 items = value;
-                
+
                 OnPropertyChanged(nameof(Items));
             }
         }
@@ -70,17 +70,17 @@ namespace eOdvjetnik.ViewModel
         public DocsViewModel()
         {
 
-            
+
             RefreshButton = new Command(RefreshButtonClick);
             Items = new ObservableCollection<DocsItem>();
             //RootShares = new ObservableCollection<RootShare>();
             ConnectAndFetchDocumentsAsync();
-            
+
 
         }
         public void RefreshButtonClick()
         {
-            
+
             //RootShares.Clear();
             ConnectAndFetchDocumentsAsync();
             //Items.Clear();
@@ -105,10 +105,15 @@ namespace eOdvjetnik.ViewModel
             {
 
 
+                items.Clear();
+                if (Items == null) { } else { Items.Clear(); }
+                if (rootShares == null) { } else { rootShares.Clear(); }
+                if (RootShares == null) { } else { RootShares.Clear(); }
+                if (RootShares == null) { } else { RootShares.Clear(); }
 
 
-        //Ispis svega na putanji
-        List<QueryDirectoryFileInformation> fileList = sMBConnect.ListPath(Preferences.Get(SUBFOLDER_nas, ""));
+                //Ispis svega na putanji
+                List<QueryDirectoryFileInformation> fileList = sMBConnect.ListPath(Preferences.Get(SUBFOLDER_nas, ""));
 
                 //Root share list
                 List<string> shares = sMBConnect.getRootShare();
@@ -129,27 +134,29 @@ namespace eOdvjetnik.ViewModel
 
                 foreach (FileDirectoryInformation file in fileList)
                 {
-                   //Debug.WriteLine($"Filename: {file.FileName}");
-                   //Debug.WriteLine($"File Attributes: {file.FileAttributes}");
-                   //Debug.WriteLine($"File -------: {file.NextEntryOffset}");
-                   //Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
-                   //Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
-                   //Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
-                   //Debug.WriteLine("----------End of Folder/file-----------");
-                   //Debug.WriteLine("---------------------Before foreach");
+                    //Debug.WriteLine($"Filename: {file.FileName}");
+                    //Debug.WriteLine($"File Attributes: {file.FileAttributes}");
+                    //Debug.WriteLine($"File -------: {file.NextEntryOffset}");
+                    //Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
+                    //Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
+                    //Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
+                    //Debug.WriteLine("----------End of Folder/file-----------");
+                    //Debug.WriteLine("---------------------Before foreach");
 
-                    if (file.FileName == "." || file.FileName == "..") 
+                    if (file.FileName == "." || file.FileName == "..")
                     {
 
                     }
-                    else { 
+                    else
+                    {
                         var icon = "blank.png";
 
                         if (file.FileAttributes.ToString("f") == "Directory")
                         {
                             icon = "folder_1484.png";
                         }
-                        else {
+                        else
+                        {
 
                             icon = Path.GetExtension(file.FileName).TrimStart('.') + ".png";
 
@@ -175,14 +182,14 @@ namespace eOdvjetnik.ViewModel
                             Changed = file.LastWriteTime,
                             Icon = icon,
                             Created = file.CreationTime,
-                            Size = $"{ file.AllocationSize / 1024 } KB",
+                            Size = $"{file.AllocationSize / 1024} KB",
 
                         };
                         items.Add(fileData);
-                        
+
 
                     }
-                  
+
 
                 }
                 Debug.WriteLine(items.Count());
@@ -204,7 +211,7 @@ namespace eOdvjetnik.ViewModel
                     //rootShares.Add(fileData);
                     fileList.Clear();
                     fileData = null;
-                    
+
                 }
 
                 //Debug.WriteLine("----------------------------------------------------------------");
@@ -237,8 +244,8 @@ namespace eOdvjetnik.ViewModel
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            
-            
+
+
 
         }
     }
