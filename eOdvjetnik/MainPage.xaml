@@ -107,9 +107,7 @@
                         TextColor="Black"
                     />
             <Button Text="Provjeri status licence" Margin="5,0,0,0"  Clicked="OnRefreshLicenceClick">
-                <Button.ImageSource>
-                    <FileImageSource File="refresh.png" />
-                </Button.ImageSource>
+
 
             </Button>
 
