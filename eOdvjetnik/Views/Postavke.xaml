@@ -32,25 +32,27 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Button  Grid.Column="0" Grid.Row="0"  Text="Sign In" Margin="5,0,0,0" Clicked="Button1_Clicked" ></Button>
+                <Button  Grid.Column="0" Grid.Row="0"  Text="{x:Static resx:AppResources.UredajLicenca}" Margin="5,0,0,0" Clicked="Button1_Clicked" >
+                    
+                </Button>
 
                 <Button  Grid.Column="1" Grid.Row="0"  Text="{x:Static resx:AppResources.NAS}" Margin="5,0,0,0" Clicked="Button4_Clicked"  >
-  
+   
                 </Button>
 
                 <Button  Grid.Column="2" Grid.Row="0"  Text="{x:Static resx:AppResources.SQL}"  Margin="5,0,0,0" Clicked="Button5_Clicked"  >
+  
+                </Button>
+
+                <Button  Grid.Column="3" Grid.Row="0"   Text="{x:Static resx:AppResources.Racun}"  Margin="5,0,0,0" Clicked="Button7_Clicked"  >
 
                 </Button>
 
-                <Button  Grid.Column="3" Grid.Row="0"  Text="{x:Static resx:AppResources.Racun}"  Margin="5,0,0,0" Clicked="Button7_Clicked"  >
+                <Button  Grid.Column="4" Grid.Row="0"   Text="{x:Static resx:AppResources.Zaposlenici}" Margin="5,0,0,0" Command="{Binding OpenZaposlenici}"  >
 
                 </Button>
 
-                <Button  Grid.Column="4" Grid.Row="0"  Text="{x:Static resx:AppResources.Zaposlenici}" Margin="5,0,0,0" Command="{Binding OpenZaposlenici}"  >
-
-                </Button>
-
-                <Button  Grid.Column="5" Grid.Row="0"  Text="{x:Static resx:AppResources.PovInfo}" Margin="5,0,0,0" Clicked="Button2_Clicked" >
+                <Button  Grid.Column="5" Grid.Row="0"   Text="{x:Static resx:AppResources.PovInfo}" Margin="5,0,0,0" Clicked="Button2_Clicked" >
 
                 </Button>
 
@@ -91,7 +93,7 @@
                     </Border>
 
 
-                    <Button   Grid.Column="0" Grid.Row="0"  Text="{x:Static resx:AppResources.Posalji}"  Margin="5,0,0,0" Command="{Binding SendFeedback}"  >
+                    <Button   Grid.Column="0" Grid.Row="0" WidthRequest="150"  Text="{x:Static resx:AppResources.Posalji}"  Margin="5,0,0,0" Command="{Binding SendFeedback}"  >
                         <Button.ImageSource>
                             <FileImageSource File="home.png" />
                         </Button.ImageSource>
@@ -137,8 +139,10 @@
                         <Entry x:Name="SUBFOLDER_Entry" Text="{Binding SubFolder}" Grid.Row="4" Grid.Column="1" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center" />
 
 
-                        <Button   Text="Sign In"  Margin="5,0,0,0" Command="{Binding SaveCommandNAS}"  >
-
+                        <Button   WidthRequest="150"  Text="{x:Static resx:AppResources.Spremi}"  Margin="5,0,0,0" Command="{Binding SaveCommandNAS}"  >
+                            <Button.ImageSource>
+                                <FileImageSource File="home.png" />
+                            </Button.ImageSource>
                         </Button>
                         
 
@@ -176,7 +180,7 @@
                         <Label Text="{x:Static resx:AppResources.Baza}" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                         <Entry x:Name="DatabaseEntry" Text="{Binding DatabaseName}" Grid.Row="3" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
 
-                        <Button     Text="{x:Static resx:AppResources.Spremi}"  Margin="5,0,0,0" Command="{Binding SQLSaveCommand}"  >
+                        <Button   WidthRequest="150"  Text="{x:Static resx:AppResources.Spremi}"  Margin="5,0,0,0" Command="{Binding SQLSaveCommand}"  >
                             <Button.ImageSource>
                                 <FileImageSource File="home.png" />
                             </Button.ImageSource>
@@ -233,7 +237,7 @@
                            HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding ReceiptSignature, Mode=TwoWay}"
                            />
 
-                        <Button Grid.Row="5" Grid.Column="0"    Text="{x:Static resx:AppResources.OdabirLogotipa}"  Margin="5,0,0,0" Clicked="OnLogoImageClicked"  >
+                        <Button Grid.Row="5" Grid.Column="0"  WidthRequest="150"  Text="{x:Static resx:AppResources.OdabirLogotipa}"  Margin="5,0,0,0" Clicked="OnLogoImageClicked"  >
                             <Button.ImageSource>
                                 <FileImageSource File="home.png" />
                             </Button.ImageSource>
@@ -244,7 +248,7 @@
                         <Image Margin="0,20,0,0" Grid.Row="5" Grid.Column="1" HeightRequest="100"  x:Name="CompanyLogo"  />
 
 
-                        <Button Grid.Row="6" Grid.Column="0"    Text="{x:Static resx:AppResources.Spremi}"  Margin="5,0,0,0" Command="{Binding SaveReceiptCompanyInfo}"  >
+                        <Button Grid.Row="6" Grid.Column="0"  WidthRequest="150"  Text="{x:Static resx:AppResources.Spremi}"  Margin="5,0,0,0" Command="{Binding SaveReceiptCompanyInfo}"  >
                             <Button.ImageSource>
                                 <FileImageSource File="home.png" />
                             </Button.ImageSource>

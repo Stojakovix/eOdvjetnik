@@ -12,7 +12,7 @@ using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using eOdvjetnik.ViewModel;
-using Microsoft.UI;
+//using Microsoft.UI;
 
 namespace eOdvjetnik;
 public static class MauiProgram
