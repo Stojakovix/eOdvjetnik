@@ -5,9 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <LinearGradientBrush x:Key="GridGradientBackground" EndPoint="0,2">
 
-        <GradientStop Color="White" Offset="0.6"/>
-        <GradientStop Color="LightGray" Offset="0.3" />
-        <GradientStop Color="White" Offset="1.0"/>
+        <GradientStop Color="#fff" Offset="0.05"/>
+        <GradientStop Color="black" Offset="10" />
+        <GradientStop Color="#faf9fb" Offset="0.5" />
 
     </LinearGradientBrush>
     <Style TargetType="Label" x:Key="ShadowLabelStyle">

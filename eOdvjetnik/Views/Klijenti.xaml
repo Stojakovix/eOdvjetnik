@@ -77,31 +77,23 @@
 
 
 
-                <Button  WidthRequest="150" Text="{x:Static resx:AppResources.DodajNaRacun}" Margin="5,0,0,0" Command="{Binding OnReciptClickCommand}" >
-                    <Button.ImageSource>
-                        <FileImageSource File="home.png" />
-                    </Button.ImageSource>
+                <Button BackgroundColor="#E1DFE1" BorderColor="Black" Text="{x:Static resx:AppResources.DodajNaRacun}" Margin="5,0,0,0" Command="{Binding OnReciptClickCommand}" >
+
 
                 </Button>
 
-                <Button WidthRequest="150" Text="{x:Static resx:AppResources.DodajNovi}" Margin="5,0,0,0" Command="{Binding OnNoviKlijentClick}" >
-                    <Button.ImageSource>
-                        <FileImageSource File="home.png" />
-                    </Button.ImageSource>
+                <Button   Text="{x:Static resx:AppResources.DodajNovi}" Margin="5,0,0,0" Command="{Binding OnNoviKlijentClick}" >
+ 
 
                 </Button>
 
 
-                <Button WidthRequest="150" Text="{x:Static resx:AppResources.NedavnoDodani}" Margin="5,0,0,0" Command="{Binding RefreshContacts}"   >
-                    <Button.ImageSource>
-                        <FileImageSource File="home.png" />
-                    </Button.ImageSource>
+                <Button   BorderColor="Black" Text="{x:Static resx:AppResources.NedavnoDodani}" Margin="5,0,0,0" Command="{Binding RefreshContacts}"   >
+
 
                 </Button>
-                <Button WidthRequest="150" Text="{x:Static resx:AppResources.Uredi}" Margin="5,0,0,0" HorizontalOptions="End" Command="{Binding EditClientButton}"  >
-                    <Button.ImageSource>
-                        <FileImageSource File="home.png" />
-                    </Button.ImageSource>
+                <Button BackgroundColor="#E1DFE1"  Text="{x:Static resx:AppResources.Uredi}" Margin="5,0,0,0" HorizontalOptions="End" Command="{Binding EditClientButton}"  >
+
 
                 </Button>
 
