@@ -15,14 +15,35 @@ public partial class App : Application
     public static NaplataViewModel SharedNaplataViewModel;
     public static PostavkeViewModel SharedPostavkeViewModel;
     public static KlijentiViewModel SharedKlijentiViewModel;
-
-
+    public static readonly BindableProperty BackgroundProperty;
+    public static readonly BindableProperty TextStyleProperty;
+    public static readonly BindableProperty TodayBackgroundProperty;
+    public static readonly BindableProperty TrailingMonthBackgroundProperty;
+    public static readonly BindableProperty TrailingMonthTextStyleProperty;
+    public SchedulerTextStyle TrailingMonthTextStyle { get; set; }
+    public SchedulerWeekNumberStyle WeekNumberStyle { get; set; }
+    public SfScheduler Scheduler { get; }
 
     public App(){
         InitializeComponent();
         Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjQ5MTQ1M0AzMjMyMmUzMDJlMzBRT2JkTm1HczFuTmdmNTVFcWNWU29xbGt6Z2lhRDFYYk1GZWppS3pjWnlNPQ==");
+       
 
 
+        var schedulerTextStyle = new SchedulerTextStyle()
+        {
+            TextColor = Colors.Red,
+            FontSize = 14,
+            FontFamily = "SF-Pro-Display-Black"
+        };
+        var schedulerWeekNumberStyle = new SchedulerWeekNumberStyle()
+        {
+            Background = Brush.LightGreen,
+            TextStyle = schedulerTextStyle,
+     
+         };
+        this.Scheduler = new SfScheduler(); // Initialize the Scheduler property
+        this.Scheduler.WeekNumberStyle = schedulerWeekNumberStyle;
 
 
         string currentCulture = Preferences.Get("CurrentCulture", null);

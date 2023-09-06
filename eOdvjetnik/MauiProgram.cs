@@ -12,7 +12,7 @@ using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using eOdvjetnik.ViewModel;
-using Microsoft.UI;
+//using Microsoft.UI;
 
 namespace eOdvjetnik;
 public static class MauiProgram
@@ -34,7 +34,10 @@ public static class MauiProgram
                 fonts.AddFont("SFUIDisplay-Ultralight.otf", "SFUIDisplay-Ultralight");
                 fonts.AddFont("SFUIDisplay-Light.otf", "SFUIDisplay-Light");
                 fonts.AddFont("SF-Pro-Display-Black.otf", "SF-Pro-Display-Black");
-                
+                fonts.AddFont("SF-Pro-Text-Medium.otf", "SF-Pro-Text-Medium");
+                fonts.AddFont("SF-Pro-Text-Bold.otf", "SF-Pro-Text-Bold");
+                fonts.AddFont("SF-Pro-Display-Bold.otf", "SF-Pro-Display-Bold");
+                fonts.AddFont("SF-Pro-Display-Semibold.otf", "SF-Pro-Display-Semibold");
 
 
 
