@@ -5,7 +5,7 @@
              xmlns:local ="clr-namespace:eOdvjetnik.ViewModel"
              Title="Postavke"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
-             BackgroundColor="White" >
+             BackgroundColor="#faf9fb" >
 
 
     <ContentPage.BindingContext>
@@ -61,7 +61,7 @@
 
                 </Button>
 
-                <VerticalStackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" Padding="10,10,10,10"  BackgroundColor="White" 
+                <VerticalStackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" Padding="10,10,10,10"  BackgroundColor="#faf9fb" 
                     x:Name="Frame1" IsVisible="True" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" >
                     <Label TextColor="Black" Text="Korisnik:" FontAttributes="Bold" Margin="0,0,0,5" />
                     <Label TextColor="Black" Text="{Binding PostavkeUserName}" Margin="0,0,0,20" />
@@ -75,7 +75,7 @@
                     <Editor TextColor="Black" Text="{Binding HWID64}" IsReadOnly="True"  WidthRequest="250" />
                 </VerticalStackLayout>
 
-                <StackLayout Grid.Row="1" Grid.ColumnSpan="7" Padding="0,0,0,0"  BackgroundColor="White" 
+                <StackLayout Grid.Row="1" Grid.ColumnSpan="7" Padding="0,0,0,0"  BackgroundColor="#faf9fb" 
                     x:Name="Frame2" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
 
                     <Border MaximumWidthRequest="420" >
@@ -104,7 +104,7 @@
 
                 </StackLayout>
 
-                <StackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7"  BackgroundColor="White" 
+                <StackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7"  BackgroundColor="#faf9fb" 
                     x:Name="Frame4" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
                     <Grid Margin="10,10,10,0" >
                         <Grid.RowDefinitions>
