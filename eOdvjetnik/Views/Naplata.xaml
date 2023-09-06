@@ -6,11 +6,18 @@
              x:Class="eOdvjetnik.Views.Naplata"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
+             xmlns:local="clr-namespace:ListViewMaui"
              Title="Naplata">
 
     <ContentPage.BindingContext>
         <viewmodel:NaplataViewModel/>
     </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:IndexToColorConverter x:Key="IndexToColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -83,9 +90,9 @@
 
             </HorizontalStackLayout>
 
-            <ScrollView Grid.Row="2" Margin="20,10,0,0" MinimumHeightRequest="800" MaximumHeightRequest="1200"  >
+            <ScrollView Grid.Row="2" Margin="0,10,0,0" MinimumHeightRequest="800" MaximumHeightRequest="1200"  >
                 <syncfusion:SfListView x:Name="listView" 
-                   ItemsSource="{Binding TariffItems}" SelectedItem="{Binding SelectedItem}" SelectionMode="Single" >
+                   ItemsSource="{Binding TariffItems}" SelectedItem="{Binding SelectedItem}" SelectionMode="Single" IsStickyHeader="True" >
 
                     <syncfusion:SfListView.HeaderTemplate>
                         <DataTemplate>
@@ -94,12 +101,12 @@
                                     <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="120"/>
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Column="0"  Text="TBR" FontSize="Default" FontAttributes="Bold" />
+                                <Label Grid.Column="0"  Text="TBR" FontSize="Default" FontAttributes="Bold" Margin="20,0,0,0" />
                                 <Label Grid.Column="1" Text="Bodovi" FontSize="Default" FontAttributes="Bold" />
                                 <Label Grid.Column="2" Text="Naziv" FontSize="Default" FontAttributes="Bold" />
                             </Grid>
@@ -108,18 +115,20 @@
                     <syncfusion:SfListView.ItemTemplate>
 
                             <DataTemplate>
-                            <Grid >
+                            <Grid BackgroundColor="{Binding .,Converter={StaticResource IndexToColorConverter},ConverterParameter={x:Reference Name=listView}}" >
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="120"/>
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Column="0" Text="{Binding oznaka}" VerticalOptions="Center" />
-                                <Label Grid.Column="1" Text="{Binding bodovi}" VerticalOptions="Center"   />
+
+
+                                <Label Grid.Column="0" Text="{Binding oznaka}" VerticalOptions="Center" Margin="20,0,0,0"  />
+                                <Label Grid.Column="1" Text="{Binding bodovi}" VerticalOptions="Center"  />
                                 <Label Grid.Column="2" Text="{Binding concatenated_name}" VerticalOptions="Center"  LineBreakMode="NoWrap" />
                             </Grid>
                         </DataTemplate>
