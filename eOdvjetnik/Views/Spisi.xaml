@@ -5,7 +5,6 @@
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
              BackgroundColor="White"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
-             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              Title="Spisi">
 
     <ContentPage.BindingContext>
