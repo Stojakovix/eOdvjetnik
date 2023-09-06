@@ -3,7 +3,7 @@
              x:Class="eOdvjetnik.Views.Spisi"
              xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
-             BackgroundColor="White"
+             BackgroundColor="#faf9fb"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              Title="Spisi">
 
@@ -115,7 +115,7 @@
                     <syncfusion:SfListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Grid BackgroundColor="White">
+                                <Grid BackgroundColor="#faf9fb">
                                     <Grid.Resources>
                                         <Style TargetType="Label">
                                             <Setter Property="TextColor" Value="Black"/>

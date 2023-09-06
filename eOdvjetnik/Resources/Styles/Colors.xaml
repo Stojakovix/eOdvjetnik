@@ -9,7 +9,7 @@
     <Color x:Key="Tertiary">#2852A8</Color>
     <Color x:Key="White">#faf9fb</Color>
     <Color x:Key="Black">#323232</Color>
-    <Color x:Key="Gray100">##faf9fb</Color>
+    <Color x:Key="Gray100">#faf9fb</Color>
     <Color x:Key="Gray200">#C8C8C8</Color>
     <Color x:Key="Gray300">#ACACAC</Color>
     <Color x:Key="Gray400">#919191</Color>
