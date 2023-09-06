@@ -10,10 +10,18 @@ public partial class SpiDok : ContentPage
 	public SpiDokViewModel viewModel = new SpiDokViewModel();
 	public SpiDok()
 	{
-		InitializeComponent();
-		this.BindingContext = viewModel;
+		//InitializeComponent();
+		//this.BindingContext = viewModel;
 
 	}
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        InitializeComponent();
+        this.BindingContext = viewModel;
+
+    }
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
