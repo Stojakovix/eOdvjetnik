@@ -289,8 +289,10 @@ public partial class AppointmentDialog : ContentPage
             {
                 try
                 {
+
                     var appString = appointment.Id.ToString();
-                    var appointmentId = int.Parse(appString);
+                    var trimmedString = appString.Replace("-", "");
+                    var appointmentId = int.Parse(trimmedString);
                     
                     var hardware_id = Preferences.Get("key", "default_value");
                     string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, color, user_id, resource_id, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}', '{AppoitmentColorName}' , '{SQLUserID}' , '{ResourceId}' , '{hardware_id}')";
