@@ -52,7 +52,7 @@ public static class MauiProgram
         builder.Services.AddTransient<DocsItemPage>();
         builder.Services.AddTransient<DocsViewModel>();
 
-        builder.Services.AddTransient<Kalendar>();
+        builder.Services.AddSingleton<Kalendar>();
         builder.Services.AddTransient<KalendarViewModel>();
         builder.Services.AddTransient<AppointmentDialog>();
         

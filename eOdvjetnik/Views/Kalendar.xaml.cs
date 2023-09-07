@@ -5,62 +5,94 @@ using eOdvjetnik.Services;
 using eOdvjetnik.ViewModel;
 using eOdvjetnik.Models;
 using System.Diagnostics.CodeAnalysis;
+using Syncfusion.Maui.GridCommon.Collections.Generic;
+
 
 namespace eOdvjetnik.Views;
 
 public partial class Kalendar : ContentPage
 {
-    public static KalendarViewModel _viewModel;
-
+    private KalendarViewModel _viewModel;
+    
+    
+    private bool isInitialized;
     public Kalendar()
     {
         try
         {
             InitializeComponent();
-            
             Debug.WriteLine("inicijalizirano");
-
-            
             this.Scheduler.DragDropSettings.TimeIndicatorTextFormat = "HH:mm";
             Scheduler.DaysView.TimeRegions = GetTimeRegion();
-            this.BindingContext = _viewModel;
-            Scheduler.AppointmentDrop += OnSchedulerAppointmentDrop;
 
+
+            Scheduler.AppointmentDrop += OnSchedulerAppointmentDrop;
 
             //MySQL Query;
             var hardware_id = Preferences.Get("key", "default_value");
+            isInitialized = false;
 
-            //Resources -
-            //var Resources = viewModel.Resources;
-
-            // Adding the scheduler resource collection to the schedule resources of SfSchedule.
-            //this.Scheduler.ResourceView.Resources = Resources;
 
         }
         catch (Exception ex)
         {
+
             Debug.WriteLine(ex.Message);
         }
 
     }
-    
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (_viewModel == null)
+        {
+            _viewModel = new KalendarViewModel();
+            this.BindingContext = _viewModel;
+            Debug.WriteLine("ViewModel initialized");
+        }
+
+        else if (!isInitialized)
+        {
+            isInitialized = true;
+            _viewModel.AdminLicenceCheck();
+            Debug.WriteLine("izvršio on appearing adminLicenceCheck");
+
+        }
+
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        var appointments = _viewModel.Appointments;
+        //var resources = _viewModel.Resources;
+        if(appointments != null)
+        {
+            appointments.Clear();
+            //resources.Clear();
+        }
+
+
+    }
+
     private void OnSchedulerAppointmentDrop(object? sender, AppointmentDropEventArgs eventArgs)
     {
         try
         {
             ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
             var appointment = eventArgs.Appointment;
-            
+
             var droptime = eventArgs.DropTime;
             var timeLength = appointment.EndTime - appointment.StartTime;
-            
-            if(eventArgs.Appointment != null)
+
+            if (eventArgs.Appointment != null)
             {
                 appointment.StartTime = eventArgs.DropTime;
                 appointment.EndTime = appointment.StartTime + timeLength;
-                
+
             }
-            
+
             Debug.WriteLine(appointment.StartTime + " " + appointment.EndTime);
 
             string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}' WHERE internal_event_id = " + appointment.Id;
@@ -77,13 +109,22 @@ public partial class Kalendar : ContentPage
 
     private void OnSchedulerViewChanged(object sender, SchedulerViewChangedEventArgs e)
     {
-        try {
-
+        try
+        {
             Scheduler.ShowBusyIndicator = true;
-            
+            // Check if the new view is a TimelineMonth view
+            if (e.NewView is SchedulerView.TimelineMonth)
+            {
+                _viewModel.AdminLicenceCheck();
+
+            }
+            else
+            {
+                // Code to execute when the view changes to something else
+            }
 
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
         }
@@ -103,8 +144,8 @@ public partial class Kalendar : ContentPage
             //Text = "pauza",
             EnablePointerInteraction = true,
             RecurrenceRule = "FREQ=DAILY;INTERVAL=1",
-            
-         
+
+
         };
         timeRegions.Add(timeRegion);
 
@@ -144,23 +185,68 @@ public partial class Kalendar : ContentPage
         {
             if (e.Element == SchedulerElement.SchedulerCell || e.Element == SchedulerElement.Appointment)
             {
-                //int resourceId = (int)e.Resource.Id;
-                //Debug.WriteLine(resourceId);
-                if (e.Appointments != null)
+                var SQLUserID = Preferences.Get("UserID", "");
+
+                if (e.Resource != null)
                 {
-                    Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
+                    string resourceId = e.Resource.Id.ToString();
                     
+                    Debug.WriteLine(resourceId);
+                    
+                    if (Scheduler.View == SchedulerView.TimelineMonth)
+                    {
+                        Preferences.Remove("resourceId");
+                        Preferences.Set("resourceId", resourceId);
+                        Debug.WriteLine("-----------------------------------------------------Izvršen if " + resourceId);
+
+                    }
+                    else
+                    {
+                        Preferences.Remove("resourceId");
+                        Preferences.Set("resourceId", SQLUserID);
+                        Debug.WriteLine("-------------------------------------Izvršen else" + SQLUserID);
+                    }
+
+                    Debug.WriteLine(resourceId + "-----------------------------------------------------");
+                    if (e.Appointments != null)
+                    {
+                        Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
+                        Debug.WriteLine("izvršen drugi if");
+                    }
+                    else
+                    {
+                        Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
+                        Debug.WriteLine("izvršen drugi else ");
+                    }
                 }
                 else
                 {
-                    Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
+
+                    //Debug.WriteLine(resourceId + "-----------------------------------------------------");
+                    if (e.Appointments != null)
+                    {
+                        Preferences.Remove("resourceId");
+                        Preferences.Set("resourceId", SQLUserID);
+                        Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
+
+                        Debug.WriteLine("--------------------------------------------------Appointment pun");
+                    }
+                    else
+                    {
+                        Preferences.Remove("resourceId");
+                        Preferences.Set("resourceId", SQLUserID);
+                        Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
+
+                        Debug.WriteLine("-------------------------------------------------Appointment prazan");
+
+                    }
                 }
             }
         }
-        catch ( Exception ex)
+        catch (Exception ex)
         {
 
-            Debug.WriteLine(ex.Message);
+            Debug.WriteLine(ex.Message + "u scheduler double tappedu");
         }
     }
 
