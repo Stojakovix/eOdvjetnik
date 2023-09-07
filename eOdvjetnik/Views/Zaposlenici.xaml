@@ -29,7 +29,7 @@
                     <sfPopup:SfPopup.ContentTemplate>
                         <DataTemplate>
                             <StackLayout>
-                                <Label Text="Upozorenje! Uređaj je moguće dodijeliti samo jednom korisniku. Korisnici s istim uređajem:" TextColor="Red" FontSize="16" Margin="20,20,0,0" FontAttributes="Bold" />
+                                <Label Text="Upozorenje! Uređaj je moguće dodijeliti samo jednom korisniku. Korisnici s istim uređajem:" TextColor="Crimson" FontSize="16" Margin="20,20,0,0" FontAttributes="Bold" />
                                 <Label Text="{Binding ZaposleniciText}" TextColor="Black" FontSize="16" Margin="12,0,0,0" Padding="0,10,0,10" />
                             </StackLayout>
                         </DataTemplate>
@@ -62,8 +62,8 @@
         
        
             </HorizontalStackLayout>
-            
-            <VerticalStackLayout  >
+
+            <VerticalStackLayout Margin="10,10,0,0"  >
 
                 <ListView IsVisible="false"  BackgroundColor="LightGray" Grid.Row="1" HorizontalOptions="Start"  ItemsSource="{Binding DataModel.Devices}">
                     <ListView.Header>
@@ -95,7 +95,7 @@
                 </ListView>
 
 
-                <ListView Margin="20,20,0,0" BackgroundColor="White" Grid.Row="1" ItemsSource="{Binding EmployeeItems}" MaximumWidthRequest="700" HorizontalOptions="Start" >
+                <ListView Margin="20,20,0,0" BackgroundColor="#faf9fb"  Grid.Row="1" ItemsSource="{Binding EmployeeItems}" MaximumWidthRequest="700" HorizontalOptions="Start" >
                     <ListView.Header>
                         <Grid >
                             <Grid.ColumnDefinitions>
@@ -107,7 +107,7 @@
                             <Label Grid.Column="0" Text="Korisnik" FontAttributes="Bold" Margin="0,0,0,10" />
                             <Label Grid.Column="1" Text="Inicijali" FontAttributes="Bold" Margin="0,0,0,10" />
                             <Label Grid.Column="2" Text="Licenca aktivna?" FontAttributes="Bold" Margin="0,0,0,10" />
-                            <Label Grid.Column="3" Text="Naziv uređaja" FontAttributes="Bold" Margin="0,0,0,10" />
+                            <Label Grid.Column="3" Text="Naziv uređaja" FontAttributes="Bold" Margin="0,0,0,10" HorizontalTextAlignment="Center" />
 
 
                         </Grid>
