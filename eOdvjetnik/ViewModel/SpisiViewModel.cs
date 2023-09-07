@@ -165,6 +165,7 @@ namespace eOdvjetnik.ViewModel
             {
                 fileItems = new ObservableCollection<FileItem>();
                 //LoadEmptyRows();
+                GenerateFiles();
                 Debug.WriteLine("inicijalizirano u spisiViewModel");
             }
             catch (Exception ex)

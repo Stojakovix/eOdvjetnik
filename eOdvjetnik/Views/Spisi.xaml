@@ -5,15 +5,144 @@
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
              BackgroundColor="#faf9fb"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
+             xmlns:local="clr-namespace:ListViewMaui"
              Title="Spisi">
 
     <ContentPage.BindingContext>
         <viewmodel:SpisiViewModel/>
     </ContentPage.BindingContext>
 
-    <ContentPage.Content>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:IndexToColorConverter x:Key="IndexToColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-        <Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+
+        <VerticalStackLayout Grid.Row="0" >
+            <StackLayout Grid.Row="0">
+                <Grid  Background="{StaticResource GridGradientBackground}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" WidthRequest="150" Text="{x:Static resx:AppResources.Dodaj}" Command="{Binding OnDodajClick}" Margin="5,0,0,0"
+                            BackgroundColor="#E1DFE1" BorderColor="Black" >
+                        <Button.ImageSource>
+                            <FileImageSource File="new_window.png" />
+                        </Button.ImageSource>
+
+                    </Button>
+
+                    <Button BackgroundColor="#E1DFE1" BorderColor="Black" 
+                            Grid.Column="2" HorizontalOptions="End" Grid.Row="0" WidthRequest="150"  Text="{x:Static resx:AppResources.Ponisti}"  Command="{Binding OnResetClick}" Margin="0,0,5,0">
+                        <Button.ImageSource>
+                            <FileImageSource File="new_window.png" />
+                        </Button.ImageSource>
+
+                    </Button>
+
+
+                    <SearchBar Grid.Column="3" Placeholder="{x:Static resx:AppResources.Pretrazi}" 
+                               HorizontalOptions="Fill"
+                               BackgroundColor="#F8F8F8"
+                               SearchCommand="{Binding SearchCommand}"
+                               Text="{Binding SearchText}"
+                               />
+                </Grid>
+                </StackLayout>
+
+
+
+                <ScrollView Grid.Row="2" Margin="0,10,0,0" MinimumHeightRequest="800" MaximumHeightRequest="1200"  >
+                <syncfusion:SfListView x:Name="listView" ItemsSource="{Binding FileItems}" SelectionMode="Single" ItemTapped="ListViewItemTapped"  IsStickyHeader="True"  >
+
+                    <syncfusion:SfListView.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="BrojSpisa" Padding="5,0,0,0" />
+                                <Label FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="Klijent" />
+                                <Label FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Protustranka" />
+                                <Label FontAttributes="Bold" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="Dodao" />
+                                <Label FontAttributes="Bold" Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center" Text="Radi" />
+                                <Label FontAttributes="Bold" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" Text="Kreirano" />
+                                <Label FontAttributes="Bold" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center" Text="Izmjenjeno" />
+                            </Grid>
+                        </DataTemplate>
+                    </syncfusion:SfListView.HeaderTemplate>
+
+                    <syncfusion:SfListView.ItemTemplate>
+
+                        <DataTemplate>
+                            <Grid BackgroundColor="{Binding .,Converter={StaticResource IndexToColorConverter},ConverterParameter={x:Reference Name=listView}}" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10" />
+                                </Grid.ColumnDefinitions>
+
+
+
+                                <Label Margin="0,8,0,8" FontSize="14"   Grid.Row="1" Grid.Column="0" HorizontalOptions="Start"  Text="{Binding BrojSpisa}" VerticalOptions="Center" LineBreakMode="NoWrap" Padding="10,0,0,0" />
+                                <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="1" HorizontalOptions="Start"   Text="{Binding ClientName}" VerticalOptions="Center" LineBreakMode="NoWrap" />
+                                <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="2" HorizontalOptions="Start"   Text="{Binding OpponentName}" VerticalOptions="Center" LineBreakMode="NoWrap" />
+                                <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="3"  HorizontalOptions="Center"  Text="{Binding InicijaliDodao}" VerticalOptions="Center" LineBreakMode="NoWrap" />
+                                <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="4" HorizontalOptions="Start"  Text="{Binding Uzrok}" VerticalOptions="Center" LineBreakMode="NoWrap"  />
+                                <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="5" HorizontalOptions="Center"  Text="{Binding Created,  StringFormat='{}{0: dd/MM/yyyy}'}" VerticalOptions="Center" LineBreakMode="NoWrap" />
+                                <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="6" HorizontalOptions="Center"  Text="{Binding DatumIzmjeneSpisa,  StringFormat='{}{0:HH:mm dd/MM/yyyy}'}"  VerticalOptions="Center" LineBreakMode="NoWrap" />
+
+                            </Grid>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+                </syncfusion:SfListView>
+            </ScrollView>
+
+
+        </VerticalStackLayout>
+
+
+
+
+    </Grid>
+
+
 
 
             <!-- Header -->
@@ -83,75 +212,7 @@
             </StackLayout>-->
 
             <!-- Scrollable ListView -->
-            <ScrollView>
-                <syncfusion:SfListView ItemsSource="{Binding FileItems}" SelectionMode="Single" ItemTapped="ListViewItemTapped"  IsStickyHeader="True">
-                    <syncfusion:SfListView.HeaderTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="10" />
-                                </Grid.ColumnDefinitions>
-
-                                <Label FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="BrojSpisa" Padding="5,0,0,0" />
-                                <Label FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="Klijent" />
-                                <Label FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Protustranka" />
-                                <Label FontAttributes="Bold" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="Dodao" />
-                                <Label FontAttributes="Bold" Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center" Text="Radi" />
-                                <Label FontAttributes="Bold" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" Text="Kreirano" />
-                                <Label FontAttributes="Bold" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center" Text="Izmjenjeno" />
-                            </Grid>
-                        </DataTemplate>
-                    </syncfusion:SfListView.HeaderTemplate>
-                    <syncfusion:SfListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid BackgroundColor="#faf9fb">
-                                    <Grid.Resources>
-                                        <Style TargetType="Label">
-                                            <Setter Property="TextColor" Value="Black"/>
-                                        </Style>
-                                    </Grid.Resources>
-                                    
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-
-                                    </Grid.RowDefinitions>
-
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="3*" />
-                                        <ColumnDefinition Width="3*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="3*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="10" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Margin="0,8,0,8" FontSize="14"   Grid.Row="1" Grid.Column="0" HorizontalOptions="Start"  Text="{Binding BrojSpisa}" VerticalOptions="Center" LineBreakMode="NoWrap" Padding="10,0,0,0" />
-                                    <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="1" HorizontalOptions="Start"   Text="{Binding ClientName}" VerticalOptions="Center" LineBreakMode="NoWrap" />
-                                    <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="2" HorizontalOptions="Start"   Text="{Binding OpponentName}" VerticalOptions="Center" LineBreakMode="NoWrap" />
-                                    <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="3"  HorizontalOptions="Center"  Text="{Binding InicijaliDodao}" VerticalOptions="Center" LineBreakMode="NoWrap" />
-                                    <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="4" HorizontalOptions="Start"  Text="{Binding Uzrok}" VerticalOptions="Center" LineBreakMode="NoWrap"  />
-                                    <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="5" HorizontalOptions="Center"  Text="{Binding Created,  StringFormat='{}{0: dd/MM/yyyy}'}" VerticalOptions="Center" LineBreakMode="NoWrap" />
-                                    <Label Margin="0,8,0,8" FontSize="14"  Grid.Row="1" Grid.Column="6" HorizontalOptions="Center"  Text="{Binding DatumIzmjeneSpisa,  StringFormat='{}{0:HH:mm dd/MM/yyyy}'}"  VerticalOptions="Center" LineBreakMode="NoWrap" />
-
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </syncfusion:SfListView.ItemTemplate>
-                    
-                </syncfusion:SfListView>
+            
                 <!--<ListView ItemsSource="{Binding FileItems}" SelectionMode="Single" SeparatorVisibility="Default" ItemTapped="ListViewItemSelected" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -192,7 +253,5 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>-->
-            </ScrollView>
-        </Grid>
-    </ContentPage.Content>
+
 </ContentPage>
