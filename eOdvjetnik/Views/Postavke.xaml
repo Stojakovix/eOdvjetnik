@@ -13,13 +13,13 @@
     </ContentPage.BindingContext>
 
     <ScrollView>
-        <VerticalStackLayout >
+        <VerticalStackLayout MinimumHeightRequest="600" MaximumHeightRequest="1500" >
             <Grid Margin="10,10,10,10" RowSpacing="5" ColumnSpacing="5">
 
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -32,36 +32,15 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Button  Grid.Column="0" Grid.Row="0"  Text="{x:Static resx:AppResources.UredajLicenca}" Margin="5,0,0,0" Clicked="Button1_Clicked" >
-                    
-                </Button>
+                <Button  Grid.Column="0" Grid.Row="0"  Text="{x:Static resx:AppResources.UredajLicenca}" Margin="5,0,0,0" Clicked="Button1_Clicked" />
+                <Button  Grid.Column="1" Grid.Row="0"  Text="{x:Static resx:AppResources.NAS}" Margin="5,0,0,0" Clicked="Button4_Clicked"  />
+                <Button  Grid.Column="2" Grid.Row="0"  Text="{x:Static resx:AppResources.SQL}"  Margin="5,0,0,0" Clicked="Button5_Clicked"  />
+                <Button  Grid.Column="3" Grid.Row="0"   Text="{x:Static resx:AppResources.Racun}"  Margin="5,0,0,0" Clicked="Button7_Clicked" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
+                <Button  Grid.Column="4" Grid.Row="0"   Text="{x:Static resx:AppResources.Zaposlenici}" Margin="5,0,0,0" Command="{Binding OpenZaposlenici}" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
+                <Button  Grid.Column="5" Grid.Row="0"   Text="{x:Static resx:AppResources.PovInfo}" Margin="5,0,0,0" Clicked="Button2_Clicked" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
+                <Button  Grid.Column="6" Grid.Row="0"  Text="{x:Static resx:AppResources.KatDog}" Margin="5,0,0,0" Command="{Binding LoadColors}"  Clicked="Button3_Clicked" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
 
-                <Button  Grid.Column="1" Grid.Row="0"  Text="{x:Static resx:AppResources.NAS}" Margin="5,0,0,0" Clicked="Button4_Clicked"  >
-   
-                </Button>
-
-                <Button  Grid.Column="2" Grid.Row="0"  Text="{x:Static resx:AppResources.SQL}"  Margin="5,0,0,0" Clicked="Button5_Clicked"  >
-  
-                </Button>
-
-                <Button  Grid.Column="3" Grid.Row="0"   Text="{x:Static resx:AppResources.Racun}"  Margin="5,0,0,0" Clicked="Button7_Clicked"  >
-
-                </Button>
-
-                <Button  Grid.Column="4" Grid.Row="0"   Text="{x:Static resx:AppResources.Zaposlenici}" Margin="5,0,0,0" Command="{Binding OpenZaposlenici}"  >
-
-                </Button>
-
-                <Button  Grid.Column="5" Grid.Row="0"   Text="{x:Static resx:AppResources.PovInfo}" Margin="5,0,0,0" Clicked="Button2_Clicked" >
-
-                </Button>
-
-
-                <Button  Grid.Column="6" Grid.Row="0"  Text="{x:Static resx:AppResources.KatDog}" Margin="5,0,0,0" Command="{Binding LoadColors}"  Clicked="Button3_Clicked" >
-
-                </Button>
-
-                <VerticalStackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" Padding="10,10,10,10"  BackgroundColor="#faf9fb" 
+                <VerticalStackLayout Margin="10,10,0,0"  Grid.Row="1" Grid.ColumnSpan="7" Padding="10,10,10,10"  BackgroundColor="#faf9fb" 
                     x:Name="Frame1" IsVisible="True" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" >
                     <Label TextColor="Black" Text="Korisnik:" FontAttributes="Bold" Margin="0,0,0,5" />
                     <Label TextColor="Black" Text="{Binding PostavkeUserName}" Margin="0,0,0,20" />
@@ -75,45 +54,35 @@
                     <Editor TextColor="Black" Text="{Binding HWID64}" IsReadOnly="True"  WidthRequest="250" />
                 </VerticalStackLayout>
 
-                <StackLayout Grid.Row="1" Grid.ColumnSpan="7" Padding="0,0,0,0"  BackgroundColor="#faf9fb" 
+                <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="7"  BackgroundColor="#faf9fb" Margin="10,20,0,0" 
                     x:Name="Frame2" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
 
-                    <Border MaximumWidthRequest="420" >
-                        <Border.WidthRequest>
-                            <OnPlatform x:TypeArguments="x:Double">
-                                <On Platform="Android,iOS" Value="225" />
-                                <On Platform="UWP,MacCatalyst" Value="420" />
-                            </OnPlatform>
-                        </Border.WidthRequest>
-                        <ScrollView>
-                            <Editor  AutoSize="TextChanges" MaxLength="380" Placeholder="{x:Static resx:AppResources.OpisGreske}" MinimumHeightRequest="150"
+                    <Border Margin="10,0,0,0" WidthRequest="500" HeightRequest="400" >
+                       
+                            <Editor  AutoSize="TextChanges" MaxLength="380" Placeholder="{x:Static resx:AppResources.OpisGreske}" PlaceholderColor="DarkGray" FontSize="Default"
                              Text="{Binding FeedbackText}"
                              />
-                        </ScrollView>
                     </Border>
 
 
-                    <Button   Grid.Column="0" Grid.Row="0" WidthRequest="150"  Text="{x:Static resx:AppResources.Posalji}"  Margin="5,0,0,0" Command="{Binding SendFeedback}"  >
+                    <Button BorderColor="Black"  WidthRequest="150"  Text="{x:Static resx:AppResources.Posalji}" Command="{Binding SendFeedback}"  >
                         <Button.ImageSource>
                             <FileImageSource File="home.png" />
                         </Button.ImageSource>
                     </Button>
 
-    
+                </VerticalStackLayout>
 
-
-                </StackLayout>
-
-                <StackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7"  BackgroundColor="#faf9fb" 
+                <VerticalStackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7"  BackgroundColor="#faf9fb" 
                     x:Name="Frame4" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
-                    <Grid Margin="10,10,10,0" >
+                    <Grid Margin="20,10,10,10"  >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="50" />
 
                         </Grid.RowDefinitions>
 
@@ -139,7 +108,7 @@
                         <Entry x:Name="SUBFOLDER_Entry" Text="{Binding SubFolder}" Grid.Row="4" Grid.Column="1" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center" />
 
 
-                        <Button   WidthRequest="150"  Text="{x:Static resx:AppResources.Spremi}"  Margin="5,0,0,0" Command="{Binding SaveCommandNAS}"  >
+                        <Button Grid.Row="5" Grid.Column="1" WidthRequest="150"  Text="{x:Static resx:AppResources.Spremi}"  Command="{Binding SaveCommandNAS}"  >
                             <Button.ImageSource>
                                 <FileImageSource File="home.png" />
                             </Button.ImageSource>
@@ -147,19 +116,19 @@
                         
 
                     </Grid>
-                </StackLayout>
+                </VerticalStackLayout>
 
 
-                <StackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" BackgroundColor="White" 
+                <VerticalStackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" BackgroundColor="#faf9fb" 
                     x:Name="Frame5" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
-                    <Grid Margin="10,10,10,0">
+                    <Grid Margin="20,10,10,10"  >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="50" />
 
                         </Grid.RowDefinitions>
 
@@ -180,7 +149,7 @@
                         <Label Text="{x:Static resx:AppResources.Baza}" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                         <Entry x:Name="DatabaseEntry" Text="{Binding DatabaseName}" Grid.Row="3" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
 
-                        <Button   WidthRequest="150"  Text="{x:Static resx:AppResources.Spremi}"  Margin="5,0,0,0" Command="{Binding SQLSaveCommand}"  >
+                        <Button Grid.Row="4" Grid.Column="1"  WidthRequest="150"  Text="{x:Static resx:AppResources.Spremi}"   Command="{Binding SQLSaveCommand}" >
                             <Button.ImageSource>
                                 <FileImageSource File="home.png" />
                             </Button.ImageSource>
@@ -188,12 +157,12 @@
 
 
                     </Grid>
-                </StackLayout>
+                </VerticalStackLayout>
 
 
-                <StackLayout  Grid.Row="1" Grid.ColumnSpan="7"  BackgroundColor="White" x:Name="Frame7" IsVisible="False" >
+                <StackLayout  Grid.Row="1" Grid.ColumnSpan="7"  BackgroundColor="#faf9fb" x:Name="Frame7" IsVisible="False" >
 
-                    <Grid >
+                    <Grid Margin="20,10,10,10" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="220"/>
                             <ColumnDefinition Width="400"/>
@@ -212,7 +181,7 @@
                         </Grid.RowDefinitions>
 
 
-                        <Label Grid.Row="0" Grid.Column="0" Text="{x:Static resx:AppResources.StopaPDV}" Margin="10,15,0,0" VerticalOptions="Start" />
+                        <Label Grid.Row="0" Grid.Column="0" Text="{x:Static resx:AppResources.StopaPDV}" Margin="10,15,0,0" VerticalOptions="Center" />
                         <Entry Grid.Row="0" Grid.Column="1" TextColor="Black" Placeholder="{Binding ReceiptPDVamount}" Margin="5,10,0,0" MaxLength="2"
                            HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="{Binding ReceiptPDVamount, Mode=TwoWay}" 
                            />
@@ -261,7 +230,7 @@
 
 
                 </StackLayout>
-                <StackLayout  Grid.Row="1" Grid.ColumnSpan="7"  BackgroundColor="White" 
+                <StackLayout  Grid.Row="1" Grid.ColumnSpan="7"  BackgroundColor="#faf9fb" Margin="20,10,0,0"
                     x:Name="Frame3" IsVisible="False" HorizontalOptions="Start" VerticalOptions="Start">
 
 
