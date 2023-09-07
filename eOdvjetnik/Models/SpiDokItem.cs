@@ -30,5 +30,6 @@ namespace eOdvjetnik.Models
         public string EmailAdrese { get; set; }
         public string Kreirao { get; set; }
         public string ZadnjeUredio { get; set; }
+        public string Icon { get; set; }
     }
 }

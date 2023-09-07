@@ -546,51 +546,52 @@ public class KlijentiViewModel : INotifyPropertyChanged
         OnReciptClickCommand = new Command(OpenRecipt);
         RefreshContacts = new Command(GenerateFiles);
         EditClientButton = new Command(EditClient);
+        GenerateFiles();
 
         var timer = Application.Current.Dispatcher.CreateTimer();
         timer.Interval = TimeSpan.FromMilliseconds(200);
         timer.Tick += (s, e) => Refresh();
         timer.Start();
         //EmptyContactRows();
-        FilesCounter = 1;
+        //FilesCounter = 1;
 
     }
 
 
-    public void EmptyContactRows()
-    {
-        FilesCounter++;
-        Contacts = new ObservableCollection<ContactItem>();
+    //public void EmptyContactRows()
+    //{
+    //    FilesCounter++;
+    //    Contacts = new ObservableCollection<ContactItem>();
 
 
-        for (int i = 0; i < 30; i++)
-        {
-            Contacts.Add(new ContactItem
-            {
-                Id = i + 1,
-                Ime = " ",
-                OIB = " ",
-                Datum_rodenja = " ",
-                Adresa = " ",
-                Boraviste = " ",
-                Telefon = " ",
-                Fax = " ",
-                Mobitel = " ",
-                Email = " ",
-                Ostalo = " ",
-                Drzava = " ",
-                Pravna = " "
-            });
-        }
-        DelayGenerateFiles();
-    }
+    //    for (int i = 0; i < 30; i++)
+    //    {
+    //        Contacts.Add(new ContactItem
+    //        {
+    //            Id = i + 1,
+    //            Ime = " ",
+    //            OIB = " ",
+    //            Datum_rodenja = " ",
+    //            Adresa = " ",
+    //            Boraviste = " ",
+    //            Telefon = " ",
+    //            Fax = " ",
+    //            Mobitel = " ",
+    //            Email = " ",
+    //            Ostalo = " ",
+    //            Drzava = " ",
+    //            Pravna = " "
+    //        });
+    //    }
+    //    DelayGenerateFiles();
+    //}
 
-    private async void DelayGenerateFiles()
-    {
-        await Task.Delay(TimeSpan.FromSeconds(1)); // Wait for 2 seconds
+    //private async void DelayGenerateFiles()
+    //{
+    //    await Task.Delay(TimeSpan.FromSeconds(1)); // Wait for 2 seconds
 
-        GenerateFiles();
-    }
+    //    GenerateFiles();
+    //}
 
     public async void OnButtonClick()
     {
@@ -622,10 +623,10 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            if (FilesCounter == 1)
-            {
-                EmptyContactRows();
-            }
+            //if (FilesCounter == 1)
+            //{
+            //    EmptyContactRows();
+            //}
 
             try
             {
@@ -750,6 +751,48 @@ public class KlijentiViewModel : INotifyPropertyChanged
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
+        }
+    }
+
+    private ContactItem _selectedItem; //Za SyncfusionListView, za obični je kod u Naplata.xaml.cs
+    public ContactItem SelectedItem
+    {
+        get { return _selectedItem; }
+        set
+        {
+            _selectedItem = value;
+            // Save to preferences
+            SaveSelectedItem();
+
+            OnPropertyChanged(nameof(SelectedItem));
+        }
+    }
+    public void SaveSelectedItem()
+    {
+        if (SelectedItem != null) 
+        { 
+            try
+            {
+                Preferences.Set("SelectedName", SelectedItem.Ime);
+                Preferences.Set("SelectedOIB", SelectedItem.OIB);
+                Preferences.Set("SelectedAddress", SelectedItem.Adresa);
+                Preferences.Set("SelectedRsidence", SelectedItem.Boraviste);
+                Preferences.Set("SelectedPhone", SelectedItem.Telefon);
+                Preferences.Set("SelectedFax", SelectedItem.Fax);
+                Preferences.Set("SelectedMobile", SelectedItem.Mobitel);
+                Preferences.Set("SelectedEmail", SelectedItem.Email);
+                Preferences.Set("SelectedOther", SelectedItem.Ostalo);
+                Preferences.Set("SelectedCountry", SelectedItem.Drzava);
+                Preferences.Set("SelectedLegalPersonString", SelectedItem.Pravna);
+                Preferences.Set("SelectedBrithDateString", SelectedItem.Datum_rodenja);
+                string IDstring = SelectedItem.Id.ToString();
+                Preferences.Set("SelectedID", IDstring);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+            }
         }
     }
 }

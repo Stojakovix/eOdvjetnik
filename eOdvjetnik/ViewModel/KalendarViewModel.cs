@@ -127,7 +127,7 @@ namespace eOdvjetnik.ViewModel
 
         #endregion
 
-        private void AdminLicenceCheck()
+        public void AdminLicenceCheck()
         {
             string licence_type = Preferences.Get("licence_type", "");
             int numberOfCharacters = 5;
@@ -136,12 +136,15 @@ namespace eOdvjetnik.ViewModel
             if (adminCheck == "Admin")
             {
                 GetEmployees();
+                Debug.WriteLine("izvršen get employees");
             }
             else
             {
                 GetUserEvents();
+                Debug.WriteLine("izvršen get user events");
+
             }
-          
+
         }
 
         public KalendarViewModel()
@@ -280,28 +283,36 @@ namespace eOdvjetnik.ViewModel
 
 
 
-                        Appointments.Add(new SchedulerAppointment()
+                        try
                         {
-                            Id = int.Parse(appointmentRow["internal_event_id"]),
-                            StartTime = DateTime.Parse(appointmentRow["TimeFrom"]),
-                            EndTime = DateTime.Parse(appointmentRow["TimeTo"]),
-                            Subject = appointmentRow["EventName"],
-                            ResourceIds = new ObservableCollection<object>
+                            Appointments.Add(new SchedulerAppointment()
                             {
-                                (object)int.Parse(appointmentRow["user_id"]) // Boxing the integer into an object
+                                Id = int.Parse(appointmentRow["internal_event_id"]),
+                                StartTime = DateTime.Parse(appointmentRow["TimeFrom"]),
+                                EndTime = DateTime.Parse(appointmentRow["TimeTo"]),
+                                Subject = appointmentRow["EventName"],
+                                ResourceIds = new ObservableCollection<object>
+                            {
+                                (object)int.Parse(appointmentRow["resource_id"]) // Boxing the integer into an object
                             },
-                            IsAllDay = bool.Parse(appointmentRow["AllDay"]),
-                            Notes = appointmentRow["DescriptionNotes"],
-                            Background = backgroundColor,
-                        });
-                        //foreach (SchedulerAppointment appointment in Appointments)
-                        //{
-                        //    Debug.WriteLine(appointment.Id + "  " +  appointment.Subject);
-                        //    foreach(object resourceId in appointment.ResourceIds)
-                        //    {
-                        //        Debug.WriteLine("Resource ID: " + resourceId.ToString());
-                        //    }
-                        //}
+                                IsAllDay = bool.Parse(appointmentRow["AllDay"]),
+                                Notes = appointmentRow["DescriptionNotes"],
+                                Background = backgroundColor,
+                            });
+                            //foreach (SchedulerAppointment appointment in Appointments)
+                            //{
+                            //    Debug.WriteLine(appointment.Id + "  " + appointment.Subject);
+                            //    foreach (object resourceId in appointment.ResourceIds)
+                            //    {
+                            //        Debug.WriteLine("Resource ID: " + resourceId.ToString());
+                            //    }
+                            //}
+                        }
+                        catch (Exception ex)
+                        {
+
+                            Debug.WriteLine(ex.Message + " u appointment.try addu ");
+                        }
                     }
                 }
             }
@@ -320,7 +331,7 @@ namespace eOdvjetnik.ViewModel
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 List<int> ExternalEventIDs = new List<int>();
                 List<int> InternalEventIDs = new List<int>();
-                string query = "SELECT * FROM `events` WHERE user_id = " + SQLUserID + ";";
+                string query = "SELECT * FROM `events` WHERE resource_id = " + SQLUserID + ";";
 
                 Debug.WriteLine(query);
 
@@ -355,7 +366,7 @@ namespace eOdvjetnik.ViewModel
                             Subject = appointmentRow["EventName"],
                             ResourceIds = new ObservableCollection<object>
                             {
-                                (object)int.Parse(appointmentRow["user_id"]) // Boxing the integer into an object
+                                (object)int.Parse(appointmentRow["resource_id"]) // Boxing the integer into an object
                             },
                             IsAllDay = bool.Parse(appointmentRow["AllDay"]),
                             Notes = appointmentRow["DescriptionNotes"],

@@ -6,15 +6,18 @@
              x:Class="eOdvjetnik.Views.Naplata"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
-
-             
-             
+             xmlns:local="clr-namespace:ListViewMaui"
              Title="Naplata">
 
     <ContentPage.BindingContext>
         <viewmodel:NaplataViewModel/>
     </ContentPage.BindingContext>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:IndexToColorConverter x:Key="IndexToColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -22,26 +25,23 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-
-        
-
         <!-- Header -->
 
         <VerticalStackLayout Grid.Row="0" >
             <Grid  Background="{StaticResource GridGradientBackground}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
                 <Label Style="{StaticResource ShadowLabelStyle}"  Text="{x:Static resx:AppResources.Zastupnik}" FontSize="14"  FontAttributes="Bold" TextColor="Black" Margin="20,10,0,12"/>
-                
+
                 <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="1"  Text="{Binding NazivTvrtke}" FontSize="14" TextColor="Black" Margin="10,10,0,12"/>
 
                 <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="0"  Grid.Row="1" Text="{x:Static resx:AppResources.Klijent}" FontSize="14"  FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
@@ -56,113 +56,93 @@
                 <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="0"  Grid.Row="4" Text="{x:Static resx:AppResources.Bodovi}" FontSize="14"  FontAttributes="Bold" TextColor="Black" Margin="20,0,0,12"/>
                 <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="1"  Grid.Row="4" Text="{Binding odabraniBodovi}" FontSize="14"  TextColor="Black" Margin="10,0,0,12" />
 
-        </Grid>
-        <HorizontalStackLayout>
+            </Grid>
+            <HorizontalStackLayout>
 
-            <Button 
-                BorderColor="DarkGray"
-                BorderWidth="1"
-                BackgroundColor="#5ac8fa"
-                Text="{x:Static resx:AppResources.PregledRacuna}"
-                FontAttributes="Bold"
-                TextColor="Black"
-                HorizontalOptions="Start"
-                Command="{Binding OnReciptClickCommand}" 
-                FontSize="Default"
-                Margin="10,10,10,10"/>
+                <Button   HorizontalOptions="Start" WidthRequest="150"  Text="{x:Static resx:AppResources.PregledRacuna}" Command="{Binding OnReciptClickCommand}"  Margin="5,0,0,0">
+                    <Button.ImageSource>
+                        <FileImageSource File="new_window.png" />
+                    </Button.ImageSource>
 
-            <Button 
-                BorderColor="DarkGray"
-                BorderWidth="1"
-                BackgroundColor="#5ac8fa"
-                Text="{x:Static resx:AppResources.DodajNaRacun}"
-                FontAttributes="Bold"
-                TextColor="Black"
-                HorizontalOptions="Start"
-                Command="{Binding AddItemCommand}" 
-                FontSize="Default"
-                Margin="10,10,10,10"/>
+                </Button>
+
+                <Button  HorizontalOptions="Start" WidthRequest="150"  Text="{x:Static resx:AppResources.DodajNaRacun}" Command="{Binding AddItemCommand}"   Margin="5,0,0,0">
+                    <Button.ImageSource>
+                        <FileImageSource File="new_window.png" />
+                    </Button.ImageSource>
+
+                </Button>
+
+
 
                 <SearchBar Placeholder="{x:Static resx:AppResources.PretragaTarifa}" 
-                   BackgroundColor="LightGray"
-                             Opacity="0.7"
-                    PlaceholderColor="Black"
+                   BackgroundColor="#F8F8F8"
                    SearchCommand="{Binding SearchCommand}"
                    Text="{Binding SearchText}"
-                   WidthRequest="400"
-                   HorizontalOptions="Start"
+                   MinimumWidthRequest="200"
+                   HorizontalOptions="Fill"
                    Margin="10,10,10,10"
-                   FontSize="Default" />
+                 />
 
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="10,0,0,10" Text="{x:Static resx:AppResources.NemaRPretrage}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}" TextColor="Black" VerticalOptions="Center" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="10,0,0,10" Text="{x:Static resx:AppResources.PovezivanjeFalse}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}" TextColor="Black" VerticalOptions="Center" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="10,10,0,10" Text="{x:Static resx:AppResources.NemaRPretrage}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}" TextColor="Black" VerticalTextAlignment="Center" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="10,10,0,10" Text="{x:Static resx:AppResources.PovezivanjeFalse}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}" TextColor="Black" VerticalTextAlignment="Center" />
 
-             
+
             </HorizontalStackLayout>
 
-       
+            <ScrollView Grid.Row="2" Margin="0,10,0,0" MinimumHeightRequest="800" MaximumHeightRequest="1200"  >
+                <syncfusion:SfListView x:Name="listView" 
+                   ItemsSource="{Binding TariffItems}" SelectedItem="{Binding SelectedItem}" SelectionMode="Single" IsStickyHeader="True" >
 
-        <Grid   >
-            <Grid.Resources>
-                <Style TargetType="Label">
-                    <Setter Property="TextColor" Value="Black" />
-                </Style>
-            </Grid.Resources>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="Auto" />
-
-            </Grid.ColumnDefinitions>
-
-                <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="0" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="{x:Static resx:AppResources.Tbr}" Margin="0,0,0,5" HorizontalOptions="Start" Padding="20,0,0,0" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="1" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="{x:Static resx:AppResources.Bodovi}"   HorizontalOptions="Center" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Grid.Column="2" VerticalOptions="Center" FontAttributes="Bold" FontSize="Default" Text="{x:Static resx:AppResources.Radnja}" Margin="0,0,0,0" />
-
-        </Grid>
-        </VerticalStackLayout>
-
-        <!-- Scrollable ListView -->
-        <ScrollView Grid.Row="1">
-            <ListView Margin="0,0,0,0" ItemsSource="{Binding TariffItems}" ItemSelected="ListViewItemSelected"  >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid BackgroundColor="White">
-                                <Grid.Resources>
-                                    <Style TargetType="Label">
-                                        <Setter Property="TextColor" Value="Black" />
-                                    </Style>
-                                </Grid.Resources>
-
+                    <syncfusion:SfListView.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid >
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
-
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="100" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Style="{StaticResource ShadowLabelStyle}" Margin="0,5,0,5" VerticalOptions="Center" Grid.Row="1" Grid.Column="0" FontSize="Default" Text="{Binding oznaka}" HorizontalOptions="Start"  Padding="20,0,0,0" />
-                                <Label Style="{StaticResource ShadowLabelStyle}" Margin="0,5,0,5" VerticalOptions="Center" Grid.Row="1" Grid.Column="1" FontSize="Default" Text="{Binding bodovi}" HorizontalOptions="Center" />
-                                <Label Style="{StaticResource ShadowLabelStyle}" Margin="0,5,0,5" VerticalOptions="Center" Grid.Row="1" Grid.Column="2" FontSize="Default" Text="{Binding concatenated_name}" WidthRequest="2000" HorizontalOptions="Start" />
-
-                                <BoxView Margin="0,24,0,0" Grid.Row="1" Grid.ColumnSpan="7" BackgroundColor="Red" HeightRequest="1"  />
-
+                                <Label Grid.Column="0"  Text="TBR" FontSize="Default" FontAttributes="Bold" Margin="20,0,0,0" />
+                                <Label Grid.Column="1" Text="Bodovi" FontSize="Default" FontAttributes="Bold" />
+                                <Label Grid.Column="2" Text="Naziv" FontSize="Default" FontAttributes="Bold" />
                             </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                        </DataTemplate>
+                    </syncfusion:SfListView.HeaderTemplate>
+                    <syncfusion:SfListView.ItemTemplate>
 
-        </ScrollView>
-        
-        
+                            <DataTemplate>
+                            <Grid BackgroundColor="{Binding .,Converter={StaticResource IndexToColorConverter},ConverterParameter={x:Reference Name=listView}}" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+
+
+                                <Label Grid.Column="0" Text="{Binding oznaka}" VerticalOptions="Center" Margin="20,0,0,0"  />
+                                <Label Grid.Column="1" Text="{Binding bodovi}" VerticalOptions="Center"  />
+                                <Label Grid.Column="2" Text="{Binding concatenated_name}" VerticalOptions="Center"  LineBreakMode="NoWrap" />
+                            </Grid>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+                </syncfusion:SfListView>
+            </ScrollView>
+
+
+        </VerticalStackLayout>
+
+
+
+
+
     </Grid>
 
 </ContentPage> 

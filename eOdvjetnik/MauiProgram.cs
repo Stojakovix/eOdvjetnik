@@ -12,6 +12,7 @@ using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using eOdvjetnik.ViewModel;
+//using Microsoft.UI;
 
 namespace eOdvjetnik;
 public static class MauiProgram
@@ -29,18 +30,30 @@ public static class MauiProgram
             {
                 //fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 //fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                fonts.AddFont("SF - Pro - Display - Bold.otf", "SFUIDisplay-Thin");
+                fonts.AddFont("SF-Pro-Text-Light.otf", "SF-Pro-Text-Light");
+                fonts.AddFont("SFUIDisplay-Ultralight.otf", "SFUIDisplay-Ultralight");
+                fonts.AddFont("SFUIDisplay-Light.otf", "SFUIDisplay-Light");
+                fonts.AddFont("SF-Pro-Display-Black.otf", "SF-Pro-Display-Black");
+                fonts.AddFont("SF-Pro-Text-Medium.otf", "SF-Pro-Text-Medium");
+                fonts.AddFont("SF-Pro-Text-Bold.otf", "SF-Pro-Text-Bold");
+                fonts.AddFont("SF-Pro-Display-Bold.otf", "SF-Pro-Display-Bold");
+                fonts.AddFont("SF-Pro-Display-Semibold.otf", "SF-Pro-Display-Semibold");
+
+
+
+
 
             });
 
         builder
             .UseMauiApp<App>();
 
-        builder.Services.AddSingleton<Dokumenti>();
+        builder.Services.AddTransient<Dokumenti>();
         builder.Services.AddTransient<DocsItemPage>();
+        builder.Services.AddTransient<DocsViewModel>();
 
         builder.Services.AddSingleton<Kalendar>();
-        builder.Services.AddSingleton<KalendarViewModel>();
+        builder.Services.AddTransient<KalendarViewModel>();
         builder.Services.AddTransient<AppointmentDialog>();
         
 

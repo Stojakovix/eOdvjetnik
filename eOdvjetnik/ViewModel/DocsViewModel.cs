@@ -22,30 +22,44 @@ namespace eOdvjetnik.ViewModel
 {
     public class DocsViewModel : INotifyPropertyChanged
     {
-        private Navigacija navigacija;
-        SMBConnect sMBConnect = new SMBConnect();
 
-        private ObservableCollection<RootShare> rootShares;
+        //Varijable za SMB preferences
+        private const string IP_nas = "IP Adresa";
+        private const string USER_nas = "Korisničko ime";
+        private const string PASS_nas = "Lozinka";
+        private const string FOLDER_nas = "Folder";
+        private const string SUBFOLDER_nas = "SubFolder";
+
+
+        SMBConnect sMBConnect = new SMBConnect();
+        public ICommand RefreshButton { get; set; }
+
+        public ObservableCollection<RootShare> rootShares;
         public ObservableCollection<RootShare> RootShares
         {
             get => rootShares;
-            set
-            {
-                rootShares = value;
-                OnPropertyChanged(nameof(RootShares));
-            }
+            //set
+            //{
+            //    rootShares = value;
+            //    OnPropertyChanged(nameof(RootShares));
+            //}
         }
 
-        private ObservableCollection<DocsItem> items;
+        public ObservableCollection<DocsItem> items;
+
+
         public ObservableCollection<DocsItem> Items
         {
+
             get => items;
             set
             {
                 items = value;
+
                 OnPropertyChanged(nameof(Items));
             }
         }
+
 
         private const string IP = "IP Adresa";
         private const string USER = "Korisničko ime";
@@ -55,14 +69,25 @@ namespace eOdvjetnik.ViewModel
 
         public DocsViewModel()
         {
-            navigacija = new Navigacija();
+
+
+            RefreshButton = new Command(RefreshButtonClick);
             Items = new ObservableCollection<DocsItem>();
-            RootShares = new ObservableCollection<RootShare>();
+            //RootShares = new ObservableCollection<RootShare>();
             ConnectAndFetchDocumentsAsync();
-            
+
 
         }
+        public void RefreshButtonClick()
+        {
 
+            //RootShares.Clear();
+            ConnectAndFetchDocumentsAsync();
+            //Items.Clear();
+            //rootShares.Clear();
+
+
+        }
         public void GetDocuments()
         {
             try
@@ -78,8 +103,17 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
+
+
+                items.Clear();
+                if (Items == null) { } else { Items.Clear(); }
+                if (rootShares == null) { } else { rootShares.Clear(); }
+                if (RootShares == null) { } else { RootShares.Clear(); }
+                if (RootShares == null) { } else { RootShares.Clear(); }
+
+
                 //Ispis svega na putanji
-                List<QueryDirectoryFileInformation> fileList = sMBConnect.ListPath(@"Users");
+                List<QueryDirectoryFileInformation> fileList = sMBConnect.ListPath(Preferences.Get(SUBFOLDER_nas, ""));
 
                 //Root share list
                 List<string> shares = sMBConnect.getRootShare();
@@ -100,27 +134,29 @@ namespace eOdvjetnik.ViewModel
 
                 foreach (FileDirectoryInformation file in fileList)
                 {
-                   //Debug.WriteLine($"Filename: {file.FileName}");
-                   //Debug.WriteLine($"File Attributes: {file.FileAttributes}");
-                   //Debug.WriteLine($"File -------: {file.NextEntryOffset}");
-                   //Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
-                   //Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
-                   //Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
-                   //Debug.WriteLine("----------End of Folder/file-----------");
-                   //Debug.WriteLine("---------------------Before foreach");
+                    //Debug.WriteLine($"Filename: {file.FileName}");
+                    //Debug.WriteLine($"File Attributes: {file.FileAttributes}");
+                    //Debug.WriteLine($"File -------: {file.NextEntryOffset}");
+                    //Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
+                    //Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
+                    //Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
+                    //Debug.WriteLine("----------End of Folder/file-----------");
+                    //Debug.WriteLine("---------------------Before foreach");
 
-                    if (file.FileName == "." || file.FileName == "..") 
+                    if (file.FileName == "." || file.FileName == "..")
                     {
 
                     }
-                    else { 
+                    else
+                    {
                         var icon = "blank.png";
 
                         if (file.FileAttributes.ToString("f") == "Directory")
                         {
                             icon = "folder_1484.png";
                         }
-                        else {
+                        else
+                        {
 
                             icon = Path.GetExtension(file.FileName).TrimStart('.') + ".png";
 
@@ -146,16 +182,20 @@ namespace eOdvjetnik.ViewModel
                             Changed = file.LastWriteTime,
                             Icon = icon,
                             Created = file.CreationTime,
-                            Size = $"{ file.AllocationSize / 1024 } KB",
+                            Size = $"{file.AllocationSize / 1024} KB",
 
                         };
                         items.Add(fileData);
 
+
                     }
-                  
+
 
                 }
-
+                Debug.WriteLine(items.Count());
+                //items.Clear();
+                //Items = new ObservableCollection<DocsItem>();
+                Debug.WriteLine("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
                 foreach (var file1 in shares)
                 {
                     //Debug.WriteLine(file1.Length.ToString());
@@ -168,7 +208,10 @@ namespace eOdvjetnik.ViewModel
                         Name = file1.ToString(),
 
                     };
-                    rootShares.Add(fileData);
+                    //rootShares.Add(fileData);
+                    fileList.Clear();
+                    fileData = null;
+
                 }
 
                 //Debug.WriteLine("----------------------------------------------------------------");
@@ -179,7 +222,8 @@ namespace eOdvjetnik.ViewModel
                 //Debug.WriteLine(ex.StackTrace);
 
             }
-
+            //items.Clear();
+            //Items.Clear();
         }
         public async Task OpenFile(string fileName)
         {
@@ -200,6 +244,9 @@ namespace eOdvjetnik.ViewModel
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+
+
         }
     }
 }

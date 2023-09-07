@@ -5,11 +5,18 @@
              xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
+            xmlns:local="clr-namespace:ListViewMaui"
              Title="Datoteka Osoba">
     <ContentPage.BindingContext>
         <viewmodel:KlijentiViewModel/>
     </ContentPage.BindingContext>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:IndexToColorConverter x:Key="IndexToColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -65,58 +72,35 @@
                 <CheckBox Margin="20,0,0,0" Grid.Column="11" Grid.Row="1" IsChecked="{Binding ClientLegalPerson}"  />
 
             </Grid>
-            
+
             <HorizontalStackLayout >
 
-                <Button 
-                BorderColor="DarkGray"
-                BorderWidth="1"
-                BackgroundColor="#5ac8fa"
-                Text="{x:Static resx:AppResources.DodajNaRacun}"
-                FontAttributes="Bold"
-                TextColor="Black"
-                HorizontalOptions="End"
-                Command="{Binding OnReciptClickCommand}" 
-                FontSize="Default"
-                Margin="10,10,10,10"/>
-                <Button 
-                BorderColor="DarkGray"
-                BorderWidth="1"
-                BackgroundColor="#5ac8fa"
-                Text="{x:Static resx:AppResources.DodajNovi}"
-                FontAttributes="Bold"
-                TextColor="Black"
-                HorizontalOptions="End"
-                Command="{Binding OnNoviKlijentClick}" 
-                FontSize="Default"
-                Margin="10,10,10,10"/>
-                <Button 
-                BorderColor="DarkGray"
-                BorderWidth="1"
-                BackgroundColor="#5ac8fa"
-                Text="{x:Static resx:AppResources.NedavnoDodani}"
-                FontAttributes="Bold"
-                TextColor="Black"
-                HorizontalOptions="End"
-                Command="{Binding RefreshContacts}" 
-                FontSize="Default"
-                Margin="10,10,10,10"/>
-                <Button 
-                BorderColor="DarkGray"
-                BorderWidth="1"
-                BackgroundColor="#5ac8fa"
-                Text="{x:Static resx:AppResources.Uredi}"
-                FontAttributes="Bold"
-                TextColor="Black"
-                HorizontalOptions="End"
-                Command="{Binding EditClientButton}" 
-                FontSize="Default"
-                Margin="10,10,10,10"/>
+
+
+                <Button BackgroundColor="#E1DFE1" BorderColor="Black" Text="{x:Static resx:AppResources.DodajNaRacun}" Margin="5,0,0,0" Command="{Binding OnReciptClickCommand}" >
+
+
+                </Button>
+
+                <Button   Text="{x:Static resx:AppResources.DodajNovi}" Margin="5,0,0,0" Command="{Binding OnNoviKlijentClick}" >
+ 
+
+                </Button>
+
+
+                <Button   BorderColor="Black" Text="{x:Static resx:AppResources.NedavnoDodani}" Margin="5,0,0,0" Command="{Binding RefreshContacts}"   >
+
+
+                </Button>
+                <Button BackgroundColor="#E1DFE1"  Text="{x:Static resx:AppResources.Uredi}" Margin="5,0,0,0" HorizontalOptions="End" Command="{Binding EditClientButton}"  >
+
+
+                </Button>
+
 
                 <SearchBar  
-                   BackgroundColor="LightGray"
-                    Opacity="0.5"
-                    PlaceholderColor="Black"
+                   BackgroundColor="#F8F8F8"
+                   PlaceholderColor="Black"
                    Placeholder="{x:Static resx:AppResources.PretragaO}"
                    SearchCommand="{Binding SearchCommand}"
                    Text="{Binding SearchText}"
@@ -125,92 +109,85 @@
                    Margin="10,10,10,10"
                    FontSize="Default" />
 
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="{x:Static resx:AppResources.NemaRPretrage}" FontSize="16" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}"   TextColor="Black" VerticalOptions="Center" Padding="0,10,0,0"/>
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="{x:Static resx:AppResources.PovezivanjeFalse}" FontSize="16" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}"  TextColor="Black" VerticalOptions="Center" Padding="0,10,0,0" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="{Binding ContactDeletedText}" FontSize="16" FontAttributes="Bold" IsVisible="{Binding ContactDeleted}"  TextColor="Black" VerticalOptions="Center" Padding="0,10,0,0" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="30,0,0,10" Text="{Binding ContactEditedText}" FontSize="16" FontAttributes="Bold" IsVisible="{Binding ContactEdited}"  TextColor="Black" VerticalOptions="Center" Padding="0,10,0,0" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,10,0,10" Text="{x:Static resx:AppResources.NemaRPretrage}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}"   TextColor="Black" VerticalTextAlignment="Center" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,10,0,10" Text="{x:Static resx:AppResources.PovezivanjeFalse}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}"  TextColor="Black" VerticalTextAlignment="Center"/>
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,10,0,10" Text="{Binding ContactDeletedText}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding ContactDeleted}"  TextColor="Black" VerticalTextAlignment="Center" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,10,0,10" Text="{Binding ContactEditedText}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding ContactEdited}"  TextColor="Black" VerticalTextAlignment="Center" />
 
 
 
             </HorizontalStackLayout>
 
 
-            <Grid  >
-                <Grid.Resources>
-                    <Style TargetType="Label">
-                        <Setter Property="TextColor" Value="Black" />
-                    </Style>
-                </Grid.Resources>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="25" />
-                    <RowDefinition Height="Auto" />
-
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*"  />
-                    <ColumnDefinition Width="*"  />
-                    <ColumnDefinition Width="*"  />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="20" />
-                </Grid.ColumnDefinitions>
-
-                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="300" Grid.Column="1" FontAttributes="Bold" Text="{x:Static resx:AppResources.Ime}" HorizontalOptions="Start"  />
-                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="100" Grid.Column="2" FontAttributes="Bold" Text="{x:Static resx:AppResources.OIB}" HorizontalOptions="Start"  />
-                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="200" Grid.Column="3" FontAttributes="Bold" Text="{x:Static resx:AppResources.Adresa}" HorizontalOptions="Start"  />
-                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="50" Grid.Column="4" FontAttributes="Bold" Text="{x:Static resx:AppResources.Telefon}" HorizontalOptions="Start" Padding="10,0,0,0" />
-                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="50" Grid.Column="5" FontAttributes="Bold" Text="{x:Static resx:AppResources.Mobitel}" HorizontalOptions="Start"   />
-                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="100" Grid.Column="6" FontAttributes="Bold" Text="{x:Static resx:AppResources.Email}" HorizontalOptions="Start"  />
-
-            </Grid>
-        </StackLayout>
+            <ScrollView Grid.Row="1" Grid.ColumnSpan="5" Margin="0,10,0,0" MinimumHeightRequest="800" MaximumHeightRequest="1200" >
+                <syncfusion:SfListView x:Name="listView" 
+    ItemsSource="{Binding Contacts}" SelectedItem="{Binding SelectedItem}" SelectionMode="Single" IsStickyHeader="True"  >
 
 
-        <ScrollView Grid.Row="1" Grid.ColumnSpan="5" >
-            <ListView ItemsSource="{Binding Contacts}" ItemSelected="ListViewItemSelected"  >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid BackgroundColor="White"  >
-                                <Grid.Resources>
-                                    <Style TargetType="Label">
-                                        <Setter Property="TextColor" Value="Black" />
-                                    </Style>
-                                </Grid.Resources>
-
+                    <syncfusion:SfListView.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid  >
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
-                                </Grid.RowDefinitions>
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="Auto" />
 
+                                </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="20" />
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="150"  />
+                                    <ColumnDefinition Width="3*"  />
                                     <ColumnDefinition Width="*"  />
-                                    <ColumnDefinition Width="*"  />
-                                    <ColumnDefinition Width="*"  />
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="200" />
                                     <ColumnDefinition Width="20" />
                                 </Grid.ColumnDefinitions>
 
-                                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="300" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="1" Text="{Binding Ime}" HorizontalOptions="Start"  />
-                                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="100" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="2" Text="{Binding OIB}"  HorizontalOptions="Start" />
-                                <Label Style="{StaticResource ShadowLabelStyle}" MinimumWidthRequest="200" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="3" Text="{Binding Adresa}"  HorizontalOptions="Start" />
-                                <Label                                           MinimumWidthRequest="50" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="4" Text="{Binding Telefon}"  HorizontalOptions="Start" Padding="10,0,0,0" />
-                                <Label                                           MinimumWidthRequest="50" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="5" Text="{Binding Mobitel}"  HorizontalOptions="Start" />
-                                <Label                                           MinimumWidthRequest="100" Margin="0,8,0,8" LineBreakMode="NoWrap" VerticalOptions="Center" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="6" Text="{Binding Email}"  HorizontalOptions="Start" />
-
-
-                                <BoxView Margin="0,40,0,0" Grid.Row="1" Grid.ColumnSpan="12" BackgroundColor="Red" HeightRequest="1"  />
+                                <Label MinimumWidthRequest="300" Grid.Column="1" FontAttributes="Bold" Text="Ime" HorizontalOptions="Start"  />
+                                <Label MinimumWidthRequest="150" Grid.Column="2" FontAttributes="Bold" Text="OIB" HorizontalOptions="Start"  />
+                                <Label MinimumWidthRequest="200" Grid.Column="3" FontAttributes="Bold" Text="Adresa" HorizontalOptions="Start"  />
+                                <Label MinimumWidthRequest="100" Grid.Column="4" FontAttributes="Bold" Text="Telefon" HorizontalOptions="Start" Padding="10,0,0,0" />
+                                <Label MinimumWidthRequest="100" Grid.Column="5" FontAttributes="Bold" Text="Mobitel" HorizontalOptions="Start"   />
+                                <Label MinimumWidthRequest="200" Grid.Column="6" FontAttributes="Bold" Text="Email" HorizontalOptions="Start"  />
 
                             </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </ScrollView>
+                        </DataTemplate>
+                    </syncfusion:SfListView.HeaderTemplate>
+                    <syncfusion:SfListView.ItemTemplate>
+
+                        <DataTemplate>
+                            <Grid BackgroundColor="{Binding .,Converter={StaticResource IndexToColorConverter},ConverterParameter={x:Reference Name=listView}}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="150"  />
+                                    <ColumnDefinition Width="3*"  />
+                                    <ColumnDefinition Width="*"  />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="20" />
+                                </Grid.ColumnDefinitions>
+
+
+                                <Label VerticalOptions="Center" MinimumWidthRequest="300"  LineBreakMode="NoWrap" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="1" Text="{Binding Ime}" HorizontalOptions="Start"  />
+                                <Label VerticalOptions="Center" MinimumWidthRequest="150" LineBreakMode="NoWrap" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="2" Text="{Binding OIB}"  HorizontalOptions="Start" />
+                                <Label VerticalOptions="Center" MinimumWidthRequest="200" LineBreakMode="NoWrap" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="3" Text="{Binding Adresa}"  HorizontalOptions="Start" />
+                                <Label VerticalOptions="Center" MinimumWidthRequest="100" LineBreakMode="NoWrap" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="4" Text="{Binding Telefon}"  HorizontalOptions="Start"  />
+                                <Label VerticalOptions="Center" MinimumWidthRequest="100" LineBreakMode="NoWrap" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="5" Text="{Binding Mobitel}"  HorizontalOptions="Start" />
+                                <Label VerticalOptions="Center" MinimumWidthRequest="200" LineBreakMode="NoWrap" Grid.Row="1" MaximumHeightRequest="30" Grid.Column="6" Text="{Binding Email}"  HorizontalOptions="Start" />
+                            </Grid>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+                </syncfusion:SfListView>
+            </ScrollView>
+
+
+
+        </StackLayout>
     </Grid>
 
 </ContentPage>

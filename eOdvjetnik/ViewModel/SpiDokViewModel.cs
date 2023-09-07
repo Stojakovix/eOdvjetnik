@@ -10,16 +10,18 @@ using eOdvjetnik.Data;
 using eOdvjetnik.Models;
 using eOdvjetnik.Services;
 using System.Windows.Input;
-
+using System.Reflection;
 
 
 namespace eOdvjetnik.ViewModel
 {
     public class SpiDokViewModel : INotifyPropertyChanged
     {
-        private Navigacija navigacija;
+        
 
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+        public int ListItemId { get; set; }
+        public string StringIcon { get; set; }
 
         private ObservableCollection<SpiDokItem> spiDokItems;
         public ObservableCollection<SpiDokItem> SpiDokItems
@@ -39,9 +41,11 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                navigacija = new Navigacija();
+                Debug.WriteLine("inicijalizirano u spidokViewModelu");
                 spiDokItems = new ObservableCollection<SpiDokItem>();
                 GenerateFiles();
+
+
             }
             catch (Exception ex)
             {
@@ -49,14 +53,17 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
+
         public void GenerateFiles()
         {
             try
             {
-                //spiDokItems.Clear();
 
+                spiDokItems.Clear();
+                ListItemId = int.Parse(Preferences.Get("listItemId", ""));
+                Debug.WriteLine(ListItemId);
                 //string query = "SELECT * FROM files ORDER BY id DESC LIMIT 100;";
-                string query = "SELECT * FROM `documents` where file_id=11273 ORDER BY `id` DESC";
+                string query = $"SELECT * FROM `documents` where file_id='{ListItemId}' ORDER BY `id` DESC";
 
                 // Debug.WriteLine(query + "u SpisiViewModelu");
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
@@ -82,6 +89,7 @@ namespace eOdvjetnik.ViewModel
                         DateTime.TryParse(filesRow["datum_kreiranja_dokumenta"], out datumKreiranjaDokumenta);
                         DateTime.TryParse(filesRow["datum_izmjene_dokumenta"], out datumIzmjeneDokumenta);
                         #endregion
+                        
                         spiDokItems.Add(new SpiDokItem()
                         {
                             Id = id,
@@ -106,17 +114,81 @@ namespace eOdvjetnik.ViewModel
                             EmailAdrese = filesRow["email_adrese"],
                             Kreirao = filesRow["kreirao"],
                             ZadnjeUredio = filesRow["zadnje_uredio"],
+                            Icon = StringIcon,
                         });
+
+
+                        if (SpiDokItems != null)
+                        {
+                            //Debug.WriteLine(spiDokItems.ToList());
+                            Assembly assembly = typeof(SpiDokViewModel).Assembly;
+                            List<string> resourceNames = new List<string>();
+                            string resourceNamePrefix = "eOdvjetnik.Resources."; // Replace with your app's actual namespace and "Resources." prefix
+
+                            string[] allResourceNames = assembly.GetManifestResourceNames();
+                            resourceNames.AddRange(allResourceNames.Where(name => name.StartsWith(resourceNamePrefix)));
+
+
+                            //resourceNames.AddRange(allResourceNames.Where(name => name.StartsWith(resourceNamePrefix)));
+
+                            StringIcon = "blank.png";
+                            //StringIcon = Path.GetExtension(file.FileName).TrimStart('.') + ".png";
+
+                            bool imageExists = resourceNames.Contains("eOdvjetnik.Resources.Images." + StringIcon);
+
+                            foreach (var item in spiDokItems)
+                            {
+                                if (item.Dokument != null)
+                                {
+                                    //Debug.WriteLine(item.Icon + " naziv spidok ikone");
+                                    if (imageExists)
+                                    {
+                                        StringIcon = Path.GetExtension(item.Dokument).TrimStart('.') + ".png";
+                                        if (item.Icon == null || item.Dokument == null)
+                                        {
+                                            StringIcon = "blank.png";
+                                            Debug.WriteLine("u else ifu " + StringIcon);
+                                        }
+                                        //Debug.WriteLine("u ifu " + StringIcon);
+                                        //Debug.WriteLine("u ifu " + item.Dokument);
+                                        //Debug.WriteLine(item.Kreirao);
+                                    }
+
+                                    //else if (item.Icon == null)
+                                    //{
+                                    //    StringIcon = "blank.png";
+                                    //    Debug.WriteLine("u else ifu " + StringIcon);
+                                    //}
+
+                                    else
+                                    {
+                                        StringIcon = "blank.png";
+                                        Debug.WriteLine("u elseu " + StringIcon);
+                                    }
+                                }
+                                else
+                                {
+                                    StringIcon = "blank.png";
+                                    Debug.WriteLine("u elseu " + StringIcon);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Debug.WriteLine("Kolekcija prazna");
+                        }
                         //initialFileItems = new ObservableCollection<FileItem>(fileItems);
-                        
+
                     }
                     OnPropertyChanged(nameof(spiDokItems));
-                    Debug.WriteLine(spiDokItems);
+                    
+                    //Debug.WriteLine(spiDokItems);
+                    
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message + "in viewModel generate files");
+                Debug.WriteLine(ex.Message + "in spidok viewModel generate files");
             }
         }
 

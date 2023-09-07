@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.Dokumenti"
              xmlns:viewmodel ="clr-namespace:eOdvjetnik.ViewModel"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             BackgroundColor="#faf9fb"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              Title="Dokumenti">
     <ContentPage.BindingContext>
@@ -16,20 +18,39 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <HorizontalStackLayout Grid.Row="0">
-            <Button Text="Nazad" Margin="5,5,5,10" BackgroundColor="Blue" />
-            <Button Text="Gumb2" Margin="5,5,5,10"  BackgroundColor="Red" />
-            <Entry Margin="5,5,5,10" Text="\Users\user\Spisi" MinimumWidthRequest="400" Placeholder="Enter text here" />
-            <Button Text="Gumb2" Margin="5,5,5,10"  BackgroundColor="Green" />
+        <HorizontalStackLayout Grid.Row="0" >
+
+            <Button Text="Home" Margin="5,0,0,0" Command="{Binding RefreshButton}">
+                <Button.ImageSource>
+                    <FileImageSource File="home.png" />
+                </Button.ImageSource>
+
+            </Button>
+            <Button Text="Nazad" Margin="5,0,0,0" Clicked="Button_Clicked_nazad">
+                <Button.ImageSource>
+                    <FileImageSource File="left.png" />
+                </Button.ImageSource>
+
+
+            </Button>
+
+            <Entry Margin="5,0,0,0" Text="{Binding textEntry}" MinimumWidthRequest="300" x:Name="textEntry2" />
+
+            <Button Text="Otvori" Margin="5,0,0,0" Clicked="Button_Clicked_otvori">
+                <Button.ImageSource>
+                    <FileImageSource File="new_window.png" />
+                </Button.ImageSource>
+
+            </Button>
         </HorizontalStackLayout>
-        
-        
-        
+
+
+
         <!-- Header -->
 
-        <VerticalStackLayout Grid.Row="1" >
-           
-            <Grid>
+                    <VerticalStackLayout Grid.Row="1" >
+
+            <Grid  BackgroundColor="#faf9fb">
                 <Grid.Resources>
                     <Style TargetType="Label">
                         <Setter Property="TextColor" Value="Black" />
@@ -56,47 +77,36 @@
             </Grid>
         </VerticalStackLayout>
 
+
+        <syncfusion:SfListView x:Name="listaDokumenata"  Grid.Row="2"
+           ItemsSource="{Binding Items}"
+    >
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Margin="0,0,0,10" Grid.Column="0" Source="{Binding Icon}" WidthRequest="50" HeightRequest="50" Aspect="Fill"/>
+                        <Label Margin="0,0,0,10" Grid.Column="1" VerticalOptions="Center"  FontSize="Default" x:Name="DocumentLabel" Text="{Binding Name}" HorizontalOptions="Start" />
+                        <Label Margin="0,0,0,10" Grid.Column="2" VerticalOptions="Center"  FontSize="Default" Text="{Binding Size}" HorizontalOptions="Start"   />
+                        <Label Margin="0,0,0,10" Grid.Column="3" VerticalOptions="Center"  FontSize="Default" Text="{Binding Created}" HorizontalOptions="Start"  />
+                        <Label Margin="0,0,0,10" Grid.Column="4" VerticalOptions="Center"  FontSize="Default" Text="{Binding Changed}" HorizontalOptions="Start"  />
+                    </Grid>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+        </syncfusion:SfListView>
+
         <!-- Scrollable ListView -->
-        <ScrollView Grid.Row="2">
-            <ListView Margin="0,0,0,0" ItemsSource="{Binding Items}" x:Name="listaDokumenata" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid BackgroundColor="White">
-                                <Grid.Resources>
-                                    <Style TargetType="Label">
-                                        <Setter Property="TextColor" Value="Black" />
-                                    </Style>
-                                </Grid.Resources>
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition Width="3*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-
-                                </Grid.ColumnDefinitions>
-
-                                <Image Margin="0,0,0,10" Grid.Row="1" Grid.Column="0" Source="{Binding Icon}" WidthRequest="50" HeightRequest="50" Aspect="Fill"/>
-                                <Label Margin="0,0,0,10" Grid.Row="1" Grid.Column="1" VerticalOptions="Center"  FontSize="Default" x:Name="DocumentLabel" Text="{Binding Name}" HorizontalOptions="Start" />
-                                <Label Margin="0,0,0,10" Grid.Row="1" Grid.Column="2" VerticalOptions="Center"  FontSize="Default" Text="{Binding Size}" HorizontalOptions="Start"   />
-                                <Label Margin="0,0,0,10" Grid.Row="1" Grid.Column="3" VerticalOptions="Center"  FontSize="Default" Text="{Binding Created}" HorizontalOptions="Start"  />
-                                <Label Margin="0,0,0,10" Grid.Row="1" Grid.Column="4" VerticalOptions="Center"  FontSize="Default" Text="{Binding Changed}" HorizontalOptions="Start"  />
-
-
-
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-        </ScrollView>
 
 
     </Grid>

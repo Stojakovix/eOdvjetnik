@@ -4,6 +4,7 @@
              x:Class="eOdvjetnik.Views.SpiDok"
              xmlns:viewModel="clr-namespace:eOdvjetnik.ViewModel"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              Title="SpiDok">
 
     <ContentPage.BindingContext>
@@ -11,18 +12,68 @@
     </ContentPage.BindingContext>
 
     <ScrollView>
-        <VerticalStackLayout>
-            <Grid RowDefinitions="*,Auto">
+        <syncfusion:SfListView x:Name="listView" 
+       ItemsSource="{Binding SpiDokItems}" >
+
+            <syncfusion:SfListView.HeaderTemplate>
+                <DataTemplate>
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0"  Text=""/>
+                        <Label Grid.Column="1" Text="Referenca" FontSize="Default" FontAttributes="Bold" />
+                        <Label Grid.Column="2" Text="Dokument" FontSize="Default" FontAttributes="Bold" />
+                    </Grid>
+                </DataTemplate>
+            </syncfusion:SfListView.HeaderTemplate>
+            
+            <syncfusion:SfListView.ItemTemplate>
+                
+                <DataTemplate>
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="{Binding Icon}"  Aspect="Fill" Margin="0,0,10,0"/>
+                        <Label Grid.Column="1" Text="{Binding Referenca}" VerticalOptions="Center" LineBreakMode="WordWrap"  />
+                        <Label Grid.Column="2" Text="{Binding Dokument}" VerticalOptions="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+        </syncfusion:SfListView>
+
+        <!--<VerticalStackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Text="Nazad" Clicked="Button_Clicked" Grid.Row="0"/>
                 <ListView ItemsSource="{Binding SpiDokItems}"
                           Margin="20"
                           x:Name="listaDokumenata"
+                          Grid.Row="1"
                           >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal" Padding="2" >
-                                    <Image Source="folder_1484.png" WidthRequest="50" HeightRequest="50" Aspect="Fill"/>
+                                    <Image Source="{Binding Icon}" WidthRequest="50" HeightRequest="50" Aspect="Fill"/>
                                     <Label x:Name="DocumentLabel" Text="{Binding Referenca}" VerticalTextAlignment="Center" Margin="10,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" TextColor="Black"/>
+                                    <Label x:Name="DokumentName" Text="{Binding Dokument}" VerticalTextAlignment="Center" Margin="10,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" TextColor="Black"/>
 
                                 </StackLayout>
                             </ViewCell>
@@ -31,6 +82,6 @@
                 </ListView>
 
             </Grid>
-        </VerticalStackLayout>
+        </VerticalStackLayout>-->
     </ScrollView>
 </ContentPage>

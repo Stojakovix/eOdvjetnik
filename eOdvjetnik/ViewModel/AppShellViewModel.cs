@@ -37,6 +37,8 @@ namespace eOdvjetnik.ViewModel
         #region Navigacija
         public ICommand MainClickCommand { get; set; }
         public ICommand KalendarClickCommand { get; set; }
+        public ICommand AdminKalendarClickCommand { get; set; }
+
         public ICommand DokumentiClickCommand { get; set; }
         public ICommand KlijentiClickCommand { get; set; }
         public ICommand NaplataClickCommand { get; set; }
@@ -176,13 +178,17 @@ namespace eOdvjetnik.ViewModel
  
         public bool disableMenu { get; set; }
         #endregion
+
+        public string licence_type { get; set; }
         public AppShellViewModel()
 		{
+            licence_type = Preferences.Get("licence_type", "");
             #region Navigacija komande
 
             MainClickCommand = new Command(OnMainClick);
 			KalendarClickCommand = new Command(OnKalendarClick);
-			DokumentiClickCommand = new Command(OnDokumentiClick);
+            AdminKalendarClickCommand = new Command(OnAdminKalendarClick);
+            DokumentiClickCommand = new Command(OnDokumentiClick);
             KlijentiClickCommand = new Command(OnKlijentiClick);
             NaplataClickCommand = new Command(OnNaplataClick);
             SpisiClickCommand = new Command(OnSpisiClick);
@@ -283,6 +289,28 @@ namespace eOdvjetnik.ViewModel
                 if (disableMenu == false)
                 {
                     await Shell.Current.GoToAsync("//Kalendar");
+                    Debug.WriteLine("KLIKNO");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine(ex.Message);
+            }
+        }
+        private async void OnAdminKalendarClick()
+        {
+            try
+            {
+                DisableMenu();
+                 
+                int numberOfCharacters = 5;
+                string adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
+                Debug.WriteLine("Kalendar ResourceView - 'Admin' provjera: " + adminCheck);
+
+                if (disableMenu == false && adminCheck == "Admin")
+                {
+                    await Shell.Current.GoToAsync("//AdminKalendar");
                     Debug.WriteLine("KLIKNO");
                 }
             }
@@ -608,6 +636,8 @@ namespace eOdvjetnik.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+      
     }
 }
 

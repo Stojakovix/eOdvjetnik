@@ -5,9 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <LinearGradientBrush x:Key="GridGradientBackground" EndPoint="0,2">
 
-        <GradientStop Color="White" Offset="0.6"/>
-        <GradientStop Color="LightGray" Offset="0.3" />
-        <GradientStop Color="White" Offset="1.0"/>
+        <GradientStop Color="#fff" Offset="0.05"/>
+        <GradientStop Color="black" Offset="10" />
+        <GradientStop Color="#faf9fb" Offset="0.5" />
 
     </LinearGradientBrush>
     <Style TargetType="Label" x:Key="ShadowLabelStyle">
@@ -40,15 +40,16 @@
     </Style>
 
     <Style TargetType="Button">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Primary}}" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
-        <Setter Property="FontFamily" Value="SFUIDisplay-Light"/>
-        <Setter Property="FontSize" Value="10"/>
-        <Setter Property="CornerRadius" Value="8"/>
-        <Setter Property="Padding" Value="14,10"/>
-        <Setter Property="MinimumHeightRequest" Value="25"/>
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
+        <Setter Property="FontFamily" Value="SF-Pro-Display-Semibold"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="CornerRadius" Value="16"/>
+        <Setter Property="Padding" Value="30,4,30,5"/>
+        <Setter Property="MinimumHeightRequest" Value="35"/>
+        <Setter Property="MaximumHeightRequest" Value="35"/>
         <Setter Property="MinimumWidthRequest" Value="25"/>
-        
+        <Setter Property="MaximumWidthRequest" Value="250"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
@@ -92,7 +93,7 @@
     <Style TargetType="DatePicker">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="SFUIDisplay-Light"/>
+        <Setter Property="FontFamily" Value="SFUIDisplay - Light"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="MinimumHeightRequest" Value="44"/>
         <Setter Property="MinimumWidthRequest" Value="44"/>
@@ -113,7 +114,7 @@
     <Style TargetType="Editor">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="SFUIDisplay-Light"/>
+        <Setter Property="FontFamily" Value="SFUIDisplay - Light"/>
         <Setter Property="FontSize" Value="14" />
         <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
         <Setter Property="MinimumHeightRequest" Value="44"/>
@@ -133,20 +134,21 @@
     </Style>
 
     <Style TargetType="Entry">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource Black}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="SFUIDisplay-Light"/>
+        <Setter Property="FontFamily" Value="SFUIDisplay - Light"/>
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
-        <Setter Property="MinimumHeightRequest" Value="44"/>
-        <Setter Property="MinimumWidthRequest" Value="44"/>
+        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray500}}" />
+        <Setter Property="MinimumHeightRequest" Value="35"/>
+        <Setter Property="HeightRequest" Value="40"/>
+        <Setter Property="MinimumWidthRequest" Value="35"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
                     <VisualState x:Name="Normal" />
                     <VisualState x:Name="Disabled">
                         <VisualState.Setters>
-                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray600}}" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>
@@ -196,7 +198,7 @@
     <Style TargetType="Label">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="SFUIDisplay-Light" />
+        <Setter Property="FontFamily" Value="SFUIDisplay - Light" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
@@ -221,7 +223,7 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
         <Setter Property="TitleColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="SFUIDisplay-Light"/>
+        <Setter Property="FontFamily" Value="SFUIDisplay - Light"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="MinimumHeightRequest" Value="44"/>
         <Setter Property="MinimumWidthRequest" Value="44"/>
@@ -259,7 +261,7 @@
     <Style TargetType="RadioButton">
         <Setter Property="BackgroundColor" Value="Transparent"/>
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-        <Setter Property="FontFamily" Value="SFUIDisplay-Light"/>
+        <Setter Property="FontFamily" Value="SFUIDisplay - Light"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="MinimumHeightRequest" Value="44"/>
         <Setter Property="MinimumWidthRequest" Value="44"/>
@@ -286,10 +288,13 @@
         <Setter Property="PlaceholderColor" Value="{StaticResource Gray500}" />
         <Setter Property="CancelButtonColor" Value="{StaticResource Gray500}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="SFUIDisplay-Light" />
+        <Setter Property="FontFamily" Value="SFUIDisplay - Light" />
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="MinimumHeightRequest" Value="44"/>
-        <Setter Property="MinimumWidthRequest" Value="44"/>
+        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray500}}" />
+        <Setter Property="MinimumHeightRequest" Value="35"/>
+        <Setter Property="HeightRequest" Value="40"/>
+        <Setter Property="MinimumWidthRequest" Value="35"/>
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
@@ -309,7 +314,7 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
         <Setter Property="PlaceholderColor" Value="{StaticResource Gray500}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="SFUIDisplay-Light" />
+        <Setter Property="FontFamily" Value="SFUIDisplay - Light" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
@@ -389,7 +394,7 @@
     <Style TargetType="TimePicker">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent"/>
-        <Setter Property="FontFamily" Value="SFUIDisplay-Light"/>
+        <Setter Property="FontFamily" Value="SFUIDisplay - Light"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="MinimumHeightRequest" Value="44"/>
         <Setter Property="MinimumWidthRequest" Value="44"/>
@@ -416,16 +421,17 @@
     </Style>
 
     <Style TargetType="Shell" ApplyToDerivedTypes="True">
-        <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray100}}" />
-        <Setter Property="Shell.ForegroundColor" Value="{OnPlatform WinUI={StaticResource Primary}, Default={StaticResource White}}" />
+        <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
+        <Setter Property="Shell.ForegroundColor" Value="{OnPlatform WinUI={StaticResource White}, Default={StaticResource White}}" />
         <Setter Property="Shell.TitleColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
         <Setter Property="Shell.DisabledColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="Shell.UnselectedColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray200}}" />
         <Setter Property="Shell.NavBarHasShadow" Value="False" />
         <Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
         <Setter Property="Shell.TabBarForegroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
-        <Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+        <Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource Black}}" />
         <Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
+
     </Style>
 
     <Style TargetType="NavigationPage">
