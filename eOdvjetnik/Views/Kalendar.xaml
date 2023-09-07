@@ -16,8 +16,6 @@
     </ContentPage.BindingContext>-->
 
     <ContentPage.Resources>
-
-
      
         <DataTemplate x:Key="AppointmentTemplate"  >
             <!--Ne koristit Frame, nema podršku za dynamic data binding, koristi border-->
@@ -89,8 +87,10 @@
                                TodayHighlightBrush="Red"
                                EnableReminder="True"  
                                SelectedAppointmentBackground="transparent"
-                               AllowedViews="Day,Week,WorkWeek,Month,Agenda,TimelineMonth,TimelineDay"
-                               View="Month" AllowViewNavigation="True"
+                               AllowedViews="Day,Week,WorkWeek,Month,Agenda,TimelineMonth"
+                               View="TimelineMonth"
+                               AllowViewNavigation="True"
+                               
                                >
             
             

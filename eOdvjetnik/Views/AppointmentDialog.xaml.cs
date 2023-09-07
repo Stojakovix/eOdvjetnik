@@ -53,28 +53,39 @@ public partial class AppointmentDialog : ContentPage
     public string DevicePlatform { get; set; }
     public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler)
     {
+        try
+        {
 
-        InitializeComponent();
-        this.appointment = appointment;
-        this.selectedDate = selectedDate;
-        this.scheduler = scheduler;
-        //ResourceId = resourceId;
-        //Debug.WriteLine("Resource id " + resourceId);
+            InitializeComponent();
 
-        eventNameText.Placeholder = "Unesite naziv...";
-        organizerText.Placeholder = "Unesite opis...";
 
-        UpdateEditor();
-        //saveButton.Clicked += SaveButton_Clicked;
-        //cancelButton.Clicked += CancelButton_Clicked;
-        switchAllDay.Toggled += SwitchAllDay_Toggled;
-        //DeleteButton.Clicked += DeleteButton_Clicked;
+            this.appointment = appointment;
+            this.selectedDate = selectedDate;
+            this.scheduler = scheduler;
+            ResourceId = int.Parse(Preferences.Get("resourceId", ""));
+            Debug.WriteLine("Resource id " + ResourceId);
 
-        categoryPicker.SelectedIndexChanged += OnCategoryPickerSelectedIndexChanged;
-        DevicePlatform = Preferences.Get("vrsta_platforme", "");
+            eventNameText.Placeholder = "Unesite naziv...";
+            organizerText.Placeholder = "Unesite opis...";
 
-        SQLUserID = Preferences.Get("UserID", "");
-        Debug.WriteLine("-------------------------------- " + SQLUserID);
+            UpdateEditor();
+            //saveButton.Clicked += SaveButton_Clicked;
+            //cancelButton.Clicked += CancelButton_Clicked;
+            switchAllDay.Toggled += SwitchAllDay_Toggled;
+            //DeleteButton.Clicked += DeleteButton_Clicked;
+
+            categoryPicker.SelectedIndexChanged += OnCategoryPickerSelectedIndexChanged;
+            DevicePlatform = Preferences.Get("vrsta_platforme", "");
+
+            SQLUserID = Preferences.Get("UserID", "");
+            Debug.WriteLine("-------------------------------- " + SQLUserID);
+        }
+
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message + "U AppointmentDialog konstruktoru");
+            Debug.WriteLine("Resource id " + ResourceId);
+        }
     }
     private void OnCategoryPickerSelectedIndexChanged(object sender, EventArgs e)
     {
@@ -82,6 +93,7 @@ public partial class AppointmentDialog : ContentPage
         eventNameText.BackgroundColor = selectedColorItem.BojaPozadine;
         AppoitmentColor = selectedColorItem.BojaPozadine;
         AppoitmentColorName = selectedColorItem.NazivBoje;
+
     }
 
 
@@ -225,10 +237,13 @@ public partial class AppointmentDialog : ContentPage
                             if (DevicePlatform == "MacCatalyst")
                             {
                                 Shell.Current.GoToAsync("//LoadingPage");
+                                viewmodel.AdminLicenceCheck();
                             }
                             else
                             {
                                 Shell.Current.GoToAsync("//Kalendar");
+                                viewmodel.AdminLicenceCheck();
+
                             }
 
 
@@ -241,10 +256,14 @@ public partial class AppointmentDialog : ContentPage
                         if (DevicePlatform == "MacCatalyst")
                         {
                             Shell.Current.GoToAsync("//LoadingPage");
+                            viewmodel.AdminLicenceCheck();
+
                         }
                         else
                         {
                             Shell.Current.GoToAsync("//Kalendar");
+                            viewmodel.AdminLicenceCheck();
+
                         }
                     }
                 }
@@ -270,9 +289,9 @@ public partial class AppointmentDialog : ContentPage
             {
                 try
                 {
-
+                    
                     var hardware_id = Preferences.Get("key", "default_value");
-                    string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, color, user_id, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}', '{AppoitmentColorName}' , '{SQLUserID}' , '{hardware_id}')";
+                    string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, color, user_id, resource_id, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}', '{AppoitmentColorName}' , '{SQLUserID}' , '{ResourceId}' , '{hardware_id}')";
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine(query);
                     Debug.WriteLine("Appointment added to remote server.");
@@ -289,7 +308,7 @@ public partial class AppointmentDialog : ContentPage
                 {
                     AppointmentDetails();
                     var hardware_id = Preferences.Get("key", "default_value");
-                    string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', color = '{AppoitmentColorName}', user_id = '{SQLUserID}', hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
+                    string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', color = '{AppoitmentColorName}',  user_id = '{SQLUserID}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine(query);
                     Debug.WriteLine("Appointment updated in the server");
@@ -302,20 +321,15 @@ public partial class AppointmentDialog : ContentPage
             }
             else
             {
-                try
-                {
+
                     AppointmentDetails();
                     var hardware_id = Preferences.Get("key", "default_value");
-                    string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', user_id = '{SQLUserID}', hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
+                    string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', user_id = '{ResourceId}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine(query);
                     Debug.WriteLine("Appointment updated in the server");
-                }
-                catch (Exception ex)
-                {
+                
 
-                    Debug.WriteLine(ex.Message + " in AppointmentDialog AddAppointmentToServer else");
-                }
             }
         }
         catch (Exception ex)
@@ -336,10 +350,10 @@ public partial class AppointmentDialog : ContentPage
             appointment.IsAllDay = this.switchAllDay.IsToggled;
             appointment.Notes = this.organizerText.Text;
             appointment.Background = AppoitmentColor;
-            //appointment.ResourceIds = new ObservableCollection<object>
-            //{
-            //    (object)ResourceId // Boxing the integer into an object
-            //};
+            appointment.ResourceIds = new ObservableCollection<object>
+            {
+                (object)ResourceId // Boxing the integer into an object
+            };
 
 
             if (this.scheduler.AppointmentsSource == null)
@@ -359,10 +373,10 @@ public partial class AppointmentDialog : ContentPage
             appointment.Notes = this.organizerText.Text;
             AppoitmentColorName = appointment.Location;
             appointment.Background = AppoitmentColor;
-            //appointment.ResourceIds = new ObservableCollection<object>
-            //{
-            //    (object)ResourceId // Boxing the integer into an object
-            //};
+            appointment.ResourceIds = new ObservableCollection<object>
+            {
+                (object)ResourceId // Boxing the integer into an object
+            };
 
         }
 
