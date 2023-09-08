@@ -49,7 +49,7 @@
         <Setter Property="MinimumHeightRequest" Value="35"/>
         <Setter Property="MaximumHeightRequest" Value="35"/>
         <Setter Property="MinimumWidthRequest" Value="25"/>
-        <Setter Property="MaximumWidthRequest" Value="250"/>
+        <Setter Property="MaximumWidthRequest" Value="300"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
