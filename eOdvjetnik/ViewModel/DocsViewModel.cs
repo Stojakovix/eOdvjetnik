@@ -234,7 +234,7 @@ namespace eOdvjetnik.ViewModel
                 //var fileUri = new Uri($"smb://{Preferences.Get(IP, "")}/{Preferences.Get(FOLDER, "")}/{fileName}");
                 //await Launcher.OpenAsync(fileUri);
                 Debug.WriteLine("Samo string -> "+@"\\192.168.1.211\Users\user\test.doc");
-                string filePath = @"\\" + Preferences.Get(IP, "") + "\\" + Preferences.Get(FOLDER_nas, "") + Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName;
+                string filePath = @"\\" + Preferences.Get(IP, "") + "\\" + Preferences.Get(FOLDER_nas, "")+ "\\" + Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName;
                 Debug.WriteLine("Izgenerirani string -> " + @"\\" + Preferences.Get(IP, "") + "\\" + Preferences.Get(FOLDER_nas, "") +"\\"+ Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName);
                 await Launcher.OpenAsync(filePath);
 
