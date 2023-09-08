@@ -79,7 +79,9 @@
 
 
         <syncfusion:SfListView x:Name="listaDokumenata"  Grid.Row="2"
-           ItemsSource="{Binding Items}"
+                               ItemsSource="{Binding Items}"
+                               ItemTapped="OnItemTapped"
+                               
     >
             <syncfusion:SfListView.ItemTemplate>
                 <DataTemplate>
