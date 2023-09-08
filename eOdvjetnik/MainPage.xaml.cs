@@ -209,12 +209,7 @@ public partial class MainPage : ContentPage
     }
 
 
-    //Translate
-
-
-
-//Translate
-
+ 
 
 public MainPage()
     {

@@ -80,7 +80,45 @@ public partial class Racun : ContentPage
                 Debug.WriteLine("Error while opening image stream: " + ex.Message);
             }
         }
+    
+
     }
+
+    private void SanityCheck()
+    {
+        if (ReceiptHeaderText == "" || ReceiptHeaderText != null)
+        {
+            string nazivtvrtke = Preferences.Get("naziv_tvrtke", "");
+            if (nazivtvrtke != "" || nazivtvrtke != null)
+            {
+                ReceiptHeaderText = nazivtvrtke;
+
+            }
+            else
+            {
+                ReceiptHeaderText = "Odvjetnički ured";
+            }
+        }
+        if (ReceiptFooterText == "" || ReceiptFooterText != null)
+        {
+            ReceiptFooterText = " ";
+        }
+        if (ReceiptPDVamountString == "" || ReceiptPDVamountString != null)
+        {
+            ReceiptPDVamountString = "25";
+        }
+        if (ReceiptIBAN == "" || ReceiptIBAN != null)
+        {
+            ReceiptIBAN = " ";
+        }
+        if (ReceiptSignature == "" || ReceiptSignature != null)
+        {
+            ReceiptSignature = " ";
+        }
+    }
+
+
+
 
     private void CreateDocument(object sender, EventArgs e)
     {
@@ -97,15 +135,17 @@ public partial class Racun : ContentPage
             ReceiptPDVamountString = Preferences.Get("receiptPDVamount", "");
             Debug.WriteLine("receiptPDVamount " + ReceiptPDVamountString);
 
-            ReceiptPDVamountFloat = 1 + (float.Parse(ReceiptPDVamountString) / 100);
-            Preferences.Set("receiptPDVamountFloat", ReceiptPDVamountFloat);
-            Debug.WriteLine("iznos PDV " + ReceiptPDVamountFloat);
-
             ReceiptIBAN = Preferences.Get("receiptIBAN", "");
             Debug.WriteLine("receiptIBAN " + ReceiptIBAN);
 
             ReceiptSignature = Preferences.Get("receiptSignature", "");
             Debug.WriteLine("receiptSignature " + ReceiptSignature);
+
+            SanityCheck();
+
+            ReceiptPDVamountFloat = 1 + (float.Parse(ReceiptPDVamountString) / 100);
+            Preferences.Set("receiptPDVamountFloat", ReceiptPDVamountFloat);
+            Debug.WriteLine("iznos PDV " + ReceiptPDVamountFloat);
         }
 
         catch (Exception ex)
@@ -168,16 +208,35 @@ public partial class Racun : ContentPage
         string resourcePath = savedImagePath;
         //Gets the image stream.
         //Stream imageStream = assembly.GetManifestResourceStream(resourcePath);
-        IWPicture picture = paragraph.AppendPicture(imageStream);
-        picture.TextWrappingStyle = TextWrappingStyle.Inline;
-        picture.HorizontalAlignment = ShapeHorizontalAlignment.Center;
-        picture.VerticalOrigin = VerticalOrigin.Margin;
-        //picture.VerticalPosition = -120;
-        // 1 cm = 28.35f
-        picture.Width = 53.8f;
-        picture.Height = 80.8f;
-        paragraph.ApplyStyle("Heading 1");
-        paragraph.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
+        if (imageStream != null)
+        {
+            IWPicture picture = paragraph.AppendPicture(imageStream);
+            picture.TextWrappingStyle = TextWrappingStyle.Inline;
+            picture.HorizontalAlignment = ShapeHorizontalAlignment.Center;
+            picture.VerticalOrigin = VerticalOrigin.Margin;
+            //picture.VerticalPosition = -120;
+            // 1 cm = 28.35f
+            picture.Width = 53.8f;
+            picture.Height = 80.8f;
+            paragraph.ApplyStyle("Heading 1");
+            paragraph.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
+        }
+        else
+        {
+            string resourcePath2 = "eOdvjetnik.Resources.DocIO.eodvjetnik.svg";
+            Stream imageStream = assembly.GetManifestResourceStream(resourcePath2);
+            IWPicture picture = paragraph.AppendPicture(imageStream);
+            picture.TextWrappingStyle = TextWrappingStyle.Inline;
+            picture.HorizontalAlignment = ShapeHorizontalAlignment.Center;
+            picture.VerticalOrigin = VerticalOrigin.Margin;
+            //picture.VerticalPosition = -120;
+            // 1 cm = 28.35f
+            picture.Width = 180f;
+            picture.Height = 80.8f;
+            paragraph.ApplyStyle("Heading 1");
+            paragraph.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
+        }
+
         WTextRange textRange = paragraph.AppendText("\n" + ReceiptHeaderText) as WTextRange;
         textRange.CharacterFormat.FontSize = 12f;
         textRange.CharacterFormat.FontName = "Calibri";

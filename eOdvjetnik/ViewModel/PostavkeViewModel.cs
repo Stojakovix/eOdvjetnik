@@ -497,7 +497,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         Preferences.Set("receiptHeaderText", ReceiptHeaderText);
         Preferences.Set("receiptFooterText", ReceiptFooterText);
         Preferences.Set("receiptSignature", ReceiptSignature);
-
+        Debug.WriteLine(ReceiptPDVamount + ReceiptIBAN + ReceiptHeaderText + ReceiptFooterText + ReceiptSignature);
     }
 
     #endregion
