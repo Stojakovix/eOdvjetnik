@@ -30,9 +30,11 @@ namespace eOdvjetnik.ViewModel
         private const string FOLDER_nas = "Folder";
         private const string SUBFOLDER_nas = "SubFolder";
 
+        public string FileName { get; set; }
 
         SMBConnect sMBConnect = new SMBConnect();
         public ICommand RefreshButton { get; set; }
+        public ICommand ItemClicked { get; set; }
 
         public ObservableCollection<RootShare> rootShares;
         public ObservableCollection<RootShare> RootShares
@@ -70,7 +72,7 @@ namespace eOdvjetnik.ViewModel
         public DocsViewModel()
         {
 
-
+            //ItemClicked = new Command(itemClicked);
             RefreshButton = new Command(RefreshButtonClick);
             Items = new ObservableCollection<DocsItem>();
             //RootShares = new ObservableCollection<RootShare>();
@@ -229,14 +231,24 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                var fileUri = new Uri($"smb://{Preferences.Get(IP, "")}/{Preferences.Get(FOLDER, "")}/{fileName}");
-                await Launcher.OpenAsync(fileUri);
+                //var fileUri = new Uri($"smb://{Preferences.Get(IP, "")}/{Preferences.Get(FOLDER, "")}/{fileName}");
+                //await Launcher.OpenAsync(fileUri);
+                string filePath = @"\\192.168.1.211\Users\user\test.doc";
+                await Launcher.OpenAsync(filePath);
+
             }
             catch (Exception ex)
             {
                 await App.Current.MainPage.DisplayAlert("Error", $"Unable to open the file: {ex.Message}", "OK");
             }
         }
+
+        //public async void itemClicked()
+        //{
+        //    await OpenFile(fileName);
+        //}
+
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;

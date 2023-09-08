@@ -27,15 +27,23 @@ public partial class Dokumenti : ContentPage
     public const string SUBFOLDER = "SubFolder";
 
 
-    private void OnLabelTapped(object sender, EventArgs e)
-    {
-        StackLayout stackLayout = (StackLayout)sender;
-        Label label = (Label)stackLayout.FindByName("DocumentLabel");
-        string labelText = label.Text;
-        // Do something with the label text
+    //private void OnLabelTapped(object sender, EventArgs e)
+    //{
+    //    StackLayout stackLayout = (StackLayout)sender;
+    //    Label label = (Label)stackLayout.FindByName("DocumentLabel");
+    //    string labelText = label.Text;
+    //    // Do something with the label text
 
-        // Do something with the item, such as display it in a message box
-        DisplayAlert("Item Tapped", labelText, "OK");
+    //    // Do something with the item, such as display it in a message box
+    //    DisplayAlert("Item Tapped", labelText, "OK");
+    //}
+
+    private async void OnItemTapped(object sender, Syncfusion.Maui.ListView.ItemTappedEventArgs e)
+    {
+        var selectedFileItem = (DocsItem)e.DataItem;
+        string fileName = selectedFileItem.Name;
+        Debug.WriteLine(fileName);
+        await viewModel.OpenFile(fileName);
     }
     protected override void OnDisappearing()
     {
@@ -66,11 +74,11 @@ public partial class Dokumenti : ContentPage
     //SMB
 
 
-    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
-    {
-        base.OnNavigatedTo(args);
+    //protected override async void OnNavigatedTo(NavigatedToEventArgs args)
+    //{
+    //    base.OnNavigatedTo(args);
 
-    }
+    //}
 
     // async void OnItemAdded(object sender, EventArgs e)
     // {
