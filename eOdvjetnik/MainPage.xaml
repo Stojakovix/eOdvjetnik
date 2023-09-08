@@ -58,11 +58,12 @@
                IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"/>
 
 
-        <VerticalStackLayout   Grid.ColumnSpan="5"  IsVisible="{Binding ActivationVisible
-            }" >
+        <VerticalStackLayout   Grid.ColumnSpan="5"  >
 
-            <Image Source="text_only.png" HeightRequest="155" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
+            <Image Source="text_only.png" HeightRequest="120" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
 
+            <Button Text="Clear All Preferences" Background="LightBlue" BorderColor="black" Command="{Binding ClearPrefrences}" IsVisible="False" />
+            <Button Text="Clear Licence Preferences" Background="LightBlue" BorderColor="black" Command="{Binding ClearLicencePrefrences}" IsVisible="False"  />
 
 
 
@@ -75,7 +76,7 @@
                         Margin="10,0,0,0"
                         LineBreakMode="WordWrap"
                         TextColor="Black"
-                
+                IsVisible="{Binding ActivationVisible }" 
                 />
 
 
@@ -86,7 +87,8 @@
                         FontSize="Small"
                         Margin="10,0,0,320"
                         LineBreakMode="WordWrap"
-                        TextColor="Black"        
+                        TextColor="Black"    
+                   IsVisible="{Binding ActivationVisible }" 
                 />
 
 
@@ -97,6 +99,7 @@
                         FontSize="Large"
                         Margin="0,0,0,10"
                         TextColor="Black"
+                   IsVisible="{Binding ActivationVisible }" 
                     />
             <Label Style="{StaticResource ShadowLabelStyle}" 
                         Text="{Binding Activation_code}"
@@ -105,11 +108,12 @@
                         FontSize="Large"
                         Margin="0,0,0,10"
                         TextColor="Black"
+                   IsVisible="{Binding ActivationVisible }" 
                     />
-            <Button Text="Provjeri status licence" Margin="5,0,0,0"  Clicked="OnRefreshLicenceClick">
+            <Button Text="Provjeri status licence" Margin="5,0,0,0"  Clicked="OnRefreshLicenceClick"
+               IsVisible="{Binding ActivationVisible }" />
 
 
-            </Button>
 
         </VerticalStackLayout>
         <StackLayout IsVisible="False" Grid.Column="4" HorizontalOptions="EndAndExpand" Padding="0,0,10,0">

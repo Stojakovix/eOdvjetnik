@@ -97,7 +97,8 @@ namespace eOdvjetnik.ViewModel
             }
         }
         #endregion
-
+        public ICommand ClearPrefrences { get; set; }
+        public ICommand ClearLicencePrefrences { get; set; }
 
         public MainPageViewModel()
         {
@@ -110,7 +111,8 @@ namespace eOdvjetnik.ViewModel
             CurrentDateDT = DateTime.Now.Date;
             CompanyName = Preferences.Get("naziv_tvrtke", "");
             WeakReferenceMessenger.Default.Register<CheckLicence>(this, RefreshLicenceData);
-
+            ClearPrefrences = new Command(DeletePreferences);
+            ClearLicencePrefrences = new Command(DeleteLicencePreference);
 
             RefreshTime();
 
@@ -171,7 +173,19 @@ namespace eOdvjetnik.ViewModel
         }
 
 
+        public void DeletePreferences()
+        {
+            Preferences.Default.Clear();
+            Preferences.Clear();
+        }
 
+        public void DeleteLicencePreference()
+        {
+            string licence = "";
+            Preferences.Set("licence_type", licence);
+
+        }
+        
         public void ParseDate()
         {
             try
