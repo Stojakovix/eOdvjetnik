@@ -40,21 +40,15 @@
 
             <HorizontalStackLayout Margin="10,10,10,0">
 
-                <Button  WidthRequest="150"  Text="Natrag" Margin="5,0,0,0" Command="{Binding BackButtonCommand}" >
-                    <Button.ImageSource>
-                        <FileImageSource File="home.png" />
-                    </Button.ImageSource>
+                <Button   Text="Natrag" Margin="5,0,0,0" Command="{Binding BackButtonCommand}" >
+
                 </Button>
 
-                <Button   WidthRequest="150"  Text="Spremi" Margin="5,0,0,0" Command="{Binding UpdateHWIDs}" >
-                    <Button.ImageSource>
-                        <FileImageSource File="home.png" />
-                    </Button.ImageSource>
+                <Button    Text="Spremi" Margin="5,0,0,0" Command="{Binding UpdateHWIDs}" >
+ 
                 </Button>
-                <Button  WidthRequest="150"  Text="Dodaj novog" Margin="5,0,0,0" Command="{Binding OpenNewEmployee}" >
-                    <Button.ImageSource>
-                        <FileImageSource File="home.png" />
-                    </Button.ImageSource>
+                <Button    Text="Dodaj novog" Margin="5,0,0,0" Command="{Binding OpenNewEmployee}" >
+      
                 </Button>
 
 
