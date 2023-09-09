@@ -394,6 +394,7 @@
 	  <None Remove="Resources\Images\new_window.png" />
 	  <None Remove="Resources\Images\play.png" />
 	  <None Remove="Resources\Images\refresh.png" />
+	  <None Remove="Resources\Install\odvjetnik_local.sql" />
 
 	</ItemGroup>
 
@@ -934,6 +935,9 @@
 	  <EmbeddedResource Include="Resources\Icons\youtube.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+	  <Resource Include="Resources\Install\odvjetnik_local.sql" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Compile Update="Resources\Strings\AppResources.Designer.cs">
