@@ -77,7 +77,7 @@
 
 
 
-                <Button BackgroundColor="#E1DFE1" BorderColor="Black" Text="{x:Static resx:AppResources.DodajNaRacun}" Margin="5,0,0,0" Command="{Binding OnReciptClickCommand}" >
+                <Button  Text="{x:Static resx:AppResources.DodajNaRacun}" Margin="5,0,0,0" Command="{Binding OnReciptClickCommand}" >
 
 
                 </Button>
@@ -88,11 +88,11 @@
                 </Button>
 
 
-                <Button   BorderColor="Black" Text="{x:Static resx:AppResources.NedavnoDodani}" Margin="5,0,0,0" Command="{Binding RefreshContacts}"   >
+                <Button    Text="{x:Static resx:AppResources.NedavnoDodani}" Margin="5,0,0,0" Command="{Binding RefreshContacts}"   >
 
 
                 </Button>
-                <Button BackgroundColor="#E1DFE1"  Text="{x:Static resx:AppResources.Uredi}" Margin="5,0,0,0" HorizontalOptions="End" Command="{Binding EditClientButton}"  >
+                <Button   Text="{x:Static resx:AppResources.Uredi}" Margin="5,0,0,0" HorizontalOptions="End" Command="{Binding EditClientButton}"  >
 
 
                 </Button>

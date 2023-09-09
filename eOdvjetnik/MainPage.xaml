@@ -57,9 +57,9 @@
                TextColor="Black"   
                IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"/>
 
-
+        
         <VerticalStackLayout   Grid.ColumnSpan="5"  >
-
+            
             <Image Source="text_only.png" HeightRequest="120" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
 
             <Button Text="Clear All Preferences" Background="LightBlue" BorderColor="black" Command="{Binding ClearPrefrences}" IsVisible="True" />
@@ -112,7 +112,7 @@
                     />
             <Button Text="Provjeri status licence"  Clicked="OnRefreshLicenceClick"
                IsVisible="{Binding ActivationVisible }" />
-
+            <Button Text="Registracija probne verzije" Clicked="BrowserOpen_Clicked" IsVisible="{Binding ActivationVisible }"/>
 
 
         </VerticalStackLayout>

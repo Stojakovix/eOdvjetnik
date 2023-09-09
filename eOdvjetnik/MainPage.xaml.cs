@@ -221,6 +221,21 @@ public MainPage()
         AskForWiFiPermission();
         BindingContext = new MainPageViewModel();
         ActivationLoop();
+
+
+
+    }
+    private async void BrowserOpen_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            Uri uri = new Uri("https://cc.eodvjetnik.hr/users/add");
+            await Microsoft.Maui.ApplicationModel.Browser.Default.OpenAsync(uri, Microsoft.Maui.ApplicationModel.BrowserLaunchMode.SystemPreferred);
+        }
+        catch (Exception ex)
+        {
+            // An unexpected error occurred. No browser may be installed on the device.
+        }
     }
 
 
