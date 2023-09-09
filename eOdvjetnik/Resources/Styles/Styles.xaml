@@ -36,7 +36,8 @@
     </Style>
 
     <Style TargetType="BoxView">
-        <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray950}}" />
+        <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray500}}" />
+        <Setter Property="Opacity" Value="0.3" />
     </Style>
 
     <Style TargetType="Button">

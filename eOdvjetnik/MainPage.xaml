@@ -116,8 +116,9 @@
 
 
         </VerticalStackLayout>
-        <StackLayout IsVisible="True" Grid.Column="4" HorizontalOptions="EndAndExpand" Padding="0,0,10,0">
+        <StackLayout IsVisible="false" Grid.Column="4" HorizontalOptions="EndAndExpand" Padding="0,0,10,0">
             <Label x:Uid="greetingLabel" />
+            
             <Picker x:Name="languagePicker" Title="{x:Static resx:AppResources.OdaberiJezik}" SelectedIndexChanged="OnLanguageSelected">
                 <Picker.Items>
                     <x:String>hr-HR</x:String>
@@ -125,6 +126,7 @@
                     <x:String>es-ES</x:String>
                 </Picker.Items>
             </Picker>
+            <BoxView HeightRequest="1"  Grid.Column="6" Margin="0,0,0,0"  BackgroundColor="Black" />
         </StackLayout>
         <Label BackgroundColor="#faf9fb" Grid.Row="1" Grid.ColumnSpan="5" IsVisible="{OnPlatform Android=False, iOS=False}"  />
         <Image Source="text_only.png" Margin="5" HeightRequest="20" HorizontalOptions="Start" Grid.Row="1" Grid.Column="0" IsVisible="{OnPlatform Android=False, iOS=False}"  />
