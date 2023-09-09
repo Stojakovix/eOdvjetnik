@@ -24,8 +24,7 @@
 
             </Grid.RowDefinitions>
 
-            <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="2" Margin="3,40,3,0"  BackgroundColor="Black" />
-            <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="2" Margin="3,40,3,0"  BackgroundColor="Black" />
+
 
             <Label Text="Ime" Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
             <Entry x:Name="NewEmployeeEntry" Keyboard="Numeric" Grid.Row="0" Grid.Column="1" Text="{Binding NewEmployeeName}"  />
@@ -33,7 +32,8 @@
             <Label Text="Inicijali" Grid.Row="1" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
             <Entry x:Name="NewEmployeeInitialsEntry" Keyboard="Numeric" Grid.Row="1" Grid.Column="1" Text="{Binding NewEmployeeInitials}"  />
 
-
+            <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="2" Margin="3,40,3,0"   />
+            <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="2" Margin="3,40,3,0"  />
             <HorizontalStackLayout Grid.Row="2"  >
                 <Button Text="Spremi" Command="{Binding SaveNewEmployee}"  Grid.Column="1" Margin="10,-200,0,0" HorizontalOptions="Start"
                     />
