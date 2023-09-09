@@ -135,12 +135,10 @@
     </Style>
 
     <Style TargetType="Entry">
-        <Setter Property="TextColor" Value="Red" />
+        <Setter Property="TextColor" Value="black" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="SFUIDisplay-Light"/>
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="PlaceholderColor" Value="Purple" />
-        <Setter Property="Placeholder" Value="Purple" />
         <Setter Property="Visual" Value="Light" />
         <Setter Property="MinimumHeightRequest" Value="35"/>
         <Setter Property="HeightRequest" Value="40"/>
