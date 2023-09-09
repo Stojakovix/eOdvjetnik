@@ -59,17 +59,13 @@
             </Grid>
             <HorizontalStackLayout>
 
-                <Button   HorizontalOptions="Start" WidthRequest="150"  Text="{x:Static resx:AppResources.PregledRacuna}" Command="{Binding OnReciptClickCommand}"  Margin="5,0,0,0">
-                    <Button.ImageSource>
-                        <FileImageSource File="new_window.png" />
-                    </Button.ImageSource>
+                <Button   HorizontalOptions="Start"  Text="{x:Static resx:AppResources.PregledRacuna}" Command="{Binding OnReciptClickCommand}"  Margin="5,0,0,0">
+
 
                 </Button>
 
-                <Button  HorizontalOptions="Start" WidthRequest="150"  Text="{x:Static resx:AppResources.DodajNaRacun}" Command="{Binding AddItemCommand}"   Margin="5,0,0,0">
-                    <Button.ImageSource>
-                        <FileImageSource File="new_window.png" />
-                    </Button.ImageSource>
+                <Button  HorizontalOptions="Start"   Text="{x:Static resx:AppResources.DodajNaRacun}" Command="{Binding AddItemCommand}"   Margin="5,0,0,0">
+
 
                 </Button>
 

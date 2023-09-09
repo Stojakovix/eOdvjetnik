@@ -21,15 +21,10 @@
         <HorizontalStackLayout Grid.Row="0" >
 
             <Button Text="Home" Margin="5,0,0,0" Command="{Binding RefreshButton}">
-                <Button.ImageSource>
-                    <FileImageSource File="home.png" />
-                </Button.ImageSource>
+
 
             </Button>
             <Button Text="Nazad" Margin="5,0,0,0" Clicked="Button_Clicked_nazad">
-                <Button.ImageSource>
-                    <FileImageSource File="left.png" />
-                </Button.ImageSource>
 
 
             </Button>
@@ -37,9 +32,7 @@
             <Entry Margin="5,0,0,0" Text="{Binding textEntry}" MinimumWidthRequest="300" x:Name="textEntry2" />
 
             <Button Text="Otvori" Margin="5,0,0,0" Clicked="Button_Clicked_otvori">
-                <Button.ImageSource>
-                    <FileImageSource File="new_window.png" />
-                </Button.ImageSource>
+
 
             </Button>
         </HorizontalStackLayout>
