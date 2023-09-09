@@ -18,21 +18,20 @@
                              HeaderTitle="Upozorenje" ShowHeader="False" ShowCloseButton="True"
                              IsVisible="{Binding DeleteClientPopupVisible}" 
                              IsOpen="{Binding DeleteClientPopupEnabled}"
-                             MinimumWidthRequest="400" 
+                             MinimumWidthRequest="300" 
+                             BackgroundColor="#faf9fb"
                              >
                 <sfPopup:SfPopup.PopupStyle>
-                    <sfPopup:PopupStyle MessageBackground="White" HeaderBackground="White"   />
+                    <sfPopup:PopupStyle MessageBackground="#faf9fb" HeaderBackground="#faf9fb"   />
                 </sfPopup:SfPopup.PopupStyle>
 
                 <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Label Text="Jeste li sigurni da želite obrisati odabrani kontakt?" TextColor="black" FontSize="20" Margin="20,20,0,0" FontAttributes="Bold"  />
-                            <HorizontalStackLayout>
-                                <Button  Text="Natrag" Grid.Row="12" Command="{Binding CancelDelete}" BackgroundColor="LightGray"  BorderColor="DarkGray"
-                     FontSize="Default"  FontAttributes="Bold"   TextColor="Black" Grid.Column="1" Margin="20,30,0,0" WidthRequest="150" HorizontalOptions="Start" />
-                                <Button  Text="Obriši" Grid.Row="12" Command="{Binding ConfirmDelete}" BackgroundColor="#DC143C"  BorderColor="DarkGray"
-                     FontSize="Default"  FontAttributes="Bold"   TextColor="LightGray" Grid.Column="1" Margin="50,30,0,0" WidthRequest="150" HorizontalOptions="End" />
+                            <Label Text="Jeste li sigurni?" TextColor="black" FontSize="20" Margin="0,40,0,50" FontAttributes="Bold" HorizontalTextAlignment="Center"  />
+                            <HorizontalStackLayout HorizontalOptions="Center">
+                                <Button  Text="Natrag" Grid.Row="12" Command="{Binding CancelDelete}" Margin="0,0,50,0"  />
+                                <Button  Text="Obriši" Grid.Row="12" Command="{Binding ConfirmDelete}"    />
                             </HorizontalStackLayout>
                         </StackLayout>
                     </DataTemplate>
@@ -40,7 +39,7 @@
             </sfPopup:SfPopup>
 
 
-            <Grid BackgroundColor="White">
+            <Grid BackgroundColor="#faf9fb">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150" />
                     <ColumnDefinition Width="*" />
