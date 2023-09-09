@@ -393,6 +393,7 @@
 	  <None Remove="Resources\Images\new_window.png" />
 	  <None Remove="Resources\Images\play.png" />
 	  <None Remove="Resources\Images\refresh.png" />
+	  <None Remove="Resources\Install\odvjetnik_local-2.3.sql" />
 	  <None Remove="Resources\Install\odvjetnik_local.sql" />
 
 	</ItemGroup>
@@ -936,6 +937,7 @@
 	  </EmbeddedResource>
 	</ItemGroup>
 	<ItemGroup>
+	  <Resource Include="Resources\Install\odvjetnik_local-2.3.sql" />
 	  <Resource Include="Resources\Install\odvjetnik_local.sql" />
 	</ItemGroup>
 	<ItemGroup>
