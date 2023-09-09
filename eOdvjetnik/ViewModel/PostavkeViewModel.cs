@@ -11,6 +11,8 @@ using System.Text.Json;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Utilities;
+using CommunityToolkit.Mvvm.Messaging;
+
 
 namespace eOdvjetnik.ViewModel;
 
@@ -617,6 +619,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
         AdminColorPopup = false;
 
         Colors = new ObservableCollection<ColorItem>();
+        WeakReferenceMessenger.Default.Register<LicenceUpdated>(this, LicenceUpdatedReceived);
+
 
         #region Devic&Licence
         ZaposleniciVisible = false;
@@ -1095,7 +1099,12 @@ public class PostavkeViewModel : INotifyPropertyChanged
         GetEmployees();
 
     }
-
+    private void LicenceUpdatedReceived(object recipient, LicenceUpdated message)
+    {
+        Debug.WriteLine("Refresh postavki nakon ažurianja licence");
+        PostavkeUserName = Preferences.Get("UserName", "");
+        PostavkeUserID = Preferences.Get("UserID", "");
+    }
 
 
 

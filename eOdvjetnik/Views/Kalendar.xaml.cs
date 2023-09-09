@@ -83,22 +83,65 @@ public partial class Kalendar : ContentPage
             ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
             var appointment = eventArgs.Appointment;
 
-            var droptime = eventArgs.DropTime;
-            var timeLength = appointment.EndTime - appointment.StartTime;
-
-            if (eventArgs.Appointment != null)
+            if (Scheduler.View == SchedulerView.TimelineMonth)
             {
-                appointment.StartTime = eventArgs.DropTime;
-                appointment.EndTime = appointment.StartTime + timeLength;
+                var droptime = eventArgs.DropTime;
+                var timeLength = appointment.EndTime - appointment.StartTime;
+                var resourceId = eventArgs.TargetResource.Id;
 
+                if (eventArgs.Appointment != null)
+                {
+                    appointment.StartTime = eventArgs.DropTime;
+                    appointment.EndTime = appointment.StartTime + timeLength;
+                    //appointment.ResourceIds.Clear();
+                    //appointment.ResourceIds.Add(resourceId);
+                    appointment.ResourceIds = new ObservableCollection<object>
+                {
+                    (object)resourceId // Boxing the integer into an object
+                };
+
+                    Debug.WriteLine(appointment.StartTime + " " + appointment.EndTime);
+                    Debug.WriteLine(resourceId);
+
+                    string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', resource_id = '{resourceId}' WHERE internal_event_id = " + appointment.Id;
+                    Debug.WriteLine(query);
+                    externalSQLConnect.sqlQuery(query);
+
+                }
             }
 
-            Debug.WriteLine(appointment.StartTime + " " + appointment.EndTime);
+            else
+            {
+                var SQLUserID = Preferences.Get("UserID", "");
+                var droptime = eventArgs.DropTime;
+                var timeLength = appointment.EndTime - appointment.StartTime;
+                var resourceId = SQLUserID;
 
-            string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}' WHERE internal_event_id = " + appointment.Id;
-            externalSQLConnect.sqlQuery(query);
+                if (eventArgs.Appointment != null)
+                {
+                    appointment.StartTime = eventArgs.DropTime;
+                    appointment.EndTime = appointment.StartTime + timeLength;
+                    //appointment.ResourceIds.Clear();
+                    //appointment.ResourceIds.Add(resourceId);
+                    appointment.ResourceIds = new ObservableCollection<object>
+                    {
+                        (object)SQLUserID // Boxing the integer into an object
+                    };
 
+                    Debug.WriteLine(appointment.StartTime + " " + appointment.EndTime);
+                    Debug.WriteLine(resourceId);
+
+                    string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', resource_id = '{resourceId}' WHERE internal_event_id = " + appointment.Id;
+                    Debug.WriteLine(query);
+                    externalSQLConnect.sqlQuery(query);
+
+                }
+
+
+            }
         }
+
+
         catch (Exception ex)
         {
 

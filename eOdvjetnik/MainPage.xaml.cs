@@ -49,7 +49,10 @@ public partial class MainPage : ContentPage
         LicenceCheck();
     }
 
-
+    private void LicenceUpdatedMessage()
+    {
+        WeakReferenceMessenger.Default.Send(new LicenceUpdated("Licence updated!"));
+    }
 
     private void OnLanguageSelected(object sender, EventArgs e)
     {
@@ -183,9 +186,8 @@ public partial class MainPage : ContentPage
         {
             Debug.WriteLine("Activation error:" + ex.Message);
         }
-       
-        
 
+        LicenceUpdatedMessage();
     }
 
 

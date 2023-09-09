@@ -13,11 +13,17 @@ using System.Windows.Input;
 using System.Reflection;
 
 
+
 namespace eOdvjetnik.ViewModel
 {
     public class SpiDokViewModel : INotifyPropertyChanged
     {
-        
+        private const string IP_nas = "IP Adresa";
+        private const string USER_nas = "Korisničko ime";
+        private const string PASS_nas = "Lozinka";
+        private const string FOLDER_nas = "Folder";
+        private const string SUBFOLDER_nas = "SubFolder";
+
 
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
         public int ListItemId { get; set; }
@@ -189,6 +195,24 @@ namespace eOdvjetnik.ViewModel
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message + "in spidok viewModel generate files");
+            }
+        }
+
+        public async Task OpenFile(string fileName)
+        {
+            try
+            {
+                //var fileUri = new Uri($"smb://{Preferences.Get(IP, "")}/{Preferences.Get(FOLDER, "")}/{fileName}");
+                //await Launcher.OpenAsync(fileUri);
+                Debug.WriteLine("Samo string -> " + @"\\192.168.1.211\Users\user\test.doc");
+                string filePath = @"\\" + Preferences.Get(IP_nas, "") + "\\" + Preferences.Get(FOLDER_nas, "") + Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName;
+                Debug.WriteLine("Izgenerirani string -> " + @"\\" + Preferences.Get(IP_nas, "") + "\\" + Preferences.Get(FOLDER_nas, "") + "\\" + Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName);
+                await Launcher.OpenAsync(filePath);
+
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", $"Unable to open the file: {ex.Message}", "OK");
             }
         }
 
