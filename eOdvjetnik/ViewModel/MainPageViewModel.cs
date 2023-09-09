@@ -47,6 +47,7 @@ namespace eOdvjetnik.ViewModel
             }
         }
         public string UserID { get; set; }
+        public DateTime TrialFileCreated;
 
         public string Activation_code { get; set; }
         public DateTime ExpireDateDT { get; set; }
@@ -238,8 +239,61 @@ namespace eOdvjetnik.ViewModel
 
             }
 
+            try
+            {
+                string licence_type = Preferences.Get("licence_type", "");
+                int numberOfCharacters = 5;
+                string trialCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
+                Debug.WriteLine("Kalendar ResourceView - 'Trial' provjera: " + trialCheck);
+                if (trialCheck == "Trial") 
+                {
 
-            ActivationScreen();
+                    try
+                    {
+                        string query = "SELECT created FROM files WHERE id = (SELECT MIN(id) FROM files);";
+                        Debug.WriteLine("");
+                        externalSQLConnect.sqlQuery(query);
+
+                        Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                        Debug.WriteLine(query + " u Search resultu");
+                        if (filesData != null)
+                        {
+                            foreach (Dictionary<string, string> filesRow in filesData)
+                            {
+
+                                DateTime oldestFileCreatedDate;
+                                DateTime.TryParse(filesRow["created"], out oldestFileCreatedDate);
+                                TrialFileCreated = oldestFileCreatedDate;
+                            };
+                            Debug.WriteLine("Trial file check " + TrialFileCreated);
+
+                        }
+
+                        DateTime dateTime = DateTime.Now;
+
+                        TimeSpan difference = dateTime.Subtract(TrialFileCreated);
+                        int daysDifference = difference.Days;
+                        if (daysDifference > 45)
+                        {
+                            ExpiredLicence = true;
+
+                        }
+                    }
+
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                    }
+                }
+               
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
+          ActivationScreen();
 
         }
 
@@ -253,7 +307,7 @@ namespace eOdvjetnik.ViewModel
                 string aktivacija = "LicenceNotActive";
                 Preferences.Set("activation_disable", aktivacija);
             }
-            else
+            else if (ExpiredLicence == false)
             {
                 ActivationVisible = false;
                 string aktivacija = "LicenceActive";
