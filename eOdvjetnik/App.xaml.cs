@@ -75,7 +75,7 @@ public partial class App : Application
         SfSchedulerResources.ResourceManager = new ResourceManager("eOdvjetnik.Resources.Strings.AppResources", Application.Current.GetType().Assembly);
 
 
-
+   
 
 
         Application.Current.UserAppTheme = AppTheme.Light;
@@ -88,8 +88,8 @@ public partial class App : Application
 
     }
 
+    private void Application_RequestedThemeChanged(object sender, AppThemeChangedEventArgs e)
+    {
 
-    
-
-
+    }
 }

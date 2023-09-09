@@ -4,8 +4,21 @@
              xmlns:local="clr-namespace:eOdvjetnik"
              x:Class="eOdvjetnik.App"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
+             UserAppTheme="Light"
+             
+  
+
              >
-    
+
+
+
+
+
+
+
+
+
+
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

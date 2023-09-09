@@ -9,6 +9,7 @@ public partial class Postavke : ContentPage
     public Postavke()
 	{
 		InitializeComponent();
+
         BindingContext = new PostavkeViewModel();
     }
 

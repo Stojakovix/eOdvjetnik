@@ -116,7 +116,7 @@
 
 
         </VerticalStackLayout>
-        <StackLayout IsVisible="False" Grid.Column="4" HorizontalOptions="EndAndExpand" Padding="0,0,10,0">
+        <StackLayout IsVisible="True" Grid.Column="4" HorizontalOptions="EndAndExpand" Padding="0,0,10,0">
             <Label x:Uid="greetingLabel" />
             <Picker x:Name="languagePicker" Title="{x:Static resx:AppResources.OdaberiJezik}" SelectedIndexChanged="OnLanguageSelected">
                 <Picker.Items>

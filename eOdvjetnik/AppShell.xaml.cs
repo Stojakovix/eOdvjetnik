@@ -31,8 +31,8 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(SpiDok), typeof(SpiDok));
         Routing.RegisterRoute(nameof(LoadingPage), typeof(LoadingPage));
         Routing.RegisterRoute(nameof(AdminKalendar), typeof(AdminKalendar));
-
-
+        AppTheme currentTheme = AppTheme.Light;
+        
 
         BindingContext = ViewModel;
         

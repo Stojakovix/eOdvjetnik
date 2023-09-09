@@ -219,7 +219,7 @@ public MainPage()
         AskForWiFiPermission();
         BindingContext = new MainPageViewModel();
         ActivationLoop();
-
+       
 
 
     }

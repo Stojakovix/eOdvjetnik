@@ -5,7 +5,9 @@
              xmlns:local ="clr-namespace:eOdvjetnik.ViewModel"
              Title="Postavke"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
-             BackgroundColor="#faf9fb" >
+             BackgroundColor="#faf9fb" 
+             
+             >
 
 
     <ContentPage.BindingContext>
