@@ -443,6 +443,7 @@ namespace eOdvjetnik.ViewModel
                     Preferences.Set("SelectedNaziv", SelectedItem.name);
                     Preferences.Set("SelectedBodovi", SelectedItem.bodovi);
                     Preferences.Set("SelectedConcatenatedName", SelectedItem.concatenated_name);
+                    Preferences.Set("SelectedOznaka", SelectedItem.oznaka);
                 }
                 catch (Exception ex)
                 {

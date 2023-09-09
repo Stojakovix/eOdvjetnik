@@ -49,7 +49,10 @@ public partial class MainPage : ContentPage
         LicenceCheck();
     }
 
-
+    private void LicenceUpdatedMessage()
+    {
+        WeakReferenceMessenger.Default.Send(new LicenceUpdated("Licence updated!"));
+    }
 
     private void OnLanguageSelected(object sender, EventArgs e)
     {
@@ -183,9 +186,8 @@ public partial class MainPage : ContentPage
         {
             Debug.WriteLine("Activation error:" + ex.Message);
         }
-       
-        
 
+        LicenceUpdatedMessage();
     }
 
 
@@ -209,12 +211,7 @@ public partial class MainPage : ContentPage
     }
 
 
-    //Translate
-
-
-
-//Translate
-
+ 
 
 public MainPage()
     {
@@ -224,6 +221,21 @@ public MainPage()
         AskForWiFiPermission();
         BindingContext = new MainPageViewModel();
         ActivationLoop();
+
+
+
+    }
+    private async void BrowserOpen_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            Uri uri = new Uri("https://cc.eodvjetnik.hr/users/add");
+            await Microsoft.Maui.ApplicationModel.Browser.Default.OpenAsync(uri, Microsoft.Maui.ApplicationModel.BrowserLaunchMode.SystemPreferred);
+        }
+        catch (Exception ex)
+        {
+            // An unexpected error occurred. No browser may be installed on the device.
+        }
     }
 
 

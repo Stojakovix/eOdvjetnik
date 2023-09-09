@@ -57,9 +57,9 @@
                TextColor="Black"   
                IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"/>
 
-
+        
         <VerticalStackLayout   Grid.ColumnSpan="5"  >
-
+            
             <Image Source="text_only.png" HeightRequest="120" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
 
             <Button Text="Clear All Preferences" Background="LightBlue" BorderColor="black" Command="{Binding ClearPrefrences}" IsVisible="True" />
@@ -85,7 +85,7 @@
                         Text="{x:Static resx:AppResources.KontaktMain}"
                         HorizontalOptions="Center"
                         FontSize="Small"
-                        Margin="10,0,0,320"
+                        Margin="10,0,0,60"
                         LineBreakMode="WordWrap"
                         TextColor="Black"    
                    IsVisible="{Binding ActivationVisible }" 
@@ -110,9 +110,9 @@
                         TextColor="Black"
                    IsVisible="{Binding ActivationVisible }" 
                     />
-            <Button Text="Provjeri status licence" Margin="5,0,0,0"  Clicked="OnRefreshLicenceClick"
+            <Button Text="Provjeri status licence"  Clicked="OnRefreshLicenceClick"
                IsVisible="{Binding ActivationVisible }" />
-
+            <Button Text="Registracija probne verzije" Clicked="BrowserOpen_Clicked" IsVisible="{Binding ActivationVisible }"/>
 
 
         </VerticalStackLayout>

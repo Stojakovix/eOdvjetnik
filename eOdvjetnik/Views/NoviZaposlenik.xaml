@@ -11,7 +11,7 @@
     </ContentPage.BindingContext>
         
     <ScrollView>
-        <Grid BackgroundColor="White">
+        <Grid BackgroundColor="#faf9fb">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="*" />

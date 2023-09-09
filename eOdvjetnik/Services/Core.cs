@@ -180,8 +180,22 @@ namespace eOdvjetnik.Services
         private const string PASS_mysql = "Lozinka2";
         private const string databasename_mysql = "databasename";
 
-        public Dictionary<string, string>[] sqlQuery(string query)
+
+        public string Install(string data)
         {
+            string sqlCommands = File.ReadAllText("Resource/Install/odvjetnik_local.sql");
+
+            // Split the SQL commands into individual commands
+            IEnumerable<string> commands = sqlCommands.Split(new[] { ";\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string command in commands)
+            {
+                sqlQuery(command);
+            }
+            return data;
+        }
+
+        public Dictionary<string, string>[] sqlQuery(string query){
 
             //Debug.WriteLine("Core.cs -> Dictionary -> Usao u sqlQuerry  *******");
             // MySQL connection settings

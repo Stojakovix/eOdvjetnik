@@ -1,4 +1,4 @@
- <Project Sdk="Microsoft.NET.Sdk">
+﻿ <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net7.0-ios;net7.0-maccatalyst;net7.0-android33.0</TargetFrameworks>
@@ -189,11 +189,10 @@
     <Resource Remove="Resources\Icons\book.png" />
 	  </ItemGroup>
 	 <ItemGroup>
-		 <EmbeddedResource Include="Resources\DocIO\AdventureCycle.jpg" />
-		 <EmbeddedResource Include="Resources\DocIO\Mountain-200.jpg" />
-		 <EmbeddedResource Include="Resources\DocIO\Mountain-300.jpg" />
-		 <EmbeddedResource Include="Resources\DocIO\Road-550-W.jpg" />
+		 <EmbeddedResource Include="Resources\DocIO\eodvjetnik.svg" />
 		 <EmbeddedResource Include="Resources\DocIO\logoNincevic.png" />
+
+
 
 	 </ItemGroup>
 	<ItemGroup>
@@ -394,6 +393,8 @@
 	  <None Remove="Resources\Images\new_window.png" />
 	  <None Remove="Resources\Images\play.png" />
 	  <None Remove="Resources\Images\refresh.png" />
+	  <None Remove="Resources\Install\odvjetnik_local-2.3.sql" />
+	  <None Remove="Resources\Install\odvjetnik_local.sql" />
 
 	</ItemGroup>
 
@@ -934,6 +935,10 @@
 	  <EmbeddedResource Include="Resources\Icons\youtube.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+	  <Resource Include="Resources\Install\odvjetnik_local-2.3.sql" />
+	  <Resource Include="Resources\Install\odvjetnik_local.sql" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Compile Update="Resources\Strings\AppResources.Designer.cs">
