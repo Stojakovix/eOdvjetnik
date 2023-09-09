@@ -127,11 +127,11 @@
                         <Button Margin="-50,0,0,0"  Grid.Row="5" Grid.Column="1"  Text="{x:Static resx:AppResources.Spremi}"  Command="{Binding SaveCommandNAS}"  >
 
                         </Button>
-                        <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="2" Margin="3,48,3,0"  BackgroundColor="Black" />
-                        <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="2" Margin="3,48,3,0"  BackgroundColor="Black" />
-                        <BoxView HeightRequest="1" Grid.Row="2" Grid.Column="2" Margin="3,48,3,0"  BackgroundColor="Black" />
-                        <BoxView HeightRequest="1" Grid.Row="3" Grid.Column="2" Margin="3,48,3,0"  BackgroundColor="Black" />
-                        <BoxView HeightRequest="1" Grid.Row="4" Grid.Column="2" Margin="3,48,3,0"  BackgroundColor="Black" />
+                        <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="2" Margin="3,48,3,0"   />
+                        <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="2" Margin="3,48,3,0"   />
+                        <BoxView HeightRequest="1" Grid.Row="2" Grid.Column="2" Margin="3,48,3,0"   />
+                        <BoxView HeightRequest="1" Grid.Row="3" Grid.Column="2" Margin="3,48,3,0"   />
+                        <BoxView HeightRequest="1" Grid.Row="4" Grid.Column="2" Margin="3,48,3,0"   />
 
 
                     </Grid>
@@ -171,10 +171,10 @@
                         <Button Margin="-50,0,0,0"  Grid.Row="4" Grid.Column="1"  Text="{x:Static resx:AppResources.Spremi}"   Command="{Binding SQLSaveCommand}" >
 
                         </Button>
-                        <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="2" Margin="3,48,3,0"  BackgroundColor="Black" />
-                        <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="2" Margin="3,48,3,0"  BackgroundColor="Black" />
-                        <BoxView HeightRequest="1" Grid.Row="2" Grid.Column="2" Margin="3,48,3,0"  BackgroundColor="Black" />
-                        <BoxView HeightRequest="1" Grid.Row="3" Grid.Column="2" Margin="3,48,3,0"  BackgroundColor="Black" />
+                        <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="2" Margin="3,48,3,0"   />
+                        <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="2" Margin="3,48,3,0"   />
+                        <BoxView HeightRequest="1" Grid.Row="2" Grid.Column="2" Margin="3,48,3,0"   />
+                        <BoxView HeightRequest="1" Grid.Row="3" Grid.Column="2" Margin="3,48,3,0"   />
              
 
                     </Grid>
@@ -199,11 +199,9 @@
                             <RowDefinition Height="65" />
                         </Grid.RowDefinitions>
 
-                        <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="2" Margin="7,48,6,0"  BackgroundColor="Black" />
-                        <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="2" Margin="7,48,6,0"  BackgroundColor="Black" />
-                        <BoxView HeightRequest="1" Grid.Row="2" Grid.Column="2" Margin="7,48,6,0"  BackgroundColor="Black" />
-                        <BoxView HeightRequest="1" Grid.Row="3" Grid.Column="2" Margin="7,206,2,0"  BackgroundColor="Black" />
-                        <BoxView HeightRequest="1" Grid.Row="4" Grid.Column="2" Margin="7,48,6,0"  BackgroundColor="Black" />
+
+
+                        
                         
                         <Label Grid.Row="0" Grid.Column="0" Text="{x:Static resx:AppResources.StopaPDV}" Margin="10,15,0,0" VerticalOptions="Center" />
                         <Entry Grid.Row="0" Grid.Column="1" TextColor="Black" Placeholder="{Binding ReceiptPDVamount}" Margin="5,10,0,0" MaxLength="2"
@@ -243,12 +241,14 @@
 
                         </Button>
 
-
                         <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="2" Margin="7,48,6,0"   />
                         <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="2" Margin="7,48,6,0"   />
                         <BoxView HeightRequest="1" Grid.Row="2" Grid.Column="2" Margin="7,48,6,0"   />
-                        <BoxView HeightRequest="1" Grid.Row="3" Grid.Column="2" Margin="7,206,2,0"  />
-                        <BoxView HeightRequest="1" Grid.Row="4" Grid.Column="2" Margin="7,48,6,0"  />
+                        <BoxView HeightRequest="1" Grid.Row="3" Grid.Column="2" Margin="7,206,2,0"   />
+                        <BoxView HeightRequest="1" Grid.Row="4" Grid.Column="2" Margin="7,48,6,0"   />
+
+
+
 
                     </Grid>
 
