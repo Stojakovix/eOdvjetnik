@@ -163,7 +163,7 @@
                             >
 
                 <sfPopup:SfPopup.PopupStyle>
-                    <sfPopup:PopupStyle MessageBackground="White" HeaderBackground="White" />
+                    <sfPopup:PopupStyle MessageBackground="#faf9fb" HeaderBackground="#faf9fb" />
                 </sfPopup:SfPopup.PopupStyle>
                 
                 <sfPopup:SfPopup.ContentTemplate>
