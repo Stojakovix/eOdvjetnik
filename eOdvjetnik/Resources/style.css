@@ -1,0 +1,23 @@
+.bottom-border {
+    border-bottom-color: red;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-block: dashed;
+    border-block-start-color: red;
+    border-color: red;
+    border-inline: double;
+    mask-border: fill;
+    border-inline-end-color: red;
+    column-rule-color: red;
+    background-color: yellow;
+    border-radius: 3;
+    border-start-start-radius: inherit;
+    box-decoration-break: inherit;
+    box-shadow: inset;
+    color-interpolation: linearRGB;
+    column-rule-color: red;
+    box-shadow: 0 0 10px red;
+    outline: 1px solid red;
+    border: 1px solid red;
+    color: red;
+}

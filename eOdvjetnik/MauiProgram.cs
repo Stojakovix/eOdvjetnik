@@ -22,7 +22,7 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
-
+        
         builder.ConfigureSyncfusionCore();
         builder
             .UseMauiApp<App>()
@@ -76,7 +76,7 @@ public static class MauiProgram
         return builder.Build();
 
 
-
+        Application.Current.UserAppTheme = AppTheme.Light;
 
 
 
