@@ -2,13 +2,13 @@ using eOdvjetnik.ViewModel;
 using eOdvjetnik.Services;
 using eOdvjetnik.Models;
 using System.Diagnostics;
-
+using System.Security;
 
 namespace eOdvjetnik.Views;
 
 public partial class SpiDok : ContentPage
 {
-	public SpiDokViewModel viewModel = new SpiDokViewModel();
+    public SpiDokViewModel viewModel = new SpiDokViewModel();
 	public SpiDok()
 	{
 		//InitializeComponent();
@@ -21,8 +21,9 @@ public partial class SpiDok : ContentPage
         base.OnAppearing();
         InitializeComponent();
         this.BindingContext = viewModel;
-
     }
+
+    
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
@@ -36,4 +37,6 @@ public partial class SpiDok : ContentPage
         Debug.WriteLine(fileName);
         await viewModel.OpenFile(fileName);
     }
+
+
 }

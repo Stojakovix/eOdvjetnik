@@ -8,9 +8,7 @@
              xmlns:local="clr-namespace:ListViewMaui"
              Title="Spisi">
 
-    <ContentPage.BindingContext>
-        <viewmodel:SpisiViewModel/>
-    </ContentPage.BindingContext>
+
 
     <ContentPage.Resources>
         <ResourceDictionary>

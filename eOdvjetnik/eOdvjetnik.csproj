@@ -114,6 +114,7 @@
 	  <MauiXaml Remove="NewFolder1\**" />
 	  <None Remove="NewFolder1\**" />
 	  <Compile Remove="Services\SaveAndroid.cs" />
+	  <MauiImage Remove="Resources\Images\doc.png" />
 	  <Resource Remove="Resources\Images\aac.png" />
 	  <Resource Remove="Resources\Images\ai.png" />
 	  <Resource Remove="Resources\Images\aiff.png" />
@@ -935,6 +936,7 @@
 	  <EmbeddedResource Include="Resources\Icons\youtube.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </EmbeddedResource>
+	  <EmbeddedResource Include="Resources\Images\doc.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Resource Include="Resources\Install\odvjetnik_local-2.3.sql" />
