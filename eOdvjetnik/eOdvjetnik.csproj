@@ -480,9 +480,6 @@
 	  <Folder Include="Templates\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <BundleResource Include="Settings.bundle\Root.plist" />
-	</ItemGroup>
-	<ItemGroup>
 	  <EmbeddedResource Include="Resources\Icons\1password.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </EmbeddedResource>
