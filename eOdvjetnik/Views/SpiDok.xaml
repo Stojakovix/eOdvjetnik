@@ -7,13 +7,14 @@
              xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              Title="SpiDok">
 
-    <ContentPage.BindingContext>
-        <viewModel:SpiDokViewModel/>
-    </ContentPage.BindingContext>
+
 
     <ScrollView>
         <syncfusion:SfListView x:Name="listView" 
-       ItemsSource="{Binding SpiDokItems}" >
+                               ItemsSource="{Binding SpiDokItems}"
+                               ItemTapped="OnItemTapped"
+                               
+                               >
 
             <syncfusion:SfListView.HeaderTemplate>
                 <DataTemplate>
@@ -33,9 +34,9 @@
                     </Grid>
                 </DataTemplate>
             </syncfusion:SfListView.HeaderTemplate>
-            
+
             <syncfusion:SfListView.ItemTemplate>
-                
+
                 <DataTemplate>
                     <Grid >
                         <Grid.RowDefinitions>

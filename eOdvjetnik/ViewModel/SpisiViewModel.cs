@@ -175,7 +175,7 @@ namespace eOdvjetnik.ViewModel
 
             var timer = Application.Current.Dispatcher.CreateTimer();
             timer.Interval = TimeSpan.FromSeconds(5);
-            timer.Tick += (s, e) => CheckCount();
+           // timer.Tick += (s, e) => CheckCount();
             timer.Start();
             
         }

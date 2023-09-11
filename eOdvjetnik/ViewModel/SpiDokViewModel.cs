@@ -95,7 +95,7 @@ namespace eOdvjetnik.ViewModel
                         DateTime.TryParse(filesRow["datum_kreiranja_dokumenta"], out datumKreiranjaDokumenta);
                         DateTime.TryParse(filesRow["datum_izmjene_dokumenta"], out datumIzmjeneDokumenta);
                         #endregion
-                        
+
                         spiDokItems.Add(new SpiDokItem()
                         {
                             Id = id,
@@ -146,31 +146,19 @@ namespace eOdvjetnik.ViewModel
                             {
                                 if (item.Dokument != null)
                                 {
-                                    //Debug.WriteLine(item.Icon + " naziv spidok ikone");
-                                    if (imageExists)
-                                    {
-                                        StringIcon = Path.GetExtension(item.Dokument).TrimStart('.') + ".png";
-                                        if (item.Icon == null || item.Dokument == null)
-                                        {
-                                            StringIcon = "blank.png";
-                                            Debug.WriteLine("u else ifu " + StringIcon);
-                                        }
-                                        //Debug.WriteLine("u ifu " + StringIcon);
-                                        //Debug.WriteLine("u ifu " + item.Dokument);
-                                        //Debug.WriteLine(item.Kreirao);
-                                    }
-
-                                    //else if (item.Icon == null)
-                                    //{
-                                    //    StringIcon = "blank.png";
-                                    //    Debug.WriteLine("u else ifu " + StringIcon);
-                                    //}
-
-                                    else
+                                    string stringIcon = Path.GetExtension(item.Dokument).TrimStart('.') + ".png";
+                                    //Debug.WriteLine(stringIcon + " " + item.Dokument + " " + "Item dokument");
+                                    StringIcon = Path.GetExtension(item.Dokument).Trim('.') + ".png";
+                                    Debug.WriteLine(StringIcon + "     " + item.Referenca);
+                                    if (item.Icon == null || item.Dokument == null)
                                     {
                                         StringIcon = "blank.png";
-                                        Debug.WriteLine("u elseu " + StringIcon);
+                                        Debug.WriteLine("u else ifu " + StringIcon);
                                     }
+                                    //Debug.WriteLine("u ifu " + StringIcon);
+                                    //Debug.WriteLine("u ifu " + item.Dokument);
+                                    //Debug.WriteLine(item.Kreirao);
+                                    
                                 }
                                 else
                                 {
@@ -187,9 +175,9 @@ namespace eOdvjetnik.ViewModel
 
                     }
                     OnPropertyChanged(nameof(spiDokItems));
-                    
+
                     //Debug.WriteLine(spiDokItems);
-                    
+
                 }
             }
             catch (Exception ex)
