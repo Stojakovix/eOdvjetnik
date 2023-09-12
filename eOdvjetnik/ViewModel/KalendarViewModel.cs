@@ -151,7 +151,7 @@ namespace eOdvjetnik.ViewModel
             int numberOfCharacters = 5;
             string adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
             Debug.WriteLine("Kalendar ResourceView - 'Admin' provjera: " + adminCheck);
-            if (adminCheck == "Admin")
+            if (adminCheck == "Admin" || adminCheck == "Trial")
             {
                 GetEmployees();
                 Debug.WriteLine("izvršen get employees");

@@ -303,15 +303,18 @@ namespace eOdvjetnik.ViewModel
             try
             {
                 DisableMenu();
-                 
+
                 int numberOfCharacters = 5;
                 string adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
                 Debug.WriteLine("Kalendar ResourceView - 'Admin' provjera: " + adminCheck);
 
-                if (disableMenu == false && adminCheck == "Admin")
+                if (disableMenu == false)
                 {
-                    await Shell.Current.GoToAsync("//AdminKalendar");
-                    Debug.WriteLine("KLIKNO");
+                    if (adminCheck == "Admin" || adminCheck == "Trial")
+                    {
+                        await Shell.Current.GoToAsync("//AdminKalendar");
+                        Debug.WriteLine("KLIKNO");
+                    }
                 }
             }
             catch (Exception ex)

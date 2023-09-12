@@ -109,7 +109,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         Debug.WriteLine("Spremi boje - 'Admin' provjera: " + adminCheck);
         AdminColorPopup = false;
 
-        if (adminCheck == "Admin")
+        if (adminCheck == "Admin" || adminCheck == "Trial")
         {
             AdminColorPopup = false;
 

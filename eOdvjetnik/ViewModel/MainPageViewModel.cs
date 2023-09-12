@@ -273,11 +273,11 @@ namespace eOdvjetnik.ViewModel
 
                         TimeSpan difference = dateTime.Subtract(TrialFileCreated);
                         int daysDifference = difference.Days;
-                        if (daysDifference > 45)
-                        {
-                            ExpiredLicence = true;
-
-                        }
+                       if (daysDifference > 45)
+                       {
+                           ExpiredLicence = true;
+                       
+                       }
                     }
 
                     catch (Exception ex)
