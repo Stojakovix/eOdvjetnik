@@ -81,11 +81,6 @@ namespace eOdvjetnik.ViewModel
                 string resourceNamePrefix = "eOdvjetnik.Resources"; // Replace with your app's actual namespace and "Resources." prefix
                 string[] allResourceNames = assembly.GetManifestResourceNames();
                 resourceNames.AddRange(allResourceNames.Where(name => name.StartsWith(resourceNamePrefix)));
-                foreach (string resourceName in resourceNames)
-                {
-                    Debug.WriteLine("---------------------**********resourceNames***********---------------------------");
-                    Debug.WriteLine(resourceName);
-                }
                 //Kraj List png
 
 
@@ -115,12 +110,9 @@ namespace eOdvjetnik.ViewModel
                         var icon = "blank.png";
                         icon = Path.GetExtension(filesRow["dokument"]).TrimStart('.') + ".png";
                         bool imageExists = resourceNames.Contains("eOdvjetnik.Resources.Images." + icon);
-                        if (imageExists)
-                        {
+                        if (imageExists){
                             icon = Path.GetExtension(filesRow["dokument"]).TrimStart('.') + ".png";
-                        }
-                        else
-                        {
+                        }else{
                             icon = "blank.png";
                         }
                         //ikona kraj                        
