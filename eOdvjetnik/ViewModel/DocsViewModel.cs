@@ -124,18 +124,21 @@ namespace eOdvjetnik.ViewModel
                 List<string> resourceNames = new List<string>();
 
                 Assembly assembly = typeof(DocsViewModel).Assembly;
+                
                 string resourceNamePrefix = "eOdvjetnik.Resources"; // Replace with your app's actual namespace and "Resources." prefix
-
                 string[] allResourceNames = assembly.GetManifestResourceNames();
                 resourceNames.AddRange(allResourceNames.Where(name => name.StartsWith(resourceNamePrefix)));
-                //foreach (string resourceName in resourceNames)
-                //{
-                //    Debug.WriteLine(resourceName);
-                //}
+                
+                foreach (string resourceName in resourceNames)
+                {
+                    Debug.WriteLine("---------------------**********resourceNames***********---------------------------");
+                    Debug.WriteLine(resourceName);
+                }
                 //Kraj List png
 
                 foreach (FileDirectoryInformation file in fileList)
                 {
+                    Debug.WriteLine("---------------------**********" + file.FileName + "***********---------------------------");
                     //Debug.WriteLine($"Filename: {file.FileName}");
                     //Debug.WriteLine($"File Attributes: {file.FileAttributes}");
                     //Debug.WriteLine($"File -------: {file.NextEntryOffset}");
@@ -148,7 +151,7 @@ namespace eOdvjetnik.ViewModel
 
 
                     var icon = "blank.png";
-                    bool imageExists = resourceNames.Contains("eOdvjetnik.Resources.Images." + icon);
+                    //bool imageExists = resourceNames.Contains("eOdvjetnik.Resources.Images." + icon);
 
                     if (file.FileName != null)
                     {
@@ -161,20 +164,20 @@ namespace eOdvjetnik.ViewModel
                         {
 
                             icon = Path.GetExtension(file.FileName).TrimStart('.') + ".png";
-                            Debug.WriteLine("Prije svega  " + icon);
+                            Debug.WriteLine(file.FileName+" Ikona -> " + icon);
 
-                            //bool imageExists = resourceNames.Contains("eOdvjetnik.Resources.Images" + icon);
+                            bool imageExists = resourceNames.Contains("eOdvjetnik.Resources.Images." + icon);
 
                             if (imageExists)
                             {
                                 icon = Path.GetExtension(file.FileName).TrimStart('.') + ".png";
-                                Debug.WriteLine("izvršen if " + icon);
+                                Debug.WriteLine("+++Slika postoji " + icon);
 
                             }
                             else
                             {
                                 icon = "blank.png";
-                                Debug.WriteLine("izvršen else " + icon);
+                                Debug.WriteLine("---Slika ne postoji " + icon);
                             }
 
                         }
@@ -185,6 +188,16 @@ namespace eOdvjetnik.ViewModel
                         icon = "blank.png";
                         Debug.WriteLine("izvršen zadnji else " + icon);
                     }
+                    DocsItem fileData = new DocsItem
+                    {
+                        Name = file.FileName,
+                        Changed = file.LastWriteTime,
+                        Icon = icon,
+                        Created = file.CreationTime,
+                        Size = $"{file.AllocationSize / 1024} KB",
+
+                    };
+                    items.Add(fileData);
                 }
                 Debug.WriteLine(items.Count());
                 //items.Clear();

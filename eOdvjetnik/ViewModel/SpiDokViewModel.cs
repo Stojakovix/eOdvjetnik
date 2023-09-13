@@ -124,60 +124,12 @@ namespace eOdvjetnik.ViewModel
                         });
 
 
-                        if (SpiDokItems != null)
-                        {
-                            //Debug.WriteLine(spiDokItems.ToList());
-                            Assembly assembly = typeof(SpiDokViewModel).Assembly;
-                            List<string> resourceNames = new List<string>();
-                            string resourceNamePrefix = "eOdvjetnik.Resources."; // Replace with your app's actual namespace and "Resources." prefix
-
-                            string[] allResourceNames = assembly.GetManifestResourceNames();
-                            resourceNames.AddRange(allResourceNames.Where(name => name.StartsWith(resourceNamePrefix)));
-
-
-                            //resourceNames.AddRange(allResourceNames.Where(name => name.StartsWith(resourceNamePrefix)));
-
-                            StringIcon = "blank.png";
-                            //StringIcon = Path.GetExtension(file.FileName).TrimStart('.') + ".png";
-
-                            bool imageExists = resourceNames.Contains("eOdvjetnik.Resources.Images." + StringIcon);
-
-                            foreach (var item in spiDokItems)
-                            {
-                                if (item.Dokument != null)
-                                {
-                                    string stringIcon = Path.GetExtension(item.Dokument).TrimStart('.') + ".png";
-                                    //Debug.WriteLine(stringIcon + " " + item.Dokument + " " + "Item dokument");
-                                    StringIcon = Path.GetExtension(item.Dokument).Trim('.') + ".png";
-                                    Debug.WriteLine(StringIcon + "     " + item.Referenca);
-                                    if (item.Icon == null || item.Dokument == null)
-                                    {
-                                        StringIcon = "blank.png";
-                                        Debug.WriteLine("u else ifu " + StringIcon);
-                                    }
-                                    //Debug.WriteLine("u ifu " + StringIcon);
-                                    //Debug.WriteLine("u ifu " + item.Dokument);
-                                    //Debug.WriteLine(item.Kreirao);
-                                    
-                                }
-                                else
-                                {
-                                    StringIcon = "blank.png";
-                                    Debug.WriteLine("u elseu " + StringIcon);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Debug.WriteLine("Kolekcija prazna");
-                        }
-                        //initialFileItems = new ObservableCollection<FileItem>(fileItems);
-
-                    }
+                        
                     OnPropertyChanged(nameof(spiDokItems));
 
-                    //Debug.WriteLine(spiDokItems);
+                    //Debug.WriteLine(spiDokItems); 
 
+                }
                 }
             }
             catch (Exception ex)
