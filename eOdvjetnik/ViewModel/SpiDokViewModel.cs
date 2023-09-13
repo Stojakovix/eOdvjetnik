@@ -74,6 +74,21 @@ namespace eOdvjetnik.ViewModel
                 // Debug.WriteLine(query + "u SpisiViewModelu");
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
                 Debug.WriteLine(query);
+
+                //List png
+                List<string> resourceNames = new List<string>();
+                Assembly assembly = typeof(DocsViewModel).Assembly;
+                string resourceNamePrefix = "eOdvjetnik.Resources"; // Replace with your app's actual namespace and "Resources." prefix
+                string[] allResourceNames = assembly.GetManifestResourceNames();
+                resourceNames.AddRange(allResourceNames.Where(name => name.StartsWith(resourceNamePrefix)));
+                foreach (string resourceName in resourceNames)
+                {
+                    Debug.WriteLine("---------------------**********resourceNames***********---------------------------");
+                    Debug.WriteLine(resourceName);
+                }
+                //Kraj List png
+
+
                 if (filesData != null)
                 {
                     foreach (Dictionary<string, string> filesRow in filesData)
@@ -95,6 +110,20 @@ namespace eOdvjetnik.ViewModel
                         DateTime.TryParse(filesRow["datum_kreiranja_dokumenta"], out datumKreiranjaDokumenta);
                         DateTime.TryParse(filesRow["datum_izmjene_dokumenta"], out datumIzmjeneDokumenta);
                         #endregion
+
+                        //ikona
+                        var icon = "blank.png";
+                        icon = Path.GetExtension(filesRow["dokument"]).TrimStart('.') + ".png";
+                        bool imageExists = resourceNames.Contains("eOdvjetnik.Resources.Images." + icon);
+                        if (imageExists)
+                        {
+                            icon = Path.GetExtension(filesRow["dokument"]).TrimStart('.') + ".png";
+                        }
+                        else
+                        {
+                            icon = "blank.png";
+                        }
+                        //ikona kraj                        
 
                         spiDokItems.Add(new SpiDokItem()
                         {
@@ -120,16 +149,17 @@ namespace eOdvjetnik.ViewModel
                             EmailAdrese = filesRow["email_adrese"],
                             Kreirao = filesRow["kreirao"],
                             ZadnjeUredio = filesRow["zadnje_uredio"],
-                            Icon = StringIcon,
+                            Icon = icon,
                         });
 
 
-                        
-                    OnPropertyChanged(nameof(spiDokItems));
 
-                    //Debug.WriteLine(spiDokItems); 
+                        OnPropertyChanged(nameof(spiDokItems));
 
-                }
+                        //Debug.WriteLine(spiDokItems); 
+
+                    }
+
                 }
             }
             catch (Exception ex)
