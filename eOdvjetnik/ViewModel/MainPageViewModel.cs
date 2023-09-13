@@ -99,7 +99,6 @@ namespace eOdvjetnik.ViewModel
         }
         #endregion
         public ICommand ClearPrefrences { get; set; }
-        public ICommand ClearLicencePrefrences { get; set; }
 
         public MainPageViewModel()
         {
@@ -113,7 +112,6 @@ namespace eOdvjetnik.ViewModel
             CompanyName = Preferences.Get("naziv_tvrtke", "");
             WeakReferenceMessenger.Default.Register<CheckLicence>(this, RefreshLicenceData);
             ClearPrefrences = new Command(DeletePreferences);
-            ClearLicencePrefrences = new Command(DeleteLicencePreference);
 
             RefreshTime();
 
@@ -176,8 +174,22 @@ namespace eOdvjetnik.ViewModel
 
         public void DeletePreferences()
         {
-            Preferences.Default.Clear();
-            Preferences.Clear();
+
+            string hwid = Preferences.Get("key", null);
+            string activationCode = Preferences.Get("activation_code", "");
+            Debug.WriteLine("Brisanje preferenci " + hwid + activationCode);
+            try
+            {
+                Preferences.Default.Clear();
+                Preferences.Clear();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+            }
+            Preferences.Set("key", hwid);
+            Preferences.Set("activation_code", activationCode);
         }
 
         public void DeleteLicencePreference()
@@ -273,11 +285,11 @@ namespace eOdvjetnik.ViewModel
 
                         TimeSpan difference = dateTime.Subtract(TrialFileCreated);
                         int daysDifference = difference.Days;
-                       if (daysDifference > 45)
-                       {
-                           ExpiredLicence = true;
-                       
-                       }
+                        if (daysDifference > 45)
+                        {
+                            ExpiredLicence = true;
+                        
+                        }
                     }
 
                     catch (Exception ex)
