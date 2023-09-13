@@ -178,9 +178,16 @@ namespace eOdvjetnik.ViewModel
             string hwid = Preferences.Get("key", null);
             string activationCode = Preferences.Get("activation_code", "");
             Debug.WriteLine("Brisanje preferenci " + hwid + activationCode);
+            try
+            {
+                Preferences.Default.Clear();
+                Preferences.Clear();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
 
-            Preferences.Default.Clear();
-            Preferences.Clear();
+            }
             Preferences.Set("key", hwid);
             Preferences.Set("activation_code", activationCode);
         }
