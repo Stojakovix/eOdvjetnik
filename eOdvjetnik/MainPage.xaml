@@ -63,7 +63,6 @@
             <Image Source="text_only.png" HeightRequest="120" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
 
             <Button Text="Clear All Preferences" Background="LightBlue" BorderColor="black" Command="{Binding ClearPrefrences}" IsVisible="True" />
-            <Button Text="Clear Licence Preferences" Background="LightBlue" BorderColor="black" Command="{Binding ClearLicencePrefrences}" IsVisible="True"  />
 
 
 
