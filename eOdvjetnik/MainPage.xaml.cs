@@ -36,7 +36,6 @@ public partial class MainPage : ContentPage
     private const string url = "https://cc.eodvjetnik.hr/token.json?token=";
     private HttpClient _Client = new HttpClient();
     
-
     public string ActivationCode { get; set; }
     public string LicenceType { get; set; }
     public string ExpireDateString { get; set; }
@@ -170,10 +169,20 @@ public partial class MainPage : ContentPage
                     Preferences.Set("company_id", company_ID);
                     Preferences.Set("device_type_id", devicetype_ID);
 
-
                     Debug.WriteLine("MainPageViewModel - > Company info: " + nazivTvrtke + OIBTvrtke + adresaTvrtke);
 
                     WeakReferenceMessenger.Default.Send(new CheckLicence("CheckLicence!"));
+
+                    string nas = Preferences.Get("IP Adresa", "");
+                    string sql = Preferences.Get("IP Adresa2", "");
+                    Debug.WriteLine("provjera jesu li dodani nas " + nas + " i sql postavke " + sql + "koja je licenca " + LicenceType);
+
+
+                    if (nas == "" || nas == null || sql == "" || sql == null)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("", "Unesite NAS i SQL postavke.", "OK");
+
+                    }
 
                 }
                 else
@@ -185,9 +194,17 @@ public partial class MainPage : ContentPage
         catch (Exception ex)
         {
             Debug.WriteLine("Activation error:" + ex.Message);
+            LicenceType = Preferences.Get("licence_type", "");
+            if (LicenceType == "" || LicenceType == null)
+            {
+                await Application.Current.MainPage.DisplayAlert("", "Licenca nije aktivna.", "OK");
+            }
+            
         }
 
         LicenceUpdatedMessage();
+      
+
     }
 
 
@@ -221,7 +238,6 @@ public MainPage()
         AskForWiFiPermission();
         BindingContext = new MainPageViewModel();
         ActivationLoop();
-       
 
 
     }
