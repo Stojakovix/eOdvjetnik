@@ -236,11 +236,11 @@
 	  <None Remove="Resources\Fonts\SFUIDisplay-Thin.otf" />
 	  <None Remove="Resources\Fonts\SFUIDisplay-Ultralight.otf" />
 	  <None Remove="Resources\Fonts\SFUIText-Regular.otf" />
-	  <None Remove="Resources\Icons\1password.png" />
-	  <None Remove="Resources\Icons\3_dots.png" />
-	  <None Remove="Resources\Icons\4_dot_menu.png" />
+	  <None Remove="Resources\Icons\aac.png" />
 	  <None Remove="Resources\Icons\add.png" />
 	  <None Remove="Resources\Icons\adjustment.png" />
+	  <None Remove="Resources\Icons\ai.png" />
+	  <None Remove="Resources\Icons\aiff.png" />
 	  <None Remove="Resources\Icons\airbnb.png" />
 	  <None Remove="Resources\Icons\alert.png" />
 	  <None Remove="Resources\Icons\amazon.png" />
@@ -249,10 +249,12 @@
 	  <None Remove="Resources\Icons\android_store.png" />
 	  <None Remove="Resources\Icons\aperture.png" />
 	  <None Remove="Resources\Icons\apple_logo.png" />
+	  <None Remove="Resources\Icons\avi.png" />
 	  <None Remove="Resources\Icons\battery.png" />
-	  <None Remove="Resources\Icons\bbc_iPlayer.png" />
 	  <None Remove="Resources\Icons\behance.png" />
+	  <None Remove="Resources\Icons\blank.png" />
 	  <None Remove="Resources\Icons\bluetooth.png" />
+	  <None Remove="Resources\Icons\bmp.png" />
 	  <None Remove="Resources\Icons\book.png" />
 	  <None Remove="Resources\Icons\bubble_speech.png" />
 	  <None Remove="Resources\Icons\busuu.png" />
@@ -263,30 +265,47 @@
 	  <None Remove="Resources\Icons\clock_app.png" />
 	  <None Remove="Resources\Icons\cloud_sun.png" />
 	  <None Remove="Resources\Icons\compass.png" />
+	  <None Remove="Resources\Icons\cpp.png" />
 	  <None Remove="Resources\Icons\credit_card.png" />
+	  <None Remove="Resources\Icons\css.png" />
+	  <None Remove="Resources\Icons\csv.png" />
+	  <None Remove="Resources\Icons\dat.png" />
 	  <None Remove="Resources\Icons\deliveroo.png" />
 	  <None Remove="Resources\Icons\deviantart.png" />
 	  <None Remove="Resources\Icons\digital_camera.png" />
 	  <None Remove="Resources\Icons\discord.png" />
 	  <None Remove="Resources\Icons\disney_plus.png" />
+	  <None Remove="Resources\Icons\dmg.png" />
+	  <None Remove="Resources\Icons\doc.png" />
+	  <None Remove="Resources\Icons\docx.png" />
 	  <None Remove="Resources\Icons\dotted_bubble_speech.png" />
+	  <None Remove="Resources\Icons\dotx.png" />
 	  <None Remove="Resources\Icons\dot_list.png" />
+	  <None Remove="Resources\Icons\down.png" />
 	  <None Remove="Resources\Icons\dribbble.png" />
 	  <None Remove="Resources\Icons\dropbox.png" />
+	  <None Remove="Resources\Icons\dwg.png" />
+	  <None Remove="Resources\Icons\dxf.png" />
+	  <None Remove="Resources\Icons\edit.svg" />
 	  <None Remove="Resources\Icons\eject.png" />
+	  <None Remove="Resources\Icons\eps.png" />
 	  <None Remove="Resources\Icons\evernote.png" />
 	  <None Remove="Resources\Icons\excel.png" />
+	  <None Remove="Resources\Icons\exe.png" />
 	  <None Remove="Resources\Icons\facebook.png" />
 	  <None Remove="Resources\Icons\facebook_messenger.png" />
 	  <None Remove="Resources\Icons\facetime.png" />
 	  <None Remove="Resources\Icons\find_my.png" />
 	  <None Remove="Resources\Icons\fitness.png" />
 	  <None Remove="Resources\Icons\flickr.png" />
+	  <None Remove="Resources\Icons\flv.png" />
 	  <None Remove="Resources\Icons\folder.png" />
+	  <None Remove="Resources\Icons\folder_1484.png" />
 	  <None Remove="Resources\Icons\football.png" />
 	  <None Remove="Resources\Icons\forward_icon.png" />
 	  <None Remove="Resources\Icons\foursquare.png" />
 	  <None Remove="Resources\Icons\gallery.png" />
+	  <None Remove="Resources\Icons\gif.png" />
 	  <None Remove="Resources\Icons\gmail.png" />
 	  <None Remove="Resources\Icons\google.png" />
 	  <None Remove="Resources\Icons\google_authenticator.png" />
@@ -300,20 +319,35 @@
 	  <None Remove="Resources\Icons\hbo_max.png" />
 	  <None Remove="Resources\Icons\heart.png" />
 	  <None Remove="Resources\Icons\home.png" />
+	  <None Remove="Resources\Icons\hpp.png" />
+	  <None Remove="Resources\Icons\html.png" />
 	  <None Remove="Resources\Icons\hulu.png" />
+	  <None Remove="Resources\Icons\ics.png" />
 	  <None Remove="Resources\Icons\inbox.png" />
 	  <None Remove="Resources\Icons\instagram.png" />
-	  <None Remove="Resources\Icons\iOS_store.png" />
 	  <None Remove="Resources\Icons\ios_x.png" />
+	  <None Remove="Resources\Icons\iso.png" />
+	  <None Remove="Resources\Icons\java.png" />
+	  <None Remove="Resources\Icons\jpg.png" />
+	  <None Remove="Resources\Icons\js.png" />
+	  <None Remove="Resources\Icons\key.png" />
 	  <None Remove="Resources\Icons\keynote.png" />
 	  <None Remove="Resources\Icons\keynotes.png" />
 	  <None Remove="Resources\Icons\lastpass.png" />
+	  <None Remove="Resources\Icons\left.png" />
+	  <None Remove="Resources\Icons\less.png" />
 	  <None Remove="Resources\Icons\letter.png" />
 	  <None Remove="Resources\Icons\linkedin.png" />
+	  <None Remove="Resources\Icons\logoimg.svg" />
+	  <None Remove="Resources\Icons\logotext.svg" />
 	  <None Remove="Resources\Icons\map_pin.png" />
 	  <None Remove="Resources\Icons\menu_sign.png" />
 	  <None Remove="Resources\Icons\microphone.png" />
 	  <None Remove="Resources\Icons\microsoft_teams.png" />
+	  <None Remove="Resources\Icons\mid.png" />
+	  <None Remove="Resources\Icons\mp3.png" />
+	  <None Remove="Resources\Icons\mp4.png" />
+	  <None Remove="Resources\Icons\mpg.png" />
 	  <None Remove="Resources\Icons\ms_words.png" />
 	  <None Remove="Resources\Icons\music_sign.png" />
 	  <None Remove="Resources\Icons\netflix.png" />
@@ -321,29 +355,48 @@
 	  <None Remove="Resources\Icons\night.png" />
 	  <None Remove="Resources\Icons\notion.png" />
 	  <None Remove="Resources\Icons\numbers.png" />
+	  <None Remove="Resources\Icons\odf.png" />
+	  <None Remove="Resources\Icons\ods.png" />
+	  <None Remove="Resources\Icons\odt.png" />
+	  <None Remove="Resources\Icons\otp.png" />
+	  <None Remove="Resources\Icons\ots.png" />
+	  <None Remove="Resources\Icons\ott.png" />
 	  <None Remove="Resources\Icons\overcast.png" />
 	  <None Remove="Resources\Icons\padlock.png" />
+	  <None Remove="Resources\Icons\page.png" />
 	  <None Remove="Resources\Icons\pages.png" />
 	  <None Remove="Resources\Icons\pause.png" />
 	  <None Remove="Resources\Icons\pay.png" />
 	  <None Remove="Resources\Icons\paypal.png" />
 	  <None Remove="Resources\Icons\pdf.png" />
 	  <None Remove="Resources\Icons\phone.png" />
+	  <None Remove="Resources\Icons\php.png" />
 	  <None Remove="Resources\Icons\piano.png" />
 	  <None Remove="Resources\Icons\pinterest.png" />
 	  <None Remove="Resources\Icons\plane.png" />
+	  <None Remove="Resources\Icons\play.png" />
 	  <None Remove="Resources\Icons\playstation.png" />
+	  <None Remove="Resources\Icons\png.png" />
 	  <None Remove="Resources\Icons\podcasts.png" />
 	  <None Remove="Resources\Icons\pokemon_go.png" />
 	  <None Remove="Resources\Icons\powerpoint.png" />
+	  <None Remove="Resources\Icons\ppt.png" />
 	  <None Remove="Resources\Icons\prime_video.png" />
 	  <None Remove="Resources\Icons\procreate.png" />
+	  <None Remove="Resources\Icons\psd.png" />
 	  <None Remove="Resources\Icons\pubj.png" />
+	  <None Remove="Resources\Icons\py.png" />
+	  <None Remove="Resources\Icons\qt.png" />
 	  <None Remove="Resources\Icons\radio.png" />
+	  <None Remove="Resources\Icons\rar.png" />
+	  <None Remove="Resources\Icons\rb.png" />
 	  <None Remove="Resources\Icons\recording.png" />
 	  <None Remove="Resources\Icons\reddit.png" />
 	  <None Remove="Resources\Icons\ribbon.png" />
+	  <None Remove="Resources\Icons\rtf.png" />
 	  <None Remove="Resources\Icons\safari.png" />
+	  <None Remove="Resources\Icons\sass.png" />
+	  <None Remove="Resources\Icons\scss.png" />
 	  <None Remove="Resources\Icons\search.png" />
 	  <None Remove="Resources\Icons\setting_cog.png" />
 	  <None Remove="Resources\Icons\shield_secure.png" />
@@ -356,12 +409,16 @@
 	  <None Remove="Resources\Icons\snapchat.png" />
 	  <None Remove="Resources\Icons\speaker.png" />
 	  <None Remove="Resources\Icons\spotify.png" />
+	  <None Remove="Resources\Icons\sql.png" />
 	  <None Remove="Resources\Icons\steam.png" />
 	  <None Remove="Resources\Icons\stocks.png" />
 	  <None Remove="Resources\Icons\stop.png" />
 	  <None Remove="Resources\Icons\stumbleupon.png" />
 	  <None Remove="Resources\Icons\telegram.png" />
 	  <None Remove="Resources\Icons\tesla.png" />
+	  <None Remove="Resources\Icons\tga.png" />
+	  <None Remove="Resources\Icons\tgz.png" />
+	  <None Remove="Resources\Icons\tiff.png" />
 	  <None Remove="Resources\Icons\tiktok.png" />
 	  <None Remove="Resources\Icons\tinder.png" />
 	  <None Remove="Resources\Icons\translate.png" />
@@ -369,6 +426,7 @@
 	  <None Remove="Resources\Icons\tunein.png" />
 	  <None Remove="Resources\Icons\twitch.png" />
 	  <None Remove="Resources\Icons\twitter.png" />
+	  <None Remove="Resources\Icons\txt.png" />
 	  <None Remove="Resources\Icons\uber.png" />
 	  <None Remove="Resources\Icons\uber_eats.png" />
 	  <None Remove="Resources\Icons\unsafe.png" />
@@ -378,6 +436,7 @@
 	  <None Remove="Resources\Icons\vimeo.png" />
 	  <None Remove="Resources\Icons\wallet.png" />
 	  <None Remove="Resources\Icons\watch_video.png" />
+	  <None Remove="Resources\Icons\wav.png" />
 	  <None Remove="Resources\Icons\waze.png" />
 	  <None Remove="Resources\Icons\weather_cloud.png" />
 	  <None Remove="Resources\Icons\wechat.png" />
@@ -386,13 +445,13 @@
 	  <None Remove="Resources\Icons\wireless.png" />
 	  <None Remove="Resources\Icons\xbox.png" />
 	  <None Remove="Resources\Icons\xing.png" />
+	  <None Remove="Resources\Icons\xls.png" />
+	  <None Remove="Resources\Icons\xlsx.png" />
+	  <None Remove="Resources\Icons\xml.png" />
+	  <None Remove="Resources\Icons\yml.png" />
 	  <None Remove="Resources\Icons\youtube.png" />
-	  <None Remove="Resources\Images\down.png" />
-	  <None Remove="Resources\Images\home.png" />
-	  <None Remove="Resources\Images\left.png" />
-	  <None Remove="Resources\Images\new_window.png" />
-	  <None Remove="Resources\Images\play.png" />
-	  <None Remove="Resources\Images\refresh.png" />
+	  <None Remove="Resources\Icons\zip.png" />
+	  <None Remove="Resources\Icons\zoom.png" />
 	  <None Remove="Resources\Install\odvjetnik_local-2.3.sql" />
 	  <None Remove="Resources\Install\odvjetnik_local.sql" />
 
@@ -479,459 +538,75 @@
 	  <Folder Include="Templates\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <EmbeddedResource Include="Resources\Icons\1password.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\3_dots.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\4_dot_menu.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\add.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\adjustment.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\airbnb.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\alert.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\amazon.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\among_us.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\android.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\android_store.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\aperture.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\apple_logo.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\battery.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\bbc_iPlayer.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\behance.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\bluetooth.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\book.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\bubble_speech.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\busuu.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\calculator.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\calendar.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\camera_focus.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\checklist.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\clock_app.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\cloud_sun.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\compass.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\credit_card.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\deliveroo.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\deviantart.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\digital_camera.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\discord.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\disney_plus.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\dotted_bubble_speech.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\dot_list.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\dribbble.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\dropbox.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\eject.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\evernote.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\excel.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\facebook.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\facebook_messenger.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\facetime.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\find_my.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\fitness.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\flickr.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\folder.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\football.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\forward_icon.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\foursquare.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\gallery.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\gmail.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\google.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\google_authenticator.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\google_chrome.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\google_drive.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\google_meet.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\google_photos.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\googl_docs.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\graph.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\grid_view.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\hbo_max.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\heart.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\home.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\hulu.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\inbox.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\instagram.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\iOS_store.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\ios_x.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\keynote.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\keynotes.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\lastpass.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\letter.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\linkedin.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\map_pin.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\menu_sign.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\microphone.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\microsoft_teams.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\ms_words.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\music_sign.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\netflix.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\news.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\night.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\notion.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\numbers.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\overcast.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\padlock.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\pages.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\pause.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\pay.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\paypal.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\pdf.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\phone.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\piano.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\pinterest.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\plane.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\playstation.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\podcasts.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\pokemon_go.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\powerpoint.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\prime_video.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\procreate.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\pubj.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\radio.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\recording.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\reddit.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\ribbon.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\safari.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\search.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\setting_cog.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\shield_secure.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\shopping_cart.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\shortcuts.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\skype.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\slack.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\slider.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\smartwatch.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\snapchat.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\speaker.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\spotify.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\steam.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\stocks.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\stop.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\stumbleupon.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\telegram.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\tesla.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\tiktok.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\tinder.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\translate.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\tumblr.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\tunein.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\twitch.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\twitter.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\uber.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\uber_eats.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\unsafe.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\user.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\video.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\video_sign.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\vimeo.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\wallet.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\watch_video.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\waze.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\weather_cloud.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\wechat.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\whatsapp.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\windows.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\wireless.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\xbox.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\xing.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Resources\Icons\youtube.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
+	  <MauiImage Include="Resources\Icons\aac.png" />
+	  <MauiImage Include="Resources\Icons\ai.png" />
+	  <MauiImage Include="Resources\Icons\aiff.png" />
+	  <MauiImage Include="Resources\Icons\avi.png" />
+	  <MauiImage Include="Resources\Icons\blank.png" />
+	  <MauiImage Include="Resources\Icons\bmp.png" />
+	  <MauiImage Include="Resources\Icons\cpp.png" />
+	  <MauiImage Include="Resources\Icons\css.png" />
+	  <MauiImage Include="Resources\Icons\csv.png" />
+	  <MauiImage Include="Resources\Icons\dat.png" />
+	  <MauiImage Include="Resources\Icons\dmg.png" />
+	  <MauiImage Include="Resources\Icons\doc.png" />
+	  <MauiImage Include="Resources\Icons\docx.png" />
+	  <MauiImage Include="Resources\Icons\dotx.png" />
+	  <MauiImage Include="Resources\Icons\down.png" />
+	  <MauiImage Include="Resources\Icons\dwg.png" />
+	  <MauiImage Include="Resources\Icons\dxf.png" />
+	  <MauiImage Include="Resources\Icons\edit.svg" />
+	  <MauiImage Include="Resources\Icons\eps.png" />
+	  <MauiImage Include="Resources\Icons\exe.png" />
+	  <MauiImage Include="Resources\Icons\flv.png" />
+	  <MauiImage Include="Resources\Icons\folder_1484.png" />
+	  <MauiImage Include="Resources\Icons\gif.png" />
+	  <MauiImage Include="Resources\Icons\hpp.png" />
+	  <MauiImage Include="Resources\Icons\html.png" />
+	  <MauiImage Include="Resources\Icons\ics.png" />
+	  <MauiImage Include="Resources\Icons\iso.png" />
+	  <MauiImage Include="Resources\Icons\java.png" />
+	  <MauiImage Include="Resources\Icons\jpg.png" />
+	  <MauiImage Include="Resources\Icons\js.png" />
+	  <MauiImage Include="Resources\Icons\key.png" />
+	  <MauiImage Include="Resources\Icons\left.png" />
+	  <MauiImage Include="Resources\Icons\less.png" />
+	  <MauiImage Include="Resources\Icons\mid.png" />
+	  <MauiImage Include="Resources\Icons\mp3.png" />
+	  <MauiImage Include="Resources\Icons\mp4.png" />
+	  <MauiImage Include="Resources\Icons\mpg.png" />
+	  <MauiImage Include="Resources\Icons\odf.png" />
+	  <MauiImage Include="Resources\Icons\ods.png" />
+	  <MauiImage Include="Resources\Icons\odt.png" />
+	  <MauiImage Include="Resources\Icons\otp.png" />
+	  <MauiImage Include="Resources\Icons\ots.png" />
+	  <MauiImage Include="Resources\Icons\ott.png" />
+	  <MauiImage Include="Resources\Icons\page.png" />
+	  <MauiImage Include="Resources\Icons\pdf.png" />
+	  <MauiImage Include="Resources\Icons\php.png" />
+	  <MauiImage Include="Resources\Icons\play.png" />
+	  <MauiImage Include="Resources\Icons\png.png" />
+	  <MauiImage Include="Resources\Icons\ppt.png" />
+	  <MauiImage Include="Resources\Icons\psd.png" />
+	  <MauiImage Include="Resources\Icons\py.png" />
+	  <MauiImage Include="Resources\Icons\qt.png" />
+	  <MauiImage Include="Resources\Icons\rar.png" />
+	  <MauiImage Include="Resources\Icons\rb.png" />
+	  <MauiImage Include="Resources\Icons\rtf.png" />
+	  <MauiImage Include="Resources\Icons\sass.png" />
+	  <MauiImage Include="Resources\Icons\scss.png" />
+	  <MauiImage Include="Resources\Icons\sql.png" />
+	  <MauiImage Include="Resources\Icons\tga.png" />
+	  <MauiImage Include="Resources\Icons\tgz.png" />
+	  <MauiImage Include="Resources\Icons\tiff.png" />
+	  <MauiImage Include="Resources\Icons\txt.png" />
+	  <MauiImage Include="Resources\Icons\wav.png" />
+	  <MauiImage Include="Resources\Icons\xls.png" />
+	  <MauiImage Include="Resources\Icons\xlsx.png" />
+	  <MauiImage Include="Resources\Icons\xml.png" />
+	  <MauiImage Include="Resources\Icons\yml.png" />
+	  <MauiImage Include="Resources\Icons\zip.png" />
+	  <MauiImage Include="Resources\Icons\zoom.png" />
 	  <EmbeddedResource Include="Resources\Images\aac.png" />
 	  <EmbeddedResource Include="Resources\Images\ai.png" />
 	  <EmbeddedResource Include="Resources\Images\aiff.png" />
@@ -943,8 +618,6 @@
 	  <EmbeddedResource Include="Resources\Images\csv.png" />
 	  <EmbeddedResource Include="Resources\Images\dat.png" />
 	  <EmbeddedResource Include="Resources\Images\dmg.png" />
-	</ItemGroup>
-	<ItemGroup>
 	  <EmbeddedResource Include="Resources\Images\doc.png" />
 	  <EmbeddedResource Include="Resources\Images\docx.png" />
 	  <EmbeddedResource Include="Resources\Images\dotx.png" />
@@ -1005,6 +678,155 @@
 	  <EmbeddedResource Include="Resources\Images\yml.png" />
 	  <EmbeddedResource Include="Resources\Images\zip.png" />
 	  <EmbeddedResource Include="Resources\Images\zoom.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiImage Include="Resources\Icons\add.png" />
+	  <MauiImage Include="Resources\Icons\adjustment.png" />
+	  <MauiImage Include="Resources\Icons\airbnb.png" />
+	  <MauiImage Include="Resources\Icons\alert.png" />
+	  <MauiImage Include="Resources\Icons\amazon.png" />
+	  <MauiImage Include="Resources\Icons\among_us.png" />
+	  <MauiImage Include="Resources\Icons\android.png" />
+	  <MauiImage Include="Resources\Icons\android_store.png" />
+	  <MauiImage Include="Resources\Icons\aperture.png" />
+	  <MauiImage Include="Resources\Icons\apple_logo.png" />
+	  <MauiImage Include="Resources\Icons\battery.png" />
+	  <MauiImage Include="Resources\Icons\behance.png" />
+	  <MauiImage Include="Resources\Icons\bluetooth.png" />
+	  <MauiImage Include="Resources\Icons\book.png" />
+	  <MauiImage Include="Resources\Icons\bubble_speech.png" />
+	  <MauiImage Include="Resources\Icons\busuu.png" />
+	  <MauiImage Include="Resources\Icons\calculator.png" />
+	  <MauiImage Include="Resources\Icons\calendar.png" />
+	  <MauiImage Include="Resources\Icons\camera_focus.png" />
+	  <MauiImage Include="Resources\Icons\checklist.png" />
+	  <MauiImage Include="Resources\Icons\clock_app.png" />
+	  <MauiImage Include="Resources\Icons\cloud_sun.png" />
+	  <MauiImage Include="Resources\Icons\compass.png" />
+	  <MauiImage Include="Resources\Icons\credit_card.png" />
+	  <MauiImage Include="Resources\Icons\deliveroo.png" />
+	  <MauiImage Include="Resources\Icons\deviantart.png" />
+	  <MauiImage Include="Resources\Icons\digital_camera.png" />
+	  <MauiImage Include="Resources\Icons\discord.png" />
+	  <MauiImage Include="Resources\Icons\disney_plus.png" />
+	  <MauiImage Include="Resources\Icons\dotted_bubble_speech.png" />
+	  <MauiImage Include="Resources\Icons\dot_list.png" />
+	  <MauiImage Include="Resources\Icons\dribbble.png" />
+	  <MauiImage Include="Resources\Icons\dropbox.png" />
+	  <MauiImage Include="Resources\Icons\eject.png" />
+	  <MauiImage Include="Resources\Icons\evernote.png" />
+	  <MauiImage Include="Resources\Icons\excel.png" />
+	  <MauiImage Include="Resources\Icons\facebook.png" />
+	  <MauiImage Include="Resources\Icons\facebook_messenger.png" />
+	  <MauiImage Include="Resources\Icons\facetime.png" />
+	  <MauiImage Include="Resources\Icons\find_my.png" />
+	  <MauiImage Include="Resources\Icons\fitness.png" />
+	  <MauiImage Include="Resources\Icons\flickr.png" />
+	  <MauiImage Include="Resources\Icons\folder.png" />
+	  <MauiImage Include="Resources\Icons\football.png" />
+	  <MauiImage Include="Resources\Icons\forward_icon.png" />
+	  <MauiImage Include="Resources\Icons\foursquare.png" />
+	  <MauiImage Include="Resources\Icons\gallery.png" />
+	  <MauiImage Include="Resources\Icons\gmail.png" />
+	  <MauiImage Include="Resources\Icons\google.png" />
+	  <MauiImage Include="Resources\Icons\google_authenticator.png" />
+	  <MauiImage Include="Resources\Icons\google_chrome.png" />
+	  <MauiImage Include="Resources\Icons\google_drive.png" />
+	  <MauiImage Include="Resources\Icons\google_meet.png" />
+	  <MauiImage Include="Resources\Icons\google_photos.png" />
+	  <MauiImage Include="Resources\Icons\googl_docs.png" />
+	  <MauiImage Include="Resources\Icons\graph.png" />
+	  <MauiImage Include="Resources\Icons\grid_view.png" />
+	  <MauiImage Include="Resources\Icons\hbo_max.png" />
+	  <MauiImage Include="Resources\Icons\heart.png" />
+	  <MauiImage Include="Resources\Icons\home.png" />
+	  <MauiImage Include="Resources\Icons\hulu.png" />
+	  <MauiImage Include="Resources\Icons\inbox.png" />
+	  <MauiImage Include="Resources\Icons\instagram.png" />
+	  <MauiImage Include="Resources\Icons\ios_x.png" />
+	  <MauiImage Include="Resources\Icons\keynote.png" />
+	  <MauiImage Include="Resources\Icons\keynotes.png" />
+	  <MauiImage Include="Resources\Icons\lastpass.png" />
+	  <MauiImage Include="Resources\Icons\letter.png" />
+	  <MauiImage Include="Resources\Icons\linkedin.png" />
+	  <MauiImage Include="Resources\Icons\logoimg.svg" />
+	  <MauiImage Include="Resources\Icons\logotext.svg" />
+	  <MauiImage Include="Resources\Icons\map_pin.png" />
+	  <MauiImage Include="Resources\Icons\menu_sign.png" />
+	  <MauiImage Include="Resources\Icons\microphone.png" />
+	  <MauiImage Include="Resources\Icons\microsoft_teams.png" />
+	  <MauiImage Include="Resources\Icons\ms_words.png" />
+	  <MauiImage Include="Resources\Icons\music_sign.png" />
+	  <MauiImage Include="Resources\Icons\netflix.png" />
+	  <MauiImage Include="Resources\Icons\news.png" />
+	  <MauiImage Include="Resources\Icons\night.png" />
+	  <MauiImage Include="Resources\Icons\notion.png" />
+	  <MauiImage Include="Resources\Icons\numbers.png" />
+	  <MauiImage Include="Resources\Icons\overcast.png" />
+	  <MauiImage Include="Resources\Icons\padlock.png" />
+	  <MauiImage Include="Resources\Icons\pages.png" />
+	  <MauiImage Include="Resources\Icons\pause.png" />
+	  <MauiImage Include="Resources\Icons\pay.png" />
+	  <MauiImage Include="Resources\Icons\paypal.png" />
+	  <MauiImage Include="Resources\Icons\phone.png" />
+	  <MauiImage Include="Resources\Icons\piano.png" />
+	  <MauiImage Include="Resources\Icons\pinterest.png" />
+	  <MauiImage Include="Resources\Icons\plane.png" />
+	  <MauiImage Include="Resources\Icons\playstation.png" />
+	  <MauiImage Include="Resources\Icons\podcasts.png" />
+	  <MauiImage Include="Resources\Icons\pokemon_go.png" />
+	  <MauiImage Include="Resources\Icons\powerpoint.png" />
+	  <MauiImage Include="Resources\Icons\prime_video.png" />
+	  <MauiImage Include="Resources\Icons\procreate.png" />
+	  <MauiImage Include="Resources\Icons\pubj.png" />
+	  <MauiImage Include="Resources\Icons\radio.png" />
+	  <MauiImage Include="Resources\Icons\recording.png" />
+	  <MauiImage Include="Resources\Icons\reddit.png" />
+	  <MauiImage Include="Resources\Icons\ribbon.png" />
+	  <MauiImage Include="Resources\Icons\safari.png" />
+	  <MauiImage Include="Resources\Icons\search.png" />
+	  <MauiImage Include="Resources\Icons\setting_cog.png" />
+	  <MauiImage Include="Resources\Icons\shield_secure.png" />
+	  <MauiImage Include="Resources\Icons\shopping_cart.png" />
+	  <MauiImage Include="Resources\Icons\shortcuts.png" />
+	  <MauiImage Include="Resources\Icons\skype.png" />
+	  <MauiImage Include="Resources\Icons\slack.png" />
+	  <MauiImage Include="Resources\Icons\slider.png" />
+	  <MauiImage Include="Resources\Icons\smartwatch.png" />
+	  <MauiImage Include="Resources\Icons\snapchat.png" />
+	  <MauiImage Include="Resources\Icons\speaker.png" />
+	  <MauiImage Include="Resources\Icons\spotify.png" />
+	  <MauiImage Include="Resources\Icons\steam.png" />
+	  <MauiImage Include="Resources\Icons\stocks.png" />
+	  <MauiImage Include="Resources\Icons\stop.png" />
+	  <MauiImage Include="Resources\Icons\stumbleupon.png" />
+	  <MauiImage Include="Resources\Icons\telegram.png" />
+	  <MauiImage Include="Resources\Icons\tesla.png" />
+	  <MauiImage Include="Resources\Icons\tiktok.png" />
+	  <MauiImage Include="Resources\Icons\tinder.png" />
+	  <MauiImage Include="Resources\Icons\translate.png" />
+	  <MauiImage Include="Resources\Icons\tumblr.png" />
+	  <MauiImage Include="Resources\Icons\tunein.png" />
+	  <MauiImage Include="Resources\Icons\twitch.png" />
+	  <MauiImage Include="Resources\Icons\twitter.png" />
+	  <MauiImage Include="Resources\Icons\uber.png" />
+	  <MauiImage Include="Resources\Icons\uber_eats.png" />
+	  <MauiImage Include="Resources\Icons\unsafe.png" />
+	  <MauiImage Include="Resources\Icons\user.png" />
+	  <MauiImage Include="Resources\Icons\video.png" />
+	  <MauiImage Include="Resources\Icons\video_sign.png" />
+	  <MauiImage Include="Resources\Icons\vimeo.png" />
+	  <MauiImage Include="Resources\Icons\wallet.png" />
+	  <MauiImage Include="Resources\Icons\watch_video.png" />
+	  <MauiImage Include="Resources\Icons\waze.png" />
+	  <MauiImage Include="Resources\Icons\weather_cloud.png" />
+	  <MauiImage Include="Resources\Icons\wechat.png" />
+	  <MauiImage Include="Resources\Icons\whatsapp.png" />
+	  <MauiImage Include="Resources\Icons\windows.png" />
+	  <MauiImage Include="Resources\Icons\wireless.png" />
+	  <MauiImage Include="Resources\Icons\xbox.png" />
+	  <MauiImage Include="Resources\Icons\xing.png" />
+	  <MauiImage Include="Resources\Icons\youtube.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Resource Include="Resources\Install\odvjetnik_local-2.3.sql" />
