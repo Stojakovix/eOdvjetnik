@@ -39,7 +39,7 @@
                     BorderWidth="0"                    
                     >
                 <Button.ImageSource>
-                    <FileImageSource File="/Resources/Images/home.png" />
+                    <FileImageSource File="home.png" />
                 </Button.ImageSource>
 
             </Button>
