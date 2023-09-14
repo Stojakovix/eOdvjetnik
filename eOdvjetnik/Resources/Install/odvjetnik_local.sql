@@ -1,4 +1,8 @@
-﻿CREATE TABLE IF NOT EXISTS `contacts` (
+﻿
+CREATE DATABASE IF NOT EXISTS `odvjetnik_local` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `eOdvjetnik`;
+
+CREATE TABLE IF NOT EXISTS `contacts` (
   `id` int(11) NOT NULL,
   `ime` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
   `OIB` text COLLATE utf8mb4_bin DEFAULT NULL,
