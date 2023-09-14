@@ -8,6 +8,7 @@ using Syncfusion.DocIO.DLS;
 using System.Collections.Generic;
 using Microsoft.Maui.Storage;
 using Microsoft.Maui.Networking;
+using System.Data;
 
 namespace eOdvjetnik.Services
 {
@@ -194,7 +195,38 @@ namespace eOdvjetnik.Services
             }
             return data;
         }
+        static void createDatabase(string[] args)
+        {
+            // MySQL server connection string
+            string connectionString = "Server=" + Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "") + ";Port=3306;User=" + Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "") + ";Password=" + Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "") + ";";
 
+            try
+            {
+                // Create a MySqlConnection
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    // Open the connection
+                    connection.Open();
+
+                    // Create a MySqlCommand to execute SQL commands
+                    using (MySqlCommand cmd = connection.CreateCommand())
+                    {
+                        // Specify the SQL command to create a new database
+                        cmd.CommandText = "CREATE DATABASE IF NOT EXISTS `eodvjetnik` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;";
+                        cmd.CommandType = CommandType.Text;
+
+                        // Execute the SQL command
+                        cmd.ExecuteNonQuery();
+
+                        Console.WriteLine("Database created successfully.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
         public Dictionary<string, string>[] sqlQuery(string query){
 
             //Debug.WriteLine("Core.cs -> Dictionary -> Usao u sqlQuerry  *******");
