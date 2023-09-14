@@ -139,10 +139,10 @@ namespace eOdvjetnik.ViewModel
                 foreach (FileDirectoryInformation file in fileList)
                 {
                     Debug.WriteLine("---------------------**********" + file.FileName + "***********---------------------------");
-                    //Debug.WriteLine($"Filename: {file.FileName}");
-                    //Debug.WriteLine($"File Attributes: {file.FileAttributes}");
-                    //Debug.WriteLine($"File -------: {file.NextEntryOffset}");
-                    //Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
+                    Debug.WriteLine($"Filename: {file.FileName}");
+                    Debug.WriteLine($"File Attributes: {file.FileAttributes}");
+                    Debug.WriteLine($"File -------: {file.NextEntryOffset}");
+                    Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
                     //Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
                     //Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
                     //Debug.WriteLine("----------End of Folder/file-----------");
@@ -155,7 +155,7 @@ namespace eOdvjetnik.ViewModel
 
                     if (file.FileName != null)
                     {
-                        if (file.FileAttributes.ToString("f") == "Directory")
+                        if (file.FileAttributes.ToString("f") == "Directory" || file.FileAttributes.ToString("f") == "ReadOnly, Directory")
                         {
                             icon = "folder_1484.png";
                         }
