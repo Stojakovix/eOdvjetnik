@@ -474,6 +474,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
     public ICommand SQLLoadCommand { get; set; }
     public ICommand SQLDeleteCommand { get; set; }
 
+    public ICommand ServerClickCommand { get; set; }
+
     //Dohvaća vrijednost varijabli iz mainPagea SQL
     public string IP { get; set; }
     public string UserName { get; set; }
@@ -671,6 +673,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         SQLSaveCommand = new Command(OnSaveClickedMySQL);
         SQLLoadCommand = new Command(OnLoadClickedMySQL);
         SQLDeleteCommand = new Command(OnDeleteClickedMySQL);
+        ServerClickCommand = new Command(OnServerClick);
         #endregion
 
         #region NAS Varijable
@@ -840,6 +843,21 @@ public class PostavkeViewModel : INotifyPropertyChanged
         UserName = "";
         Password = "";
         DatabaseName = "";
+    }
+
+    private async void OnServerClick()
+    {
+        string websiteUrl = "https://dev.mysql.com/downloads/mysql/"; // Replace with the URL you want to open
+
+        try
+        {
+            await Launcher.OpenAsync(websiteUrl);
+        }
+        catch (Exception ex)
+        {
+            // Handle any exceptions that may occur, such as if the URL is invalid
+            Console.WriteLine("Error opening website: " + ex.Message);
+        }
     }
 
 
