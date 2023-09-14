@@ -188,8 +188,8 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message);
 
             }
-            Preferences.Set("key", hwid);
-            Preferences.Set("activation_code", activationCode);
+            //Preferences.Set("key", hwid);
+            //Preferences.Set("activation_code", activationCode);
         }
 
         public void DeleteLicencePreference()

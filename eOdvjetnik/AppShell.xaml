@@ -32,11 +32,14 @@
                    
                     Command="{Binding MainClickCommand}" 
                     x:Name="PočetnaButton"
-                    
-                    FontFamily="SFUIDisplay - Light"
+                    Margin="0,0,0,0"
+                    FontFamily="SFUIDisplay-Light"
                     TextColor="Black"
                     FontSize="18"
-                    BorderWidth="0"                    
+                    BorderWidth="0"       
+
+                    Padding="10,5,10,5"
+
                     >
                 <Button.ImageSource>
                     <FileImageSource File="home.png" />
@@ -47,21 +50,25 @@
                     Grid.Column="1" Text="Osobni ročišnik" 
                     Command="{Binding KalendarClickCommand}" 
                     x:Name="KalendarButton" 
-
+                    Margin="0,0,0,0"
                     BorderWidth="0"
                     FontSize="18"
-                    FontFamily="SFUIDisplay - Light"
+                    FontFamily="SFUIDisplay-Light"
                     TextColor="Black"
+                  Padding="10,5,10,5"
+
+                    
                     />
-            
+
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
            Grid.Column="2" Text="Ročišnik tvrtke" 
            Command="{Binding AdminKalendarClickCommand}" 
            x:Name="AdminKalendarButton" 
-
+           Margin="0,0,0,0"
            BorderWidth="0"
            FontSize="18"
-                    FontFamily="SFUIDisplay - Light"
+                                      Padding="10,5,10,5"
+                    FontFamily="SFUIDisplay-Light"
            TextColor="Black"
            />
 
@@ -72,8 +79,9 @@
 
                     Margin="10,0" 
                     BorderWidth="0"
-                    FontFamily="SFUIDisplay - Light"
+                    FontFamily="SFUIDisplay-Light"
                     FontSize="18"
+                    Padding="10,5,10,5"
                     TextColor="Black"
                     />
 
@@ -83,8 +91,9 @@
                     x:Name="NaplataButton"
 
                     BorderWidth="0"
-                    FontFamily="SFUIDisplay - Light"
+                    FontFamily="SFUIDisplay-Light"
                     FontSize="18"
+                    Padding="10,5,10,5"
                     TextColor="Black"
                     />
 
@@ -94,8 +103,9 @@
                     x:Name="DokumentiButton"
 
                     BorderWidth="0"
-                    FontFamily="SFUIDisplay - Light"
+                    FontFamily="SFUIDisplay-Light"
                     FontSize="18"
+                    Padding="10,5,10,5"
                     TextColor="Black"
                     />
 
@@ -103,10 +113,10 @@
                     Grid.Column="4" Text="{x:Static resx:AppResources.Kontakti}" 
                     Command="{Binding KlijentiClickCommand}" 
                     x:Name="KlijentiButton"
-
                     BorderWidth="0"
-                    FontFamily="SFUIDisplay - Light"
+                    FontFamily="SFUIDisplay-Light"
                     FontSize="18"
+                    Padding="10,5,10,5"
                     TextColor="Black"
                     />
 
@@ -114,11 +124,11 @@
             <Button Grid.Column="7" 
                     Text="{x:Static resx:AppResources.KorisnickaPodrska}" 
                     IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
- 
                     BorderWidth="0" 
                     Command="{Binding OnSupportClickCommand}"
                     FontSize="18"
-                    FontFamily="SFUIDisplay - Light"
+                    Padding="10,5,10,5"
+                    FontFamily="SFUIDisplay-Light"
                     TextColor="Black"
  />
 
@@ -127,9 +137,10 @@
 
                     IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
                     BorderWidth="0"
-                    FontFamily="SFUIDisplay - Light"
+                    FontFamily="SFUIDisplay-Light"
                     Command="{Binding PostavkeClickCommand}" 
                     FontSize="18"
+                    Padding="10,5,10,5"
                     TextColor="Black"
  />
 
@@ -142,8 +153,8 @@
                 <sfPopup:SfPopup.PopupStyle>
                     <sfPopup:PopupStyle MessageBackground="#faf9fb" HeaderBackground="#faf9fb"  />
                 </sfPopup:SfPopup.PopupStyle>
-                    
-                    <sfPopup:SfPopup.ContentTemplate>
+
+                <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
                         <StackLayout>
                             <Label Text="{x:Static resx:AppResources.MainMobBroj}" TextColor="Black" FontSize="16" Margin="20,0,0,10"/>
@@ -165,7 +176,7 @@
                 <sfPopup:SfPopup.PopupStyle>
                     <sfPopup:PopupStyle MessageBackground="#faf9fb" HeaderBackground="#faf9fb" />
                 </sfPopup:SfPopup.PopupStyle>
-                
+
                 <sfPopup:SfPopup.ContentTemplate>
                     <DataTemplate>
                         <HorizontalStackLayout>
@@ -175,7 +186,7 @@
                 </sfPopup:SfPopup.ContentTemplate>
             </sfPopup:SfPopup>
 
-          
+
 
 
         </HorizontalStackLayout>
