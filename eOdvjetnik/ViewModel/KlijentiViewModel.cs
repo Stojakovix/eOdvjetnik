@@ -187,7 +187,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
             {
                 contacts.Clear();
             }
-            string query = "SELECT * FROM `contacts` ORDER by id desc limit 30;";
+            string query = "SELECT * FROM `contacts` ORDER by id asc limit 30;";
             Debug.WriteLine("Generate contacts query: " + query);
             try
             {

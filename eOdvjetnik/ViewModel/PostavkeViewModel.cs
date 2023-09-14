@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Xml.Linq;
 using Utilities;
 using CommunityToolkit.Mvvm.Messaging;
-
+using System.Reflection;
 
 namespace eOdvjetnik.ViewModel;
 
@@ -20,6 +20,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
 {
 
     private Navigacija navigacija;
+
+    
     public string PostavkeUserName { get; set; }
     public string PostavkeUserID { get; set; }
 
@@ -791,6 +793,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
             string userName = UserName;
             string databaseName = DatabaseName;
 
+            
             Preferences.Set(IP_mysql, IP);
             Preferences.Set(USER_mysql, UserName);
             Preferences.Set(PASS_mysql, Password);
@@ -800,6 +803,46 @@ public class PostavkeViewModel : INotifyPropertyChanged
             Debug.WriteLine("Saved");
             Debug.WriteLine(UserName + " " + Password);
             Debug.WriteLine("KLINUTO NA SAVE U NAS POSTAVKAMA");
+
+            //var assembly = typeof(App).Assembly;
+            //using (var stream = assembly.GetManifestResourceStream("eOdvjetnik.Resources.Install.odvjetnik_local.sql"))
+            //{
+            //    Debug.WriteLine("stream name " + stream);
+            //    using (var reader = new StreamReader(stream))
+            //    {
+            //        string line;
+            //        while ((line = reader.ReadLine()) != null)
+            //        {
+            //            Debug.WriteLine(line);
+            //            externalSQLConnect.sqlQuery(line);
+            //        }
+            //    }
+            //}
+
+
+
+            var assembly = typeof(App).Assembly;
+            using (var stream = assembly.GetManifestResourceStream("eOdvjetnik.Resources.Install.odvjetnik_local.sql"))
+            {
+                Debug.WriteLine("stream name " + stream);
+                using (var reader = new StreamReader(stream))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        Debug.WriteLine(line);
+                        externalSQLConnect.sqlQuery(line);
+
+                        // Add a condition to break out of the loop after the first line
+                        break;
+                    }
+                }
+            }
+
+
+
+
+
 
         }
         catch (Exception ex)
