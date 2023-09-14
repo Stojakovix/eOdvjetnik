@@ -195,7 +195,7 @@ namespace eOdvjetnik.Services
             }
             return data;
         }
-        static void createDatabase(string[] args)
+        public void createDatabase(string[] args)
         {
             // MySQL server connection string
             string connectionString = "Server=" + Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "") + ";Port=3306;User=" + Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "") + ";Password=" + Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "") + ";";

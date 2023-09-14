@@ -726,6 +726,23 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
             Debug.WriteLine("Nas saved " + Preferences.Default);
             Debug.WriteLine("KLINUTO NA SAVE U NAS POSTAVKAMA");
+            string[] arguments = new string[] { "database" };
+            externalSQLConnect.createDatabase(arguments);
+            Debug.WriteLine(arguments);
+
+            var assembly = typeof(App).Assembly;
+            using (var stream = assembly.GetManifestResourceStream("eOdvjetnik.Resources.Install.odvjetnik_local.sql"))
+            {
+                Debug.WriteLine("stream name " + stream);
+                using (var reader = new StreamReader(stream))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        Debug.WriteLine(line);
+                    }
+                }
+            }
 
         }
 
