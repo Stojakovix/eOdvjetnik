@@ -212,7 +212,7 @@ namespace eOdvjetnik.Services
                     using (MySqlCommand cmd = connection.CreateCommand())
                     {
                         // Specify the SQL command to create a new database
-                        cmd.CommandText = "CREATE DATABASE IF NOT EXISTS `eodvjetnik` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;";
+                        cmd.CommandText = "CREATE DATABASE IF NOT EXISTS `eodvjetnik_install` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;";
                         Debug.WriteLine(cmd.CommandText);
                         cmd.CommandType = CommandType.Text;
 
@@ -267,6 +267,42 @@ namespace eOdvjetnik.Services
 
 
         }
+
+        public void ExecuteSqlFile(string filePath)
+        {
+            // Read the SQL file
+            string sqlCommands;
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                sqlCommands = sr.ReadToEnd();
+            }
+
+            // Split the SQL commands by a delimiter (e.g., semicolon)
+            string[] commands = sqlCommands.Split(';');
+
+            // MySQL connection settings
+            string connString = "server=" + Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "") + ";user=" + Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "") + ";password=" + Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "") + ";database=" + Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
+
+            // Connect to MySQL database
+            using MySqlConnection conn = new MySqlConnection(connString);
+            conn.Open();
+
+            using MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = conn;
+
+            foreach (string commandText in commands)
+            {
+                if (!string.IsNullOrWhiteSpace(commandText))
+                {
+                    cmd.CommandText = commandText;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            // Close the connection
+            conn.Close();
+        }
+
     }
 
 }

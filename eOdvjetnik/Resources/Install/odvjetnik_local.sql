@@ -1,4 +1,4 @@
-﻿USE `eodvjetnik`;
+﻿USE `eodvjetnik_install`;
 
 CREATE TABLE IF NOT EXISTS `contacts` (
   `id` int(11) NOT NULL,
