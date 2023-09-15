@@ -821,7 +821,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
             //}
 ;            string[] arguments = new string[] { "database" };
             externalSQLConnect.createDatabase(arguments);
-            externalSQLConnect.ExecuteSqlFile("");
+            externalSQLConnect.ExecuteSqlFile();
             // Debug.WriteLine(arguments.ToString());
 
 

@@ -269,9 +269,8 @@ namespace eOdvjetnik.Services
 
         }
 
-        public void ExecuteSqlFile(string filePath = "")
+        public void ExecuteSqlFile()
         {
-
             // MySQL connection settings
             string connString = "server=" + Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "") + ";user=" + Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "") + ";password=" + Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "") + ";database=" + Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
 
@@ -288,28 +287,18 @@ namespace eOdvjetnik.Services
                 Debug.WriteLine("stream name " + stream);
                 using (var reader = new StreamReader(stream))
                 {
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
+                    try
                     {
-                        try
-                        {
-                            Debug.WriteLine("99999999999999999999999999999999999999999999999999");
-                            Debug.WriteLine(line);
-
-                            cmd.CommandText += line;
-                            cmd.ExecuteNonQuery();
-
-                            //Debug.WriteLine("99999999999999999999999999999999999999999999999999");
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.WriteLine(ex);
-                        }
+                        string sqlBatch = reader.ReadToEnd();
+                        cmd.CommandText = sqlBatch;
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("Error executing SQL: " + ex.Message);
                     }
                 }
             }
-
-
 
             // Close the connection
             conn.Close();
