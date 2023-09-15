@@ -65,7 +65,7 @@ namespace eOdvjetnik.Services
         private const string PASS_nas = "Lozinka";
         private const string FOLDER_nas = "Folder";
         private const string SUBFOLDER_nas = "SubFolder";
-        
+
 
         //public ObservableCollection<DocsItem> Items { get; set; } = new();
         public ObservableCollection<string> ShareFiles { get; set; } = new ObservableCollection<string>();
@@ -126,10 +126,10 @@ namespace eOdvjetnik.Services
 
             }
 
-            
+
 
         }
-            public List<string> getRootShare()
+        public List<string> getRootShare()
         {
             //INICIRAJ SMB KONEKCIJU DA DOHVATI SVE DOKUMENTE
             //Debug.WriteLine("Core.cs -> getRootShare -> INICIRAJ SMB KONEKCIJU  ****" + Preferences.Get(IP_nas, "") + "***");
@@ -153,7 +153,7 @@ namespace eOdvjetnik.Services
                     foreach (string nesto in shares)
                     {
                         ////Debug.WriteLine(nesto);
-                            
+
                     }
 
                     //Debug.WriteLine("7777777777777777777");
@@ -164,7 +164,7 @@ namespace eOdvjetnik.Services
             }
             return shares;
 
-            
+
 
 
         }
@@ -228,7 +228,8 @@ namespace eOdvjetnik.Services
                 Console.WriteLine($"Error: {ex.Message}");
             }
         }
-        public Dictionary<string, string>[] sqlQuery(string query){
+        public Dictionary<string, string>[] sqlQuery(string query)
+        {
 
             //Debug.WriteLine("Core.cs -> Dictionary -> Usao u sqlQuerry  *******");
             // MySQL connection settings
@@ -268,17 +269,8 @@ namespace eOdvjetnik.Services
 
         }
 
-        public void ExecuteSqlFile(string filePath)
+        public void ExecuteSqlFile(string filePath = "")
         {
-            // Read the SQL file
-            string sqlCommands;
-            using (StreamReader sr = new StreamReader(filePath))
-            {
-                sqlCommands = sr.ReadToEnd();
-            }
-
-            // Split the SQL commands by a delimiter (e.g., semicolon)
-            string[] commands = sqlCommands.Split(';');
 
             // MySQL connection settings
             string connString = "server=" + Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "") + ";user=" + Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "") + ";password=" + Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "") + ";database=" + Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
@@ -290,14 +282,34 @@ namespace eOdvjetnik.Services
             using MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = conn;
 
-            foreach (string commandText in commands)
+            var assembly = typeof(App).Assembly;
+            using (var stream = assembly.GetManifestResourceStream("eOdvjetnik.Resources.Install.odvjetnik_local.sql"))
             {
-                if (!string.IsNullOrWhiteSpace(commandText))
+                Debug.WriteLine("stream name " + stream);
+                using (var reader = new StreamReader(stream))
                 {
-                    cmd.CommandText = commandText;
-                    cmd.ExecuteNonQuery();
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        try
+                        {
+                            Debug.WriteLine("99999999999999999999999999999999999999999999999999");
+                            Debug.WriteLine(line);
+
+                            cmd.CommandText = line;
+                            cmd.ExecuteNonQuery();
+
+                            //Debug.WriteLine("99999999999999999999999999999999999999999999999999");
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine(ex);
+                        }
+                    }
                 }
             }
+
+
 
             // Close the connection
             conn.Close();

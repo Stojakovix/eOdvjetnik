@@ -821,29 +821,11 @@ public class PostavkeViewModel : INotifyPropertyChanged
             //}
 ;            string[] arguments = new string[] { "database" };
             externalSQLConnect.createDatabase(arguments);
-            Debug.WriteLine(arguments.ToString());
-            
+            externalSQLConnect.ExecuteSqlFile("");
+            // Debug.WriteLine(arguments.ToString());
 
-            string filePath = "eOdvjetnik.Resources.Install.odvjetnik_local.sql"; // Replace with the actual file path
-            var assembly = typeof(App).Assembly;
-            using (var stream = assembly.GetManifestResourceStream(filePath))
-            {
-                if (stream != null)
-                {
-                    using (var reader = new StreamReader(stream))
-                    {
-                        string sqlCommands = reader.ReadToEnd();
-                        externalSQLConnect.ExecuteSqlFile(sqlCommands);
-                        // Now, you have the SQL commands in the 'sqlCommands' string
-                        // You can execute them using your 'ExecuteSqlFile' method or other logic
-                    }
-                }
-                else
-                {
-                    Debug.WriteLine("stream is null ");
-                    // Handle the case where the resource was not found
-                }
-            }
+
+
 
             //var assembly = typeof(App).Assembly;
             //using (var stream = assembly.GetManifestResourceStream("eOdvjetnik.Resources.Install.odvjetnik_local.sql"))
