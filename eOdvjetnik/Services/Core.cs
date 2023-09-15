@@ -213,6 +213,7 @@ namespace eOdvjetnik.Services
                     {
                         // Specify the SQL command to create a new database
                         cmd.CommandText = "CREATE DATABASE IF NOT EXISTS `eodvjetnik` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;";
+                        Debug.WriteLine(cmd.CommandText);
                         cmd.CommandType = CommandType.Text;
 
                         // Execute the SQL command

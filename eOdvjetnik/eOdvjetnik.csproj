@@ -830,7 +830,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Resource Include="Resources\Install\odvjetnik_local-2.3.sql" />
-	  <Resource Include="Resources\Install\odvjetnik_local.sql" />
+	  <EmbeddedResource Include="Resources\Install\odvjetnik_local.sql" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Compile Update="Resources\Strings\AppResources.Designer.cs">
