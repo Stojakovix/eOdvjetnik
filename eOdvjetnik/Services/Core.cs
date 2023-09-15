@@ -296,7 +296,7 @@ namespace eOdvjetnik.Services
                             Debug.WriteLine("99999999999999999999999999999999999999999999999999");
                             Debug.WriteLine(line);
 
-                            cmd.CommandText = line;
+                            cmd.CommandText += line;
                             cmd.ExecuteNonQuery();
 
                             //Debug.WriteLine("99999999999999999999999999999999999999999999999999");
