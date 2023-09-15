@@ -476,6 +476,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
     public ICommand SQLLoadCommand { get; set; }
     public ICommand SQLDeleteCommand { get; set; }
 
+    public ICommand SQLDatabaseCommand { get; set; }
     public ICommand ServerClickCommand { get; set; }
 
     //Dohvaća vrijednost varijabli iz mainPagea SQL
@@ -676,6 +677,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         SQLLoadCommand = new Command(OnLoadClickedMySQL);
         SQLDeleteCommand = new Command(OnDeleteClickedMySQL);
         ServerClickCommand = new Command(OnServerClick);
+        SQLDatabaseCommand = new Command(OnDatabaseClick);
         #endregion
 
         #region NAS Varijable
@@ -785,6 +787,20 @@ public class PostavkeViewModel : INotifyPropertyChanged
     #endregion
 
     #region SQL Funkcije
+
+    private void OnDatabaseClick()
+    {
+        try
+        {
+            string[] arguments = new string[] { "database" };
+            externalSQLConnect.createDatabase(arguments);
+            externalSQLConnect.ExecuteSqlFile();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+    }
     private void OnSaveClickedMySQL()
     {
         try
@@ -800,48 +816,9 @@ public class PostavkeViewModel : INotifyPropertyChanged
             Preferences.Set(PASS_mysql, Password);
             Preferences.Set(databasename_mysql, DatabaseName);
 
-
             Debug.WriteLine("Saved");
             Debug.WriteLine(UserName + " " + Password);
             Debug.WriteLine("KLINUTO NA SAVE U NAS POSTAVKAMA");
-
-            //var assembly = typeof(App).Assembly;
-            //using (var stream = assembly.GetManifestResourceStream("eOdvjetnik.Resources.Install.odvjetnik_local.sql"))
-            //{
-            //    Debug.WriteLine("stream name " + stream);
-            //    using (var reader = new StreamReader(stream))
-            //    {
-            //        string line;
-            //        while ((line = reader.ReadLine()) != null)
-            //        {
-            //            Debug.WriteLine(line);
-            //            externalSQLConnect.sqlQuery(line);
-            //        }
-            //    }
-            //}
-;            string[] arguments = new string[] { "database" };
-            externalSQLConnect.createDatabase(arguments);
-            externalSQLConnect.ExecuteSqlFile();
-            // Debug.WriteLine(arguments.ToString());
-
-
-
-
-            //var assembly = typeof(App).Assembly;
-            //using (var stream = assembly.GetManifestResourceStream("eOdvjetnik.Resources.Install.odvjetnik_local.sql"))
-            //{
-
-            //    Debug.WriteLine("stream name " + stream);
-            //    using (var reader = new StreamReader(stream))
-            //    {
-
-            //        string line;
-            //        while ((line = reader.ReadLine()) != null)
-            //        {
-            //            Debug.WriteLine(line);
-            //        }
-            //    }
-            //}
 
         }
         catch (Exception ex)
