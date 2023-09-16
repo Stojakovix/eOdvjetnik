@@ -238,10 +238,25 @@ namespace eOdvjetnik.ViewModel
             {
                 //var fileUri = new Uri($"smb://{Preferences.Get(IP, "")}/{Preferences.Get(FOLDER, "")}/{fileName}");
                 //await Launcher.OpenAsync(fileUri);
-                Debug.WriteLine("Samo string -> "+@"\\192.168.1.211\Users\user\test.doc");
-                string filePath = @"\\" + Preferences.Get(IP, "") + "\\" + Preferences.Get(FOLDER_nas, "")+ "\\" + Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName;
-                Debug.WriteLine("Izgenerirani string -> " + @"\\" + Preferences.Get(IP, "") + "\\" + Preferences.Get(FOLDER_nas, "") +"\\"+ Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName);
-                await Launcher.OpenAsync(filePath);
+
+                if (DeviceInfo.Platform == DevicePlatform.macOS)
+                {
+                    // Code to execute on macOS
+                    Console.WriteLine("Running on macOS");
+                    Debug.WriteLine("Samo string -> " + @"\\192.168.1.211\Users\user\test.doc");
+                    string filePath = @"smb\\" + Preferences.Get(IP, "") + "\\" + Preferences.Get(FOLDER_nas, "") + "\\" + Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName;
+                    Debug.WriteLine("Izgenerirani string -> " + @"\\" + Preferences.Get(IP, "") + "\\" + Preferences.Get(FOLDER_nas, "") + "\\" + Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName);
+                    await Launcher.OpenAsync(filePath);
+                }
+                else
+                {
+                    // Code to execute on other platforms
+                    Console.WriteLine("Running on a platform other than macOS");
+                    Debug.WriteLine("Samo string -> " + @"\\192.168.1.211\Users\user\test.doc");
+                    string filePath = @"\\" + Preferences.Get(IP, "") + "\\" + Preferences.Get(FOLDER_nas, "") + "\\" + Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName;
+                    Debug.WriteLine("Izgenerirani string -> " + @"\\" + Preferences.Get(IP, "") + "\\" + Preferences.Get(FOLDER_nas, "") + "\\" + Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName);
+                    await Launcher.OpenAsync(filePath);
+                }
 
             }
             catch (Exception ex)
