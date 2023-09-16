@@ -244,7 +244,7 @@ namespace eOdvjetnik.ViewModel
                     // Code to execute on macOS
                     Console.WriteLine("Running on macOS");
                     Debug.WriteLine("Samo string -> " + @"\\192.168.1.211\Users\user\test.doc");
-                    string filePath = @"smb\\" + Preferences.Get(IP, "") + "\\" + Preferences.Get(FOLDER_nas, "") + "\\" + Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName;
+                    string filePath = @"smb:\\" + Preferences.Get(IP, "") + "\\" + Preferences.Get(FOLDER_nas, "") + "\\" + Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName;
                     Debug.WriteLine("Izgenerirani string -> " + @"\\" + Preferences.Get(IP, "") + "\\" + Preferences.Get(FOLDER_nas, "") + "\\" + Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName);
                     await Launcher.OpenAsync(filePath);
                 }
