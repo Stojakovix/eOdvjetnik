@@ -174,6 +174,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
             }
         }
     }
+
+
     public void GenerateFiles()
     {
         ContactEdited = false;
@@ -493,6 +495,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
     public ICommand RefreshContacts { get; set; }
     public ICommand EditClientButton { get; set; }
     public int FilesCounter { get; set; }
+    public ICommand AddAsClient { get; set; }
+    public ICommand AddAsOpponent { get; set; }
     public KlijentiViewModel()
     {
         navigacija = new Navigacija();
@@ -546,6 +550,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
         OnReciptClickCommand = new Command(OpenRecipt);
         RefreshContacts = new Command(GenerateFiles);
         EditClientButton = new Command(EditClient);
+        AddAsClient = new Command(AddSelectedAsClient);
+        AddAsOpponent = new Command(AddSelectedAsOpponent);
         GenerateFiles();
 
         var timer = Application.Current.Dispatcher.CreateTimer();
@@ -794,5 +800,18 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
             }
         }
+    }
+
+    public void AddSelectedAsClient()
+    {
+        Preferences.Set("FilesClientID", ClientID);
+        Preferences.Set("FilesClientName", ClientName);
+
+    }
+    public void AddSelectedAsOpponent()
+    {
+        Preferences.Set("FilesOpponent", ClientID);
+        Preferences.Set("FilesOpponentName", ClientName);
+
     }
 }

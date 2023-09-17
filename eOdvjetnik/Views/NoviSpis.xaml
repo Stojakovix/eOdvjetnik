@@ -11,7 +11,7 @@
 
 
     <ScrollView>
-        <Grid BackgroundColor="White">
+        <Grid BackgroundColor="#faf9fb">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="*" />
@@ -29,59 +29,59 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Label Text="Id" Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="IdEntry" Keyboard="Numeric" Grid.Row="0" Grid.Column="1" Text="{Binding Id}"  />
-            <Label Text="BrojSpisa" Grid.Row="1" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="BrojSpisaEntry" Grid.Row="1" Grid.Column="1" Text="{Binding BrojSpisa}" />
-            <Label Text="Spisicol" Grid.Row="2" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="SpisicolEntry" Grid.Row="2" Grid.Column="1" Text="{Binding SpisiCol}"/>
-            <Label Text="ClientId" Grid.Row="3" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center"/>
-            <Entry x:Name="ClientIdEntry" Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding ClientId}"/>
-            <Label Text="OpponentId" Grid.Row="4" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="OpponentIdEntry" Keyboard="Numeric" Grid.Row="4" Grid.Column="1"  Text="{Binding OpponentId}"/>
-            <Label Text="InicijaliVoditeljId" Grid.Row="5" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="InicijaliVoditeljIdEntry" Keyboard="Numeric" Grid.Row="5" Grid.Column="1" Text="{Binding InicijaliVoditelj}"/>
-            <Label Text="InicijaliDodao" Grid.Row="6" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="InicijaliDodaoEntry" Grid.Row="6" Grid.Column="1" Text="{Binding InicijaliDodao}"/>
-            <Label Text="Filescol" Grid.Row="7" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="FilescolEntry" Grid.Row="7" Grid.Column="1" Text="{Binding FilesCol}"/>
-            <Label Text="InicijaliDodjeljeno" Grid.Row="8" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="InicijaliDodjeljenoEntry" Grid.Row="8" Grid.Column="1" Text="{Binding InicijaliDodijeljeno}"/>
-            <Label Text="Created" Grid.Row="9" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <DatePicker x:Name="CreatedDatePicker" Grid.Row="9" Grid.Column="1" Date="{Binding Created}"/>
-            <Label Text="AktivnoPasivno" Grid.Row="10" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="AktivnoPasivnoEntry" Grid.Row="10" Grid.Column="1" Text="{Binding AktivnoPasivno}"/>
-            <Label Text="Referenca" Grid.Row="11" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="ReferencaEntry" Grid.Row="11" Grid.Column="1" Text="{Binding Referenca}"/>
-            <Label Text="DatumPromjeneStatusa" Grid.Row="12" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center"  />
-            <DatePicker x:Name="DatumPromjeneStatusaDatePicker" Grid.Row="12" Grid.Column="1" Date="{Binding DatumPromjene}"/>
-            <Label Text="Radi" Grid.Row="13" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="UzrokEntry" Grid.Row="13" Grid.Column="1" Text="{Binding Uzrok}"/>
-            <Label Text="DatumKreiranjaSpisa" Grid.Row="14" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <DatePicker x:Name="DatumKreiranjaSpisaDatePicker" Grid.Row="14" Grid.Column="1" Date="{Binding DatumKreiranja}"/>
-            <Label Text="DatumIzmjeneSpisa" Grid.Row="15" Grid.Column="0"  Margin="20,0,0,0" VerticalOptions="Center" />
-            <DatePicker x:Name="DatumIzmjeneSpisaDatePicker" Grid.Row="15" Grid.Column="1" Date="{Binding DatumIzmjene}"/>
-            <Label Text="Kreirao" Grid.Row="16" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="KreiraoEntry" Grid.Row="16" Grid.Column="1" Text="{Binding Kreirao}"/>
-            <Label Text="ZadnjeUredio" Grid.Row="17" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="ZadnjeUredioEntry" Grid.Row="17" Grid.Column="1" Text="{Binding ZadnjeUredio}"/>
-            <Label Text="Jezik" Grid.Row="18" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center"  />
-            <Entry x:Name="JezikEntry" Grid.Row="18" Grid.Column="1" Text="{Binding Jezik}"/>
-            <Label Text="BrojPredmeta" Grid.Row="19" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
-            <Entry x:Name="BrojPredmetaEntry" Grid.Row="19" Grid.Column="1" Text="{Binding BrojPredmeta}"/>
 
-            <Button Margin="20,10,0,10" Text="Dodaj" Command="{Binding OnDodajClick}" Grid.Row="20"
-                    BorderColor="DarkGray" BackgroundColor="#5ac8fa" TextColor="Black" FontSize="Default"
+
+            </Grid.RowDefinitions>
+
+            <Label Text="Broj Spisa" Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" />
+            <Entry x:Name="BrojSpisaEntry" Grid.Row="0" Grid.Column="1" Text="{Binding BrojSpisa}" VerticalTextAlignment="Center"  />
+
+            <Label Text="Klijent" Grid.Row="1" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" VerticalTextAlignment="End"  />
+            <Entry x:Name="ClientIdEntry" Keyboard="Numeric" Grid.Row="1" Grid.Column="1" Text="{Binding ClientName}" VerticalTextAlignment="Center"  IsReadOnly="True"/>
+
+            <Label Text="Protustranka" Grid.Row="2" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" VerticalTextAlignment="Center"  />
+            <Entry x:Name="OpponentIdEntry" Keyboard="Numeric" Grid.Row="2" Grid.Column="1"  Text="{Binding OpponentName}" VerticalTextAlignment="Center"  IsReadOnly="True" />
+
+            <Label Text="Voditelj" Grid.Row="3" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" VerticalTextAlignment="Center" />
+            <Picker Grid.Row="3" Grid.Column="1" ItemsSource="{Binding EmployeeItems1}" SelectedItem="{Binding SelectedEmployeeItem1}" VerticalTextAlignment="Center">
+                <Picker.ItemDisplayBinding>
+                    <Binding Path="Initals" />
+                </Picker.ItemDisplayBinding>
+            </Picker>
+            
+            <Label Text="Dodjeljeno" Grid.Row="4" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" VerticalTextAlignment="Center"  />
+            <Picker Grid.Row="4" Grid.Column="1" ItemsSource="{Binding EmployeeItems2}" SelectedItem="{Binding SelectedEmployeeItem2}" VerticalTextAlignment="Center">
+                <Picker.ItemDisplayBinding>
+                    <Binding Path="Initals" />
+                </Picker.ItemDisplayBinding>
+            </Picker>
+
+
+            <Label Text="Status" Grid.Row="5" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" VerticalTextAlignment="Center"  />
+            <Picker Grid.Row="5" Grid.Column="1" SelectedIndexChanged="OnStatusSelected" >
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Aktivno</x:String>
+                        <x:String>Pasivno</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Label Text="Referenca" Grid.Row="6" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" VerticalTextAlignment="Center"  />
+            <Entry x:Name="ReferencaEntry" Grid.Row="6" Grid.Column="1" Text="{Binding Referenca}" VerticalTextAlignment="Center"  />
+
+            <Label Text="Radi" Grid.Row="7" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" VerticalTextAlignment="Center"  />
+            <Entry x:Name="UzrokEntry" Grid.Row="7" Grid.Column="1" Text="{Binding Uzrok}"  VerticalTextAlignment="Center"  />
+
+            <Label Text="Jezik" Grid.Row="8" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" VerticalTextAlignment="Center"   />
+            <Entry x:Name="JezikEntry" Grid.Row="8" Grid.Column="1" Text="{Binding Jezik}" VerticalTextAlignment="Center"  />
+
+            <Label Text="Broj predmeta" Grid.Row="9" Grid.Column="0" Margin="20,0,0,0" Padding="0,0,0,0" VerticalOptions="Center" VerticalTextAlignment="Center"   />
+            <Entry x:Name="BrojPredmetaEntry" Grid.Row="9" Grid.Column="1" Text="{Binding BrojPredmeta}"  VerticalTextAlignment="Center"  />
+            <Label Text="       " Margin="20,0,0,20" Grid.Row="10"/>
+
+            <Button Margin="20,0,0,0" Text="Dodaj" Command="{Binding OnDodajClick}" Grid.Row="11"
+                 
                     />
 
 

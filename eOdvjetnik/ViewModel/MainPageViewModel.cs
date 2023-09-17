@@ -47,6 +47,8 @@ namespace eOdvjetnik.ViewModel
             }
         }
         public string UserID { get; set; }
+        public string UserInitials { get; set; }
+
         public DateTime TrialFileCreated;
 
         public string Activation_code { get; set; }
@@ -350,9 +352,12 @@ namespace eOdvjetnik.ViewModel
                         int.TryParse(filesRow["id"], out id);
                         UserName = filesRow["ime"];
                         UserID = id.ToString();
-                     }
+                        UserInitials = filesRow["inicijali"];
+                    }
                     Preferences.Set("UserName", UserName);
                     Preferences.Set("UserID", UserID);
+                    Preferences.Set("UserInitials", UserInitials);
+
                 }
                 else
                 {

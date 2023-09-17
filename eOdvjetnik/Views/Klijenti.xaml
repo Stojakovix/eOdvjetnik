@@ -73,50 +73,44 @@
 
             </Grid>
 
-            <HorizontalStackLayout >
+            <HorizontalStackLayout Margin="0,0,0,10">
+
+                <Button   Text="{x:Static resx:AppResources.DodajNovi}" Margin="5,0,0,0" Command="{Binding OnNoviKlijentClick}" />
+
+                <Button    Text="{x:Static resx:AppResources.NedavnoDodani}" Margin="5,0,0,0" Command="{Binding RefreshContacts}"   />
+
+                <Button   Text="{x:Static resx:AppResources.Uredi}" Margin="5,0,0,0" HorizontalOptions="End" Command="{Binding EditClientButton}"  />
+
+                <Button  Text="{x:Static resx:AppResources.DodajNaRacun}" Margin="5,0,0,0" Command="{Binding OnReciptClickCommand}" />
+
+                <Button   Text="Dodaj kao klijenta" Margin="5,0,0,0" HorizontalOptions="End" Command="{Binding AddAsClient}"  />
+                
+                <Button   Text="Dodaj kao protustranku" Margin="5,0,0,0" HorizontalOptions="End" Command="{Binding AddAsOpponent}"  />
 
 
+            </HorizontalStackLayout>
 
-                <Button  Text="{x:Static resx:AppResources.DodajNaRacun}" Margin="5,0,0,0" Command="{Binding OnReciptClickCommand}" >
+            <HorizontalStackLayout BackgroundColor="#faf9fb">
 
-
-                </Button>
-
-                <Button   Text="{x:Static resx:AppResources.DodajNovi}" Margin="5,0,0,0" Command="{Binding OnNoviKlijentClick}" >
- 
-
-                </Button>
-
-
-                <Button    Text="{x:Static resx:AppResources.NedavnoDodani}" Margin="5,0,0,0" Command="{Binding RefreshContacts}"   >
-
-
-                </Button>
-                <Button   Text="{x:Static resx:AppResources.Uredi}" Margin="5,0,0,0" HorizontalOptions="End" Command="{Binding EditClientButton}"  >
-
-
-                </Button>
-
-
-                <SearchBar  
-                   BackgroundColor="#F8F8F8"
+            <SearchBar  
+                   BackgroundColor="White"
                    PlaceholderColor="Black"
                    Placeholder="{x:Static resx:AppResources.PretragaO}"
                    SearchCommand="{Binding SearchCommand}"
                    Text="{Binding SearchText}"
                    WidthRequest="400"
                    HorizontalOptions="Start"
-                   Margin="10,10,10,10"
+                   Margin="10,0,10,0"
                    FontSize="Default" />
 
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,10,0,10" Text="{x:Static resx:AppResources.NemaRPretrage}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}"   TextColor="Black" VerticalTextAlignment="Center" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,10,0,10" Text="{x:Static resx:AppResources.PovezivanjeFalse}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}"  TextColor="Black" VerticalTextAlignment="Center"/>
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,10,0,10" Text="{Binding ContactDeletedText}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding ContactDeleted}"  TextColor="Black" VerticalTextAlignment="Center" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,10,0,10" Text="{Binding ContactEditedText}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding ContactEdited}"  TextColor="Black" VerticalTextAlignment="Center" />
-
-
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{x:Static resx:AppResources.NemaRPretrage}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}"   TextColor="Black" VerticalTextAlignment="Center" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{x:Static resx:AppResources.PovezivanjeFalse}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}"  TextColor="Black" VerticalTextAlignment="Center"/>
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{Binding ContactDeletedText}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding ContactDeleted}"  TextColor="Black" VerticalTextAlignment="Center" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{Binding ContactEditedText}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding ContactEdited}"  TextColor="Black" VerticalTextAlignment="Center" />
 
             </HorizontalStackLayout>
+
+
 
 
             <ScrollView Grid.Row="1" Grid.ColumnSpan="5" Margin="0,10,0,0" MinimumHeightRequest="800" MaximumHeightRequest="1200" >

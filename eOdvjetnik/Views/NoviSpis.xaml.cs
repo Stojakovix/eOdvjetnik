@@ -5,12 +5,31 @@ using eOdvjetnik.Model;
 
 public partial class NoviSpis : ContentPage
 {
-	
-    
-    public NoviSpis()
-	{
-        InitializeComponent();
-        BindingContext = new NoviSpisViewModel();
 
+
+    private NoviSpisViewModel viewModel;
+
+    public NoviSpis()
+    {
+        InitializeComponent();
+        viewModel = new NoviSpisViewModel();
+        BindingContext = viewModel;
+    }
+
+    private void OnStatusSelected(object sender, EventArgs e)
+    {
+        if (sender is Picker picker)
+        {
+            string selectedStatus = picker.SelectedItem as string;
+            viewModel.AktivnoPasivno = selectedStatus;
+        }
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        viewModel = new NoviSpisViewModel();
+        BindingContext = viewModel;
     }
 }

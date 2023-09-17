@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows.Input;
 using eOdvjetnik.Model;
 using eOdvjetnik.Services;
+using MySqlX.XDevAPI;
 using Syncfusion.Maui.Scheduler;
 
 namespace eOdvjetnik.ViewModel
@@ -17,7 +18,9 @@ namespace eOdvjetnik.ViewModel
         public ICommand OnDodajClick { get; set; }
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
 
+
         FileItem fileitem;
+        public string UserInitials { get; set; }
         public NoviSpisViewModel()
         {      
             try
@@ -25,6 +28,22 @@ namespace eOdvjetnik.ViewModel
                 navigacija = new Navigacija();
                 OnDodajClick = new Command(DodajClickButton);
                 AddFilesToRemoteServer = new Command(() => AddSpisToRemoteServer(fileitem));
+                EmployeeItems1 = new List<EmployeeItem>(); 
+                EmployeeItems2 = new List<EmployeeItem>();
+
+                GetEmployees1();
+                GetEmployees2();
+
+
+                ClientId = Preferences.Get("FilesClientID", "");
+                ClientName = Preferences.Get("FilesClientName", "");
+                OpponentId = Preferences.Get("FilesOpponent", "");
+                OpponentName = Preferences.Get("FilesOpponentName", "");
+
+                UserInitials = Preferences.Get("UserInitials", "");
+
+
+
             }
             catch (Exception ex)
             {
@@ -32,6 +51,132 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
+        public List<EmployeeItem> EmployeeItems1 { get; set; } 
+        private EmployeeItem selectedEmployeeItem1;
+
+        public EmployeeItem SelectedEmployeeItem1
+        {
+            get { return selectedEmployeeItem1; }
+            set
+            {
+                if (selectedEmployeeItem1 != value)
+                {
+                    selectedEmployeeItem1 = value;
+                    OnPropertyChanged(nameof(SelectedEmployeeItem1));
+                    InicijaliVoditelj = selectedEmployeeItem1?.Initals;
+                }
+            }
+        }
+
+        public List<EmployeeItem> EmployeeItems2 { get; set; }
+        private EmployeeItem selectedEmployeeItem2;
+
+        public EmployeeItem SelectedEmployeeItem2
+        {
+            get { return selectedEmployeeItem2; }
+            set
+            {
+                if (selectedEmployeeItem2 != value)
+                {
+                    selectedEmployeeItem2 = value;
+                    OnPropertyChanged(nameof(SelectedEmployeeItem2));
+                    InicijaliDodijeljeno = selectedEmployeeItem2?.Initals;
+                }
+            }
+        }
+
+
+        public void GetEmployees1()
+        {
+            try
+            {
+                if (EmployeeItems1 != null)
+                {
+                    EmployeeItems1.Clear();
+
+                }
+
+                string query = "SELECT id, ime, inicijali FROM employees;";
+
+
+                // Debug.WriteLine(query + "u SpisiViewModelu");
+                Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                if (filesData != null)
+                {
+                    foreach (Dictionary<string, string> filesRow in filesData)
+                    {
+                        #region Varijable za listu
+                        int id;
+                        int active;
+
+                        int.TryParse(filesRow["id"], out id);
+                        int.TryParse(filesRow["inicijali"], out active);
+                        #endregion
+
+                        var employee = new EmployeeItem()
+                        {
+                            Id = id,
+                            EmployeeName = filesRow["ime"],
+                            Initals = filesRow["inicijali"],
+                        };
+
+
+                        EmployeeItems1.Add(employee);
+                    }
+                    OnPropertyChanged(nameof(EmployeeItems1));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message + "in viewModel generate files");
+            }
+        }
+
+        public void GetEmployees2()
+        {
+            try
+            {
+                if (EmployeeItems2 != null)
+                {
+                    EmployeeItems2.Clear();
+
+                }
+
+                string query = "SELECT id, ime, inicijali FROM employees;";
+
+
+                // Debug.WriteLine(query + "u SpisiViewModelu");
+                Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                if (filesData != null)
+                {
+                    foreach (Dictionary<string, string> filesRow in filesData)
+                    {
+                        #region Varijable za listu
+                        int id;
+                        int active;
+
+                        int.TryParse(filesRow["id"], out id);
+                        int.TryParse(filesRow["inicijali"], out active);
+                        #endregion
+
+                        var employee = new EmployeeItem()
+                        {
+                            Id = id,
+                            EmployeeName = filesRow["ime"],
+                            Initals = filesRow["inicijali"],
+                        };
+
+
+                        EmployeeItems2.Add(employee);
+                    }
+                    OnPropertyChanged(nameof(EmployeeItems2));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message + "in viewModel generate files");
+            }
+        }
 
         private ObservableCollection<FileItem> fileitems;
         public ObservableCollection<FileItem> fileItems
@@ -103,8 +248,13 @@ namespace eOdvjetnik.ViewModel
                 }
             }
         }
+
+        public string ClientName { get; set; }
+        public string OpponentName { get; set; }
+
+
         private string opponentId;
-        public string OpponnentId
+        public string OpponentId
         {
             get { return opponentId; }
             set
@@ -112,7 +262,7 @@ namespace eOdvjetnik.ViewModel
                 if (opponentId != value)
                 {
                     opponentId = value;
-                    OnPropertyChanged(nameof(OpponnentId));
+                    OnPropertyChanged(nameof(OpponentId));
                 }
             }
         }
@@ -194,6 +344,8 @@ namespace eOdvjetnik.ViewModel
                 }
             }
         }
+
+
         private string referenca;
         public string Referenca
         {
@@ -332,18 +484,31 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
+        private void GetCurrentDate()
+        {
+            DateTime currentDate = DateTime.Now;
+              
+            Created = currentDate;
+            DatumPromjene = currentDate;
+            DatumKreiranja = currentDate;
+            DatumIzmjene = currentDate;
+
+        }
+
         private void AddSpisToRemoteServer(FileItem fileItem)
         {
+            
             try
             {
+                GetCurrentDate();
                 #region Varijable za spremanje
                 //int idValue = int.Parse(Id);
                 int idValue = int.Parse(Id ?? "0");
                 string brojSpisa = BrojSpisa ?? string.Empty;
                 string spisiCol = SpisiCol ?? string.Empty;
                 int clientId = int.Parse(ClientId ?? "0");
-                int opponentId = int.Parse(OpponnentId ?? "0");
-                int inicijaliVoditelj = int.Parse(InicijaliVoditelj ?? "0");
+                int opponentId = int.Parse(OpponentId ?? "0");
+                string inicijaliVoditelj = InicijaliVoditelj ?? "0";
                 string inicijaliDodao = InicijaliDodao ?? string.Empty;
                 string filesCol = FilesCol ?? string.Empty;
                 string inicijaliDodijeljeno = InicijaliDodijeljeno ?? string.Empty;
@@ -364,10 +529,14 @@ namespace eOdvjetnik.ViewModel
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 string disableForeignKeyChecksQuery = "SET FOREIGN_KEY_CHECKS = 0";
                 externalSQLConnect.sqlQuery(disableForeignKeyChecksQuery);
+                Debug.WriteLine("DDDDDDDDDD broj spisa " + brojSpisa + ", spisiCol " + spisiCol + ", ClientId " + ClientId);
 
-                string query = $"INSERT INTO Files (broj_spisa, spisicol, client_id, opponent_id, inicijali_voditelj_id, inicijali_dodao, filescol, inicijali_dodjeljeno, created, aktivno_pasivno, referenca, datum_promjene_statusa, uzrok, datum_kreiranja_spisa, datum_izmjene_spisa, kreirao, zadnje_uredio, jezik,broj_predmeta ) " +
-                        $"VALUES ('{brojSpisa}', '{spisiCol}', '{clientId}', '{opponentId}', '{inicijaliVoditelj}' , '{inicijaliDodao}' , '{filesCol}' , '{inicijaliDodijeljeno}' , '{created.ToString("yyyy-MM-dd HH:mm:ss")}' , '{aktivnoPasivno}' , '{referenca}' , '{datumPromjene.ToString("yyyy-MM-dd HH:mm:ss")}' , '{uzrok}' , '{datumKreiranja.ToString("yyyy-MM-dd HH:mm:ss")}' , '{datumIzmjene.ToString("yyyy-MM-dd HH:mm:ss")}' , '{kreirao}' , '{zadnjeUredio}' , '{jezik}' , '{brojPredmeta}' )";
+
+                string query = $"INSERT INTO files (broj_spisa, spisicol, client_id, opponent_id, inicijali_voditelj_id, inicijali_dodao, filescol, inicijali_dodjeljeno, created, aktivno_pasivno, referenca, datum_promjene_statusa, uzrok, datum_kreiranja_spisa, datum_izmjene_spisa, kreirao, zadnje_uredio, jezik,broj_predmeta ) " +
+                       $"VALUES ('{brojSpisa}', '{spisiCol}', '{ClientId}', '{OpponentId}', '{InicijaliVoditelj}' , '{UserInitials}' , '{filesCol}' , '{InicijaliDodijeljeno}' , '{created.ToString("yyyy-MM-dd HH:mm:ss")}' , '{aktivnoPasivno}' , '{referenca}' , '{datumPromjene.ToString("yyyy-MM-dd HH:mm:ss")}' , '{uzrok}' , '{datumKreiranja.ToString("yyyy-MM-dd HH:mm:ss")}' , '{datumIzmjene.ToString("yyyy-MM-dd HH:mm:ss")}' , '{kreirao}' , '{zadnjeUredio}' , '{jezik}' , '{brojPredmeta}' )";
                 Debug.WriteLine(query + " in novi spis viewModel");
+
+
                 externalSQLConnect.sqlQuery(query);
                 Debug.WriteLine("Appointment added to remote server in novi spis viewModel");
 
@@ -395,6 +564,7 @@ namespace eOdvjetnik.ViewModel
         #endregion
 
     }
+
 
 
 }
