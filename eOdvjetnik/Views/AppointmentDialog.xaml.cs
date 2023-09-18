@@ -182,11 +182,11 @@ public partial class AppointmentDialog : ContentPage
         if (DevicePlatform == "MacCatalyst")
         {
 
-            Shell.Current.GoToAsync("//LoadingPage");
+            Shell.Current.GoToAsync("///LoadingPage");
         }
         else
         {
-            Shell.Current.GoToAsync("//Kalendar");
+            Shell.Current.GoToAsync("///Kalendar");
         }
 
 

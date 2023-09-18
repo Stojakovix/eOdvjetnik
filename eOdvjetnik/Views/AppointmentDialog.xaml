@@ -119,7 +119,7 @@
             <HorizontalStackLayout Margin="0,20,0,0" >
                 <Button x:Name="DeleteButton" Clicked="DeleteButton_Clicked" Text="Obriši" BorderColor="DarkGray" Background="#DC143C" TextColor="LightGray"  WidthRequest="120" FontSize="Default" Margin="0,0,10,0" />
                 <Button x:Name="cancelButton" Clicked="CancelButton_Clicked" Text="Odustani" BorderColor="DarkGray" BackgroundColor="LightGray"  TextColor="#3B3B3B" WidthRequest="120" FontSize="Default" Margin="0,0,10,0" />
-                <Button x:Name="saveButton" Clicked="SaveButton_Clicked" Text="Spremi" BorderColor="DarkGray"  BackgroundColor="#5ac8fa" TextColor="Black" WidthRequest="100" FontSize="Default" Margin="0,0,10,0"  />
+                <Button x:Name="saveButton" Clicked="SaveButton_Clicked" Text="Spremi" BorderColor="DarkGray"  BackgroundColor="#5ac8fa" TextColor="Black" WidthRequest="120" FontSize="Default" Margin="0,0,10,0"  />
             </HorizontalStackLayout>
             
         </VerticalStackLayout>

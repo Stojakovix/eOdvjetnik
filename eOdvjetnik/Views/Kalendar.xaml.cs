@@ -57,9 +57,15 @@ public partial class Kalendar : ContentPage
             isInitialized = true;
             _viewModel.AdminLicenceCheck();
             Debug.WriteLine("izvršio on appearing adminLicenceCheck");
+            
 
         }
 
+    }
+
+    private void OnSchedulerAppointmentDragStarting(object? sender, AppointmentDragStartingEventArgs e)
+    {
+        e.Cancel = true; 
     }
 
     protected override void OnDisappearing()
