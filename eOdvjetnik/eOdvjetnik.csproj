@@ -338,8 +338,6 @@
 	  <None Remove="Resources\Icons\less.png" />
 	  <None Remove="Resources\Icons\letter.png" />
 	  <None Remove="Resources\Icons\linkedin.png" />
-	  <None Remove="Resources\Icons\logoimg.svg" />
-	  <None Remove="Resources\Icons\logotext.svg" />
 	  <None Remove="Resources\Icons\map_pin.png" />
 	  <None Remove="Resources\Icons\menu_sign.png" />
 	  <None Remove="Resources\Icons\microphone.png" />
@@ -749,8 +747,6 @@
 	  <MauiImage Include="Resources\Icons\lastpass.png" />
 	  <MauiImage Include="Resources\Icons\letter.png" />
 	  <MauiImage Include="Resources\Icons\linkedin.png" />
-	  <MauiImage Include="Resources\Icons\logoimg.svg" />
-	  <MauiImage Include="Resources\Icons\logotext.svg" />
 	  <MauiImage Include="Resources\Icons\map_pin.png" />
 	  <MauiImage Include="Resources\Icons\menu_sign.png" />
 	  <MauiImage Include="Resources\Icons\microphone.png" />
