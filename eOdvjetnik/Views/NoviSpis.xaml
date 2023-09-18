@@ -80,11 +80,30 @@
             <Entry x:Name="BrojPredmetaEntry" Grid.Row="9" Grid.Column="1" Text="{Binding BrojPredmeta}"  VerticalTextAlignment="Center"  />
             <Label Text="       " Margin="20,0,0,20" Grid.Row="10"/>
 
+
+
+            <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="1" Margin="3,39,3,0"   />
+            <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="1" Margin="3,39,3,0"   />
+            <BoxView HeightRequest="1" Grid.Row="2" Grid.Column="1" Margin="3,39,3,0"   />
+            <BoxView HeightRequest="1" Grid.Row="3" Grid.Column="1" Margin="3,39,3,0"   />
+            <BoxView HeightRequest="1" Grid.Row="4" Grid.Column="1" Margin="3,39,3,0"   />
+            <BoxView HeightRequest="1" Grid.Row="5" Grid.Column="1" Margin="3,39,3,0"   />
+            <BoxView HeightRequest="1" Grid.Row="6" Grid.Column="1" Margin="3,39,3,0"   />
+            <BoxView HeightRequest="1" Grid.Row="7" Grid.Column="1" Margin="3,39,3,0"   />
+            <BoxView HeightRequest="1" Grid.Row="8" Grid.Column="1" Margin="3,39,3,0"   />
+            <BoxView HeightRequest="1" Grid.Row="9" Grid.Column="1" Margin="3,39,3,0"   />
+            
+            
+            
+            
             <Button Margin="20,0,0,0" Text="Dodaj" Command="{Binding OnDodajClick}" Grid.Row="11"
                  
                     />
 
 
+            
+            
+            
         </Grid>
     </ScrollView>
 </ContentPage>
