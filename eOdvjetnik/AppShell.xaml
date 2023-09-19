@@ -30,83 +30,79 @@
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                    
-                    Command="{Binding MainClickCommand}" 
+                    Command="{Binding MainClickCommand}"
+                    Text="Početna" 
                     x:Name="PočetnaButton"
-                    Margin="0,0,0,0"
-                    FontFamily="SFUIDisplay-Light"
-                    TextColor="Black"
-                    FontSize="18"
-                    BorderWidth="0"       
-
-                    Padding="10,5,10,5"
-
-                    >
-                <Button.ImageSource>
-                    <FileImageSource File="home.png" />
-                </Button.ImageSource>
-
-            </Button>
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-                    Grid.Column="1" Text="Osobni ročišnik" 
-                    Command="{Binding KalendarClickCommand}" 
-                    x:Name="KalendarButton" 
-                    Margin="0,0,0,0"
                     BorderWidth="0"
                     FontSize="18"
                     FontFamily="SFUIDisplay-Light"
                     TextColor="Black"
-                  Padding="10,5,10,5"
+                    Padding="10,5,10,5"
+                    Margin="20,0,0,0"
 
-                    
-                    />
+             />
+
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
-           Grid.Column="2" Text="Ročišnik tvrtke" 
-           Command="{Binding AdminKalendarClickCommand}" 
-           x:Name="AdminKalendarButton" 
-           Margin="0,0,0,0"
-           BorderWidth="0"
-           FontSize="18"
-                                      Padding="10,5,10,5"
+                    Grid.Column="1" Text="Ročišnik" 
+                    Command="{Binding KalendarClickCommand}" 
+                    x:Name="KalendarButton" 
+                    Margin="20,0,0,0"
+                    BorderWidth="0"
+                    FontSize="18"
                     FontFamily="SFUIDisplay-Light"
-           TextColor="Black"
+                    TextColor="Black"
+                    Padding="10,5,10,5"
+
+                    
+             />
+
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=False}" 
+                    Grid.Column="2" Text="Ročišnik tvrtke" 
+                    Command="{Binding AdminKalendarClickCommand}" 
+                    x:Name="AdminKalendarButton" 
+                    Margin="20,0,0,0"
+                    BorderWidth="0"
+                    FontSize="18"
+                    Padding="10,5,10,5"
+                    FontFamily="SFUIDisplay-Light"
+                    TextColor="Black"
            />
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="6" Text="{x:Static resx:AppResources.Upisnik}" 
                     Command="{Binding SpisiClickCommand}" 
                     x:Name="SpisiButton"
-
-                    Margin="10,0" 
+                    Margin="20,0,0,0"
                     BorderWidth="0"
                     FontFamily="SFUIDisplay-Light"
                     FontSize="18"
                     Padding="10,5,10,5"
                     TextColor="Black"
-                    />
+            />
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="5" Text="{x:Static resx:AppResources.Tarifa}" 
                     Command="{Binding NaplataClickCommand}" 
                     x:Name="NaplataButton"
-
                     BorderWidth="0"
                     FontFamily="SFUIDisplay-Light"
                     FontSize="18"
                     Padding="10,5,10,5"
                     TextColor="Black"
+                    Margin="20,0,0,0"
                     />
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="3" Text="{x:Static resx:AppResources.Dokumenti}" 
                     Command="{Binding DokumentiClickCommand}" 
                     x:Name="DokumentiButton"
-
                     BorderWidth="0"
                     FontFamily="SFUIDisplay-Light"
                     FontSize="18"
                     Padding="10,5,10,5"
                     TextColor="Black"
+                    Margin="20,0,0,0"
                     />
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
@@ -118,6 +114,7 @@
                     FontSize="18"
                     Padding="10,5,10,5"
                     TextColor="Black"
+                    Margin="20,0,0,0"
                     />
 
 
@@ -130,11 +127,11 @@
                     Padding="10,5,10,5"
                     FontFamily="SFUIDisplay-Light"
                     TextColor="Black"
- />
+                    Margin="20,0,0,0"
+            />
 
             <Button Grid.Column="10" 
                     Text="{x:Static resx:AppResources.Postavke}" 
-
                     IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
                     BorderWidth="0"
                     FontFamily="SFUIDisplay-Light"
@@ -142,7 +139,8 @@
                     FontSize="18"
                     Padding="10,5,10,5"
                     TextColor="Black"
- />
+                    Margin="20,0,0,0"
+             />
 
 
             <sfPopup:SfPopup x:Name="popup" 
