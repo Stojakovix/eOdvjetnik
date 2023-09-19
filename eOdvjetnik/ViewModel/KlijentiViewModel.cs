@@ -826,7 +826,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
         string tekst3 = "' spremljen je kao klijent.";
         string tekstObavijest = string.Concat(tekst1, tekst2, tekst3);
 
-        Application.Current.MainPage.DisplayAlert("Novi spis", tekstObavijest, "OK");
+        Application.Current.MainPage.DisplayAlert("", tekstObavijest, "OK");
 
     }
     public void AddSelectedAsOpponent()
@@ -838,7 +838,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
         string tekst3 = "' spremljen je kao protustranka.";
         string tekstObavijest = string.Concat(tekst1, tekst2, tekst3);
 
-        Application.Current.MainPage.DisplayAlert("Novi spis", tekstObavijest, "OK");
+        Application.Current.MainPage.DisplayAlert(" ", tekstObavijest, "OK");
 
     }
 }
