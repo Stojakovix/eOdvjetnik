@@ -105,8 +105,8 @@
 
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{x:Static resx:AppResources.NemaRPretrage}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}"   TextColor="Black" VerticalTextAlignment="Center" />
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{x:Static resx:AppResources.PovezivanjeFalse}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}"  TextColor="Black" VerticalTextAlignment="Center"/>
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{Binding ContactDeletedText}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding ContactDeleted}"  TextColor="Black" VerticalTextAlignment="Center" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{Binding ContactEditedText}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding ContactEdited}"  TextColor="Black" VerticalTextAlignment="Center" />
+                <!--<Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{Binding ContactDeletedText}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding ContactDeleted}"  TextColor="Black" VerticalTextAlignment="Center" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{Binding ContactEditedText}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding ContactEdited}"  TextColor="Black" VerticalTextAlignment="Center" />-->
 
             </HorizontalStackLayout>
 

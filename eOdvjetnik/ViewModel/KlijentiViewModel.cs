@@ -12,6 +12,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using System.Globalization;
 using System.Diagnostics.Metrics;
 using System.Reflection;
+using System.Web;
 
 namespace eOdvjetnik.ViewModel;
 
@@ -189,7 +190,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
             {
                 contacts.Clear();
             }
-            string query = "SELECT * FROM `contacts` ORDER by id asc limit 30;";
+            string query = "SELECT * FROM `contacts` ORDER by id desc limit 30;";
             Debug.WriteLine("Generate contacts query: " + query);
             try
             {
@@ -602,7 +603,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
     public async void OnButtonClick()
     {
         await Shell.Current.GoToAsync("/NoviKlijent");
-        Debug.WriteLine("novi spis clicked");
+        Debug.WriteLine("novi klijent clicked");
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
@@ -657,8 +658,9 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 {
                     ClientLegalPerson = false;
                 }
-                ContactDeletedText = Preferences.Get("ContactDeleted", "");
-                ContactEditedText = "Uspješno ste izmijenili kontakt: " + ClientName;
+
+
+
             }
             catch (Exception ex)
             {
@@ -674,6 +676,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
     private async void EditClient()
     {
         await Shell.Current.GoToAsync("/UrediKlijenta");
+        Debug.WriteLine("uredi klijenta clicked");
+
 
     }
 
@@ -681,14 +685,18 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         GenerateFiles();
         Debug.WriteLine("Generating files after adding a new contact");
+        Application.Current.MainPage.DisplayAlert("", "Uspješno ste dodali novi kontakt.", "OK");
+
+
     }
 
     private void ContactDeletedReceived(object recipient, ContactDeleted message)
     {
         GenerateFiles();
+        Debug.WriteLine("Generating files after deleting a contact");
         ContactDeletedText = Preferences.Get("ContactDeleted", "");
         ContactDeleted = true;
-        Debug.WriteLine("Generating files after deleting a contact");
+        Application.Current.MainPage.DisplayAlert("", ContactDeletedText, "OK");
 
     }
 
@@ -753,6 +761,13 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 Debug.WriteLine(ex.Message);
                 NoSQLreply = true;
             }
+
+            string tekst1 = "Uspješno ste izmijenili kontakt: ";
+            string tekst2 = Preferences.Get("ClientEditedName", "");
+            string tekstObavijest = string.Concat(tekst1, tekst2);
+            ContactEditedText = tekstObavijest;
+            Application.Current.MainPage.DisplayAlert("", ContactEditedText, "OK");
+
         }
         catch (Exception ex)
         {
@@ -775,8 +790,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
     }
     public void SaveSelectedItem()
     {
-        if (SelectedItem != null) 
-        { 
+        if (SelectedItem != null)
+        {
             try
             {
                 Preferences.Set("SelectedName", SelectedItem.Ime);
@@ -806,12 +821,24 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         Preferences.Set("FilesClientID", ClientID);
         Preferences.Set("FilesClientName", ClientName);
+        string tekst1 = "Kontakt '";
+        string tekst2 = ClientName;
+        string tekst3 = "' spremljen je kao klijent.";
+        string tekstObavijest = string.Concat(tekst1, tekst2, tekst3);
+
+        Application.Current.MainPage.DisplayAlert("Novi spis", tekstObavijest, "OK");
 
     }
     public void AddSelectedAsOpponent()
     {
         Preferences.Set("FilesOpponent", ClientID);
         Preferences.Set("FilesOpponentName", ClientName);
+        string tekst1 = "Kontakt '";
+        string tekst2 = ClientName;
+        string tekst3 = "' spremljen je kao protustranka.";
+        string tekstObavijest = string.Concat(tekst1, tekst2, tekst3);
+
+        Application.Current.MainPage.DisplayAlert("Novi spis", tekstObavijest, "OK");
 
     }
 }

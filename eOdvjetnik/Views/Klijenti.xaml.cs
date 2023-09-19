@@ -10,10 +10,13 @@ using System.Diagnostics;
 
 public partial class Klijenti : ContentPage
 {
-	public Klijenti()
+    public KlijentiViewModel viewModel = new KlijentiViewModel();
+    private bool isInitialized;
+    public Klijenti()
 	{
-		InitializeComponent();
-        this.BindingContext = new KlijentiViewModel();
+        InitializeComponent();
+        this.BindingContext = viewModel;
+        isInitialized = false;
 
     }
 
@@ -22,7 +25,20 @@ public partial class Klijenti : ContentPage
         base.OnAppearing();
         this.Window.MinimumHeight = 620;
         this.Window.MinimumWidth = 860;
+        if (!isInitialized)
+        {
+            isInitialized = true;
+        }
+        else
+        {
+            viewModel.GenerateFiles();
+        }
+        Debug.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAA" + isInitialized.ToString());
     }
+
+   
+
+
     //private async void ListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
     //{
     //    if (e.SelectedItem == null)

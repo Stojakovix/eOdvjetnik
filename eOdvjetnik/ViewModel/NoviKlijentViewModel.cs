@@ -514,6 +514,8 @@ namespace eOdvjetnik.ViewModel
             {
                 UpdateContactOnRemoteServer(contactItem);
                 await Shell.Current.GoToAsync("///Klijenti");
+                Preferences.Set("ClientEditedName", ClientName);
+
                 ContactEditedMessage();
                 Debug.WriteLine("Klijent je ažuriran: " + ClientName);
             }
