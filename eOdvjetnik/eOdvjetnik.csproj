@@ -67,7 +67,7 @@
 	  <CodesignKey>iPhone Distribution</CodesignKey>
 	  <CodesignProvision>App Store eOdvjetnik Apple iOS Distribution Profil</CodesignProvision>
 	  <MtouchDebug>true</MtouchDebug>
-	  <CodesignEntitlements>Entitlements</CodesignEntitlements>
+	  <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
 	  <DebugSymbols>true</DebugSymbols>
@@ -87,6 +87,8 @@
 	  <CodesignKey>Mac Developer</CodesignKey>
 	  <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
 	  <CodesignProvision>Mac Store eOdvjetnik Mac OS Develop Profile</CodesignProvision>
+	  <MtouchDebug>true</MtouchDebug>
+	  <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
