@@ -467,6 +467,7 @@
 		<PackageReference Include="Syncfusion.DocIO.NET" Version="23.1.36" />
 		<PackageReference Include="Syncfusion.Licensing" Version="23.1.36" />
 		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="23.1.36" />
+		<PackageReference Include="Syncfusion.Maui.Picker" Version="23.1.36" />
 		<PackageReference Include="Syncfusion.Maui.Popup" Version="23.1.36" />
 		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="23.1.36" />
 		<PackageReference Include="MySql.Data" Version="8.1.0" />
