@@ -43,14 +43,14 @@
             <Entry x:Name="OpponentIdEntry" Keyboard="Numeric" Grid.Row="2" Grid.Column="1"  Text="{Binding OpponentName}" VerticalTextAlignment="Center"  IsReadOnly="True" />
 
             <Label Text="Voditelj" Grid.Row="3" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" VerticalTextAlignment="Center" />
-            <Picker Grid.Row="3" Grid.Column="1" ItemsSource="{Binding EmployeeItems1}" SelectedItem="{Binding SelectedEmployeeItem1}" VerticalTextAlignment="Center">
+            <Picker Grid.Row="3" Grid.Column="1" BackgroundColor="#faf9fb" ItemsSource="{Binding EmployeeItems1}" SelectedItem="{Binding SelectedEmployeeItem1}" VerticalTextAlignment="Center">
                 <Picker.ItemDisplayBinding>
                     <Binding Path="Initals" />
                 </Picker.ItemDisplayBinding>
             </Picker>
             
             <Label Text="Dodjeljeno" Grid.Row="4" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" VerticalTextAlignment="Center"  />
-            <Picker Grid.Row="4" Grid.Column="1" ItemsSource="{Binding EmployeeItems2}" SelectedItem="{Binding SelectedEmployeeItem2}" VerticalTextAlignment="Center">
+            <Picker Grid.Row="4" Grid.Column="1" BackgroundColor="#faf9fb"  ItemsSource="{Binding EmployeeItems2}" SelectedItem="{Binding SelectedEmployeeItem2}" VerticalTextAlignment="Center">
                 <Picker.ItemDisplayBinding>
                     <Binding Path="Initals" />
                 </Picker.ItemDisplayBinding>
@@ -58,7 +58,7 @@
 
 
             <Label Text="Status" Grid.Row="5" Grid.Column="0" Margin="20,0,0,0" VerticalOptions="Center" VerticalTextAlignment="Center"  />
-            <Picker Grid.Row="5" Grid.Column="1" SelectedIndexChanged="OnStatusSelected" >
+            <Picker Grid.Row="5" Grid.Column="1" SelectedIndexChanged="OnStatusSelected" BackgroundColor="#faf9fb"  >
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Aktivno</x:String>
@@ -92,13 +92,18 @@
             <BoxView HeightRequest="1" Grid.Row="7" Grid.Column="1" Margin="3,39,3,0"   />
             <BoxView HeightRequest="1" Grid.Row="8" Grid.Column="1" Margin="3,39,3,0"   />
             <BoxView HeightRequest="1" Grid.Row="9" Grid.Column="1" Margin="3,39,3,0"   />
+
+
+            <HorizontalStackLayout   Grid.Row="11" >
+
+                <Button Margin="20,0,0,0" Text="Nazad" Command="{Binding OnNazadClick}"   />
+                <Button Margin="30,0,0,0" Text="Dodaj" Command="{Binding OnDodajClick}"   />
+          
+
+
+            </HorizontalStackLayout>
             
-            
-            
-            
-            <Button Margin="20,0,0,0" Text="Dodaj" Command="{Binding OnDodajClick}" Grid.Row="11"
-                 
-                    />
+    
 
 
             

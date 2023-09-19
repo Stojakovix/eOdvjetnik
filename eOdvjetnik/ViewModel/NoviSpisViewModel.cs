@@ -16,6 +16,8 @@ namespace eOdvjetnik.ViewModel
         public ICommand AddFilesToRemoteServer { get; set; }
        
         public ICommand OnDodajClick { get; set; }
+        public ICommand OnNazadClick { get; set; }
+
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
 
 
@@ -27,6 +29,8 @@ namespace eOdvjetnik.ViewModel
             {
                 navigacija = new Navigacija();
                 OnDodajClick = new Command(DodajClickButton);
+                OnNazadClick = new Command(NazadClickButton);
+
                 AddFilesToRemoteServer = new Command(() => AddSpisToRemoteServer(fileitem));
                 EmployeeItems1 = new List<EmployeeItem>(); 
                 EmployeeItems2 = new List<EmployeeItem>();
@@ -554,7 +558,12 @@ namespace eOdvjetnik.ViewModel
             AddSpisToRemoteServer(FileItem);
             Shell.Current.GoToAsync("//Spisi");
         }
-       
+        private void NazadClickButton()
+        {
+            Shell.Current.GoToAsync("//Spisi");
+        }
+
+
         #region Property Changed
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
