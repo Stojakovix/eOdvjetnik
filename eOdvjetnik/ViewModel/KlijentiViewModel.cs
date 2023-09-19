@@ -18,7 +18,6 @@ namespace eOdvjetnik.ViewModel;
 
 public class KlijentiViewModel : INotifyPropertyChanged
 {
-    private Navigacija navigacija;
 
     private void RočišnikMenuItem_Clicked(object sender, EventArgs e)
     {
@@ -500,7 +499,6 @@ public class KlijentiViewModel : INotifyPropertyChanged
     public ICommand AddAsOpponent { get; set; }
     public KlijentiViewModel()
     {
-        navigacija = new Navigacija();
         WeakReferenceMessenger.Default.Register<RefreshContacts>(this, NewContactAddedReceived);
         WeakReferenceMessenger.Default.Register<ContactDeleted>(this, ContactDeletedReceived);
         WeakReferenceMessenger.Default.Register<ContactEdited>(this, ContactEditedReceived);
@@ -559,6 +557,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
         timer.Interval = TimeSpan.FromMilliseconds(200);
         timer.Tick += (s, e) => Refresh();
         timer.Start();
+        Debug.WriteLine("Klijenti ViewModel uspješno izvršeni");
         //EmptyContactRows();
         //FilesCounter = 1;
 

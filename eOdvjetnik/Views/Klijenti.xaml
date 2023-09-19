@@ -7,9 +7,7 @@
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
             xmlns:local="clr-namespace:ListViewMaui"
              Title="Datoteka Osoba">
-    <ContentPage.BindingContext>
-        <viewmodel:KlijentiViewModel/>
-    </ContentPage.BindingContext>
+
 
     <ContentPage.Resources>
         <ResourceDictionary>

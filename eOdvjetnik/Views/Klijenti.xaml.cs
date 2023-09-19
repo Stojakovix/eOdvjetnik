@@ -25,15 +25,16 @@ public partial class Klijenti : ContentPage
         base.OnAppearing();
         this.Window.MinimumHeight = 620;
         this.Window.MinimumWidth = 860;
-        if (!isInitialized)
+        if (isInitialized == false)
         {
             isInitialized = true;
+            Debug.WriteLine("initialized is true"); 
         }
-        else
+        else if (isInitialized == false)
         {
             viewModel.GenerateFiles();
+            Debug.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAA" + isInitialized.ToString());
         }
-        Debug.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAA" + isInitialized.ToString());
     }
 
    

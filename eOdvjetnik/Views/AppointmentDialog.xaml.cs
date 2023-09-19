@@ -182,9 +182,9 @@ public partial class AppointmentDialog : ContentPage
     {
         if ((sender as Microsoft.Maui.Controls.Switch).IsToggled)
         {
-            startTime_picker.SelectedTime = new TimeSpan(12, 0, 0);
+            startTime_picker.Time = new TimeSpan(12, 0, 0);
             startTime_picker.IsEnabled = false;
-            endTime_picker.SelectedTime = new TimeSpan(12, 0, 0);
+            endTime_picker.Time = new TimeSpan(12, 0, 0);
             endTime_picker.IsEnabled = false;
         }
         else
@@ -215,10 +215,10 @@ public partial class AppointmentDialog : ContentPage
     {
         try
         {
-            var endDate = endDate_picker.SelectedDate;
-            var startDate = startDate_picker.SelectedDate;
-            var endTime = endTime_picker.SelectedTime;
-            var startTime = startTime_picker.SelectedTime;
+            var endDate = endDate_picker.Date;
+            var startDate = startDate_picker.Date;
+            var endTime = endTime_picker.Time;
+            var startTime = startTime_picker.Time;
 
             if (AppoitmentColorName == null || AppoitmentColorName == "")
             {
@@ -366,8 +366,8 @@ public partial class AppointmentDialog : ContentPage
         {
             appointment = new SchedulerAppointment();
             appointment.Subject = this.eventNameText.Text;
-            appointment.StartTime = this.startDate_picker.SelectedDate.Add(this.startTime_picker.SelectedTime);
-            appointment.EndTime = this.endDate_picker.SelectedDate.Add(this.endTime_picker.SelectedTime);
+            appointment.StartTime = this.startDate_picker.Date.Add(this.startTime_picker.Time);
+            appointment.EndTime = this.endDate_picker.Date.Add(this.endTime_picker.Time);
             appointment.IsAllDay = this.switchAllDay.IsToggled;
             appointment.Notes = this.organizerText.Text;
             appointment.Background = AppoitmentColor;
@@ -388,8 +388,8 @@ public partial class AppointmentDialog : ContentPage
         else
         {
             appointment.Subject = this.eventNameText.Text;
-            appointment.StartTime = this.startDate_picker.SelectedDate.Add(this.startTime_picker.SelectedTime);
-            appointment.EndTime = this.endDate_picker.SelectedDate.Add(this.endTime_picker.SelectedTime);
+            appointment.StartTime = this.startDate_picker.Date.Add(this.startTime_picker.Time);
+            appointment.EndTime = this.endDate_picker.Date.Add(this.endTime_picker.Time);
             appointment.IsAllDay = this.switchAllDay.IsToggled;
             appointment.Notes = this.organizerText.Text;
             AppoitmentColorName = appointment.Location;
@@ -423,8 +423,8 @@ public partial class AppointmentDialog : ContentPage
         {
             eventNameText.Text = appointment.Subject.ToString();
             organizerText.Text = appointment.Notes;
-            startDate_picker.SelectedDate = appointment.StartTime;
-            endDate_picker.SelectedDate = appointment.EndTime;
+            startDate_picker.Date = appointment.StartTime;
+            endDate_picker.Date = appointment.EndTime;
 
             var appointmentColor = (appointment.Background as SolidColorBrush)?.Color;
             Debug.WriteLine("Tražena boja: " + appointmentColor.ToArgbHex());
@@ -443,15 +443,15 @@ public partial class AppointmentDialog : ContentPage
 
             if (!appointment.IsAllDay)
             {
-                startTime_picker.SelectedTime = new TimeSpan(appointment.StartTime.Hour, appointment.StartTime.Minute, appointment.StartTime.Second);
-                endTime_picker.SelectedTime = new TimeSpan(appointment.EndTime.Hour, appointment.EndTime.Minute, appointment.EndTime.Second);
+                startTime_picker.Time = new TimeSpan(appointment.StartTime.Hour, appointment.StartTime.Minute, appointment.StartTime.Second);
+                endTime_picker.Time = new TimeSpan(appointment.EndTime.Hour, appointment.EndTime.Minute, appointment.EndTime.Second);
                 switchAllDay.IsToggled = false;
             }
             else
             {
-                startTime_picker.SelectedTime = new TimeSpan(12, 0, 0);
+                startTime_picker.Time = new TimeSpan(12, 0, 0);
                 startTime_picker.IsEnabled = false;
-                endTime_picker.SelectedTime = new TimeSpan(12, 0, 0);
+                endTime_picker.Time = new TimeSpan(12, 0, 0);
                 endTime_picker.IsEnabled = false;
                 switchAllDay.IsToggled = true;
             }
@@ -462,10 +462,10 @@ public partial class AppointmentDialog : ContentPage
             eventNameText.Text = "";
             organizerText.Text = "";
             switchAllDay.IsToggled = false;
-            startDate_picker.SelectedDate = selectedDate;
-            startTime_picker.SelectedTime = new TimeSpan(selectedDate.Hour, selectedDate.Minute, selectedDate.Second);
-            endDate_picker.SelectedDate = selectedDate;
-            endTime_picker.SelectedTime = new TimeSpan(selectedDate.Hour + 1, selectedDate.Minute, selectedDate.Second);
+            startDate_picker.Date = selectedDate;
+            startTime_picker.Time = new TimeSpan(selectedDate.Hour, selectedDate.Minute, selectedDate.Second);
+            endDate_picker.Date = selectedDate;
+            endTime_picker.Time = new TimeSpan(selectedDate.Hour + 1, selectedDate.Minute, selectedDate.Second);
         }
     }
 
