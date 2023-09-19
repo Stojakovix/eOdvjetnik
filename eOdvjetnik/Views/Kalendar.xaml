@@ -24,22 +24,6 @@
             </Border>
         </DataTemplate>
 
-        <!--<DataTemplate x:Key="MonthAppointmentTemplate"  >
-            --><!--Ne koristit Frame, nema podršku za dynamic data binding, koristi border--><!--
-            <Border Background="{Binding Background}"  StrokeShape="RoundRectangle 5,5,5,5" >
-                <Label Text="{Binding Subject}" TextColor="Black"  HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Bold" LineBreakMode="WordWrap" MaxLines="2"  />
-            </Border>
-        </DataTemplate>
-        <DataTemplate x:Key="WeekAppointmentTemplate">
-            <Border Background="{Binding Background}" StrokeShape="RoundRectangle 5,5,5,5">
-                <Label Text="{Binding Subject}" TextColor="Red" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Bold" LineBreakMode="WordWrap" MaxLines="2" />
-            </Border>
-        </DataTemplate>
-        <DataTemplate x:Key="ResourceViewAppointmentTemplate">
-            <Border Background="{Binding Background}" StrokeShape="RoundRectangle 5,5,5,5">
-                <Label Text="{Binding Subject}" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Bold" LineBreakMode="WordWrap" MaxLines="2" />
-            </Border>
-        </DataTemplate>-->
         <DataTemplate x:Key="AllDayAppointmentTemplate">
             <Grid Background="{Binding Background}"   Opacity="0.5">
                 <Label Text="{Binding Subject}"   VerticalOptions="Center" TextColor="Red" MaxLines="2" FontSize="Caption" FontAttributes="Bold" HorizontalOptions="Center" />
@@ -49,32 +33,6 @@
 
     </ContentPage.Resources>
 
-    <!--<scheduler:SfScheduler x:Name="Scheduler" 
-                               View="Day" 
-                               FirstDayOfWeek="Monday" 
-                               Tapped="Scheduler_DoubleTapped" 
-                               SelectedCellBackground="transparent"
-                               AppointmentsSource="{Binding Appointments}" 
-                               ShowWeekNumber="True" 
-                               BackgroundColor="{AppThemeBinding Dark=White, Light=White}"
-                               AllowedViews="Day,Week,WorkWeek,Agenda,Month" 
-                               TodayHighlightBrush="Red"
-                               EnableReminder="True"  
-                               SelectedAppointmentBackground="transparent"                      
-                           >        
-        <scheduler:SfScheduler.DaysView>
-            <scheduler:SchedulerDaysView TimeFormat="HH:mm " TimeInterval="1:0:0" CurrentTimeIndicatorBrush="Red" AppointmentTemplate="{StaticResource AppointmentTemplate}" 
-                                         AllDayAppointmentTemplate="{StaticResource AllDayAppointmentTemplate}" >
-                <scheduler:SchedulerDaysView.TimeRegionTemplate>
-                    <DataTemplate>
-                        <Grid Background="#fafafa"/>
-                    </DataTemplate>
-                </scheduler:SchedulerDaysView.TimeRegionTemplate>
-
-            </scheduler:SchedulerDaysView>
-        </scheduler:SfScheduler.DaysView>
-
-    </scheduler:SfScheduler>-->
     <Grid>
         <scheduler:SfScheduler x:Name="Scheduler" 
                                FirstDayOfWeek="Monday" 
@@ -152,19 +110,13 @@
             </scheduler:SfScheduler.MonthView>
             
 
- 
-
-
             <scheduler:SfScheduler.TimelineView>
                 <scheduler:SchedulerTimelineView AppointmentTemplate="{StaticResource AppointmentTemplate}" 
                                                 TimeFormat="HH:mm">
                 </scheduler:SchedulerTimelineView>
             </scheduler:SfScheduler.TimelineView>
 
-
         </scheduler:SfScheduler>
-        
-        <!--Skontat zašto ne radi-->
 
     </Grid>
 

@@ -12,22 +12,23 @@ namespace eOdvjetnik.Views;
 
 public partial class Kalendar : ContentPage
 {
-    private KalendarViewModel _viewModel;
-    
-    
+
+
+    private static KalendarViewModel _viewModel;
     private bool isInitialized;
-    public Kalendar()
+    public Kalendar(KalendarViewModel viewModel)
     {
         try
         {
+            _viewModel = viewModel;
             InitializeComponent();
             Debug.WriteLine("inicijalizirano");
+            this.BindingContext = viewModel;
+            
+            
             this.Scheduler.DragDropSettings.TimeIndicatorTextFormat = "HH:mm";
             Scheduler.DaysView.TimeRegions = GetTimeRegion();
-
-
             Scheduler.AppointmentDrop += OnSchedulerAppointmentDrop;
-
             //MySQL Query;
             var hardware_id = Preferences.Get("key", "default_value");
             isInitialized = false;
@@ -45,20 +46,17 @@ public partial class Kalendar : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        if (_viewModel == null)
+        if (!isInitialized)
         {
-            _viewModel = new KalendarViewModel();
-            this.BindingContext = _viewModel;
+            isInitialized = true;
             Debug.WriteLine("ViewModel initialized");
         }
 
-        else if (!isInitialized)
+        else
         {
-            isInitialized = true;
-            _viewModel.AdminLicenceCheck();
+            //isInitialized = true;
+             _viewModel.AdminLicenceCheck();
             Debug.WriteLine("izvršio on appearing adminLicenceCheck");
-            
-
         }
 
     }
@@ -165,7 +163,7 @@ public partial class Kalendar : ContentPage
             if (e.NewView is SchedulerView.TimelineMonth)
             {
                 _viewModel.AdminLicenceCheck();
-
+                Debug.WriteLine("izvršen onSchedulerViewChanged");
             }
             else
             {
