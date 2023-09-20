@@ -147,6 +147,10 @@ namespace eOdvjetnik.ViewModel
 
         public void AdminLicenceCheck()
         {
+            EmployeeItems.Clear();
+            Appointments.Clear();
+            AdminAppointments.Clear();
+            Resources.Clear();
             string licence_type = Preferences.Get("licence_type", "");
             int numberOfCharacters = 5;
             string adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));

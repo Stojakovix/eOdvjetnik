@@ -139,7 +139,7 @@
 
     <Style TargetType="Entry">
         <Setter Property="TextColor" Value="black" />
-        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="BackgroundColor" Value="{Binding Gray150}" />
         <Setter Property="FontFamily" Value="SFUIDisplay-Light"/>
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Visual" Value="Light" />
