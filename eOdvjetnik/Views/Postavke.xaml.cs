@@ -9,8 +9,8 @@ public partial class Postavke : ContentPage
     public Postavke()
 	{
 		InitializeComponent();
+        this.BindingContext = App.SharedPostavkeViewModel;
 
-        BindingContext = new PostavkeViewModel();
     }
 
     private async void OnLogoImageClicked(object sender, EventArgs e)
