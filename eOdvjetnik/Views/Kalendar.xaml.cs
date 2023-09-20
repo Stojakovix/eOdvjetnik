@@ -168,6 +168,7 @@ public partial class Kalendar : ContentPage
             }
             else
             {
+                _viewModel.GetUserEvents();
                 // Code to execute when the view changes to something else
             }
 

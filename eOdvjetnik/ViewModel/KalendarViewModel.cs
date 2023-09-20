@@ -353,6 +353,7 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
+                Appointments.Clear();
                 var hardware_id = Preferences.Get("key", "default_value");
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 List<int> ExternalEventIDs = new List<int>();
