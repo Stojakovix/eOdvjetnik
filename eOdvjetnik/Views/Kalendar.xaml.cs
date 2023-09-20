@@ -162,6 +162,7 @@ public partial class Kalendar : ContentPage
             // Check if the new view is a TimelineMonth view
             if (e.NewView is SchedulerView.TimelineMonth)
             {
+                
                 _viewModel.AdminLicenceCheck();
                 Debug.WriteLine("izvršen onSchedulerViewChanged");
             }
@@ -173,7 +174,7 @@ public partial class Kalendar : ContentPage
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(ex.Message);
+            Debug.WriteLine(ex.Message + " U OnSchedulerViewChangedu");
         }
     }
     private ObservableCollection<SchedulerTimeRegion> GetTimeRegion()
