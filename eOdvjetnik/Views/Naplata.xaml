@@ -9,9 +9,6 @@
              xmlns:local="clr-namespace:ListViewMaui"
              Title="Naplata">
 
-    <ContentPage.BindingContext>
-        <viewmodel:NaplataViewModel/>
-    </ContentPage.BindingContext>
 
     <ContentPage.Resources>
         <ResourceDictionary>

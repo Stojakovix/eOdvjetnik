@@ -308,6 +308,7 @@ namespace eOdvjetnik.ViewModel
             }
 
           ActivationScreen();
+          Activation_code = Preferences.Get("activation_code", "");
 
         }
 
