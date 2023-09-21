@@ -10,7 +10,7 @@ namespace eOdvjetnik.Views;
 
 public partial class AppointmentDialog : ContentPage
 {
-    public static KalendarViewModel kalendarViewModel;
+    private static KalendarViewModel kalendarViewModel;
     SchedulerAppointment appointment;
     DateTime selectedDate;
     SfScheduler scheduler;
@@ -51,14 +51,14 @@ public partial class AppointmentDialog : ContentPage
         }
     }
     public string DevicePlatform { get; set; }
-    public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler)
+    public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler, KalendarViewModel kalendarView)
     {
         try
         {
 
             InitializeComponent();
 
-
+            kalendarViewModel = kalendarView;
             this.appointment = appointment;
             this.selectedDate = AdjustSelectedDate(selectedDate);
             this.scheduler = scheduler;

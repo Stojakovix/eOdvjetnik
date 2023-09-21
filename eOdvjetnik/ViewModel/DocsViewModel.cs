@@ -129,20 +129,20 @@ namespace eOdvjetnik.ViewModel
                 string[] allResourceNames = assembly.GetManifestResourceNames();
                 resourceNames.AddRange(allResourceNames.Where(name => name.StartsWith(resourceNamePrefix)));
                 
-                foreach (string resourceName in resourceNames)
-                {
-                    Debug.WriteLine("---------------------**********resourceNames***********---------------------------");
-                    Debug.WriteLine(resourceName);
-                }
+                //foreach (string resourceName in resourceNames)
+                //{
+                //    Debug.WriteLine("---------------------**********resourceNames***********---------------------------");
+                //    Debug.WriteLine(resourceName);
+                //}
                 //Kraj List png
 
                 foreach (FileDirectoryInformation file in fileList)
                 {
-                    Debug.WriteLine("---------------------**********" + file.FileName + "***********---------------------------");
-                    Debug.WriteLine($"Filename: {file.FileName}");
-                    Debug.WriteLine($"File Attributes: {file.FileAttributes}");
-                    Debug.WriteLine($"File -------: {file.NextEntryOffset}");
-                    Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
+                    //Debug.WriteLine("---------------------**********" + file.FileName + "***********---------------------------");
+                    //Debug.WriteLine($"Filename: {file.FileName}");
+                    //Debug.WriteLine($"File Attributes: {file.FileAttributes}");
+                    //Debug.WriteLine($"File -------: {file.NextEntryOffset}");
+                    //Debug.WriteLine($"File Size: {file.AllocationSize / 1024}KB");
                     //Debug.WriteLine($"Created Date: {file.CreationTime.ToString("f")}");
                     //Debug.WriteLine($"Last Modified Date: {file.LastWriteTime.ToString("f")}");
                     //Debug.WriteLine("----------End of Folder/file-----------");
@@ -171,13 +171,13 @@ namespace eOdvjetnik.ViewModel
                             if (imageExists)
                             {
                                 icon = Path.GetExtension(file.FileName).TrimStart('.') + ".png";
-                                Debug.WriteLine("+++Slika postoji " + icon);
+                                //Debug.WriteLine("+++Slika postoji " + icon);
 
                             }
                             else
                             {
                                 icon = "blank.png";
-                                Debug.WriteLine("---Slika ne postoji " + icon);
+                                //Debug.WriteLine("---Slika ne postoji " + icon);
                             }
 
                         }

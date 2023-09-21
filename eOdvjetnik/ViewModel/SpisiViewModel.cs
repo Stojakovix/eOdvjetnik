@@ -334,8 +334,10 @@ namespace eOdvjetnik.ViewModel
                         initialFileItems = new ObservableCollection<FileItem>(fileItems);
                         foreach(FileItem item in fileItems)
                         {
-                            Debug.WriteLine(item.BrojSpisa);
+                            //Debug.WriteLine(item.BrojSpisa);
+                            
                         }
+                        Debug.WriteLine(FileItems.Count);
 
                     }
                     OnPropertyChanged(nameof(fileItems));
