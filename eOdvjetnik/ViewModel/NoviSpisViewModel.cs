@@ -14,7 +14,7 @@ namespace eOdvjetnik.ViewModel
         private Navigacija navigacija;
 
         public ICommand AddFilesToRemoteServer { get; set; }
-       
+
         public ICommand OnDodajClick { get; set; }
         public ICommand OnNazadClick { get; set; }
 
@@ -24,7 +24,7 @@ namespace eOdvjetnik.ViewModel
         FileItem fileitem;
         public string UserInitials { get; set; }
         public NoviSpisViewModel()
-        {      
+        {
             try
             {
                 navigacija = new Navigacija();
@@ -32,7 +32,7 @@ namespace eOdvjetnik.ViewModel
                 OnNazadClick = new Command(NazadClickButton);
 
                 AddFilesToRemoteServer = new Command(() => AddSpisToRemoteServer(fileitem));
-                EmployeeItems1 = new List<EmployeeItem>(); 
+                EmployeeItems1 = new List<EmployeeItem>();
                 EmployeeItems2 = new List<EmployeeItem>();
 
                 GetEmployees1();
@@ -55,7 +55,7 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-        public List<EmployeeItem> EmployeeItems1 { get; set; } 
+        public List<EmployeeItem> EmployeeItems1 { get; set; }
         private EmployeeItem selectedEmployeeItem1;
 
         public EmployeeItem SelectedEmployeeItem1
@@ -491,7 +491,7 @@ namespace eOdvjetnik.ViewModel
         private void GetCurrentDate()
         {
             DateTime currentDate = DateTime.Now;
-              
+
             Created = currentDate;
             DatumPromjene = currentDate;
             DatumKreiranja = currentDate;
@@ -501,7 +501,7 @@ namespace eOdvjetnik.ViewModel
 
         private void AddSpisToRemoteServer(FileItem fileItem)
         {
-            
+
             try
             {
                 GetCurrentDate();
@@ -544,19 +544,40 @@ namespace eOdvjetnik.ViewModel
                 externalSQLConnect.sqlQuery(query);
                 Debug.WriteLine("Appointment added to remote server in novi spis viewModel");
 
-                
+
 
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message + " in noviSpisViewModel AddAppointmentToServer");
             }
+
+
+
         }
 
         private void DodajClickButton()
         {
-            AddSpisToRemoteServer(FileItem);
-            Shell.Current.GoToAsync("//Spisi");
+            string nullString = "";
+            if (BrojSpisa == nullString || BrojSpisa == null)
+            {
+                Application.Current.MainPage.DisplayAlert("Upozorenje", "Potrebno je unijeti broj spisa.", "OK");
+             }
+            else if (ClientId == nullString || ClientId == null)
+            {
+                Application.Current.MainPage.DisplayAlert("Upozorenje", "Potrebno je otvoriti 'Kontakti' i dodati kijenta.", "OK");
+
+            }
+            else if (OpponentId == nullString || OpponentId == null)
+            {
+                Application.Current.MainPage.DisplayAlert("Upozorenje", "Potrebno je otvoriti 'Kontakti' i dodati protustranku.", "OK");
+
+            }
+            else
+            {
+                AddSpisToRemoteServer(FileItem);
+                Shell.Current.GoToAsync("//Spisi");
+            }
         }
         private void NazadClickButton()
         {
