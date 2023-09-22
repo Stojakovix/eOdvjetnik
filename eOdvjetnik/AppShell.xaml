@@ -39,6 +39,7 @@
                     TextColor="Black"
                     Padding="10,5,10,5"
                     Margin="20,0,0,0"
+                    Clicked="Button_Clicked"
 
              />
 
@@ -53,6 +54,7 @@
                     FontFamily="SFUIDisplay-Light"
                     TextColor="Black"
                     Padding="10,5,10,5"
+                    Clicked="Button_Clicked"
 
                     
              />
@@ -79,6 +81,8 @@
                     FontSize="18"
                     Padding="10,5,10,5"
                     TextColor="Black"
+                                        Clicked="Button_Clicked"
+
             />
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
@@ -91,6 +95,8 @@
                     Padding="10,5,10,5"
                     TextColor="Black"
                     Margin="20,0,0,0"
+                                        Clicked="Button_Clicked"
+
                     />
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
@@ -103,6 +109,8 @@
                     Padding="10,5,10,5"
                     TextColor="Black"
                     Margin="20,0,0,0"
+                                        Clicked="Button_Clicked"
+
                     />
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
@@ -115,6 +123,8 @@
                     Padding="10,5,10,5"
                     TextColor="Black"
                     Margin="20,0,0,0"
+                                        Clicked="Button_Clicked"
+
                     />
 
 
@@ -128,6 +138,8 @@
                     FontFamily="SFUIDisplay-Light"
                     TextColor="Black"
                     Margin="20,0,0,0"
+                                        Clicked="Button_Clicked"
+
             />
 
             <Button Grid.Column="10" 
@@ -140,6 +152,7 @@
                     Padding="10,5,10,5"
                     TextColor="Black"
                     Margin="20,0,0,0"
+                    Clicked="Button_Clicked"
              />
 
 
