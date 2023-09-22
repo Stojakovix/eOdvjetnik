@@ -227,7 +227,7 @@ namespace eOdvjetnik.ViewModel
         public ICommand OnReciptClickCommand { get; set; }
         public ICommand AddItemCommand { get; }
         public ICommand RemoveItemCommand { get; set; }
-        public ICommand NewReceipt { get; }
+        public ICommand RemoveAllItemsCommand { get; }
         public ICommand BackToTariffs { get; set; }
 
         public float totalAmount { get; private set; }
@@ -335,7 +335,7 @@ namespace eOdvjetnik.ViewModel
 
 
 
-        public void DeleteRecipt()
+        public void RemoveAllItems()
         {
             ReceiptItems.Clear();
         }
@@ -361,17 +361,116 @@ namespace eOdvjetnik.ViewModel
             CalculateTotalAmount();
         }
 
-        #endregion
+      
 
+        public ICommand ConfirmDeleteItem { get; set; }
+        public ICommand ConfirmDeleteAllItems { get; set; }
+
+        public ICommand CancelDelete { get; set; }
+
+        private bool _DeleteItemPopupVisible;
+
+        public bool DeleteItemPopupVisible
+        {
+            get { return _DeleteItemPopupVisible; }
+            set
+            {
+                if (_DeleteItemPopupVisible != value)
+                {
+                    _DeleteItemPopupVisible = value;
+                    OnPropertyChanged(nameof(DeleteItemPopupVisible));
+                }
+            }
+        }
+        private bool _DeleteItemPopupEnabled;
+
+        public bool DeleteItemPopupEnabled
+        {
+            get { return _DeleteItemPopupEnabled; }
+            set
+            {
+                if (_DeleteItemPopupEnabled != value)
+                {
+                    _DeleteItemPopupEnabled = value;
+                    OnPropertyChanged(nameof(DeleteItemPopupEnabled));
+                }
+            }
+        }
+        private bool _DeleteAllItemsPopupVisible;
+
+        public bool DeleteAllItemsPopupVisible
+        {
+            get { return _DeleteAllItemsPopupVisible; }
+            set
+            {
+                if (_DeleteAllItemsPopupVisible != value)
+                {
+                    _DeleteAllItemsPopupVisible = value;
+                    OnPropertyChanged(nameof(DeleteAllItemsPopupVisible));
+                }
+            }
+        }
+        private bool _DeleteAllItemsPopupEnabled;
+
+        public bool DeleteAllItemsPopupEnabled
+        {
+            get { return _DeleteAllItemsPopupEnabled; }
+            set
+            {
+                if (_DeleteAllItemsPopupEnabled != value)
+                {
+                    _DeleteAllItemsPopupEnabled = value;
+                    OnPropertyChanged(nameof(DeleteAllItemsPopupEnabled));
+                }
+            }
+        }
+        public void DeleteItemPopup()
+        {
+            DeleteItemPopupVisible = true;
+            DeleteItemPopupEnabled = true;
+        }
+        public void DeleteAllItemsPopup()
+        {
+            DeleteAllItemsPopupVisible = true;
+            DeleteAllItemsPopupEnabled = true;
+        }
+        public void OnCancelCLick()
+        {
+            DeleteItemPopupVisible = false;
+            DeleteItemPopupEnabled = false;
+            DeleteAllItemsPopupVisible = false;
+            DeleteAllItemsPopupEnabled = false;
+        }
+
+        public void OnDeleteItemCLick()
+        {
+            DeleteItemPopupVisible = false;
+            DeleteItemPopupEnabled = false;
+            DeleteItem();
+        }
+        public void OnDeleteAllItemsCLick()
+        {
+            DeleteAllItemsPopupVisible = false;
+            DeleteAllItemsPopupEnabled = false;
+            RemoveAllItems();
+        }
+
+        #endregion
         public NaplataViewModel()
         {
             navigacija = new Navigacija();
             OnReciptClickCommand = new Command(OnReceiptClick);
-            NewReceipt = new Command(DeleteRecipt);
+            RemoveAllItemsCommand = new Command(DeleteAllItemsPopup);
             AddItemCommand = new Command(AddItem);
-            RemoveItemCommand = new Command(DeleteItem);
+            RemoveItemCommand = new Command(DeleteItemPopup);
             BackToTariffs = new Command(OnBackClick);
             ReceiptItems = new ObservableCollection<ReceiptItem>();
+            ConfirmDeleteItem = new Command(OnDeleteItemCLick);
+            ConfirmDeleteAllItems = new Command(OnDeleteAllItemsCLick);
+            CancelDelete = new Command(OnCancelCLick);
+
+
+
             try
             {
                 tariffItems = new ObservableCollection<TariffItem>();
@@ -453,6 +552,9 @@ namespace eOdvjetnik.ViewModel
             }
 
         }
+
+     
+
     }
 
 }
