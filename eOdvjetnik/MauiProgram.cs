@@ -12,6 +12,7 @@ using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using eOdvjetnik.ViewModel;
+using Plugin.LocalNotification;
 //using Microsoft.UI;
 
 namespace eOdvjetnik;
@@ -26,6 +27,7 @@ public static class MauiProgram
         builder.ConfigureSyncfusionCore();
         builder
             .UseMauiApp<App>()
+            .UseLocalNotification()
             .ConfigureFonts(fonts =>
             {
                 //fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -71,7 +73,7 @@ public static class MauiProgram
         string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Licence.db3");
 
         builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<DeviceIdDatabase>(s, dbPath));
-
+        
 
         return builder.Build();
 

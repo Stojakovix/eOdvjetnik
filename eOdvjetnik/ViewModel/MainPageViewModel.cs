@@ -5,6 +5,7 @@ using Timer = System.Timers.Timer;
 using eOdvjetnik.Services;
 using eOdvjetnik.Resources.Strings;
 using CommunityToolkit.Mvvm.Messaging;
+using Plugin.LocalNotification;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -232,10 +233,11 @@ namespace eOdvjetnik.ViewModel
             );
         }
 
+
         private void LicenceCheck() // Provjera isteka licence
         {
             LicenceStatus = Preferences.Get("licence_active", "");
-
+            
             ExpiredLicence = true;
             if (LicenceStatus == null)
             {

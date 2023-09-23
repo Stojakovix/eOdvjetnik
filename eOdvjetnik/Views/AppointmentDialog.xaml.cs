@@ -5,6 +5,7 @@ using eOdvjetnik.Services;
 using System.Diagnostics;
 using eOdvjetnik.Model;
 using eOdvjetnik.ViewModel;
+using Plugin.LocalNotification;
 
 namespace eOdvjetnik.Views;
 
@@ -211,6 +212,10 @@ public partial class AppointmentDialog : ContentPage
     }
 
 
+
+
+   
+
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
         try
@@ -285,6 +290,7 @@ public partial class AppointmentDialog : ContentPage
                     }
                 }
             }
+            SaveNotification();
         }
         catch (Exception ex)
         {
@@ -359,7 +365,30 @@ public partial class AppointmentDialog : ContentPage
         }
     }
 
+    private void SaveNotification()
+    {
+        try
+        {
+            var request = new NotificationRequest
+            {
+                NotificationId = 1,
+                Title = "Dodan novi događaj",
+                Description = "U kalendaru je dodan novi događaj",
+                BadgeNumber = 1,
+                CategoryType = NotificationCategoryType.Status,
+                Schedule = new NotificationRequestSchedule
+                {
+                    NotifyTime = DateTime.Now.AddSeconds(10),
+                }
+            };
 
+            LocalNotificationCenter.Current.Show(request);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+    }
     private void AppointmentDetails()
     {
         if (appointment == null)

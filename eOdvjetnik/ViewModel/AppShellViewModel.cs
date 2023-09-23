@@ -5,6 +5,7 @@ using System.Diagnostics;
 using Syncfusion.Maui.Popup;
 using System.ComponentModel;
 using eOdvjetnik.Resources.Strings;
+using Plugin.LocalNotification;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -382,6 +383,7 @@ namespace eOdvjetnik.ViewModel
             }
         }
         #endregion
+
 
         #region Support funkcije
         private void OnSupportClick()

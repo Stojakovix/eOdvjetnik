@@ -28,7 +28,7 @@
 
 
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+            <Button IsVisible="{OnPlatform Android=True , iOS=False , WinUI=True , MacCatalyst=True}" 
                    
                     Command="{Binding MainClickCommand}"
                     Text="Početna" 
@@ -44,7 +44,7 @@
              />
 
 
-            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
+            <Button IsVisible="{OnPlatform Android=True , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="1" Text="Ročišnik" 
                     Command="{Binding KalendarClickCommand}" 
                     x:Name="KalendarButton" 
@@ -144,7 +144,7 @@
 
             <Button Grid.Column="10" 
                     Text="{x:Static resx:AppResources.Postavke}" 
-                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
+                    IsVisible="{OnPlatform Android=True , iOS=False , WinUI=True , MacCatalyst=True}"  
                     BorderWidth="0"
                     FontFamily="SFUIDisplay-Light"
                     Command="{Binding PostavkeClickCommand}" 
