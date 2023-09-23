@@ -138,7 +138,7 @@
                     FontFamily="SFUIDisplay-Light"
                     TextColor="Black"
                     Margin="20,0,0,0"
-                                        Clicked="Button_Clicked"
+                                        
 
             />
 
