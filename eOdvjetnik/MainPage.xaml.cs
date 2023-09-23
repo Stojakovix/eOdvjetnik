@@ -73,7 +73,13 @@ public partial class MainPage : ContentPage
         string string1 = "https://cc.eodvjetnik.hr/eodvjetnikadmin/waiting-lists/request?cpuid=";
         string string2 = Preferences.Get("key", null);
         string activationURL = string.Concat(string1, string2);
-        Debug.WriteLine("MainPageViewModel - > ActivationLoop - Spoio URL" + activationURL);
+        Debug.WriteLine("MainPageViewModel - > ActivationLoop - URL za waiting list: " + activationURL);
+        Preferences.Get("activation_code", ActivationCode);
+
+        if (ActivationCode == null || ActivationCode == "")
+        {
+
+        
         try
         {
             Debug.WriteLine("MainPageViewModel - > ActivationLoop -> usao u try");
@@ -81,16 +87,15 @@ public partial class MainPage : ContentPage
             using (var client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync(activationURL);
-                Debug.WriteLine("MainPageViewModel - > ActivationLoop -> Dohvatio response");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine("MainPageViewModel - > ActivationLoop -> uspješno dohvatio");
+                    Debug.WriteLine("MainPageViewModel - > ActivationLoop -> Dohvatio response");
 
                     string jsonContent = await response.Content.ReadAsStringAsync();
                     response.EnsureSuccessStatusCode();
                     var content = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine("MainPageViewModel - > ActivationLoop -> content " + content);
+                    Debug.WriteLine("MainPageViewModel - > ActivationLoop -> JSON: " + content);
 
                     var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                     var data = System.Text.Json.JsonSerializer.Deserialize<ActivationData[]>(content, options);
@@ -102,15 +107,20 @@ public partial class MainPage : ContentPage
                 }
                 else
                 {
-                    // Što ako se ne može povezati
-
+                    Debug.WriteLine("MainPageViewModel - > ActivationLoop -> Povezivanje neuspješno");
+                    await Application.Current.MainPage.DisplayAlert("Upozorenje", "Povezivanje s poslužiteljem nije uspjelo.", "OK");
                 }
             }
+            WeakReferenceMessenger.Default.Send(new CheckLicence("CheckLicence!")); // 1 put
+            LicenceCheck();
+
         }
         catch (Exception ex)
         {
             Debug.WriteLine("Activation error:" + ex.Message);
         }
+        }
+        WeakReferenceMessenger.Default.Send(new CheckLicence("CheckLicence!")); // 1 put
         LicenceCheck();
     }
 
@@ -119,11 +129,12 @@ public partial class MainPage : ContentPage
 
     public async void LicenceCheck()
     {
+
         Debug.WriteLine("MainPageViewModel - > LicenceCheck");
         string string1 = "https://cc.eodvjetnik.hr/eodvjetnikadmin/licences/request?cpuid=";
         string string2 = Preferences.Get("key", null);
         string licenceURL = string.Concat(string1, string2);
-        Debug.WriteLine("MainPageViewModel - > LicenceCheck - Spoio URL" + licenceURL);
+        Debug.WriteLine("MainPageViewModel - > LicenceCheck - URL za dohvaćanje licence: " + licenceURL);
         try
         {
             Debug.WriteLine("MainPageViewModel - > LicenceCheck -> usao u try");
@@ -131,22 +142,18 @@ public partial class MainPage : ContentPage
             using (var client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync(licenceURL);
-                Debug.WriteLine("MainPageViewModel - > LicenceCheck -> Dohvatio response");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine("MainPageViewModel - > LicenceCheck -> uspješno dohvatio");
+                    Debug.WriteLine("MainPageViewModel - > LicenceCheck -> uspješno dohvatio licence");
 
                     string jsonContent = await response.Content.ReadAsStringAsync();
                     response.EnsureSuccessStatusCode();
                     var content = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine("MainPageViewModel - > LicenceCheck -> content " + content);
-
+                    Debug.WriteLine("MainPageViewModel - > LicenceCheck -> JSON s licencama: " + content);
 
                     var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                     var jsonObject = JsonSerializer.Deserialize<JsonElement>(content, options);
-
-                    // int licenceIsActive = jsonObject.GetProperty("Devices")[0].GetProperty("licence_active").GetInt32(); 
 
                     string licenceIsActive = jsonObject.GetProperty("Devices")[0].GetProperty("licence_active").GetString();
                     int companyID = jsonObject.GetProperty("Devices")[0].GetProperty("company_id").GetInt32();
@@ -159,7 +166,6 @@ public partial class MainPage : ContentPage
                     string OIBTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("OIB").GetString();
                     string adresaTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("adresa").GetString();
 
-
                     Preferences.Set("expire_date", expireDate);
                     Preferences.Set("licence_type", licenceType);
                     Preferences.Set("licence_active", licenceIsActive);
@@ -169,15 +175,15 @@ public partial class MainPage : ContentPage
                     Preferences.Set("company_id", company_ID);
                     Preferences.Set("device_type_id", devicetype_ID);
 
-                    Debug.WriteLine("MainPageViewModel - > Company info: " + nazivTvrtke + OIBTvrtke + adresaTvrtke);
+                    Debug.WriteLine("MainPageViewModel - > Company info: " + nazivTvrtke + " " + OIBTvrtke + " " + adresaTvrtke);
 
-                    WeakReferenceMessenger.Default.Send(new CheckLicence("CheckLicence!"));
+                    WeakReferenceMessenger.Default.Send(new CheckLicence("CheckLicence!")); 
 
                     string nas = Preferences.Get("IP Adresa", "");
                     string sql = Preferences.Get("IP Adresa2", "");
                     Debug.WriteLine("provjera jesu li dodani nas " + nas + " i sql postavke " + sql + "koja je licenca " + LicenceType);
 
-
+                    //provjera jesu li NAS i SQL postavke unesne
                     if (nas == "" || nas == null || sql == "" || sql == null)
                     {
                         await Application.Current.MainPage.DisplayAlert("", "Unesite NAS i SQL postavke.", "OK");
@@ -188,24 +194,25 @@ public partial class MainPage : ContentPage
                 else
                 {
                     // Što ako se ne može povezati
+                    //await Application.Current.MainPage.DisplayAlert("Upozorenje", "Povezivanje s poslužiteljem nije uspjelo.", "OK");
                 }
             }
         }
         catch (Exception ex)
         {
             Debug.WriteLine("Activation error:" + ex.Message);
-            LicenceType = Preferences.Get("licence_type", "");
-            if (LicenceType == "" || LicenceType == null)
-            {
-                await Application.Current.MainPage.DisplayAlert("", "Licenca nije aktivna.", "OK");
-            }
-            
+
+
+            //LicenceType = Preferences.Get("licence_type", "");
+            //if (LicenceType == "" || LicenceType == null)
+            //{
+            //    await Application.Current.MainPage.DisplayAlert("", "Licenca nije aktivna.", "OK");
+            //}
+
         }
-
-        LicenceUpdatedMessage();
-      
-
-    }
+        WeakReferenceMessenger.Default.Send(new CheckLicence("CheckLicence!")); // 1 put
+        LicenceUpdatedMessage(); 
+      }
 
 
 

@@ -6,10 +6,6 @@
 	<array>
 		<integer>2</integer>
 	</array>
-	<key></key>
-	<array>
-		<string>arm64</string>
-	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -31,11 +27,15 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>hr</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<string>false</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Zadar ICT © 2023</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Please allow this option, wee need it for precise data. Thank You</string>
+	<string>Please allow this option, we need it for precise data. Thank You</string>
 	<key>SettingsBundle</key>
 	<string>Settings.bundle</string>
+	<key>CFBundleIdentifier</key>
+	<string>maccatalyst.com.zadarict.eodvjetnik</string>
 </dict>
 </plist>
