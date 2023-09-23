@@ -13,7 +13,7 @@ namespace eOdvjetnik.ViewModel
     {
 
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
-        private readonly KeyValueService keyValueService = new KeyValueService();
+        
         //DateTime
         
 
@@ -109,7 +109,7 @@ namespace eOdvjetnik.ViewModel
             
             Version = $"{AppResources.Version} {AppInfo.VersionString}";
             //Activation_code = Preferences.Get("activation_code", "");
-            Activation_code = keyValueService.GetValue("activation_code" + "--------------------------------------------" );
+
             Debug.WriteLine(Activation_code);
             ExpireDateString = Preferences.Get("expire_date", "");
             LicenceStatus = Preferences.Get("licence_active", "");

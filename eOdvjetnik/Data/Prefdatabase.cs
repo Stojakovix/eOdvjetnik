@@ -1,45 +1,54 @@
 ﻿using eOdvjetnik.Models;
 using SQLite;
+using eOdvjetnik.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Maui.Controls.Internals;
+using System.Diagnostics;
 
 namespace eOdvjetnik.Data
 {
-    public class Prefdatabase : IDisposable
+    public class Prefdatabase
     {
-        private readonly SQLiteConnection _connection;
+        SQLiteAsyncConnection Database;
 
-        public Prefdatabase(string dbPath) 
+        public Prefdatabase() 
         {
-            _connection = new SQLiteConnection(dbPath);
-            _connection.CreateTable<PrefItem>();
+            //Database = new SQLiteConnection(dbPath);
+            //Database.CreateTable<PrefItem>();
         }
 
-        public void Dispose()
+        public async Task Init()
         {
-            _connection.Dispose();
+            if (Database is not null)
+                return;
+
+            Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
+            _ = await Database.CreateTableAsync<PrefItem>();
+            Debug.Writeine("Baza inicijalizirana --------------------------------------");
+            
         }
 
-        public void InsertOrUpdate(string key, string value)
+        public async Task InsertOrUpdate(string key, string value)
         {
-            var item = _connection.Table<PrefItem>().FirstOrDefault(x => x.Key == key);
+            var item = await Database.Table<PrefItem>().FirstOrDefaultAsync(x => x.Key == key);
             if (item == null)
             {
-                _connection.Insert(new PrefItem { Key = key, Value = value });
+                await Database.InsertAsync(new PrefItem { Key = key, Value = value });
             }
             else
             {
                 item.Value = value;
-                _connection.Update(item);
+                await Database.UpdateAsync(item);
             }
         }
 
-        public string GetValue(string key)
+        public async Task<string> GetValue(string key)
         {
-            var item = _connection.Table<PrefItem>().FirstOrDefault(x => x.Key == key);
+            var item = await Database.Table<PrefItem>().FirstOrDefaultAsync(x => x.Key == key);
             return item?.Value;
         }
     }

@@ -20,6 +20,7 @@ public partial class App : Application
     public static readonly BindableProperty TodayBackgroundProperty;
     public static readonly BindableProperty TrailingMonthBackgroundProperty;
     public static readonly BindableProperty TrailingMonthTextStyleProperty;
+    
     public SchedulerTextStyle TrailingMonthTextStyle { get; set; }
     public SchedulerWeekNumberStyle WeekNumberStyle { get; set; }
     public SfScheduler Scheduler { get; }
@@ -29,7 +30,8 @@ public partial class App : Application
         //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjQ5MTQ1M0AzMjMyMmUzMDJlMzBRT2JkTm1HczFuTmdmNTVFcWNWU29xbGt6Z2lhRDFYYk1GZWppS3pjWnlNPQ==");
         Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NHaF5cXmVCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdgWXZfeHRUQmddWEJ2V0c=");
 
-
+        var database = new Prefdatabase();
+        database.Init();
 
         var schedulerTextStyle = new SchedulerTextStyle()
         {
