@@ -74,6 +74,12 @@ public partial class MainPage : ContentPage
         string string2 = Preferences.Get("key", null);
         string activationURL = string.Concat(string1, string2);
         Debug.WriteLine("MainPageViewModel - > ActivationLoop - URL za waiting list: " + activationURL);
+        Preferences.Get("activation_code", ActivationCode);
+
+        if (ActivationCode == null || ActivationCode == "")
+        {
+
+        
         try
         {
             Debug.WriteLine("MainPageViewModel - > ActivationLoop -> usao u try");
@@ -113,6 +119,9 @@ public partial class MainPage : ContentPage
         {
             Debug.WriteLine("Activation error:" + ex.Message);
         }
+        }
+        WeakReferenceMessenger.Default.Send(new CheckLicence("CheckLicence!")); // 1 put
+        LicenceCheck();
     }
 
 
@@ -201,7 +210,7 @@ public partial class MainPage : ContentPage
             //}
 
         }
-
+        WeakReferenceMessenger.Default.Send(new CheckLicence("CheckLicence!")); // 1 put
         LicenceUpdatedMessage(); 
       }
 
