@@ -19,7 +19,7 @@ namespace eOdvjetnik.ViewModel;
 public class PostavkeViewModel : INotifyPropertyChanged
 {
 
-    private Navigacija navigacija;
+
 
     private string _PostavkeUserName;
 
@@ -99,7 +99,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
                     }
 
                 }
-          
+
 
             }
             catch (Exception ex)
@@ -295,15 +295,6 @@ public class PostavkeViewModel : INotifyPropertyChanged
     public ICommand SaveNewEmployee { get; set; }
     public ICommand BackButtonCommand { get; set; }
     public ICommand CloseNewEmployeeCommand { get; set; }
-
-    public ICommand PocetnaClick => navigacija.PocetnaClick;
-    public ICommand KalendarClick => navigacija.KalendarClick;
-    public ICommand SpisiClick => navigacija.SpisiClick;
-    public ICommand TarifaClick => navigacija.TarifaClick;
-    public ICommand DokumentiClick => navigacija.DokumentiClick;
-    public ICommand KontaktiClick => navigacija.KontaktiClick;
-    public ICommand KorisnickaClick => navigacija.KorisnickaPodrskaClick;
-    public ICommand PostavkeClick => navigacija.PostavkeClick;
 
     public async void OnNoviZaposlenikClick()
     {
@@ -513,12 +504,20 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     public void ReceiptCompanyInfo()
     {
-        Preferences.Set("receiptPDVamount", ReceiptPDVamount);
-        Preferences.Set("receiptIBAN", ReceiptIBAN);
-        Preferences.Set("receiptHeaderText", ReceiptHeaderText);
-        Preferences.Set("receiptFooterText", ReceiptFooterText);
-        Preferences.Set("receiptSignature", ReceiptSignature);
-        Debug.WriteLine(ReceiptPDVamount + ReceiptIBAN + ReceiptHeaderText + ReceiptFooterText + ReceiptSignature);
+        try
+        {
+            Preferences.Set("receiptPDVamount", ReceiptPDVamount);
+            Preferences.Set("receiptIBAN", ReceiptIBAN);
+            Preferences.Set("receiptHeaderText", ReceiptHeaderText);
+            Preferences.Set("receiptFooterText", ReceiptFooterText);
+            Preferences.Set("receiptSignature", ReceiptSignature);
+            Debug.WriteLine(ReceiptPDVamount + ReceiptIBAN + ReceiptHeaderText + ReceiptFooterText + ReceiptSignature);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+
+        }
     }
 
     #endregion
@@ -561,26 +560,27 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     public async void OnFeedbackClicked()
     {
-        FeedbackVisible = false;
-        FeedbackErrorVisible = false;
-        string url = "https://cc.eodvjetnik.hr/eodvjetnikadmin/feedbacks/feedback?cpuid=";
-        CompanyID = Preferences.Get("company_id", "");
-        EmployeeID = Preferences.Get("device_type_id", "");
-        DateSentString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-        string TextWithNoSpaces = ReplaceSpacesAndSectionBreaks(FeedbackText);
-        string DateWithNoSpaces = ReplaceSpacesAndSectionBreaks(DateSentString);
-
-        string feedbackURL = string.Concat(url, HWID64, "&company=", CompanyID, "&employee=", EmployeeID, "&date=", DateWithNoSpaces, "&text=", TextWithNoSpaces);
-
-        //Debug.WriteLine(feedbackURL);
-        //Debug.WriteLine(HWID64);
-        //Debug.WriteLine(CompanyID);
-        //Debug.WriteLine(EmployeeID);
-        //Debug.WriteLine(DateSentString);
-        //Debug.WriteLine(FeedbackText);
         try
         {
+            FeedbackVisible = false;
+            FeedbackErrorVisible = false;
+            string url = "https://cc.eodvjetnik.hr/eodvjetnikadmin/feedbacks/feedback?cpuid=";
+            CompanyID = Preferences.Get("company_id", "");
+            EmployeeID = Preferences.Get("device_type_id", "");
+            DateSentString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+            string TextWithNoSpaces = ReplaceSpacesAndSectionBreaks(FeedbackText);
+            string DateWithNoSpaces = ReplaceSpacesAndSectionBreaks(DateSentString);
+
+            string feedbackURL = string.Concat(url, HWID64, "&company=", CompanyID, "&employee=", EmployeeID, "&date=", DateWithNoSpaces, "&text=", TextWithNoSpaces);
+
+            //Debug.WriteLine(feedbackURL);
+            //Debug.WriteLine(HWID64);
+            //Debug.WriteLine(CompanyID);
+            //Debug.WriteLine(EmployeeID);
+            //Debug.WriteLine(DateSentString);
+            //Debug.WriteLine(FeedbackText);
+
             Debug.WriteLine("Feedback -> usao u try");
 
             using (var client = new HttpClient())
@@ -631,96 +631,104 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     public PostavkeViewModel()
     {
-
-        navigacija = new Navigacija();
-        LoadColors = new Command(GetColors);
-        SaveColors = new Command(SetColors);
-        AdminColorPopup = false;
-        CloseNewEmployeeCommand = new Command(CloseNewEmployee);
-
-        Colors = new ObservableCollection<ColorItem>();
-        WeakReferenceMessenger.Default.Register<LicenceUpdated>(this, LicenceUpdatedReceived);
-
-
-        #region Devic&Licence
-        ZaposleniciVisible = false;
-        ZaposleniciOpen = false;
-
-        GetAllCompanyDevices = new Command(GetJsonDeviceData);
-        GetAllCompanyEmployees = new Command(GetEmployees);
-        OpenZaposlenici = new Command(ZaposleniciClicked);
-        SaveReceiptCompanyInfo = new Command(ReceiptCompanyInfo);
-        CheckHWIDs = new Command(CheckDuplicates);
-        UpdateHWIDs = new Command(UpdateEmployeeHWID);
-        OpenNewEmployee = new Command(OnNoviZaposlenikClick);
-        SaveNewEmployee = new Command(AddNewEmployee);
-        BackButtonCommand = new Command(OnBackButtonClick);
-
-        ReceiptPDVamount = Preferences.Get("receiptPDVamount", "");
-        ReceiptIBAN = Preferences.Get("receiptIBAN", "");
-        ReceiptHeaderText = Preferences.Get("receiptHeaderText", "");
-        ReceiptFooterText = Preferences.Get("receiptFooterText", "");
-
-        HWID = Preferences.Get("key", null);
-        LicenceType = Preferences.Get("licence_type", "");
-        DateTimeString = Preferences.Get("expire_date", "");
-        Activation_code = Preferences.Get("activation_code", "");
         try
         {
-            ParseDate();
-            FetchCompanyDevices();
-            employeeItem = new ObservableCollection<EmployeeItem>();
-            GetJsonDeviceData();
-            HWID64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(HWID));
-            GetEmployees();
 
+
+            LoadColors = new Command(GetColors);
+            SaveColors = new Command(SetColors);
+            AdminColorPopup = false;
+            CloseNewEmployeeCommand = new Command(CloseNewEmployee);
+
+            Colors = new ObservableCollection<ColorItem>();
+            WeakReferenceMessenger.Default.Register<LicenceUpdated>(this, LicenceUpdatedReceived);
+
+
+            #region Devic&Licence
+            ZaposleniciVisible = false;
+            ZaposleniciOpen = false;
+
+            GetAllCompanyDevices = new Command(GetJsonDeviceData);
+            GetAllCompanyEmployees = new Command(GetEmployees);
+            OpenZaposlenici = new Command(ZaposleniciClicked);
+            SaveReceiptCompanyInfo = new Command(ReceiptCompanyInfo);
+            CheckHWIDs = new Command(CheckDuplicates);
+            UpdateHWIDs = new Command(UpdateEmployeeHWID);
+            OpenNewEmployee = new Command(OnNoviZaposlenikClick);
+            SaveNewEmployee = new Command(AddNewEmployee);
+            BackButtonCommand = new Command(OnBackButtonClick);
+
+            ReceiptPDVamount = Preferences.Get("receiptPDVamount", "");
+            ReceiptIBAN = Preferences.Get("receiptIBAN", "");
+            ReceiptHeaderText = Preferences.Get("receiptHeaderText", "");
+            ReceiptFooterText = Preferences.Get("receiptFooterText", "");
+
+            HWID = Preferences.Get("key", null);
+            LicenceType = Preferences.Get("licence_type", "");
+            DateTimeString = Preferences.Get("expire_date", "");
+            Activation_code = Preferences.Get("activation_code", "");
+            try
+            {
+                ParseDate();
+                FetchCompanyDevices();
+                employeeItem = new ObservableCollection<EmployeeItem>();
+                GetJsonDeviceData();
+                HWID64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(HWID));
+                GetEmployees();
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
+            #endregion
+            #region NAS komande
+            SaveCommandNAS = new Command(OnSaveClickedNas);
+            LoadCommandNAS = new Command(OnLoadClickedNas);
+            DeleteCommandNAS = new Command(OnDeleteClickedNas);
+            #endregion
+
+            #region SQL komande
+            SQLSaveCommand = new Command(OnSaveClickedMySQL);
+            SQLLoadCommand = new Command(OnLoadClickedMySQL);
+            SQLDeleteCommand = new Command(OnDeleteClickedMySQL);
+            ServerClickCommand = new Command(OnServerClick);
+            SQLDatabaseCommand = new Command(OnDatabaseClick);
+            #endregion
+
+            #region NAS Varijable
+            IPNas = Preferences.Get(IP_nas, "");
+            UserNas = Preferences.Get(USER_nas, "");
+            PassNas = Preferences.Get(PASS_nas, "");
+            Folder = Preferences.Get(FOLDER_nas, "");
+            SubFolder = Preferences.Get(SUBFOLDER_nas, "");
+
+            #endregion
+
+            #region SQL varijable
+
+            IP = Preferences.Get(IP_mysql, "");
+            UserName = Preferences.Get(USER_mysql, "");
+            Password = Preferences.Get(PASS_mysql, "");
+            DatabaseName = Preferences.Get(databasename_mysql, "");
+
+            #endregion
+
+            #region Feedback
+            FeedbackVisible = false;
+            FeedbackErrorVisible = false;
+            SendFeedback = new Command(OnFeedbackClicked);
+            #endregion
+
+            PostavkeUserName = Preferences.Get("UserName", "");
+            PostavkeUserID = Preferences.Get("UserID", "");
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
+
         }
-
-        #endregion
-        #region NAS komande
-        SaveCommandNAS = new Command(OnSaveClickedNas);
-        LoadCommandNAS = new Command(OnLoadClickedNas);
-        DeleteCommandNAS = new Command(OnDeleteClickedNas);
-        #endregion
-
-        #region SQL komande
-        SQLSaveCommand = new Command(OnSaveClickedMySQL);
-        SQLLoadCommand = new Command(OnLoadClickedMySQL);
-        SQLDeleteCommand = new Command(OnDeleteClickedMySQL);
-        ServerClickCommand = new Command(OnServerClick);
-        SQLDatabaseCommand = new Command(OnDatabaseClick);
-        #endregion
-
-        #region NAS Varijable
-        IPNas = Preferences.Get(IP_nas, "");
-        UserNas = Preferences.Get(USER_nas, "");
-        PassNas = Preferences.Get(PASS_nas, "");
-        Folder = Preferences.Get(FOLDER_nas, "");
-        SubFolder = Preferences.Get(SUBFOLDER_nas, "");
-
-        #endregion
-
-        #region SQL varijable
-
-        IP = Preferences.Get(IP_mysql, "");
-        UserName = Preferences.Get(USER_mysql, "");
-        Password = Preferences.Get(PASS_mysql, "");
-        DatabaseName = Preferences.Get(databasename_mysql, "");
-
-        #endregion
-
-        #region Feedback
-        FeedbackVisible = false;
-        FeedbackErrorVisible = false;
-        SendFeedback = new Command(OnFeedbackClicked);
-        #endregion
-
-        PostavkeUserName =  Preferences.Get("UserName", "");
-        PostavkeUserID =  Preferences.Get("UserID", "");
     }
 
 
@@ -825,7 +833,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
             string userName = UserName;
             string databaseName = DatabaseName;
 
-            
+
             Preferences.Set(IP_mysql, IP);
             Preferences.Set(USER_mysql, UserName);
             Preferences.Set(PASS_mysql, Password);
@@ -976,81 +984,98 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     public void CheckDuplicates()
     {
-        ZaposleniciVisible = false;
-        ZaposleniciOpen = false;
-        EmployeeDuplicates = false;
-
-        if (EmployeeItems == null || EmployeeItems.Count <= 1)
-            return;
-
-        var duplicateHWIDGroups = EmployeeItems
-            .Where(e => !string.IsNullOrEmpty(e.EmployeeHWID))
-            .GroupBy(e => e.EmployeeHWID)
-            .Where(g => g.Count() > 1)
-            .ToList();
-
-        if (duplicateHWIDGroups.Any())
-        {
-            //Debug.WriteLine("Više korisnika ima isti HWID:");
-            foreach (var group in duplicateHWIDGroups)
-            {
-                var employeeNames = group.Select(e => e.EmployeeName).ToList();
-                var employeeHWID = group.Key;
-
-                //Debug.WriteLine($"Korisnici povezani s istim uređajem: {string.Join(", ", employeeNames)}");
-            }
-            ZaposleniciVisible = true;
-            ZaposleniciOpen = true;
-            EmployeeDuplicates = true;
-
-        }
-        else
+        try
         {
             ZaposleniciVisible = false;
             ZaposleniciOpen = false;
             EmployeeDuplicates = false;
 
-            //Debug.WriteLine("Nema duplih HWID.");
+            if (EmployeeItems == null || EmployeeItems.Count <= 1)
+                return;
+
+            var duplicateHWIDGroups = EmployeeItems
+                .Where(e => !string.IsNullOrEmpty(e.EmployeeHWID))
+                .GroupBy(e => e.EmployeeHWID)
+                .Where(g => g.Count() > 1)
+                .ToList();
+
+            if (duplicateHWIDGroups.Any())
+            {
+                //Debug.WriteLine("Više korisnika ima isti HWID:");
+                foreach (var group in duplicateHWIDGroups)
+                {
+                    var employeeNames = group.Select(e => e.EmployeeName).ToList();
+                    var employeeHWID = group.Key;
+
+                    //Debug.WriteLine($"Korisnici povezani s istim uređajem: {string.Join(", ", employeeNames)}");
+                }
+                ZaposleniciVisible = true;
+                ZaposleniciOpen = true;
+                EmployeeDuplicates = true;
+
+            }
+            else
+            {
+                ZaposleniciVisible = false;
+                ZaposleniciOpen = false;
+                EmployeeDuplicates = false;
+
+                //Debug.WriteLine("Nema duplih HWID.");
+            }
+            GetDuplicateEmployeesString();
+            Debug.WriteLine(GetDuplicateEmployeesString());
         }
-        GetDuplicateEmployeesString();
-        Debug.WriteLine(GetDuplicateEmployeesString());
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+
+        }
     }
 
     public string GetDuplicateEmployeesString()
     {
-        if (EmployeeItems == null || EmployeeItems.Count <= 1)
-            return string.Empty;
-
-        var duplicateHWIDGroups = EmployeeItems
-            .Where(e => !string.IsNullOrEmpty(e.EmployeeHWID))
-            .GroupBy(e => e.EmployeeHWID)
-            .Where(g => g.Count() > 1)
-            .ToList();
-
-        if (duplicateHWIDGroups.Any())
+        try
         {
-            var duplicatesStringBuilder = new StringBuilder();
-            //duplicatesStringBuilder.AppendLine("\n");
+            if (EmployeeItems == null || EmployeeItems.Count <= 1)
+                return string.Empty;
 
-            foreach (var group in duplicateHWIDGroups)
+            var duplicateHWIDGroups = EmployeeItems
+                .Where(e => !string.IsNullOrEmpty(e.EmployeeHWID))
+                .GroupBy(e => e.EmployeeHWID)
+                .Where(g => g.Count() > 1)
+                .ToList();
+
+            if (duplicateHWIDGroups.Any())
             {
-                var employeeNames = group.Select(e => e.EmployeeName);
-                var employeeHWID = group.Key;
+                var duplicatesStringBuilder = new StringBuilder();
+                //duplicatesStringBuilder.AppendLine("\n");
 
-                duplicatesStringBuilder.AppendLine($" {string.Join(", ", employeeNames)}\n");
+                foreach (var group in duplicateHWIDGroups)
+                {
+                    var employeeNames = group.Select(e => e.EmployeeName);
+                    var employeeHWID = group.Key;
+
+                    duplicatesStringBuilder.AppendLine($" {string.Join(", ", employeeNames)}\n");
+                }
+                string zaposleniciPopupString = duplicatesStringBuilder.ToString();
+                ZaposleniciText = zaposleniciPopupString;
+
+                return duplicatesStringBuilder.ToString();
+
             }
-            string zaposleniciPopupString = duplicatesStringBuilder.ToString();
-            ZaposleniciText = zaposleniciPopupString;
+            else
+            {
+                ZaposleniciVisible = false;
+                ZaposleniciOpen = false;
 
-            return duplicatesStringBuilder.ToString();
-
+                return "Nema duplih HWID.";
+            }
         }
-        else
+        catch (Exception ex)
         {
-            ZaposleniciVisible = false;
-            ZaposleniciOpen = false;
+            Debug.WriteLine(ex.Message);
+            return null;
 
-            return "Nema duplih HWID.";
         }
     }
 
@@ -1095,34 +1120,42 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     public void EntryIncompleteCheck()
     {
-        NewEmployeeInitials = NewEmployeeInitials.Replace(" ", "");
-        if (NewEmployeeName == "")
+        try
         {
-            NewEmployeeEntryIncomplete = true;
-            Application.Current.MainPage.DisplayAlert("", "Potrebno je unijeti ime.", "OK");
+            NewEmployeeInitials = NewEmployeeInitials.Replace(" ", "");
+            if (NewEmployeeName == "")
+            {
+                NewEmployeeEntryIncomplete = true;
+                Application.Current.MainPage.DisplayAlert("", "Potrebno je unijeti ime.", "OK");
+
+            }
+            else if (NewEmployeeInitials == "")
+            {
+                NewEmployeeEntryIncomplete = true;
+                Application.Current.MainPage.DisplayAlert("", "Potrebno je unijeti inicijale", "OK");
+
+
+            }
+            else if (NewEmployeeInitials != "")
+            {
+                DuplicateInitialsCheck();
+            }
+
+
+            else
+            {
+                string newInitialsUpper = NewEmployeeInitials.ToUpper();
+                NewEmployeeInitials = newInitialsUpper;
+                NewEmployeeEntryIncomplete = false;
+
+            }
 
         }
-        else if (NewEmployeeInitials == "")
+        catch (Exception ex)
         {
-            NewEmployeeEntryIncomplete = true;
-            Application.Current.MainPage.DisplayAlert("", "Potrebno je unijeti inicijale", "OK");
-
+            Debug.WriteLine(ex.Message);
 
         }
-        else if (NewEmployeeInitials != "")
-        {
-            DuplicateInitialsCheck();
-        }
-
-
-        else
-        {
-            string newInitialsUpper = NewEmployeeInitials.ToUpper();
-            NewEmployeeInitials = newInitialsUpper;
-            NewEmployeeEntryIncomplete = false;
-
-        }
-
 
     }
     public async void AddNewEmployee()
@@ -1163,36 +1196,52 @@ public class PostavkeViewModel : INotifyPropertyChanged
     }
     private void LicenceUpdatedReceived(object recipient, LicenceUpdated message)
     {
-        Debug.WriteLine("Refresh postavki nakon ažurianja licence");
-        PostavkeUserName = Preferences.Get("UserName", "");
-        PostavkeUserID = Preferences.Get("UserID", "");
+        try
+        {
+            Debug.WriteLine("Refresh postavki nakon ažurianja licence");
+            PostavkeUserName = Preferences.Get("UserName", "");
+            PostavkeUserID = Preferences.Get("UserID", "");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+
+        }
     }
 
-   public void DuplicateInitialsCheck()
+    public void DuplicateInitialsCheck()
     {
-        string newInitialsLower = NewEmployeeInitials.ToLower(); 
-
-        string newInitialsUpper = NewEmployeeInitials.ToUpper();
-
-         foreach (var employeeItem in EmployeeItems)
+        try
         {
-            if (employeeItem.Initals == newInitialsLower)
-            {
-                string duplicateID = employeeItem.EmployeeName;
-                Application.Current.MainPage.DisplayAlert("", "Inicijali su već dodijeljeni korisniku " + duplicateID, "OK");
-                NewEmployeeEntryIncomplete = true;
-            }
-        }
-        foreach (var employeeItem in EmployeeItems)
-        {
-            if (employeeItem.Initals == newInitialsUpper)
-            {
-                string duplicateID = employeeItem.EmployeeName;
-                Application.Current.MainPage.DisplayAlert("", "Inicijali su već dodijeljeni korisniku " + duplicateID, "OK");
-                NewEmployeeEntryIncomplete = true;
-            }
-        }
+            string newInitialsLower = NewEmployeeInitials.ToLower();
 
+            string newInitialsUpper = NewEmployeeInitials.ToUpper();
+
+            foreach (var employeeItem in EmployeeItems)
+            {
+                if (employeeItem.Initals == newInitialsLower)
+                {
+                    string duplicateID = employeeItem.EmployeeName;
+                    Application.Current.MainPage.DisplayAlert("", "Inicijali su već dodijeljeni korisniku " + duplicateID, "OK");
+                    NewEmployeeEntryIncomplete = true;
+                }
+            }
+            foreach (var employeeItem in EmployeeItems)
+            {
+                if (employeeItem.Initals == newInitialsUpper)
+                {
+                    string duplicateID = employeeItem.EmployeeName;
+                    Application.Current.MainPage.DisplayAlert("", "Inicijali su već dodijeljeni korisniku " + duplicateID, "OK");
+                    NewEmployeeEntryIncomplete = true;
+                }
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+
+        }
     }
 
     public async void CloseNewEmployee()

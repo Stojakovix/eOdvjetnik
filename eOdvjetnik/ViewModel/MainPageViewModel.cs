@@ -203,27 +203,33 @@ namespace eOdvjetnik.ViewModel
             Preferences.Set("licence_type", licence);
 
         }
-        
+
         public void ParseDate()
         {
             try
             {
-                DateTimeOffset dateTimeOffset = DateTimeOffset.Parse(ExpireDateString);
-                ExpireDateDT = dateTimeOffset.Date;
-                TimeSpan difference = ExpireDateDT.Subtract(CurrentDateDT);
-                double days = difference.TotalDays;
-                string daysR = days.ToString();
-                GracePeriod = days + 10;
-                Debug.WriteLine("ParseDate() - days until licence expires: " + daysR);
-                Debug.WriteLine("ParseDate() - grace period after licence expired: " + GracePeriod);
-                Preferences.Set("days_until_expiry", daysR);
+                if (DateTimeOffset.TryParse(ExpireDateString, out DateTimeOffset dateTimeOffset))
+                {
+                    ExpireDateDT = dateTimeOffset.Date;
+                    TimeSpan difference = ExpireDateDT.Subtract(CurrentDateDT);
+                    double days = difference.TotalDays;
+                    string daysR = days.ToString();
+                    GracePeriod = days + 10;
+                    Debug.WriteLine("ParseDate() - days until licence expires: " + daysR);
+                    Debug.WriteLine("ParseDate() - grace period after licence expired: " + GracePeriod);
+                    Preferences.Set("days_until_expiry", daysR);
+                }
+                else
+                {
+                    Debug.WriteLine("Invalid date format: " + ExpireDateString);
+                }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Licenca vjerojatno nije aktivna: " + ex.Message);
-
+                Debug.WriteLine("An error occurred: " + ex.Message);
             }
         }
+
 
         void RefreshTime()
         {
