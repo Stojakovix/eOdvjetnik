@@ -158,7 +158,6 @@ namespace eOdvjetnik.ViewModel
             try
             {
                 LicenceCheck();
-                UserNameAndID();
             }
             catch (Exception ex)
             {
