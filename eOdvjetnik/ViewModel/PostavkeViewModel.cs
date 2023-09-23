@@ -21,8 +21,21 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     private Navigacija navigacija;
 
-    
-    public string PostavkeUserName { get; set; }
+    private string _PostavkeUserName;
+
+    public string PostavkeUserName
+    {
+        get { return _PostavkeUserName; }
+        set
+        {
+            if (_PostavkeUserName != value)
+            {
+                _PostavkeUserName = value;
+                OnPropertyChanged(nameof(PostavkeUserName));
+            }
+        }
+    }
+
     public string PostavkeUserID { get; set; }
 
     #region Boje
