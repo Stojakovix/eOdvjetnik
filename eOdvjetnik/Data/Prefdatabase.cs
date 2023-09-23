@@ -28,7 +28,7 @@ namespace eOdvjetnik.Data
 
             Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
             _ = await Database.CreateTableAsync<PrefItem>();
-            Debug.Writeine("Baza inicijalizirana --------------------------------------");
+            Debug.WriteLine("Baza inicijalizirana --------------------------------------");
             
         }
 

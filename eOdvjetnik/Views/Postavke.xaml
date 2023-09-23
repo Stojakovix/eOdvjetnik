@@ -10,10 +10,6 @@
              
              >
 
-
-    <ContentPage.BindingContext>
-        <local:PostavkeViewModel x:Name="viewmodel"/>
-    </ContentPage.BindingContext>
     <ContentPage.Resources>
         <StyleSheet Source="/Resources/style.css" />
         <StyleSheet>

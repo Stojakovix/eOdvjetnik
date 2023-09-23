@@ -124,7 +124,6 @@ public partial class MainPage : ContentPage
         Debug.WriteLine("MainPageViewModel - > ActivationLoop");
         string string1 = "https://cc.eodvjetnik.hr/eodvjetnikadmin/waiting-lists/request?cpuid=";
         string string2 = Preferences.Get("key", null);
-        string string3 = 
         string activationURL = string.Concat(string1, string2);
         Debug.WriteLine("MainPageViewModel - > ActivationLoop - URL za waiting list: " + activationURL);
         Preferences.Get("activation_code", ActivationCode);
