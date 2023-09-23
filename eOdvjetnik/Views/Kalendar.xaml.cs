@@ -24,7 +24,7 @@ public partial class Kalendar : ContentPage
             InitializeComponent();
             Debug.WriteLine("inicijalizirano");
             this.BindingContext = viewModel;
-            
+
             
             this.Scheduler.DragDropSettings.TimeIndicatorTextFormat = "HH:mm";
             Scheduler.DaysView.TimeRegions = GetTimeRegion();
@@ -74,6 +74,10 @@ public partial class Kalendar : ContentPage
         if(appointments != null)
         {
             appointments.Clear();
+            if (Scheduler != null)
+            {
+                Scheduler.AppointmentDragStarting += OnSchedulerAppointmentDragStarting;
+            }
             //resources.Clear();
         }
 
@@ -162,18 +166,20 @@ public partial class Kalendar : ContentPage
             // Check if the new view is a TimelineMonth view
             if (e.NewView is SchedulerView.TimelineMonth)
             {
+                
                 _viewModel.AdminLicenceCheck();
                 Debug.WriteLine("izvršen onSchedulerViewChanged");
             }
             else
             {
+                _viewModel.GetUserEvents();
                 // Code to execute when the view changes to something else
             }
 
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(ex.Message);
+            Debug.WriteLine(ex.Message + " U OnSchedulerViewChangedu");
         }
     }
     private ObservableCollection<SchedulerTimeRegion> GetTimeRegion()
@@ -257,12 +263,12 @@ public partial class Kalendar : ContentPage
                     Debug.WriteLine(resourceId + "-----------------------------------------------------");
                     if (e.Appointments != null)
                     {
-                        Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
+                        Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler, _viewModel));
                         Debug.WriteLine("izvršen drugi if");
                     }
                     else
                     {
-                        Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
+                        Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler, _viewModel));
                         Debug.WriteLine("izvršen drugi else ");
                     }
                 }
@@ -274,7 +280,7 @@ public partial class Kalendar : ContentPage
                     {
                         Preferences.Remove("resourceId");
                         Preferences.Set("resourceId", SQLUserID);
-                        Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
+                        Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler, _viewModel));
 
                         Debug.WriteLine("--------------------------------------------------Appointment pun");
                     }
@@ -282,7 +288,7 @@ public partial class Kalendar : ContentPage
                     {
                         Preferences.Remove("resourceId");
                         Preferences.Set("resourceId", SQLUserID);
-                        Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
+                        Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler, _viewModel));
 
                         Debug.WriteLine("-------------------------------------------------Appointment prazan");
 

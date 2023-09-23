@@ -35,7 +35,9 @@
             <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="2" Margin="3,40,3,0"   />
             <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="2" Margin="3,40,3,0"  />
             <HorizontalStackLayout Grid.Row="2"  >
-                <Button Text="Spremi" Command="{Binding SaveNewEmployee}"  Grid.Column="1" Margin="10,-200,0,0" HorizontalOptions="Start"
+                <Button Text="Natrag" Command="{Binding CloseNewEmployeeCommand}"  Grid.Column="1" Margin="10,-200,0,0" HorizontalOptions="Start"
+     />
+                <Button Text="Spremi" Command="{Binding SaveNewEmployee}"  Grid.Column="1" Margin="60,-200,0,0" HorizontalOptions="Start"
                     />
                
             </HorizontalStackLayout>

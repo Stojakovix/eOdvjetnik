@@ -348,9 +348,20 @@ namespace eOdvjetnik.ViewModel
             DisableMenu();
             if (disableMenu == false)
             {
-                await Shell.Current.GoToAsync("///Spisi");
-                Debug.WriteLine("KLIKNO Spisi");
+                try
+                {
+                    await Shell.Current.GoToAsync("/Spisi");
+                    Debug.WriteLine("KLIKNO Spisi");
+                } 
+               
+                 catch (Exception ex)
+            {
+                    await Shell.Current.GoToAsync("///Spisi");
+                    Debug.WriteLine("KLIKNO Spisi");
+
+                }
             }
+
         }
         private async void OnPostavkeClick()
         {

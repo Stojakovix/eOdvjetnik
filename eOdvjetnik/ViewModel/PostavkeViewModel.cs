@@ -281,6 +281,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
     public ICommand OpenNewEmployee { get; set; }
     public ICommand SaveNewEmployee { get; set; }
     public ICommand BackButtonCommand { get; set; }
+    public ICommand CloseNewEmployeeCommand { get; set; }
 
     public ICommand PocetnaClick => navigacija.PocetnaClick;
     public ICommand KalendarClick => navigacija.KalendarClick;
@@ -622,6 +623,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         LoadColors = new Command(GetColors);
         SaveColors = new Command(SetColors);
         AdminColorPopup = false;
+        CloseNewEmployeeCommand = new Command(CloseNewEmployee);
 
         Colors = new ObservableCollection<ColorItem>();
         WeakReferenceMessenger.Default.Register<LicenceUpdated>(this, LicenceUpdatedReceived);
@@ -1080,6 +1082,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     public void EntryIncompleteCheck()
     {
+        NewEmployeeInitials = NewEmployeeInitials.Replace(" ", "");
         if (NewEmployeeName == "")
         {
             NewEmployeeEntryIncomplete = true;
@@ -1093,8 +1096,16 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
 
         }
+        else if (NewEmployeeInitials != "")
+        {
+            DuplicateInitialsCheck();
+        }
+
+
         else
         {
+            string newInitialsUpper = NewEmployeeInitials.ToUpper();
+            NewEmployeeInitials = newInitialsUpper;
             NewEmployeeEntryIncomplete = false;
 
         }
@@ -1111,6 +1122,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         {
             Debug.WriteLine(ex.Message);
         }
+
 
         if (NewEmployeeEntryIncomplete == false)
         {
@@ -1143,6 +1155,37 @@ public class PostavkeViewModel : INotifyPropertyChanged
         PostavkeUserID = Preferences.Get("UserID", "");
     }
 
+   public void DuplicateInitialsCheck()
+    {
+        string newInitialsLower = NewEmployeeInitials.ToLower(); 
+
+        string newInitialsUpper = NewEmployeeInitials.ToUpper();
+
+         foreach (var employeeItem in EmployeeItems)
+        {
+            if (employeeItem.Initals == newInitialsLower)
+            {
+                string duplicateID = employeeItem.EmployeeName;
+                Application.Current.MainPage.DisplayAlert("", "Inicijali su već dodijeljeni korisniku " + duplicateID, "OK");
+                NewEmployeeEntryIncomplete = true;
+            }
+        }
+        foreach (var employeeItem in EmployeeItems)
+        {
+            if (employeeItem.Initals == newInitialsUpper)
+            {
+                string duplicateID = employeeItem.EmployeeName;
+                Application.Current.MainPage.DisplayAlert("", "Inicijali su već dodijeljeni korisniku " + duplicateID, "OK");
+                NewEmployeeEntryIncomplete = true;
+            }
+        }
+
+    }
+
+    public async void CloseNewEmployee()
+    {
+        await Shell.Current.GoToAsync("//Zaposlenici");
+    }
 
 
 }

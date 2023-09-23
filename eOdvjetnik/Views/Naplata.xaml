@@ -9,9 +9,6 @@
              xmlns:local="clr-namespace:ListViewMaui"
              Title="Naplata">
 
-    <ContentPage.BindingContext>
-        <viewmodel:NaplataViewModel/>
-    </ContentPage.BindingContext>
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -72,7 +69,8 @@
 
 
                 <SearchBar Placeholder="{x:Static resx:AppResources.PretragaTarifa}" 
-                   BackgroundColor="#F8F8F8"
+                   BackgroundColor="White"
+                   PlaceholderColor="Black"
                    SearchCommand="{Binding SearchCommand}"
                    Text="{Binding SearchText}"
                    MinimumWidthRequest="200"

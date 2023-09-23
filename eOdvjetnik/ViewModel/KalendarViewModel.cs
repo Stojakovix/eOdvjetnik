@@ -147,6 +147,10 @@ namespace eOdvjetnik.ViewModel
 
         public void AdminLicenceCheck()
         {
+            EmployeeItems.Clear();
+            Appointments.Clear();
+            AdminAppointments.Clear();
+            Resources.Clear();
             string licence_type = Preferences.Get("licence_type", "");
             int numberOfCharacters = 5;
             string adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
@@ -349,6 +353,7 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
+                Appointments.Clear();
                 var hardware_id = Preferences.Get("key", "default_value");
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 List<int> ExternalEventIDs = new List<int>();

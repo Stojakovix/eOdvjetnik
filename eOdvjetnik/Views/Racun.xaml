@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.Racun"
+             xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
              xmlns:viewmodel="clr-namespace:eOdvjetnik.ViewModel"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              Title="Naplata">
@@ -21,6 +22,60 @@
 
         <VerticalStackLayout Grid.Row="0" >
 
+            <!-- Popup No1 -->
+
+            <sfPopup:SfPopup x:Name="BrisanjeStavkePopup" 
+                    HeaderTitle="Upozorenje" ShowHeader="False" ShowCloseButton="True"
+                    IsVisible="{Binding DeleteItemPopupVisible}" 
+                    IsOpen="{Binding DeleteItemPopupEnabled}"
+                    MinimumWidthRequest="300" 
+                    BackgroundColor="#faf9fb"
+                    >
+                <sfPopup:SfPopup.PopupStyle>
+                    <sfPopup:PopupStyle MessageBackground="#faf9fb" HeaderBackground="#faf9fb"   />
+                </sfPopup:SfPopup.PopupStyle>
+
+                <sfPopup:SfPopup.ContentTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="Jeste li sigurni?" TextColor="black" FontSize="20" Margin="0,40,0,50" FontAttributes="Bold" HorizontalTextAlignment="Center"  />
+                            <HorizontalStackLayout HorizontalOptions="Center">
+                                <Button  Text="Natrag" Grid.Row="12" Command="{Binding CancelDelete}" Margin="0,0,50,0"  />
+                                <Button  Text="Obriši" Grid.Row="12" Command="{Binding ConfirmDeleteItem}"    />
+                            </HorizontalStackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </sfPopup:SfPopup.ContentTemplate>
+            </sfPopup:SfPopup>
+
+            <!-- Popup No1 -->
+
+            <sfPopup:SfPopup x:Name="BrisanjeSvihStavkiPopup" 
+          HeaderTitle="Upozorenje" ShowHeader="False" ShowCloseButton="True"
+          IsVisible="{Binding DeleteAllItemsPopupVisible}" 
+          IsOpen="{Binding DeleteAllItemsPopupEnabled}"
+          MinimumWidthRequest="300" 
+          BackgroundColor="#faf9fb"
+          >
+                <sfPopup:SfPopup.PopupStyle>
+                    <sfPopup:PopupStyle MessageBackground="#faf9fb" HeaderBackground="#faf9fb"   />
+                </sfPopup:SfPopup.PopupStyle>
+
+                <sfPopup:SfPopup.ContentTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="Jeste li sigurni?" TextColor="black" FontSize="20" Margin="0,40,0,50" FontAttributes="Bold" HorizontalTextAlignment="Center"  />
+                            <HorizontalStackLayout HorizontalOptions="Center">
+                                <Button  Text="Natrag" Grid.Row="12" Command="{Binding CancelDelete}" Margin="0,0,50,0"  />
+                                <Button  Text="Obriši" Grid.Row="12" Command="{Binding ConfirmDeleteAllItems}"    />
+                            </HorizontalStackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </sfPopup:SfPopup.ContentTemplate>
+            </sfPopup:SfPopup>
+
+            <!-- Dalje Header -->
+
             <HorizontalStackLayout>
                 <Grid Margin="10,10,0,10">
                     <Grid.ColumnDefinitions>
@@ -31,33 +86,11 @@
 
                     </Grid.ColumnDefinitions>
 
-                    <Button   Grid.Column="0" HorizontalOptions="Start"  Text="Nazad" Command="{Binding BackToTariffs}" Margin="5,0,0,0">
+                    <Button   Grid.Column="0" HorizontalOptions="Start"  Text="Nazad" Command="{Binding BackToTariffs}" Margin="5,0,0,0" />
+                    <Button   Grid.Column="1" HorizontalOptions="Start"  Text="Izradi račun" Clicked="CreateDocument" Margin="5,0,0,0" />
+                    <Button   Grid.Column="2" HorizontalOptions="Start"  Text="Obriši sve" Command="{Binding RemoveAllItemsCommand}" Margin="5,0,0,0" />
+                    <Button   Grid.Column="3" HorizontalOptions="Start" Text="Obriši odabranu stavku" Command="{Binding RemoveItemCommand}"  Margin="5,0,0,0" />
 
-
-                    </Button>
-
-                    <Button   Grid.Column="1" HorizontalOptions="Start"  Text="Izradi račun" Clicked="CreateDocument" Margin="5,0,0,0">
-  
-
-                    </Button>
-
-                    <Button   Grid.Column="2" HorizontalOptions="Start"  Text="Obriši sve" Command="{Binding NewReceipt}" Margin="5,0,0,0">
-      
-
-                    </Button>
-
-                    <Button   Grid.Column="3" HorizontalOptions="Start" Text="Obriši odabranu stavku" Command="{Binding RemoveItemCommand}"  Margin="5,0,0,0">
-
-
-                    </Button>
-
-
-
-
-
-
-
-                 
                 </Grid>
 
             </HorizontalStackLayout>
@@ -91,18 +124,18 @@
                 <Label Grid.Row="1" Grid.Column="1" FontAttributes="Bold" Text="Radnja" Margin="45,0,0,0"  />
                 <Label Grid.Row="1" Grid.Column="2" FontAttributes="Bold" Text="Bodovi" HorizontalOptions="End" />
                 <Label Grid.Row="1" Grid.Column="3" FontAttributes="Bold" Text="Koeficijent" Padding="55,0,0,0" HorizontalOptions="Start"  />
-                <Label Grid.Row="1" Grid.Column="4" FontAttributes="Bold" Text="Iznos" HorizontalOptions="End"  />
+                <Label Grid.Row="1" Grid.Column="4" FontAttributes="Bold" Text="Iznos" HorizontalOptions="End"  Margin="0,0,10,0" />
             </Grid>
         </VerticalStackLayout>
 
 
-        <ScrollView Grid.Row="1" Margin="60,10,0,0" >
+        <ScrollView Grid.Row="1" Margin="50,10,0,0" >
             <ListView ItemsSource="{Binding ReceiptItems, Mode=TwoWay}" Grid.ColumnSpan="6" SelectedItem="{Binding SelectedReceiptItem}"  >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout>
-                                <Grid BackgroundColor="White"  >
+                                <Grid >
                                     <Grid.Resources>
                                         <Style TargetType="Label">
                                             <Setter Property="TextColor" Value="Black" />
@@ -124,17 +157,16 @@
 
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Row="1" Grid.Column="0" Text="{Binding Tbr}" LineBreakMode="NoWrap" VerticalOptions="Center"  />
+                                    <Label Grid.Row="1" Grid.Column="0" Text="{Binding Tbr}" LineBreakMode="NoWrap" VerticalOptions="Center" Margin="10,0,0,0"  />
 
                                     <Label Grid.Row="1" Grid.Column="1" Text="{Binding Name}" LineBreakMode="NoWrap" VerticalOptions="Center" HorizontalOptions="Start"  />
 
                                     <Label Grid.Row="1" Grid.Column="2" Text="{Binding Points}"  VerticalOptions="Center" HorizontalOptions="End"  />
 
                                     <Entry Grid.Row="1" Grid.Column="3" Text="{Binding Coefficient, Mode=TwoWay}"  VerticalOptions="CenterAndExpand" HorizontalOptions="Center" 
-                                           HorizontalTextAlignment="End"
-                                       />
+                                           HorizontalTextAlignment="End"  />
 
-                                    <Label Grid.Row="1" Grid.Column="4" Text="{Binding Currency}"   VerticalOptions="Center" HorizontalOptions="End" />
+                                    <Label Grid.Row="1" Grid.Column="4" Text="{Binding Currency}"   VerticalOptions="Center" HorizontalOptions="End" Margin="0,0,10,0" />
 
                                     <BoxView Margin="0,50,0,0" Grid.Row="1" Grid.ColumnSpan="5" BackgroundColor="Red" HeightRequest="1"  />
 
@@ -153,32 +185,22 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="100" />
-                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="60" />
 
                                     </Grid.ColumnDefinitions>
 
                                     <Label Text="Ukupni iznos:" HorizontalOptions="End" Grid.Column="0" FontAttributes="Bold"
-                                                        x:Name="UkupanIznos" IsVisible="{Binding UkupanIznosVisible}"
-
-                                                       />
+                                                        x:Name="UkupanIznos" IsVisible="{Binding UkupanIznosVisible}"  />
 
                                     <Label Grid.Column="1" Text="{Binding TotalAmountCurrency}" HorizontalTextAlignment="End" WidthRequest="100" Padding="0,0,10,0" FontAttributes="Bold" 
-                                                       x:Name="ukupanIznos" IsVisible="{Binding UkupanIznosVisible}"
-                                                       />
+                                                       x:Name="ukupanIznos" IsVisible="{Binding UkupanIznosVisible}"   />
 
                                 </Grid>
-
-
-
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </ScrollView>
-
-        <!-- Add the SfListView here -->
-
-
     </Grid>
 </ContentPage> 

@@ -10,13 +10,11 @@ using System.Diagnostics;
 
 public partial class Klijenti : ContentPage
 {
-    public KlijentiViewModel viewModel = new KlijentiViewModel();
-    private bool isInitialized;
+   
     public Klijenti()
 	{
         InitializeComponent();
-        this.BindingContext = viewModel;
-        isInitialized = false;
+        this.BindingContext = App.SharedKlijentiViewModel;
 
     }
 
@@ -25,16 +23,7 @@ public partial class Klijenti : ContentPage
         base.OnAppearing();
         this.Window.MinimumHeight = 620;
         this.Window.MinimumWidth = 860;
-        if (isInitialized == false)
-        {
-            isInitialized = true;
-            Debug.WriteLine("initialized is true"); 
-        }
-        else if (isInitialized == false)
-        {
-            viewModel.GenerateFiles();
-            Debug.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAA" + isInitialized.ToString());
-        }
+        
     }
 
    

@@ -46,5 +46,35 @@ public partial class AppShell : Shell
         ViewModel.SupportPopupOpen = true;
 
     }
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        if (sender is Button clickedButton)
+        {
+            LastPressedButton = clickedButton;
+        }
+    }
+    private Button lastPressedButton = null;
+
+    // Property to track the last pressed button
+    public Button LastPressedButton
+    {
+        get { return lastPressedButton; }
+        set
+        {
+            if (lastPressedButton != null)
+            {
+                // Reset the background color of the previous button
+                lastPressedButton.BackgroundColor = Color.FromArgb("#faf9fb"); // Set to the initial color
+            }
+
+            lastPressedButton = value;
+
+            if (lastPressedButton != null)
+            {
+                // Change the background color of the current button
+                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2"); // Set to the new color Color.FromArgb("#FAFAFA")
+            }
+        }
+    }
 
 }

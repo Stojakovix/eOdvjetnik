@@ -7,9 +7,7 @@
              BackgroundColor="#faf9fb"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              Title="Dokumenti">
-    <ContentPage.BindingContext>
-        <viewmodel:DocsViewModel/>
-    </ContentPage.BindingContext>
+
 
     <Grid>
         <Grid.RowDefinitions>
