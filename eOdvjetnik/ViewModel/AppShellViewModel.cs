@@ -262,13 +262,10 @@ namespace eOdvjetnik.ViewModel
         #region Navigacija Funkcije
         private async void OnMainClick()
 		{
-            DisableMenu();
-            if (disableMenu == false)
-            {
+            
                 await Shell.Current.GoToAsync("///MainPage");
                 Debug.WriteLine("KLIKNO");
-            }
-			
+            			
 		}
 
         private async void OnDokumentiClick()
@@ -365,12 +362,10 @@ namespace eOdvjetnik.ViewModel
         }
         private async void OnPostavkeClick()
         {
-            DisableMenu();
-            if (disableMenu == false)
-            {
+           
                 await Shell.Current.GoToAsync("///Postavke");
                 Debug.WriteLine("KLIKNO Postavke");
-            }
+            
         }
         private async void OnSpiDokClick()
         {
