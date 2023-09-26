@@ -26,6 +26,7 @@ public partial class Spisi : ContentPage
         }
         else
         {
+            SecureStorage.Remove("listItemId");
             viewModel.GenerateFiles();
         }
     }
@@ -41,15 +42,18 @@ public partial class Spisi : ContentPage
     {
         try
         {
+            
             //var selectedTariffItem = (TariffItem)e.SelectedItem;
             var selectedFileItem = (FileItem)e.DataItem;
             string itemId = selectedFileItem.Id.ToString();
-            Preferences.Set("listItemId", itemId);
+            //Preferences.Set("listItemId", itemId);
+            
+            await SecureStorage.SetAsync("listItemId", itemId);
             //Debug.WriteLine("Item tapped " + itemId);
             Debug.WriteLine(itemId + " u ListViewItemSelectedu u spisima");
-            //await Shell.Current.GoToAsync("//SpiDok");
+
             await Navigation.PushAsync(new SpiDok());
-            ((ListView)sender).SelectedItem = null;
+            //((ListView)sender).SelectedItem = null;
         }
         catch (Exception ex)
         {

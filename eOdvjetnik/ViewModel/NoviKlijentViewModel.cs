@@ -30,13 +30,14 @@ namespace eOdvjetnik.ViewModel
         public ICommand CancelDelete { get; set; }
         public ICommand BackButtonCommand { get; set; }
 
+        
 
         public NoviKlijentViewModel()
         {
 
             try
             {
-                navigacija = new Navigacija();
+
                 ClientID = Preferences.Get("SelectedID", "");
                 ClientName = Preferences.Get("SelectedName", "");
                 ClientOIB = Preferences.Get("SelectedOIB", "");

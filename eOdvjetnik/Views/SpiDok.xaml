@@ -5,9 +5,12 @@
              xmlns:viewModel="clr-namespace:eOdvjetnik.ViewModel"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             
              Title="SpiDok">
 
-
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
 
     <ScrollView>
         <syncfusion:SfListView x:Name="listView" 
@@ -20,17 +23,19 @@
                 <DataTemplate>
                     <Grid >
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="20" />
+                            <RowDefinition Height="35" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="300"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Column="0"  Text=""/>
                         <Label Grid.Column="1" Text="Referenca" FontSize="Default" FontAttributes="Bold" />
                         <Label Grid.Column="2" Text="Dokument" FontSize="Default" FontAttributes="Bold" />
+                        <Button Grid.Column="3" Text="Nazad" Clicked="Button_Clicked" Margin="-10"/>
                     </Grid>
                 </DataTemplate>
             </syncfusion:SfListView.HeaderTemplate>
@@ -55,6 +60,7 @@
                 </DataTemplate>
             </syncfusion:SfListView.ItemTemplate>
         </syncfusion:SfListView>
+        
 
         <!--<VerticalStackLayout>
             <Grid>

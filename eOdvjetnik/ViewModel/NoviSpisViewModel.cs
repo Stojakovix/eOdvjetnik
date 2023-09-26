@@ -27,7 +27,6 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                navigacija = new Navigacija();
                 OnDodajClick = new Command(DodajClickButton);
                 OnNazadClick = new Command(NazadClickButton);
 
@@ -37,17 +36,24 @@ namespace eOdvjetnik.ViewModel
 
                 GetEmployees1();
                 GetEmployees2();
+                //InitializeData();
 
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
 
-                ClientId = Preferences.Get("FilesClientID", "");
-                ClientName = Preferences.Get("FilesClientName", "");
-                OpponentId = Preferences.Get("FilesOpponent", "");
-                OpponentName = Preferences.Get("FilesOpponentName", "");
-
-                UserInitials = Preferences.Get("UserInitials", "");
-
-
-
+        public async Task InitializeData()
+        {
+            try
+            {
+                ClientId = await SecureStorage.GetAsync("FilesClientID");
+                ClientName = await SecureStorage.GetAsync("FilesClientName");
+                OpponentId = await SecureStorage.GetAsync("FilesOpponent");
+                OpponentName = await SecureStorage.GetAsync("FilesOpponentName");
+                UserInitials = await SecureStorage.GetAsync("UserInitials");
             }
             catch (Exception ex)
             {
@@ -499,11 +505,12 @@ namespace eOdvjetnik.ViewModel
 
         }
 
-        private void AddSpisToRemoteServer(FileItem fileItem)
+        private async void AddSpisToRemoteServer(FileItem fileItem)
         {
 
             try
             {
+                await InitializeData();
                 GetCurrentDate();
                 #region Varijable za spremanje
                 //int idValue = int.Parse(Id);
