@@ -25,7 +25,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
     }
     ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
-
+    TrecaSreca trecaSreca = new TrecaSreca();
     private ObservableCollection<ContactItem> contacts;
     public ObservableCollection<ContactItem> Contacts
     {
@@ -513,8 +513,11 @@ public class KlijentiViewModel : INotifyPropertyChanged
     public ICommand AddAsClient { get; set; }
     public ICommand AddAsOpponent { get; set; }
 
-    public async Task InitializeData()
-    {
+        
+
+        Contacts = new ObservableCollection<ContactItem>();
+        ContactDeleted = false;
+
         try
         {
             ClientID = await SecureStorage.GetAsync("SelectedID");
@@ -659,20 +662,20 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
             try
             {
-                await InitializeData();
-                //ClientID = Preferences.Get("SelectedID", "");
-                //ClientName = Preferences.Get("SelectedName", "");
-                //ClientOIB = Preferences.Get("SelectedOIB", "");
-                //ClientAddress = Preferences.Get("SelectedAddress", "");
-                //ClientResidence = Preferences.Get("SelectedRsidence", "");
-                //ClientPhone = Preferences.Get("SelectedPhone", "");
-                //ClientFax = Preferences.Get("SelectedFax", "");
-                //ClientMobile = Preferences.Get("SelectedMobile", "");
-                //ClientEmail = Preferences.Get("SelectedEmail", "");
-                //ClientOther = Preferences.Get("SelectedOther", "");
-                //ClientCountry = Preferences.Get("SelectedCountry", "");
-                //ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
-                //ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
+                
+                ClientID = Preferences.Get("SelectedID", "");
+                ClientName = Preferences.Get("SelectedName", "");
+                ClientOIB = Preferences.Get("SelectedOIB", "");
+                ClientAddress = Preferences.Get("SelectedAddress", "");
+                ClientResidence = Preferences.Get("SelectedRsidence", "");
+                ClientPhone = Preferences.Get("SelectedPhone", "");
+                ClientFax = Preferences.Get("SelectedFax", "");
+                ClientMobile = Preferences.Get("SelectedMobile", "");
+                ClientEmail = Preferences.Get("SelectedEmail", "");
+                ClientOther = Preferences.Get("SelectedOther", "");
+                ClientCountry = Preferences.Get("SelectedCountry", "");
+                ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
+                ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
                 if (ClientLegalPersonString == "True")
                 {
                     ClientLegalPerson = true;
@@ -817,56 +820,32 @@ public class KlijentiViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(SelectedItem));
         }
     }
-    public async Task SaveItems()
+    public void SaveSelectedItem()
     {
-        try
+        if (SelectedItem != null)
         {
-            Debug.WriteLine("UŠO U JEBENU FUNKCIJU SAVE ITEMS");
-            if (SelectedItem != null)
+            try
             {
-                await SecureStorage.SetAsync("SelectedName", SelectedItem.Ime);
-                await SecureStorage.SetAsync("SelectedOIB", SelectedItem.OIB);
-                await SecureStorage.SetAsync("SelectedAddress", SelectedItem.Adresa);
-                await SecureStorage.SetAsync("SelectedRsidence", SelectedItem.Boraviste);
-                await SecureStorage.SetAsync("SelectedPhone", SelectedItem.Telefon);
-                await SecureStorage.SetAsync("SelectedFax", SelectedItem.Fax);
-                await SecureStorage.SetAsync("SelectedMobile", SelectedItem.Mobitel);
-                await SecureStorage.SetAsync("SelectedEmail", SelectedItem.Email);
-                await SecureStorage.SetAsync("SelectedOther", SelectedItem.Ostalo);
-                await SecureStorage.SetAsync("SelectedCountry", SelectedItem.Drzava);
-                await SecureStorage.SetAsync("SelectedLegalPersonString", SelectedItem.Pravna);
-                await SecureStorage.SetAsync("SelectedBrithDateString", SelectedItem.Datum_rodenja);
+                Preferences.Set("SelectedName", SelectedItem.Ime);
+                Preferences.Set("SelectedOIB", SelectedItem.OIB);
+                Preferences.Set("SelectedAddress", SelectedItem.Adresa);
+                Preferences.Set("SelectedRsidence", SelectedItem.Boraviste);
+                Preferences.Set("SelectedPhone", SelectedItem.Telefon);
+                Preferences.Set("SelectedFax", SelectedItem.Fax);
+                Preferences.Set("SelectedMobile", SelectedItem.Mobitel);
+                Preferences.Set("SelectedEmail", SelectedItem.Email);
+                Preferences.Set("SelectedOther", SelectedItem.Ostalo);
+                Preferences.Set("SelectedCountry", SelectedItem.Drzava);
+                Preferences.Set("SelectedLegalPersonString", SelectedItem.Pravna);
+                Preferences.Set("SelectedBrithDateString", SelectedItem.Datum_rodenja);
                 string IDstring = SelectedItem.Id.ToString();
-                Debug.WriteLine(IDstring);
-                await SecureStorage.SetAsync("SelectedID", IDstring);
-            }
-            else if (SelectedItem == null)
-            {
-                Debug.WriteLine("Selected item is null");
-            }
-            else
-            {
-                Debug.WriteLine("Selected item is null");
-            }
-            Debug.WriteLine("Posle svega");
-        }
-        catch (Exception ex)
-        {
+                Preferences.Set("SelectedID", IDstring);
 
-            Debug.WriteLine(ex.Message + " in save Items");
-        }
-    }
-    public async void SaveSelectedItem()
-    {
-        
-        try
-        {
-            await SaveItems();
-            Debug.WriteLine(ClientName + " " + ClientID + " In save selected item");
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message + " in save items");
+                TrecaSreca.AddKeyValuePair("SelectedName", SelectedItem.Ime);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
 
         }
     }

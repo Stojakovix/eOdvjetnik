@@ -72,8 +72,7 @@ public static class MauiProgram
 
         builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<DeviceIdDatabase>(s, dbPath));
 
-        var database = new Prefdatabase();
-        database.Init(); // Make sure the initialization is complete before starting the app
+        TrecaSreca.CreateXmlFile();
 
 
         return builder.Build();
