@@ -25,7 +25,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
     }
     ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
-
+    TrecaSreca trecaSreca = new TrecaSreca();
     private ObservableCollection<ContactItem> contacts;
     public ObservableCollection<ContactItem> Contacts
     {
@@ -503,6 +503,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
         WeakReferenceMessenger.Default.Register<ContactDeleted>(this, ContactDeletedReceived);
         WeakReferenceMessenger.Default.Register<ContactEdited>(this, ContactEditedReceived);
 
+        
 
         Contacts = new ObservableCollection<ContactItem>();
         ContactDeleted = false;
@@ -636,6 +637,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
             try
             {
+                
                 ClientID = Preferences.Get("SelectedID", "");
                 ClientName = Preferences.Get("SelectedName", "");
                 ClientOIB = Preferences.Get("SelectedOIB", "");
@@ -807,6 +809,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 Preferences.Set("SelectedBrithDateString", SelectedItem.Datum_rodenja);
                 string IDstring = SelectedItem.Id.ToString();
                 Preferences.Set("SelectedID", IDstring);
+
+                TrecaSreca.AddKeyValuePair("SelectedName", SelectedItem.Ime);
             }
             catch (Exception ex)
             {
