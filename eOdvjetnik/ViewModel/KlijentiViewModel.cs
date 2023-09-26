@@ -811,6 +811,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
         {
             _selectedItem = value;
             // Save to preferences
+            
             SaveSelectedItem();
 
             OnPropertyChanged(nameof(SelectedItem));
@@ -818,40 +819,41 @@ public class KlijentiViewModel : INotifyPropertyChanged
     }
     public async Task SaveItems()
     {
-        if (SelectedItem != null)
+        try
         {
-            await SecureStorage.SetAsync("SelectedName", SelectedItem.Ime);
-            await SecureStorage.SetAsync("SelectedOIB", SelectedItem.OIB);
-            await SecureStorage.SetAsync("SelectedAddress", SelectedItem.Adresa);
-            await SecureStorage.SetAsync("SelectedRsidence", SelectedItem.Boraviste);
-            await SecureStorage.SetAsync("SelectedPhone", SelectedItem.Telefon);
-            await SecureStorage.SetAsync("SelectedFax", SelectedItem.Fax);
-            await SecureStorage.SetAsync("SelectedMobile", SelectedItem.Mobitel);
-            await SecureStorage.SetAsync("SelectedEmail", SelectedItem.Email);
-            await SecureStorage.SetAsync("SelectedOther", SelectedItem.Ostalo);
-            await SecureStorage.SetAsync("SelectedCountry", SelectedItem.Drzava);
-            await SecureStorage.SetAsync("SelectedLegalPersonString", SelectedItem.Pravna);
-            await SecureStorage.SetAsync("SelectedBrithDateString", SelectedItem.Datum_rodenja);
-            //string IDstring = SelectedItem.Id.ToString();
-            //await SecureStorage.SetAsync("SelectedID", IDstring);
-            if (SelectedItem.Id.ToString() != null)
+            Debug.WriteLine("UŠO U JEBENU FUNKCIJU SAVE ITEMS");
+            if (SelectedItem != null)
             {
+                await SecureStorage.SetAsync("SelectedName", SelectedItem.Ime);
+                await SecureStorage.SetAsync("SelectedOIB", SelectedItem.OIB);
+                await SecureStorage.SetAsync("SelectedAddress", SelectedItem.Adresa);
+                await SecureStorage.SetAsync("SelectedRsidence", SelectedItem.Boraviste);
+                await SecureStorage.SetAsync("SelectedPhone", SelectedItem.Telefon);
+                await SecureStorage.SetAsync("SelectedFax", SelectedItem.Fax);
+                await SecureStorage.SetAsync("SelectedMobile", SelectedItem.Mobitel);
+                await SecureStorage.SetAsync("SelectedEmail", SelectedItem.Email);
+                await SecureStorage.SetAsync("SelectedOther", SelectedItem.Ostalo);
+                await SecureStorage.SetAsync("SelectedCountry", SelectedItem.Drzava);
+                await SecureStorage.SetAsync("SelectedLegalPersonString", SelectedItem.Pravna);
+                await SecureStorage.SetAsync("SelectedBrithDateString", SelectedItem.Datum_rodenja);
                 string IDstring = SelectedItem.Id.ToString();
                 Debug.WriteLine(IDstring);
                 await SecureStorage.SetAsync("SelectedID", IDstring);
             }
-            else if (SelectedItem.Id.ToString() == null)
+            else if (SelectedItem == null)
             {
-                Debug.WriteLine("id is empty");
+                Debug.WriteLine("Selected item is null");
             }
             else
             {
-                Debug.WriteLine("eo ne znam majke mi");
+                Debug.WriteLine("Selected item is null");
             }
+            Debug.WriteLine("Posle svega");
         }
-        else if(SelectedItem == null)
+        catch (Exception ex)
         {
-            Debug.WriteLine("Selected item is null");
+
+            Debug.WriteLine(ex.Message + " in save Items");
         }
     }
     public async void SaveSelectedItem()
