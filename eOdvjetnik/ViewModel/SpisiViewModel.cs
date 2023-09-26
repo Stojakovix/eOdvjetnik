@@ -337,7 +337,7 @@ namespace eOdvjetnik.ViewModel
                             //Debug.WriteLine(item.BrojSpisa);
                             
                         }
-                        Debug.WriteLine(FileItems.Count);
+                       // Debug.WriteLine(FileItems.Count);
 
                     }
                     OnPropertyChanged(nameof(fileItems));

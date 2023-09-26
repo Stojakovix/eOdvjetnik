@@ -175,6 +175,21 @@ public class KlijentiViewModel : INotifyPropertyChanged
         }
     }
 
+    private string Tekst2 { get; set; }
+
+    public string tekst2
+    {
+        get { return Tekst2; }
+        set
+        {
+            if (Tekst2 != value)
+            {
+                Tekst2 = value;
+                OnPropertyChanged(nameof(tekst2));
+            }
+        }
+    }
+
 
     public void GenerateFiles()
     {
@@ -497,11 +512,6 @@ public class KlijentiViewModel : INotifyPropertyChanged
     public int FilesCounter { get; set; }
     public ICommand AddAsClient { get; set; }
     public ICommand AddAsOpponent { get; set; }
-    public KlijentiViewModel()
-    {
-        WeakReferenceMessenger.Default.Register<RefreshContacts>(this, NewContactAddedReceived);
-        WeakReferenceMessenger.Default.Register<ContactDeleted>(this, ContactDeletedReceived);
-        WeakReferenceMessenger.Default.Register<ContactEdited>(this, ContactEditedReceived);
 
         
 
@@ -510,19 +520,21 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
         try
         {
-            ClientID = Preferences.Get("SelectedID", "");
-            ClientName = Preferences.Get("SelectedName", "");
-            ClientOIB = Preferences.Get("SelectedOIB", "");
-            ClientAddress = Preferences.Get("SelectedAddress", "");
-            ClientResidence = Preferences.Get("SelectedRsidence", "");
-            ClientPhone = Preferences.Get("SelectedPhone", "");
-            ClientFax = Preferences.Get("SelectedFax", "");
-            ClientMobile = Preferences.Get("SelectedMobile", "");
-            ClientEmail = Preferences.Get("SelectedEmail", "");
-            ClientOther = Preferences.Get("SelectedOther", "");
-            ClientCountry = Preferences.Get("SelectedCountry", "");
-            ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
-            ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
+            ClientID = await SecureStorage.GetAsync("SelectedID");
+            ClientName = await SecureStorage.GetAsync("SelectedName");
+            ClientOIB = await SecureStorage.GetAsync("SelectedOIB");
+            ClientAddress = await SecureStorage.GetAsync("SelectedAddress");
+            ClientResidence = await SecureStorage.GetAsync("SelectedRsidence");
+            ClientPhone = await SecureStorage.GetAsync("SelectedPhone");
+            ClientFax = await SecureStorage.GetAsync("SelectedFax");
+            ClientMobile = await SecureStorage.GetAsync("SelectedMobile");
+            ClientEmail = await SecureStorage.GetAsync("SelectedEmail");
+            ClientOther = await SecureStorage.GetAsync("SelectedOther");
+            ClientCountry = await SecureStorage.GetAsync("SelectedCountry");
+            ClientLegalPersonString = await SecureStorage.GetAsync("SelectedLegalPersonString");
+            ClientBirthDate = await SecureStorage.GetAsync("SelectedBrithDateString");
+
+
             if (ClientLegalPersonString == "True")
             {
                 ClientLegalPerson = true;
@@ -540,17 +552,30 @@ public class KlijentiViewModel : INotifyPropertyChanged
             {
                 ClientLegalPerson = false;
             }
+            tekst2 = await SecureStorage.GetAsync("ClientEditedName");
 
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(ex.Message);
+            Debug.WriteLine(ex.Message + " in initialize data");
 
         }
+    }
+    public KlijentiViewModel()
+    {
+        WeakReferenceMessenger.Default.Register<RefreshContacts>(this, NewContactAddedReceived);
+        WeakReferenceMessenger.Default.Register<ContactDeleted>(this, ContactDeletedReceived);
+        WeakReferenceMessenger.Default.Register<ContactEdited>(this, ContactEditedReceived);
+
+
+        Contacts = new ObservableCollection<ContactItem>();
+        ContactDeleted = false;
+
+        
         OnReciptClickCommand = new Command(OpenRecipt);
         RefreshContacts = new Command(GenerateFiles);
         EditClientButton = new Command(EditClient);
-        AddAsClient = new Command(AddSelectedAsClient);
+        AddAsClient = new Command(AddSelectedClient);
         AddAsOpponent = new Command(AddSelectedAsOpponent);
         GenerateFiles();
 
@@ -628,7 +653,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
     }
     void Refresh()
     {
-        MainThread.BeginInvokeOnMainThread(() =>
+        MainThread.BeginInvokeOnMainThread(async () =>
         {
             //if (FilesCounter == 1)
             //{
@@ -665,7 +690,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message + " in refresh");
 
             }
         }
@@ -690,14 +715,19 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
 
     }
+    private async Task getContactText()
+    {
+        ContactDeletedText = await SecureStorage.GetAsync("ContactDeleted");
+    }
 
-    private void ContactDeletedReceived(object recipient, ContactDeleted message)
+    private async void ContactDeletedReceived(object recipient, ContactDeleted message)
     {
         GenerateFiles();
         Debug.WriteLine("Generating files after deleting a contact");
-        ContactDeletedText = Preferences.Get("ContactDeleted", "");
+        await getContactText();
+        //ContactDeletedText = Preferences.Get("ContactDeleted", "");
         ContactDeleted = true;
-        Application.Current.MainPage.DisplayAlert("", ContactDeletedText, "OK");
+        await Application.Current.MainPage.DisplayAlert("", ContactDeletedText, "OK");
 
     }
 
@@ -759,12 +789,12 @@ public class KlijentiViewModel : INotifyPropertyChanged
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message + " in Contact Edited Received if");
                 NoSQLreply = true;
             }
 
             string tekst1 = "Uspješno ste izmijenili kontakt: ";
-            string tekst2 = Preferences.Get("ClientEditedName", "");
+            //string tekst2 = Preferences.Get("ClientEditedName", "");
             string tekstObavijest = string.Concat(tekst1, tekst2);
             ContactEditedText = tekstObavijest;
             Application.Current.MainPage.DisplayAlert("", ContactEditedText, "OK");
@@ -772,7 +802,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(ex.Message);
+            Debug.WriteLine(ex.Message + " in Contact Edited Received");
         }
     }
 
@@ -784,6 +814,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
         {
             _selectedItem = value;
             // Save to preferences
+            
             SaveSelectedItem();
 
             OnPropertyChanged(nameof(SelectedItem));
@@ -816,32 +847,64 @@ public class KlijentiViewModel : INotifyPropertyChanged
             {
                 Debug.WriteLine(ex.Message);
 
-            }
         }
     }
 
-    public void AddSelectedAsClient()
+    public async Task getClientName()
     {
-        Preferences.Set("FilesClientID", ClientID);
-        Preferences.Set("FilesClientName", ClientName);
-        string tekst1 = "Kontakt '";
-        string tekst2 = ClientName;
-        string tekst3 = "' spremljen je kao klijent.";
-        string tekstObavijest = string.Concat(tekst1, tekst2, tekst3);
-
-        Application.Current.MainPage.DisplayAlert("", tekstObavijest, "OK");
-
+        await SecureStorage.SetAsync("FilesClientID", ClientID);
+        await SecureStorage.SetAsync("FilesClientName", ClientName);
     }
-    public void AddSelectedAsOpponent()
+
+    public async void AddSelectedClient()
     {
-        Preferences.Set("FilesOpponent", ClientID);
-        Preferences.Set("FilesOpponentName", ClientName);
-        string tekst1 = "Kontakt '";
-        string tekst2 = ClientName;
-        string tekst3 = "' spremljen je kao protustranka.";
-        string tekstObavijest = string.Concat(tekst1, tekst2, tekst3);
+        try
+        {
+            await InitializeData();
+            await getClientName();
+            if (ClientID != null && ClientName != null)
+            {
+                
 
-        Application.Current.MainPage.DisplayAlert(" ", tekstObavijest, "OK");
+                string tekst1 = "Kontakt '";
+                string tekst2 = ClientName;
+                string tekst3 = "' spremljen je kao klijent.";
+                string tekstObavijest = string.Concat(tekst1, tekst2, tekst3);
 
+                await Application.Current.MainPage.DisplayAlert("", tekstObavijest, "OK");
+            }
+            else
+            {
+                Debug.WriteLine("ClientID or ClientName is null.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message + " in AddSelectedClientAsync");
+        }
+    }
+
+    public async void AddSelectedAsOpponent()
+    {
+        try
+        {
+            await InitializeData();
+            //Preferences.Set("FilesOpponent", ClientID);
+            //Preferences.Set("FilesOpponentName", ClientName);
+            await SecureStorage.SetAsync("FilesOpponent", ClientID);
+            await SecureStorage.SetAsync("FilesOpponentName", ClientName);
+
+            string tekst1 = "Kontakt '";
+            string tekst2 = ClientName;
+            string tekst3 = "' spremljen je kao protustranka.";
+            string tekstObavijest = string.Concat(tekst1, tekst2, tekst3);
+
+            await Application.Current.MainPage.DisplayAlert(" ", tekstObavijest, "OK");
+
+        }
+        catch (Exception ex)
+        { 
+            Debug.WriteLine(ex.Message);
+        }
     }
 }

@@ -47,6 +47,7 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
+                
                 Debug.WriteLine("inicijalizirano u spidokViewModelu");
                 spiDokItems = new ObservableCollection<SpiDokItem>();
                 GenerateFiles();
@@ -59,15 +60,37 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-
-        public void GenerateFiles()
+        public async Task InitializeDataAsync()
         {
             try
             {
+                string listItemIdString = await SecureStorage.GetAsync("listItemId");
+                Debug.WriteLine(listItemIdString + " u InitializeData ");
+                if (int.TryParse(listItemIdString, out int parsedItemId))
+                {
+                    ListItemId = parsedItemId;
+                }
+                else
+                {
+                    // Handle the case where parsing fails - Tu neki popup ili da vrati na spise, smislit nešt
+                    Debug.WriteLine("Failed to parse listItemId.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
 
+
+        public async void GenerateFiles()
+        {
+            try
+            {
+                await InitializeDataAsync();
                 spiDokItems.Clear();
-                ListItemId = int.Parse(Preferences.Get("listItemId", ""));
-                Debug.WriteLine(ListItemId);
+                
+                Debug.WriteLine(ListItemId + " u generateFiles");
                 //string query = "SELECT * FROM files ORDER BY id DESC LIMIT 100;";
                 string query = $"SELECT * FROM `documents` where file_id='{ListItemId}' ORDER BY `id` DESC";
 
@@ -166,9 +189,13 @@ namespace eOdvjetnik.ViewModel
             {
                 //var fileUri = new Uri($"smb://{Preferences.Get(IP, "")}/{Preferences.Get(FOLDER, "")}/{fileName}");
                 //await Launcher.OpenAsync(fileUri);
+                string ip = await SecureStorage.GetAsync(IP_nas);
+                string folder = await SecureStorage.GetAsync(FOLDER_nas);
+                string subfolder = await SecureStorage.GetAsync(SUBFOLDER_nas);
+                //string ip = await SecureStorage.GetAsync(IP_nas);
                 Debug.WriteLine("Samo string -> " + @"\\192.168.1.211\Users\user\test.doc");
-                string filePath = @"\\" + Preferences.Get(IP_nas, "") + "\\" + Preferences.Get(FOLDER_nas, "") + Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName;
-                Debug.WriteLine("Izgenerirani string -> " + @"\\" + Preferences.Get(IP_nas, "") + "\\" + Preferences.Get(FOLDER_nas, "") + "\\" + Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName);
+                string filePath = @"\\" + ip + "\\" + folder + subfolder + "\\" + fileName;
+                Debug.WriteLine("Izgenerirani string -> " + @"\\" + ip + "\\" + folder + subfolder + "\\" + fileName);
                 await Launcher.OpenAsync(filePath);
 
             }
