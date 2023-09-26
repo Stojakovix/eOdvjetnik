@@ -4,32 +4,14 @@
              x:Class="eOdvjetnik.MainPage"
              xmlns:sfPopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
              xmlns:local ="clr-namespace:eOdvjetnik.ViewModel"
-             xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
-             
-             >
+             xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings" >
 
-
-
-
-    <ContentPage.Resources>
-
-    </ContentPage.Resources>
-
-    <ContentPage.BindingContext>
-        <local:MainPageViewModel/>
-    </ContentPage.BindingContext>
-
-
-
-    
     
     <Grid>
-
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="30"  />
-
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -38,7 +20,6 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
-
         </Grid.ColumnDefinitions>
 
         <Image Opacity="0.5" HorizontalOptions="FillAndExpand" MaximumHeightRequest="4000" MaximumWidthRequest="4000" Grid.ColumnSpan="7" Grid.Row="0" Source="main_pozadina.jpg"  
@@ -64,10 +45,6 @@
 
             <Button Text="Clear All Preferences" Background="LightBlue" BorderColor="black" Command="{Binding ClearPrefrences}" IsVisible="True" />
 
-
-
-
-
             <Label  Style="{StaticResource ShadowLabelStyle}" 
                         Text="{x:Static resx:AppResources.ZaAktivaciju}"
                         HorizontalOptions="Center"
@@ -75,10 +52,7 @@
                         Margin="10,0,0,0"
                         LineBreakMode="WordWrap"
                         TextColor="Black"
-                IsVisible="{Binding ActivationVisible }" 
-                />
-
-
+                IsVisible="{Binding ActivationVisible }"   />
 
             <Label Style="{StaticResource ShadowLabelStyle}" 
                         Text="{x:Static resx:AppResources.KontaktMain}"
@@ -87,9 +61,7 @@
                         Margin="10,0,0,60"
                         LineBreakMode="WordWrap"
                         TextColor="Black"    
-                   IsVisible="{Binding ActivationVisible }" 
-                />
-
+                   IsVisible="{Binding ActivationVisible }" />
 
             <Label Style="{StaticResource ShadowLabelStyle}" 
                         Text="{x:Static resx:AppResources.AKTIVACIJSKIKOD}" 
@@ -98,8 +70,7 @@
                         FontSize="Large"
                         Margin="0,0,0,10"
                         TextColor="Black"
-                   IsVisible="{Binding ActivationVisible }" 
-                    />
+                   IsVisible="{Binding ActivationVisible }"  />
             <Label Style="{StaticResource ShadowLabelStyle}" 
                         Text="{Binding Activation_code}"
                         VerticalOptions="Center" 
@@ -109,10 +80,9 @@
                         TextColor="Black"
                    IsVisible="{Binding ActivationVisible }" 
                     />
-            <Button  Grid.Row="1" Grid.ColumnSpan="5" Margin="0,10,0,0" HeightRequest="50" Text="Provjeri status licence"  Clicked="OnRefreshLicenceClick"
+            <Button  Grid.Row="1" Grid.ColumnSpan="5" Margin="0,10,0,0" HeightRequest="50" Text="Provjeri status licence"  Command="{Binding CheckLicenceStatus}"
                IsVisible="{Binding ActivationVisible }" />
             <Button  Grid.Row="2" Grid.ColumnSpan="6" Margin="0,10,0,0" HeightRequest="50" Text="Registracija probne verzije" Clicked="BrowserOpen_Clicked" IsVisible="{Binding ActivationVisible }"/>
-
 
         </VerticalStackLayout>
         <StackLayout IsVisible="false" Grid.Column="4" HorizontalOptions="EndAndExpand" Padding="0,0,10,0">
@@ -130,10 +100,8 @@
 
         <Grid BackgroundColor="#faf9fb" Grid.Row="1" Grid.ColumnSpan="5" IsVisible="{OnPlatform Android=False, iOS=False}" MaximumWidthRequest="2000"  >
 
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
-
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -141,7 +109,6 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
-
             </Grid.ColumnDefinitions>
             
             <Image Grid.Row="1" Grid.Column="0" Source="text_only.png" Margin="20,0,0,0" HorizontalOptions="Start" HeightRequest="25" />
@@ -151,14 +118,7 @@
 
 
         </Grid>
-      
-
-
-
     </Grid>
-
-    
-
 
 </ContentPage>
 

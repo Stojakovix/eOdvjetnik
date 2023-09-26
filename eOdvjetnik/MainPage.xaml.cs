@@ -1,23 +1,13 @@
 ﻿using System.Diagnostics;
 using System.Text;
-using eOdvjetnik.Data;
 using System.Security.Cryptography;
 using eOdvjetnik.ViewModel;
 using System.Globalization;
-using System.Text.Json;
-using eOdvjetnik.Models;
-using System.Windows.Input;
-using System.Threading;
-using System;
-using System.Resources;
-using Microsoft.Maui.Controls;
-using Xamarin.Essentials;
 using Preferences = Microsoft.Maui.Storage.Preferences;
 using Permissions = Microsoft.Maui.ApplicationModel.Permissions;
 using PermissionStatus = Microsoft.Maui.ApplicationModel.PermissionStatus;
 using DeviceType = Microsoft.Maui.Devices.DeviceType;
 using DeviceInfo = Microsoft.Maui.Devices.DeviceInfo;
-using CommunityToolkit.Mvvm.Messaging;
 using Plugin.LocalNotification;
 
 namespace eOdvjetnik;
@@ -27,51 +17,9 @@ namespace eOdvjetnik;
 public partial class MainPage : ContentPage
 {
 
-
-
-    //MySQL varijable
-    public string query;
-
-
-    //int count = 0;
-    private const string url = "https://cc.eodvjetnik.hr/token.json?token=";
+    private const string url = "https://cc.eodvjetnik.hr/token.json?token="; //DD: čemu ovo?
     private HttpClient _Client = new HttpClient();
-    
-    public string ActivationCode { get; set; }
-    public string LicenceType { get; set; }
-    public string ExpireDateString { get; set; }
-
-    //KRAJ NAS
-
-
-    private void OnRefreshLicenceClick(object sender, EventArgs e)
-    {
-        LicenceCheck();
-        
-        try
-        {
-            var request = new NotificationRequest
-            {
-                NotificationId = 1,
-                Title = "Kliknut kalendar",
-                Description = "U kalendaru je dodan novi događaj",
-                BadgeNumber = 1,
-                CategoryType = NotificationCategoryType.Status,
-                Schedule = new NotificationRequestSchedule
-                {
-                    NotifyTime = DateTime.Now.AddSeconds(5),
-                }
-            };
-            LocalNotificationCenter.Current.AreNotificationsEnabled();
-            LocalNotificationCenter.Current.Show(request);
-            Debug.WriteLine(request.Title);
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message);
-        }
-
-    }
+      
     private void SaveNotification()
     {
         try
@@ -97,12 +45,7 @@ public partial class MainPage : ContentPage
             Debug.WriteLine(ex.Message);
         }
     }
-
-    private void LicenceUpdatedMessage()
-    {
-        WeakReferenceMessenger.Default.Send(new LicenceUpdated("Licence updated!"));
-    }
-
+       
     private void OnLanguageSelected(object sender, EventArgs e)
     {
         // Get the selected language from the dropdown
@@ -116,158 +59,6 @@ public partial class MainPage : ContentPage
         // Refresh the UI to reflect the changes in language
         InitializeComponent();
     }
-
-    public async void ActivationLoop()
-    {
-        var database = new Prefdatabase();
-        
-        Debug.WriteLine("MainPageViewModel - > ActivationLoop");
-        string string1 = "https://cc.eodvjetnik.hr/eodvjetnikadmin/waiting-lists/request?cpuid=";
-        string string2 = Preferences.Get("key", null);
-        string activationURL = string.Concat(string1, string2);
-        Debug.WriteLine("MainPageViewModel - > ActivationLoop - URL za waiting list: " + activationURL);
-        Preferences.Get("activation_code", ActivationCode);
-
-        if (ActivationCode == null || ActivationCode == "")
-        {
-
-        
-        try
-        {
-            Debug.WriteLine("MainPageViewModel - > ActivationLoop -> usao u try");
-
-            using (var client = new HttpClient())
-            {
-                HttpResponseMessage response = await client.GetAsync(activationURL);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    Debug.WriteLine("MainPageViewModel - > ActivationLoop -> Dohvatio response");
-
-                    string jsonContent = await response.Content.ReadAsStringAsync();
-                    response.EnsureSuccessStatusCode();
-                    var content = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine("MainPageViewModel - > ActivationLoop -> JSON: " + content);
-
-                    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                    var data = System.Text.Json.JsonSerializer.Deserialize<ActivationData[]>(content, options);
-
-                    ActivationCode = data[0].activation_code;
-                    Preferences.Set("activation_code", ActivationCode);
-
-                    Debug.WriteLine($"Received data: {data[0].id}, {data[0].created}, {data[0].hwid}, {data[0].IP}, {data[0].activation_code}");
-                }
-                else
-                {
-                    Debug.WriteLine("MainPageViewModel - > ActivationLoop -> Povezivanje neuspješno");
-                    await Application.Current.MainPage.DisplayAlert("Upozorenje", "Povezivanje s poslužiteljem nije uspjelo.", "OK");
-                }
-            }
-            WeakReferenceMessenger.Default.Send(new CheckLicence("CheckLicence!")); // 1 put
-            LicenceCheck();
-
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine("Activation error:" + ex.Message);
-        }
-        }
-        WeakReferenceMessenger.Default.Send(new CheckLicence("CheckLicence!")); // 1 put
-        LicenceCheck();
-    }
-
-
-
-
-    public async void LicenceCheck()
-    {
-
-        Debug.WriteLine("MainPageViewModel - > LicenceCheck");
-        string string1 = "https://cc.eodvjetnik.hr/eodvjetnikadmin/licences/request?cpuid=";
-        string string2 = Preferences.Get("key", null);
-        string licenceURL = string.Concat(string1, string2);
-        Debug.WriteLine("MainPageViewModel - > LicenceCheck - URL za dohvaćanje licence: " + licenceURL);
-        try
-        {
-            Debug.WriteLine("MainPageViewModel - > LicenceCheck -> usao u try");
-
-            using (var client = new HttpClient())
-            {
-                HttpResponseMessage response = await client.GetAsync(licenceURL);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    Debug.WriteLine("MainPageViewModel - > LicenceCheck -> uspješno dohvatio licence");
-
-                    string jsonContent = await response.Content.ReadAsStringAsync();
-                    response.EnsureSuccessStatusCode();
-                    var content = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine("MainPageViewModel - > LicenceCheck -> JSON s licencama: " + content);
-
-                    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                    var jsonObject = JsonSerializer.Deserialize<JsonElement>(content, options);
-
-                    string licenceIsActive = jsonObject.GetProperty("Devices")[0].GetProperty("licence_active").GetString();
-                    int companyID = jsonObject.GetProperty("Devices")[0].GetProperty("company_id").GetInt32();
-                    string company_ID = companyID.ToString();
-                    int devicetypeID = jsonObject.GetProperty("Devices")[0].GetProperty("device_type_id").GetInt32();
-                    string devicetype_ID = devicetypeID.ToString();
-                    string licenceType = jsonObject.GetProperty("LicenceTypes")[0].GetProperty("naziv").GetString();
-                    string expireDate = jsonObject.GetProperty("Licences")[0].GetProperty("expire_date").GetString();
-                    string nazivTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("naziv").GetString();
-                    string OIBTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("OIB").GetString();
-                    string adresaTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("adresa").GetString();
-
-                    Preferences.Set("expire_date", expireDate);
-                    Preferences.Set("licence_type", licenceType);
-                    Preferences.Set("licence_active", licenceIsActive);
-                    Preferences.Set("naziv_tvrtke", nazivTvrtke);
-                    Preferences.Set("OIBTvrtke", OIBTvrtke);
-                    Preferences.Set("adresaTvrtke", adresaTvrtke);
-                    Preferences.Set("company_id", company_ID);
-                    Preferences.Set("device_type_id", devicetype_ID);
-
-                    Debug.WriteLine("MainPageViewModel - > Company info: " + nazivTvrtke + " " + OIBTvrtke + " " + adresaTvrtke);
-
-                    WeakReferenceMessenger.Default.Send(new CheckLicence("CheckLicence!")); 
-
-                    string nas = Preferences.Get("IP Adresa", "");
-                    string sql = Preferences.Get("IP Adresa2", "");
-                    Debug.WriteLine("provjera jesu li dodani nas " + nas + " i sql postavke " + sql + "koja je licenca " + LicenceType);
-
-                    //provjera jesu li NAS i SQL postavke unesne
-                    if (nas == "" || nas == null || sql == "" || sql == null)
-                    {
-                        await Application.Current.MainPage.DisplayAlert("", "Unesite NAS i SQL postavke.", "OK");
-
-                    }
-
-                }
-                else
-                {
-                    // Što ako se ne može povezati
-                    //await Application.Current.MainPage.DisplayAlert("Upozorenje", "Povezivanje s poslužiteljem nije uspjelo.", "OK");
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine("Activation error:" + ex.Message);
-
-
-            //LicenceType = Preferences.Get("licence_type", "");
-            //if (LicenceType == "" || LicenceType == null)
-            //{
-            //    await Application.Current.MainPage.DisplayAlert("", "Licenca nije aktivna.", "OK");
-            //}
-
-        }
-        WeakReferenceMessenger.Default.Send(new CheckLicence("CheckLicence!")); // 1 put
-        LicenceUpdatedMessage(); 
-      }
-
-
-
 
     async void AskForWiFiPermission()
     {
@@ -286,21 +77,18 @@ public partial class MainPage : ContentPage
         }
     }
 
-
-
- 
-
-public MainPage()
+    public MainPage()
     {
         InitializeComponent();
         ReadDeviceInfo();
         GetMicroSeconds();
         AskForWiFiPermission();
         BindingContext = new MainPageViewModel();
-        ActivationLoop();
 
 
     }
+
+
     private async void BrowserOpen_Clicked(object sender, EventArgs e)
     {
         try
@@ -313,7 +101,6 @@ public MainPage()
             // An unexpected error occurred. No browser may be installed on the device.
         }
     }
-
 
     public static void ReadDeviceInfo()
     {
@@ -339,7 +126,7 @@ public MainPage()
 
     }
 
-    public static string GetMicroSeconds()
+    public static string GetMicroSeconds() //DD: čemu ovo?
     {
         double timestamp = Stopwatch.GetTimestamp();
         double microseconds = 1_000_000.0 * timestamp / Stopwatch.Frequency;
@@ -348,7 +135,7 @@ public MainPage()
         return hashedData;
 
     }
-    static string ComputeSha256Hash(string rawData)
+    static string ComputeSha256Hash(string rawData) //DD: čemu ovo?
     {
         // Create a SHA256   
         using (SHA256 sha256Hash = SHA256.Create())
@@ -367,18 +154,13 @@ public MainPage()
 
     }
    
-
-
     protected override void OnAppearing()
     {
-
-
 
         // Get the current device information
         var deviceInfo = DeviceInfo.Current;
         Debug.WriteLine(deviceInfo);
         // Get the culture information
-
 
 
         // Get the current culture information
@@ -393,8 +175,6 @@ public MainPage()
         // Get the country/region code
         var countryCode2 = cultureInfo.ThreeLetterWindowsLanguageName;
         Debug.WriteLine(countryCode2);
-
-
 
 
         base.OnAppearing();
