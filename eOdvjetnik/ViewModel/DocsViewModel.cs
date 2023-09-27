@@ -113,9 +113,9 @@ namespace eOdvjetnik.ViewModel
                 if (RootShares == null) { } else { RootShares.Clear(); }
                 if (RootShares == null) { } else { RootShares.Clear(); }
 
-
+                string subfolder_nas = TrecaSreca.Get(SUBFOLDER_nas);
                 //Ispis svega na putanji
-                List<QueryDirectoryFileInformation> fileList = sMBConnect.ListPath(Preferences.Get(SUBFOLDER_nas, ""));
+                List<QueryDirectoryFileInformation> fileList = sMBConnect.ListPath(subfolder_nas);
 
                 //Root share list
                 List<string> shares = sMBConnect.getRootShare();
@@ -236,7 +236,7 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                //var fileUri = new Uri($"smb://{Preferences.Get(IP, "")}/{Preferences.Get(FOLDER, "")}/{fileName}");
+                //var fileUri = new Uri($"smb://{Preferences.Get(IP, "")}I/{Preferences.Get(FOLDER, "")}/{fileName}");
                 //await Launcher.OpenAsync(fileUri);
 
                 Debug.WriteLine(DeviceInfo.Platform);
@@ -249,8 +249,12 @@ namespace eOdvjetnik.ViewModel
                 {
                     // Code to execute on macOS
                     Console.WriteLine("Running on macOS");
+
                     //string filePath = @"/Volumes/" + Preferences.Get(FOLDER_nas, "") + "/" + Preferences.Get(SUBFOLDER_nas, "") + "/" + fileName;
-                    string filePath = @"smb://" + Preferences.Get(IP, "") + "/" + Preferences.Get(FOLDER_nas, "") + "/" + Preferences.Get(SUBFOLDER_nas, "") + "/" + fileName;
+                    string ip = TrecaSreca.Get(IP);
+                    string folder = TrecaSreca.Get(FOLDER_nas);
+                    string subfolder = TrecaSreca.Get(SUBFOLDER_nas);
+                    string filePath = @"smb://" + ip + "/" + folder + "/" + subfolder + "/" + fileName;
 
                     Debug.WriteLine(filePath);
                     await Launcher.OpenAsync(filePath);
@@ -259,7 +263,10 @@ namespace eOdvjetnik.ViewModel
                 {
                     // Code to execute on other platforms
                     Console.WriteLine("Running on a platform other than macOS");
-                    string filePath = @"\\" + Preferences.Get(IP, "") + "\\" + Preferences.Get(FOLDER_nas, "") + "\\" + Preferences.Get(SUBFOLDER_nas, "") + "\\" + fileName;
+                    string ip = TrecaSreca.Get(IP);
+                    string folder = TrecaSreca.Get(FOLDER_nas);
+                    string subfolder = TrecaSreca.Get(SUBFOLDER_nas);
+                    string filePath = @"smb://" + ip + "/" + folder + "/" + subfolder + "/" + fileName;
                     Debug.WriteLine(filePath);
                     await Launcher.OpenAsync(filePath);
                 }

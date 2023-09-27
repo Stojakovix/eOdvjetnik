@@ -71,7 +71,7 @@ namespace eOdvjetnik.Services
             }
         }
 
-        public static void UpdatePreferenceValue(string key, string newValue)
+        public static void Update(string key, string newValue)
         {
             XDocument xmlDoc = XDocument.Load(FilePath);
 
@@ -86,7 +86,7 @@ namespace eOdvjetnik.Services
             }
         }
 
-        public static void DeletePreference(string key)
+        public static void Remove(string key)
         {
             XDocument xmlDoc = XDocument.Load(FilePath);
 
@@ -99,6 +99,13 @@ namespace eOdvjetnik.Services
                 preferenceElement.Remove();
                 xmlDoc.Save(FilePath);
             }
+        }
+
+        public static void Clear()
+        {
+            XDocument xmlDoc = XDocument.Load(FilePath);
+            xmlDoc.Root.Elements().Remove();
+            xmlDoc.Save(FilePath);
         }
 
     }

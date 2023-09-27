@@ -151,7 +151,7 @@ namespace eOdvjetnik.ViewModel
             Appointments.Clear();
             AdminAppointments.Clear();
             Resources.Clear();
-            string licence_type = Preferences.Get("licence_type", "");
+            string licence_type = TrecaSreca.Get("licence_type");
             int numberOfCharacters = 5;
             string adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
             Debug.WriteLine("Kalendar ResourceView - 'Admin' provjera: " + adminCheck);
@@ -175,7 +175,7 @@ namespace eOdvjetnik.ViewModel
             AdminViewByName = new Command(GetAdminCalendarEventsByName);
             AdminAppointments = new ObservableCollection<AdminCalendarItem>();
 
-            SQLUserID = Preferences.Get("UserID", "");
+            SQLUserID = TrecaSreca.Get("UserID");
 
             try
             {
@@ -278,7 +278,7 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
-                var hardware_id = Preferences.Get("key", "default_value");
+                var hardware_id = TrecaSreca.Get("key");
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 List<int> ExternalEventIDs = new List<int>();
                 List<int> InternalEventIDs = new List<int>();
@@ -354,7 +354,7 @@ namespace eOdvjetnik.ViewModel
             try
             {
                 Appointments.Clear();
-                var hardware_id = Preferences.Get("key", "default_value");
+                var hardware_id = TrecaSreca.Get("key");
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 List<int> ExternalEventIDs = new List<int>();
                 List<int> InternalEventIDs = new List<int>();

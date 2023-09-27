@@ -38,19 +38,19 @@ namespace eOdvjetnik.ViewModel
             try
             {
 
-                ClientID = Preferences.Get("SelectedID", "");
-                ClientName = Preferences.Get("SelectedName", "");
-                ClientOIB = Preferences.Get("SelectedOIB", "");
-                ClientAddress = Preferences.Get("SelectedAddress", "");
-                ClientResidence = Preferences.Get("SelectedRsidence", "");
-                ClientPhone = Preferences.Get("SelectedPhone", "");
-                ClientFax = Preferences.Get("SelectedFax", "");
-                ClientMobile = Preferences.Get("SelectedMobile", "");
-                ClientEmail = Preferences.Get("SelectedEmail", "");
-                ClientOther = Preferences.Get("SelectedOther", "");
-                ClientCountry = Preferences.Get("SelectedCountry", "");
-                ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
-                ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
+                ClientID = TrecaSreca.Get("SelectedID");
+                ClientName = TrecaSreca.Get("SelectedName");
+                ClientOIB = TrecaSreca.Get("SelectedOIB");
+                ClientAddress = TrecaSreca.Get("SelectedAddress");
+                ClientResidence = TrecaSreca.Get("SelectedRsidence");
+                ClientPhone = TrecaSreca.Get("SelectedPhone");
+                ClientFax = TrecaSreca.Get("SelectedFax");
+                ClientMobile = TrecaSreca.Get("SelectedMobile");
+                ClientEmail = TrecaSreca.Get("SelectedEmail");
+                ClientOther = TrecaSreca.Get("SelectedOther");
+                ClientCountry = TrecaSreca.Get("SelectedCountry");
+                ClientLegalPersonString = TrecaSreca.Get("SelectedLegalPersonString");
+                ClientBirthDate = TrecaSreca.Get("SelectedBrithDateString");
 
                 if (ClientLegalPersonString == "True")
                 {
@@ -400,7 +400,7 @@ namespace eOdvjetnik.ViewModel
                     ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                     Debug.WriteLine("Client ID " + ClientID);
                     string contactDeleted = "Obrisali ste kontakt: " + ClientName;
-                    Preferences.Set("ContactDeleted", contactDeleted);
+                    TrecaSreca.Set("ContactDeleted", contactDeleted);
 
 
                     string DeleteQuery = "DELETE FROM contacts WHERE ID = " + ClientID;
@@ -473,22 +473,22 @@ namespace eOdvjetnik.ViewModel
                 externalSQLConnect.sqlQuery(UpdateQuery);
 
 
-                Preferences.Set("SelectedName", ClientName);
-                Preferences.Set("SelectedOIB", ClientOIB);
-                Preferences.Set("SelectedAddress", ClientAddress);
-                Preferences.Set("SelectedRsidence", ClientResidence);
-                Preferences.Set("SelectedPhone", ClientPhone);
-                Preferences.Set("SelectedFax", ClientFax);
-                Preferences.Set("SelectedMobile", ClientMobile);
-                Preferences.Set("SelectedEmail", ClientEmail);
-                Preferences.Set("SelectedOther", ClientOther);
-                Preferences.Set("SelectedCountry", ClientCountry);
-                Preferences.Set("SelectedBrithDateString", ClientBirthDate);
+                TrecaSreca.Set("SelectedName", ClientName);
+                TrecaSreca.Set("SelectedOIB", ClientOIB);
+                TrecaSreca.Set("SelectedAddress", ClientAddress);
+                TrecaSreca.Set("SelectedRsidence", ClientResidence);
+                TrecaSreca.Set("SelectedPhone", ClientPhone);
+                TrecaSreca.Set("SelectedFax", ClientFax);
+                TrecaSreca.Set("SelectedMobile", ClientMobile);
+                TrecaSreca.Set("SelectedEmail", ClientEmail);
+                TrecaSreca.Set("SelectedOther", ClientOther);
+                TrecaSreca.Set("SelectedCountry", ClientCountry);
+                TrecaSreca.Set("SelectedBrithDateString", ClientBirthDate);
 
              
                 if (ClientLegalPerson == true)
                  {
-                    Preferences.Set("SelectedLegalPersonString", "True");
+                    TrecaSreca.Set("SelectedLegalPersonString", "True");
 
                 }
 
@@ -515,7 +515,7 @@ namespace eOdvjetnik.ViewModel
             {
                 UpdateContactOnRemoteServer(contactItem);
                 await Shell.Current.GoToAsync("///Klijenti");
-                Preferences.Set("ClientEditedName", ClientName);
+                TrecaSreca.Set("ClientEditedName", ClientName);
 
                 ContactEditedMessage();
                 Debug.WriteLine("Klijent je ažuriran: " + ClientName);

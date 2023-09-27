@@ -60,36 +60,16 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-        public async Task InitializeDataAsync()
+
+        public void GenerateFiles()
         {
             try
             {
-                string listItemIdString = await SecureStorage.GetAsync("listItemId");
-                Debug.WriteLine(listItemIdString + " u InitializeData ");
-                if (int.TryParse(listItemIdString, out int parsedItemId))
-                {
-                    ListItemId = parsedItemId;
-                }
-                else
-                {
-                    // Handle the case where parsing fails - Tu neki popup ili da vrati na spise, smislit nešt
-                    Debug.WriteLine("Failed to parse listItemId.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
-
-
-        public async void GenerateFiles()
-        {
-            try
-            {
-                await InitializeDataAsync();
-                spiDokItems.Clear();
                 
+                spiDokItems.Clear();
+                ListItemId = int.Parse(TrecaSreca.Get("listItemId"));
+                Debug.WriteLine(ListItemId);
+
                 Debug.WriteLine(ListItemId + " u generateFiles");
                 //string query = "SELECT * FROM files ORDER BY id DESC LIMIT 100;";
                 string query = $"SELECT * FROM `documents` where file_id='{ListItemId}' ORDER BY `id` DESC";
@@ -189,10 +169,9 @@ namespace eOdvjetnik.ViewModel
             {
                 //var fileUri = new Uri($"smb://{Preferences.Get(IP, "")}/{Preferences.Get(FOLDER, "")}/{fileName}");
                 //await Launcher.OpenAsync(fileUri);
-                string ip = await SecureStorage.GetAsync(IP_nas);
-                string folder = await SecureStorage.GetAsync(FOLDER_nas);
-                string subfolder = await SecureStorage.GetAsync(SUBFOLDER_nas);
-                //string ip = await SecureStorage.GetAsync(IP_nas);
+                string ip =  TrecaSreca.Get(IP_nas);
+                string folder =  TrecaSreca.Get(FOLDER_nas);
+                string subfolder =  TrecaSreca.Get(SUBFOLDER_nas);
                 Debug.WriteLine("Samo string -> " + @"\\192.168.1.211\Users\user\test.doc");
                 string filePath = @"\\" + ip + "\\" + folder + subfolder + "\\" + fileName;
                 Debug.WriteLine("Izgenerirani string -> " + @"\\" + ip + "\\" + folder + subfolder + "\\" + fileName);

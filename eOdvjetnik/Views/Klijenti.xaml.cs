@@ -26,49 +26,4 @@ public partial class Klijenti : ContentPage
         
     }
 
-   
-
-
-    //private async void ListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
-    //{
-    //    if (e.SelectedItem == null)
-    //        return;
-
-    //    var selectedTariffItem = (ContactItem)e.SelectedItem;
-
-    //    await SaveToPreferences(selectedTariffItem.Id, selectedTariffItem.Ime, selectedTariffItem.OIB, selectedTariffItem.Datum_rodenja, selectedTariffItem.Adresa, selectedTariffItem.Boraviste, selectedTariffItem.Telefon, selectedTariffItem.Fax, selectedTariffItem.Mobitel, selectedTariffItem.Email, selectedTariffItem.Ostalo, selectedTariffItem.Drzava, selectedTariffItem.Pravna);
-
-    //    ((ListView)sender).SelectedItem = null;
-    //}
-
-
-    //private Task SaveToPreferences(int Id, string Ime, string OIB, string Datum_rodenja, string Adresa, string Boraviste,  string Telefon, string Fax, string Mobitel, string Email, string Ostalo, string Drzava, string Pravna)
-    //{
-    //    Preferences.Set("SelectedName", Ime);
-    //    Preferences.Set("SelectedOIB", OIB);
-    //    Preferences.Set("SelectedAddress", Adresa);
-    //    Preferences.Set("SelectedRsidence", Boraviste);
-    //    Preferences.Set("SelectedPhone", Telefon);
-    //    Preferences.Set("SelectedFax", Fax);
-    //    Preferences.Set("SelectedMobile", Mobitel);
-    //    Preferences.Set("SelectedEmail", Email);
-    //    Preferences.Set("SelectedOther", Ostalo);
-    //    Preferences.Set("SelectedCountry", Drzava);
-    //    Preferences.Set("SelectedLegalPersonString", Pravna);
-    //    Preferences.Set("SelectedBrithDateString", Datum_rodenja);
-
-    //    try
-    //    {
-    //        string IDstring = Id.ToString();
-    //        Preferences.Set("SelectedID", IDstring);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        Debug.WriteLine(ex.Message);
-    //    }
-
-
-
-    //    return Task.CompletedTask;
-    //}
 }
