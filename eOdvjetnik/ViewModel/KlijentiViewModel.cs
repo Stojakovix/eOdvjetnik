@@ -175,20 +175,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
         }
     }
 
-    private string Tekst2 { get; set; }
 
-    public string tekst2
-    {
-        get { return Tekst2; }
-        set
-        {
-            if (Tekst2 != value)
-            {
-                Tekst2 = value;
-                OnPropertyChanged(nameof(tekst2));
-            }
-        }
-    }
 
 
     public void GenerateFiles()
@@ -514,53 +501,6 @@ public class KlijentiViewModel : INotifyPropertyChanged
     public ICommand AddAsOpponent { get; set; }
 
         
-
-        Contacts = new ObservableCollection<ContactItem>();
-        ContactDeleted = false;
-
-        try
-        {
-            ClientID = await SecureStorage.GetAsync("SelectedID");
-            ClientName = await SecureStorage.GetAsync("SelectedName");
-            ClientOIB = await SecureStorage.GetAsync("SelectedOIB");
-            ClientAddress = await SecureStorage.GetAsync("SelectedAddress");
-            ClientResidence = await SecureStorage.GetAsync("SelectedRsidence");
-            ClientPhone = await SecureStorage.GetAsync("SelectedPhone");
-            ClientFax = await SecureStorage.GetAsync("SelectedFax");
-            ClientMobile = await SecureStorage.GetAsync("SelectedMobile");
-            ClientEmail = await SecureStorage.GetAsync("SelectedEmail");
-            ClientOther = await SecureStorage.GetAsync("SelectedOther");
-            ClientCountry = await SecureStorage.GetAsync("SelectedCountry");
-            ClientLegalPersonString = await SecureStorage.GetAsync("SelectedLegalPersonString");
-            ClientBirthDate = await SecureStorage.GetAsync("SelectedBrithDateString");
-
-
-            if (ClientLegalPersonString == "True")
-            {
-                ClientLegalPerson = true;
-            }
-            else
-            {
-                ClientLegalPerson = false;
-            }
-
-            if (ClientLegalPersonString == "True")
-            {
-                ClientLegalPerson = true;
-            }
-            else
-            {
-                ClientLegalPerson = false;
-            }
-            tekst2 = await SecureStorage.GetAsync("ClientEditedName");
-
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message + " in initialize data");
-
-        }
-    }
     public KlijentiViewModel()
     {
         WeakReferenceMessenger.Default.Register<RefreshContacts>(this, NewContactAddedReceived);
@@ -571,7 +511,46 @@ public class KlijentiViewModel : INotifyPropertyChanged
         Contacts = new ObservableCollection<ContactItem>();
         ContactDeleted = false;
 
-        
+        try
+        {
+            ClientID = Preferences.Get("SelectedID", "");
+            ClientName = Preferences.Get("SelectedName", "");
+            ClientOIB = Preferences.Get("SelectedOIB", "");
+            ClientAddress = Preferences.Get("SelectedAddress", "");
+            ClientResidence = Preferences.Get("SelectedRsidence", "");
+            ClientPhone = Preferences.Get("SelectedPhone", "");
+            ClientFax = Preferences.Get("SelectedFax", "");
+            ClientMobile = Preferences.Get("SelectedMobile", "");
+            ClientEmail = Preferences.Get("SelectedEmail", "");
+            ClientOther = Preferences.Get("SelectedOther", "");
+            ClientCountry = Preferences.Get("SelectedCountry", "");
+            ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
+            ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
+            if (ClientLegalPersonString == "True")
+            {
+                ClientLegalPerson = true;
+            }
+            else
+            {
+                ClientLegalPerson = false;
+            }
+
+            if (ClientLegalPersonString == "True")
+            {
+                ClientLegalPerson = true;
+            }
+            else
+            {
+                ClientLegalPerson = false;
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+
+        }
+
         OnReciptClickCommand = new Command(OpenRecipt);
         RefreshContacts = new Command(GenerateFiles);
         EditClientButton = new Command(EditClient);
@@ -794,7 +773,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
             }
 
             string tekst1 = "Uspješno ste izmijenili kontakt: ";
-            //string tekst2 = Preferences.Get("ClientEditedName", "");
+            string tekst2 = Preferences.Get("ClientEditedName", "");
             string tekstObavijest = string.Concat(tekst1, tekst2);
             ContactEditedText = tekstObavijest;
             Application.Current.MainPage.DisplayAlert("", ContactEditedText, "OK");
@@ -846,22 +825,17 @@ public class KlijentiViewModel : INotifyPropertyChanged
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
+            }
 
         }
     }
 
-    public async Task getClientName()
-    {
-        await SecureStorage.SetAsync("FilesClientID", ClientID);
-        await SecureStorage.SetAsync("FilesClientName", ClientName);
-    }
 
-    public async void AddSelectedClient()
+    public void AddSelectedClient()
     {
         try
         {
-            await InitializeData();
-            await getClientName();
+
             if (ClientID != null && ClientName != null)
             {
                 
@@ -871,7 +845,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 string tekst3 = "' spremljen je kao klijent.";
                 string tekstObavijest = string.Concat(tekst1, tekst2, tekst3);
 
-                await Application.Current.MainPage.DisplayAlert("", tekstObavijest, "OK");
+                Application.Current.MainPage.DisplayAlert("", tekstObavijest, "OK");
             }
             else
             {
@@ -888,9 +862,9 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         try
         {
-            await InitializeData();
-            //Preferences.Set("FilesOpponent", ClientID);
-            //Preferences.Set("FilesOpponentName", ClientName);
+
+            Preferences.Set("FilesOpponent", ClientID);
+            Preferences.Set("FilesOpponentName", ClientName);
             await SecureStorage.SetAsync("FilesOpponent", ClientID);
             await SecureStorage.SetAsync("FilesOpponentName", ClientName);
 

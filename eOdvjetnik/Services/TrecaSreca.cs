@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Google.Protobuf.Collections;
+using Microsoft.Maui.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,19 +31,30 @@ namespace eOdvjetnik.Services
         {
             XDocument xmlDoc = XDocument.Load(FilePath);
 
-            XElement preferencesElement = xmlDoc.Root;
-            preferencesElement.Add(new XElement("Preference",
-                new XAttribute("Key", key),
-                new XAttribute("Value", value)
-            ));
+            XElement preferenceElement = xmlDoc.Root
+                .Elements("Preference")
+                .FirstOrDefault(p => p.Attribute("Key").Value == key);
 
+            if (preferenceElement != null)
+            {
+                // If the key already exists, update its value
+                preferenceElement.SetAttributeValue("Value", value);
+            }
+            else
+            {
+                // If the key doesn't exist, add a new key-value pair
+                XElement newPreferenceElement = new XElement("Preference",
+                    new XAttribute("Key", key),
+                    new XAttribute("Value", value)
+                );
+                xmlDoc.Root.Add(newPreferenceElement);
+            }
             xmlDoc.Save(FilePath);
         }
 
         public static string GetPreferenceValue(string key)
         {
             XDocument xmlDoc = XDocument.Load(FilePath);
-
             XElement preferenceElement = xmlDoc.Root
                 .Elements("Preference")
                 .FirstOrDefault(p => p.Attribute("Key").Value == key);
