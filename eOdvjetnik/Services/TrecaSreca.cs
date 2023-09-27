@@ -101,5 +101,14 @@ namespace eOdvjetnik.Services
             }
         }
 
+        public static void DeleteAllPreferences() //DD: dodao za gumb na main page
+        {
+            XDocument xmlDoc = XDocument.Load(FilePath);
+
+            // Remove all Preference elements
+            xmlDoc.Root.Elements("Preference").Remove();
+
+            xmlDoc.Save(FilePath);
+        }
     }
 }

@@ -9,6 +9,7 @@ using PermissionStatus = Microsoft.Maui.ApplicationModel.PermissionStatus;
 using DeviceType = Microsoft.Maui.Devices.DeviceType;
 using DeviceInfo = Microsoft.Maui.Devices.DeviceInfo;
 using Plugin.LocalNotification;
+using eOdvjetnik.Services;
 
 namespace eOdvjetnik;
 
@@ -55,7 +56,7 @@ public partial class MainPage : ContentPage
         Thread.CurrentThread.CurrentCulture = new CultureInfo(selectedLanguage);
         Thread.CurrentThread.CurrentUICulture = new CultureInfo(selectedLanguage);
 
-        Preferences.Set("CurrentCulture", selectedLanguage);
+        TrecaSreca.Set("CurrentCulture", selectedLanguage);
         // Refresh the UI to reflect the changes in language
         InitializeComponent();
     }
@@ -185,7 +186,7 @@ public partial class MainPage : ContentPage
             //zakomentirati nakon setanja na null
             //Microsoft.Maui.Storage.Preferences.Set("key", null);
             //Provjerava da li ima ključ spremnjen u preferences
-            if (string.IsNullOrEmpty(Microsoft.Maui.Storage.Preferences.Get("key", null)))
+            if (string.IsNullOrEmpty(TrecaSreca.Get("key")))
             {
 
                 base.OnAppearing();
@@ -197,15 +198,15 @@ public partial class MainPage : ContentPage
                 
 
                 //Sprema u preferences index neku vrijednost iz varijable
-                Microsoft.Maui.Storage.Preferences.Set("key", time);
+                TrecaSreca.Set("key", time);
                 Debug.WriteLine("spremio u preferences");
-                string preferencesKey = Microsoft.Maui.Storage.Preferences.Get("key", null);
+                string preferencesKey = TrecaSreca.Get("key");
                 Debug.WriteLine("Izvađen iz preferences: " + preferencesKey);
                 
             }
             else
             {
-                Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + Microsoft.Maui.Storage.Preferences.Get("key", null));
+                Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + TrecaSreca.Get("key"));
 
 
 

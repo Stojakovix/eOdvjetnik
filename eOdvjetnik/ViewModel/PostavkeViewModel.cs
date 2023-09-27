@@ -1,18 +1,12 @@
 ﻿using eOdvjetnik.Model;
 using eOdvjetnik.Services;
-using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text;
-using System.Text.Json;
 using System.Windows.Input;
-using System.Xml.Linq;
-using Utilities;
 using CommunityToolkit.Mvvm.Messaging;
-using System.Reflection;
 
 namespace eOdvjetnik.ViewModel;
 
@@ -118,9 +112,14 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     public void SetColors()
     {
-        string licence_type = Preferences.Get("licence_type", "");
+        string licence_type = TrecaSreca.Get("licence_type");
         int numberOfCharacters = 5;
-        string adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
+        string adminCheck = "";
+        if (licence_type != null)
+        {
+             adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
+
+        }
         Debug.WriteLine("Spremi boje - 'Admin' provjera: " + adminCheck);
         AdminColorPopup = false;
 
@@ -308,7 +307,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
     {
         try
         {
-            JsonDevicesData = Preferences.Get("json_devices", null);
+            JsonDevicesData = TrecaSreca.Get("json_devices");
             Debug.WriteLine("JsonDevicesData = " + JsonDevicesData);
 
             _dataModel = new DeviceDataModel();
@@ -408,9 +407,13 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     private async void ZaposleniciClicked()
     {
-        string licence_type = Preferences.Get("licence_type", "");
+        string licence_type = TrecaSreca.Get("licence_type");
         int numberOfCharacters = 5;
-        string adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
+        string adminCheck = "";
+        if(licence_type != null)
+        {
+            adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
+        }
         Debug.WriteLine("Zaposlenici button - 'Admin' provjera: " + adminCheck);
         if (adminCheck == "Admin")
         {
@@ -506,11 +509,11 @@ public class PostavkeViewModel : INotifyPropertyChanged
     {
         try
         {
-            Preferences.Set("receiptPDVamount", ReceiptPDVamount);
-            Preferences.Set("receiptIBAN", ReceiptIBAN);
-            Preferences.Set("receiptHeaderText", ReceiptHeaderText);
-            Preferences.Set("receiptFooterText", ReceiptFooterText);
-            Preferences.Set("receiptSignature", ReceiptSignature);
+            TrecaSreca.Set("receiptPDVamount", ReceiptPDVamount);
+            TrecaSreca.Set("receiptIBAN", ReceiptIBAN);
+            TrecaSreca.Set("receiptHeaderText", ReceiptHeaderText);
+            TrecaSreca.Set("receiptFooterText", ReceiptFooterText);
+            TrecaSreca.Set("receiptSignature", ReceiptSignature);
             Debug.WriteLine(ReceiptPDVamount + ReceiptIBAN + ReceiptHeaderText + ReceiptFooterText + ReceiptSignature);
         }
         catch (Exception ex)
@@ -565,8 +568,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
             FeedbackVisible = false;
             FeedbackErrorVisible = false;
             string url = "https://cc.eodvjetnik.hr/eodvjetnikadmin/feedbacks/feedback?cpuid=";
-            CompanyID = Preferences.Get("company_id", "");
-            EmployeeID = Preferences.Get("device_type_id", "");
+            CompanyID = TrecaSreca.Get("company_id");
+            EmployeeID = TrecaSreca.Get("device_type_id");
             DateSentString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             string TextWithNoSpaces = ReplaceSpacesAndSectionBreaks(FeedbackText);
@@ -658,15 +661,15 @@ public class PostavkeViewModel : INotifyPropertyChanged
             SaveNewEmployee = new Command(AddNewEmployee);
             BackButtonCommand = new Command(OnBackButtonClick);
 
-            ReceiptPDVamount = Preferences.Get("receiptPDVamount", "");
-            ReceiptIBAN = Preferences.Get("receiptIBAN", "");
-            ReceiptHeaderText = Preferences.Get("receiptHeaderText", "");
-            ReceiptFooterText = Preferences.Get("receiptFooterText", "");
+            ReceiptPDVamount = TrecaSreca.Get("receiptPDVamount");
+            ReceiptIBAN = TrecaSreca.Get("receiptIBAN");
+            ReceiptHeaderText = TrecaSreca.Get("receiptHeaderText");
+            ReceiptFooterText = TrecaSreca.Get("receiptFooterText");
 
-            HWID = Preferences.Get("key", null);
-            LicenceType = Preferences.Get("licence_type", "");
-            DateTimeString = Preferences.Get("expire_date", "");
-            Activation_code = Preferences.Get("activation_code", "");
+            HWID = TrecaSreca.Get("key");
+            LicenceType = TrecaSreca.Get("licence_type");
+            DateTimeString = TrecaSreca.Get("expire_date");
+            Activation_code = TrecaSreca.Get("activation_code");
             try
             {
                 ParseDate();
@@ -685,33 +688,33 @@ public class PostavkeViewModel : INotifyPropertyChanged
             #endregion
             #region NAS komande
             SaveCommandNAS = new Command(OnSaveClickedNas);
-            LoadCommandNAS = new Command(OnLoadClickedNas);
-            DeleteCommandNAS = new Command(OnDeleteClickedNas);
+            //LoadCommandNAS = new Command(OnLoadClickedNas);
+            //DeleteCommandNAS = new Command(OnDeleteClickedNas);
             #endregion
 
             #region SQL komande
             SQLSaveCommand = new Command(OnSaveClickedMySQL);
-            SQLLoadCommand = new Command(OnLoadClickedMySQL);
-            SQLDeleteCommand = new Command(OnDeleteClickedMySQL);
+            //SQLLoadCommand = new Command(OnLoadClickedMySQL);
+            //SQLDeleteCommand = new Command(OnDeleteClickedMySQL);
             ServerClickCommand = new Command(OnServerClick);
             SQLDatabaseCommand = new Command(OnDatabaseClick);
             #endregion
 
             #region NAS Varijable
-            IPNas = Preferences.Get(IP_nas, "");
-            UserNas = Preferences.Get(USER_nas, "");
-            PassNas = Preferences.Get(PASS_nas, "");
-            Folder = Preferences.Get(FOLDER_nas, "");
-            SubFolder = Preferences.Get(SUBFOLDER_nas, "");
+            IPNas = TrecaSreca.Get(IP_nas);
+            UserNas = TrecaSreca.Get(USER_nas);
+            PassNas = TrecaSreca.Get(PASS_nas);
+            Folder = TrecaSreca.Get(FOLDER_nas);
+            SubFolder = TrecaSreca.Get(SUBFOLDER_nas);
 
             #endregion
 
             #region SQL varijable
 
-            IP = Preferences.Get(IP_mysql, "");
-            UserName = Preferences.Get(USER_mysql, "");
-            Password = Preferences.Get(PASS_mysql, "");
-            DatabaseName = Preferences.Get(databasename_mysql, "");
+            IP = TrecaSreca.Get(IP_mysql);
+            UserName = TrecaSreca.Get(USER_mysql);
+            Password = TrecaSreca.Get(PASS_mysql);
+            DatabaseName = TrecaSreca.Get(databasename_mysql);
 
             #endregion
 
@@ -721,8 +724,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
             SendFeedback = new Command(OnFeedbackClicked);
             #endregion
 
-            PostavkeUserName = Preferences.Get("UserName", "");
-            PostavkeUserID = Preferences.Get("UserID", "");
+            PostavkeUserName = TrecaSreca.Get("UserName");
+            PostavkeUserID = TrecaSreca.Get("UserID");
         }
         catch (Exception ex)
         {
@@ -743,13 +746,13 @@ public class PostavkeViewModel : INotifyPropertyChanged
             string user_nas = UserNas;
             string folder = Folder;
             string subFolder = SubFolder;
-            Preferences.Set(IP_nas, ip_nas);
-            Preferences.Set(PASS_nas, pass_nas);
-            Preferences.Set(USER_nas, user_nas);
-            Preferences.Set(FOLDER_nas, folder);
-            Preferences.Set(SUBFOLDER_nas, subFolder);
+            TrecaSreca.Set(IP_nas, ip_nas);
+            TrecaSreca.Set(PASS_nas, pass_nas);
+            TrecaSreca.Set(USER_nas, user_nas);
+            TrecaSreca.Set(FOLDER_nas, folder);
+            TrecaSreca.Set(SUBFOLDER_nas, subFolder);
 
-            Debug.WriteLine("Nas saved " + Preferences.Default);
+            //Debug.WriteLine("Nas saved " + Preferences.Default);
             Debug.WriteLine("KLINUTO NA SAVE U NAS POSTAVKAMA");
 
 
@@ -760,52 +763,52 @@ public class PostavkeViewModel : INotifyPropertyChanged
             Debug.WriteLine(ex.Message + "In PostavkeViewModel NAS");
         }
     }
-    private void OnLoadClickedNas()
-    {
-        try
-        {
-            var ipmynas = Preferences.Get(IP_nas, IPNas);
-            var usermynas = Preferences.Get(USER_nas, UserNas);
-            var passmynas = Preferences.Get(PASS_nas, PassNas);
-            var folder = Preferences.Get(FOLDER_nas, Folder);
-            var subfolder = Preferences.Get(SUBFOLDER_nas, SubFolder);
+    //private void OnLoadClickedNas()
+    //{
+    //    try
+    //    {
+    //        var ipmynas = TrecaSreca.Get(IP_nas, IPNas);
+    //        var usermynas = TrecaSreca.Get(USER_nas, UserNas);
+    //        var passmynas = TrecaSreca.Get(PASS_nas, PassNas);
+    //        var folder = TrecaSreca.Get(FOLDER_nas, Folder);
+    //        var subfolder = TrecaSreca.Get(SUBFOLDER_nas, SubFolder);
 
-            Debug.WriteLine("Load uspješan");
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message + "in PostavkeViewModel OnLoadNAS");
-        }
-    }
-    private void OnDeleteClickedNas()
-    {
-        try
-        {
-            if (String.IsNullOrEmpty(IPNas))
-            {
-                ShowAlert("Alert", "Data is already deleted.");
-            }
-            else
-            {
-                Preferences.Remove(IPNas);
-                Preferences.Remove(UserNas);
-                Preferences.Remove(PassNas);
-                Preferences.Remove(Folder);
-                Preferences.Remove(SubFolder);
+    //        Debug.WriteLine("Load uspješan");
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Debug.WriteLine(ex.Message + "in PostavkeViewModel OnLoadNAS");
+    //    }
+    //}
+    //private void OnDeleteClickedNas()
+    //{
+    //    try
+    //    {
+    //        if (String.IsNullOrEmpty(IPNas))
+    //        {
+    //            ShowAlert("Alert", "Data is already deleted.");
+    //        }
+    //        else
+    //        {
+    //            TrecaSreca.DeletePreference(IPNas);
+    //            TrecaSreca.DeletePreference(UserNas);
+    //            TrecaSreca.DeletePreference(PassNas);
+    //            TrecaSreca.DeletePreference(Folder);
+    //            TrecaSreca.DeletePreference(SubFolder);
 
-                Debug.WriteLine("Succesfully deleted the values");
-            }
-            IPNas = "";
-            UserNas = "";
-            PassNas = "";
-            Folder = "";
-            SubFolder = "";
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message);
-        }
-    }
+    //            Debug.WriteLine("Succesfully deleted the values");
+    //        }
+    //        IPNas = "";
+    //        UserNas = "";
+    //        PassNas = "";
+    //        Folder = "";
+    //        SubFolder = "";
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Debug.WriteLine(ex.Message);
+    //    }
+    //}
 
     #endregion
 
@@ -834,10 +837,10 @@ public class PostavkeViewModel : INotifyPropertyChanged
             string databaseName = DatabaseName;
 
 
-            Preferences.Set(IP_mysql, IP);
-            Preferences.Set(USER_mysql, UserName);
-            Preferences.Set(PASS_mysql, Password);
-            Preferences.Set(databasename_mysql, DatabaseName);
+            TrecaSreca.Set(IP_mysql, IP);
+            TrecaSreca.Set(USER_mysql, UserName);
+            TrecaSreca.Set(PASS_mysql, Password);
+            TrecaSreca.Set(databasename_mysql, DatabaseName);
 
             Debug.WriteLine("Saved");
             Debug.WriteLine(UserName + " " + Password);
@@ -849,43 +852,43 @@ public class PostavkeViewModel : INotifyPropertyChanged
             Debug.WriteLine(ex.Message);
         }
     }
-    private void OnLoadClickedMySQL()
-    {
-        try
-        {
-            var ipmysql = Preferences.Get(IP, IP_mysql);
-            var usermysql = Preferences.Get(UserName, USER_mysql);
-            var passmysql = Preferences.Get(Password, PASS_mysql);
-            var databaseNamemysql = Preferences.Get(DatabaseName, databasename_mysql);
+    //private void OnLoadClickedMySQL()
+    //{
+    //    try
+    //    {
+    //        var ipmysql = Preferences.Get(IP, IP_mysql);
+    //        var usermysql = Preferences.Get(UserName, USER_mysql);
+    //        var passmysql = Preferences.Get(Password, PASS_mysql);
+    //        var databaseNamemysql = Preferences.Get(DatabaseName, databasename_mysql);
 
-            Debug.WriteLine("Load uspješan");
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message + "in MainPageViewModel OnLoadSQL");
-        }
-    }
+    //        Debug.WriteLine("Load uspješan");
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Debug.WriteLine(ex.Message + "in MainPageViewModel OnLoadSQL");
+    //    }
+    //}
 
-    private void OnDeleteClickedMySQL()
-    {
-        if (String.IsNullOrEmpty(IP))
-        {
-            ShowAlert("Alert", "Data is already deleted.");
-        }
-        else
-        {
-            Preferences.Remove(IP);
-            Preferences.Remove(UserName);
-            Preferences.Remove(Password);
-            Preferences.Remove(databasename_mysql);
+    //private void OnDeleteClickedMySQL()
+    //{
+    //    if (String.IsNullOrEmpty(IP))
+    //    {
+    //        ShowAlert("Alert", "Data is already deleted.");
+    //    }
+    //    else
+    //    {
+    //        Preferences.Remove(IP);
+    //        Preferences.Remove(UserName);
+    //        Preferences.Remove(Password);
+    //        Preferences.Remove(databasename_mysql);
 
-        }
+    //    }
 
-        IP = "";
-        UserName = "";
-        Password = "";
-        DatabaseName = "";
-    }
+    //    IP = "";
+    //    UserName = "";
+    //    Password = "";
+    //    DatabaseName = "";
+    //}
 
     private async void OnServerClick()
     {
@@ -945,7 +948,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
         Debug.WriteLine("PostavkeModel - > FetchCompanyDevices");
         string string1 = "https://cc.eodvjetnik.hr/eodvjetnikadmin/devices/getAll?cpuid=";
-        string string2 = Preferences.Get("key", null);
+        string string2 = TrecaSreca.Get("key");
         string activationURL = string.Concat(string1, string2);
         Debug.WriteLine("PostavkeModel - > FetchCompanyDevices - URL: " + activationURL);
         try
@@ -966,7 +969,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
                     var content = await response.Content.ReadAsStringAsync();
                     Debug.WriteLine("PostavkeModel - > FetchCompanyDevices -> Json string: " + content);
                     string json_devices = content.ToString();
-                    Preferences.Set("json_devices", json_devices);
+                    TrecaSreca.Set("json_devices", json_devices);
 
                 }
                 else
@@ -1199,8 +1202,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
         try
         {
             Debug.WriteLine("Refresh postavki nakon ažurianja licence");
-            PostavkeUserName = Preferences.Get("UserName", "");
-            PostavkeUserID = Preferences.Get("UserID", "");
+            PostavkeUserName = TrecaSreca.Get("UserName");
+            PostavkeUserID = TrecaSreca.Get("UserID");
         }
         catch (Exception ex)
         {

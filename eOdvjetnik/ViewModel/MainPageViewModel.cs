@@ -80,7 +80,7 @@ namespace eOdvjetnik.ViewModel
         #endregion
 
         #region Varijable za aktivaciju/licencu
-        public string hardwareID = Preferences.Get("key", null);
+        public string hardwareID = TrecaSreca.Get("key");
         private string LocalUserName;
         public string UserName
         {
@@ -128,9 +128,9 @@ namespace eOdvjetnik.ViewModel
             CheckLicenceStatus = new Command(OnRefreshLicenceClick);
             CurrentDateDT = DateTime.Now.Date;
             RefreshTime();
-            ExpireDateString = Preferences.Get("expire_date", "");
-            LicenceStatus = Preferences.Get("licence_active", "");
-            CompanyName = Preferences.Get("naziv_tvrtke", "");
+            ExpireDateString = TrecaSreca.Get("expire_date");
+            LicenceStatus = TrecaSreca.Get("licence_active");
+            CompanyName = TrecaSreca.Get("naziv_tvrtke");
 
             var timer = Application.Current.Dispatcher.CreateTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -149,9 +149,9 @@ namespace eOdvjetnik.ViewModel
             DevicePlatform CheckPlatform = DeviceInfo.Current.Platform;
             Debug.WriteLine("VRSTA PLATFORME " + CheckPlatform);
             string VrstaPlatforme = CheckPlatform.ToString();
-            Preferences.Set("vrsta_platforme", VrstaPlatforme);
+            TrecaSreca.Set("vrsta_platforme", VrstaPlatforme);
 
-            string TypeOfLicence = Preferences.Get("licence_type", "");
+            string TypeOfLicence = TrecaSreca.Get("licence_type");
             if (LicenceStatus == "0" || TypeOfLicence == null || TypeOfLicence == "")
             {
                 LicenceType = "nije aktivirana";
@@ -186,7 +186,7 @@ namespace eOdvjetnik.ViewModel
                     GracePeriod = days + 10;
                     Debug.WriteLine("ParseDate() - days until licence expires: " + daysR);
                     Debug.WriteLine("ParseDate() - grace period after licence expired: " + GracePeriod);
-                    Preferences.Set("days_until_expiry", daysR);
+                    TrecaSreca.Set("days_until_expiry", daysR);
                 }
                 else
                 {
@@ -202,13 +202,12 @@ namespace eOdvjetnik.ViewModel
 
         public void DeletePreferences()
         {
-            string hwid = Preferences.Get("key", null);
-            string activationCode = Preferences.Get("activation_code", "");
+            string hwid = TrecaSreca.Get("key");
+            string activationCode = TrecaSreca.Get("activation_code");
             Debug.WriteLine("Brisanje preferenci " + hwid + " " + activationCode);
             try
             {
-                Preferences.Default.Clear();
-                Preferences.Clear();
+                TrecaSreca.DeleteAllPreferences();
             }
             catch (Exception ex)
             {
@@ -222,10 +221,10 @@ namespace eOdvjetnik.ViewModel
 
             Debug.WriteLine("MainPageViewModel - > ActivationLoop");
             string string1 = "https://cc.eodvjetnik.hr/eodvjetnikadmin/waiting-lists/request?cpuid=";
-            string string2 = Preferences.Get("key", null);
+            string string2 = TrecaSreca.Get("key");
             string activationURL = string.Concat(string1, string2);
             Debug.WriteLine("MainPageViewModel - > ActivationLoop - URL za waiting list: " + activationURL);
-            Preferences.Get("activation_code", ActivationCode);
+            TrecaSreca.Get("activation_code");
 
             if (ActivationCode == null || ActivationCode == "")
             {
@@ -252,7 +251,7 @@ namespace eOdvjetnik.ViewModel
                             var data = System.Text.Json.JsonSerializer.Deserialize<ActivationData[]>(content, options);
 
                             ActivationCode = data[0].activation_code;
-                            Preferences.Set("activation_code", ActivationCode);
+                            TrecaSreca.Set("activation_code", ActivationCode);
 
                             Debug.WriteLine($"Received data: {data[0].id}, {data[0].created}, {data[0].hwid}, {data[0].IP}, {data[0].activation_code}");
                         }
@@ -278,7 +277,7 @@ namespace eOdvjetnik.ViewModel
 
             Debug.WriteLine("MainPageViewModel - > LicenceCheck");
             string string1 = "https://cc.eodvjetnik.hr/eodvjetnikadmin/licences/request?cpuid=";
-            string string2 = Preferences.Get("key", null);
+            string string2 = TrecaSreca.Get("key");
             string licenceURL = string.Concat(string1, string2);
             Debug.WriteLine("MainPageViewModel - > LicenceCheck - URL za dohvaćanje licence: " + licenceURL);
             try
@@ -312,14 +311,14 @@ namespace eOdvjetnik.ViewModel
                         string OIBTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("OIB").GetString();
                         string adresaTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("adresa").GetString();
 
-                        Preferences.Set("expire_date", expireDate);
-                        Preferences.Set("licence_type", licenceType);
-                        Preferences.Set("licence_active", licenceIsActive);
-                        Preferences.Set("naziv_tvrtke", nazivTvrtke);
-                        Preferences.Set("OIBTvrtke", OIBTvrtke);
-                        Preferences.Set("adresaTvrtke", adresaTvrtke);
-                        Preferences.Set("company_id", company_ID);
-                        Preferences.Set("device_type_id", devicetype_ID);
+                        TrecaSreca.Set("expire_date", expireDate);
+                        TrecaSreca.Set("licence_type", licenceType);
+                        TrecaSreca.Set("licence_active", licenceIsActive);
+                        TrecaSreca.Set("naziv_tvrtke", nazivTvrtke);
+                        TrecaSreca.Set("OIBTvrtke", OIBTvrtke);
+                        TrecaSreca.Set("adresaTvrtke", adresaTvrtke);
+                        TrecaSreca.Set("company_id", company_ID);
+                        TrecaSreca.Set("device_type_id", devicetype_ID);
 
                         Debug.WriteLine("MainPageViewModel - > Company info: " + nazivTvrtke + " " + OIBTvrtke + " " + adresaTvrtke);
 
@@ -351,8 +350,8 @@ namespace eOdvjetnik.ViewModel
         public void CheckNasSQLSettings()  //provjera jesu li NAS i SQL postavke unesne
 
         {
-            string nas = Preferences.Get("IP Adresa", "");
-            string sql = Preferences.Get("IP Adresa2", "");
+            string nas = TrecaSreca.Get("IP Adresa");
+            string sql = TrecaSreca.Get("IP Adresa2");
             Debug.WriteLine("provjera jesu li dodani nas " + nas + " i sql postavke " + sql + "koja je licenca " + LicenceType);
             if (nas == "" || nas == null || sql == "" || sql == null)
             {
@@ -368,7 +367,7 @@ namespace eOdvjetnik.ViewModel
 
     private void LicenceExpiryCheck() // Provjera isteka licence nakon što izvrti LicenceCheck()
         {
-            LicenceStatus = Preferences.Get("licence_active", "");
+            LicenceStatus = TrecaSreca.Get("licence_active");
             
             ExpiredLicence = true;
             if (LicenceStatus == null)
@@ -389,9 +388,13 @@ namespace eOdvjetnik.ViewModel
 
             try //provjera ponovne instalacije Trial licence -> postoji li u SQL-u file ID stariji o 45 dana
             {
-                string licence_type = Preferences.Get("licence_type", "");
+                string licence_type = TrecaSreca.Get("licence_type");
                 int numberOfCharacters = 5;
-                string trialCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
+                string trialCheck = "";
+                if (licence_type != null)
+                {
+                    trialCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
+                }
                 Debug.WriteLine("Kalendar ResourceView - 'Trial' provjera: " + trialCheck);
                 if (trialCheck == "Trial") 
                 {
@@ -442,7 +445,7 @@ namespace eOdvjetnik.ViewModel
             }
 
           ActivationScreen();
-          Activation_code = Preferences.Get("activation_code", "");
+          Activation_code = TrecaSreca.Get("activation_code");
 
         }
 
@@ -454,13 +457,13 @@ namespace eOdvjetnik.ViewModel
             {
                 ActivationVisible = true;
                 string aktivacija = "LicenceNotActive";
-                Preferences.Set("activation_disable", aktivacija);
+                TrecaSreca.Set("activation_disable", aktivacija);
             }
             else if (ExpiredLicence == false)
             {
                 ActivationVisible = false;
                 string aktivacija = "LicenceActive";
-                Preferences.Set("activation_disable", aktivacija);
+                TrecaSreca.Set("activation_disable", aktivacija);
                 CheckNasSQLSettings();
             }
 
@@ -486,9 +489,9 @@ namespace eOdvjetnik.ViewModel
                         UserID = id.ToString();
                         UserInitials = filesRow["inicijali"];
                     }
-                    Preferences.Set("UserName", UserName);
-                    Preferences.Set("UserID", UserID);
-                    Preferences.Set("UserInitials", UserInitials);
+                    TrecaSreca.Set("UserName", UserName);
+                    TrecaSreca.Set("UserID", UserID);
+                    TrecaSreca.Set("UserInitials", UserInitials);
 
                 }
                 else
