@@ -11,8 +11,6 @@ namespace eOdvjetnik.ViewModel
 {
     public class NoviSpisViewModel : INotifyPropertyChanged
     {
-        private Navigacija navigacija;
-
         public ICommand AddFilesToRemoteServer { get; set; }
 
         public ICommand OnDodajClick { get; set; }
@@ -36,7 +34,13 @@ namespace eOdvjetnik.ViewModel
 
                 GetEmployees1();
                 GetEmployees2();
-                //InitializeData();
+
+                ClientId = TrecaSreca.Get("FilesClientID");
+                ClientName = TrecaSreca.Get("FilesClientName");
+                OpponentId = TrecaSreca.Get("FilesOpponent");
+                OpponentName = TrecaSreca.Get("FilesOpponentName");
+
+                UserInitials = TrecaSreca.Get("UserInitials");
 
             }
             catch (Exception ex)
@@ -45,21 +49,7 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
-        public async Task InitializeData()
-        {
-            try
-            {
-                ClientId = await SecureStorage.GetAsync("FilesClientID");
-                ClientName = await SecureStorage.GetAsync("FilesClientName");
-                OpponentId = await SecureStorage.GetAsync("FilesOpponent");
-                OpponentName = await SecureStorage.GetAsync("FilesOpponentName");
-                UserInitials = await SecureStorage.GetAsync("UserInitials");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
+
 
         public List<EmployeeItem> EmployeeItems1 { get; set; }
         private EmployeeItem selectedEmployeeItem1;
@@ -505,12 +495,11 @@ namespace eOdvjetnik.ViewModel
 
         }
 
-        private async void AddSpisToRemoteServer(FileItem fileItem)
+        private void AddSpisToRemoteServer(FileItem fileItem)
         {
 
             try
             {
-                await InitializeData();
                 GetCurrentDate();
                 #region Varijable za spremanje
                 //int idValue = int.Parse(Id);

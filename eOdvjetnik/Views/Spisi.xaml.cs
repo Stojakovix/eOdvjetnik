@@ -3,6 +3,7 @@ using eOdvjetnik.Model;
 using Syncfusion.Maui.DataGrid;
 using System.Diagnostics;
 using Syncfusion.Maui.ListView;
+using eOdvjetnik.Services;
 
 namespace eOdvjetnik.Views;
 
@@ -26,7 +27,7 @@ public partial class Spisi : ContentPage
         }
         else
         {
-            SecureStorage.Remove("listItemId");
+
             viewModel.GenerateFiles();
         }
     }
@@ -47,8 +48,7 @@ public partial class Spisi : ContentPage
             var selectedFileItem = (FileItem)e.DataItem;
             string itemId = selectedFileItem.Id.ToString();
             //Preferences.Set("listItemId", itemId);
-            
-            await SecureStorage.SetAsync("listItemId", itemId);
+            TrecaSreca.Set("listItemId", itemId);
             //Debug.WriteLine("Item tapped " + itemId);
             Debug.WriteLine(itemId + " u ListViewItemSelectedu u spisima");
 

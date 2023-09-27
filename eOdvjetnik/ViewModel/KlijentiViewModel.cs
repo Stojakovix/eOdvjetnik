@@ -18,14 +18,7 @@ namespace eOdvjetnik.ViewModel;
 
 public class KlijentiViewModel : INotifyPropertyChanged
 {
-
-    private void RočišnikMenuItem_Clicked(object sender, EventArgs e)
-    {
-        Debug.WriteLine("MainPageViewModel - > ActivationLoop");
-
-    }
     ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
-    TrecaSreca trecaSreca = new TrecaSreca();
     private ObservableCollection<ContactItem> contacts;
     public ObservableCollection<ContactItem> Contacts
     {
@@ -511,20 +504,6 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
         try
         {
-            //ClientID = Preferences.Get("SelectedID", "");
-            //ClientName = Preferences.Get("SelectedName", "");
-            //ClientOIB = Preferences.Get("SelectedOIB", "");
-            //ClientAddress = Preferences.Get("SelectedAddress", "");
-            //ClientResidence = Preferences.Get("SelectedRsidence", "");
-            //ClientPhone = Preferences.Get("SelectedPhone", "");
-            //ClientFax = Preferences.Get("SelectedFax", "");
-            //ClientMobile = Preferences.Get("SelectedMobile", "");
-            //ClientEmail = Preferences.Get("SelectedEmail", "");
-            //ClientOther = Preferences.Get("SelectedOther", "");
-            //ClientCountry = Preferences.Get("SelectedCountry", "");
-            //ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
-            //ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
-
 
             ClientID = TrecaSreca.Get("SelectedID");
             ClientName = TrecaSreca.Get("SelectedName");
@@ -539,6 +518,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
             ClientCountry = TrecaSreca.Get("SelectedCountry");
             ClientLegalPersonString = TrecaSreca.Get("SelectedLegalPersonString");
             ClientBirthDate = TrecaSreca.Get("SelectedBrithDateString");
+
+            
 
             if (ClientLegalPersonString == "True")
             {
@@ -655,21 +636,6 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
             try
             {
-
-                //ClientID = Preferences.Get("SelectedID", "");
-                //ClientName = Preferences.Get("SelectedName", "");
-                //ClientOIB = Preferences.Get("SelectedOIB", "");
-                //ClientAddress = Preferences.Get("SelectedAddress", "");
-                //ClientResidence = Preferences.Get("SelectedRsidence", "");
-                //ClientPhone = Preferences.Get("SelectedPhone", "");
-                //ClientFax = Preferences.Get("SelectedFax", "");
-                //ClientMobile = Preferences.Get("SelectedMobile", "");
-                //ClientEmail = Preferences.Get("SelectedEmail", "");
-                //ClientOther = Preferences.Get("SelectedOther", "");
-                //ClientCountry = Preferences.Get("SelectedCountry", "");
-                //ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
-                //ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
-
                 ClientID = TrecaSreca.Get("SelectedID");
                 ClientName = TrecaSreca.Get("SelectedName");
                 ClientOIB = TrecaSreca.Get("SelectedOIB");
@@ -725,7 +691,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         GenerateFiles();
         Debug.WriteLine("Generating files after deleting a contact");
-        //ContactDeletedText = Preferences.Get("ContactDeleted", "");
+        ContactDeletedText = TrecaSreca.Get("ContactDeleted");
         ContactDeleted = true;
         await Application.Current.MainPage.DisplayAlert("", ContactDeletedText, "OK");
     }
@@ -793,7 +759,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
             }
 
             string tekst1 = "Uspješno ste izmijenili kontakt: ";
-            string tekst2 = Preferences.Get("ClientEditedName", "");
+            string tekst2 = TrecaSreca.Get("ClientEditedName");
             string tekstObavijest = string.Concat(tekst1, tekst2);
             ContactEditedText = tekstObavijest;
             Application.Current.MainPage.DisplayAlert("", ContactEditedText, "OK");
@@ -825,19 +791,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
         {
             try
             {
-            //    Preferences.Set("SelectedName", SelectedItem.Ime);
-            //    Preferences.Set("SelectedOIB", SelectedItem.OIB);
-            //    Preferences.Set("SelectedAddress", SelectedItem.Adresa);
-            //    Preferences.Set("SelectedRsidence", SelectedItem.Boraviste);
-            //    Preferences.Set("SelectedPhone", SelectedItem.Telefon);
-            //    Preferences.Set("SelectedFax", SelectedItem.Fax);
-            //    Preferences.Set("SelectedMobile", SelectedItem.Mobitel);
-            //    Preferences.Set("SelectedEmail", SelectedItem.Email);
-            //    Preferences.Set("SelectedOther", SelectedItem.Ostalo);
-            //    Preferences.Set("SelectedCountry", SelectedItem.Drzava);
-            //    Preferences.Set("SelectedLegalPersonString", SelectedItem.Pravna);
-            //    Preferences.Set("SelectedBrithDateString", SelectedItem.Datum_rodenja);
-            //    Preferences.Set("SelectedID", IDstring);
+
                 string IDstring = SelectedItem.Id.ToString();
 
                 TrecaSreca.Set("SelectedName", SelectedItem.Ime);
@@ -872,7 +826,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
             if (ClientID != null && ClientName != null)
             {
-                
+                TrecaSreca.Set("FilesClientID", ClientID);
+                TrecaSreca.Set("FilesClientName", ClientName);
 
                 string tekst1 = "Kontakt '";
                 string tekst2 = ClientName;
@@ -896,11 +851,8 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         try
         {
-
-            Preferences.Set("FilesOpponent", ClientID);
-            Preferences.Set("FilesOpponentName", ClientName);
-            await SecureStorage.SetAsync("FilesOpponent", ClientID);
-            await SecureStorage.SetAsync("FilesOpponentName", ClientName);
+            TrecaSreca.Set("FilesOpponent", ClientID);
+            TrecaSreca.Set("FilesOpponentName", ClientName);
 
             string tekst1 = "Kontakt '";
             string tekst2 = ClientName;

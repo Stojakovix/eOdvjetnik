@@ -9,6 +9,8 @@ using SMBLibrary.SMB1;
 using Microsoft.Maui.Controls;
 using System.Diagnostics;
 using eOdvjetnik.ViewModel;
+using eOdvjetnik.Services;
+
 namespace eOdvjetnik.Views;
 
 
@@ -61,7 +63,9 @@ public partial class Dokumenti : ContentPage
             InitializeComponent();
             //database = docsdatabase;
             BindingContext = viewModel;
-            textEntry2.Text = "\\" + Preferences.Get(FOLDER, "") + "\\" + Preferences.Get(SUBFOLDER, "");
+            string folder = TrecaSreca.Get(FOLDER);
+            string subfolder = TrecaSreca.Get(SUBFOLDER);
+            textEntry2.Text = "\\" + folder + "\\" + subfolder;
 
 
         }

@@ -207,7 +207,7 @@ namespace eOdvjetnik.ViewModel
             Debug.WriteLine("Brisanje preferenci " + hwid + " " + activationCode);
             try
             {
-                TrecaSreca.DeleteAllPreferences();
+                TrecaSreca.Clear();
             }
             catch (Exception ex)
             {

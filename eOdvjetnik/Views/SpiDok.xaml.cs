@@ -27,7 +27,6 @@ public partial class SpiDok : ContentPage
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
-        SecureStorage.Remove("listItemId");
 		await Shell.Current.GoToAsync("//Spisi");
     }
 

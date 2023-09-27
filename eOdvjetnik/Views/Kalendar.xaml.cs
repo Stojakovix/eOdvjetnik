@@ -30,7 +30,7 @@ public partial class Kalendar : ContentPage
             Scheduler.DaysView.TimeRegions = GetTimeRegion();
             Scheduler.AppointmentDrop += OnSchedulerAppointmentDrop;
             //MySQL Query;
-            var hardware_id = Preferences.Get("key", "default_value");
+            var hardware_id = TrecaSreca.Get("key");
             isInitialized = false;
 
 
@@ -120,7 +120,7 @@ public partial class Kalendar : ContentPage
 
             else
             {
-                var SQLUserID = Preferences.Get("UserID", "");
+                var SQLUserID = TrecaSreca.Get("UserID");
                 var droptime = eventArgs.DropTime;
                 var timeLength = appointment.EndTime - appointment.StartTime;
                 var resourceId = SQLUserID;
@@ -238,7 +238,7 @@ public partial class Kalendar : ContentPage
         {
             if (e.Element == SchedulerElement.SchedulerCell || e.Element == SchedulerElement.Appointment)
             {
-                var SQLUserID = Preferences.Get("UserID", "");
+                var SQLUserID = TrecaSreca.Get("UserID");
 
                 if (e.Resource != null)
                 {
@@ -248,15 +248,15 @@ public partial class Kalendar : ContentPage
                     
                     if (Scheduler.View == SchedulerView.TimelineMonth)
                     {
-                        Preferences.Remove("resourceId");
-                        Preferences.Set("resourceId", resourceId);
+                        TrecaSreca.Remove("resourceId");
+                        TrecaSreca.Set("resourceId", resourceId);
                         Debug.WriteLine("-----------------------------------------------------Izvršen if " + resourceId);
 
                     }
                     else
                     {
-                        Preferences.Remove("resourceId");
-                        Preferences.Set("resourceId", SQLUserID);
+                        TrecaSreca.Remove("resourceId");
+                        TrecaSreca.Set("resourceId", SQLUserID);
                         Debug.WriteLine("-------------------------------------Izvršen else" + SQLUserID);
                     }
 
@@ -278,16 +278,16 @@ public partial class Kalendar : ContentPage
                     //Debug.WriteLine(resourceId + "-----------------------------------------------------");
                     if (e.Appointments != null)
                     {
-                        Preferences.Remove("resourceId");
-                        Preferences.Set("resourceId", SQLUserID);
+                        TrecaSreca.Remove("resourceId");
+                        TrecaSreca.Set("resourceId", SQLUserID);
                         Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler, _viewModel));
 
                         Debug.WriteLine("--------------------------------------------------Appointment pun");
                     }
                     else
                     {
-                        Preferences.Remove("resourceId");
-                        Preferences.Set("resourceId", SQLUserID);
+                        TrecaSreca.Remove("resourceId");
+                        TrecaSreca.Set("resourceId", SQLUserID);
                         Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler, _viewModel));
 
                         Debug.WriteLine("-------------------------------------------------Appointment prazan");
