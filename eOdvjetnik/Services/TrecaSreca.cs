@@ -2,6 +2,7 @@
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace eOdvjetnik.Services
 {
     public class TrecaSreca
     {
-        private static readonly string FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "preferences.xml");
+        private static readonly string FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "preferences.xml");
 
 
         public static void CreateXmlFile()
@@ -24,10 +25,11 @@ namespace eOdvjetnik.Services
                 );
 
                 xmlDoc.Save(FilePath);
+                Debug.WriteLine(FilePath);
             }
         }
 
-        public static void AddKeyValuePair(string key, string value)
+        public static void Set(string key, string value)
         {
             XDocument xmlDoc = XDocument.Load(FilePath);
 
@@ -52,7 +54,7 @@ namespace eOdvjetnik.Services
             xmlDoc.Save(FilePath);
         }
 
-        public static string GetPreferenceValue(string key)
+        public static string Get(string key)
         {
             XDocument xmlDoc = XDocument.Load(FilePath);
             XElement preferenceElement = xmlDoc.Root

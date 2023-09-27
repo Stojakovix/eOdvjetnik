@@ -176,8 +176,6 @@ public class KlijentiViewModel : INotifyPropertyChanged
     }
 
 
-
-
     public void GenerateFiles()
     {
         ContactEdited = false;
@@ -513,19 +511,35 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
         try
         {
-            ClientID = Preferences.Get("SelectedID", "");
-            ClientName = Preferences.Get("SelectedName", "");
-            ClientOIB = Preferences.Get("SelectedOIB", "");
-            ClientAddress = Preferences.Get("SelectedAddress", "");
-            ClientResidence = Preferences.Get("SelectedRsidence", "");
-            ClientPhone = Preferences.Get("SelectedPhone", "");
-            ClientFax = Preferences.Get("SelectedFax", "");
-            ClientMobile = Preferences.Get("SelectedMobile", "");
-            ClientEmail = Preferences.Get("SelectedEmail", "");
-            ClientOther = Preferences.Get("SelectedOther", "");
-            ClientCountry = Preferences.Get("SelectedCountry", "");
-            ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
-            ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
+            //ClientID = Preferences.Get("SelectedID", "");
+            //ClientName = Preferences.Get("SelectedName", "");
+            //ClientOIB = Preferences.Get("SelectedOIB", "");
+            //ClientAddress = Preferences.Get("SelectedAddress", "");
+            //ClientResidence = Preferences.Get("SelectedRsidence", "");
+            //ClientPhone = Preferences.Get("SelectedPhone", "");
+            //ClientFax = Preferences.Get("SelectedFax", "");
+            //ClientMobile = Preferences.Get("SelectedMobile", "");
+            //ClientEmail = Preferences.Get("SelectedEmail", "");
+            //ClientOther = Preferences.Get("SelectedOther", "");
+            //ClientCountry = Preferences.Get("SelectedCountry", "");
+            //ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
+            //ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
+
+
+            ClientID = TrecaSreca.Get("SelectedID");
+            ClientName = TrecaSreca.Get("SelectedName");
+            ClientOIB = TrecaSreca.Get("SelectedOIB");
+            ClientAddress = TrecaSreca.Get("SelectedAddress");
+            ClientResidence = TrecaSreca.Get("SelectedRsidence");
+            ClientPhone = TrecaSreca.Get("SelectedPhone");
+            ClientFax = TrecaSreca.Get("SelectedFax");
+            ClientMobile = TrecaSreca.Get("SelectedMobile");
+            ClientEmail = TrecaSreca.Get("SelectedEmail");
+            ClientOther = TrecaSreca.Get("SelectedOther");
+            ClientCountry = TrecaSreca.Get("SelectedCountry");
+            ClientLegalPersonString = TrecaSreca.Get("SelectedLegalPersonString");
+            ClientBirthDate = TrecaSreca.Get("SelectedBrithDateString");
+
             if (ClientLegalPersonString == "True")
             {
                 ClientLegalPerson = true;
@@ -641,20 +655,34 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
             try
             {
-                
-                ClientID = Preferences.Get("SelectedID", "");
-                ClientName = Preferences.Get("SelectedName", "");
-                ClientOIB = Preferences.Get("SelectedOIB", "");
-                ClientAddress = Preferences.Get("SelectedAddress", "");
-                ClientResidence = Preferences.Get("SelectedRsidence", "");
-                ClientPhone = Preferences.Get("SelectedPhone", "");
-                ClientFax = Preferences.Get("SelectedFax", "");
-                ClientMobile = Preferences.Get("SelectedMobile", "");
-                ClientEmail = Preferences.Get("SelectedEmail", "");
-                ClientOther = Preferences.Get("SelectedOther", "");
-                ClientCountry = Preferences.Get("SelectedCountry", "");
-                ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
-                ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
+
+                //ClientID = Preferences.Get("SelectedID", "");
+                //ClientName = Preferences.Get("SelectedName", "");
+                //ClientOIB = Preferences.Get("SelectedOIB", "");
+                //ClientAddress = Preferences.Get("SelectedAddress", "");
+                //ClientResidence = Preferences.Get("SelectedRsidence", "");
+                //ClientPhone = Preferences.Get("SelectedPhone", "");
+                //ClientFax = Preferences.Get("SelectedFax", "");
+                //ClientMobile = Preferences.Get("SelectedMobile", "");
+                //ClientEmail = Preferences.Get("SelectedEmail", "");
+                //ClientOther = Preferences.Get("SelectedOther", "");
+                //ClientCountry = Preferences.Get("SelectedCountry", "");
+                //ClientLegalPersonString = Preferences.Get("SelectedLegalPersonString", "");
+                //ClientBirthDate = Preferences.Get("SelectedBrithDateString", "");
+
+                ClientID = TrecaSreca.Get("SelectedID");
+                ClientName = TrecaSreca.Get("SelectedName");
+                ClientOIB = TrecaSreca.Get("SelectedOIB");
+                ClientAddress = TrecaSreca.Get("SelectedAddress");
+                ClientResidence = TrecaSreca.Get("SelectedRsidence");
+                ClientPhone = TrecaSreca.Get("SelectedPhone");
+                ClientFax = TrecaSreca.Get("SelectedFax");
+                ClientMobile = TrecaSreca.Get("SelectedMobile");
+                ClientEmail = TrecaSreca.Get("SelectedEmail");
+                ClientOther = TrecaSreca.Get("SelectedOther");
+                ClientCountry = TrecaSreca.Get("SelectedCountry");
+                ClientLegalPersonString = TrecaSreca.Get("SelectedLegalPersonString");
+                ClientBirthDate = TrecaSreca.Get("SelectedBrithDateString");
                 if (ClientLegalPersonString == "True")
                 {
                     ClientLegalPerson = true;
@@ -676,8 +704,6 @@ public class KlijentiViewModel : INotifyPropertyChanged
         );
     }
 
-
-
     private async void EditClient()
     {
         await Shell.Current.GoToAsync("/UrediKlijenta");
@@ -694,20 +720,14 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
 
     }
-    private async Task getContactText()
-    {
-        ContactDeletedText = await SecureStorage.GetAsync("ContactDeleted");
-    }
 
     private async void ContactDeletedReceived(object recipient, ContactDeleted message)
     {
         GenerateFiles();
         Debug.WriteLine("Generating files after deleting a contact");
-        await getContactText();
         //ContactDeletedText = Preferences.Get("ContactDeleted", "");
         ContactDeleted = true;
         await Application.Current.MainPage.DisplayAlert("", ContactDeletedText, "OK");
-
     }
 
     private void ContactEditedReceived(object recipient, ContactEdited message)
@@ -805,34 +825,36 @@ public class KlijentiViewModel : INotifyPropertyChanged
         {
             try
             {
-                Preferences.Set("SelectedName", SelectedItem.Ime);
-                Preferences.Set("SelectedOIB", SelectedItem.OIB);
-                Preferences.Set("SelectedAddress", SelectedItem.Adresa);
-                Preferences.Set("SelectedRsidence", SelectedItem.Boraviste);
-                Preferences.Set("SelectedPhone", SelectedItem.Telefon);
-                Preferences.Set("SelectedFax", SelectedItem.Fax);
-                Preferences.Set("SelectedMobile", SelectedItem.Mobitel);
-                Preferences.Set("SelectedEmail", SelectedItem.Email);
-                Preferences.Set("SelectedOther", SelectedItem.Ostalo);
-                Preferences.Set("SelectedCountry", SelectedItem.Drzava);
-                Preferences.Set("SelectedLegalPersonString", SelectedItem.Pravna);
-                Preferences.Set("SelectedBrithDateString", SelectedItem.Datum_rodenja);
+            //    Preferences.Set("SelectedName", SelectedItem.Ime);
+            //    Preferences.Set("SelectedOIB", SelectedItem.OIB);
+            //    Preferences.Set("SelectedAddress", SelectedItem.Adresa);
+            //    Preferences.Set("SelectedRsidence", SelectedItem.Boraviste);
+            //    Preferences.Set("SelectedPhone", SelectedItem.Telefon);
+            //    Preferences.Set("SelectedFax", SelectedItem.Fax);
+            //    Preferences.Set("SelectedMobile", SelectedItem.Mobitel);
+            //    Preferences.Set("SelectedEmail", SelectedItem.Email);
+            //    Preferences.Set("SelectedOther", SelectedItem.Ostalo);
+            //    Preferences.Set("SelectedCountry", SelectedItem.Drzava);
+            //    Preferences.Set("SelectedLegalPersonString", SelectedItem.Pravna);
+            //    Preferences.Set("SelectedBrithDateString", SelectedItem.Datum_rodenja);
+            //    Preferences.Set("SelectedID", IDstring);
                 string IDstring = SelectedItem.Id.ToString();
-                Preferences.Set("SelectedID", IDstring);
 
-                TrecaSreca.AddKeyValuePair("SelectedName", SelectedItem.Ime);
-                TrecaSreca.AddKeyValuePair("SelectedOIB", SelectedItem.OIB);
-                TrecaSreca.AddKeyValuePair("SelectedAddress", SelectedItem.Adresa);
-                TrecaSreca.AddKeyValuePair("SelectedRsidence", SelectedItem.Boraviste);
-                TrecaSreca.AddKeyValuePair("SelectedPhone", SelectedItem.Telefon);
-                TrecaSreca.AddKeyValuePair("SelectedFax", SelectedItem.Fax);
-                TrecaSreca.AddKeyValuePair("SelectedMobile", SelectedItem.Mobitel);
-                TrecaSreca.AddKeyValuePair("SelectedEmail", SelectedItem.Email);
-                TrecaSreca.AddKeyValuePair("SelectedOther", SelectedItem.Ostalo);
-                TrecaSreca.AddKeyValuePair("SelectedCountry", SelectedItem.Drzava);
-                TrecaSreca.AddKeyValuePair("SelectedLegalPersonString", SelectedItem.Pravna);
-                TrecaSreca.AddKeyValuePair("SelectedBrithDateString", SelectedItem.Datum_rodenja);
-                TrecaSreca.AddKeyValuePair("SelectedID", IDstring);
+                TrecaSreca.Set("SelectedName", SelectedItem.Ime);
+                TrecaSreca.Set("SelectedOIB", SelectedItem.OIB);
+                TrecaSreca.Set("SelectedAddress", SelectedItem.Adresa);
+                TrecaSreca.Set("SelectedRsidence", SelectedItem.Boraviste);
+                TrecaSreca.Set("SelectedPhone", SelectedItem.Telefon);
+                TrecaSreca.Set("SelectedFax", SelectedItem.Fax);
+                TrecaSreca.Set("SelectedMobile", SelectedItem.Mobitel);
+                TrecaSreca.Set("SelectedEmail", SelectedItem.Email);
+                TrecaSreca.Set("SelectedOther", SelectedItem.Ostalo);
+                TrecaSreca.Set("SelectedCountry", SelectedItem.Drzava);
+                TrecaSreca.Set("SelectedLegalPersonString", SelectedItem.Pravna);
+                TrecaSreca.Set("SelectedBrithDateString", SelectedItem.Datum_rodenja);
+                TrecaSreca.Set("SelectedID", IDstring);
+                Debug.WriteLine(SelectedItem.Ime);
+
             }
             catch (Exception ex)
             {
