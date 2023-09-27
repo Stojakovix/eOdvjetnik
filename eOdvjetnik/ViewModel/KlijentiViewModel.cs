@@ -821,6 +821,18 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 Preferences.Set("SelectedID", IDstring);
 
                 TrecaSreca.AddKeyValuePair("SelectedName", SelectedItem.Ime);
+                TrecaSreca.AddKeyValuePair("SelectedOIB", SelectedItem.OIB);
+                TrecaSreca.AddKeyValuePair("SelectedAddress", SelectedItem.Adresa);
+                TrecaSreca.AddKeyValuePair("SelectedRsidence", SelectedItem.Boraviste);
+                TrecaSreca.AddKeyValuePair("SelectedPhone", SelectedItem.Telefon);
+                TrecaSreca.AddKeyValuePair("SelectedFax", SelectedItem.Fax);
+                TrecaSreca.AddKeyValuePair("SelectedMobile", SelectedItem.Mobitel);
+                TrecaSreca.AddKeyValuePair("SelectedEmail", SelectedItem.Email);
+                TrecaSreca.AddKeyValuePair("SelectedOther", SelectedItem.Ostalo);
+                TrecaSreca.AddKeyValuePair("SelectedCountry", SelectedItem.Drzava);
+                TrecaSreca.AddKeyValuePair("SelectedLegalPersonString", SelectedItem.Pravna);
+                TrecaSreca.AddKeyValuePair("SelectedBrithDateString", SelectedItem.Datum_rodenja);
+                TrecaSreca.AddKeyValuePair("SelectedID", IDstring);
             }
             catch (Exception ex)
             {
