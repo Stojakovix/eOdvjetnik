@@ -978,6 +978,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
                     // 
                 }
             }
+            Debug.WriteLine("PostavkeModel - > FetchCompanyDevices -> Uspjesno dovrseno");
+
         }
         catch (Exception ex)
         {
@@ -1202,9 +1204,10 @@ public class PostavkeViewModel : INotifyPropertyChanged
     {
         try
         {
-            Debug.WriteLine("Refresh postavki nakon ažurianja licence");
             PostavkeUserName = TrecaSreca.Get("UserName");
             PostavkeUserID = TrecaSreca.Get("UserID");
+            Debug.WriteLine("PostavkeViewModel - LicenceUpdatedReceived -> Username: " + PostavkeUserName + " UserID: " + PostavkeUserID);
+
         }
         catch (Exception ex)
         {

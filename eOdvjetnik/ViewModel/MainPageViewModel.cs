@@ -49,7 +49,21 @@ namespace eOdvjetnik.ViewModel
                 }
             }
         }
-        public string Activation_code { get; set; }
+  
+
+        private string pvtActivation_code;
+        public string Activation_code
+    {
+            get { return pvtActivation_code; }
+            set
+            {
+                if (pvtActivation_code != value)
+                {
+                pvtActivation_code = value;
+                    OnPropertyChanged(nameof(Activation_code));
+                }
+            }
+        }
 
         //Footer:
         public string Version { get; set; }
@@ -219,11 +233,11 @@ namespace eOdvjetnik.ViewModel
         {
             //var database = new Prefdatabase();
 
-            Debug.WriteLine("MainPageViewModel - > ActivationLoop");
+            Debug.WriteLine("MainPageViewModel - > ActivationCodeCheck");
             string string1 = "https://cc.eodvjetnik.hr/eodvjetnikadmin/waiting-lists/request?cpuid=";
             string string2 = TrecaSreca.Get("key");
             string activationURL = string.Concat(string1, string2);
-            Debug.WriteLine("MainPageViewModel - > ActivationLoop - URL za waiting list: " + activationURL);
+            Debug.WriteLine("MainPageViewModel - > ActivationCodeCheck - URL za waiting list: " + activationURL);
             TrecaSreca.Get("activation_code");
 
             if (ActivationCode == null || ActivationCode == "")
@@ -232,7 +246,7 @@ namespace eOdvjetnik.ViewModel
 
                 try
                 {
-                    Debug.WriteLine("MainPageViewModel - > ActivationLoop -> usao u try");
+                    Debug.WriteLine("MainPageViewModel - > ActivationCodeCheck -> usao u try");
 
                     using (var client = new HttpClient())
                     {
@@ -240,12 +254,12 @@ namespace eOdvjetnik.ViewModel
 
                         if (response.IsSuccessStatusCode)
                         {
-                            Debug.WriteLine("MainPageViewModel - > ActivationLoop -> Dohvatio response");
+                            Debug.WriteLine("MainPageViewModel - > ActivationCodeCheck -> Dohvatio response");
 
                             string jsonContent = await response.Content.ReadAsStringAsync();
                             response.EnsureSuccessStatusCode();
                             var content = await response.Content.ReadAsStringAsync();
-                            Debug.WriteLine("MainPageViewModel - > ActivationLoop -> JSON: " + content);
+                            Debug.WriteLine("MainPageViewModel - > ActivationCodeCheck -> JSON: " + content);
 
                             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                             var data = System.Text.Json.JsonSerializer.Deserialize<ActivationData[]>(content, options);
@@ -253,11 +267,13 @@ namespace eOdvjetnik.ViewModel
                             ActivationCode = data[0].activation_code;
                             TrecaSreca.Set("activation_code", ActivationCode);
 
-                            Debug.WriteLine($"Received data: {data[0].id}, {data[0].created}, {data[0].hwid}, {data[0].IP}, {data[0].activation_code}");
+                            Debug.WriteLine($"MainPageViewModel - > ActivationCodeCheck -> received data: {data[0].id}, {data[0].created}, {data[0].hwid}, {data[0].IP}, {data[0].activation_code}");
+                            Debug.WriteLine("MainPageViewModel - > ActivationCodeCheck -> Uspjesno dovrsen!");
+
                         }
                         else
                         {
-                            Debug.WriteLine("MainPageViewModel - > ActivationLoop -> Povezivanje neuspješno");
+                            Debug.WriteLine("MainPageViewModel - > ActivationCodeCheck -> Povezivanje neuspješno");
                             await Application.Current.MainPage.DisplayAlert("Upozorenje", "Povezivanje s poslužiteljem nije uspjelo.", "OK");
                         }
                     }
@@ -265,7 +281,7 @@ namespace eOdvjetnik.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("Activation error:" + ex.Message);
+                    Debug.WriteLine("MainPageViewModel - ActivationCodeCheck() error:" + ex.Message);
                 }
             }
             LicenceCheck();
@@ -321,6 +337,7 @@ namespace eOdvjetnik.ViewModel
                         TrecaSreca.Set("device_type_id", devicetype_ID);
 
                         Debug.WriteLine("MainPageViewModel - > Company info: " + nazivTvrtke + " " + OIBTvrtke + " " + adresaTvrtke);
+                        Debug.WriteLine("MainPageViewModel - > LicenceCheck -> Uspjesno dovrsen!");
 
                     }
                     else
@@ -332,7 +349,7 @@ namespace eOdvjetnik.ViewModel
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Activation error:" + ex.Message);
+                Debug.WriteLine("MainPageViewModel - > LicenceCheck -> Catch! " + ex.Message);
 
 
                 //LicenceType = Preferences.Get("licence_type", "");
@@ -395,7 +412,7 @@ namespace eOdvjetnik.ViewModel
                 {
                     trialCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
                 }
-                Debug.WriteLine("Kalendar ResourceView - 'Trial' provjera: " + trialCheck);
+                Debug.WriteLine("MainPageViewModel - LicenceExpiryCheck - 'Trial' provjera: " + trialCheck);
                 if (trialCheck == "Trial") 
                 {
 
@@ -436,11 +453,14 @@ namespace eOdvjetnik.ViewModel
                         Debug.WriteLine(ex.Message);
                     }
                 }
-               
+                Debug.WriteLine("MainPageViewModel - LicenceExpiryCheck - Uspjesno dovrseno");
+
 
             }
             catch (Exception ex)
             {
+                Debug.WriteLine("MainPageViewModel - LicenceExpiryCheck - Catch!");
+
                 Debug.WriteLine(ex.Message);
             }
 

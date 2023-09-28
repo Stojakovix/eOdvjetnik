@@ -43,7 +43,7 @@
             
             <Image Source="text_only.png" HeightRequest="120" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
 
-            <Button Text="Clear All Preferences" Background="LightBlue" BorderColor="black" Command="{Binding ClearPrefrences}" IsVisible="True" />
+            <Button Text="Clear All Preferences" Background="LightBlue" BorderColor="black" Command="{Binding ClearPrefrences}" IsVisible="False" />
 
             <Label  Style="{StaticResource ShadowLabelStyle}" 
                         Text="{x:Static resx:AppResources.ZaAktivaciju}"
@@ -105,16 +105,19 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150"  />
+                 <ColumnDefinition Width="*" />
+                 <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="250" />
             </Grid.ColumnDefinitions>
-            
-            <Image Grid.Row="1" Grid.Column="0" Source="text_only.png" Margin="20,0,0,0" HorizontalOptions="Start" HeightRequest="25" />
-            <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding Version}" FontSize="20" VerticalTextAlignment="Center" />
-            <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding LicenceType, StringFormat={x:Static resx:AppResources.License}}" FontSize="20" VerticalTextAlignment="Center" LineBreakMode="NoWrap" />
-            <Label Grid.Row="1" Grid.Column="3" Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding CurrentDateTimeString}" HorizontalOptions="End" Margin="0,0,20,0" FontSize="20" VerticalTextAlignment="Center" />
+
+            <Image Grid.Row="1" Grid.Column="0" Source="text_only.png" Margin="20,0,0,0" HeightRequest="25" />
+            <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding Version}" FontSize="20" VerticalTextAlignment="Center" LineBreakMode="NoWrap"  />
+            <Label Grid.Row="1" Grid.Column="4" Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding LicenceType, StringFormat={x:Static resx:AppResources.License}}" FontSize="20" VerticalTextAlignment="Center" LineBreakMode="NoWrap" />
+            <Label Grid.Row="1" Grid.Column="6" Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding CurrentDateTimeString}" HorizontalOptions="End" Margin="0,0,20,0" FontSize="20" VerticalTextAlignment="Center" LineBreakMode="NoWrap" />
 
 
         </Grid>
