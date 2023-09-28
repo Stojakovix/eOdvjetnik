@@ -170,6 +170,12 @@ public partial class Kalendar : ContentPage
                 _viewModel.AdminLicenceCheck();
                 Debug.WriteLine("izvršen onSchedulerViewChanged");
             }
+            else if (e.NewView is SchedulerView.Agenda)
+            {
+                _viewModel.AdminLicenceCheck();
+                Debug.WriteLine("izvršen onSchedulerViewChanged u else ifu - agenda");
+
+            }
             else
             {
                 _viewModel.GetUserEvents();
