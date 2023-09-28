@@ -9,6 +9,6 @@
 	<key>com.apple.security.files.user-selected.read-write</key>
 	<true/>
 	<key>com.apple.security.inherit</key>
-	<true/>
+	<true/>	
 </dict>
 </plist>

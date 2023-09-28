@@ -12,7 +12,7 @@ namespace eOdvjetnik.Services
 {
     public class TrecaSreca
     {
-        private static readonly string FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "preferences.xml");
+        private static readonly string FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "preferences.xml");
 
 
         public static void CreateXmlFile()
