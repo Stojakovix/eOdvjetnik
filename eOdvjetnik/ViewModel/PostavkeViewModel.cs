@@ -471,7 +471,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
     #endregion
 
     #region SQL
-    //Varijable za MySQL preferences
+    //Varijable za MySQL
+    //
     public const string IP_mysql = "IP Adresa2";
     public const string USER_mysql = "Korisničko ime2";
     public const string PASS_mysql = "Lozinka2";

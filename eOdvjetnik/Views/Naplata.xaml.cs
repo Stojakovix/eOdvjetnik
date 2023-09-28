@@ -30,14 +30,14 @@ public partial class Naplata : ContentPage
     {
         InitializeComponent();
         this.BindingContext = App.SharedNaplataViewModel;
-        CompanyName = Preferences.Get("naziv_tvrtke", "");
-        CompanyOIB = Preferences.Get("OIBTvrtke", "");
-        CompanyAddress = Preferences.Get("adresaTvrtke", "");
+        CompanyName = TrecaSreca.Get("naziv_tvrtke");
+        CompanyOIB = TrecaSreca.Get("OIBTvrtke");
+        CompanyAddress = TrecaSreca.Get("adresaTvrtke");
         DateTime dateTime = DateTime.Now;
         dateTime = dateTime.AddDays(7);
-        ClientName = Preferences.Get("SelectedName", "");
-        ClientOIB = Preferences.Get("SelectedOIB", "");
-        ClientAddress = Preferences.Get("SelectedAddress", "");
+        ClientName = TrecaSreca.Get("SelectedName");
+        ClientOIB = TrecaSreca.Get("SelectedOIB");
+        ClientAddress = TrecaSreca.Get("SelectedAddress");
       
     }
 

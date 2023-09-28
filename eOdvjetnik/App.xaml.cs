@@ -1,4 +1,5 @@
 ﻿using eOdvjetnik.Data;
+using eOdvjetnik.Services;
 using eOdvjetnik.ViewModel;
 using eOdvjetnik.Views;
 using Syncfusion.Maui.Scheduler;
@@ -49,17 +50,17 @@ public partial class App : Application
         this.Scheduler.WeekNumberStyle = schedulerWeekNumberStyle;
 
 
-        string currentCulture = Preferences.Get("CurrentCulture", null);
+        string currentCulture = TrecaSreca.Get("CurrentCulture");
         if (currentCulture == null)
         {
             // CurrentCulture is not set, save it in preferences
             //string cultureName = CultureInfo.CurrentCulture.Name;
-            Preferences.Set("CurrentCulture", "hr-HR");
+            TrecaSreca.Set("CurrentCulture", "hr-HR");
         }
 
 
         //var CultureString = CultureInfo.CurrentUICulture.Name;
-        var CultureString = Preferences.Get("CurrentCulture", null);
+        var CultureString = TrecaSreca.Get("CurrentCulture");
 
         CultureInfo.CurrentCulture = new CultureInfo(CultureString);
         CultureInfo.CurrentUICulture = new CultureInfo(CultureString);

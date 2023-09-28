@@ -75,13 +75,13 @@ namespace eOdvjetnik.Services
         {
             //Debug.WriteLine("Core.cs -> ListPath -> Usao u ListPath  ****"+ Preferences.Get(IP_nas, "") + "***");
             SMB2Client client = new SMB2Client();
-            bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP_nas, "")), SMBTransportType.DirectTCPTransport);
-            NTStatus status = client.Login(String.Empty, Preferences.Get(USER_nas, ""), Preferences.Get(PASS_nas, ""));
+            bool isConnected = client.Connect(System.Net.IPAddress.Parse(TrecaSreca.Get(IP_nas)), SMBTransportType.DirectTCPTransport);
+            NTStatus status = client.Login(String.Empty, TrecaSreca.Get(USER_nas), TrecaSreca.Get(PASS_nas));
             //Debug.WriteLine("6666666666666666666");
             //Debug.WriteLine(status);
             //Debug.WriteLine("6666666666666666666");
 
-            ISMBFileStore fileStore = client.TreeConnect(Preferences.Get(FOLDER_nas, ""), out status);
+            ISMBFileStore fileStore = client.TreeConnect(TrecaSreca.Get(FOLDER_nas), out status);
             if (status == NTStatus.STATUS_SUCCESS)
             {
                 //Debug.WriteLine("7777777777777777777");
@@ -90,7 +90,7 @@ namespace eOdvjetnik.Services
                 object directoryHandle;
                 FileStatus fileStatus;
                 //status = fileStore.CreateFile(out directoryHandle, out fileStatus, String.Empty, AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
-                status = fileStore.CreateFile(out directoryHandle, out fileStatus, Preferences.Get(SUBFOLDER_nas, ""), AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
+                status = fileStore.CreateFile(out directoryHandle, out fileStatus, TrecaSreca.Get(SUBFOLDER_nas), AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
                 //status = fileStore.CreateFile(out directoryHandle, out fileStatus, "*", AccessMask.SYNCHRONIZE | (AccessMask)DirectoryAccessMask.FILE_LIST_DIRECTORY, 0, ShareAccess.Read | ShareAccess.Write | ShareAccess.Delete, CreateDisposition.FILE_OPEN, CreateOptions.FILE_SYNCHRONOUS_IO_NONALERT | CreateOptions.FILE_DIRECTORY_FILE, null);
 
                 if (status == NTStatus.STATUS_SUCCESS)
@@ -136,9 +136,9 @@ namespace eOdvjetnik.Services
 
             SMB2Client client = new SMB2Client();
             //Debug.WriteLine("Core.cs -> getRootShare -> new SMB2Client()  *******");
-            bool isConnected = client.Connect(System.Net.IPAddress.Parse(Preferences.Get(IP_nas, "")), SMBTransportType.DirectTCPTransport);
+            bool isConnected = client.Connect(System.Net.IPAddress.Parse(TrecaSreca.Get(IP_nas)), SMBTransportType.DirectTCPTransport);
 
-            NTStatus status = client.Login(String.Empty, Preferences.Get(USER_nas, ""), Preferences.Get(PASS_nas, ""));
+            NTStatus status = client.Login(String.Empty, TrecaSreca.Get(USER_nas), TrecaSreca.Get(PASS_nas));
             List<string> shares = client.ListShares(out status);
             if (isConnected)
             {
@@ -198,7 +198,7 @@ namespace eOdvjetnik.Services
         public void createDatabase(string[] args)
         {
             // MySQL server connection string
-            string connectionString = "Server=" + Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "") + ";Port=3306;User=" + Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "") + ";Password=" + Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "") + ";";
+            string connectionString = "Server=" + TrecaSreca.Get(IP_mysql) + ";Port=3306;User=" + TrecaSreca.Get(USER_mysql) + ";Password=" + TrecaSreca.Get(PASS_mysql) + ";";
 
             try
             {
@@ -233,7 +233,7 @@ namespace eOdvjetnik.Services
 
             //Debug.WriteLine("Core.cs -> Dictionary -> Usao u sqlQuerry  *******");
             // MySQL connection settings
-            string connString = "server=" + Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "") + ";user=" + Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "") + ";password=" + Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "") + ";database=" + Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
+            string connString = "server=" + TrecaSreca.Get(IP_mysql) + ";user=" + TrecaSreca.Get(USER_mysql) + ";password=" + TrecaSreca.Get(PASS_mysql) + ";database=" + TrecaSreca.Get(databasename_mysql);
 
             // Connect to MySQL database
             using MySqlConnection conn = new MySqlConnection(connString);
@@ -272,7 +272,7 @@ namespace eOdvjetnik.Services
         public void ExecuteSqlFile()
         {
             // MySQL connection settings
-            string connString = "server=" + Microsoft.Maui.Storage.Preferences.Get(IP_mysql, "") + ";user=" + Microsoft.Maui.Storage.Preferences.Get(USER_mysql, "") + ";password=" + Microsoft.Maui.Storage.Preferences.Get(PASS_mysql, "") + ";database=" + Microsoft.Maui.Storage.Preferences.Get(databasename_mysql, "");
+            string connString = "server=" + TrecaSreca.Get(IP_mysql) + ";user=" + TrecaSreca.Get(USER_mysql) + ";password=" + TrecaSreca.Get(PASS_mysql) + ";database=" + TrecaSreca.Get(databasename_mysql);
 
             // Connect to MySQL database
             using MySqlConnection conn = new MySqlConnection(connString);
