@@ -82,7 +82,11 @@
 	  <CodesignProvision>eOdvjetnik_DeveloperID</CodesignProvision>
 	  <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
 	  <PackageSigningKey>Developer ID Installer: Robert Vincic (FY8PYJ9EF9)</PackageSigningKey>
-	  <UseHardenedRuntime>true</UseHardenedRuntime>
+	  <MtouchDebug>true</MtouchDebug>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
+	  <MtouchDebug>true</MtouchDebug>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->

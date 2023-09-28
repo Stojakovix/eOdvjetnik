@@ -73,6 +73,8 @@ namespace eOdvjetnik.Services
 
         public List<QueryDirectoryFileInformation> ListPath(string path)
         {
+
+            try { 
             //Debug.WriteLine("Core.cs -> ListPath -> Usao u ListPath  ****"+ Preferences.Get(IP_nas, "") + "***");
             SMB2Client client = new SMB2Client();
             bool isConnected = client.Connect(System.Net.IPAddress.Parse(TrecaSreca.Get(IP_nas)), SMBTransportType.DirectTCPTransport);
@@ -126,11 +128,17 @@ namespace eOdvjetnik.Services
 
             }
 
-
+            }
+            catch (Exception ex)
+            {
+                // An unexpected error occurred. No browser may be installed on the device.
+                return null;
+            }
 
         }
         public List<string> getRootShare()
         {
+            try { 
             //INICIRAJ SMB KONEKCIJU DA DOHVATI SVE DOKUMENTE
             //Debug.WriteLine("Core.cs -> getRootShare -> INICIRAJ SMB KONEKCIJU  ****" + Preferences.Get(IP_nas, "") + "***");
 
@@ -165,7 +173,12 @@ namespace eOdvjetnik.Services
             return shares;
 
 
-
+            }
+            catch (Exception ex)
+            {
+                // An unexpected error occurred. No browser may be installed on the device.
+                return null;
+            }
 
         }
 
@@ -231,6 +244,7 @@ namespace eOdvjetnik.Services
         public Dictionary<string, string>[] sqlQuery(string query)
         {
 
+            try { 
             //Debug.WriteLine("Core.cs -> Dictionary -> Usao u sqlQuerry  *******");
             // MySQL connection settings
             string connString = "server=" + TrecaSreca.Get(IP_mysql) + ";user=" + TrecaSreca.Get(USER_mysql) + ";password=" + TrecaSreca.Get(PASS_mysql) + ";database=" + TrecaSreca.Get(databasename_mysql);
@@ -265,7 +279,12 @@ namespace eOdvjetnik.Services
             conn.Close();
 
             return results.ToArray();
-
+            }
+            catch (Exception ex)
+            {
+                // An unexpected error occurred. No browser may be installed on the device.
+                return null;
+            }
 
         }
 
