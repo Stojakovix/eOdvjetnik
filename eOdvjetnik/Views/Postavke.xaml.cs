@@ -1,6 +1,5 @@
-using eOdvjetnik.ViewModel;
-using Microsoft.Maui.Controls;
-using System.Diagnostics;
+using eOdvjetnik.Services;
+
 
 namespace eOdvjetnik.Views;
 
@@ -28,7 +27,7 @@ public partial class Postavke : ContentPage
                 var stream = await result.OpenReadAsync();
                 CompanyLogo.Source = ImageSource.FromStream(() => stream);
                 string filePath = result.FullPath;
-                Preferences.Set("LogoImagePath", filePath);
+                TrecaSreca.Set("LogoImagePath", filePath);
             }
             else
             {

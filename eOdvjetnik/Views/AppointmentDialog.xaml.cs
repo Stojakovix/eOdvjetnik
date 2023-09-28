@@ -63,7 +63,7 @@ public partial class AppointmentDialog : ContentPage
             this.appointment = appointment;
             this.selectedDate = AdjustSelectedDate(selectedDate);
             this.scheduler = scheduler;
-            ResourceId = int.Parse(Preferences.Get("resourceId", ""));
+            ResourceId = int.Parse(TrecaSreca.Get("resourceId"));
             Debug.WriteLine("Resource id " + ResourceId);
 
             eventNameText.Placeholder = "Unesite naziv...";
@@ -76,9 +76,9 @@ public partial class AppointmentDialog : ContentPage
             //DeleteButton.Clicked += DeleteButton_Clicked;
 
             categoryPicker.SelectedIndexChanged += OnCategoryPickerSelectedIndexChanged;
-            DevicePlatform = Preferences.Get("vrsta_platforme", "");
+            DevicePlatform = TrecaSreca.Get("vrsta_platforme");
 
-            SQLUserID = Preferences.Get("UserID", "");
+            SQLUserID = TrecaSreca.Get("UserID");
             Debug.WriteLine("-------------------------------- " + SQLUserID);
         }
 
@@ -317,7 +317,7 @@ public partial class AppointmentDialog : ContentPage
                     var trimmedString = appString.Replace("-", "");
                     var appointmentId = int.Parse(trimmedString);
                     
-                    var hardware_id = Preferences.Get("key", "default_value");
+                    var hardware_id = TrecaSreca.Get("key");
                     string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, color, user_id, resource_id, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}', '{AppoitmentColorName}' , '{SQLUserID}' , '{ResourceId}' , '{hardware_id}')";
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine(query);
@@ -334,7 +334,7 @@ public partial class AppointmentDialog : ContentPage
                 try
                 {
                     AppointmentDetails();
-                    var hardware_id = Preferences.Get("key", "default_value");
+                    var hardware_id = TrecaSreca.Get("key");
                     string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', color = '{AppoitmentColorName}',  user_id = '{SQLUserID}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine(query);
@@ -350,7 +350,7 @@ public partial class AppointmentDialog : ContentPage
             {
 
                     AppointmentDetails();
-                    var hardware_id = Preferences.Get("key", "default_value");
+                    var hardware_id = TrecaSreca.Get("key");
                     string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', user_id = '{ResourceId}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine(query);

@@ -479,12 +479,12 @@ namespace eOdvjetnik.ViewModel
             {
                 Debug.WriteLine(ex.Message);
             }
-            NazivTvrtke = Preferences.Get("naziv_tvrtke", "");
-            odabrani_TBR = Preferences.Get("SelectedOznaka", "");
-            odabrani_Bodovi = Preferences.Get("SelectedBodovi", "");
-            odabrani_Naziv = Preferences.Get("SelectedConcatenatedName", "");
-            odabraniParentName = Preferences.Get("SelectedParentName", "");
-            NazivKlijenta = Preferences.Get("SelectedName", "");
+            NazivTvrtke = TrecaSreca.Get("naziv_tvrtke");
+            odabrani_TBR = TrecaSreca.Get("SelectedOznaka");
+            odabrani_Bodovi = TrecaSreca.Get("SelectedBodovi");
+            odabrani_Naziv = TrecaSreca.Get("SelectedConcatenatedName");
+            odabraniParentName = TrecaSreca.Get("SelectedParentName");
+            NazivKlijenta = TrecaSreca.Get("SelectedName");
 
 
 
@@ -507,12 +507,12 @@ namespace eOdvjetnik.ViewModel
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                NazivTvrtke = Preferences.Get("naziv_tvrtke", "");
-                odabraniTBR = Preferences.Get("SelectedOznaka", "");
-                odabraniBodovi = Preferences.Get("SelectedBodovi", "");
-                odabraniNaziv = Preferences.Get("SelectedConcatenatedName", "");
-                OdabraniParentName = Preferences.Get("SelectedParentName", "");
-                NazivKlijenta = Preferences.Get("SelectedName", "");
+                NazivTvrtke = TrecaSreca.Get("naziv_tvrtke");
+                odabraniTBR = TrecaSreca.Get("SelectedOznaka");
+                odabraniBodovi = TrecaSreca.Get("SelectedBodovi");
+                odabraniNaziv = TrecaSreca.Get("SelectedConcatenatedName");
+                OdabraniParentName = TrecaSreca.Get("SelectedParentName");
+                NazivKlijenta = TrecaSreca.Get("SelectedName");
                 CalculateTotalAmount();
 
 
@@ -539,10 +539,10 @@ namespace eOdvjetnik.ViewModel
             {
                 try
                 {
-                    Preferences.Set("SelectedNaziv", SelectedItem.name);
-                    Preferences.Set("SelectedBodovi", SelectedItem.bodovi);
-                    Preferences.Set("SelectedConcatenatedName", SelectedItem.concatenated_name);
-                    Preferences.Set("SelectedOznaka", SelectedItem.oznaka);
+                    TrecaSreca.Set("SelectedNaziv", SelectedItem.name);
+                    TrecaSreca.Set("SelectedBodovi", SelectedItem.bodovi);
+                    TrecaSreca.Set("SelectedConcatenatedName", SelectedItem.concatenated_name);
+                    TrecaSreca.Set("SelectedOznaka", SelectedItem.oznaka);
                 }
                 catch (Exception ex)
                 {

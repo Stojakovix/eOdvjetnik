@@ -42,7 +42,7 @@
                                EnableReminder="True"  
                                SelectedAppointmentBackground="transparent"
                                AllowedViews="Day,Week,WorkWeek,Month,Agenda,TimelineMonth"
-                               View="Month"
+                               View="Day"
                                AllowViewNavigation="True"
                                
                                >
@@ -89,7 +89,7 @@
                                              >
                     <scheduler:SchedulerDaysView.TimeRegionTemplate>
                         <DataTemplate>
-                            <Grid Background="#fafa"/>
+                            <Grid Background="#f2f2f2"/>
                         </DataTemplate>
                     </scheduler:SchedulerDaysView.TimeRegionTemplate>
 

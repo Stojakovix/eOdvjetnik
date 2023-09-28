@@ -53,18 +53,18 @@ public partial class Racun : ContentPage
 	{
         InitializeComponent();
         this.BindingContext = App.SharedNaplataViewModel;
-        CompanyName = Preferences.Get("naziv_tvrtke", "");
-        CompanyOIB = Preferences.Get("OIBTvrtke", "");
-        CompanyAddress = Preferences.Get("adresaTvrtke", "");
+        CompanyName = TrecaSreca.Get("naziv_tvrtke");
+        CompanyOIB = TrecaSreca.Get("OIBTvrtke");
+        CompanyAddress = TrecaSreca.Get("adresaTvrtke");
         CurrentDate = DateTime.Now.ToString("dd.MM.yyyy.");
         DateTime dateTime = DateTime.Now;
         dateTime = dateTime.AddDays(7);
         PaymentDate = dateTime.ToString("dd.MM.yyyy");
-        ClientName = Preferences.Get("SelectedName", "");
-        ClientOIB = Preferences.Get("SelectedOIB", "");
-        ClientAddress = Preferences.Get("SelectedAddress", "");
+        ClientName = TrecaSreca.Get("SelectedName");
+        ClientOIB = TrecaSreca.Get("SelectedOIB");
+        ClientAddress = TrecaSreca.Get("SelectedAddress");
 
-        savedImagePath = Preferences.Get("LogoImagePath", string.Empty);
+        savedImagePath = TrecaSreca.Get("LogoImagePath");
 
         // Get the image stream from the saved image path
          imageStream = null;
@@ -88,7 +88,7 @@ public partial class Racun : ContentPage
     {
         if (ReceiptHeaderText == "" || ReceiptHeaderText != null)
         {
-            string nazivtvrtke = Preferences.Get("naziv_tvrtke", "");
+            string nazivtvrtke = TrecaSreca.Get("naziv_tvrtke");
             if (nazivtvrtke != "" || nazivtvrtke != null)
             {
                 ReceiptHeaderText = nazivtvrtke;
@@ -126,25 +126,25 @@ public partial class Racun : ContentPage
         {
             Debug.WriteLine("Create document ušao u try");
 
-            ReceiptHeaderText = Preferences.Get("receiptHeaderText", "");
+            ReceiptHeaderText = TrecaSreca.Get("receiptHeaderText");
             Debug.WriteLine("ReceiptHeaderText " + ReceiptHeaderText);
 
-            ReceiptFooterText = Preferences.Get("receiptFooterText", "");
+            ReceiptFooterText = TrecaSreca.Get("receiptFooterText");
             Debug.WriteLine("ReceiptFooterTex " + ReceiptFooterText);
 
-            ReceiptPDVamountString = Preferences.Get("receiptPDVamount", "");
+            ReceiptPDVamountString = TrecaSreca.Get("receiptPDVamount");
             Debug.WriteLine("receiptPDVamount " + ReceiptPDVamountString);
 
-            ReceiptIBAN = Preferences.Get("receiptIBAN", "");
+            ReceiptIBAN = TrecaSreca.Get("receiptIBAN");
             Debug.WriteLine("receiptIBAN " + ReceiptIBAN);
 
-            ReceiptSignature = Preferences.Get("receiptSignature", "");
+            ReceiptSignature = TrecaSreca.Get("receiptSignature");
             Debug.WriteLine("receiptSignature " + ReceiptSignature);
 
             SanityCheck();
 
             ReceiptPDVamountFloat = 1 + (float.Parse(ReceiptPDVamountString) / 100);
-            Preferences.Set("receiptPDVamountFloat", ReceiptPDVamountFloat);
+            TrecaSreca.Set("receiptPDVamountFloat", ReceiptPDVamountFloat.ToString());
             Debug.WriteLine("iznos PDV " + ReceiptPDVamountFloat);
         }
 

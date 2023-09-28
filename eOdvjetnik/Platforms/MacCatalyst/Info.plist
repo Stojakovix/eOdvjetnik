@@ -35,6 +35,10 @@
 	<string>Please allow this option, we need it for precise data. Thank You</string>
 	<key>SettingsBundle</key>
 	<string>Settings.bundle</string>
+	<key>LocationWhenInUse</key>
+	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<true/>
 	<key>CFBundleIdentifier</key>
 	<string>maccatalyst.com.zadarict.eodvjetnik</string>
 </dict>

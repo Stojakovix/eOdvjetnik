@@ -6,6 +6,7 @@ using Syncfusion.Maui.Popup;
 using System.ComponentModel;
 using eOdvjetnik.Resources.Strings;
 using Plugin.LocalNotification;
+using eOdvjetnik.Services;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -183,7 +184,7 @@ namespace eOdvjetnik.ViewModel
         public string licence_type { get; set; }
         public AppShellViewModel()
 		{
-            licence_type = Preferences.Get("licence_type", "");
+            licence_type = TrecaSreca.Get("licence_type");
             #region Navigacija komande
 
             MainClickCommand = new Command(OnMainClick);
@@ -207,8 +208,8 @@ namespace eOdvjetnik.ViewModel
 
             #region NAS komande
             SaveCommandNAS = new Command(OnSaveClickedNas);
-            LoadCommandNAS = new Command(OnLoadClickedNas);
-            DeleteCommandNAS = new Command(OnDeleteClickedNas);
+            //LoadCommandNAS = new Command(OnLoadClickedNas);
+            //DeleteCommandNAS = new Command(OnDeleteClickedNas);
             ShowNASPopupCommand = new Command(NASPopup);
             CloseNASPopupCommand = new Command(NASPopupClosed);
 
@@ -216,26 +217,26 @@ namespace eOdvjetnik.ViewModel
 
             #region SQL komande
             SQLSaveCommand = new Command(OnSaveClickedMySQL);
-            SQLLoadCommand = new Command(OnLoadClickedMySQL);
-            SQLDeleteCommand = new Command(OnDeleteClickedMySQL);
+            //SQLLoadCommand = new Command(OnLoadClickedMySQL);
+            //SQLDeleteCommand = new Command(OnDeleteClickedMySQL);
             SQLShowPopupCommand = new Command(SQLPopup);
             #endregion
 
             #region NAS Varijable
-            IPNas = Preferences.Get(IP_nas, "");
-            UserNas = Preferences.Get(USER_nas, "");
-            PassNas = Preferences.Get(PASS_nas, "");
-            Folder = Preferences.Get(FOLDER_nas, "");
-            SubFolder = Preferences.Get(SUBFOLDER_nas, "");
+            IPNas = TrecaSreca.Get(IP_nas);
+            UserNas = TrecaSreca.Get(USER_nas);
+            PassNas = TrecaSreca.Get(PASS_nas);
+            Folder = TrecaSreca.Get(FOLDER_nas);
+            SubFolder = TrecaSreca.Get(SUBFOLDER_nas);
 
             #endregion
 
             #region SQL varijable
 
-            IP = Preferences.Get(IP_mysql, "");
-            UserName = Preferences.Get(USER_mysql, "");
-            Password = Preferences.Get(PASS_mysql, "");
-            DatabaseName = Preferences.Get(databasename_mysql, "");
+            IP = TrecaSreca.Get(IP_mysql);
+            UserName = TrecaSreca.Get(USER_mysql);
+            Password = TrecaSreca.Get(PASS_mysql);
+            DatabaseName = TrecaSreca.Get(databasename_mysql);
 
             #endregion
             SfPopup popup = new SfPopup();
@@ -247,7 +248,7 @@ namespace eOdvjetnik.ViewModel
 
         public void DisableMenu()
         {
-             string ProvjeraAktivacije = Preferences.Get("activation_disable", "");
+             string ProvjeraAktivacije = TrecaSreca.Get("activation_disable");
             Debug.WriteLine(ProvjeraAktivacije);
             if (ProvjeraAktivacije == "LicenceNotActive") 
             {
@@ -303,6 +304,7 @@ namespace eOdvjetnik.ViewModel
                 DisableMenu();
 
                 int numberOfCharacters = 5;
+
                 string adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
                 Debug.WriteLine("Kalendar ResourceView - 'Admin' provjera: " + adminCheck);
 
@@ -410,13 +412,13 @@ namespace eOdvjetnik.ViewModel
                 string user_nas = UserNas;
                 string folder = Folder;
                 string subFolder = SubFolder;
-                Preferences.Set(IP_nas, ip_nas);
-                Preferences.Set(PASS_nas, pass_nas);
-                Preferences.Set(USER_nas, user_nas);
-                Preferences.Set(FOLDER_nas, folder);
-                Preferences.Set(SUBFOLDER_nas, subFolder);
+                TrecaSreca.Set(IP_nas, ip_nas);
+                TrecaSreca.Set(PASS_nas, pass_nas);
+                TrecaSreca.Set(USER_nas, user_nas);
+                TrecaSreca.Set(FOLDER_nas, folder);
+                TrecaSreca.Set(SUBFOLDER_nas, subFolder);
 
-                Debug.WriteLine("Nas saved " + Preferences.Default);
+                //Debug.WriteLine("Nas saved " + Preferences.Default);
                 NASPopupClosed();
             }
 
@@ -425,52 +427,52 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message + "In MainPageViewModel NAS");
             }
         }
-        private void OnLoadClickedNas()
-        {
-            try
-            {
-                var ipmynas = Preferences.Get(IP_nas, IPNas);
-                var usermynas = Preferences.Get(USER_nas, UserNas);
-                var passmynas = Preferences.Get(PASS_nas, PassNas);
-                var folder = Preferences.Get(FOLDER_nas, Folder);
-                var subfolder = Preferences.Get(SUBFOLDER_nas, SubFolder);
+        //private void OnLoadClickedNas()
+        //{
+        //    try
+        //    {
+        //        var ipmynas = TrecaSreca.Get(IP_nas, IPNas);
+        //        var usermynas = TrecaSreca.Get(USER_nas, UserNas);
+        //        var passmynas = TrecaSreca.Get(PASS_nas, PassNas);
+        //        var folder = TrecaSreca.Get(FOLDER_nas, Folder);
+        //        var subfolder = TrecaSreca.Get(SUBFOLDER_nas, SubFolder);
 
-                Debug.WriteLine("Load uspješan");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message + "in MainPageViewModel OnLoadNAS");
-            }
-        }
-        private void OnDeleteClickedNas()
-        {
-            try
-            {
-                if (String.IsNullOrEmpty(IPNas))
-                {
-                    ShowAlert("Alert", "Data is already deleted.");
-                }
-                else
-                {
-                    Preferences.Remove(IPNas);
-                    Preferences.Remove(UserNas);
-                    Preferences.Remove(PassNas);
-                    Preferences.Remove(Folder);
-                    Preferences.Remove(SubFolder);
+        //        Debug.WriteLine("Load uspješan");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.Message + "in MainPageViewModel OnLoadNAS");
+        //    }
+        //}
+        //private void OnDeleteClickedNas()
+        //{
+        //    try
+        //    {
+        //        if (String.IsNullOrEmpty(IPNas))
+        //        {
+        //            ShowAlert("Alert", "Data is already deleted.");
+        //        }
+        //        else
+        //        {
+        //            Preferences.Remove(IPNas);
+        //            Preferences.Remove(UserNas);
+        //            Preferences.Remove(PassNas);
+        //            Preferences.Remove(Folder);
+        //            Preferences.Remove(SubFolder);
 
-                    Debug.WriteLine("Succesfully deleted the values");
-                }
-                IPNas = "";
-                UserNas = "";
-                PassNas = "";
-                Folder = "";
-                SubFolder = "";
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
+        //            Debug.WriteLine("Succesfully deleted the values");
+        //        }
+        //        IPNas = "";
+        //        UserNas = "";
+        //        PassNas = "";
+        //        Folder = "";
+        //        SubFolder = "";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.Message);
+        //    }
+        //}
         private void NASPopup()
         {
             try
@@ -511,10 +513,10 @@ namespace eOdvjetnik.ViewModel
                 string userName = UserName;
                 string databaseName = DatabaseName;
 
-                Preferences.Set(IP_mysql, IP);
-                Preferences.Set(USER_mysql, UserName);
-                Preferences.Set(PASS_mysql, Password);
-                Preferences.Set(databasename_mysql, DatabaseName);
+                TrecaSreca.Set(IP_mysql, IP);
+                TrecaSreca.Set(USER_mysql, UserName);
+                TrecaSreca.Set(PASS_mysql, Password);
+                TrecaSreca.Set(databasename_mysql, DatabaseName);
 
                 
                 Debug.WriteLine("Saved");
@@ -527,43 +529,43 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message);
             }
         }
-        private void OnLoadClickedMySQL()
-        {
-            try
-            {
-                var ipmysql = Preferences.Get(IP, IP_mysql);
-                var usermysql = Preferences.Get(UserName, USER_mysql);
-                var passmysql = Preferences.Get(Password, PASS_mysql);
-                var databaseNamemysql = Preferences.Get(DatabaseName, databasename_mysql);
+        //private void OnLoadClickedMySQL()
+        //{
+        //    try
+        //    {
+        //        var ipmysql = Preferences.Get(IP, IP_mysql);
+        //        var usermysql = Preferences.Get(UserName, USER_mysql);
+        //        var passmysql = Preferences.Get(Password, PASS_mysql);
+        //        var databaseNamemysql = Preferences.Get(DatabaseName, databasename_mysql);
 
-                Debug.WriteLine("Load uspješan");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message + "in MainPageViewModel OnLoadSQL");
-            }
-        }
+        //        Debug.WriteLine("Load uspješan");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.Message + "in MainPageViewModel OnLoadSQL");
+        //    }
+        //}
 
-        private void OnDeleteClickedMySQL()
-        {
-            if (String.IsNullOrEmpty(IP))
-            {
-                ShowAlert("Alert", "Data is already deleted.");
-            }
-            else
-            {
-                Preferences.Remove(IP);
-                Preferences.Remove(UserName);
-                Preferences.Remove(Password);
-                Preferences.Remove(databasename_mysql);
+        //private void OnDeleteClickedMySQL()
+        //{
+        //    if (String.IsNullOrEmpty(IP))
+        //    {
+        //        ShowAlert("Alert", "Data is already deleted.");
+        //    }
+        //    else
+        //    {
+        //        Preferences.Remove(IP);
+        //        Preferences.Remove(UserName);
+        //        Preferences.Remove(Password);
+        //        Preferences.Remove(databasename_mysql);
 
-            }
+        //    }
 
-            IP = "";
-            UserName = "";
-            Password = "";
-            DatabaseName = "";
-        }
+        //    IP = "";
+        //    UserName = "";
+        //    Password = "";
+        //    DatabaseName = "";
+        //}
 
         private void SQLPopup()
         {
@@ -601,7 +603,7 @@ namespace eOdvjetnik.ViewModel
             try
             {
                 DaysRemaining = 0;
-                string days_remaining = Preferences.Get("days_until_expiry", "");
+                string days_remaining = TrecaSreca.Get("days_until_expiry");
                 DaysRemaining = Convert.ToInt32(days_remaining);
                 Debug.WriteLine(DaysRemaining);
                 if (DaysRemaining > 1 && DaysRemaining < 10)
