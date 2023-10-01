@@ -59,60 +59,60 @@ namespace eOdvjetnik.Services
             Console.WriteLine();
         }
     }
-    public static class Kodiranje
-    {
-        public static void Main()
-        {
-            string original = "Hello, world!";
-            byte[] key = GenerateRandomKey();
-            byte[] iv = GenerateRandomIV();
+    //public static class Kodiranje
+    //{
+    //    public static void Main()
+    //    {
+    //        string original = "Hello, world!";
+    //        byte[] key = GenerateRandomKey();
+    //        byte[] iv = GenerateRandomIV();
 
-            byte[] encrypted = EncryptString(original, key, iv);
-            string decrypted = DecryptString(encrypted, key, iv);
+    //        byte[] encrypted = EncryptString(original, key, iv);
+    //        string decrypted = DecryptString(encrypted, key, iv);
 
-            Console.WriteLine($"Original: {original}");
-            Console.WriteLine($"Encrypted: {Convert.ToBase64String(encrypted)}");
-            Console.WriteLine($"Decrypted: {decrypted}");
-        }
+    //        Console.WriteLine($"Original: {original}");
+    //        Console.WriteLine($"Encrypted: {Convert.ToBase64String(encrypted)}");
+    //        Console.WriteLine($"Decrypted: {decrypted}");
+    //    }
 
-        private static byte[] GenerateRandomKey()
-        {
-            using var aes = Aes.Create();
-            aes.GenerateKey();
-            return aes.Key;
-        }
+    //    private static byte[] GenerateRandomKey()
+    //    {
+    //        using var aes = Aes.Create();
+    //        aes.GenerateKey();
+    //        return aes.Key;
+    //    }
 
-        private static byte[] GenerateRandomIV()
-        {
-            using var aes = Aes.Create();
-            aes.GenerateIV();
-            return aes.IV;
-        }
+    //    private static byte[] GenerateRandomIV()
+    //    {
+    //        using var aes = Aes.Create();
+    //        aes.GenerateIV();
+    //        return aes.IV;
+    //    }
 
-        private static byte[] EncryptString(string plaintext, byte[] key, byte[] iv)
-        {
-            using var aes = Aes.Create();
-            aes.Key = key;
-            aes.IV = iv;
+    //    private static byte[] EncryptString(string plaintext, byte[] key, byte[] iv)
+    //    {
+    //        using var aes = Aes.Create();
+    //        aes.Key = key;
+    //        aes.IV = iv;
 
-            var encryptor = aes.CreateEncryptor();
-            byte[] plaintextBytes = Encoding.UTF8.GetBytes(plaintext);
-            byte[] encryptedBytes = encryptor.TransformFinalBlock(plaintextBytes, 0, plaintextBytes.Length);
-            return encryptedBytes;
-        }
+    //        var encryptor = aes.CreateEncryptor();
+    //        byte[] plaintextBytes = Encoding.UTF8.GetBytes(plaintext);
+    //        byte[] encryptedBytes = encryptor.TransformFinalBlock(plaintextBytes, 0, plaintextBytes.Length);
+    //        return encryptedBytes;
+    //    }
 
-        private static string DecryptString(byte[] ciphertext, byte[] key, byte[] iv)
-        {
-            using var aes = Aes.Create();
-            aes.Key = key;
-            aes.IV = iv;
+    //    private static string DecryptString(byte[] ciphertext, byte[] key, byte[] iv)
+    //    {
+    //        using var aes = Aes.Create();
+    //        aes.Key = key;
+    //        aes.IV = iv;
 
-            var decryptor = aes.CreateDecryptor();
-            byte[] decryptedBytes = decryptor.TransformFinalBlock(ciphertext, 0, ciphertext.Length);
-            string plaintext = Encoding.UTF8.GetString(decryptedBytes);
-            return plaintext;
-        }
-    }
+    //        var decryptor = aes.CreateDecryptor();
+    //        byte[] decryptedBytes = decryptor.TransformFinalBlock(ciphertext, 0, ciphertext.Length);
+    //        string plaintext = Encoding.UTF8.GetString(decryptedBytes);
+    //        return plaintext;
+    //    }
+    //}
     public class SMBConnect
     {
         //Varijable za SMB preferences

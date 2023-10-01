@@ -176,7 +176,7 @@ namespace eOdvjetnik.ViewModel
             AdminAppointments = new ObservableCollection<AdminCalendarItem>();
 
             SQLUserID = TrecaSreca.Get("UserID");
-
+            Debug.WriteLine(" user id je " + SQLUserID);
             try
             {
                 Appointments = new ObservableCollection<SchedulerAppointment>(); // Initialize the Appointments collection
@@ -259,7 +259,7 @@ namespace eOdvjetnik.ViewModel
                             Id = employee.Id
                         });
 
-                        Debug.Write(employee.EmployeeName + ", ");
+                        Debug.Write(employee.EmployeeName + " id " + employee.Id + ", ");
                     }
 
 
@@ -359,6 +359,7 @@ namespace eOdvjetnik.ViewModel
                 List<int> ExternalEventIDs = new List<int>();
                 List<int> InternalEventIDs = new List<int>();
                 string query = "SELECT * FROM `events` WHERE resource_id = " + SQLUserID + ";";
+                Debug.WriteLine(query);
 
                 Debug.WriteLine(query);
 

@@ -55,8 +55,22 @@ public partial class Kalendar : ContentPage
         else
         {
             //isInitialized = true;
-             _viewModel.AdminLicenceCheck();
-            Debug.WriteLine("izvršio on appearing adminLicenceCheck");
+            if(Scheduler.View is SchedulerView.TimelineMonth)
+            {
+                _viewModel.AdminLicenceCheck();
+                Debug.WriteLine("izvršio on appearing adminLicenceCheck");
+            }
+            else if(Scheduler.View is SchedulerView.Agenda)
+            {
+                _viewModel.AdminLicenceCheck();
+                Debug.WriteLine("izvršio on appearing adminLicenceCheck u elseifu");
+            }
+            else
+            {
+                _viewModel.GetUserEvents();
+                Debug.WriteLine("Izvršio onAppearing GetUser events");
+            }
+             
         }
 
     }
