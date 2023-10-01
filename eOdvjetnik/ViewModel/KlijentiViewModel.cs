@@ -113,68 +113,68 @@ public class KlijentiViewModel : INotifyPropertyChanged
     }
 
 
-    public bool LocalContactDeleted { get; set; }
-    public bool ContactDeleted
-    {
-        get { return LocalContactDeleted; }
-        set
-        {
-            if (LocalContactDeleted != value)
-            {
-                LocalContactDeleted = value;
-                OnPropertyChanged(nameof(ContactDeleted));
-            }
-        }
-    }
+    //public bool LocalContactDeleted { get; set; }
+    //public bool ContactDeleted
+    //{
+    //    get { return LocalContactDeleted; }
+    //    set
+    //    {
+    //        if (LocalContactDeleted != value)
+    //        {
+    //            LocalContactDeleted = value;
+    //            OnPropertyChanged(nameof(ContactDeleted));
+    //        }
+    //    }
+    //}
 
-    public bool LocalContactEdited { get; set; }
-    public bool ContactEdited
-    {
-        get { return LocalContactEdited; }
-        set
-        {
-            if (LocalContactEdited != value)
-            {
-                LocalContactEdited = value;
-                OnPropertyChanged(nameof(ContactEdited));
-            }
-        }
-    }
+    //public bool LocalContactEdited { get; set; }
+    //public bool ContactEdited
+    //{
+    //    get { return LocalContactEdited; }
+    //    set
+    //    {
+    //        if (LocalContactEdited != value)
+    //        {
+    //            LocalContactEdited = value;
+    //            OnPropertyChanged(nameof(ContactEdited));
+    //        }
+    //    }
+    //}
 
-    public bool LocalNoQueryResult { get; set; }
-    public bool NoQueryResult
-    {
-        get { return LocalNoQueryResult; }
-        set
-        {
-            if (LocalNoQueryResult != value)
-            {
-                LocalNoQueryResult = value;
-                OnPropertyChanged(nameof(NoQueryResult));
-            }
-        }
-    }
-    public bool LocalNoSQLreply { get; set; }
-    public bool NoSQLreply
-    {
-        get { return LocalNoSQLreply; }
-        set
-        {
-            if (LocalNoSQLreply != value)
-            {
-                LocalNoSQLreply = value;
-                OnPropertyChanged(nameof(NoSQLreply));
-            }
-        }
-    }
+    //public bool LocalNoQueryResult { get; set; }
+    //public bool NoQueryResult
+    //{
+    //    get { return LocalNoQueryResult; }
+    //    set
+    //    {
+    //        if (LocalNoQueryResult != value)
+    //        {
+    //            LocalNoQueryResult = value;
+    //            OnPropertyChanged(nameof(NoQueryResult));
+    //        }
+    //    }
+    //}
+    //public bool LocalNoSQLreply { get; set; }
+    //public bool NoSQLreply
+    //{
+    //    get { return LocalNoSQLreply; }
+    //    set
+    //    {
+    //        if (LocalNoSQLreply != value)
+    //        {
+    //            LocalNoSQLreply = value;
+    //            OnPropertyChanged(nameof(NoSQLreply));
+    //        }
+    //    }
+    //}
 
 
     public void GenerateFiles()
     {
-        ContactEdited = false;
-        ContactDeleted = false;
-        NoSQLreply = false;
-        NoQueryResult = false;
+        //ContactEdited = false;
+        //ContactDeleted = false;
+        //NoSQLreply = false;
+        //NoQueryResult = false;
         Debug.WriteLine(contacts);
         try
         {
@@ -220,13 +220,16 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 }
                 else
                 {
-                    NoQueryResult = true;
+                    //NoQueryResult = true;
+                    Application.Current.MainPage.DisplayAlert("", "Nema rezultata pretrage!", "OK");
+
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                NoSQLreply = true;
+                //NoSQLreply = true;
+                Application.Current.MainPage.DisplayAlert("", "Povezivanje sa SQL bazom nije uspjelo!", "OK");
 
             }
         }
@@ -238,16 +241,16 @@ public class KlijentiViewModel : INotifyPropertyChanged
     }
     public void GenerateSearchResults()
     {
-        ContactEdited = false;
-        NoQueryResult = false;
-        NoSQLreply = false;
-        ContactDeleted = false;
+        //ContactEdited = false;
+        //NoQueryResult = false;
+        //NoSQLreply = false;
+        //ContactDeleted = false;
         Debug.WriteLine(contacts);
         try
         {
             if (contacts != null)
             {
-                NoQueryResult = false;
+                //NoQueryResult = false;
                 contacts.Clear();
             }
             string query = "SELECT * FROM `contacts` WHERE LOWER(ime) LIKE LOWER('%" + SearchText + "%') OR OIB LIKE '%" + SearchText + "%' limit 30";
@@ -287,13 +290,16 @@ public class KlijentiViewModel : INotifyPropertyChanged
                 }
                 else
                 {
-                    NoQueryResult = true;
+                    //NoQueryResult = true;
+                    Application.Current.MainPage.DisplayAlert("", "Nema rezultata pretrage!", "OK");
+
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                NoSQLreply = true;
+                //NoSQLreply = true;
+                Application.Current.MainPage.DisplayAlert("", "Povezivanje sa SQL bazom nije uspjelo!", "OK");
             }
         }
         catch (Exception ex)
@@ -500,7 +506,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
 
 
         Contacts = new ObservableCollection<ContactItem>();
-        ContactDeleted = false;
+        //ContactDeleted = false;
 
         try
         {
@@ -692,23 +698,23 @@ public class KlijentiViewModel : INotifyPropertyChanged
         GenerateFiles();
         Debug.WriteLine("Generating files after deleting a contact");
         ContactDeletedText = TrecaSreca.Get("ContactDeleted");
-        ContactDeleted = true;
+        //ContactDeleted = true;
         await Application.Current.MainPage.DisplayAlert("", ContactDeletedText, "OK");
     }
 
     private void ContactEditedReceived(object recipient, ContactEdited message)
     {
 
-        NoQueryResult = false;
-        NoSQLreply = false;
-        ContactDeleted = false;
+        //NoQueryResult = false;
+        //NoSQLreply = false;
+        //ContactDeleted = false;
 
         Debug.WriteLine(contacts);
         try
         {
             if (contacts != null)
             {
-                NoQueryResult = false;
+                //NoQueryResult = false;
                 contacts.Clear();
             }
             string query = "SELECT * FROM contacts WHERE id = " + ClientID;
@@ -745,17 +751,18 @@ public class KlijentiViewModel : INotifyPropertyChanged
                             Pravna = filesRow["pravna"],
                         });
                     }
-                    ContactEdited = true;
+                    //ContactEdited = true;
                 }
                 else
                 {
-                    NoQueryResult = true;
+                    //NoQueryResult = true;
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message + " in Contact Edited Received if");
-                NoSQLreply = true;
+                //NoSQLreply = true;
+                Application.Current.MainPage.DisplayAlert("", "Povezivanje sa SQL bazom nije uspjelo!", "OK");
             }
 
             string tekst1 = "Uspješno ste izmijenili kontakt: ";

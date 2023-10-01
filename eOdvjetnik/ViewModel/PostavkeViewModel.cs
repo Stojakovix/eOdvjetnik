@@ -222,13 +222,65 @@ public class PostavkeViewModel : INotifyPropertyChanged
             }
         }
     }
+    private string _LicenceType;
+
+    public string LicenceType
+    {
+        get { return _LicenceType; }
+        set
+        {
+            if (_LicenceType != value)
+            {
+                _LicenceType = value;
+                OnPropertyChanged(nameof(LicenceType));
+            }
+        }
+    }
+    private string _ExpiryDate;
+
+    public string ExpiryDate
+    {
+        get { return _ExpiryDate; }
+        set
+        {
+            if (_ExpiryDate != value)
+            {
+                _ExpiryDate = value;
+                OnPropertyChanged(nameof(ExpiryDate));
+            }
+        }
+    }
+    private string _HWID64;
+
+    public string HWID64
+    {
+        get { return _HWID64; }
+        set
+        {
+            if (_HWID64 != value)
+            {
+                _HWID64 = value;
+                OnPropertyChanged(nameof(HWID64));
+            }
+        }
+    }
+    private string _Activation_code;
+
+    public string Activation_code
+    {
+        get { return _Activation_code; }
+        set
+        {
+            if (_Activation_code != value)
+            {
+                _Activation_code = value;
+                OnPropertyChanged(nameof(Activation_code));
+            }
+        }
+    }
     public string HWID { get; set; }
-    public string HWID64 { get; set; }
-    public string LicenceType { get; set; }
     public string DateTimeString { get; set; }
     public DateTime ExpiryDateOnly { get; set; }
-    public string ExpiryDate { get; set; }
-    public string Activation_code { get; set; }
     public string JsonDevicesData { get; set; }
 
     private DeviceDataModel _dataModel;
@@ -324,9 +376,9 @@ public class PostavkeViewModel : INotifyPropertyChanged
                     device.ConvertHwidToHwid64();
 
                     Debug.WriteLine($"Device ID: {device.id}");
-                    Debug.WriteLine($"Company ID: {device.hwid}");
+                    Debug.WriteLine($"Device HWID: {device.hwid}");
                     Debug.WriteLine($"Description: {device.opis}");
-                    Debug.WriteLine($"Base64 Company ID: {device.hwid64}");
+                    Debug.WriteLine($"Base64 HWID: {device.hwid64}");
                 }
                 _dataModel.Devices.Insert(0, new Device { opis = "Bez uređaja" });
             }
@@ -920,6 +972,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
     {
         try
         {
+            DateTimeString = TrecaSreca.Get("expire_date");
             DateTimeOffset dateTimeOffset = DateTimeOffset.Parse(DateTimeString);
             ExpiryDateOnly = dateTimeOffset.Date;
             ExpiryDate = ExpiryDateOnly.ToString("D");
@@ -1207,7 +1260,12 @@ public class PostavkeViewModel : INotifyPropertyChanged
             PostavkeUserName = TrecaSreca.Get("UserName");
             PostavkeUserID = TrecaSreca.Get("UserID");
             Debug.WriteLine("PostavkeViewModel - LicenceUpdatedReceived -> Username: " + PostavkeUserName + " UserID: " + PostavkeUserID);
-
+            GetJsonDeviceData();
+            Activation_code = TrecaSreca.Get("activation_code");
+            LicenceType = TrecaSreca.Get("licence_type");
+            HWID = TrecaSreca.Get("key");
+            HWID64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(HWID));
+            ParseDate();
         }
         catch (Exception ex)
         {

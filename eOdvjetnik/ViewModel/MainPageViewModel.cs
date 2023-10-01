@@ -359,7 +359,16 @@ namespace eOdvjetnik.ViewModel
                 //}
 
             }
-          
+            string TypeOfLicence = TrecaSreca.Get("licence_type");
+            if (LicenceStatus == "0" || TypeOfLicence == null || TypeOfLicence == "")
+            {
+                LicenceType = "nije aktivirana";
+            }
+            else
+            {
+                LicenceType = TypeOfLicence;
+                CompanyName = TrecaSreca.Get("naziv_tvrtke");
+            }
             LicenceUpdatedMessage(); //Javlja postavkama da je licenca ažurirana
             LicenceExpiryCheck();
         }
@@ -374,10 +383,7 @@ namespace eOdvjetnik.ViewModel
             {
                 Application.Current.MainPage.DisplayAlert("", "Unesite NAS i SQL postavke.", "OK");
             }
-            else
-            {
-                UserNameAndID();
-            }
+           
         }
 
 
@@ -385,23 +391,28 @@ namespace eOdvjetnik.ViewModel
     private void LicenceExpiryCheck() // Provjera isteka licence nakon što izvrti LicenceCheck()
         {
             LicenceStatus = TrecaSreca.Get("licence_active");
-            
-            ExpiredLicence = true;
-            if (LicenceStatus == null)
+            string vrstaLicence = TrecaSreca.Get("licence_type");
+
+            if(vrstaLicence != "" || vrstaLicence != null || vrstaLicence != "nije aktivirana")
             {
                 ExpiredLicence = true;
-            }
+                if (LicenceStatus == null)
+                {
+                    ExpiredLicence = true;
+                }
 
-            else if (LicenceStatus == "0" && GracePeriod > 0 && GracePeriod < 11)
-            {
-                ExpiredLicence = true;
+                else if (LicenceStatus == "0" && GracePeriod > 0 && GracePeriod < 11)
+                {
+                    ExpiredLicence = true;
 
-            }
-            else if (LicenceStatus == "1")
-            {
-                ExpiredLicence = false;
+                }
+                else if (LicenceStatus == "1")
+                {
+                    ExpiredLicence = false;
 
+                }
             }
+          
 
             try //provjera ponovne instalacije Trial licence -> postoji li u SQL-u file ID stariji o 45 dana
             {
@@ -512,7 +523,7 @@ namespace eOdvjetnik.ViewModel
                     TrecaSreca.Set("UserName", UserName);
                     TrecaSreca.Set("UserID", UserID);
                     TrecaSreca.Set("UserInitials", UserInitials);
-
+                    LicenceUpdatedMessage();
                 }
                 else
                 {
