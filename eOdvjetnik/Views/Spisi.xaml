@@ -82,13 +82,13 @@
                                     <ColumnDefinition Width="10" />
                                 </Grid.ColumnDefinitions>
 
-                                <Label FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="BrojSpisa" Padding="5,0,0,0" />
+                                <Label FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Broj spisa" Padding="10,0,0,0" />
                                 <Label FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="Klijent" />
                                 <Label FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Protustranka" />
                                 <Label FontAttributes="Bold" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="Dodao" />
                                 <Label FontAttributes="Bold" Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center" Text="Radi" />
                                 <Label FontAttributes="Bold" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" Text="Kreirano" />
-                                <Label FontAttributes="Bold" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center" Text="Izmjenjeno" />
+                                <Label FontAttributes="Bold" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center" Text="Izmijenjeno" />
                             </Grid>
                         </DataTemplate>
                     </syncfusion:SfListView.HeaderTemplate>

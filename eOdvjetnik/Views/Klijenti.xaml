@@ -73,7 +73,7 @@
 
             <HorizontalStackLayout Margin="0,0,0,10">
 
-                <Button   Text="{x:Static resx:AppResources.DodajNovi}" Margin="5,0,0,0" Command="{Binding OnNoviKlijentClick}" />
+                <Button   Text="{x:Static resx:AppResources.DodajNovi}" Margin="10,0,0,0" Command="{Binding OnNoviKlijentClick}" />
 
                 <Button    Text="{x:Static resx:AppResources.NedavnoDodani}" Margin="5,0,0,0" Command="{Binding RefreshContacts}"   />
 
@@ -101,8 +101,8 @@
                    Margin="10,0,10,0"
                    FontSize="Default" />
 
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{x:Static resx:AppResources.NemaRPretrage}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}"   TextColor="Black" VerticalTextAlignment="Center" />
-                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{x:Static resx:AppResources.PovezivanjeFalse}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}"  TextColor="Black" VerticalTextAlignment="Center"/>
+                <!--<Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{x:Static resx:AppResources.NemaRPretrage}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoQueryResult}"   TextColor="Black" VerticalTextAlignment="Center" />
+                <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{x:Static resx:AppResources.PovezivanjeFalse}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding NoSQLreply}"  TextColor="Black" VerticalTextAlignment="Center"/>-->
                 <!--<Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{Binding ContactDeletedText}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding ContactDeleted}"  TextColor="Black" VerticalTextAlignment="Center" />
                 <Label Style="{StaticResource ShadowLabelStyle}" Margin="20,0,0,0" Text="{Binding ContactEditedText}" FontSize="Default" FontAttributes="Bold" IsVisible="{Binding ContactEdited}"  TextColor="Black" VerticalTextAlignment="Center" />-->
 

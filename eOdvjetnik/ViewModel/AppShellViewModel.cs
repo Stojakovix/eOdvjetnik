@@ -618,12 +618,12 @@ namespace eOdvjetnik.ViewModel
                     ExpiryPopupOpen = true;
                     Expiryvisible = true;
                 }
-                else if (DaysRemaining == 0 || DaysRemaining < 0)
-                {
-                    Days_Remaining = "Vaša licenca je istekla!";
-                    ExpiryPopupOpen = true;
-                    Expiryvisible = true;
-                }
+                //else if (DaysRemaining == 0 || DaysRemaining < 0)
+                //{
+                //    Days_Remaining = "Vaša licenca je istekla!";
+                //    ExpiryPopupOpen = true;
+                //    Expiryvisible = true;
+                //}
             }
             catch (Exception ex)
             {

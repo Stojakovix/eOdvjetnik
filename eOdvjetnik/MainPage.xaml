@@ -43,7 +43,7 @@
             
             <Image Source="text_only.png" HeightRequest="120" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
 
-            <Button Text="Clear All Preferences" Background="LightBlue" BorderColor="black" Command="{Binding ClearPrefrences}" IsVisible="False" />
+            <Button Text="Clear All Preferences"  Command="{Binding ClearPrefrences}" IsVisible="True" />
 
             <Label  Style="{StaticResource ShadowLabelStyle}" 
                         Text="{x:Static resx:AppResources.ZaAktivaciju}"
@@ -109,7 +109,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="150"  />
                  <ColumnDefinition Width="*" />
-                 <ColumnDefinition Width="200" />
+                 <ColumnDefinition Width="250" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="250" />
             </Grid.ColumnDefinitions>
