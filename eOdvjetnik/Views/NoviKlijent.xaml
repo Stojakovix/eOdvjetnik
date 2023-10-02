@@ -71,16 +71,10 @@
             <HorizontalStackLayout Grid.Row="12" Grid.Column="1"  >
 
                 <Button Text="Spremi" Margin="5,0,0,0" Command="{Binding DodajNovogKlijenta}">
-                    <Button.ImageSource>
-                        <FileImageSource File="home.png" />
-                    </Button.ImageSource>
 
                 </Button>
 
                 <Button Text="Odustani" Margin="5,0,0,0" Command="{Binding BackButtonCommand}">
-                    <Button.ImageSource>
-                        <FileImageSource File="home.png" />
-                    </Button.ImageSource>
 
                 </Button>
 
