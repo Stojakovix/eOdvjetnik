@@ -86,7 +86,7 @@ public partial class Racun : ContentPage
 
     private void SanityCheck()
     {
-        if (ReceiptHeaderText == "" || ReceiptHeaderText != null)
+        if (ReceiptHeaderText == "" || ReceiptHeaderText == null)
         {
             string nazivtvrtke = TrecaSreca.Get("naziv_tvrtke");
             if (nazivtvrtke != "" || nazivtvrtke != null)
@@ -99,19 +99,19 @@ public partial class Racun : ContentPage
                 ReceiptHeaderText = "Odvjetnički ured";
             }
         }
-        if (ReceiptFooterText == "" || ReceiptFooterText != null)
+        if (ReceiptFooterText == "" || ReceiptFooterText == null)
         {
             ReceiptFooterText = " ";
         }
-        if (ReceiptPDVamountString == "" || ReceiptPDVamountString != null)
+        if (ReceiptPDVamountString == "" || ReceiptPDVamountString == null)
         {
             ReceiptPDVamountString = "25";
         }
-        if (ReceiptIBAN == "" || ReceiptIBAN != null)
+        if (ReceiptIBAN == "" || ReceiptIBAN == null)
         {
             ReceiptIBAN = " ";
         }
-        if (ReceiptSignature == "" || ReceiptSignature != null)
+        if (ReceiptSignature == "" || ReceiptSignature == null)
         {
             ReceiptSignature = " ";
         }
