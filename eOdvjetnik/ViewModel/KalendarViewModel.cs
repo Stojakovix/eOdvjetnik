@@ -149,7 +149,7 @@ namespace eOdvjetnik.ViewModel
         {
             EmployeeItems.Clear();
             Appointments.Clear();
-            AdminAppointments.Clear();
+            //AdminAppointments.Clear();
             Resources.Clear();
             string licence_type = TrecaSreca.Get("licence_type");
             int numberOfCharacters = 5;
@@ -171,9 +171,9 @@ namespace eOdvjetnik.ViewModel
 
         public KalendarViewModel()
         {
-            AdminViewByDate = new Command(GetAdminCalendarEventsByDate);
-            AdminViewByName = new Command(GetAdminCalendarEventsByName);
-            AdminAppointments = new ObservableCollection<AdminCalendarItem>();
+        //    AdminViewByDate = new Command(GetAdminCalendarEventsByDate);
+        //    AdminViewByName = new Command(GetAdminCalendarEventsByName);
+        //    AdminAppointments = new ObservableCollection<AdminCalendarItem>();
 
             SQLUserID = TrecaSreca.Get("UserID");
             Debug.WriteLine(" user id je " + SQLUserID);
@@ -185,7 +185,7 @@ namespace eOdvjetnik.ViewModel
                 Resources = new ObservableCollection<SchedulerResource>();
                 GetColors();
                 AdminLicenceCheck();
-                GetAdminCalendarEventsByDate();
+                //GetAdminCalendarEventsByDate();
                 //this.QueryAppointmentsCommand = new Command<Object(LoadMoreAppointments, CanLoadMoreAppointments);
                 Debug.WriteLine("---------------------inicijalizirano kalendarViewModel constructor");
 
@@ -213,8 +213,10 @@ namespace eOdvjetnik.ViewModel
                 if (employeeItem != null)
                 {
                     employeeItem.Clear();
+                    Debug.WriteLine("Cleared employee item collection");
 
                 }
+
 
                 string query = "SELECT id, ime, inicijali, hwid, active, type FROM employees;";
 
@@ -248,7 +250,6 @@ namespace eOdvjetnik.ViewModel
 
                         employeeItem.Add(employee);
                     }
-
                     foreach (EmployeeItem employee in employeeItem)
                     {
                         Resources.Add(new SchedulerResource()
@@ -259,8 +260,15 @@ namespace eOdvjetnik.ViewModel
                             Id = employee.Id
                         });
 
-                        Debug.Write(employee.EmployeeName + " id " + employee.Id + ", ");
+                        
+                       // Debug.Write(employee.EmployeeName + " id " + employee.Id + ", ");
                     }
+                    
+                    //foreach (SchedulerResource resource in Resources)
+                    //{
+                    //    Debug.WriteLine(resource.Name + ", " + resource.Id);
+                        
+                    //}
 
 
                     OnPropertyChanged(nameof(employeeItem));
@@ -278,6 +286,7 @@ namespace eOdvjetnik.ViewModel
         {
             try
             {
+                Appointments.Clear();
                 var hardware_id = TrecaSreca.Get("key");
                 ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
                 List<int> ExternalEventIDs = new List<int>();
@@ -327,7 +336,7 @@ namespace eOdvjetnik.ViewModel
                             });
                             //foreach (SchedulerAppointment appointment in Appointments)
                             //{
-                            //    Debug.WriteLine(appointment.Id + "  " + appointment.Subject);
+                            //    Debug.WriteLine(appointment.Id + " - " + appointment.Subject);
                             //    foreach (object resourceId in appointment.ResourceIds)
                             //    {
                             //        Debug.WriteLine("Resource ID: " + resourceId.ToString());
@@ -361,7 +370,6 @@ namespace eOdvjetnik.ViewModel
                 string query = "SELECT * FROM `events` WHERE resource_id = " + SQLUserID + ";";
                 Debug.WriteLine(query);
 
-                Debug.WriteLine(query);
 
                 //Rezultat query-ja u apointmentData
                 Dictionary<string, string>[] appointmentData = externalSQLConnect.sqlQuery(query);
@@ -430,122 +438,122 @@ namespace eOdvjetnik.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public void GetAdminCalendarEventsByDate()
-        {
-            if (adminAppointments != null)
-            {
-                adminAppointments.Clear();
-            }
-            string query = "SELECT events.*, employees.ime, event_colors.vrsta_dogadaja FROM events INNER JOIN employees ON events.user_id = employees.id INNER JOIN event_colors ON events.color = event_colors.naziv_boje ORDER BY STR_TO_DATE(events.TimeFrom, '%Y-%m-%d %H:%i:%s') DESC;";
+        //public void GetAdminCalendarEventsByDate()
+        //{
+        //    if (adminAppointments != null)
+        //    {
+        //        adminAppointments.Clear();
+        //    }
+        //    string query = "SELECT events.*, employees.ime, event_colors.vrsta_dogadaja FROM events INNER JOIN employees ON events.user_id = employees.id INNER JOIN event_colors ON events.color = event_colors.naziv_boje ORDER BY STR_TO_DATE(events.TimeFrom, '%Y-%m-%d %H:%i:%s') DESC;";
 
-            try
-            {
+        //    try
+        //    {
 
-                Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
-                Debug.WriteLine(query + " u Admin Kalendaru");
-                if (filesData != null)
-                {
-                    foreach (Dictionary<string, string> filesRow in filesData)
-                    {
+        //        Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+        //        Debug.WriteLine(query + " u Admin Kalendaru");
+        //        if (filesData != null)
+        //        {
+        //            foreach (Dictionary<string, string> filesRow in filesData)
+        //            {
 
-                        //int id;
-                        DateTime startTime;
-                        DateTime endTime;
+        //                //int id;
+        //                DateTime startTime;
+        //                DateTime endTime;
 
-                        //int.TryParse(filesRow["ID"], out id);
-                        DateTime.TryParse(filesRow["TimeFrom"], out startTime);
-                        DateTime.TryParse(filesRow["TimeTo"], out endTime);
+        //                //int.TryParse(filesRow["ID"], out id);
+        //                DateTime.TryParse(filesRow["TimeFrom"], out startTime);
+        //                DateTime.TryParse(filesRow["TimeTo"], out endTime);
 
-                        string colorName = filesRow["color"];
-                        if (colorName == null || colorName == "")
-                        {
-                            colorName = "LightGray";
-                        }
-                        Color backgroundColor = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(colorName);
+        //                string colorName = filesRow["color"];
+        //                if (colorName == null || colorName == "")
+        //                {
+        //                    colorName = "LightGray";
+        //                }
+        //                Color backgroundColor = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(colorName);
 
-                        adminAppointments.Add(new AdminCalendarItem()
-                        {
+        //                //adminAppointments.Add(new AdminCalendarItem()
+        //                //{
 
-                            StartTime = startTime,
-                            StartDateString = startTime.ToString("d.' 'MMM yyyy"),
-                            StartTimeString = startTime.ToString("HH:mm"),
-                            EndTime = endTime,
-                            EndTimeString = endTime.ToString("f"),
-                            EventName = filesRow["EventName"],
-                            DescriptionNotes = filesRow["DescriptionNotes"],
-                            UserName = filesRow["ime"],
-                            Type = backgroundColor,
-                            EventType = filesRow["vrsta_dogadaja"],
+        //                //    StartTime = startTime,
+        //                //    StartDateString = startTime.ToString("d.' 'MMM yyyy"),
+        //                //    StartTimeString = startTime.ToString("HH:mm"),
+        //                //    EndTime = endTime,
+        //                //    EndTimeString = endTime.ToString("f"),
+        //                //    EventName = filesRow["EventName"],
+        //                //    DescriptionNotes = filesRow["DescriptionNotes"],
+        //                //    UserName = filesRow["ime"],
+        //                //    Type = backgroundColor,
+        //                //    EventType = filesRow["vrsta_dogadaja"],
 
-                        });
+        //                //});
 
-                    }
+        //            }
 
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message + "in viewModel generate files");
-            }
-        }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.Message + "in viewModel generate files");
+        //    }
+        //}
 
-        public void GetAdminCalendarEventsByName()
-        {
-            if (adminAppointments != null)
-            {
-                adminAppointments.Clear();
-            }
-            string query = "SELECT events.*, employees.ime, event_colors.vrsta_dogadaja FROM events INNER JOIN employees ON events.user_id = employees.id INNER JOIN event_colors ON events.color = event_colors.naziv_boje ORDER BY employees.ime ASC, STR_TO_DATE(events.TimeFrom, '%Y-%m-%d %H:%i:%s') ASC;";
+        //public void GetAdminCalendarEventsByName()
+        //{
+        //    if (adminAppointments != null)
+        //    {
+        //        adminAppointments.Clear();
+        //    }
+        //    string query = "SELECT events.*, employees.ime, event_colors.vrsta_dogadaja FROM events INNER JOIN employees ON events.user_id = employees.id INNER JOIN event_colors ON events.color = event_colors.naziv_boje ORDER BY employees.ime ASC, STR_TO_DATE(events.TimeFrom, '%Y-%m-%d %H:%i:%s') ASC;";
 
-            try
-            {
+        //    try
+        //    {
 
-                Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
-                Debug.WriteLine(query + " u Admin Kalendaru");
-                if (filesData != null)
-                {
-                    foreach (Dictionary<string, string> filesRow in filesData)
-                    {
+        //        Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+        //        Debug.WriteLine(query + " u Admin Kalendaru");
+        //        if (filesData != null)
+        //        {
+        //            foreach (Dictionary<string, string> filesRow in filesData)
+        //            {
 
-                        //int id;
-                        DateTime startTime;
-                        DateTime endTime;
+        //                //int id;
+        //                DateTime startTime;
+        //                DateTime endTime;
 
-                        //int.TryParse(filesRow["ID"], out id);
-                        DateTime.TryParse(filesRow["TimeFrom"], out startTime);
-                        DateTime.TryParse(filesRow["TimeTo"], out endTime);
+        //                //int.TryParse(filesRow["ID"], out id);
+        //                DateTime.TryParse(filesRow["TimeFrom"], out startTime);
+        //                DateTime.TryParse(filesRow["TimeTo"], out endTime);
 
-                        string colorName = filesRow["color"];
-                        if (colorName == null || colorName == "")
-                        {
-                            colorName = "LightGray";
-                        }
-                        Color backgroundColor = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(colorName);
+        //                string colorName = filesRow["color"];
+        //                if (colorName == null || colorName == "")
+        //                {
+        //                    colorName = "LightGray";
+        //                }
+        //                Color backgroundColor = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(colorName);
 
-                        adminAppointments.Add(new AdminCalendarItem()
-                        {
+        //                adminAppointments.Add(new AdminCalendarItem()
+        //                {
 
-                            StartTime = startTime,
-                            StartDateString = startTime.ToString("d' 'MMM yyyy"),
-                            StartTimeString = startTime.ToString("HH:mm"),
-                            EndTime = endTime,
-                            EndTimeString = endTime.ToString("f"),
-                            EventName = filesRow["EventName"],
-                            DescriptionNotes = filesRow["DescriptionNotes"],
-                            UserName = filesRow["ime"],
-                            Type = backgroundColor,
-                            EventType = filesRow["vrsta_dogadaja"],
+        //                    StartTime = startTime,
+        //                    StartDateString = startTime.ToString("d' 'MMM yyyy"),
+        //                    StartTimeString = startTime.ToString("HH:mm"),
+        //                    EndTime = endTime,
+        //                    EndTimeString = endTime.ToString("f"),
+        //                    EventName = filesRow["EventName"],
+        //                    DescriptionNotes = filesRow["DescriptionNotes"],
+        //                    UserName = filesRow["ime"],
+        //                    Type = backgroundColor,
+        //                    EventType = filesRow["vrsta_dogadaja"],
 
-                        });
+        //                });
 
-                    }
+        //            }
 
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message + "in viewModel generate files");
-            }
-        }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.Message + "in viewModel generate files");
+        //    }
+        //}
     }
 }

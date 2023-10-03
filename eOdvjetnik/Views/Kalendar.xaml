@@ -15,7 +15,7 @@
         <DataTemplate x:Key="AppointmentTemplate"  >
             <!--Ne koristit Frame, nema podršku za dynamic data binding, koristi border-->
             <Border Background="{Binding Background}" StrokeShape="RoundRectangle 5,5,5,5" Stroke="Transparent">
-                <Label Text="{Binding Subject}" TextColor="Black"  HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Bold" LineBreakMode="WordWrap" MaxLines="2"  />
+                <Label Text="{Binding Subject}" TextColor="Black"  HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Bold" LineBreakMode="WordWrap" MaxLines="10"  />
             </Border>
         </DataTemplate>
 
@@ -29,6 +29,7 @@
     </ContentPage.Resources>
 
     <Grid>
+        
         <scheduler:SfScheduler x:Name="Scheduler" 
                                FirstDayOfWeek="Monday" 
                                DoubleTapped="Scheduler_DoubleTapped" 
@@ -44,7 +45,7 @@
                                AllowedViews="Day,Week,WorkWeek,Month,Agenda,TimelineMonth"
                                View="Day"
                                AllowViewNavigation="True"
-                               
+                               ShowNavigationArrows="True"
                                >
 
 
@@ -53,29 +54,13 @@
                 <scheduler:SchedulerResourceView Resources="{Binding Resources}" >
                     <scheduler:SchedulerResourceView.HeaderTemplate>
                         <DataTemplate>
-                            <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Fill">
-                                <!--<Border StrokeThickness="5"
-                           Stroke="{Binding Foreground}"
-                           HorizontalOptions="Center"
-                           HeightRequest="{OnIdiom Desktop = 70, Phone = 65}"                                            
-                           WidthRequest="{OnIdiom Desktop= 70, Phone=65}">
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="150"/>
-                                    </Border.StrokeShape>
-                                    
-                                    <Image WidthRequest="{OnIdiom Desktop = 55, Phone = 50}"                                               
-                            HeightRequest="{OnIdiom Desktop = 55, Phone = 50}"
-                            HorizontalOptions="Center"
-                          
-                            VerticalOptions="Center"
-                            Aspect="Fill"/>
-                                </Border>-->
-                                <Label Text="{Binding Name}" TextColor="Black" FontSize="{OnIdiom Desktop= 12, Phone=10}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                            </StackLayout>
+                            <Grid VerticalOptions="Center" HorizontalOptions="Fill">
+                                <Label Text="{Binding Name}" TextColor="Black"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Grid>
                         </DataTemplate>
                     </scheduler:SchedulerResourceView.HeaderTemplate>
+                    
                 </scheduler:SchedulerResourceView>
-
 
             </scheduler:SfScheduler.ResourceView>
 
@@ -100,6 +85,7 @@
             <scheduler:SfScheduler.MonthView >
                 <scheduler:SchedulerMonthView AppointmentTemplate="{StaticResource AppointmentTemplate}"
                                               
+                                              
                                               >
                 </scheduler:SchedulerMonthView>
             </scheduler:SfScheduler.MonthView>
@@ -108,6 +94,7 @@
             <scheduler:SfScheduler.TimelineView>
                 <scheduler:SchedulerTimelineView AppointmentTemplate="{StaticResource AppointmentTemplate}" 
                                                  TimeFormat="HH:mm"
+                                                 TimeIntervalWidth="100"
                                                  NonWorkingDays="Saturday,Sunday">
                 </scheduler:SchedulerTimelineView>
             </scheduler:SfScheduler.TimelineView>

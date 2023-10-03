@@ -14,16 +14,16 @@ public partial class Kalendar : ContentPage
 {
 
 
-    private static KalendarViewModel _viewModel;
+    private  KalendarViewModel _viewModel;
     private bool isInitialized;
     public Kalendar(KalendarViewModel viewModel)
     {
         try
         {
             _viewModel = viewModel;
+            this.BindingContext = viewModel;
             InitializeComponent();
             Debug.WriteLine("inicijalizirano");
-            this.BindingContext = viewModel;
 
             
             this.Scheduler.DragDropSettings.TimeIndicatorTextFormat = "HH:mm";
@@ -43,37 +43,33 @@ public partial class Kalendar : ContentPage
 
     }
 
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        if (!isInitialized)
-        {
-            isInitialized = true;
-            Debug.WriteLine("ViewModel initialized");
-        }
+    //protected override void OnAppearing()
+    //{
+    //    base.OnAppearing();
+    //    if (!isInitialized)
+    //    {
+    //        isInitialized = true;
+    //        Debug.WriteLine("ViewModel initialized");
+    //    }
 
-        else
-        {
-            //isInitialized = true;
-            if(Scheduler.View is SchedulerView.TimelineMonth)
-            {
-                _viewModel.AdminLicenceCheck();
-                Debug.WriteLine("izvršio on appearing adminLicenceCheck");
-            }
-            else if(Scheduler.View is SchedulerView.Agenda)
-            {
-                _viewModel.AdminLicenceCheck();
-                Debug.WriteLine("izvršio on appearing adminLicenceCheck u elseifu");
-            }
-            else
-            {
-                _viewModel.GetUserEvents();
-                Debug.WriteLine("Izvršio onAppearing GetUser events");
-            }
+    //    else
+    //    {
+    //        //isInitialized = true;
+    //        if(Scheduler.View is SchedulerView.TimelineMonth || Scheduler.View is SchedulerView.Agenda)
+    //        {
+    //            _viewModel.GetColors();
+    //            _viewModel.AdminLicenceCheck();
+    //            Debug.WriteLine("izvršio on appearing adminLicenceCheck");
+    //        }
+    //        else
+    //        {
+    //            _viewModel.GetUserEvents();
+    //            Debug.WriteLine("Izvršio onAppearing GetUser events");
+    //        }
              
-        }
+    //    }
 
-    }
+    //}
 
     private void OnSchedulerAppointmentDragStarting(object? sender, AppointmentDragStartingEventArgs e)
     {
@@ -85,9 +81,13 @@ public partial class Kalendar : ContentPage
         base.OnDisappearing();
         var appointments = _viewModel.Appointments;
         //var resources = _viewModel.Resources;
+        var resources = _viewModel.Resources;
         if(appointments != null)
         {
-            appointments.Clear();
+            //appointments.Clear();
+            //resources.Clear();
+            Debug.WriteLine("Triggered onDisappearing");
+            //resources.Clear();
             if (Scheduler != null)
             {
                 Scheduler.AppointmentDragStarting += OnSchedulerAppointmentDragStarting;
@@ -104,7 +104,7 @@ public partial class Kalendar : ContentPage
         {
             ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
             var appointment = eventArgs.Appointment;
-
+            
             if (Scheduler.View == SchedulerView.TimelineMonth)
             {
                 var droptime = eventArgs.DropTime;
@@ -172,27 +172,25 @@ public partial class Kalendar : ContentPage
     }
 
 
-    private void OnSchedulerViewChanged(object sender, SchedulerViewChangedEventArgs e)
+    private  void OnSchedulerViewChanged(object sender, SchedulerViewChangedEventArgs e)
     {
         try
         {
             Scheduler.ShowBusyIndicator = true;
             // Check if the new view is a TimelineMonth view
-            if (e.NewView is SchedulerView.TimelineMonth)
+            if (Scheduler.View is SchedulerView.TimelineMonth || Scheduler.View is SchedulerView.Agenda)
             {
+                //_viewModel.GetColors();
+                // _viewModel.AdminLicenceCheck();
+                //_viewModel = new KalendarViewModel();
                 
-                _viewModel.AdminLicenceCheck();
-                Debug.WriteLine("izvršen onSchedulerViewChanged");
-            }
-            else if (e.NewView is SchedulerView.Agenda)
-            {
-                _viewModel.AdminLicenceCheck();
-                Debug.WriteLine("izvršen onSchedulerViewChanged u else ifu - agenda");
-
+                _viewModel.GetAllEvents();
+                Debug.WriteLine("izvršen onSchedulerViewChanged u ifu");
             }
             else
             {
                 _viewModel.GetUserEvents();
+                Debug.WriteLine("izvršen else u OnSchedulerViewChanged");
                 // Code to execute when the view changes to something else
             }
 
@@ -202,6 +200,8 @@ public partial class Kalendar : ContentPage
             Debug.WriteLine(ex.Message + " U OnSchedulerViewChangedu");
         }
     }
+
+
     private ObservableCollection<SchedulerTimeRegion> GetTimeRegion()
     {
         var startTime = DateTime.UnixEpoch.AddHours(19);
@@ -283,12 +283,12 @@ public partial class Kalendar : ContentPage
                     Debug.WriteLine(resourceId + "-----------------------------------------------------");
                     if (e.Appointments != null)
                     {
-                        Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler, _viewModel));
+                        Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
                         Debug.WriteLine("izvršen drugi if");
                     }
                     else
                     {
-                        Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler, _viewModel));
+                        Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
                         Debug.WriteLine("izvršen drugi else ");
                     }
                 }
@@ -300,7 +300,7 @@ public partial class Kalendar : ContentPage
                     {
                         TrecaSreca.Remove("resourceId");
                         TrecaSreca.Set("resourceId", SQLUserID);
-                        Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler, _viewModel));
+                        Navigation.PushAsync(new AppointmentDialog((SchedulerAppointment)e.Appointments[0], (e.Appointments[0] as SchedulerAppointment).StartTime, this.Scheduler));
 
                         Debug.WriteLine("--------------------------------------------------Appointment pun");
                     }
@@ -308,7 +308,7 @@ public partial class Kalendar : ContentPage
                     {
                         TrecaSreca.Remove("resourceId");
                         TrecaSreca.Set("resourceId", SQLUserID);
-                        Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler, _viewModel));
+                        Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
 
                         Debug.WriteLine("-------------------------------------------------Appointment prazan");
 

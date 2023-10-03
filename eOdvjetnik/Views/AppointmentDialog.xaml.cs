@@ -52,14 +52,14 @@ public partial class AppointmentDialog : ContentPage
         }
     }
     public string DevicePlatform { get; set; }
-    public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler, KalendarViewModel kalendarView)
+    public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler)
     {
         try
         {
 
             InitializeComponent();
 
-            kalendarViewModel = kalendarView;
+            
             this.appointment = appointment;
             this.selectedDate = AdjustSelectedDate(selectedDate);
             this.scheduler = scheduler;
@@ -259,12 +259,12 @@ public partial class AppointmentDialog : ContentPage
                             if (DevicePlatform == "MacCatalyst")
                             {
                                 Shell.Current.GoToAsync("//LoadingPage");
-                                kalendarViewModel.AdminLicenceCheck();
+                                //kalendarViewModel.AdminLicenceCheck();
                             }
                             else
                             {
                                 Shell.Current.GoToAsync("//Kalendar");
-                                kalendarViewModel.AdminLicenceCheck();
+                                //kalendarViewModel.AdminLicenceCheck();
 
                             }
 
@@ -278,19 +278,19 @@ public partial class AppointmentDialog : ContentPage
                         if (DevicePlatform == "MacCatalyst")
                         {
                             Shell.Current.GoToAsync("//LoadingPage");
-                            kalendarViewModel.AdminLicenceCheck();
+                            //kalendarViewModel.AdminLicenceCheck();
 
                         }
                         else
                         {
                             Shell.Current.GoToAsync("//Kalendar");
-                            kalendarViewModel.AdminLicenceCheck();
+                            //kalendarViewModel.AdminLicenceCheck();
 
                         }
                     }
                 }
             }
-            SaveNotification();
+            //SaveNotification();
         }
         catch (Exception ex)
         {
