@@ -1,5 +1,6 @@
 using eOdvjetnik.Services;
-
+using CommunityToolkit.Mvvm.Messaging;
+using System.Diagnostics;
 
 namespace eOdvjetnik.Views;
 
@@ -9,6 +10,8 @@ public partial class Postavke : ContentPage
 	{
 		InitializeComponent();
         this.BindingContext = App.SharedPostavkeViewModel;
+        WeakReferenceMessenger.Default.Register<NoNasDetected>(this, EnterNAS);
+
 
     }
 
@@ -46,7 +49,23 @@ public partial class Postavke : ContentPage
         this.Window.MinimumHeight = 620;
         this.Window.MinimumWidth = 860;
     }
+
     public double MinWidth { get; set; }
+    public void EnterNAS(object recipient, NoNasDetected message)
+    {
+
+        Frame1.IsVisible = false;
+        Frame2.IsVisible = false;
+        Frame3.IsVisible = false;
+        Frame4.IsVisible = true;
+        Frame5.IsVisible = false;
+        Frame7.IsVisible = false;
+        Application.Current.MainPage.DisplayAlert("", "Za pristup dokumentima unesite NAS postavke", "OK");
+
+    }
+
+
+
     private void Button1_Clicked(object sender, EventArgs e)
     {
         Frame1.IsVisible = true;
