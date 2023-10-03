@@ -8,7 +8,8 @@ using CommunityToolkit.Mvvm.Messaging;
 using Plugin.LocalNotification;
 using System.Text.Json;
 using eOdvjetnik.Models;
-
+using System.Security.Cryptography;
+using System.Text;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -137,6 +138,7 @@ namespace eOdvjetnik.ViewModel
 
         public MainPageViewModel()
         {
+            GenerateHWID();
             Version = $"{AppResources.Version} {AppInfo.VersionString}";
             ClearPrefrences = new Command(DeletePreferences);
             CheckLicenceStatus = new Command(OnRefreshLicenceClick);
@@ -577,6 +579,81 @@ namespace eOdvjetnik.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        #region HWID 
+
+        public static string GetMicroSeconds() //DD: čemu ovo?
+        {
+            double timestamp = Stopwatch.GetTimestamp();
+            double microseconds = 1_000_000.0 * timestamp / Stopwatch.Frequency;
+            string hashedData = ComputeSha256Hash(microseconds.ToString());
+
+            return hashedData;
+
+        }
+        static string ComputeSha256Hash(string rawData) //DD: čemu ovo?
+        {
+            // Create a SHA256   
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+
+        }
+
+        public void GenerateHWID()
+        {
+            string url = "https://cc.eodvjetnik.hr/token.json?token="; 
+
+            try
+            {
+                //zakomentirati nakon setanja na null
+                //Microsoft.Maui.Storage.Preferences.Set("key", null);
+                //Provjerava da li ima ključ spremnjen u preferences
+                if (string.IsNullOrEmpty(TrecaSreca.Get("key")))
+                {
+
+
+                    var time = GetMicroSeconds();
+                    // ----------------- platform ispod --------------
+                    var device = Microsoft.Maui.Devices.DeviceInfo.Current.Platform;
+                    Debug.WriteLine("url je----------------main" + url + time);
+
+
+                    //Sprema u preferences index neku vrijednost iz varijable
+                    TrecaSreca.Set("key", time);
+                    Debug.WriteLine("spremio HWID");
+                    string preferencesKey = TrecaSreca.Get("key");
+                    Debug.WriteLine("HWID učitan iz preferences: " + preferencesKey);
+
+                }
+                else
+                {
+                    Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + TrecaSreca.Get("key"));
+
+
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message + " in MainPage");
+            }
+        }
+
+
+
+        #endregion
     }
 }
 

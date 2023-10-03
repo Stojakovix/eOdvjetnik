@@ -111,7 +111,7 @@
                  <ColumnDefinition Width="*" />
                  <ColumnDefinition Width="250" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
 
             <Image Grid.Row="1" Grid.Column="0" Source="text_only.png" Margin="20,0,0,0" HeightRequest="25" />
