@@ -7,6 +7,8 @@ using System.ComponentModel;
 using eOdvjetnik.Resources.Strings;
 using Plugin.LocalNotification;
 using eOdvjetnik.Services;
+using CommunityToolkit.Mvvm.Messaging;
+
 
 namespace eOdvjetnik.ViewModel
 {
@@ -272,11 +274,22 @@ namespace eOdvjetnik.ViewModel
 
         private async void OnDokumentiClick()
         {
+            var ip_nas = TrecaSreca.Get("IP Adresa");
+            var user_nas = TrecaSreca.Get("Korisničko ime");
+            var pass_nas = TrecaSreca.Get("Lozinka");
             DisableMenu();
             if (disableMenu == false)
             {
-                await Shell.Current.GoToAsync("///Dokumenti");
-                Debug.WriteLine("KLIKNO");
+                if (ip_nas != null || user_nas != null || pass_nas != null)
+                {
+                    await Shell.Current.GoToAsync("///Dokumenti");
+                    Debug.WriteLine("KLIKNO");
+                }
+                else
+                {
+                    await Shell.Current.GoToAsync("//Postavke");
+                    WeakReferenceMessenger.Default.Send(new NoNasDetected("No NAS settings!"));
+                }
             }
         }
 

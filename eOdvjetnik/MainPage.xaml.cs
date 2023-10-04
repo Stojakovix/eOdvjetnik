@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Text;
-using System.Security.Cryptography;
 using eOdvjetnik.ViewModel;
 using System.Globalization;
 using Preferences = Microsoft.Maui.Storage.Preferences;
@@ -18,7 +17,6 @@ namespace eOdvjetnik;
 public partial class MainPage : ContentPage
 {
 
-    private const string url = "https://cc.eodvjetnik.hr/token.json?token="; //DD: čemu ovo?
     private HttpClient _Client = new HttpClient();
       
     private void SaveNotification()
@@ -82,11 +80,8 @@ public partial class MainPage : ContentPage
     {
         InitializeComponent();
         ReadDeviceInfo();
-        GetMicroSeconds();
         AskForWiFiPermission();
         BindingContext = new MainPageViewModel();
-
-
     }
 
 
@@ -127,34 +122,7 @@ public partial class MainPage : ContentPage
 
     }
 
-    public static string GetMicroSeconds() //DD: čemu ovo?
-    {
-        double timestamp = Stopwatch.GetTimestamp();
-        double microseconds = 1_000_000.0 * timestamp / Stopwatch.Frequency;
-        string hashedData = ComputeSha256Hash(microseconds.ToString());
 
-        return hashedData;
-
-    }
-    static string ComputeSha256Hash(string rawData) //DD: čemu ovo?
-    {
-        // Create a SHA256   
-        using (SHA256 sha256Hash = SHA256.Create())
-        {
-            // ComputeHash - returns byte array  
-            byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
-
-            // Convert byte array to a string   
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < bytes.Length; i++)
-            {
-                builder.Append(bytes[i].ToString("x2"));
-            }
-            return builder.ToString();
-        }
-
-    }
-   
     protected override void OnAppearing()
     {
 
@@ -181,43 +149,7 @@ public partial class MainPage : ContentPage
         base.OnAppearing();
         this.Window.MinimumHeight = 680;
         this.Window.MinimumWidth = 860;
-        try
-        {
-            //zakomentirati nakon setanja na null
-            //Microsoft.Maui.Storage.Preferences.Set("key", null);
-            //Provjerava da li ima ključ spremnjen u preferences
-            if (string.IsNullOrEmpty(TrecaSreca.Get("key")))
-            {
-
-                base.OnAppearing();
-
-                var time = GetMicroSeconds();
-                // ----------------- platform ispod --------------
-                var device = Microsoft.Maui.Devices.DeviceInfo.Current.Platform;
-                Debug.WriteLine("url je----------------main" + url + time);
-                
-
-                //Sprema u preferences index neku vrijednost iz varijable
-                TrecaSreca.Set("key", time);
-                Debug.WriteLine("spremio u preferences");
-                string preferencesKey = TrecaSreca.Get("key");
-                Debug.WriteLine("Izvađen iz preferences: " + preferencesKey);
-                
-            }
-            else
-            {
-                Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + TrecaSreca.Get("key"));
-
-
-
-            }
-        }
-        //Kraj IF preferences
-
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message + " in MainPage");
-        }
+       
 
     }
 
