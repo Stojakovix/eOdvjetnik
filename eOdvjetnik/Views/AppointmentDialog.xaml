@@ -90,11 +90,14 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontSize="Default"  Text="Početak" TextColor="Black" Margin="0,0,0,10" VerticalOptions="Center"  />
-                    <HorizontalStackLayout Grid.Column="1"  Margin="0,0,0,10"  >
+                    <HorizontalStackLayout Grid.Column="1"  Margin="0,0,0,20"  >
                         <DatePicker x:Name="startDate_picker" 
                                     Format="dd/MM/yyyy"
+                                    Grid.Row="0"
+                                    Margin="0,0,20,-20"
+                                    VerticalOptions="Start"
                                     FontSize="Medium"
-                                    FontAutoScalingEnabled="True"  />
+                                      />
                         <TimePicker x:Name="startTime_picker"
                                     Format="HH:mm" VerticalOptions="Center"
                                     MinimumHeightRequest="10"
@@ -109,20 +112,18 @@
                         <ColumnDefinition Width="120" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+
                     <Label Grid.Column="0" FontSize="Default" Text="Završetak" TextColor="Black" Margin="0,0,0,10" VerticalOptions="Center" />
                     <HorizontalStackLayout Grid.Column="1" Margin="0,0,0,10" >
                         <DatePicker  x:Name="endDate_picker"
                                      Grid.Column="0"
-                                     Grid.Row="0"
+                                     Margin="0,0,20,-20"
                                      VerticalOptions="Start"
                                      FontSize="Medium"
                                      Format="dd/MM/yyyy"/>
                         <TimePicker  x:Name="endTime_picker"
-                                     Grid.Column ="1"
-                                     Grid.Row="0"
+                                     Grid.Column="0"
+
                                      Format="HH:mm"
                                      VerticalOptions="Center"
                                      MinimumHeightRequest="10"
@@ -137,8 +138,8 @@
                         <ColumnDefinition Width="120" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" FontSize="Default"  VerticalTextAlignment="Center"  Text="Cjelodnevni događaj"   TextColor="Black" />
-                    <Switch  Grid.Column="1" x:Name="switchAllDay" HorizontalOptions="Start"  VerticalOptions="Center" BackgroundColor="White" ThumbColor="#DC143C"  />
+                    <Label Grid.Column="0" FontSize="Default" Margin="0,20,20,-20" VerticalTextAlignment="Center"   Text="Cjelodnevni događaj"   TextColor="Black" />
+                    <Switch  Grid.Column="1" x:Name="switchAllDay" Margin="0,20,20,-20" HorizontalOptions="Start"  VerticalOptions="Center" BackgroundColor="White" ThumbColor="#DC143C"  />
                 </Grid>
 
                 <HorizontalStackLayout Margin="0,20,0,0" >
