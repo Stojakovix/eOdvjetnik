@@ -7,6 +7,8 @@ using System.ComponentModel;
 using eOdvjetnik.Resources.Strings;
 using Plugin.LocalNotification;
 using eOdvjetnik.Services;
+using CommunityToolkit.Mvvm.Messaging;
+
 
 namespace eOdvjetnik.ViewModel
 {
@@ -285,8 +287,8 @@ namespace eOdvjetnik.ViewModel
                 }
                 else
                 {
-                    ShowAlert("Došlo je do greške", "Molim upišite vrijednosti u polja");
                     await Shell.Current.GoToAsync("//Postavke");
+                    WeakReferenceMessenger.Default.Send(new NoNasDetected("No NAS settings!"));
                 }
             }
         }
