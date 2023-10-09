@@ -206,11 +206,17 @@ namespace eOdvjetnik.ViewModel
 
         }
 
+        public bool DefaultPicker { get; set; }
+        public bool MacBookPicker { get; set; }
+        public string DevicePlatform { get; set; }
+
+
+
         public KalendarViewModel()
         {
-        //    AdminViewByDate = new Command(GetAdminCalendarEventsByDate);
-        //    AdminViewByName = new Command(GetAdminCalendarEventsByName);
-        //    AdminAppointments = new ObservableCollection<AdminCalendarItem>();
+            //    AdminViewByDate = new Command(GetAdminCalendarEventsByDate);
+            //    AdminViewByName = new Command(GetAdminCalendarEventsByName);
+            //    AdminAppointments = new ObservableCollection<AdminCalendarItem>();
 
             SQLUserID = TrecaSreca.Get("UserID");
             Debug.WriteLine(" user id je " + SQLUserID);
@@ -235,6 +241,17 @@ namespace eOdvjetnik.ViewModel
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message + "in kalendarViewModel constructor");
+            }
+            DevicePlatform = TrecaSreca.Get("vrsta_platforme");
+            if (DevicePlatform == "MacCatalyst") ///MacBookPicker kontrola 
+            {
+                MacBookPicker = true;
+                DefaultPicker = false; 
+            }
+            else
+            {
+                MacBookPicker = true;
+                DefaultPicker = false;
             }
         }
 
@@ -302,14 +319,14 @@ namespace eOdvjetnik.ViewModel
                             Id = employee.Id
                         });
 
-                        
-                       // Debug.Write(employee.EmployeeName + " id " + employee.Id + ", ");
+
+                        // Debug.Write(employee.EmployeeName + " id " + employee.Id + ", ");
                     }
-                    
+
                     //foreach (SchedulerResource resource in Resources)
                     //{
                     //    Debug.WriteLine(resource.Name + ", " + resource.Id);
-                        
+
                     //}
 
 

@@ -18,6 +18,17 @@ namespace eOdvjetnik.ViewModel
 
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
 
+        private bool ServiceModeEnabled { get; set; }
+        public bool ServiceMode
+    {
+            get { return ServiceModeEnabled; }
+            set
+            {
+            ServiceModeEnabled = value;
+                OnPropertyChanged(nameof(ServiceMode));
+            }
+        }
+
         #region Stavke vidljive na MainPageu
 
         private string LocalCompanyName;
@@ -138,6 +149,7 @@ namespace eOdvjetnik.ViewModel
 
         public MainPageViewModel()
         {
+            ServiceMode = false;
             GenerateHWID();
             Version = $"{AppResources.Version} {AppInfo.VersionString}";
             ClearPrefrences = new Command(DeletePreferences);
@@ -147,7 +159,6 @@ namespace eOdvjetnik.ViewModel
             ExpireDateString = TrecaSreca.Get("expire_date");
             LicenceStatus = TrecaSreca.Get("licence_active");
             CompanyName = TrecaSreca.Get("naziv_tvrtke");
-
             var timer = Application.Current.Dispatcher.CreateTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += (s, e) => RefreshTime();
@@ -177,6 +188,10 @@ namespace eOdvjetnik.ViewModel
                 LicenceType = TypeOfLicence;
             }
             UserNameAndID();
+
+           
+             
+
         }
 
         void RefreshTime()
@@ -328,6 +343,9 @@ namespace eOdvjetnik.ViewModel
                         string nazivTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("naziv").GetString();
                         string OIBTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("OIB").GetString();
                         string adresaTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("adresa").GetString();
+                        bool serviceMode = jsonObject.GetProperty("Companies")[0].GetProperty("service_mode").GetBoolean();
+
+
 
                         TrecaSreca.Set("expire_date", expireDate);
                         TrecaSreca.Set("licence_type", licenceType);
@@ -337,6 +355,7 @@ namespace eOdvjetnik.ViewModel
                         TrecaSreca.Set("adresaTvrtke", adresaTvrtke);
                         TrecaSreca.Set("company_id", company_ID);
                         TrecaSreca.Set("device_type_id", devicetype_ID);
+                        TrecaSreca.Set("service_mode", serviceMode.ToString());
 
                         Debug.WriteLine("MainPageViewModel - > Company info: " + nazivTvrtke + " " + OIBTvrtke + " " + adresaTvrtke);
                         Debug.WriteLine("MainPageViewModel - > LicenceCheck -> Uspjesno dovrsen!");
@@ -373,6 +392,14 @@ namespace eOdvjetnik.ViewModel
             }
             LicenceUpdatedMessage(); //Javlja postavkama da je licenca ažurirana
             LicenceExpiryCheck();
+
+            string serviceModeCheck = TrecaSreca.Get("service_mode");
+
+            if (serviceModeCheck == "True")
+            {
+                ServiceMode = true;
+                Debug.WriteLine("SERVICE MODE ENABLED!");
+            }
         }
 
         public void CheckNasSQLSettings()  //provjera jesu li NAS i SQL postavke unesne

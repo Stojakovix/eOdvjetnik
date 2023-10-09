@@ -41,7 +41,7 @@
 		<RuntimeIdentifiers Condition="$(TargetFramework.Contains('-android'))">android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
 		<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
 		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-		<PackageCertificateThumbprint>C07B81BDB15FA1C022E6938F8C8923350B7EAB67</PackageCertificateThumbprint>
+		<PackageCertificateThumbprint>1E88D0F44F1DEACE9B8E5F728303A7856069681B</PackageCertificateThumbprint>
 		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
 		<AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
@@ -87,6 +87,13 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
 	  <MtouchDebug>true</MtouchDebug>
+	</PropertyGroup>
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
+		<AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
+		<PackageCertificateThumbprint>C07B81BDB15FA1C022E6938F8C8923350B7EAB67</PackageCertificateThumbprint>
+	</PropertyGroup>
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(RuntimeIdentifierOverride)' != ''">
+		<RuntimeIdentifier>$(RuntimeIdentifierOverride)</RuntimeIdentifier>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
@@ -465,12 +472,12 @@
 		<PackageReference Include="SMBLibrary" Version="1.5.0.1" />
 		<PackageReference Include="SQLite" Version="3.13.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
-		<PackageReference Include="Syncfusion.DocIO.NET" Version="23.1.38" />
-		<PackageReference Include="Syncfusion.Licensing" Version="23.1.38" />
-		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="23.1.38" />
-		<PackageReference Include="Syncfusion.Maui.Picker" Version="23.1.38" />
-		<PackageReference Include="Syncfusion.Maui.Popup" Version="23.1.38" />
-		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="23.1.38" />
+		<PackageReference Include="Syncfusion.DocIO.NET" Version="23.1.39" />
+		<PackageReference Include="Syncfusion.Licensing" Version="23.1.39" />
+		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="23.1.39" />
+		<PackageReference Include="Syncfusion.Maui.Picker" Version="23.1.39" />
+		<PackageReference Include="Syncfusion.Maui.Popup" Version="23.1.39" />
+		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="23.1.39" />
 		<PackageReference Include="MySql.Data" Version="8.1.0" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
 
