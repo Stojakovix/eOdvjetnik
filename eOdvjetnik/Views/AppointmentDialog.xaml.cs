@@ -6,10 +6,11 @@ using System.Diagnostics;
 using eOdvjetnik.Model;
 using eOdvjetnik.ViewModel;
 using Plugin.LocalNotification;
+using System.ComponentModel;
 
 namespace eOdvjetnik.Views;
 
-public partial class AppointmentDialog : ContentPage
+public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
 {
     private static KalendarViewModel kalendarViewModel;
     SchedulerAppointment appointment;
@@ -17,6 +18,20 @@ public partial class AppointmentDialog : ContentPage
     SfScheduler scheduler;
 
 
+    private bool isVisible;
+
+    public bool IsVisible
+    {
+        get { return isVisible; }
+        set
+        {
+            if (isVisible != value)
+            {
+                isVisible = value;
+                OnPropertyChanged(nameof(IsVisible));
+            }
+        }
+    }
 
 
     public string SQLUserID { get; set; }
@@ -58,13 +73,15 @@ public partial class AppointmentDialog : ContentPage
         {
 
             InitializeComponent();
-
-            
+           // spisiViewModel.GenerateFiles();
+            //Files = new ObservableCollection<FileItem>();
             this.appointment = appointment;
             this.selectedDate = AdjustSelectedDate(selectedDate);
             this.scheduler = scheduler;
+            isVisible = false;
             ResourceId = int.Parse(TrecaSreca.Get("resourceId"));
             Debug.WriteLine("Resource id " + ResourceId);
+            //Debug.WriteLine("Svi fajlovi " + Files.Count());
 
             eventNameText.Placeholder = "Unesite naziv...";
             organizerText.Placeholder = "Unesite opis...";
@@ -214,7 +231,6 @@ public partial class AppointmentDialog : ContentPage
 
 
 
-   
 
     private void SaveButton_Clicked(object sender, EventArgs e)
     {

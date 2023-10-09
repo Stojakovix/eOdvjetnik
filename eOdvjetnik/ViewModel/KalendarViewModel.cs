@@ -19,6 +19,22 @@ namespace eOdvjetnik.ViewModel
     public class KalendarViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<SchedulerAppointment> appointments;
+        private SpisiViewModel spisiViewModel = new SpisiViewModel();
+
+        private ObservableCollection<FileItem> fileItems;
+        public ObservableCollection<FileItem> FileItems
+        {
+            get { return fileItems; }
+            set
+            {
+                if (fileItems != value)
+                {
+                    fileItems = value;
+                    OnPropertyChanged(nameof(FileItems));
+                }
+            }
+        }
+
 
         private ObservableCollection<AdminCalendarItem> adminAppointments;
         public ObservableCollection<AdminCalendarItem> AdminAppointments
@@ -35,6 +51,27 @@ namespace eOdvjetnik.ViewModel
         }
         public ICommand AdminViewByDate { get; set; }
         public ICommand AdminViewByName { get; set; }
+
+        public ICommand DodajButtonClick { get; set; }
+        public ICommand ZatvoriButtonClick { get; set; }
+
+        //public bool SpisiGridIsVisible { get; set; }
+
+        private bool spisiGridIsVisible;
+        public bool SpisiGridIsVisible
+        {
+            get { return spisiGridIsVisible; }
+            set
+            {
+                if (spisiGridIsVisible != value)
+                {
+                    spisiGridIsVisible = value;
+                    OnPropertyChanged(nameof(SpisiGridIsVisible));
+                }
+            }
+        }
+
+
 
         //private bool showBusyIndicator;
         //private bool AdminTrue { get; set; }
@@ -183,8 +220,13 @@ namespace eOdvjetnik.ViewModel
                 CategoryColor = new ObservableCollection<ColorItem>();
                 employeeItem = new ObservableCollection<EmployeeItem>();
                 Resources = new ObservableCollection<SchedulerResource>();
+                FileItems = new ObservableCollection<FileItem>();
+                DodajButtonClick = new Command(DodajSpis_clicked);
+                ZatvoriButtonClick = new Command(Zatvori_clicked);
+
                 GetColors();
                 AdminLicenceCheck();
+                GenerateFiles();
                 //GetAdminCalendarEventsByDate();
                 //this.QueryAppointmentsCommand = new Command<Object(LoadMoreAppointments, CanLoadMoreAppointments);
                 Debug.WriteLine("---------------------inicijalizirano kalendarViewModel constructor");
@@ -281,6 +323,100 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(ex.Message + "in viewModel generate files");
             }
         }
+
+        private void DodajSpis_clicked()
+        {
+           // GenerateFiles();
+            SpisiGridIsVisible = true;
+        }
+
+        private void Zatvori_clicked()
+        {
+            SpisiGridIsVisible = false;
+        }
+
+
+        public void GenerateFiles()
+        {
+            try
+            {
+                fileItems.Clear();
+
+                //string query = "SELECT * FROM files ORDER BY id DESC LIMIT 100;";
+                string query = "SELECT files.*, client.ime AS client_name, opponent.ime AS opponent_name FROM files LEFT JOIN contacts AS client ON files.client_id = client.id LEFT JOIN contacts AS opponent ON files.opponent_id = opponent.id ORDER BY files.id DESC LIMIT 20";
+
+
+                Debug.WriteLine(query + "u SpisiViewModelu");
+                Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                if (filesData != null)
+                {
+                    foreach (Dictionary<string, string> filesRow in filesData)
+                    {
+                        #region Varijable za listu
+                        int id;
+                        int clientId;
+                        int opponentId;
+                        int inicijaliVoditeljId;
+                        DateTime created;
+                        DateTime datumPromjeneStatusa;
+                        DateTime datumKreiranjaSpisa;
+                        DateTime datumIzmjeneSpisa;
+
+                        int.TryParse(filesRow["id"], out id);
+                        int.TryParse(filesRow["client_id"], out clientId);
+                        int.TryParse(filesRow["opponent_id"], out opponentId);
+                        int.TryParse(filesRow["inicijali_voditelj_id"], out inicijaliVoditeljId);
+                        DateTime.TryParse(filesRow["created"], out created);
+                        DateTime.TryParse(filesRow["datum_promjene_statusa"], out datumPromjeneStatusa);
+                        DateTime.TryParse(filesRow["datum_kreiranja_spisa"], out datumKreiranjaSpisa);
+                        DateTime.TryParse(filesRow["datum_izmjene_spisa"], out datumIzmjeneSpisa);
+                        #endregion
+                        fileItems.Add(new FileItem()
+                        {
+                            Id = id,
+                            BrojSpisa = filesRow["broj_spisa"],
+                            Spisicol = filesRow["spisicol"],
+                            ClientId = clientId,
+                            OpponentId = opponentId,
+                            InicijaliVoditeljId = inicijaliVoditeljId,
+                            InicijaliDodao = filesRow["inicijali_dodao"],
+                            Filescol = filesRow["filescol"],
+                            InicijaliDodjeljeno = filesRow["inicijali_dodjeljeno"],
+                            Created = created,
+                            AktivnoPasivno = filesRow["aktivno_pasivno"],
+                            Referenca = filesRow["referenca"],
+                            DatumPromjeneStatusa = datumPromjeneStatusa,
+                            Uzrok = filesRow["uzrok"],
+                            DatumKreiranjaSpisa = datumKreiranjaSpisa,
+                            DatumIzmjeneSpisa = datumIzmjeneSpisa,
+                            Kreirao = filesRow["kreirao"],
+                            ZadnjeUredio = filesRow["zadnje_uredio"],
+                            Jezik = filesRow["jezik"],
+                            BrojPredmeta = filesRow["broj_predmeta"],
+                            ClientName = filesRow["client_name"],
+                            OpponentName = filesRow["opponent_name"]
+                        });
+                        foreach (FileItem item in fileItems)
+                        {
+                            //Debug.WriteLine(item.BrojSpisa);
+
+                        }
+                        // Debug.WriteLine(FileItems.Count);
+
+                    }
+                    OnPropertyChanged(nameof(fileItems));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message + "in viewModel generate files");
+            }
+        }
+
+
+
+
+
 
         public void GetAllEvents()
         {

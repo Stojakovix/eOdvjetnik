@@ -16,6 +16,7 @@ public partial class App : Application
     public static NaplataViewModel SharedNaplataViewModel;
     public static PostavkeViewModel SharedPostavkeViewModel;
     public static KlijentiViewModel SharedKlijentiViewModel;
+    public static SpisiViewModel spisiViewModel;
     public static readonly BindableProperty BackgroundProperty;
     public static readonly BindableProperty TextStyleProperty;
     public static readonly BindableProperty TodayBackgroundProperty;
@@ -86,6 +87,7 @@ public partial class App : Application
         SharedNaplataViewModel = new NaplataViewModel();
         SharedPostavkeViewModel = new PostavkeViewModel();
         SharedKlijentiViewModel = new KlijentiViewModel();
+        spisiViewModel = new SpisiViewModel();
 
 
     }
