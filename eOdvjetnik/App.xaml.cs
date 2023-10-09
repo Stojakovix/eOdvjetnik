@@ -78,11 +78,9 @@ public partial class App : Application
   
         SfSchedulerResources.ResourceManager = new ResourceManager("eOdvjetnik.Resources.Strings.AppResources", Application.Current.GetType().Assembly);
 
-
-   
-
-
         Application.Current.UserAppTheme = AppTheme.Light;
+        this.RequestedThemeChanged += (s, e) => { Application.Current.UserAppTheme = AppTheme.Light; };
+
         MainPage = new AppShell();
 
         SharedNaplataViewModel = new NaplataViewModel();

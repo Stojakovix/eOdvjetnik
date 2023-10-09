@@ -130,59 +130,66 @@ namespace eOdvjetnik.Services
         public List<QueryDirectoryFileInformation> ListPath(string path)
         {
 
-            try { 
-            //Debug.WriteLine("Core.cs -> ListPath -> Usao u ListPath  ****"+ Preferences.Get(IP_nas, "") + "***");
-            SMB2Client client = new SMB2Client();
-            bool isConnected = client.Connect(System.Net.IPAddress.Parse(TrecaSreca.Get(IP_nas)), SMBTransportType.DirectTCPTransport);
-            NTStatus status = client.Login(String.Empty, TrecaSreca.Get(USER_nas), TrecaSreca.Get(PASS_nas));
-            //Debug.WriteLine("6666666666666666666");
-            //Debug.WriteLine(status);
-            //Debug.WriteLine("6666666666666666666");
-
-            ISMBFileStore fileStore = client.TreeConnect(TrecaSreca.Get(FOLDER_nas), out status);
-            if (status == NTStatus.STATUS_SUCCESS)
+            try
             {
-                //Debug.WriteLine("7777777777777777777");
+                //Debug.WriteLine("Core.cs -> ListPath -> Usao u ListPath  ****"+ Preferences.Get(IP_nas, "") + "***");
+                SMB2Client client = new SMB2Client();
+                bool isConnected = client.Connect(System.Net.IPAddress.Parse(TrecaSreca.Get(IP_nas)), SMBTransportType.DirectTCPTransport);
+                NTStatus status = client.Login(String.Empty, TrecaSreca.Get(USER_nas), TrecaSreca.Get(PASS_nas));
+                //Debug.WriteLine("6666666666666666666");
                 //Debug.WriteLine(status);
-                //Debug.WriteLine("7777777777777777777");
-                object directoryHandle;
-                FileStatus fileStatus;
-                //status = fileStore.CreateFile(out directoryHandle, out fileStatus, String.Empty, AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
-                status = fileStore.CreateFile(out directoryHandle, out fileStatus, TrecaSreca.Get(SUBFOLDER_nas), AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
-                //status = fileStore.CreateFile(out directoryHandle, out fileStatus, "*", AccessMask.SYNCHRONIZE | (AccessMask)DirectoryAccessMask.FILE_LIST_DIRECTORY, 0, ShareAccess.Read | ShareAccess.Write | ShareAccess.Delete, CreateDisposition.FILE_OPEN, CreateOptions.FILE_SYNCHRONOUS_IO_NONALERT | CreateOptions.FILE_DIRECTORY_FILE, null);
+                //Debug.WriteLine("6666666666666666666");
 
+                ISMBFileStore fileStore = client.TreeConnect(TrecaSreca.Get(FOLDER_nas), out status);
                 if (status == NTStatus.STATUS_SUCCESS)
                 {
-                    //Debug.WriteLine("8888888888888888888");
+                    //Debug.WriteLine("7777777777777777777");
                     //Debug.WriteLine(status);
-                    //Debug.WriteLine("8888888888888888888");
-                    List<QueryDirectoryFileInformation> fileList;
+                    //Debug.WriteLine("7777777777777777777");
+                    object directoryHandle;
+                    FileStatus fileStatus;
+                    string subfolder = TrecaSreca.Get(SUBFOLDER_nas);
+                    if (subfolder == null)
+                    {
+                        subfolder = " ";
+                    }
 
-                    status = fileStore.QueryDirectory(out fileList, directoryHandle, "*", FileInformationClass.FileDirectoryInformation);
-                    status = fileStore.CloseFile(directoryHandle);
-                    status = fileStore.Disconnect();
-                    return fileList;
+                    //status = fileStore.CreateFile(out directoryHandle, out fileStatus, String.Empty, AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
+                    status = fileStore.CreateFile(out directoryHandle, out fileStatus, TrecaSreca.Get(SUBFOLDER_nas), AccessMask.GENERIC_READ, SMBLibrary.FileAttributes.Directory, ShareAccess.Read | ShareAccess.Write, CreateDisposition.FILE_OPEN, CreateOptions.FILE_DIRECTORY_FILE, null);
+                    //status = fileStore.CreateFile(out directoryHandle, out fileStatus, "*", AccessMask.SYNCHRONIZE | (AccessMask)DirectoryAccessMask.FILE_LIST_DIRECTORY, 0, ShareAccess.Read | ShareAccess.Write | ShareAccess.Delete, CreateDisposition.FILE_OPEN, CreateOptions.FILE_SYNCHRONOUS_IO_NONALERT | CreateOptions.FILE_DIRECTORY_FILE, null);
+
+                    if (status == NTStatus.STATUS_SUCCESS)
+                    {
+                        //Debug.WriteLine("8888888888888888888");
+                        //Debug.WriteLine(status);
+                        //Debug.WriteLine("8888888888888888888");
+                        List<QueryDirectoryFileInformation> fileList;
+
+                        status = fileStore.QueryDirectory(out fileList, directoryHandle, "*", FileInformationClass.FileDirectoryInformation);
+                        status = fileStore.CloseFile(directoryHandle);
+                        status = fileStore.Disconnect();
+                        return fileList;
+                    }
+                    else
+                    {
+                        //Debug.WriteLine("9999999999999999999");
+                        //Debug.WriteLine(status);
+                        //Debug.WriteLine("9999999999999999999");
+                        List<QueryDirectoryFileInformation> fileList = new List<QueryDirectoryFileInformation>();
+                        return fileList;
+
+                    }
                 }
                 else
                 {
-                    //Debug.WriteLine("9999999999999999999");
+                    //Debug.WriteLine("10101010010101010101");
                     //Debug.WriteLine(status);
-                    //Debug.WriteLine("9999999999999999999");
+                    //DisplayAlert("Error", string(status), "OK");
+                    //Debug.WriteLine("10101010010101010101");
                     List<QueryDirectoryFileInformation> fileList = new List<QueryDirectoryFileInformation>();
                     return fileList;
 
                 }
-            }
-            else
-            {
-                //Debug.WriteLine("10101010010101010101");
-                //Debug.WriteLine(status);
-                //DisplayAlert("Error", string(status), "OK");
-                //Debug.WriteLine("10101010010101010101");
-                List<QueryDirectoryFileInformation> fileList = new List<QueryDirectoryFileInformation>();
-                return fileList;
-
-            }
 
             }
             catch (Exception ex)
@@ -194,39 +201,40 @@ namespace eOdvjetnik.Services
         }
         public List<string> getRootShare()
         {
-            try { 
-            //INICIRAJ SMB KONEKCIJU DA DOHVATI SVE DOKUMENTE
-            //Debug.WriteLine("Core.cs -> getRootShare -> INICIRAJ SMB KONEKCIJU  ****" + Preferences.Get(IP_nas, "") + "***");
-
-            SMB2Client client = new SMB2Client();
-            //Debug.WriteLine("Core.cs -> getRootShare -> new SMB2Client()  *******");
-            bool isConnected = client.Connect(System.Net.IPAddress.Parse(TrecaSreca.Get(IP_nas)), SMBTransportType.DirectTCPTransport);
-
-            NTStatus status = client.Login(String.Empty, TrecaSreca.Get(USER_nas), TrecaSreca.Get(PASS_nas));
-            List<string> shares = client.ListShares(out status);
-            if (isConnected)
+            try
             {
+                //INICIRAJ SMB KONEKCIJU DA DOHVATI SVE DOKUMENTE
+                //Debug.WriteLine("Core.cs -> getRootShare -> INICIRAJ SMB KONEKCIJU  ****" + Preferences.Get(IP_nas, "") + "***");
 
-                //Debug.WriteLine("6666666666666666666");
-                //Debug.WriteLine(status);
-                //Debug.WriteLine("6666666666666666666");
-                if (status == NTStatus.STATUS_SUCCESS)
+                SMB2Client client = new SMB2Client();
+                //Debug.WriteLine("Core.cs -> getRootShare -> new SMB2Client()  *******");
+                bool isConnected = client.Connect(System.Net.IPAddress.Parse(TrecaSreca.Get(IP_nas)), SMBTransportType.DirectTCPTransport);
+
+                NTStatus status = client.Login(String.Empty, TrecaSreca.Get(USER_nas), TrecaSreca.Get(PASS_nas));
+                List<string> shares = client.ListShares(out status);
+                if (isConnected)
                 {
 
-                    //Debug.WriteLine("7777777777777777777");
-                    foreach (string nesto in shares)
+                    //Debug.WriteLine("6666666666666666666");
+                    //Debug.WriteLine(status);
+                    //Debug.WriteLine("6666666666666666666");
+                    if (status == NTStatus.STATUS_SUCCESS)
                     {
-                        ////Debug.WriteLine(nesto);
 
+                        //Debug.WriteLine("7777777777777777777");
+                        foreach (string nesto in shares)
+                        {
+                            ////Debug.WriteLine(nesto);
+
+                        }
+
+                        //Debug.WriteLine("7777777777777777777");
+                        client.Logoff();
                     }
+                    client.Disconnect();
 
-                    //Debug.WriteLine("7777777777777777777");
-                    client.Logoff();
                 }
-                client.Disconnect();
-
-            }
-            return shares;
+                return shares;
 
 
             }
@@ -300,41 +308,42 @@ namespace eOdvjetnik.Services
         public Dictionary<string, string>[] sqlQuery(string query)
         {
 
-            try { 
-            //Debug.WriteLine("Core.cs -> Dictionary -> Usao u sqlQuerry  *******");
-            // MySQL connection settings
-            string connString = "server=" + TrecaSreca.Get(IP_mysql) + ";user=" + TrecaSreca.Get(USER_mysql) + ";password=" + TrecaSreca.Get(PASS_mysql) + ";database=" + TrecaSreca.Get(databasename_mysql);
-
-            // Connect to MySQL database
-            using MySqlConnection conn = new MySqlConnection(connString);
-            conn.Open();
-
-            // Execute query and retrieve data
-            using MySqlCommand cmd = new MySqlCommand(query, conn);
-            using MySqlDataReader reader = cmd.ExecuteReader();
-            List<Dictionary<string, string>> results = new List<Dictionary<string, string>>();
-
-
-            while (reader.Read())
+            try
             {
-                Dictionary<string, string> row = new Dictionary<string, string>();
+                //Debug.WriteLine("Core.cs -> Dictionary -> Usao u sqlQuerry  *******");
+                // MySQL connection settings
+                string connString = "server=" + TrecaSreca.Get(IP_mysql) + ";user=" + TrecaSreca.Get(USER_mysql) + ";password=" + TrecaSreca.Get(PASS_mysql) + ";database=" + TrecaSreca.Get(databasename_mysql);
 
-                for (int i = 0; i < reader.FieldCount; i++)
+                // Connect to MySQL database
+                using MySqlConnection conn = new MySqlConnection(connString);
+                conn.Open();
+
+                // Execute query and retrieve data
+                using MySqlCommand cmd = new MySqlCommand(query, conn);
+                using MySqlDataReader reader = cmd.ExecuteReader();
+                List<Dictionary<string, string>> results = new List<Dictionary<string, string>>();
+
+
+                while (reader.Read())
                 {
-                    string attributeName = reader.GetName(i);
-                    string attributeValue = reader[i].ToString();
-                    row.Add(attributeName, attributeValue);
+                    Dictionary<string, string> row = new Dictionary<string, string>();
+
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        string attributeName = reader.GetName(i);
+                        string attributeValue = reader[i].ToString();
+                        row.Add(attributeName, attributeValue);
+                    }
+
+                    results.Add(row);
                 }
 
-                results.Add(row);
-            }
 
+                // Close the reader and the connection
+                reader.Close();
+                conn.Close();
 
-            // Close the reader and the connection
-            reader.Close();
-            conn.Close();
-
-            return results.ToArray();
+                return results.ToArray();
             }
             catch (Exception ex)
             {

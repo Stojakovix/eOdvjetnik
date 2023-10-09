@@ -8,7 +8,8 @@ using CommunityToolkit.Mvvm.Messaging;
 using Plugin.LocalNotification;
 using System.Text.Json;
 using eOdvjetnik.Models;
-
+using System.Security.Cryptography;
+using System.Text;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -16,6 +17,17 @@ namespace eOdvjetnik.ViewModel
     {
 
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+
+        private bool ServiceModeEnabled { get; set; }
+        public bool ServiceMode
+    {
+            get { return ServiceModeEnabled; }
+            set
+            {
+            ServiceModeEnabled = value;
+                OnPropertyChanged(nameof(ServiceMode));
+            }
+        }
 
         #region Stavke vidljive na MainPageu
 
@@ -137,6 +149,8 @@ namespace eOdvjetnik.ViewModel
 
         public MainPageViewModel()
         {
+            ServiceMode = false;
+            GenerateHWID();
             Version = $"{AppResources.Version} {AppInfo.VersionString}";
             ClearPrefrences = new Command(DeletePreferences);
             CheckLicenceStatus = new Command(OnRefreshLicenceClick);
@@ -145,7 +159,6 @@ namespace eOdvjetnik.ViewModel
             ExpireDateString = TrecaSreca.Get("expire_date");
             LicenceStatus = TrecaSreca.Get("licence_active");
             CompanyName = TrecaSreca.Get("naziv_tvrtke");
-
             var timer = Application.Current.Dispatcher.CreateTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += (s, e) => RefreshTime();
@@ -175,6 +188,10 @@ namespace eOdvjetnik.ViewModel
                 LicenceType = TypeOfLicence;
             }
             UserNameAndID();
+
+           
+             
+
         }
 
         void RefreshTime()
@@ -326,6 +343,9 @@ namespace eOdvjetnik.ViewModel
                         string nazivTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("naziv").GetString();
                         string OIBTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("OIB").GetString();
                         string adresaTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("adresa").GetString();
+                        bool serviceMode = jsonObject.GetProperty("Companies")[0].GetProperty("service_mode").GetBoolean();
+
+
 
                         TrecaSreca.Set("expire_date", expireDate);
                         TrecaSreca.Set("licence_type", licenceType);
@@ -335,6 +355,7 @@ namespace eOdvjetnik.ViewModel
                         TrecaSreca.Set("adresaTvrtke", adresaTvrtke);
                         TrecaSreca.Set("company_id", company_ID);
                         TrecaSreca.Set("device_type_id", devicetype_ID);
+                        TrecaSreca.Set("service_mode", serviceMode.ToString());
 
                         Debug.WriteLine("MainPageViewModel - > Company info: " + nazivTvrtke + " " + OIBTvrtke + " " + adresaTvrtke);
                         Debug.WriteLine("MainPageViewModel - > LicenceCheck -> Uspjesno dovrsen!");
@@ -371,6 +392,14 @@ namespace eOdvjetnik.ViewModel
             }
             LicenceUpdatedMessage(); //Javlja postavkama da je licenca ažurirana
             LicenceExpiryCheck();
+
+            string serviceModeCheck = TrecaSreca.Get("service_mode");
+
+            if (serviceModeCheck == "True")
+            {
+                ServiceMode = true;
+                Debug.WriteLine("SERVICE MODE ENABLED!");
+            }
         }
 
         public void CheckNasSQLSettings()  //provjera jesu li NAS i SQL postavke unesne
@@ -504,12 +533,14 @@ namespace eOdvjetnik.ViewModel
         public void UserNameAndID() //dohvaća username, ID i inicijale za kasnije spremanje novog spisa/kontakta - možda treba dodati kod u SPISE i KLIJENTE
         {
             // dodati da samo izvršava if (username == null || username == "")
-
+            // ako je userName i userId prazan odn izvrši se if, ne može se dodat event u kalendaru
+            // odnosno ako je filesData prazan, ne dodaje event
             string query = "SELECT * FROM employees WHERE hwid = '" + hardwareID + "';";
             Debug.WriteLine(query);
             try
             {
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                Debug.WriteLine(filesData.Length + " dužina filesData-a");
                 if (filesData != null && filesData.Length > 0)
                 {
                     foreach (Dictionary<string, string> filesRow in filesData)
@@ -520,15 +551,18 @@ namespace eOdvjetnik.ViewModel
                         UserID = id.ToString();
                         UserInitials = filesRow["inicijali"];
                     }
+                    
                     TrecaSreca.Set("UserName", UserName);
                     TrecaSreca.Set("UserID", UserID);
                     TrecaSreca.Set("UserInitials", UserInitials);
+                    Debug.WriteLine("izvršio if");
                     LicenceUpdatedMessage();
                 }
                 else
                 {
                     UserName = " ";
                     UserID = " ";
+                    Debug.WriteLine("Isčito iz elsea");
                 }
             }
             catch (Exception ex)
@@ -577,6 +611,81 @@ namespace eOdvjetnik.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        #region HWID 
+
+        public static string GetMicroSeconds() //DD: čemu ovo?
+        {
+            double timestamp = Stopwatch.GetTimestamp();
+            double microseconds = 1_000_000.0 * timestamp / Stopwatch.Frequency;
+            string hashedData = ComputeSha256Hash(microseconds.ToString());
+
+            return hashedData;
+
+        }
+        static string ComputeSha256Hash(string rawData) //DD: čemu ovo?
+        {
+            // Create a SHA256   
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+
+        }
+
+        public void GenerateHWID()
+        {
+            string url = "https://cc.eodvjetnik.hr/token.json?token="; 
+
+            try
+            {
+                //zakomentirati nakon setanja na null
+                //Microsoft.Maui.Storage.Preferences.Set("key", null);
+                //Provjerava da li ima ključ spremnjen u preferences
+                if (string.IsNullOrEmpty(TrecaSreca.Get("key")))
+                {
+
+
+                    var time = GetMicroSeconds();
+                    // ----------------- platform ispod --------------
+                    var device = Microsoft.Maui.Devices.DeviceInfo.Current.Platform;
+                    Debug.WriteLine("url je----------------main" + url + time);
+
+
+                    //Sprema u preferences index neku vrijednost iz varijable
+                    TrecaSreca.Set("key", time);
+                    Debug.WriteLine("spremio HWID");
+                    string preferencesKey = TrecaSreca.Get("key");
+                    Debug.WriteLine("HWID učitan iz preferences: " + preferencesKey);
+
+                }
+                else
+                {
+                    Debug.WriteLine("VAŠ KLJUČ JE VEĆ IZGENERIRAN: " + TrecaSreca.Get("key"));
+
+
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message + " in MainPage");
+            }
+        }
+
+
+
+        #endregion
     }
 }
 

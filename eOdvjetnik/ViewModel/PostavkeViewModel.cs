@@ -471,6 +471,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         {
             try
             {
+                GetEmployees();
                 await Shell.Current.GoToAsync("///Zaposlenici");
                 Debug.WriteLine("Zaposlenici clicked");
 
@@ -479,6 +480,12 @@ public class PostavkeViewModel : INotifyPropertyChanged
             {
                 Debug.WriteLine(ex.Message);
             }
+
+        }
+        else
+        {
+            await Application.Current.MainPage.DisplayAlert("", "Samo administrator može dodavati nove zaposlenike.", "OK");
+
         }
 
     }
@@ -898,6 +905,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
             Debug.WriteLine("Saved");
             Debug.WriteLine(UserName + " " + Password);
             Debug.WriteLine("KLINUTO NA SAVE U NAS POSTAVKAMA");
+          
 
         }
         catch (Exception ex)
@@ -1222,6 +1230,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
         try
         {
             EntryIncompleteCheck();
+            Debug.WriteLine(NewEmployeeEntryIncomplete.ToString());
+
         }
         catch (Exception ex)
         {

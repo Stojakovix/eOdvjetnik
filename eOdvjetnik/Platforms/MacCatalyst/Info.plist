@@ -41,5 +41,7 @@
 	<true/>
 	<key>CFBundleIdentifier</key>
 	<string>maccatalyst.com.zadarict.eodvjetnik</string>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>
