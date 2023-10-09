@@ -533,12 +533,14 @@ namespace eOdvjetnik.ViewModel
         public void UserNameAndID() //dohvaća username, ID i inicijale za kasnije spremanje novog spisa/kontakta - možda treba dodati kod u SPISE i KLIJENTE
         {
             // dodati da samo izvršava if (username == null || username == "")
-
+            // ako je userName i userId prazan odn izvrši se if, ne može se dodat event u kalendaru
+            // odnosno ako je filesData prazan, ne dodaje event
             string query = "SELECT * FROM employees WHERE hwid = '" + hardwareID + "';";
             Debug.WriteLine(query);
             try
             {
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                Debug.WriteLine(filesData.Length + " dužina filesData-a");
                 if (filesData != null && filesData.Length > 0)
                 {
                     foreach (Dictionary<string, string> filesRow in filesData)
@@ -549,15 +551,18 @@ namespace eOdvjetnik.ViewModel
                         UserID = id.ToString();
                         UserInitials = filesRow["inicijali"];
                     }
+                    
                     TrecaSreca.Set("UserName", UserName);
                     TrecaSreca.Set("UserID", UserID);
                     TrecaSreca.Set("UserInitials", UserInitials);
+                    Debug.WriteLine("izvršio if");
                     LicenceUpdatedMessage();
                 }
                 else
                 {
                     UserName = " ";
                     UserID = " ";
+                    Debug.WriteLine("Isčito iz elsea");
                 }
             }
             catch (Exception ex)

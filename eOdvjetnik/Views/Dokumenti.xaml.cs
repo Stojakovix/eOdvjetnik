@@ -45,6 +45,15 @@ public partial class Dokumenti : ContentPage
         var selectedFileItem = (DocsItem)e.DataItem;
         string fileName = selectedFileItem.Name;
         Debug.WriteLine(fileName);
+        //if("filenamezavršava sa doc/folder il kako god")
+        //{
+        //    izvrši funkciju(connectandfetchasync) u viewmodelu
+        //
+        //} else
+        //{
+        // await viewModel.OpenFile(fileName);
+        //}
+
         await viewModel.OpenFile(fileName);
     }
     protected override void OnDisappearing()

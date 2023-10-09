@@ -276,8 +276,17 @@ public partial class Kalendar : ContentPage
                     else
                     {
                         TrecaSreca.Remove("resourceId");
-                        TrecaSreca.Set("resourceId", SQLUserID);
-                        Debug.WriteLine("-------------------------------------Izvršen else" + SQLUserID);
+                        if(SQLUserID == null)
+                        {
+                            SQLUserID = "1";
+                            TrecaSreca.Set("resourceId", SQLUserID);
+                        } else
+                        {
+                            TrecaSreca.Set("resourceId", SQLUserID);
+                            Debug.WriteLine("-------------------------------------Izvršen else" + SQLUserID);
+                        }
+                        //TrecaSreca.Set("resourceId", SQLUserID);
+                        //Debug.WriteLine("-------------------------------------Izvršen else" + SQLUserID);
                     }
 
                     Debug.WriteLine(resourceId + "-----------------------------------------------------");
@@ -307,7 +316,19 @@ public partial class Kalendar : ContentPage
                     else
                     {
                         TrecaSreca.Remove("resourceId");
-                        TrecaSreca.Set("resourceId", SQLUserID);
+
+                        if (SQLUserID == null)
+                        {
+                            SQLUserID = "1";
+                            TrecaSreca.Set("resourceId", SQLUserID);
+                        }
+                        else
+                        {
+                            TrecaSreca.Set("resourceId", SQLUserID);
+                            Debug.WriteLine("-------------------------------------Izvršen else" + SQLUserID);
+                        }
+
+                        //TrecaSreca.Set("resourceId", SQLUserID);
                         Navigation.PushAsync(new AppointmentDialog(null, (DateTime)e.Date, this.Scheduler));
 
                         Debug.WriteLine("-------------------------------------------------Appointment prazan");
@@ -318,7 +339,7 @@ public partial class Kalendar : ContentPage
         }
         catch (Exception ex)
         {
-
+            
             Debug.WriteLine(ex.Message + "u scheduler double tappedu");
         }
     }

@@ -195,6 +195,7 @@ namespace eOdvjetnik.ViewModel
                         Icon = icon,
                         Created = file.CreationTime,
                         Size = $"{file.AllocationSize / 1024} KB",
+                       // ext = file.FileInformationClass.ToString
 
                     };
                     items.Add(fileData);
