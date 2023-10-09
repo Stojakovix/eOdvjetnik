@@ -6,6 +6,7 @@ using System.Diagnostics;
 using eOdvjetnik.Model;
 using eOdvjetnik.ViewModel;
 using Plugin.LocalNotification;
+using System.Globalization;
 
 namespace eOdvjetnik.Views;
 
@@ -15,7 +16,6 @@ public partial class AppointmentDialog : ContentPage
     SchedulerAppointment appointment;
     DateTime selectedDate;
     SfScheduler scheduler;
-
 
 
 
@@ -52,6 +52,9 @@ public partial class AppointmentDialog : ContentPage
         }
     }
     public string DevicePlatform { get; set; }
+    public DateTime MacBookStartDT { get; set; }
+    public DateTime MacBookEndDT { get; set; }
+
     public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler)
     {
         try
@@ -59,9 +62,16 @@ public partial class AppointmentDialog : ContentPage
 
             InitializeComponent();
 
-            
+            //za MacBook picker:
+            SelectStartHour();
+            SelectStartMinute();
+            SelectEndHour();
+            SelectEndMinute();
+
             this.appointment = appointment;
             this.selectedDate = AdjustSelectedDate(selectedDate);
+            Debug.WriteLine("DDDDDDDDDDDDDDDDDDD Selected date: " + selectedDate);
+
             this.scheduler = scheduler;
             ResourceId = int.Parse(TrecaSreca.Get("resourceId"));
             Debug.WriteLine("Resource id " + ResourceId);
@@ -77,6 +87,11 @@ public partial class AppointmentDialog : ContentPage
 
             categoryPicker.SelectedIndexChanged += OnCategoryPickerSelectedIndexChanged;
             DevicePlatform = TrecaSreca.Get("vrsta_platforme");
+           
+           
+            
+
+
 
             SQLUserID = TrecaSreca.Get("UserID");
             Debug.WriteLine("-------------------------------- " + SQLUserID);
@@ -178,7 +193,6 @@ public partial class AppointmentDialog : ContentPage
         }
     }
 
-
     private void SwitchAllDay_Toggled(object sender, ToggledEventArgs e)
     {
         if ((sender as Microsoft.Maui.Controls.Switch).IsToggled)
@@ -187,12 +201,46 @@ public partial class AppointmentDialog : ContentPage
             startTime_picker.IsEnabled = false;
             endTime_picker.Time = new TimeSpan(12, 0, 0);
             endTime_picker.IsEnabled = false;
+
+            //MacBook picker
+            startHourPicker.IsEnabled = false;
+            startMinutePicker.IsEnabled = false;
+            endHourPicker.IsEnabled = false;
+            endMinutePicker.IsEnabled = false;
+
+            int defaultIndex1 = startHourPicker.Items.IndexOf("12");
+            if (defaultIndex1 >= 0)
+            {
+                startHourPicker.SelectedIndex = defaultIndex1;
+            }
+            int defaultIndex2 = endHourPicker.Items.IndexOf("13");
+            if (defaultIndex2 >= 0)
+            {
+                endHourPicker.SelectedIndex = defaultIndex2;
+            }
+            int defaultIndex3 = startMinutePicker.Items.IndexOf("00");
+            if (defaultIndex3 >= 0)
+            {
+                startMinutePicker.SelectedIndex = defaultIndex3;
+            }
+            int defaultIndex4 = endMinutePicker.Items.IndexOf("00");
+            if (defaultIndex4 >= 0)
+            {
+                endMinutePicker.SelectedIndex = defaultIndex4;
+            }
+            //da, sve ovo samo za Mac
         }
         else
         {
             startTime_picker.IsEnabled = true;
             endTime_picker.IsEnabled = true;
             (sender as Microsoft.Maui.Controls.Switch).IsToggled = false;
+
+            //MacBook picker
+            startHourPicker.IsEnabled = true;
+            startMinutePicker.IsEnabled = true;
+            endHourPicker.IsEnabled = true;
+            endMinutePicker.IsEnabled = true;
         }
     }
     private void CancelButton_Clicked(object sender, EventArgs e)
@@ -211,11 +259,6 @@ public partial class AppointmentDialog : ContentPage
         Debug.WriteLine("Cancel Clicked");
     }
 
-
-
-
-   
-
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
         try
@@ -224,6 +267,41 @@ public partial class AppointmentDialog : ContentPage
             var startDate = startDate_picker.Date;
             var endTime = endTime_picker.Time;
             var startTime = startTime_picker.Time;
+            Debug.WriteLine("regular start time: " + startTime + ", end time: " + endTime);
+            Debug.WriteLine(DevicePlatform);
+
+
+            //MacBookPicker:
+            if (DevicePlatform == "MacCatalyst") //MacBookPicker učitavanje, ako radi ok, zamijeniti != s == 
+            {
+                string selectedStartHour = startHourPicker.SelectedItem.ToString();
+                string selectedStartMinute = startMinutePicker.SelectedItem.ToString();
+                string MacStartTime = $"{selectedStartHour}:{selectedStartMinute}";
+
+                string selectedEndHour = endHourPicker.SelectedItem.ToString();
+                string selectedEndMinute = endMinutePicker.SelectedItem.ToString();
+                string MacEndTime = $"{selectedEndHour}:{selectedEndMinute}";
+
+                string format = @"hh\:mm"; 
+
+                try
+                {
+                    startTime = TimeSpan.ParseExact(MacStartTime, format, CultureInfo.InvariantCulture);
+                    endTime = TimeSpan.ParseExact(MacEndTime, format, CultureInfo.InvariantCulture);
+                    Debug.WriteLine("Macbook start time: " + MacStartTime + ", end time: " + MacEndTime);
+                    Debug.WriteLine("Macbook parsed start time: " + startTime + ", end time: " + endTime);
+                    MacBookStartDT = new DateTime(startDate.Year, startDate.Month, startDate.Day, startTime.Hours, startTime.Minutes, startTime.Seconds) ;
+                    MacBookEndDT = new DateTime(endDate.Year, endDate.Month, endDate.Day, endTime.Hours, endTime.Minutes, endTime.Seconds);
+                    Debug.WriteLine("MacBookStartDateTime: " + MacBookStartDT + " MacBookEndDateTime: " + MacBookEndDT);
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message + " in AppointmentDialog SaveButtonClicked");
+                }
+            }
+            // MacBookPicker sve do ovdje
+
 
             if (AppoitmentColorName == null || AppoitmentColorName == "")
             {
@@ -243,13 +321,13 @@ public partial class AppointmentDialog : ContentPage
 
                     if (endDate < startDate)
                     {
-                        Application.Current.MainPage.DisplayAlert("", "End time should be greater than start time", "OK");
+                        Application.Current.MainPage.DisplayAlert("", "Datum završetka mora biti isti kao datum početka\rili slijediti nakon njega.", "OK");
                     }
                     else if (endDate == startDate)
                     {
                         if (endTime < startTime)
                         {
-                            Application.Current.MainPage.DisplayAlert("", "End time should be greater than start time", "OK");
+                            Application.Current.MainPage.DisplayAlert("", "Vrijeme završetka mora biti veće od vremena početka", "OK");
                         }
                         else
                         {
@@ -312,20 +390,27 @@ public partial class AppointmentDialog : ContentPage
             {
                 try
                 {
-
                     var appString = appointment.Id.ToString();
                     var trimmedString = appString.Replace("-", "");
                     var appointmentId = int.Parse(trimmedString);
-                    
+
                     var hardware_id = TrecaSreca.Get("key");
-                    string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, color, user_id, resource_id, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}', '{AppoitmentColorName}' , '{SQLUserID}' , '{ResourceId}' , '{hardware_id}')";
-                    externalSQLConnect.sqlQuery(query);
-                    Debug.WriteLine(query);
-                    Debug.WriteLine("Appointment added to remote server. Appointment id = " + appointmentId  );
+                    if (DevicePlatform == "MacCatalyst")
+                    {
+                        string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, color, user_id, resource_id, hardwareid) VALUES ('{MacBookStartDT.ToString("yyyy-MM-dd HH:mm:ss")}', '{MacBookEndDT.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}', '{AppoitmentColorName}' , '{SQLUserID}' , '{ResourceId}' , '{hardware_id}')";
+                        externalSQLConnect.sqlQuery(query);
+                        Debug.WriteLine(query);
+                    }
+                    else
+                    {
+                        string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, internal_event_id, color, user_id, resource_id, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{appointment.Id}', '{AppoitmentColorName}' , '{SQLUserID}' , '{ResourceId}' , '{hardware_id}')";
+                        externalSQLConnect.sqlQuery(query);
+                        Debug.WriteLine(query);
+                    }
+                     Debug.WriteLine("Appointment added to remote server. Appointment id = " + appointmentId);
                 }
                 catch (Exception ex)
                 {
-
                     Debug.WriteLine(ex.Message + " in AppointmentDialog AddAppointmentToServer if");
                 }
             }
@@ -335,28 +420,44 @@ public partial class AppointmentDialog : ContentPage
                 {
                     AppointmentDetails();
                     var hardware_id = TrecaSreca.Get("key");
-                    string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', color = '{AppoitmentColorName}',  user_id = '{SQLUserID}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
-                    externalSQLConnect.sqlQuery(query);
-                    Debug.WriteLine(query);
+                    if (DevicePlatform == "MacCatalyst")
+                    {
+                        string query = $"UPDATE events SET TimeFrom = '{MacBookStartDT.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{MacBookEndDT.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', color = '{AppoitmentColorName}',  user_id = '{SQLUserID}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
+                        externalSQLConnect.sqlQuery(query);
+                        Debug.WriteLine(query);
+                    }
+                    else
+                    {
+                        string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', color = '{AppoitmentColorName}',  user_id = '{SQLUserID}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
+                        externalSQLConnect.sqlQuery(query);
+                        Debug.WriteLine(query);
+                    }
+                       
                     Debug.WriteLine("Appointment updated in the server");
                 }
                 catch (Exception ex)
                 {
-
-                    Debug.WriteLine(ex.Message + " in AppointmentDialog AddAppointmentToServer else");
+                    Debug.WriteLine(ex.Message + " in AppointmentDialog AddAppointmentToServer error");
                 }
             }
             else
             {
 
-                    AppointmentDetails();
-                    var hardware_id = TrecaSreca.Get("key");
+                AppointmentDetails();
+                var hardware_id = TrecaSreca.Get("key");
+                if (DevicePlatform == "MacCatalyst")
+                {
+                    string query = $"UPDATE events SET TimeFrom = '{MacBookStartDT.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{MacBookEndDT.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', user_id = '{ResourceId}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
+                    externalSQLConnect.sqlQuery(query);
+                    Debug.WriteLine(query);
+                }
+                else
+                {
                     string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', user_id = '{ResourceId}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine(query);
-                    Debug.WriteLine("Appointment updated in the server");
-                
-
+                }
+              Debug.WriteLine("Appointment updated in the server");
             }
         }
         catch (Exception ex)
@@ -401,17 +502,40 @@ public partial class AppointmentDialog : ContentPage
             appointment.Notes = this.organizerText.Text;
             appointment.Background = AppoitmentColor;
             appointment.ResourceIds = new ObservableCollection<object>
-            {
+                        {
                 (object)ResourceId // Boxing the integer into an object
             };
+            if (DevicePlatform == "MacCatalyst")
+            {
+                string selectedStartHour = startHourPicker.SelectedItem.ToString();
+                string selectedStartMinute = startMinutePicker.SelectedItem.ToString();
+                string MacStartTime = $"{selectedStartHour}:{selectedStartMinute}";
 
+                string selectedEndHour = endHourPicker.SelectedItem.ToString();
+                string selectedEndMinute = endMinutePicker.SelectedItem.ToString();
+                string MacEndTime = $"{selectedEndHour}:{selectedEndMinute}";
+
+                string format = @"hh\:mm";
+
+                try
+                {
+                    var startTime = TimeSpan.ParseExact(MacStartTime, format, CultureInfo.InvariantCulture);
+                    var endTime = TimeSpan.ParseExact(MacEndTime, format, CultureInfo.InvariantCulture);
+
+                    appointment.StartTime = this.startDate_picker.Date.Add(startTime);
+                    appointment.EndTime = this.endDate_picker.Date.Add(endTime);
+                }
+                catch (Exception ex) 
+                {
+                    Debug.WriteLine(ex.Message + " in AppointmentDialog AppointmentDetails - MacBookPicker");
+                }
+
+            }
 
             if (this.scheduler.AppointmentsSource == null)
             {
                 this.scheduler.AppointmentsSource = new ObservableCollection<SchedulerAppointment>();
             }
-
-
             (this.scheduler.AppointmentsSource as ObservableCollection<SchedulerAppointment>).Add(appointment);
         }
         else
@@ -427,6 +551,32 @@ public partial class AppointmentDialog : ContentPage
             {
                 (object)ResourceId // Boxing the integer into an object
             };
+            if (DevicePlatform == "MacCatalyst")
+            {
+                string selectedStartHour = startHourPicker.SelectedItem.ToString();
+                string selectedStartMinute = startMinutePicker.SelectedItem.ToString();
+                string MacStartTime = $"{selectedStartHour}:{selectedStartMinute}";
+
+                string selectedEndHour = endHourPicker.SelectedItem.ToString();
+                string selectedEndMinute = endMinutePicker.SelectedItem.ToString();
+                string MacEndTime = $"{selectedEndHour}:{selectedEndMinute}";
+
+                string format = @"hh\:mm";
+
+                try
+                {
+                    var startTime = TimeSpan.ParseExact(MacStartTime, format, CultureInfo.InvariantCulture);
+                    var endTime = TimeSpan.ParseExact(MacEndTime, format, CultureInfo.InvariantCulture);
+
+                    appointment.StartTime = this.startDate_picker.Date.Add(startTime);
+                    appointment.EndTime = this.endDate_picker.Date.Add(endTime);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message + " in AppointmentDialog AppointmentDetails - MacBookPicker");
+                }
+
+            }
 
         }
 
@@ -475,6 +625,19 @@ public partial class AppointmentDialog : ContentPage
                 startTime_picker.Time = new TimeSpan(appointment.StartTime.Hour, appointment.StartTime.Minute, appointment.StartTime.Second);
                 endTime_picker.Time = new TimeSpan(appointment.EndTime.Hour, appointment.EndTime.Minute, appointment.EndTime.Second);
                 switchAllDay.IsToggled = false;
+
+                if (DevicePlatform == "MacCatalyst")
+                {
+                    int startHour = appointment.StartTime.Hour;
+                    int startMinute = appointment.StartTime.Minute;
+                    int endHour = appointment.EndTime.Hour;
+                    int endMinute = appointment.EndTime.Minute;
+
+                    startHourPicker.SelectedIndex = startHour;
+                    startMinutePicker.SelectedIndex = startMinute / 5;
+                    endHourPicker.SelectedIndex = endHour;
+                    endMinutePicker.SelectedIndex = endMinute / 5;
+                }
             }
             else
             {
@@ -483,6 +646,12 @@ public partial class AppointmentDialog : ContentPage
                 endTime_picker.Time = new TimeSpan(12, 0, 0);
                 endTime_picker.IsEnabled = false;
                 switchAllDay.IsToggled = true;
+
+                if (DevicePlatform == "MacCatalyst")
+                {
+                    startHourPicker.SelectedIndex = startHourPicker.Items.IndexOf("12");
+                    startMinutePicker.SelectedIndex = startMinutePicker.Items.IndexOf("00");
+                }
             }
 
         }
@@ -495,8 +664,105 @@ public partial class AppointmentDialog : ContentPage
             startTime_picker.Time = new TimeSpan(selectedDate.Hour, selectedDate.Minute, selectedDate.Second);
             endDate_picker.Date = selectedDate;
             endTime_picker.Time = new TimeSpan(selectedDate.Hour + 1, selectedDate.Minute, selectedDate.Second);
+
+            if (DevicePlatform == "MacCatalyst")
+            {
+                int macStartHour = selectedDate.Hour;
+                int macEndHour = selectedDate.Hour + 1; 
+                startHourPicker.SelectedIndex = macStartHour;
+                endHourPicker.SelectedIndex = macEndHour;
+            }
+
+
         }
     }
 
+    private void SelectStartHour()
+    {
+        for (int i = 0; i <= 23; i++)
+        {
+            string startHour = i.ToString("00");
+            startHourPicker.Items.Add(startHour);
+        }
 
+        int defaultIndex = startHourPicker.Items.IndexOf("12");
+        if (defaultIndex >= 0)
+        {
+            startHourPicker.SelectedIndex = defaultIndex;
+        }
+
+        startHourPicker.SelectedIndexChanged += (sender, args) =>
+        {
+            if (startHourPicker.SelectedIndex != -1)
+            {
+                string selectedStartHour = startHourPicker.SelectedItem.ToString();
+            }
+        };
+    }
+    private void SelectStartMinute()
+    {
+        for (int i = 0; i <= 55; i += 5)
+        {
+            string startMinute = i.ToString("00");
+            startMinutePicker.Items.Add(startMinute);
+        }
+
+        int defaultMinuteIndex = startMinutePicker.Items.IndexOf("00");
+        if (defaultMinuteIndex >= 0)
+        {
+            startMinutePicker.SelectedIndex = defaultMinuteIndex;
+        }
+
+        startMinutePicker.SelectedIndexChanged += (sender, args) =>
+        {
+            if (startMinutePicker.SelectedIndex != -1)
+            {
+                string selectedStartMinute = startMinutePicker.SelectedItem.ToString();
+            }
+        };
+    }
+    private void SelectEndHour()
+    {
+        for (int i = 0; i <= 23; i++)
+        {
+            string endHour = i.ToString("00");
+            endHourPicker.Items.Add(endHour);
+        }
+
+        int defaultIndex = endHourPicker.Items.IndexOf("13");
+        if (defaultIndex >= 0)
+        {
+            endHourPicker.SelectedIndex = defaultIndex;
+        }
+
+        endHourPicker.SelectedIndexChanged += (sender, args) =>
+        {
+            if (endHourPicker.SelectedIndex != -1)
+            {
+                string selectedendHour = endHourPicker.SelectedItem.ToString();
+            }
+        };
+    }
+    private void SelectEndMinute()
+    {
+        for (int i = 0; i <= 55; i += 5)
+        {
+            string endMinute = i.ToString("00");
+            endMinutePicker.Items.Add(endMinute);
+        }
+
+        int defaultMinuteIndex = endMinutePicker.Items.IndexOf("00");
+        if (defaultMinuteIndex >= 0)
+        {
+            endMinutePicker.SelectedIndex = defaultMinuteIndex;
+        }
+
+        endMinutePicker.SelectedIndexChanged += (sender, args) =>
+        {
+            if (endMinutePicker.SelectedIndex != -1)
+            {
+                string selectedEndMinute = endMinutePicker.SelectedItem.ToString();
+            }
+        };
+    }
 }

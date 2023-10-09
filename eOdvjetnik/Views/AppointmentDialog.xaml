@@ -90,20 +90,24 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontSize="Default"  Text="Početak" TextColor="Black" Margin="0,0,0,10" VerticalOptions="Center"  />
-                    <HorizontalStackLayout Grid.Column="1"  Margin="0,0,0,20"  >
+                    <HorizontalStackLayout Grid.Column="1"  Margin="0,0,0,10"  >
                         <DatePicker x:Name="startDate_picker" 
                                     Format="dd/MM/yyyy"
-                                    Grid.Row="0"
-                                    Margin="0,0,20,-20"
-                                    VerticalOptions="Start"
-                                    FontSize="Medium"
-                                      />
+                                    FontSize="16"
+                                    FontAutoScalingEnabled="True"  />
                         <TimePicker x:Name="startTime_picker"
-                                    Format="HH:mm" VerticalOptions="Center"
-                                    MinimumHeightRequest="10"
-                                    FontSize="Medium"  />
-                        <!--<picker:SfDatePicker x:Name="startDate_picker" Format="dd_MM_yyyy" HeightRequest="200"/>
-                        <picker:SfTimePicker x:Name="startTime_picker" Format="HH_mm" VerticalOptions="Center" HeightRequest="200" MinuteInterval="5"/>-->
+                                    Format="HH:mm" VerticalOptions="CenterAndExpand"
+                                    MinimumHeightRequest="11"
+                                    FontSize="16"  
+                                    IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=DefaultPicker}"
+                                    />
+                        <Picker x:Name="startHourPicker" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=MacBookPicker}"
+                                FontSize="16"  HeightRequest="11" VerticalOptions="Center" />
+
+                        <Picker x:Name="startMinutePicker" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=MacBookPicker}" 
+                                FontSize="16"  HeightRequest="11" VerticalOptions="Center" />
+
+                      
                     </HorizontalStackLayout>
                 </Grid>
 
@@ -112,24 +116,33 @@
                         <ColumnDefinition Width="120" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
                     <Label Grid.Column="0" FontSize="Default" Text="Završetak" TextColor="Black" Margin="0,0,0,10" VerticalOptions="Center" />
                     <HorizontalStackLayout Grid.Column="1" Margin="0,0,0,10" >
                         <DatePicker  x:Name="endDate_picker"
                                      Grid.Column="0"
-                                     Margin="0,0,20,-20"
+                                     Grid.Row="0"
                                      VerticalOptions="Start"
-                                     FontSize="Medium"
+                                     FontSize="16"
                                      Format="dd/MM/yyyy"/>
                         <TimePicker  x:Name="endTime_picker"
-                                     Grid.Column="0"
-
+                                     Grid.Column ="1"
+                                     Grid.Row="0"
                                      Format="HH:mm"
-                                     VerticalOptions="Center"
-                                     MinimumHeightRequest="10"
-                                     FontSize="Medium"  />
-                        <!--<picker:SfDatePicker x:Name="endDate_picker" Format="dd_MM_yyyy" HeightRequest="200"/>-->
-                        <!--<picker:SfTimePicker x:Name="endTime_picker" Format="HH_mm" VerticalOptions="Center" HeightRequest="200" MinuteInterval="5"/>-->
+                                     VerticalOptions="CenterAndExpand"
+                                     MinimumHeightRequest="11"
+                                     FontSize="16"  
+                        IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=DefaultPicker}"  />
+
+                        <Picker x:Name="endHourPicker" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=MacBookPicker}" 
+                                FontSize="16"  HeightRequest="11" VerticalOptions="Center" />
+
+                        <Picker x:Name="endMinutePicker" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=MacBookPicker}" 
+                                FontSize="16"  HeightRequest="11" VerticalOptions="Center" />
+
+                       
                     </HorizontalStackLayout>
                 </Grid>
 
@@ -138,8 +151,8 @@
                         <ColumnDefinition Width="120" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" FontSize="Default" Margin="0,20,20,-20" VerticalTextAlignment="Center"   Text="Cjelodnevni događaj"   TextColor="Black" />
-                    <Switch  Grid.Column="1" x:Name="switchAllDay" Margin="0,20,20,-20" HorizontalOptions="Start"  VerticalOptions="Center" BackgroundColor="White" ThumbColor="#DC143C"  />
+                    <Label Grid.Column="0" FontSize="Default"  VerticalTextAlignment="Center"  Text="Cjelodnevni događaj"   TextColor="Black" />
+                    <Switch  Grid.Column="1" x:Name="switchAllDay" HorizontalOptions="Start"  VerticalOptions="Center" ThumbColor="#DC143C"  />
                 </Grid>
 
                 <HorizontalStackLayout Margin="0,20,0,0" >
