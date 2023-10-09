@@ -61,18 +61,7 @@
                     </Entry>
                 </Grid>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="120" />
-                        <ColumnDefinition Width="200" />
-                        <ColumnDefinition Width="200" />
-                    </Grid.ColumnDefinitions>
-                    
-                    <Label  Grid.Column="0"  Text="Spisi" FontSize="Default" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20" />
-                    <Button Grid.Column="1" Text="Odaberi Spis" FontSize="Default" TextColor="Black" Command="{Binding DodajButtonClick}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20"/>
-                    <Button Grid.Column="2" x:Name="ZatvoriName" IsVisible="{Binding SpisiGridIsVisible}" Text="Zatvori" Command="{Binding ZatvoriButtonClick}" FontSize="Default" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20" />
 
-                </Grid>
                 <!--<Grid x:Name="SpisiGrid" IsVisible="False" >
                     
                         <syncfusion:SfListView x:Name="listView" ItemsSource="Files" SelectionMode="Single"  IsStickyHeader="True"  >
@@ -139,46 +128,7 @@
                   
                 </Grid>-->
 
-                <Grid x:Name="SpisiGrid" IsVisible="{Binding SpisiGridIsVisible}">
-                    <syncfusion:SfListView ItemsSource="{Binding FileItems}">
 
-                        <syncfusion:SfListView.HeaderTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="20"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="3*" />
-
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Broj spisa" Padding="10,0,0,0" />
-                                    <Label FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="Klijent" />
-
-                                </Grid>
-                            </DataTemplate>
-                        </syncfusion:SfListView.HeaderTemplate>
-
-                        <syncfusion:SfListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="3*" />
-                                    </Grid.ColumnDefinitions>
-                                <Label Margin="0,8,0,8" FontSize="14"   Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" Text="{Binding BrojSpisa}"   VerticalOptions="Center" LineBreakMode="NoWrap" Padding="10,0,0,0" />
-                                <Label Margin="0,8,0,8" FontSize="14"   Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" Text="{Binding ClientName}"   VerticalOptions="Center" LineBreakMode="NoWrap" Padding="10,0,0,0" />
-                                </Grid>
-                                
-                            </DataTemplate>
-
-                        </syncfusion:SfListView.ItemTemplate>
-
-
-                    </syncfusion:SfListView>
-                </Grid>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -273,6 +223,60 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontSize="Default"  VerticalTextAlignment="Center"  Text="Cjelodnevni događaj"   TextColor="Black" />
                     <Switch  Grid.Column="1" x:Name="switchAllDay" HorizontalOptions="Start"  VerticalOptions="Center" ThumbColor="#DC143C"  />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="200" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label  Grid.Column="0"  Text="Spisi" FontSize="Default" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20" />
+                    <Button Grid.Column="1" Text="Odaberi Spis" FontSize="Default" TextColor="Black" Command="{Binding DodajButtonClick}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20"/>
+                    <Button Grid.Column="2" x:Name="ZatvoriName" IsVisible="{Binding SpisiGridIsVisible}" Text="Zatvori" Command="{Binding ZatvoriButtonClick}" FontSize="Default" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20" />
+
+                </Grid>
+
+                <Grid x:Name="SpisiGrid" IsVisible="{Binding SpisiGridIsVisible}">
+                    <syncfusion:SfListView ItemsSource="{Binding FileItems}">
+
+                        <syncfusion:SfListView.HeaderTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="3*" />
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Broj spisa" Padding="10,0,0,0" />
+                                    <Label FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="Klijent" />
+
+                                </Grid>
+                            </DataTemplate>
+                        </syncfusion:SfListView.HeaderTemplate>
+
+                        <syncfusion:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="3*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Margin="0,8,0,8" FontSize="14"   Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" Text="{Binding BrojSpisa}"   VerticalOptions="Center" LineBreakMode="NoWrap" Padding="10,0,0,0" />
+                                    <Label Margin="0,8,0,8" FontSize="14"   Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" Text="{Binding ClientName}"   VerticalOptions="Center" LineBreakMode="NoWrap" Padding="10,0,0,0" />
+                                </Grid>
+
+                            </DataTemplate>
+
+                        </syncfusion:SfListView.ItemTemplate>
+
+
+                    </syncfusion:SfListView>
                 </Grid>
 
                 <HorizontalStackLayout Margin="0,20,0,0" >
