@@ -50,6 +50,7 @@
 
 
 
+
             <scheduler:SfScheduler.ResourceView>
                 <scheduler:SchedulerResourceView Resources="{Binding Resources}" >
                     <scheduler:SchedulerResourceView.HeaderTemplate>

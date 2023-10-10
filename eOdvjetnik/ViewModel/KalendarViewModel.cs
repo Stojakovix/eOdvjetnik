@@ -1,17 +1,13 @@
-﻿using Syncfusion.Maui.Scheduler;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using eOdvjetnik.Model;
+using eOdvjetnik.Models;
+using eOdvjetnik.Services;
+using Syncfusion.Maui.Scheduler;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using eOdvjetnik.Models;
 using System.Diagnostics;
-using eOdvjetnik.Services;
 using System.Windows.Input;
-using Newtonsoft.Json;
-using eOdvjetnik.Model;
-using System.Drawing;
 using Color = Microsoft.Maui.Graphics.Color;
-using Syncfusion.DocIO.DLS;
-using System.Xml.Linq;
-using Microsoft.Maui.Graphics.Text;
 
 
 namespace eOdvjetnik.ViewModel
@@ -53,7 +49,7 @@ namespace eOdvjetnik.ViewModel
         public ICommand AdminViewByName { get; set; }
 
         public ICommand DodajButtonClick { get; set; }
-        public ICommand ZatvoriButtonClick { get; set; }
+
 
         //public bool SpisiGridIsVisible { get; set; }
 
@@ -217,22 +213,24 @@ namespace eOdvjetnik.ViewModel
             //    AdminViewByDate = new Command(GetAdminCalendarEventsByDate);
             //    AdminViewByName = new Command(GetAdminCalendarEventsByName);
             //    AdminAppointments = new ObservableCollection<AdminCalendarItem>();
-
+            WeakReferenceMessenger.Default.Register<AppointmentSpisId>(this, AppointmentSpisIdReceived);
             SQLUserID = TrecaSreca.Get("UserID");
             Debug.WriteLine(" user id je " + SQLUserID);
             try
             {
+
                 Appointments = new ObservableCollection<SchedulerAppointment>(); // Initialize the Appointments collection
                 CategoryColor = new ObservableCollection<ColorItem>();
                 employeeItem = new ObservableCollection<EmployeeItem>();
                 Resources = new ObservableCollection<SchedulerResource>();
                 FileItems = new ObservableCollection<FileItem>();
                 DodajButtonClick = new Command(DodajSpis_clicked);
-                ZatvoriButtonClick = new Command(Zatvori_clicked);
+                
+
 
                 GetColors();
                 AdminLicenceCheck();
-                GenerateFiles();
+                //GenerateFiles();
                 //GetAdminCalendarEventsByDate();
                 //this.QueryAppointmentsCommand = new Command<Object(LoadMoreAppointments, CanLoadMoreAppointments);
                 Debug.WriteLine("---------------------inicijalizirano kalendarViewModel constructor");
@@ -343,8 +341,15 @@ namespace eOdvjetnik.ViewModel
 
         private void DodajSpis_clicked()
         {
-           // GenerateFiles();
-            SpisiGridIsVisible = true;
+            // GenerateFiles();
+            if (SpisiGridIsVisible == false)
+            {
+                SpisiGridIsVisible = true;
+            }
+            else
+            {
+                SpisiGridIsVisible = false;
+            }
         }
 
         private void Zatvori_clicked()
@@ -353,82 +358,170 @@ namespace eOdvjetnik.ViewModel
         }
 
 
-        public void GenerateFiles()
+        //public void GenerateFiles()
+        //{
+        //    try
+        //    {
+        //        fileItems.Clear();
+
+        //        //string query = "SELECT * FROM files ORDER BY id DESC LIMIT 100;";
+        //        string query = "SELECT files.*, client.ime AS client_name, opponent.ime AS opponent_name FROM files LEFT JOIN contacts AS client ON files.client_id = client.id LEFT JOIN contacts AS opponent ON files.opponent_id = opponent.id ORDER BY files.id DESC LIMIT 20";
+
+
+        //        Debug.WriteLine(query + "u SpisiViewModelu");
+        //        Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+        //        if (filesData != null)
+        //        {
+        //            foreach (Dictionary<string, string> filesRow in filesData)
+        //            {
+        //                #region Varijable za listu
+        //                int id;
+        //                int clientId;
+        //                int opponentId;
+        //                int inicijaliVoditeljId;
+        //                DateTime created;
+        //                DateTime datumPromjeneStatusa;
+        //                DateTime datumKreiranjaSpisa;
+        //                DateTime datumIzmjeneSpisa;
+
+        //                int.TryParse(filesRow["id"], out id);
+        //                int.TryParse(filesRow["client_id"], out clientId);
+        //                int.TryParse(filesRow["opponent_id"], out opponentId);
+        //                int.TryParse(filesRow["inicijali_voditelj_id"], out inicijaliVoditeljId);
+        //                DateTime.TryParse(filesRow["created"], out created);
+        //                DateTime.TryParse(filesRow["datum_promjene_statusa"], out datumPromjeneStatusa);
+        //                DateTime.TryParse(filesRow["datum_kreiranja_spisa"], out datumKreiranjaSpisa);
+        //                DateTime.TryParse(filesRow["datum_izmjene_spisa"], out datumIzmjeneSpisa);
+        //                #endregion
+        //                fileItems.Add(new FileItem()
+        //                {
+        //                    Id = id,
+        //                    BrojSpisa = filesRow["broj_spisa"],
+        //                    Spisicol = filesRow["spisicol"],
+        //                    ClientId = clientId,
+        //                    OpponentId = opponentId,
+        //                    InicijaliVoditeljId = inicijaliVoditeljId,
+        //                    InicijaliDodao = filesRow["inicijali_dodao"],
+        //                    Filescol = filesRow["filescol"],
+        //                    InicijaliDodjeljeno = filesRow["inicijali_dodjeljeno"],
+        //                    Created = created,
+        //                    AktivnoPasivno = filesRow["aktivno_pasivno"],
+        //                    Referenca = filesRow["referenca"],
+        //                    DatumPromjeneStatusa = datumPromjeneStatusa,
+        //                    Uzrok = filesRow["uzrok"],
+        //                    DatumKreiranjaSpisa = datumKreiranjaSpisa,
+        //                    DatumIzmjeneSpisa = datumIzmjeneSpisa,
+        //                    Kreirao = filesRow["kreirao"],
+        //                    ZadnjeUredio = filesRow["zadnje_uredio"],
+        //                    Jezik = filesRow["jezik"],
+        //                    BrojPredmeta = filesRow["broj_predmeta"],
+        //                    ClientName = filesRow["client_name"],
+        //                    OpponentName = filesRow["opponent_name"]
+        //                });
+        //                foreach (FileItem item in fileItems)
+        //                {
+        //                    //Debug.WriteLine(item.BrojSpisa);
+
+        //                }
+        //                // Debug.WriteLine(FileItems.Count);
+
+        //            }
+        //            OnPropertyChanged(nameof(fileItems));
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.Message + "in viewModel generate files");
+        //    }
+        //}
+
+
+          #region Search
+
+        private string _searchText;
+        public string SearchText
+        {
+            get { return _searchText; }
+            set
+            {
+                if (_searchText != value)
+                {
+                    _searchText = value;
+                    OnPropertyChanged(nameof(SearchText));
+                }
+            }
+        }
+        private ICommand searchCommand;
+        public ICommand SearchCommand
+        {
+            get
+            {
+                if (searchCommand == null)
+                {
+                    searchCommand = new Command(GenerateSearchResults);
+                }
+                return searchCommand;
+            }
+        }
+        //public ICommand OnResetClick { get; set; }
+
+        //public void ResetListView()
+        //{
+        //    fileItems.Clear();
+        //    foreach (var item in initialFileItems)
+        //    {
+        //        fileItems.Add(item);
+        //    }
+        //}
+
+
+        public void GenerateSearchResults()
         {
             try
             {
                 fileItems.Clear();
 
-                //string query = "SELECT * FROM files ORDER BY id DESC LIMIT 100;";
-                string query = "SELECT files.*, client.ime AS client_name, opponent.ime AS opponent_name FROM files LEFT JOIN contacts AS client ON files.client_id = client.id LEFT JOIN contacts AS opponent ON files.opponent_id = opponent.id ORDER BY files.id DESC LIMIT 20";
-
-
-                Debug.WriteLine(query + "u SpisiViewModelu");
+                // parametri za pretragu broj spisa, klijent id, opponent id, referenca, uzrok, broj predmeta
+                string search_term = SearchText;
+                string escaped_search_term = search_term.Replace("/", "\\/");
+                //string query = "SELECT * FROM `files` WHERE `broj_spisa` LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci  or `referenca` LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci or `uzrok` LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci  or `broj_predmeta` LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci ORDER BY `broj_predmeta` DESC";
+                //string query = "SELECT files.*, client.ime AS client_name, opponent.ime AS opponent_name FROM files LEFT JOIN contacts AS client ON files.client_id = client.id LEFT JOIN contacts AS opponent ON files.opponent_id = opponent.id WHERE files.broj_spisa LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.referenca LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.uzrok LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.broj_predmeta LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci ORDER BY files.broj_predmeta DESC";
+                string query = "SELECT files.*, client.ime AS client_name, opponent.ime AS opponent_name FROM files LEFT JOIN contacts AS client ON files.client_id = client.id LEFT JOIN contacts AS opponent ON files.opponent_id = opponent.id WHERE files.broj_spisa LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.referenca LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.uzrok LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.broj_predmeta LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR client.ime LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR opponent.ime LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.client_id IN (SELECT id FROM contacts WHERE ime LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci) OR files.opponent_id IN (SELECT id FROM contacts WHERE ime LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci) ORDER BY files.id DESC LIMIT 20";
+                
+                // Debug.WriteLine(query);
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                Debug.WriteLine(query + " u Search resultu");
                 if (filesData != null)
                 {
                     foreach (Dictionary<string, string> filesRow in filesData)
                     {
+
                         #region Varijable za listu
                         int id;
-                        int clientId;
-                        int opponentId;
-                        int inicijaliVoditeljId;
-                        DateTime created;
-                        DateTime datumPromjeneStatusa;
-                        DateTime datumKreiranjaSpisa;
-                        DateTime datumIzmjeneSpisa;
+
 
                         int.TryParse(filesRow["id"], out id);
-                        int.TryParse(filesRow["client_id"], out clientId);
-                        int.TryParse(filesRow["opponent_id"], out opponentId);
-                        int.TryParse(filesRow["inicijali_voditelj_id"], out inicijaliVoditeljId);
-                        DateTime.TryParse(filesRow["created"], out created);
-                        DateTime.TryParse(filesRow["datum_promjene_statusa"], out datumPromjeneStatusa);
-                        DateTime.TryParse(filesRow["datum_kreiranja_spisa"], out datumKreiranjaSpisa);
-                        DateTime.TryParse(filesRow["datum_izmjene_spisa"], out datumIzmjeneSpisa);
+
                         #endregion
                         fileItems.Add(new FileItem()
                         {
                             Id = id,
                             BrojSpisa = filesRow["broj_spisa"],
-                            Spisicol = filesRow["spisicol"],
-                            ClientId = clientId,
-                            OpponentId = opponentId,
-                            InicijaliVoditeljId = inicijaliVoditeljId,
-                            InicijaliDodao = filesRow["inicijali_dodao"],
-                            Filescol = filesRow["filescol"],
-                            InicijaliDodjeljeno = filesRow["inicijali_dodjeljeno"],
-                            Created = created,
-                            AktivnoPasivno = filesRow["aktivno_pasivno"],
-                            Referenca = filesRow["referenca"],
-                            DatumPromjeneStatusa = datumPromjeneStatusa,
-                            Uzrok = filesRow["uzrok"],
-                            DatumKreiranjaSpisa = datumKreiranjaSpisa,
-                            DatumIzmjeneSpisa = datumIzmjeneSpisa,
-                            Kreirao = filesRow["kreirao"],
-                            ZadnjeUredio = filesRow["zadnje_uredio"],
-                            Jezik = filesRow["jezik"],
-                            BrojPredmeta = filesRow["broj_predmeta"],
                             ClientName = filesRow["client_name"],
-                            OpponentName = filesRow["opponent_name"]
                         });
-                        foreach (FileItem item in fileItems)
-                        {
-                            //Debug.WriteLine(item.BrojSpisa);
 
-                        }
-                        // Debug.WriteLine(FileItems.Count);
 
                     }
-                    OnPropertyChanged(nameof(fileItems));
+                    Debug.WriteLine("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB" + fileItems.Count());
+
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message + "in viewModel generate files");
+                Debug.WriteLine(ex.Message);
             }
         }
+        #endregion
 
 
 
@@ -571,6 +664,56 @@ namespace eOdvjetnik.ViewModel
             }
         }
 
+
+        public void AppointmentSpisIdReceived(object received, AppointmentSpisId message)
+        {
+            int idSpisa = int.Parse(TrecaSreca.Get("IDSpisa"));
+            SpisiGridIsVisible = true;
+            try
+            {
+                fileItems.Clear();
+
+                // parametri za pretragu broj spisa, klijent id, opponent id, referenca, uzrok, broj predmeta
+                string search_term = idSpisa.ToString();
+                string escaped_search_term = search_term.Replace("/", "\\/");
+                //string query = "SELECT * FROM `files` WHERE `id` = '" + escaped_search_term + "'";
+                string query = "SELECT files.*, client.ime AS client_name FROM files LEFT JOIN contacts AS client ON files.client_id = client.id WHERE files.id = '" + escaped_search_term + "'";
+                //string query = "SELECT files.*, client.ime AS client_name, opponent.ime AS opponent_name FROM files LEFT JOIN contacts AS client ON files.client_id = client.id LEFT JOIN contacts AS opponent ON files.opponent_id = opponent.id WHERE files.broj_spisa LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.referenca LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.uzrok LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.broj_predmeta LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci ORDER BY files.broj_predmeta DESC";
+                //string query = "SELECT files.*, client.ime AS client_name, opponent.ime AS opponent_name FROM files LEFT JOIN contacts AS client ON files.client_id = client.id LEFT JOIN contacts AS opponent ON files.opponent_id = opponent.id WHERE files.broj_spisa LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.referenca LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.uzrok LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.broj_predmeta LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR client.ime LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR opponent.ime LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci OR files.client_id IN (SELECT id FROM contacts WHERE ime LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci) OR files.opponent_id IN (SELECT id FROM contacts WHERE ime LIKE '%" + escaped_search_term + "%' COLLATE utf8mb4_general_ci) ORDER BY files.id DESC LIMIT 20";
+                // Debug.WriteLine(query);
+                Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
+                Debug.WriteLine(query + " u Search resultu");
+                if (filesData != null)
+                {
+                    foreach (Dictionary<string, string> filesRow in filesData)
+                    {
+
+                        #region Varijable za listu
+                        int id;
+
+
+                        int.TryParse(filesRow["id"], out id);
+
+                        #endregion
+                        fileItems.Add(new FileItem()
+                        {
+                            Id = id,
+                            BrojSpisa = filesRow["broj_spisa"],
+                            ClientName = filesRow["client_name"],
+
+                        });
+
+
+                    }
+                    Debug.WriteLine("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB" + fileItems.Count());
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            
+        }
 
         /// <summary>
         /// Property changed event handler

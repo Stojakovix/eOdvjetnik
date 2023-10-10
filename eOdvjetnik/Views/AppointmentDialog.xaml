@@ -225,7 +225,11 @@
                     <Switch  Grid.Column="1" x:Name="switchAllDay" HorizontalOptions="Start"  VerticalOptions="Center" ThumbColor="#DC143C"  />
                 </Grid>
 
-                <Grid>
+                <Grid Margin="0,10,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="120" />
                         <ColumnDefinition Width="200" />
@@ -233,15 +237,16 @@
                     </Grid.ColumnDefinitions>
 
                     <Label  Grid.Column="0"  Text="Spisi" FontSize="Default" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20" />
-                    <Button Grid.Column="1" Text="Odaberi Spis" FontSize="Default" TextColor="Black" Command="{Binding DodajButtonClick}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20"/>
-                    <Button Grid.Column="2" x:Name="ZatvoriName" IsVisible="{Binding SpisiGridIsVisible}" Text="Zatvori" Command="{Binding ZatvoriButtonClick}" FontSize="Default" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20" />
+                    <Button Grid.Column="1" Text="Povezani spis" FontSize="Default" TextColor="Black" Command="{Binding DodajButtonClick}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20"/>
+                    <SearchBar Grid.Column="0" Grid.ColumnSpan="3" SearchCommand="{Binding SearchCommand}" WidthRequest="200"
+                               Text="{Binding SearchText}" Grid.Row="1" Placeholder="Pretraga spisa" IsVisible="{Binding SpisiGridIsVisible}" HorizontalOptions="Start" VerticalOptions="Center" ></SearchBar>
 
                 </Grid>
 
-                <Grid x:Name="SpisiGrid" IsVisible="{Binding SpisiGridIsVisible}">
-                    <syncfusion:SfListView ItemsSource="{Binding FileItems}">
+                <Grid Margin="0,15,0,0"  x:Name="SpisiGrid" IsVisible="{Binding SpisiGridIsVisible}" MinimumHeightRequest="100">
+                    <syncfusion:SfListView ItemsSource="{Binding FileItems}" IsStickyHeader="True" ItemTapped="ListViewItemTapped">
 
-                        <syncfusion:SfListView.HeaderTemplate>
+                        <syncfusion:SfListView.HeaderTemplate >
                             <DataTemplate>
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -250,6 +255,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="3*" />
+
 
                                     </Grid.ColumnDefinitions>
 
@@ -267,8 +273,9 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="3*" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Margin="0,8,0,8" FontSize="14"   Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" Text="{Binding BrojSpisa}"   VerticalOptions="Center" LineBreakMode="NoWrap" Padding="10,0,0,0" />
+                                    <Label Margin="0,8,0,8" FontSize="14"   Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" Text="{Binding BrojSpisa}"    VerticalOptions="Center" LineBreakMode="NoWrap" Padding="10,0,0,0" />
                                     <Label Margin="0,8,0,8" FontSize="14"   Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" Text="{Binding ClientName}"   VerticalOptions="Center" LineBreakMode="NoWrap" Padding="10,0,0,0" />
+                                    
                                 </Grid>
 
                             </DataTemplate>
