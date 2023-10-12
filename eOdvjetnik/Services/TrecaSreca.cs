@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Text;
 using System.Security.Cryptography;
+using Google.Protobuf.WellKnownTypes;
 
 namespace eOdvjetnik.Services
 {
@@ -31,13 +32,23 @@ namespace eOdvjetnik.Services
             }
         }
 
-        public static void Set(string key, string value)
+        public static void Set(string key, string value, bool protectedString = false)
         {
             XDocument xmlDoc = XDocument.Load(FilePath);
 
             XElement preferenceElement = xmlDoc.Root
                 .Elements("Preference")
                 .FirstOrDefault(p => p.Attribute("Key").Value == key);
+
+
+            if (protectedString == true) {
+                byte[] keyCode = Convert.FromBase64String(Get("license"));
+                byte[] ivCode = Convert.FromBase64String(Get("activation_key"));
+                value = Convert.ToBase64String(EncryptString(value, keyCode, ivCode));
+                
+            }
+
+
 
             if (preferenceElement != null)
             {
@@ -56,16 +67,25 @@ namespace eOdvjetnik.Services
             xmlDoc.Save(FilePath);
         }
 
-        public static string Get(string key)
+        public static string Get(string key, bool protectedString = false)
         {
+
             XDocument xmlDoc = XDocument.Load(FilePath);
             XElement preferenceElement = xmlDoc.Root
                 .Elements("Preference")
                 .FirstOrDefault(p => p.Attribute("Key").Value == key);
 
-            if (preferenceElement != null)
+            string value  =  null;
+            if (protectedString == true)
             {
-                return preferenceElement.Attribute("Value").Value;
+                byte[] keyCode = Convert.FromBase64String(Get("license"));
+                byte[] ivCode = Convert.FromBase64String(Get("activation_key"));
+                value = DecryptString(Convert.FromBase64String(preferenceElement.Attribute("Value").Value), keyCode, ivCode);
+            }
+
+            if (value != null)
+            {
+                return value;
             }
             else
             {
@@ -73,7 +93,7 @@ namespace eOdvjetnik.Services
             }
         }
 
-        public static void Update(string key, string newValue)
+        public static void Update(string key, string newValue, bool protectedString = false)
         {
             XDocument xmlDoc = XDocument.Load(FilePath);
 
