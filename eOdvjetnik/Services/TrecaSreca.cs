@@ -133,7 +133,7 @@ namespace eOdvjetnik.Services
             byte[] key = GenerateRandomKey();
             byte[] iv = GenerateRandomIV();
 
-
+            var salt = "xJAfN9BuVRf+KvPpXxb/QCbqhPfqiB09RDPWyFcJGkZEvMZi+mSnP74xsmEmAdgirrnrxjJ/hrW2cz4HnqnPQkcUg=";
 
 
 
