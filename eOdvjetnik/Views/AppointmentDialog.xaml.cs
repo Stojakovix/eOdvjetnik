@@ -15,10 +15,11 @@ namespace eOdvjetnik.Views;
 public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
 {
     private static KalendarViewModel kalendarViewModel;
+    
     SchedulerAppointment appointment;
     DateTime selectedDate;
     SfScheduler scheduler;
-
+    public ObservableCollection<FileItem> FileItems { get; set; }
 
     private bool isVisible;
 
@@ -79,7 +80,7 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
         {
 
             InitializeComponent();
-
+            FileItems = new ObservableCollection<FileItem>();
             //za MacBook picker:
             SelectStartHour();
             SelectStartMinute();
@@ -88,7 +89,7 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
 
             this.appointment = appointment;
             this.selectedDate = AdjustSelectedDate(selectedDate);
-
+            
             this.scheduler = scheduler;
             isVisible = true;
             ResourceId = int.Parse(TrecaSreca.Get("resourceId"));
@@ -821,6 +822,20 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
         };
     }
 
+    private async void ListViewItemDoubleTapped(object sender, Syncfusion.Maui.ListView.ItemDoubleTappedEventArgs e)
+    {
+
+        //var selectedTariffItem = (TariffItem)e.SelectedItem;
+        var selectedFileItem = (FileItem)e.DataItem;
+        int itemId = selectedFileItem.Id;
+        IDSpisa = itemId;
+        Debug.WriteLine(itemId + " u ListViewItemSelectedu u appointmentu");
+        TrecaSreca.Set("IDSpisa", IDSpisa.ToString());
+        //Debug.WriteLine("Item tapped " + itemId);
+        Debug.WriteLine(itemId + " u ListViewItemSelectedu u spisima");
+
+        await Navigation.PushAsync(new SpiDok());
+    }
     private async void ListViewItemTapped(object sender, Syncfusion.Maui.ListView.ItemTappedEventArgs e)
     {
         try
@@ -831,10 +846,15 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
             int itemId = selectedFileItem.Id;
             IDSpisa = itemId;
             Debug.WriteLine(itemId + " u ListViewItemSelectedu u appointmentu");
-            await Application.Current.MainPage.DisplayAlert("", "Spis povezan uz događaj", "OK");
             TrecaSreca.Set("IDSpisa", IDSpisa.ToString());
 
             WeakReferenceMessenger.Default.Send(new AppointmentSpisId("fileupdated"));
+            if (FileItems.Count > 1)
+            {
+                await Application.Current.MainPage.DisplayAlert("", "Spis povezan uz događaj", "OK");
+            }
+
+
 
         }
         catch (Exception ex)
