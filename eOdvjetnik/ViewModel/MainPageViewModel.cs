@@ -156,6 +156,7 @@ namespace eOdvjetnik.ViewModel
             CheckLicenceStatus = new Command(OnRefreshLicenceClick);
             CurrentDateDT = DateTime.Now.Date;
             RefreshTime();
+            TrecaSreca.init();
             ExpireDateString = TrecaSreca.Get("expire_date");
             LicenceStatus = TrecaSreca.Get("licence_active");
             CompanyName = TrecaSreca.Get("naziv_tvrtke");
