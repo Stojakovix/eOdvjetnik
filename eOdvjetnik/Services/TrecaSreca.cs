@@ -148,7 +148,7 @@ namespace eOdvjetnik.Services
 
 
 
-        public static void Update(string key, string newValue)
+        public static void Update(string key, string newValue, bool protectedString = false)
         {
             XDocument xmlDoc = XDocument.Load(FilePath);
 
