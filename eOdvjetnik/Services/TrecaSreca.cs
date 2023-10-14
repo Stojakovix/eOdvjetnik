@@ -47,8 +47,14 @@ namespace eOdvjetnik.Services
                     // Generate a random IV (Initialization Vector) for each encryption
                     aesAlg.GenerateIV();
 
-                    // Generate a random key
-                    aesAlg.GenerateKey();
+                    // Manually define a unique security salt (make sure it's different for each piece of data)
+                    byte[] salt = Encoding.UTF8.GetBytes("CFQp4uSd2Dp1oi3SEb5ff5cjwRy9WdJJ");
+
+                    // Trim or expand the salt to match the key size
+                    Array.Resize(ref salt, aesAlg.Key.Length);
+
+                    // Set the key using the combined salt and key
+                    aesAlg.Key = salt;
 
                     // Encrypt the value
                     byte[] encryptedValue;
@@ -66,19 +72,17 @@ namespace eOdvjetnik.Services
 
                     if (preferenceElement != null)
                     {
-                        // If the key already exists, update its value, IV, and key
+                        // If the key already exists, update its value and IV
                         preferenceElement.SetAttributeValue("Value", Convert.ToBase64String(encryptedValue));
                         preferenceElement.SetAttributeValue("IV", Convert.ToBase64String(aesAlg.IV));
-                        preferenceElement.SetAttributeValue("AESKey", Convert.ToBase64String(aesAlg.Key)); // Use a different attribute name
                     }
                     else
                     {
-                        // If the key doesn't exist, add a new key-value pair
+                        // If the key doesn't exist, add a new key-value pair with IV
                         XElement newPreferenceElement = new XElement("Preference",
                             new XAttribute("Key", key),
                             new XAttribute("Value", Convert.ToBase64String(encryptedValue)),
-                            new XAttribute("IV", Convert.ToBase64String(aesAlg.IV)),
-                            new XAttribute("AESKey", Convert.ToBase64String(aesAlg.Key)) // Use a different attribute name
+                            new XAttribute("IV", Convert.ToBase64String(aesAlg.IV))
                         );
                         xmlDoc.Root.Add(newPreferenceElement);
                     }
@@ -87,10 +91,9 @@ namespace eOdvjetnik.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("U trecoj sreci u setu " + ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
-
 
         public static string Get(string key)
         {
@@ -115,20 +118,22 @@ namespace eOdvjetnik.Services
                         else
                         {
                             // Handle the case where "IV" attribute is missing or null
-                            // You can throw an exception or return an appropriate error message.
                             return null; // Return null to indicate the error.
                         }
 
-                        // Get the key from the stored data
-                        byte[] storedKey = Convert.FromBase64String(preferenceElement.Attribute("AESKey").Value); // Corrected attribute name
-                        aesAlg.Key = storedKey;
+                        // Manually define the same fixed salt for both encryption and decryption
+                        byte[] salt = Encoding.UTF8.GetBytes("CFQp4uSd2Dp1oi3SEb5ff5cjwRy9WdJJ");
+
+                        // Ensure that the key size matches the size of the generated key
+                        byte[] keyBytes = new byte[aesAlg.Key.Length];
+                        Array.Copy(salt, keyBytes, Math.Min(salt.Length, aesAlg.Key.Length));
+                        aesAlg.Key = keyBytes;
 
                         // Decrypt the value
                         byte[] encryptedValue = Convert.FromBase64String(preferenceElement.Attribute("Value").Value);
                         using (var decryptor = aesAlg.CreateDecryptor())
                         {
                             byte[] decryptedValue = decryptor.TransformFinalBlock(encryptedValue, 0, encryptedValue.Length);
-                            Debug.WriteLine(Encoding.UTF8.GetString(decryptedValue));
                             return Encoding.UTF8.GetString(decryptedValue);
                         }
                     }
