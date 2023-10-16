@@ -312,7 +312,7 @@ namespace eOdvjetnik.ViewModel
         }
         private async void OnBackClick()
         {
-            await Shell.Current.GoToAsync("//Naplata");
+            await Shell.Current.GoToAsync("..");
 
         }
 
