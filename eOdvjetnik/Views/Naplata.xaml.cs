@@ -41,13 +41,27 @@ public partial class Naplata : ContentPage
       
     }
 
-    
-    
+    private bool isInitialized { get; set; }
+
+
+
     protected override void OnAppearing()
     {
         base.OnAppearing();
         this.Window.MinimumHeight = 620;
         this.Window.MinimumWidth = 860;
+
+        if (!isInitialized)
+        {
+            isInitialized = true;
+            Debug.WriteLine("ViewModel initialized");
+        }
+
+        else
+        {
+            new NaplataViewModel();
+            Debug.WriteLine("inicijaliziran else u on appearingu");
+        }
     }
     public double MinWidth { get; set; }
 

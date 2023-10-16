@@ -55,7 +55,7 @@ public partial class Kalendar : ContentPage
     //    else
     //    {
     //        //isInitialized = true;
-    //        if(Scheduler.View is SchedulerView.TimelineMonth || Scheduler.View is SchedulerView.Agenda)
+    //        if (Scheduler.View is SchedulerView.TimelineMonth || Scheduler.View is SchedulerView.Agenda)
     //        {
     //            _viewModel.GetColors();
     //            _viewModel.AdminLicenceCheck();
@@ -66,7 +66,7 @@ public partial class Kalendar : ContentPage
     //            _viewModel.GetUserEvents();
     //            Debug.WriteLine("Izvršio onAppearing GetUser events");
     //        }
-             
+
     //    }
 
     //}

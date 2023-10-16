@@ -542,7 +542,7 @@ namespace eOdvjetnik.ViewModel
             try
             {
                 Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query);
-                Debug.WriteLine(filesData.Length + " dužina filesData-a");
+                //Debug.WriteLine(filesData.Length + " dužina filesData-a");
                 if (filesData != null && filesData.Length > 0)
                 {
                     foreach (Dictionary<string, string> filesRow in filesData)

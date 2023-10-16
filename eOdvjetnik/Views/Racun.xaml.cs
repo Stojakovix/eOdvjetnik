@@ -49,6 +49,8 @@ public partial class Racun : ContentPage
     public string ReceiptSignature { get; set; }
 
 
+
+
     public Racun()
 	{
         InitializeComponent();
@@ -83,6 +85,8 @@ public partial class Racun : ContentPage
     
 
     }
+
+
 
     private void SanityCheck()
     {
