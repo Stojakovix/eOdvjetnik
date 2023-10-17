@@ -18,9 +18,13 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="50" />
+        </Grid.ColumnDefinitions>
         <!-- Header -->
 
-        <VerticalStackLayout Grid.Row="0" >
+        <VerticalStackLayout Grid.Row="0" Grid.ColumnSpan="1" >
 
             <!-- Popup No1 -->
 
@@ -115,7 +119,7 @@
                     <ColumnDefinition Width="120" />
                     <ColumnDefinition Width="150" />
                     <ColumnDefinition Width="120" />
-                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="20" />
 
                 </Grid.ColumnDefinitions>
 
@@ -129,8 +133,8 @@
         </VerticalStackLayout>
 
 
-        <ScrollView Grid.Row="1" Margin="50,10,0,0" >
-            <ListView ItemsSource="{Binding ReceiptItems, Mode=TwoWay}" Grid.ColumnSpan="6" SelectedItem="{Binding SelectedReceiptItem}"  >
+        <ScrollView Grid.Row="1" Grid.Column="0" Margin="50,10,0,0" >
+            <ListView ItemsSource="{Binding ReceiptItems, Mode=TwoWay}" Grid.ColumnSpan="6" SelectedItem="{Binding SelectedReceiptItem}" BackgroundColor="#faf9fb" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -153,7 +157,7 @@
                                         <ColumnDefinition Width="120" />
                                         <ColumnDefinition Width="150" />
                                         <ColumnDefinition Width="120" />
-                                        <ColumnDefinition Width="60" />
+                                        <ColumnDefinition Width="20" />
 
                                     </Grid.ColumnDefinitions>
 
@@ -163,12 +167,13 @@
 
                                     <Label Grid.Row="1" Grid.Column="2" Text="{Binding Points}"  VerticalOptions="Center" HorizontalOptions="End"  />
 
-                                    <Entry Grid.Row="1" Grid.Column="3" Text="{Binding Coefficient, Mode=TwoWay}"  VerticalOptions="CenterAndExpand" HorizontalOptions="Center" 
+                                    <Entry Grid.Row="1" Grid.Column="3" Text="{Binding Coefficient, Mode=TwoWay}"  VerticalOptions="CenterAndExpand" HorizontalOptions="End" 
                                            HorizontalTextAlignment="End"  />
 
                                     <Label Grid.Row="1" Grid.Column="4" Text="{Binding Currency}"   VerticalOptions="Center" HorizontalOptions="End" Margin="0,0,10,0" />
 
-                                    <BoxView Margin="0,50,0,0" Grid.Row="1" Grid.ColumnSpan="5" BackgroundColor="Red" HeightRequest="1"  />
+                                    <BoxView Margin="10,50,0,0" Grid.Row="1" Grid.ColumnSpan="5" BackgroundColor="Red" HeightRequest="1" 
+                                             IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=False}" />
 
                                 </Grid>
 

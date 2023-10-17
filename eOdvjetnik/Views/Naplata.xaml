@@ -73,7 +73,7 @@
                    PlaceholderColor="Black"
                    SearchCommand="{Binding SearchCommand}"
                    Text="{Binding SearchText}"
-                   MinimumWidthRequest="200"
+                   WidthRequest="280"                   
                    HorizontalOptions="Fill"
                    Margin="10,10,10,10"
                  />
