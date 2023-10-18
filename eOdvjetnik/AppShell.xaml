@@ -8,7 +8,7 @@
        Shell.FlyoutBehavior="{OnPlatform WinUI=Disabled, MacCatalyst=Disabled, Android=Flyout, iOS=Flyout}"
        Shell.NavBarIsVisible="{OnPlatform WinUI=True, MacCatalyst=True , Android=True, iOS=True}"
        xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
-       Shell.PresentationMode="NotAnimated"
+       Shell.ForegroundColor="Black"
        >
 
 
@@ -18,6 +18,7 @@
 
 
     <Shell.TitleView>
+        
         <HorizontalStackLayout  Spacing="-10"   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
             <HorizontalStackLayout.Margin   >
                 <OnPlatform x:TypeArguments="Thickness" Default="0,0,0,0">
@@ -28,7 +29,7 @@
 
 
 
-            <Button IsVisible="{OnPlatform Android=True , iOS=False , WinUI=True , MacCatalyst=True}" 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                    
                     Command="{Binding MainClickCommand}"
                     Text="Početna" 
@@ -44,7 +45,7 @@
              />
 
 
-            <Button IsVisible="{OnPlatform Android=True , iOS=False , WinUI=True , MacCatalyst=True}" 
+            <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="1" Text="Ročišnik" 
                     Command="{Binding KalendarClickCommand}" 
                     x:Name="KalendarButton" 
@@ -81,7 +82,7 @@
                     FontSize="18"
                     Padding="10,5,10,5"
                     TextColor="Black"
-                                        Clicked="Button_Clicked"
+                    Clicked="Button_Clicked"
 
             />
 
@@ -95,7 +96,7 @@
                     Padding="10,5,10,5"
                     TextColor="Black"
                     Margin="20,0,0,0"
-                                        Clicked="Button_Clicked"
+                    Clicked="Button_Clicked"
 
                     />
 
@@ -109,7 +110,7 @@
                     Padding="10,5,10,5"
                     TextColor="Black"
                     Margin="20,0,0,0"
-                                        Clicked="Button_Clicked"
+                    Clicked="Button_Clicked"
 
                     />
 
@@ -123,7 +124,7 @@
                     Padding="10,5,10,5"
                     TextColor="Black"
                     Margin="20,0,0,0"
-                                        Clicked="Button_Clicked"
+                    Clicked="Button_Clicked"
 
                     />
 
@@ -144,7 +145,7 @@
 
             <Button Grid.Column="10" 
                     Text="{x:Static resx:AppResources.Postavke}" 
-                    IsVisible="{OnPlatform Android=True , iOS=False , WinUI=True , MacCatalyst=True}"  
+                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
                     BorderWidth="0"
                     FontFamily="SFUIDisplay-Light"
                     Command="{Binding PostavkeClickCommand}" 
