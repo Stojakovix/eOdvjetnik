@@ -6,9 +6,12 @@
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              Title="NoviKlijent">
 
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <viewmodel:NoviKlijentViewModel/>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False"/>
+    </Shell.BackButtonBehavior>
 
     <ScrollView>
         <Grid BackgroundColor="#faf9fb">

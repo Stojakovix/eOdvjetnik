@@ -38,6 +38,7 @@ public partial class Naplata : ContentPage
         ClientName = TrecaSreca.Get("SelectedName");
         ClientOIB = TrecaSreca.Get("SelectedOIB");
         ClientAddress = TrecaSreca.Get("SelectedAddress");
+        
       
     }
 

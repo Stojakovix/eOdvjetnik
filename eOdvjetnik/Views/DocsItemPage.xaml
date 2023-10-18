@@ -6,6 +6,9 @@
              xmlns:models="clr-namespace:eOdvjetnik.Models"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              x:DataType="models:DocsItem">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False"/>
+    </Shell.BackButtonBehavior>
 
     <ScrollView>
         <VerticalStackLayout Padding="20"

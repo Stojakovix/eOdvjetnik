@@ -7,9 +7,13 @@
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              Title="Naplata">
 
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <viewmodel:NaplataViewModel/>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False"/>
+    </Shell.BackButtonBehavior>
 
 
     <Grid>

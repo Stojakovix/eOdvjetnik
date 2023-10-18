@@ -6,6 +6,7 @@ using Syncfusion.Maui.Popup;
 using eOdvjetnik.ViewModel;
 using Org.BouncyCastle.Asn1.X509.Qualified;
 using System.ComponentModel;
+using Google.Protobuf.WellKnownTypes;
 
 public partial class AppShell : Shell , INotifyPropertyChanged 
 {
@@ -63,13 +64,51 @@ public partial class AppShell : Shell , INotifyPropertyChanged
         SfPopup popup = new SfPopup();
 		
     }
-    protected override void OnAppearing()
+
+    protected override void OnNavigating(ShellNavigatingEventArgs args)
     {
-        base.OnAppearing();
-        currentRoute = "MainPage";
+        base.OnNavigating(args);
         if (lastPressedButton != null)
         {
-            lastPressedButton.BackgroundColor = Color.FromHex("#DEE6F2");
+            // Reset the background color of the previous button
+            lastPressedButton.BackgroundColor = Color.FromArgb("#faf9fb"); // Set to the initial color
+        }
+
+        if (lastPressedButton != null)
+        {
+            currentRoute = Shell.Current.CurrentItem.CurrentItem.Route;
+            Debug.WriteLine("current route is " + currentRoute);
+            // Change the background color of the current button
+            // Set to the new color Color.FromArgb("#FAFAFA")
+            if (currentRoute.EndsWith("Kalendar"))
+            {
+                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+            }
+            else if (currentRoute.EndsWith("MainPage"))
+            {
+                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+            }
+            else if (currentRoute.EndsWith("Spisi"))
+            {
+                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+            }
+            else if (currentRoute.EndsWith("Klijenti"))
+            {
+                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+            }
+            else if (currentRoute.EndsWith("Naplata"))
+            {
+                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+            }
+            else if (currentRoute.EndsWith("Dokumenti"))
+            {
+                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+            }
+            else if (currentRoute.EndsWith("Postavke"))
+            {
+                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+            }
+
         }
 
     }
