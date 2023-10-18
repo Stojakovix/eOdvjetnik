@@ -4,11 +4,30 @@ using Views;
 using Microsoft.Maui.Controls;
 using Syncfusion.Maui.Popup;
 using eOdvjetnik.ViewModel;
+using Org.BouncyCastle.Asn1.X509.Qualified;
+using System.ComponentModel;
+using Google.Protobuf.WellKnownTypes;
 
-public partial class AppShell : Shell
+public partial class AppShell : Shell , INotifyPropertyChanged 
 {
 
     AppShellViewModel ViewModel = new AppShellViewModel();
+
+    private string currentRoute;
+
+    public string CurrentRoute
+    {
+        get { return currentRoute; }
+        set
+        {
+            if (currentRoute != value)
+            {
+                currentRoute = value;
+                OnPropertyChanged(nameof(CurrentRoute));
+            }
+        }
+    }
+
     public AppShell()
 	{
 		InitializeComponent();
@@ -29,9 +48,14 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(UrediKlijenta), typeof(UrediKlijenta));
         Routing.RegisterRoute(nameof(NoviZaposlenik), typeof(NoviZaposlenik));
         Routing.RegisterRoute(nameof(SpiDok), typeof(SpiDok));
-        Routing.RegisterRoute(nameof(LoadingPage), typeof(LoadingPage));
+        Routing.RegisterRoute(nameof(LoadingPageKalendar), typeof(LoadingPageKalendar));
+        Routing.RegisterRoute(nameof(LoadingPageKlijenti), typeof(LoadingPageKlijenti));
+        Routing.RegisterRoute(nameof(LoadingPageNaplata), typeof(LoadingPageNaplata));
+        Routing.RegisterRoute(nameof(LoadingPageSpisi), typeof(LoadingPageSpisi));
+
         Routing.RegisterRoute(nameof(AdminKalendar), typeof(AdminKalendar));
         AppTheme currentTheme = AppTheme.Light;
+
         
 
         BindingContext = ViewModel;
@@ -39,6 +63,54 @@ public partial class AppShell : Shell
 
         SfPopup popup = new SfPopup();
 		
+    }
+
+    protected override void OnNavigating(ShellNavigatingEventArgs args)
+    {
+        base.OnNavigating(args);
+        if (lastPressedButton != null)
+        {
+            // Reset the background color of the previous button
+            lastPressedButton.BackgroundColor = Color.FromArgb("#faf9fb"); // Set to the initial color
+        }
+
+        if (lastPressedButton != null)
+        {
+            currentRoute = Shell.Current.CurrentItem.CurrentItem.Route;
+            Debug.WriteLine("current route is " + currentRoute);
+            // Change the background color of the current button
+            // Set to the new color Color.FromArgb("#FAFAFA")
+            if (currentRoute.EndsWith("Kalendar"))
+            {
+                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+            }
+            else if (currentRoute.EndsWith("MainPage"))
+            {
+                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+            }
+            else if (currentRoute.EndsWith("Spisi"))
+            {
+                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+            }
+            else if (currentRoute.EndsWith("Klijenti"))
+            {
+                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+            }
+            else if (currentRoute.EndsWith("Naplata"))
+            {
+                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+            }
+            else if (currentRoute.EndsWith("Dokumenti"))
+            {
+                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+            }
+            else if (currentRoute.EndsWith("Postavke"))
+            {
+                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+            }
+
+        }
+
     }
     private void OnKorisnickaPodrskaClicked(object sender, EventArgs e)
     {
@@ -51,6 +123,7 @@ public partial class AppShell : Shell
         if (sender is Button clickedButton)
         {
             LastPressedButton = clickedButton;
+            
         }
     }
     private Button lastPressedButton = null;
@@ -71,10 +144,50 @@ public partial class AppShell : Shell
 
             if (lastPressedButton != null)
             {
+                currentRoute = Shell.Current.CurrentItem.CurrentItem.Route;
+                Debug.WriteLine("current route is " + currentRoute);
                 // Change the background color of the current button
-                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2"); // Set to the new color Color.FromArgb("#FAFAFA")
+                 // Set to the new color Color.FromArgb("#FAFAFA")
+                if (currentRoute.EndsWith("Kalendar"))
+                {
+                    lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+                }
+                else if (currentRoute.EndsWith("MainPage"))
+                {
+                    lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+                }
+                else if (currentRoute.EndsWith("Spisi"))
+                {
+                    lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+                }
+                else if (currentRoute.EndsWith("Klijenti"))
+                {
+                    lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+                }
+                else if (currentRoute.EndsWith("Naplata"))
+                {
+                    lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+                }
+                else if (currentRoute.EndsWith("Dokumenti"))
+                {
+                    lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+                }
+                else if (currentRoute.EndsWith("Postavke"))
+                {
+                    lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+                }
+   
             }
+            
+
         }
+
+    }
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
 }

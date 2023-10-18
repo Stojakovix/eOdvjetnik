@@ -36,7 +36,7 @@
                FontSize="Large"
                LineBreakMode="WordWrap"
                TextColor="Black"   
-               IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"/>
+               IsVisible="{OnPlatform Android=True, iOS=True, WinUI=True, MacCatalyst=True}"/>
 
         
         <VerticalStackLayout   Grid.ColumnSpan="5"  >

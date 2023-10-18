@@ -11,7 +11,9 @@
              xmlns:picker="clr-namespace:Syncfusion.Maui.Picker;assembly=Syncfusion.Maui.Picker"
              xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
                 >
-
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False"/>
+    </Shell.BackButtonBehavior>
     <ContentPage.BindingContext>
         <local:KalendarViewModel x:Name="viewmodel"/>
     </ContentPage.BindingContext>
@@ -243,7 +245,7 @@
 
                 </Grid>
 
-                <Grid Margin="0,15,0,0"  x:Name="SpisiGrid" IsVisible="{Binding SpisiGridIsVisible}" MinimumHeightRequest="100">
+                <Grid Margin="0,15,0,0"  x:Name="SpisiGrid" IsVisible="{Binding SpisiGridIsVisible}" MinimumHeightRequest="100" BackgroundColor="#faf9fb" >
                     <syncfusion:SfListView ItemsSource="{Binding FileItems}" IsStickyHeader="True" ItemTapped="ListViewItemTapped" ItemDoubleTapped="ListViewItemDoubleTapped">
 
                         <syncfusion:SfListView.HeaderTemplate >

@@ -8,7 +8,9 @@
              xmlns:local="clr-namespace:ListViewMaui"
              Title="Spisi">
 
-
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False"/>
+    </Shell.BackButtonBehavior>
 
     <ContentPage.Resources>
         <ResourceDictionary>

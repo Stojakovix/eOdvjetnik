@@ -150,7 +150,15 @@ namespace eOdvjetnik.ViewModel
         public MainPageViewModel()
         {
             ServiceMode = false;
-            GenerateHWID();
+            try
+            {
+                GenerateHWID();
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine("GenerateHWID() error: " + ex.Message);
+            }
             Version = $"{AppResources.Version} {AppInfo.VersionString}";
             ClearPrefrences = new Command(DeletePreferences);
             CheckLicenceStatus = new Command(OnRefreshLicenceClick);

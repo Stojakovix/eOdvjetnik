@@ -14,6 +14,7 @@ namespace eOdvjetnik.ViewModel
     public class NaplataViewModel : INotifyPropertyChanged
     {
         private Navigacija navigacija;
+        public string DevicePlatform { get; set; }
 
         #region Pretraga tarifa
 
@@ -312,8 +313,16 @@ namespace eOdvjetnik.ViewModel
         }
         private async void OnBackClick()
         {
-            await Shell.Current.GoToAsync("..");
+            if (DevicePlatform == "MacCatalyst")
+            {
+              await  Shell.Current.GoToAsync("///LoadingPageNaplata");
 
+            }
+            else
+            {
+              await  Shell.Current.GoToAsync("///Naplata");
+
+            }
         }
 
         private async void OnReceiptClick()
@@ -469,6 +478,7 @@ namespace eOdvjetnik.ViewModel
             ConfirmDeleteAllItems = new Command(OnDeleteAllItemsCLick);
             CancelDelete = new Command(OnCancelCLick);
 
+            DevicePlatform = TrecaSreca.Get("vrsta_platforme");
 
 
             try

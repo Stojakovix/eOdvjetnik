@@ -30,10 +30,12 @@ namespace eOdvjetnik.ViewModel
         public ICommand CancelDelete { get; set; }
         public ICommand BackButtonCommand { get; set; }
 
-        
+        public string DevicePlatform { get; set; }
+
 
         public NoviKlijentViewModel()
         {
+            DevicePlatform = TrecaSreca.Get("vrsta_platforme");
 
             try
             {
@@ -378,7 +380,16 @@ namespace eOdvjetnik.ViewModel
             if (Name != null && Name != "")
             {
                 AddKlijentToRemoteServer(contactItem);
-                await Shell.Current.GoToAsync("///Klijenti");
+                if (DevicePlatform != "MacCatalyst")
+                {
+                    await Shell.Current.GoToAsync("///LoadingPageKlijenti");
+
+                }
+                else
+                {
+                    await Shell.Current.GoToAsync("///Klijenti");
+
+                }
                 NewContactAdded();
                 //Debug.WriteLine("Klijent dodan" + klijent.Ime);
             }
@@ -440,7 +451,16 @@ namespace eOdvjetnik.ViewModel
             DeleteClientPopupEnabled = false;
             DeleteClientPopupVisible = false;
             DeleteContactOnRemoteServer(contactItem);
-            await Shell.Current.GoToAsync("///Klijenti");
+            if (DevicePlatform == "MacCatalyst")
+            {
+                await Shell.Current.GoToAsync("///LoadingPageKlijenti");
+
+            }
+            else
+            {
+                await Shell.Current.GoToAsync("///Klijenti");
+
+            }
             ContactDeletedMessage();
 
         }
@@ -506,7 +526,16 @@ namespace eOdvjetnik.ViewModel
         }
         public async void OnBackButtonClick()
         {
-            await Shell.Current.GoToAsync("///Klijenti");
+            if (DevicePlatform == "MacCatalyst")
+            {
+                await Shell.Current.GoToAsync("///LoadingPageKlijenti");
+
+            }
+            else
+            {
+                await Shell.Current.GoToAsync("///Klijenti");
+
+            }
         }
         public async void OnUpdateCLick()
         {
@@ -514,7 +543,16 @@ namespace eOdvjetnik.ViewModel
             if (ClientName != null && ClientName != "")
             {
                 UpdateContactOnRemoteServer(contactItem);
-                await Shell.Current.GoToAsync("///Klijenti");
+                if (DevicePlatform == "MacCatalyst")
+                {
+                    await Shell.Current.GoToAsync("///LoadingPageKlijenti");
+
+                }
+                else
+                {
+                    await Shell.Current.GoToAsync("///Klijenti");
+
+                }
                 TrecaSreca.Set("ClientEditedName", ClientName);
 
                 ContactEditedMessage();

@@ -811,6 +811,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
             TrecaSreca.Set(USER_nas, user_nas);
             TrecaSreca.Set(FOLDER_nas, folder);
             TrecaSreca.Set(SUBFOLDER_nas, subFolder);
+            Application.Current.MainPage.DisplayAlert("", "NAS postavke su uspješno spremljene.", "OK");
 
             //Debug.WriteLine("Nas saved " + Preferences.Default);
             Debug.WriteLine("KLINUTO NA SAVE U NAS POSTAVKAMA");
@@ -821,6 +822,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message + "In PostavkeViewModel NAS");
+            Application.Current.MainPage.DisplayAlert("", "Došlo je do pogreške prilikom spremanja.", "OK");
+
         }
     }
     //private void OnLoadClickedNas()
@@ -904,13 +907,16 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
             Debug.WriteLine("Saved");
             Debug.WriteLine(UserName + " " + Password);
-            Debug.WriteLine("KLINUTO NA SAVE U NAS POSTAVKAMA");
-          
+            Debug.WriteLine("KLINUTO NA SAVE U SQL POSTAVKAMA");
+            Application.Current.MainPage.DisplayAlert("", "SQL postavke su uspješno spremljene.", "OK");
+
 
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
+            Application.Current.MainPage.DisplayAlert("", "Došlo je do pogreške prilikom spremanja.", "OK");
+
         }
     }
     //private void OnLoadClickedMySQL()
