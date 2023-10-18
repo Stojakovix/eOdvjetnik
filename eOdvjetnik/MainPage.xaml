@@ -41,9 +41,9 @@
         
         <VerticalStackLayout   Grid.ColumnSpan="5"  >
             
-            <Image Source="text_only.png" HeightRequest="120" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
+            <Image Source="text_only.png" HeightRequest="120" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=False, MacCatalyst=False}" />
 
-            <Button Text="Clear All Preferences"  Command="{Binding ClearPrefrences}" IsVisible="true" />
+            <Button Text="Clear All Preferences"  Command="{Binding ClearPrefrences}" IsVisible="{Binding ServiceMode}" />
 
             <Label  Style="{StaticResource ShadowLabelStyle}" 
                         Text="{x:Static resx:AppResources.ZaAktivaciju}"
@@ -58,7 +58,7 @@
                         Text="{x:Static resx:AppResources.KontaktMain}"
                         HorizontalOptions="Center"
                         FontSize="Small"
-                        Margin="10,0,0,60"
+                        Margin="10,0,0,10"
                         LineBreakMode="WordWrap"
                         TextColor="Black"    
                    IsVisible="{Binding ActivationVisible }" />
