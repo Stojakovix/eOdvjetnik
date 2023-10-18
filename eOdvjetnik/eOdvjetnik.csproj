@@ -457,6 +457,7 @@
 	  <None Remove="Resources\Icons\youtube.png" />
 	  <None Remove="Resources\Icons\zip.png" />
 	  <None Remove="Resources\Icons\zoom.png" />
+	  <None Remove="Resources\Images\paperclip.png" />
 	  <None Remove="Resources\Install\odvjetnik_local-2.3.sql" />
 	  <None Remove="Resources\Install\odvjetnik_local.sql" />
 

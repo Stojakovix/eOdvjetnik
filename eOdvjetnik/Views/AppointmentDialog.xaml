@@ -243,7 +243,7 @@
 
                 </Grid>
 
-                <Grid Margin="0,15,0,0"  x:Name="SpisiGrid" IsVisible="{Binding SpisiGridIsVisible}" MinimumHeightRequest="100">
+                <Grid Margin="0,15,0,0"  x:Name="SpisiGrid" IsVisible="{Binding SpisiGridIsVisible}" MinimumHeightRequest="100" BackgroundColor="#faf9fb" >
                     <syncfusion:SfListView ItemsSource="{Binding FileItems}" IsStickyHeader="True" ItemTapped="ListViewItemTapped" ItemDoubleTapped="ListViewItemDoubleTapped">
 
                         <syncfusion:SfListView.HeaderTemplate >
