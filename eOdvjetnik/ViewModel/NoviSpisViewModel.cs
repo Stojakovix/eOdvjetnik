@@ -17,6 +17,7 @@ namespace eOdvjetnik.ViewModel
         public ICommand OnNazadClick { get; set; }
 
         ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+        public string DevicePlatform { get; set; }
 
 
         FileItem fileitem;
@@ -39,7 +40,7 @@ namespace eOdvjetnik.ViewModel
                 ClientName = TrecaSreca.Get("FilesClientName");
                 OpponentId = TrecaSreca.Get("FilesOpponent");
                 OpponentName = TrecaSreca.Get("FilesOpponentName");
-
+                DevicePlatform = TrecaSreca.Get("vrsta_platforme");
                 UserInitials = TrecaSreca.Get("UserInitials");
 
             }
@@ -572,12 +573,30 @@ namespace eOdvjetnik.ViewModel
             else
             {
                 AddSpisToRemoteServer(FileItem);
-                Shell.Current.GoToAsync("//Spisi");
+                if (DevicePlatform == "MacCatalyst")
+                {
+                    Shell.Current.GoToAsync("///LoadingPageSpisi");
+
+                }
+                else
+                {
+                    Shell.Current.GoToAsync("///Spisi");
+
+                }
             }
         }
         private void NazadClickButton()
         {
-            Shell.Current.GoToAsync("//Spisi");
+            if (DevicePlatform == "MacCatalyst")
+            {
+                Shell.Current.GoToAsync("///LoadingPageSpisi");
+
+            }
+            else
+            {
+                Shell.Current.GoToAsync("///Spisi");
+
+            }
         }
 
 

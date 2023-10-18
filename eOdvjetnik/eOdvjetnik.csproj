@@ -506,7 +506,16 @@
 	  <MauiXaml Update="Views\Klijenti.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\LoadingPage.xaml">
+	  <MauiXaml Update="Views\LoadingPageKlijenti.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LoadingPageSpisi.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LoadingPageNaplata.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LoadingPageKalendar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Naplata.xaml">
@@ -843,6 +852,18 @@
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>AppResources.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\LoadingPageKlijenti.xaml.cs">
+	    <DependentUpon>LoadingPageKlijenti.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\LoadingPageSpisi.xaml.cs">
+	    <DependentUpon>LoadingPageSpisi.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\LoadingPageNaplata.xaml.cs">
+	    <DependentUpon>LoadingPageNaplata.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\LoadingPageKalendar.xaml.cs">
+	    <DependentUpon>LoadingPageKalendar.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\UrediKlijenta.xaml.cs">
 	    <DependentUpon>UrediKlijenta.xaml</DependentUpon>

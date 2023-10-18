@@ -43,7 +43,15 @@ public partial class Naplata : ContentPage
 
     private bool isInitialized { get; set; }
 
+    protected override void OnNavigatedFrom(NavigatedFromEventArgs args)
+    {
+        base.OnNavigatedFrom(args);
+        if(args.GetType() == typeof(Klijenti))
+        {
+            new NaplataViewModel();
+        }
 
+    }
 
     protected override void OnAppearing()
     {

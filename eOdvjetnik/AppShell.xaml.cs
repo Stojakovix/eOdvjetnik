@@ -47,7 +47,11 @@ public partial class AppShell : Shell , INotifyPropertyChanged
         Routing.RegisterRoute(nameof(UrediKlijenta), typeof(UrediKlijenta));
         Routing.RegisterRoute(nameof(NoviZaposlenik), typeof(NoviZaposlenik));
         Routing.RegisterRoute(nameof(SpiDok), typeof(SpiDok));
-        Routing.RegisterRoute(nameof(LoadingPage), typeof(LoadingPage));
+        Routing.RegisterRoute(nameof(LoadingPageKalendar), typeof(LoadingPageKalendar));
+        Routing.RegisterRoute(nameof(LoadingPageKlijenti), typeof(LoadingPageKlijenti));
+        Routing.RegisterRoute(nameof(LoadingPageNaplata), typeof(LoadingPageNaplata));
+        Routing.RegisterRoute(nameof(LoadingPageSpisi), typeof(LoadingPageSpisi));
+
         Routing.RegisterRoute(nameof(AdminKalendar), typeof(AdminKalendar));
         AppTheme currentTheme = AppTheme.Light;
 

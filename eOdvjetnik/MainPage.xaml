@@ -36,14 +36,14 @@
                FontSize="Large"
                LineBreakMode="WordWrap"
                TextColor="Black"   
-               IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"/>
+               IsVisible="{OnPlatform Android=True, iOS=True, WinUI=True, MacCatalyst=True}"/>
 
         
         <VerticalStackLayout   Grid.ColumnSpan="5"  >
             
             <Image Source="text_only.png" HeightRequest="120" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" />
 
-            <Button Text="Clear All Preferences"  Command="{Binding ClearPrefrences}" IsVisible="{Binding ServiceMode}" />
+            <Button Text="Clear All Preferences"  Command="{Binding ClearPrefrences}" IsVisible="true" />
 
             <Label  Style="{StaticResource ShadowLabelStyle}" 
                         Text="{x:Static resx:AppResources.ZaAktivaciju}"
