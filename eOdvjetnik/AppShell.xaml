@@ -33,7 +33,7 @@
                    
                     Command="{Binding MainClickCommand}"
                     Text="Početna" 
-                    x:Name="PočetnaButton"
+                    x:Name="PocetnaButton"
                     BorderWidth="0"
                     FontSize="18"
                     FontFamily="SFUIDisplay-Light"
@@ -145,7 +145,8 @@
 
             <Button Grid.Column="10" 
                     Text="{x:Static resx:AppResources.Postavke}" 
-                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  
+                    IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"
+                    x:Name="Postavkebutton"
                     BorderWidth="0"
                     FontFamily="SFUIDisplay-Light"
                     Command="{Binding PostavkeClickCommand}" 
