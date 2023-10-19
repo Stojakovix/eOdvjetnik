@@ -25,8 +25,7 @@
         <Image Opacity="0.5" HorizontalOptions="FillAndExpand" MaximumHeightRequest="4000" MaximumWidthRequest="4000" Grid.ColumnSpan="7" Grid.Row="0" Source="main_pozadina.jpg"  
                Aspect="Fill"  IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}" />
 
-        <Image HorizontalOptions="FillAndExpand" Grid.ColumnSpan="7" Grid.Row="0" Source="text_only.png"  
-          Aspect="AspectFit" Margin="80,0,80,0" IsVisible="{OnPlatform Android=True, iOS=True, WinUI=False, MacCatalyst=False}" />
+        <Image HorizontalOptions="FillAndExpand" Grid.ColumnSpan="7" Grid.Row="0" Source="text_only.png" Aspect="AspectFit" Margin="80,0,80,0" IsVisible="{OnPlatform Android=True, iOS=True, WinUI=False, MacCatalyst=False}" />
         
         <Label Grid.Row="0" Grid.ColumnSpan="6" Margin="0,0,50,50"
                VerticalOptions="End"
@@ -40,8 +39,8 @@
 
         
         <VerticalStackLayout   Grid.ColumnSpan="5"  >
-            
-            <Image Source="text_only.png" HeightRequest="120" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=False, MacCatalyst=False}" />
+
+            <Image Source="text_only.png" HeightRequest="120" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}" />
 
             <Button Text="Clear All Preferences"  Command="{Binding ClearPrefrences}" IsVisible="{Binding ServiceMode}" />
 

@@ -63,16 +63,16 @@ public partial class App : Application
         //var CultureString = CultureInfo.CurrentUICulture.Name;
         var CultureString = TrecaSreca.Get("CurrentCulture");
 
-        //CultureInfo.CurrentCulture = new CultureInfo(CultureString);
-        //CultureInfo.CurrentUICulture = new CultureInfo(CultureString);
+        CultureInfo.CurrentCulture = new CultureInfo(CultureString);
+        CultureInfo.CurrentUICulture = new CultureInfo(CultureString);
        // SfSchedulerResources.ResourceManager = new ResourceManager("eOdvjetnik.Resources.SfScheduler."+CultureString, Application.Current.GetType().Assembly);
 
         //SfSchedulerResources.ResourceManager = new ResourceManager("eOdvjetnik.Resources.SfScheduler", Application.Current.GetType().Assembly);
 
         //SfSchedulerResources.ResourceManager = new ResourceManager("eOdvjetnik.Resources.SfScheduler", Application.Current.GetType().Assembly);
         
-        //CultureInfo.CurrentCulture = new CultureInfo("hr-HR");
-        //CultureInfo.CurrentUICulture = new CultureInfo("hr-HR");
+        CultureInfo.CurrentCulture = new CultureInfo("hr-HR");
+        CultureInfo.CurrentUICulture = new CultureInfo("hr-HR");
         //CultureInfo.CurrentCulture = new CultureInfo("sr-SR");
         //CultureInfo.CurrentUICulture = new CultureInfo("sr-SR");
 
