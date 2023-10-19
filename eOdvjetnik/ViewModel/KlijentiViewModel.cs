@@ -621,6 +621,7 @@ public class KlijentiViewModel : INotifyPropertyChanged
     {
         try
         {
+            WeakReferenceMessenger.Default.Send(new NaplataReceived("Iz klijenata u naplatu"));
             await Shell.Current.GoToAsync("///Naplata");
             Debug.WriteLine("Racun clicked");
 

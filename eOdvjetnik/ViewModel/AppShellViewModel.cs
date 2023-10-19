@@ -287,8 +287,10 @@ namespace eOdvjetnik.ViewModel
                 }
                 else
                 {
+                    
                     await Shell.Current.GoToAsync("//Postavke");
                     WeakReferenceMessenger.Default.Send(new NoNasDetected("No NAS settings!"));
+                    WeakReferenceMessenger.Default.Send(new DokumentiReceived("ip,user ili pass prazni"));
                 }
             }
         }

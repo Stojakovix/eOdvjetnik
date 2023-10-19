@@ -8,6 +8,7 @@ using Org.BouncyCastle.Asn1.X509.Qualified;
 using System.ComponentModel;
 using Google.Protobuf.WellKnownTypes;
 using eOdvjetnik.Services;
+using CommunityToolkit.Mvvm.Messaging;
 
 public partial class AppShell : Shell , INotifyPropertyChanged 
 {
@@ -58,6 +59,8 @@ public partial class AppShell : Shell , INotifyPropertyChanged
         AppTheme currentTheme = AppTheme.Light;
         PocetnaButton.BackgroundColor = Color.FromArgb("#DEE6F2");
 
+        WeakReferenceMessenger.Default.Register<NaplataReceived>(this, NaplataClicked);
+        WeakReferenceMessenger.Default.Register<DokumentiReceived>(this, DokumentiClicked);
 
         BindingContext = ViewModel;
         
@@ -65,77 +68,78 @@ public partial class AppShell : Shell , INotifyPropertyChanged
         SfPopup popup = new SfPopup();
 		
     }
+    
 
-    protected override void OnNavigating(ShellNavigatingEventArgs args)
-    {
-        base.OnNavigating(args);
-        if (lastPressedButton != null)
-        {
-            // Reset the background color of the previous button
-            lastPressedButton.BackgroundColor = Color.FromArgb("#faf9fb"); // Set to the initial color
-        }
-        if(lastPressedButton == null)
-        {
-            lastPressedButton = PocetnaButton;
-        }
-        if (lastPressedButton != null)
-        {
-            currentRoute = Shell.Current.CurrentItem.CurrentItem.Route;
-            Debug.WriteLine("current route is " + currentRoute);
-            // Change the background color of the current button
-            // Set to the new color Color.FromArgb("#FAFAFA")
-            if (currentRoute.EndsWith("Kalendar"))
-            {
-                lastPressedButton = KalendarButton;
-            }
-            else if (currentRoute.EndsWith("MainPage"))
-            {
-                lastPressedButton = PocetnaButton;
-            }
-            else if (currentRoute.EndsWith("Spisi"))
-            {
-                lastPressedButton = SpisiButton;
-            }
-            else if (currentRoute.EndsWith("Klijenti"))
-            {
-                lastPressedButton = KlijentiButton;
-            }
-            else if (currentRoute.EndsWith("Naplata"))
-            {
-                lastPressedButton = NaplataButton;
-            }
-            else if (currentRoute.EndsWith("Dokumenti"))
-            {
-                var ip_nas = TrecaSreca.Get("IP Adresa");
-                var user_nas = TrecaSreca.Get("Korisničko ime");
-                var pass_nas = TrecaSreca.Get("Lozinka");
-                if (ip_nas != null || user_nas != null || pass_nas != null)
-                {
-                    lastPressedButton = DokumentiButton;
-                }
-                else
-                {
-                    lastPressedButton = Postavkebutton;
-                }
-            }
-            else if (currentRoute.EndsWith("Postavke"))
-            {
-                lastPressedButton = Postavkebutton;
-            }
+    //protected override void OnNavigating(ShellNavigatingEventArgs args)
+    //{
+    //    base.OnNavigating(args);
+    //    if (lastPressedButton != null)
+    //    {
+    //        // Reset the background color of the previous button
+    //        lastPressedButton.BackgroundColor = Color.FromArgb("#faf9fb"); // Set to the initial color
+    //    }
+    //    if (lastPressedButton == null)
+    //    {
+    //        lastPressedButton = PocetnaButton;
+    //    }
+    //    if (lastPressedButton != null)
+    //    {
+    //        currentRoute = Shell.Current.CurrentItem.CurrentItem.Route;
+    //        Debug.WriteLine("current route is " + currentRoute);
+    //        // Change the background color of the current button
+    //        // Set to the new color Color.FromArgb("#FAFAFA")
+    //        if (currentRoute.EndsWith("Kalendar"))
+    //        {
+    //            lastPressedButton = KalendarButton;
+    //        }
+    //        else if (currentRoute.EndsWith("MainPage"))
+    //        {
+    //            lastPressedButton = PocetnaButton;
+    //        }
+    //        else if (currentRoute.EndsWith("Spisi"))
+    //        {
+    //            lastPressedButton = SpisiButton;
+    //        }
+    //        else if (currentRoute.EndsWith("Klijenti"))
+    //        {
+    //            lastPressedButton = KlijentiButton;
+    //        }
+    //        else if (currentRoute.EndsWith("Naplata"))
+    //        {
+    //            lastPressedButton = NaplataButton;
+    //        }
+    //        else if (currentRoute.EndsWith("Dokumenti"))
+    //        {
+    //            var ip_nas = TrecaSreca.Get("IP Adresa");
+    //            var user_nas = TrecaSreca.Get("Korisničko ime");
+    //            var pass_nas = TrecaSreca.Get("Lozinka");
+    //            if (ip_nas != null || user_nas != null || pass_nas != null)
+    //            {
+    //                lastPressedButton = DokumentiButton;
+    //            }
+    //            else
+    //            {
+    //                lastPressedButton = Postavkebutton;
+    //            }
+    //        }
+    //        else if (currentRoute.EndsWith("Postavke"))
+    //        {
+    //            lastPressedButton = Postavkebutton;
+    //        }
 
-            if (lastPressedButton != null)
-            {
-                lastPressedButton.BackgroundColor = Color.FromArgb("#faf9fb"); // Set to the initial color
-            }
+    //        if (lastPressedButton != null)
+    //        {
+    //            lastPressedButton.BackgroundColor = Color.FromArgb("#faf9fb"); // Set to the initial color
+    //        }
 
-            if (lastPressedButton != null)
-            {
-                lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2"); // Set to the new color
-            }
+    //        if (lastPressedButton != null)
+    //        {
+    //            lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2"); // Set to the new color
+    //        }
 
-        }
+    //    }
 
-    }
+    //}
     private void OnKorisnickaPodrskaClicked(object sender, EventArgs e)
     {
         ViewModel.SupportVisible = true;
@@ -158,17 +162,27 @@ public partial class AppShell : Shell , INotifyPropertyChanged
         get { return lastPressedButton; }
         set
         {
+            if (lastPressedButton == null)
+            {
+                lastPressedButton = PocetnaButton;
+
+                
+            }
             if (lastPressedButton != null)
             {
                 // Reset the background color of the previous button
                 lastPressedButton.BackgroundColor = Color.FromArgb("#faf9fb"); // Set to the initial color
+                NaplataButton.BackgroundColor = Color.FromArgb("#faf9fb");
+                DokumentiButton.BackgroundColor = Color.FromArgb("#faf9fb");
+
             }
+
 
             lastPressedButton = value;
 
             if (lastPressedButton != null)
             {
-                currentRoute = Shell.Current.CurrentItem.CurrentItem.Route;
+                currentRoute = Current.CurrentItem.CurrentItem.Route;
                 Debug.WriteLine("current route is " + currentRoute);
                 // Change the background color of the current button
                  // Set to the new color Color.FromArgb("#FAFAFA")
@@ -200,13 +214,46 @@ public partial class AppShell : Shell , INotifyPropertyChanged
                 {
                     lastPressedButton.BackgroundColor = Color.FromArgb("#DEE6F2");
                 }
-   
+
+
             }
             
 
         }
 
     }
+
+    private void DokumentiClicked(object recipient, DokumentiReceived message)
+    {
+        if (lastPressedButton != null)
+        {
+            // Reset the background color of the previous button
+            lastPressedButton.BackgroundColor = Color.FromArgb("#faf9fb"); // Set to the initial color
+        }
+        if (lastPressedButton != null)
+        {
+            Postavkebutton.BackgroundColor = Color.FromArgb("#DEE6F2");
+        }
+    }
+
+    private void NaplataClicked(object recipient, NaplataReceived message)
+    {
+        if (lastPressedButton == null)
+        {
+            lastPressedButton = PocetnaButton;
+        }
+        if (lastPressedButton != null)
+        {
+            // Reset the background color of the previous button
+            lastPressedButton.BackgroundColor = Color.FromArgb("#faf9fb"); // Set to the initial color
+        }
+
+        if (lastPressedButton != null)
+        {
+            NaplataButton.BackgroundColor = Color.FromArgb("#DEE6F2");
+        }
+    }
+
     public event PropertyChangedEventHandler PropertyChanged;
 
     void OnPropertyChanged(string propertyName)
