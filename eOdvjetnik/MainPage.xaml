@@ -111,13 +111,13 @@
                  <ColumnDefinition Width="*" />
                  <ColumnDefinition Width="250" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="330" />
             </Grid.ColumnDefinitions>
 
             <Image Grid.Row="1" Grid.Column="0" Source="text_only.png" Margin="20,0,0,0" HeightRequest="25" />
             <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding Version}" FontSize="20" VerticalTextAlignment="Center" LineBreakMode="NoWrap"  />
             <Label Grid.Row="1" Grid.Column="4" Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding LicenceType, StringFormat={x:Static resx:AppResources.License}}" FontSize="20" VerticalTextAlignment="Center" LineBreakMode="NoWrap" />
-            <Label Grid.Row="1" Grid.Column="6" Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding CurrentDateTimeString}" HorizontalOptions="End" Margin="0,0,20,0" FontSize="20" VerticalTextAlignment="Center" LineBreakMode="NoWrap" />
+            <Label Grid.Row="1" Grid.Column="6" Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding CurrentDateTimeString}" HorizontalOptions="End" Margin="0,0,10,0" FontSize="20" VerticalTextAlignment="Start" LineBreakMode="NoWrap" />
 
 
         </Grid>
