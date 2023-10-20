@@ -217,6 +217,7 @@
     <ShellContent ContentTemplate="{DataTemplate views:LoadingPageKlijenti}" Route="LoadingPageKlijenti" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
     <ShellContent ContentTemplate="{DataTemplate views:LoadingPageNaplata}" Route="LoadingPageNaplata" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
     <ShellContent ContentTemplate="{DataTemplate views:LoadingPageSpisi}" Route="LoadingPageSpisi" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
+    <ShellContent ContentTemplate="{DataTemplate views:LoadingPageZaposlenici}" Route="LoadingPageZaposlenici" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
 
     <ShellContent Title="{x:Static resx:AppResources.KorisnickaPodrska}" ContentTemplate="{DataTemplate sfPopup:SfPopup}" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"   />
     <ShellContent Title="{x:Static resx:AppResources.Postavke}" ContentTemplate="{DataTemplate views:Postavke}" Route="Postavke"  IsVisible="{OnPlatform Android=True , iOS=True , WinUI=True , MacCatalyst=True}"   />
