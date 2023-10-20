@@ -6,11 +6,11 @@
              Title="Postavke"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings"
              BackgroundColor="#faf9fb" 
-     
              
-             >
+            
+            >
 
-    <ContentPage.Resources>
+    <!--<ContentPage.Resources>
         <StyleSheet Source="/Resources/style.css" />
         <StyleSheet>
             <![CDATA[
@@ -24,10 +24,10 @@
 
 
         </StyleSheet>
-    </ContentPage.Resources>
+    </ContentPage.Resources>-->
     <ScrollView>
         <VerticalStackLayout MinimumHeightRequest="600" MaximumHeightRequest="1500" >
-            <Grid Margin="10,10,10,10" RowSpacing="5" ColumnSpacing="5">
+            <Grid Margin="10,10,10,20" RowSpacing="5" ColumnSpacing="5">
 
 
                 <Grid.RowDefinitions>
@@ -45,15 +45,15 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Button  Grid.Column="0" Grid.Row="0"  Text="{x:Static resx:AppResources.UredajLicenca}" Margin="5,0,0,0" Clicked="Button1_Clicked" />
-                <Button  Grid.Column="1" Grid.Row="0"  Text="{x:Static resx:AppResources.NAS}" Margin="5,0,0,0" Clicked="Button4_Clicked"  />
-                <Button  Grid.Column="2" Grid.Row="0"  Text="{x:Static resx:AppResources.SQL}"  Margin="5,0,0,0" Clicked="Button5_Clicked"  />
-                <Button  Grid.Column="3" Grid.Row="0"   Text="{x:Static resx:AppResources.Racun}"  Margin="5,0,0,0" Clicked="Button7_Clicked" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
-                <Button  Grid.Column="4" Grid.Row="0"   Text="{x:Static resx:AppResources.Zaposlenici}" Margin="5,0,0,0" Command="{Binding OpenZaposlenici}" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
-                <Button  Grid.Column="5" Grid.Row="0"   Text="{x:Static resx:AppResources.PovInfo}" Margin="5,0,0,0" Clicked="Button2_Clicked" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
-                <Button  Grid.Column="6" Grid.Row="0"  Text="{x:Static resx:AppResources.KatDog}" Margin="5,0,0,0" Command="{Binding LoadColors}"  Clicked="Button3_Clicked" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
+                <Button  Grid.Column="0" Grid.Row="0"  Text="{x:Static resx:AppResources.UredajLicenca}" Margin="5,0,0,5" Clicked="Button1_Clicked" />
+                <Button  Grid.Column="1" Grid.Row="0"  Text="{x:Static resx:AppResources.NAS}" Margin="5,0,0,5" Clicked="Button4_Clicked"  />
+                <Button  Grid.Column="2" Grid.Row="0"  Text="{x:Static resx:AppResources.SQL}"  Margin="5,0,0,5" Clicked="Button5_Clicked"  />
+                <Button  Grid.Column="3" Grid.Row="0"   Text="{x:Static resx:AppResources.Racun}"  Margin="5,0,0,5" Clicked="Button7_Clicked" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
+                <Button  Grid.Column="4" Grid.Row="0"   Text="{x:Static resx:AppResources.Zaposlenici}" Margin="5,0,0,5" Command="{Binding OpenZaposlenici}" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
+                <Button  Grid.Column="5" Grid.Row="0"   Text="{x:Static resx:AppResources.PovInfo}" Margin="5,0,0,5" Clicked="Button2_Clicked" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
+                <Button  Grid.Column="6" Grid.Row="0"  Text="{x:Static resx:AppResources.KatDog}" Margin="5,0,0,5" Command="{Binding LoadColors}"  Clicked="Button3_Clicked" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
 
-                <VerticalStackLayout Margin="10,10,0,0"  Grid.Row="1" Grid.ColumnSpan="7" Padding="10,10,10,10"  BackgroundColor="#faf9fb" 
+                <VerticalStackLayout Margin="10,10,0,10"  Grid.Row="1" Grid.ColumnSpan="7" Padding="10,10,10,10"  BackgroundColor="#faf9fb" 
                     x:Name="Frame1" IsVisible="True" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" >
                     <Label TextColor="Black" Text="Korisnik:" FontAttributes="Bold" Margin="0,0,0,5" />
                     <Label TextColor="Black" Text="{Binding PostavkeUserName}" Margin="0,0,0,20" />
@@ -123,11 +123,11 @@
                         <Button Margin="-50,0,0,0"  Grid.Row="5" Grid.Column="1"  Text="{x:Static resx:AppResources.Spremi}"  Command="{Binding SaveCommandNAS}"  >
 
                         </Button>
-                        <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="2" Margin="3,48,3,0"   />
-                        <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="2" Margin="3,48,3,0"   />
-                        <BoxView HeightRequest="1" Grid.Row="2" Grid.Column="2" Margin="3,48,3,0"   />
-                        <BoxView HeightRequest="1" Grid.Row="3" Grid.Column="2" Margin="3,48,3,0"   />
-                        <BoxView HeightRequest="1" Grid.Row="4" Grid.Column="2" Margin="3,48,3,0"   />
+                        <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="2" Margin="3,48,3,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"   />
+                        <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="2" Margin="3,48,3,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"    />
+                        <BoxView HeightRequest="1" Grid.Row="2" Grid.Column="2" Margin="3,48,3,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"    />
+                        <BoxView HeightRequest="1" Grid.Row="3" Grid.Column="2" Margin="3,48,3,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"    />
+                        <BoxView HeightRequest="1" Grid.Row="4" Grid.Column="2" Margin="3,48,3,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"    />
 
 
                     </Grid>
@@ -154,20 +154,20 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Text="{x:Static resx:AppResources.IPAdresa}" Grid.Row="0" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                        <Entry Margin="0,10,0,0"  x:Name="IPEntry" Text="{Binding IP}" Grid.Row="0" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
+                        <Entry Margin="0,0,0,0"  x:Name="IPEntry" Text="{Binding IP}" Grid.Row="0" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
 
                         <Label Text="{x:Static resx:AppResources.KorisnickoIme}" Grid.Row="1" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
-                        <Entry Margin="0,10,0,0"  x:Name="USEREntry" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
+                        <Entry Margin="0,0,0,0"  x:Name="USEREntry" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
 
                         <Label Text="{x:Static resx:AppResources.Lozinka}" Grid.Row="2" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                         <Entry Margin="0,10,0,0"  x:Name="PASSEntry" Text="{Binding Password}" IsPassword="True" Grid.Row="2" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"  />
 
                         <Label Text="{x:Static resx:AppResources.Baza}" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                         <Entry Margin="0,10,0,0"  x:Name="DatabaseEntry" Text="{Binding DatabaseName}" Grid.Row="3" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
-                        <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="1" Margin="3,48,3,0"   />
-                        <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="1" Margin="3,48,3,0"   />
-                        <BoxView HeightRequest="1" Grid.Row="2" Grid.Column="1" Margin="3,48,3,0"   />
-                        <BoxView HeightRequest="1" Grid.Row="3" Grid.Column="1" Margin="3,48,3,0"   />
+                        <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="1" Margin="3,48,3,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"   />
+                        <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="1" Margin="3,48,3,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"   />
+                        <BoxView HeightRequest="1" Grid.Row="2" Grid.Column="1" Margin="3,48,3,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"  />
+                        <BoxView HeightRequest="1" Grid.Row="3" Grid.Column="1" Margin="3,48,3,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"  />
 
                         <Button Margin="10,0,0,0"  Grid.Row="4" Grid.Column="0"   Text="{x:Static resx:AppResources.Spremi}"   Command="{Binding SQLSaveCommand}"/>
                         <Button Margin="10,0,0,0"  Grid.Row="5" Grid.Column="0"  Text="Instaliraj Server" Command="{Binding ServerClickCommand}"/>
@@ -238,11 +238,11 @@
 
                         </Button>
 
-                        <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="2" Margin="7,48,6,0"   />
-                        <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="2" Margin="7,48,6,0"   />
-                        <BoxView HeightRequest="1" Grid.Row="2" Grid.Column="2" Margin="7,48,6,0"   />
-                        <BoxView HeightRequest="1" Grid.Row="3" Grid.Column="2" Margin="7,206,2,0"   />
-                        <BoxView HeightRequest="1" Grid.Row="4" Grid.Column="2" Margin="7,48,6,0"   />
+                        <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="2" Margin="7,48,6,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"   />
+                        <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="2" Margin="7,48,6,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"   />
+                        <BoxView HeightRequest="1" Grid.Row="2" Grid.Column="2" Margin="7,48,6,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"  />
+                        <BoxView HeightRequest="1" Grid.Row="3" Grid.Column="2" Margin="7,206,2,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"   />
+                        <BoxView HeightRequest="1" Grid.Row="4" Grid.Column="2" Margin="7,48,6,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}"   />
 
 
 

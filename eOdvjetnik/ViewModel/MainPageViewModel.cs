@@ -564,6 +564,7 @@ namespace eOdvjetnik.ViewModel
                     
                     TrecaSreca.Set("UserName", UserName);
                     TrecaSreca.Set("UserID", UserID);
+                    Debug.WriteLine(UserID);
                     TrecaSreca.Set("UserInitials", UserInitials);
                     Debug.WriteLine("izvršio if");
                     LicenceUpdatedMessage();

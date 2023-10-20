@@ -432,6 +432,7 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
     {
         try
         {
+            Debug.WriteLine(SQLUserID);
             ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
             //var appId = Convert.ToInt32(appointment.Id);
             string getIDQuery = $"SELECT * FROM events WHERE internal_event_id = \"{appointment.Id}\"";
