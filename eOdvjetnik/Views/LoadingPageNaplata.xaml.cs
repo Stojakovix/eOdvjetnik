@@ -15,10 +15,10 @@ public partial class LoadingPageNaplata : ContentPage
     {
         base.OnNavigatedTo(args);
         Debug.WriteLine("LoadingPage:Naplata");
-        IdiNaKalendar();
+        OpenNaplata();
     }
 
-    public async void IdiNaKalendar()
+    public async void OpenNaplata()
     {
        await Shell.Current.GoToAsync("///Naplata");
     }

@@ -12,8 +12,17 @@ namespace eOdvjetnik.ViewModel;
 
 public class PostavkeViewModel : INotifyPropertyChanged
 {
-
-
+    private bool ServiceModeEnabled { get; set; }
+    public bool ServiceMode
+    {
+        get { return ServiceModeEnabled; }
+        set
+        {
+            ServiceModeEnabled = value;
+            OnPropertyChanged(nameof(ServiceMode));
+        }
+    }
+    public string DevicePlatform { get; set; }
 
     private string _PostavkeUserName;
 
@@ -696,8 +705,13 @@ public class PostavkeViewModel : INotifyPropertyChanged
     {
         try
         {
-
-
+            ServiceMode = false;
+            string serviceModeCheck = TrecaSreca.Get("service_mode");
+            if (serviceModeCheck == "True")
+            {
+                ServiceMode = true;
+            }
+            DevicePlatform = TrecaSreca.Get("vrsta_platforme");
             LoadColors = new Command(GetColors);
             SaveColors = new Command(SetColors);
             AdminColorPopup = false;
@@ -1258,7 +1272,16 @@ public class PostavkeViewModel : INotifyPropertyChanged
                                $"VALUES ('{NewEmployeeName}', '{NewEmployeeInitials}')";
                 externalSQLConnect.sqlQuery(query);
 
-                await Shell.Current.GoToAsync("//Zaposlenici");
+                if (DevicePlatform == "MacCatalyst")
+                {
+                    await Shell.Current.GoToAsync("///LoadingPageZaposlenici");
+
+                }
+                else
+                {
+                    await Shell.Current.GoToAsync("//Zaposlenici");
+
+                }
             }
 
             catch (Exception ex)
@@ -1327,7 +1350,18 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     public async void CloseNewEmployee()
     {
-        await Shell.Current.GoToAsync("//Zaposlenici");
+
+
+        if (DevicePlatform == "MacCatalyst")
+        {
+            await Shell.Current.GoToAsync("///LoadingPageZaposlenici");
+
+        }
+        else
+        {
+            await Shell.Current.GoToAsync("//Zaposlenici");
+
+        }
     }
 
 

@@ -508,6 +508,9 @@
 	  <MauiXaml Update="Views\LoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\LoadingPageZaposlenici.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Naplata.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -842,6 +845,9 @@
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>AppResources.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\LoadingPageZaposlenici.xaml.cs">
+	    <DependentUpon>LoadingPageZaposlenici.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\UrediKlijenta.xaml.cs">
 	    <DependentUpon>UrediKlijenta.xaml</DependentUpon>

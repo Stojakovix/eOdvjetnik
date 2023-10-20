@@ -15,10 +15,10 @@ public partial class LoadingPageKlijenti : ContentPage
     {
         base.OnNavigatedTo(args);
         Debug.WriteLine("LoadingPage:Klijenti");
-        IdiNaKalendar();
+        OpenKlijenti();
     }
 
-    public async void IdiNaKalendar()
+    public async void OpenKlijenti()
     {
        await Shell.Current.GoToAsync("///Klijenti");
     }

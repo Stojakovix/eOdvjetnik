@@ -15,10 +15,10 @@ public partial class LoadingPageSpisi : ContentPage
     {
         base.OnNavigatedTo(args);
         Debug.WriteLine("LoadingPage:Spisi");
-        IdiNaKalendar();
+        OpenSpisi();
     }
 
-    public async void IdiNaKalendar()
+    public async void OpenSpisi()
     {
        await Shell.Current.GoToAsync("///Spisi");
     }

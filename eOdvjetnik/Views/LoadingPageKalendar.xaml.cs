@@ -15,10 +15,10 @@ public partial class LoadingPageKalendar : ContentPage
     {
         base.OnNavigatedTo(args);
         Debug.WriteLine("LoadingPage:Kalendar");
-        IdiNaKalendar();
+        OpenKalendar();
     }
 
-    public async void IdiNaKalendar()
+    public async void OpenKalendar()
     {
        await Shell.Current.GoToAsync("///Kalendar");
     }
