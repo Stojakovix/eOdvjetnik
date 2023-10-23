@@ -26,8 +26,8 @@
                Aspect="Fill"  IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}" />
 
         <Image HorizontalOptions="FillAndExpand" Grid.ColumnSpan="7" Grid.Row="0" Source="text_only.png" Aspect="AspectFit" Margin="80,0,80,0" IsVisible="{OnPlatform Android=True, iOS=True, WinUI=False, MacCatalyst=False}" />
-        
-        <Label Grid.Row="0" Grid.ColumnSpan="6" Margin="0,0,50,50"
+
+        <Label Grid.Row="0" Grid.ColumnSpan="6" Margin="{OnPlatform Android='10,0,10,10', iOS='10,0,10,10', MacCatalyst='0,0,50,50', WinUI='0,0,50,50'}" 
                VerticalOptions="End"
                HorizontalOptions="End"
                Style="{StaticResource ShadowLabelStyle}"    
