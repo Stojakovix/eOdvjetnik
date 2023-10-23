@@ -22,7 +22,7 @@
     <ScrollView>
         <StackLayout  NavigationPage.HasNavigationBar="False">
 
-            <VerticalStackLayout Margin="20,20,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+            <VerticalStackLayout Margin="20,20,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" MinimumHeightRequest="720" >
 
 
                 <Grid>
@@ -196,16 +196,15 @@
                         <DatePicker  x:Name="endDate_picker"
                                      Grid.Column="0"
                                      Grid.Row="0"
-                                     VerticalOptions="Start"
+                                     VerticalOptions="CenterAndExpand"
                                      FontSize="16"
                                      Format="dd/MM/yyyy"/>
                         <TimePicker  x:Name="endTime_picker"
-                                     
-                                     Grid.Column ="1"
+                                     Grid.Column="1"
                                      Grid.Row="0"
+                                     MinimumHeightRequest="11"
                                      Format="HH:mm"
                                      VerticalOptions="CenterAndExpand"
-                                     HeightRequest="110"
                                      FontSize="16"  
                         IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=DefaultPicker}"  />
 
@@ -234,13 +233,13 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="200" />
                         <ColumnDefinition Width="200" />
                     </Grid.ColumnDefinitions>
 
                     <!--<Label  Grid.Column="0"  Text="Spisi" FontSize="Default" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20" />-->
-                    <Button Grid.Column="0" Text="Povezani spis" FontSize="Default" TextColor="Black" Command="{Binding DodajButtonClick}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20"/>
+                    <Button Grid.Column="0"  Text="Povezani spis" FontSize="Default" TextColor="Black" Command="{Binding DodajButtonClick}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20"/>
                     <SearchBar Grid.Column="0" Grid.ColumnSpan="3" SearchCommand="{Binding SearchCommand}" WidthRequest="200"
                                Text="{Binding SearchText}" Grid.Row="1" Placeholder="Pretraga spisa" IsVisible="{Binding SpisiGridIsVisible}" HorizontalOptions="Start" VerticalOptions="Center" ></SearchBar>
 
@@ -290,9 +289,9 @@
                 </Grid>
 
                 <HorizontalStackLayout Margin="0,20,0,0" >
-                    <Button x:Name="DeleteButton" Clicked="DeleteButton_Clicked" Text="Obriši"  Margin="0,5,10,0" />
-                    <Button x:Name="cancelButton" Clicked="CancelButton_Clicked" Text="Odustani"  Margin="0,5,10,0" />
-                    <Button x:Name="saveButton" Clicked="SaveButton_Clicked" Text="Spremi" Margin="0,5,10,0"  />
+                    <Button x:Name="DeleteButton" Clicked="DeleteButton_Clicked" Text="Obriši"  Margin="0,-5,10,0" />
+                    <Button x:Name="cancelButton" Clicked="CancelButton_Clicked" Text="Odustani"  Margin="0,-5,10,0" />
+                    <Button x:Name="saveButton" Clicked="SaveButton_Clicked" Text="Spremi" Margin="0,-5,10,0"  />
                 </HorizontalStackLayout>
 
             </VerticalStackLayout>
