@@ -248,8 +248,8 @@ namespace eOdvjetnik.ViewModel
             }
             else
             {
-                MacBookPicker = true;
-                DefaultPicker = false;
+                MacBookPicker = false;
+                DefaultPicker = true;
             }
         }
 
