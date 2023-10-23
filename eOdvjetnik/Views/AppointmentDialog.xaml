@@ -174,10 +174,10 @@
                                     IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=DefaultPicker}"
                                     />
                         <Picker x:Name="startHourPicker" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=MacBookPicker}"
-                                FontSize="16"  HeightRequest="11" VerticalOptions="Center" />
+                                FontSize="16"  HeightRequest="44" VerticalOptions="Center" />
 
                         <Picker x:Name="startMinutePicker" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=MacBookPicker}" 
-                                FontSize="16"  HeightRequest="11" VerticalOptions="Center" />
+                                FontSize="16"  HeightRequest="44" VerticalOptions="Center" />
 
                       
                     </HorizontalStackLayout>
@@ -200,19 +200,20 @@
                                      FontSize="16"
                                      Format="dd/MM/yyyy"/>
                         <TimePicker  x:Name="endTime_picker"
+                                     
                                      Grid.Column ="1"
                                      Grid.Row="0"
                                      Format="HH:mm"
                                      VerticalOptions="CenterAndExpand"
-                                     MinimumHeightRequest="11"
+                                     HeightRequest="110"
                                      FontSize="16"  
                         IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=DefaultPicker}"  />
 
                         <Picker x:Name="endHourPicker" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=MacBookPicker}" 
-                                FontSize="16"  HeightRequest="11" VerticalOptions="Center" />
+                                FontSize="16"  HeightRequest="44" VerticalOptions="CenterAndExpand" />
 
                         <Picker x:Name="endMinutePicker" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=MacBookPicker}" 
-                                FontSize="16"  HeightRequest="11" VerticalOptions="Center" />
+                                FontSize="16"  HeightRequest="44" VerticalOptions="CenterAndExpand" />
 
                        
                     </HorizontalStackLayout>
@@ -238,8 +239,8 @@
                         <ColumnDefinition Width="200" />
                     </Grid.ColumnDefinitions>
 
-                    <Label  Grid.Column="0"  Text="Spisi" FontSize="Default" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20" />
-                    <Button Grid.Column="1" Text="Povezani spis" FontSize="Default" TextColor="Black" Command="{Binding DodajButtonClick}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20"/>
+                    <!--<Label  Grid.Column="0"  Text="Spisi" FontSize="Default" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20" />-->
+                    <Button Grid.Column="0" Text="Povezani spis" FontSize="Default" TextColor="Black" Command="{Binding DodajButtonClick}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20"/>
                     <SearchBar Grid.Column="0" Grid.ColumnSpan="3" SearchCommand="{Binding SearchCommand}" WidthRequest="200"
                                Text="{Binding SearchText}" Grid.Row="1" Placeholder="Pretraga spisa" IsVisible="{Binding SpisiGridIsVisible}" HorizontalOptions="Start" VerticalOptions="Center" ></SearchBar>
 
@@ -289,9 +290,9 @@
                 </Grid>
 
                 <HorizontalStackLayout Margin="0,20,0,0" >
-                    <Button x:Name="DeleteButton" Clicked="DeleteButton_Clicked" Text="Obriši"  Margin="0,0,10,0" />
-                    <Button x:Name="cancelButton" Clicked="CancelButton_Clicked" Text="Odustani"  Margin="0,0,10,0" />
-                    <Button x:Name="saveButton" Clicked="SaveButton_Clicked" Text="Spremi" Margin="0,0,10,0"  />
+                    <Button x:Name="DeleteButton" Clicked="DeleteButton_Clicked" Text="Obriši"  Margin="0,5,10,0" />
+                    <Button x:Name="cancelButton" Clicked="CancelButton_Clicked" Text="Odustani"  Margin="0,5,10,0" />
+                    <Button x:Name="saveButton" Clicked="SaveButton_Clicked" Text="Spremi" Margin="0,5,10,0"  />
                 </HorizontalStackLayout>
 
             </VerticalStackLayout>
