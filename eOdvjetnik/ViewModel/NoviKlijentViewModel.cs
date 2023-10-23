@@ -380,7 +380,7 @@ namespace eOdvjetnik.ViewModel
             if (Name != null && Name != "")
             {
                 AddKlijentToRemoteServer(contactItem);
-                if (DevicePlatform != "MacCatalyst")
+                if (DevicePlatform == "MacCatalyst")
                 {
                     await Shell.Current.GoToAsync("///LoadingPageKlijenti");
 
