@@ -464,7 +464,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="banditoth.MAUI.Multilanguage" Version="1.0.5" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="LocalizationResourceManager.Maui" Version="1.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -472,13 +472,13 @@
 		<PackageReference Include="SMBLibrary" Version="1.5.0.1" />
 		<PackageReference Include="SQLite" Version="3.13.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
-		<PackageReference Include="Syncfusion.DocIO.NET" Version="23.1.41" />
-		<PackageReference Include="Syncfusion.Licensing" Version="23.1.41" />
-		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="23.1.41" />
-		<PackageReference Include="Syncfusion.Maui.Picker" Version="23.1.41" />
-		<PackageReference Include="Syncfusion.Maui.Popup" Version="23.1.41" />
-		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="23.1.41" />
-		<PackageReference Include="MySql.Data" Version="8.1.0" />
+		<PackageReference Include="Syncfusion.DocIO.NET" Version="23.1.42" />
+		<PackageReference Include="Syncfusion.Licensing" Version="23.1.42" />
+		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="23.1.42" />
+		<PackageReference Include="Syncfusion.Maui.Picker" Version="23.1.42" />
+		<PackageReference Include="Syncfusion.Maui.Popup" Version="23.1.42" />
+		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="23.1.42" />
+		<PackageReference Include="MySql.Data" Version="8.2.0" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
 
 	</ItemGroup>
