@@ -32,14 +32,19 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0"  Text="Kategorija" FontSize="Default" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" Margin="0,0,0,20"  />
-                    <Picker Grid.Column="1" TextColor="Gray" Margin="0,0,0,20" HorizontalOptions="StartAndExpand" x:Name="categoryPicker"
-            VerticalTextAlignment="Center" ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=CategoryColor}"
-            ItemDisplayBinding="{Binding VrstaDogadaja}" SelectedIndexChanged="OnCategoryPickerSelectedIndexChanged"  >
+                    <Picker Grid.Column="1"
+                            TextColor="Gray"
+                            Margin="0,0,0,20"
+                            HorizontalOptions="StartAndExpand"
+                            x:Name="categoryPicker"
+                            VerticalTextAlignment="Center"
+                            ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type local:KalendarViewModel}}, Path=CategoryColor}"
+                            ItemDisplayBinding="{Binding VrstaDogadaja}" 
+                            SelectedIndexChanged="OnCategoryPickerSelectedIndexChanged">
                         <Picker.WidthRequest>
                             <OnPlatform x:TypeArguments="x:Double">
                                 <On Platform="Android,iOS" Value="200" />
                                 <On Platform="UWP,MacCatalyst" Value="300" />
-
                             </OnPlatform>
                         </Picker.WidthRequest>
                     </Picker>
@@ -59,6 +64,7 @@
                                 <On Platform="Android,iOS" Value="200" />
                                 <On Platform="UWP,MacCatalyst" Value="500" />
                             </OnPlatform>
+             
                         </Entry.WidthRequest>
                     </Entry>
                 </Grid>

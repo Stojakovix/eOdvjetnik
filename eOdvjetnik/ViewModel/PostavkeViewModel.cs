@@ -545,6 +545,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
     public const string USER_mysql = "Korisničko ime2";
     public const string PASS_mysql = "Lozinka2";
     public const string databasename_mysql = "databasename";
+    public const string port = "port";
     //MySQL varijable
     public string query;
 
@@ -561,6 +562,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
     public string UserName { get; set; }
     public string Password { get; set; }
     public string DatabaseName { get; set; }
+    public string Port { get; set; }
 
     #endregion
 
@@ -789,6 +791,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
             UserName = TrecaSreca.Get(USER_mysql);
             Password = TrecaSreca.Get(PASS_mysql);
             DatabaseName = TrecaSreca.Get(databasename_mysql);
+            Port = TrecaSreca.Get(port);
 
             #endregion
 
@@ -912,15 +915,17 @@ public class PostavkeViewModel : INotifyPropertyChanged
             string password = Password;
             string userName = UserName;
             string databaseName = DatabaseName;
+            string portId = Port;
 
 
             TrecaSreca.Set(IP_mysql, IP);
             TrecaSreca.Set(USER_mysql, UserName);
             TrecaSreca.Set(PASS_mysql, Password);
             TrecaSreca.Set(databasename_mysql, DatabaseName);
+            TrecaSreca.Set(port, Port);
 
             Debug.WriteLine("Saved");
-            Debug.WriteLine(UserName + " " + Password);
+            Debug.WriteLine(UserName + " " + Password + " " + Port);
             Debug.WriteLine("KLINUTO NA SAVE U SQL POSTAVKAMA");
             Application.Current.MainPage.DisplayAlert("", "SQL postavke su uspješno spremljene.", "OK");
 

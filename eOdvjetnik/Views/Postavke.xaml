@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eOdvjetnik.Views.Postavke"
              xmlns:local ="clr-namespace:eOdvjetnik.ViewModel"
@@ -30,9 +29,9 @@
             <Grid Margin="10,10,10,20" RowSpacing="5" ColumnSpacing="5">
 
 
-                <Grid.RowDefinitions >
+                <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -44,13 +43,14 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                    <Button  Grid.Column="0" Grid.Row="0"  Text="{x:Static resx:AppResources.UredajLicenca}"  Clicked="Button1_Clicked" /> 
-                    <Button  Grid.Column="1" Grid.Row="0"  Text="{x:Static resx:AppResources.NAS}"  Clicked="Button4_Clicked"  />
-                    <Button  Grid.Column="2" Grid.Row="0"  Text="{x:Static resx:AppResources.SQL}"   Clicked="Button5_Clicked"  />
-                    <Button  Grid.Column="3" Grid.Row="0"  Text="{x:Static resx:AppResources.Racun}"   Clicked="Button7_Clicked" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
-                    <Button  Grid.Column="4" Grid.Row="0"  Text="{x:Static resx:AppResources.Zaposlenici}" Command="{Binding OpenZaposlenici}" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
-                    <Button  Grid.Column="5" Grid.Row="0"  Text="{x:Static resx:AppResources.PovInfo}"  Clicked="Button2_Clicked" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
-                    <Button  Grid.Column="6" Grid.Row="0"  Text="{x:Static resx:AppResources.KatDog}"  Command="{Binding LoadColors}"  Clicked="Button3_Clicked" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
+
+                <Button  Grid.Column="0" Grid.Row="0"  Text="{x:Static resx:AppResources.UredajLicenca}"  Clicked="Button1_Clicked" />
+                <Button  Grid.Column="1" Grid.Row="0"  Text="{x:Static resx:AppResources.NAS}" Clicked="Button4_Clicked"  />
+                <Button  Grid.Column="2" Grid.Row="0"  Text="{x:Static resx:AppResources.SQL}" Clicked="Button5_Clicked"  />
+                <Button  Grid.Column="3" Grid.Row="0"   Text="{x:Static resx:AppResources.Racun}" Clicked="Button7_Clicked" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
+                <Button  Grid.Column="4" Grid.Row="0"   Text="{x:Static resx:AppResources.Zaposlenici}" Command="{Binding OpenZaposlenici}" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
+                <Button  Grid.Column="5" Grid.Row="0"   Text="{x:Static resx:AppResources.PovInfo}" Clicked="Button2_Clicked" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
+                <Button  Grid.Column="6" Grid.Row="0"  Text="{x:Static resx:AppResources.KatDog}" Command="{Binding LoadColors}"  Clicked="Button3_Clicked" IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}"  />
 
                 <VerticalStackLayout Margin="10,10,0,10"  Grid.Row="1" Grid.ColumnSpan="7" Padding="10,10,10,10"  BackgroundColor="#faf9fb" 
                     x:Name="Frame1" IsVisible="True" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" >
@@ -84,7 +84,7 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7"  BackgroundColor="#faf9fb" 
-                    x:Name="Frame4" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
+                    x:Name="Frame4" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" HeightRequest="600">
                     <Grid Margin="20,10,10,10"  >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -134,8 +134,8 @@
 
 
                 <VerticalStackLayout MaximumWidthRequest="420" Grid.Row="1" Grid.ColumnSpan="7" BackgroundColor="#faf9fb" 
-                    x:Name="Frame5" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
-                    <Grid Margin="20,10,10,10"  >
+                    x:Name="Frame5" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" HeightRequest="600">
+                    <Grid Margin="20,10,10,10" VerticalOptions="FillAndExpand"  >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -144,6 +144,7 @@
                             <RowDefinition Height="70" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="50" />
 
                         </Grid.RowDefinitions>
 
@@ -163,17 +164,22 @@
 
                         <Label Text="{x:Static resx:AppResources.Baza}" Grid.Row="3" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
                         <Entry Margin="0,10,0,0"  x:Name="DatabaseEntry" Text="{Binding DatabaseName}" Grid.Row="3" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"   />
+
+                        <Label Text="Port" Grid.Row="4" Grid.Column="0" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="NoWrap" />
+                        <Entry Margin="0,10,0,0"  x:Name="PORTEntry" Text="{Binding Port}"  Grid.Row="4" Grid.Column="1" TextColor="Black" VerticalTextAlignment="Center"  />
+
+
                         <BoxView HeightRequest="1" Grid.Row="0" Grid.Column="1" Margin="3,48,3,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=False}"  />
                         <BoxView HeightRequest="1" Grid.Row="1" Grid.Column="1" Margin="3,48,3,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=False}"  />
                         <BoxView HeightRequest="1" Grid.Row="2" Grid.Column="1" Margin="3,48,3,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=False}" />
                         <BoxView HeightRequest="1" Grid.Row="3" Grid.Column="1" Margin="3,48,3,0" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=False}"  />
 
-                        <Button Margin="0,0,0,0"  Grid.Row="4" Grid.Column="1"   Text="{x:Static resx:AppResources.Spremi}"   Command="{Binding SQLSaveCommand}" WidthRequest="150"/>
-                        <Button Margin="10,0,0,0"  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="1"  Text="Instaliraj Server" Command="{Binding ServerClickCommand}" IsVisible="{Binding ServiceMode}" />
-                        <Button Margin="10,0,0,0"  Grid.Row="6" Grid.Column="0"  Grid.ColumnSpan="1"   Text="Instaliraj bazu" Command="{Binding SQLDatabaseCommand}" IsVisible="{Binding ServiceMode}" />
+                        <Button Margin="0,0,0,0"  Grid.Row="5" Grid.Column="1"   Text="{x:Static resx:AppResources.Spremi}" WidthRequest="150"   Command="{Binding SQLSaveCommand}" />
+                        <Button Margin="10,0,0,0"  Grid.Row="6" Grid.Column="0"  Text="Instaliraj Server"  Command="{Binding ServerClickCommand}" Padding="0" IsVisible="True" />
+                        <Button Margin="10,0,0,0"  Grid.Row="7" Grid.Column="0"  Text="Instaliraj bazu"  Command="{Binding SQLDatabaseCommand}" Padding="0" IsVisible="True" />
 
 
-                    </Grid>
+                      </Grid>
                 </VerticalStackLayout>
 
 
