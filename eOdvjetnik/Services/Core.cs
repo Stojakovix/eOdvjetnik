@@ -221,7 +221,7 @@ namespace eOdvjetnik.Services
         public void createDatabase(string[] args)
         {
             // MySQL server connection string
-            string connectionString = "Server=" + TrecaSreca.Get(IP_mysql) + ";Port=3306;User=" + TrecaSreca.Get(USER_mysql) + ";Password=" + TrecaSreca.Get(PASS_mysql) + ";";
+            string connectionString = "Server=" + TrecaSreca.Get(IP_mysql) + ";Port="+ TrecaSreca.Get("port") +";User=" + TrecaSreca.Get(USER_mysql) + ";Password=" + TrecaSreca.Get(PASS_mysql) + ";";
 
             try
             {
@@ -258,7 +258,7 @@ namespace eOdvjetnik.Services
             {
                 //Debug.WriteLine("Core.cs -> Dictionary -> Usao u sqlQuerry  *******");
                 // MySQL connection settings
-                string connString = "server=" + TrecaSreca.Get(IP_mysql) + ";user=" + TrecaSreca.Get(USER_mysql) + ";password=" + TrecaSreca.Get(PASS_mysql) + ";database=" + TrecaSreca.Get(databasename_mysql);
+                string connString = "server=" + TrecaSreca.Get(IP_mysql) + ";port="+ TrecaSreca.Get("port") + ";user=" + TrecaSreca.Get(USER_mysql) + ";password=" + TrecaSreca.Get(PASS_mysql) + ";database=" + TrecaSreca.Get(databasename_mysql);
 
                 // Connect to MySQL database
                 using MySqlConnection conn = new MySqlConnection(connString);
