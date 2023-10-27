@@ -792,6 +792,10 @@ public class PostavkeViewModel : INotifyPropertyChanged
             Password = TrecaSreca.Get(PASS_mysql);
             DatabaseName = TrecaSreca.Get(databasename_mysql);
             Port = TrecaSreca.Get(port);
+            if(string.IsNullOrEmpty(Port))
+            {
+                Port = "3306";
+            }
 
             #endregion
 
