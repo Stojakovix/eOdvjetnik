@@ -6,7 +6,7 @@
              xmlns:local ="clr-namespace:eOdvjetnik.ViewModel"
              xmlns:resx="clr-namespace:eOdvjetnik.Resources.Strings" >
 
-    
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -25,68 +25,94 @@
         <Image Opacity="0.5" HorizontalOptions="FillAndExpand" MaximumHeightRequest="4000" MaximumWidthRequest="4000" Grid.ColumnSpan="7" Grid.Row="0" Source="main_pozadina.jpg"  
                Aspect="Fill"  IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}" />
 
-        <Image HorizontalOptions="FillAndExpand" Grid.ColumnSpan="7" Grid.Row="0" Source="text_only.png" Aspect="AspectFit" Margin="80,0,80,0" IsVisible="{OnPlatform Android=True, iOS=True, WinUI=False, MacCatalyst=False}" />
 
         <Label Grid.Row="0" Grid.ColumnSpan="6" Margin="{OnPlatform Android='10,0,10,10', iOS='10,0,10,10', MacCatalyst='0,0,50,50', WinUI='0,0,50,50'}" 
                VerticalOptions="End"
-               HorizontalOptions="End"
-               Style="{StaticResource ShadowLabelStyle}"    
+               HorizontalOptions="End"   
                Text="{Binding CompanyName}"
                FontSize="Large"
                LineBreakMode="WordWrap"
                TextColor="Black"   
                IsVisible="{OnPlatform Android=True, iOS=True, WinUI=True, MacCatalyst=True}"/>
 
-        
+
         <VerticalStackLayout   Grid.ColumnSpan="5"  >
 
             <Image Source="text_only.png" HeightRequest="120" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}" />
 
             <Button Text="Clear All Preferences"  Command="{Binding ClearPrefrences}" IsVisible="{Binding ServiceMode}" />
 
-            <Label  Style="{StaticResource ShadowLabelStyle}" 
-                        Text="{x:Static resx:AppResources.ZaAktivaciju}"
-                        HorizontalOptions="Center"
-                        FontSize="Small"
-                        Margin="10,0,0,0"
-                        LineBreakMode="WordWrap"
-                        TextColor="Black"
-                IsVisible="{Binding ActivationVisible }"   />
+            <Label
+                Text="{x:Static resx:AppResources.ZaAktivaciju}"
+                HorizontalOptions="Center"
+                FontSize="Small"
+                Margin="{OnPlatform Android='40,10,20,10', iOS='40,0,20,10', MacCatalyst='10,0,0,0', WinUI='10,0,0,0'}"
+                LineBreakMode="WordWrap"
+                TextColor="Black"
+                IsVisible="{Binding ActivationVisible }"
+                >
 
-            <Label Style="{StaticResource ShadowLabelStyle}" 
-                        Text="{x:Static resx:AppResources.KontaktMain}"
-                        HorizontalOptions="Center"
-                        FontSize="Small"
-                        Margin="10,0,0,10"
-                        LineBreakMode="WordWrap"
-                        TextColor="Black"    
-                   IsVisible="{Binding ActivationVisible }" />
+            </Label>
 
-            <Label Style="{StaticResource ShadowLabelStyle}" 
-                        Text="{x:Static resx:AppResources.AKTIVACIJSKIKOD}" 
-                        VerticalOptions="Center" 
-                        HorizontalOptions="Center"
-                        FontSize="Large"
-                        Margin="0,0,0,10"
-                        TextColor="Black"
-                   IsVisible="{Binding ActivationVisible }"  />
-            <Label Style="{StaticResource ShadowLabelStyle}" 
-                        Text="{Binding Activation_code}"
-                        VerticalOptions="Center" 
-                        HorizontalOptions="Center"
-                        FontSize="Large"
-                        Margin="0,0,0,10"
-                        TextColor="Black"
-                   IsVisible="{Binding ActivationVisible }" 
-                    />
-            <Button  Grid.Row="1" Grid.ColumnSpan="5" Margin="0,10,0,0" HeightRequest="50" Text="Provjeri status licence"  Command="{Binding CheckLicenceStatus}"
-               IsVisible="{Binding ActivationVisible }" />
-            <Button  Grid.Row="2" Grid.ColumnSpan="6" Margin="0,10,0,0" HeightRequest="50" Text="Registracija probne verzije" Clicked="BrowserOpen_Clicked" IsVisible="{Binding ActivationVisible }"/>
+            <Label
+                Text="{x:Static resx:AppResources.KontaktMain}"
+                HorizontalOptions="Center"
+                FontSize="Small"
+                Margin="{OnPlatform Android='40,10,20,10', iOS='40,0,20,10', MacCatalyst='10,0,0,0', WinUI='10,0,0,0'}"
+                LineBreakMode="WordWrap"
+                TextColor="Black"    
+                IsVisible="{Binding ActivationVisible }"
+                >
+
+            </Label>
+            <Label 
+                Text="{x:Static resx:AppResources.AKTIVACIJSKIKOD}" 
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                FontSize="Large"
+                Margin="{OnPlatform Android='0,30,0,10', iOS='0,30,0,10', MacCatalyst='0,0,0,10', WinUI='0,0,0,10'}"
+
+                TextColor="Black"
+                IsVisible="{Binding ActivationVisible }"
+                
+                >
+
+            </Label>
+            <Label
+                Text="{Binding Activation_code}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                FontSize="Large"
+                Margin="{OnPlatform Android='0,30,0,10', iOS='0,30,0,10', MacCatalyst='0,0,0,10', WinUI='0,0,0,10'}"
+
+                TextColor="Black"
+                IsVisible="{Binding ActivationVisible }"
+                >
+
+
+            </Label>
+
+            <Button  Grid.Row="1" Grid.ColumnSpan="5"
+                     Margin="{OnPlatform Android='0,40,0,10', iOS='0,30,0,10', MacCatalyst='0,10,0,0', WinUI='0,10,0,0'}"
+                     HeightRequest="50" 
+                     Text="Provjeri status licence"  
+                     Command="{Binding CheckLicenceStatus}"
+                     IsVisible="{Binding ActivationVisible }" />
+            
+            <Button  Grid.Row="2" 
+                     Grid.ColumnSpan="6"
+                     Margin="{OnPlatform Android='0,20,0,10', iOS='0,30,0,10', MacCatalyst='0,10,0,0', WinUI='0,10,0,0'}"
+                     HeightRequest="50" 
+                     Text="Registracija probne verzije" 
+                     Clicked="BrowserOpen_Clicked" 
+                     IsVisible="{Binding ActivationVisible }"/>
+            
+            <Image HorizontalOptions="FillAndExpand" Grid.ColumnSpan="7" Grid.Row="3" Source="text_only.png" Aspect="AspectFit"  Margin="80,70,80,0" IsVisible="{OnPlatform Android=True, iOS=True, WinUI=False, MacCatalyst=False}" />
 
         </VerticalStackLayout>
         <StackLayout IsVisible="false" Grid.Column="4" HorizontalOptions="EndAndExpand" Padding="0,0,10,0">
             <Label x:Uid="greetingLabel" />
-            
+
             <Picker x:Name="languagePicker" Title="{x:Static resx:AppResources.OdaberiJezik}" SelectedIndexChanged="OnLanguageSelected">
                 <Picker.Items>
                     <x:String>hr-HR</x:String>
@@ -107,16 +133,16 @@
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="150"  />
-                 <ColumnDefinition Width="*" />
-                 <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="250" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="330" />
             </Grid.ColumnDefinitions>
 
             <Image Grid.Row="1" Grid.Column="0" Source="text_only.png" Margin="20,0,0,0" HeightRequest="25" />
-            <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding Version}" FontSize="20" VerticalTextAlignment="Center" LineBreakMode="NoWrap"  />
-            <Label Grid.Row="1" Grid.Column="4" Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding LicenceType, StringFormat={x:Static resx:AppResources.License}}" FontSize="20" VerticalTextAlignment="Center" LineBreakMode="NoWrap" />
-            <Label Grid.Row="1" Grid.Column="6" Style="{StaticResource ShadowLabelStyle}" TextColor="Black" Text="{Binding CurrentDateTimeString}" HorizontalOptions="End" Margin="0,0,10,0" FontSize="20" VerticalTextAlignment="Start" LineBreakMode="NoWrap" />
+            <Label Grid.Row="1" Grid.Column="2" TextColor="Black" Text="{Binding Version}" FontSize="20" VerticalTextAlignment="Center" LineBreakMode="NoWrap"  />
+            <Label Grid.Row="1" Grid.Column="4" TextColor="Black" Text="{Binding LicenceType, StringFormat={x:Static resx:AppResources.License}}" FontSize="20" VerticalTextAlignment="Center" LineBreakMode="NoWrap" />
+            <Label Grid.Row="1" Grid.Column="6" TextColor="Black" Text="{Binding CurrentDateTimeString}" HorizontalOptions="End" Margin="0,0,10,0" FontSize="20" VerticalTextAlignment="Start" LineBreakMode="NoWrap" />
 
 
         </Grid>
