@@ -480,9 +480,22 @@ public class PostavkeViewModel : INotifyPropertyChanged
         {
             try
             {
-                GetEmployees();
-                await Shell.Current.GoToAsync("///Zaposlenici");
-                Debug.WriteLine("Zaposlenici clicked");
+                string ip_sql = TrecaSreca.Get(IP_mysql);
+                string user_sql = TrecaSreca.Get(USER_mysql);
+                string pass_sql = TrecaSreca.Get(PASS_mysql);
+
+                if (String.IsNullOrEmpty(ip_sql) || String.IsNullOrEmpty(user_sql) || String.IsNullOrEmpty(pass_sql))
+                {
+                    WeakReferenceMessenger.Default.Send(new NoSQLDetected("No SQL settings!"));
+                }
+                else
+                {
+                    
+                    GetEmployees();
+                    await Shell.Current.GoToAsync("///Zaposlenici");
+                    Debug.WriteLine("Zaposlenici clicked");
+                }
+
 
             }
             catch (Exception ex)

@@ -11,6 +11,7 @@ public partial class Postavke : ContentPage
 		InitializeComponent();
         this.BindingContext = App.SharedPostavkeViewModel;
         WeakReferenceMessenger.Default.Register<NoNasDetected>(this, EnterNAS);
+        WeakReferenceMessenger.Default.Register<NoSQLDetected>(this, EnterSQL);
 
 
     }
@@ -64,6 +65,17 @@ public partial class Postavke : ContentPage
 
     }
 
+    public void EnterSQL(object recipient, NoSQLDetected message)
+    {
+        Frame1.IsVisible = false;
+        Frame2.IsVisible = false;
+        Frame3.IsVisible = false;
+        Frame4.IsVisible = false;
+        Frame5.IsVisible = true;
+        Frame7.IsVisible = false;
+        Application.Current.MainPage.DisplayAlert("", "Za pristup podatcima unesite SQL postavke", "OK");
+    }
+
 
 
     private void Button1_Clicked(object sender, EventArgs e)
@@ -87,12 +99,24 @@ public partial class Postavke : ContentPage
     }
     private void Button3_Clicked(object sender, EventArgs e)
     {
-        Frame1.IsVisible = false;
-        Frame2.IsVisible = false;
-        Frame3.IsVisible = true;
-        Frame4.IsVisible = false;
-        Frame5.IsVisible = false;
-        Frame7.IsVisible = false;
+        string ip_sql = TrecaSreca.Get("IP Adresa2");
+        string user_sql = TrecaSreca.Get("Korisničko ime2");
+        string pass_sql = TrecaSreca.Get("Lozinka2");
+
+        if (String.IsNullOrEmpty(ip_sql) || String.IsNullOrEmpty(user_sql) || String.IsNullOrEmpty(pass_sql))
+        {
+            WeakReferenceMessenger.Default.Send(new NoSQLDetected("No SQL settings!"));
+        }
+        else
+        {
+            Frame1.IsVisible = false;
+            Frame2.IsVisible = false;
+            Frame3.IsVisible = true;
+            Frame4.IsVisible = false;
+            Frame5.IsVisible = false;
+            Frame7.IsVisible = false;
+        }
+
     }
     private void Button4_Clicked(object sender, EventArgs e)
     {
