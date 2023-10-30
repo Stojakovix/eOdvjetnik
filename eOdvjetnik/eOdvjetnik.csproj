@@ -39,9 +39,9 @@
 		<RunAOTCompilation>false</RunAOTCompilation>
 		<AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
 		<RuntimeIdentifiers Condition="$(TargetFramework.Contains('-android'))">android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
-		<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+		<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
 		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-		<PackageCertificateThumbprint>3CC675BC9B1A1ED8646C003295AC7BBEE4B090B4</PackageCertificateThumbprint>
+		<PackageCertificateThumbprint>35F6166BB0CB132E9C171CF3E87E353AA4116EB4</PackageCertificateThumbprint>
 		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
 		<AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
@@ -50,6 +50,7 @@
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 		<GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
 		<DefaultLanguage>hr</DefaultLanguage>
+		<AppxPackageSigningTimestampServerUrl>http://timestamp.globalsign.com/tsa/r6advanced1</AppxPackageSigningTimestampServerUrl>
 	</PropertyGroup>
 
 
@@ -90,7 +91,7 @@
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
 		<AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
-		<PackageCertificateThumbprint>3cc675bc9b1a1ed8646c003295ac7bbee4b090b4</PackageCertificateThumbprint>
+		<PackageCertificateThumbprint>35F6166BB0CB132E9C171CF3E87E353AA4116EB4</PackageCertificateThumbprint>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(RuntimeIdentifierOverride)' != ''">
 		<RuntimeIdentifier>$(RuntimeIdentifierOverride)</RuntimeIdentifier>
