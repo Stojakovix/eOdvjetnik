@@ -18,18 +18,18 @@
 
         <HorizontalStackLayout Grid.Row="0" >
 
-            <Button Text="Home" Margin="5,0,0,0" Command="{Binding RefreshButton}">
+            <Button Text="Home" Margin="5,0,0,0" Command="{Binding HomeClicked}">
 
 
             </Button>
-            <Button Text="Nazad" Margin="5,0,0,0" Clicked="Button_Clicked_nazad">
+            <Button Text="Nazad" Margin="5,0,0,0" Command="{Binding NazadClicked}">
 
 
             </Button>
 
-            <Entry Margin="5,0,0,0" Text="{Binding textEntry}" MinimumWidthRequest="300" x:Name="textEntry2" />
+            <Entry Margin="5,0,0,0" Text="{Binding TextEntry}" MinimumWidthRequest="300" x:Name="textEntry2" />
 
-            <Button Text="Otvori" Margin="5,0,0,0" Clicked="Button_Clicked_otvori">
+            <Button Text="Otvori" Margin="5,0,0,0" Command="{Binding OtvoriClicked}">
 
 
             </Button>

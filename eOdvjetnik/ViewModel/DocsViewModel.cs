@@ -14,9 +14,7 @@ using System.Reflection;
 using System;
 using System.IO;
 using Microsoft.Maui.Controls;
-
-
-
+using Org.BouncyCastle.Asn1.BC;
 
 namespace eOdvjetnik.ViewModel
 {
@@ -35,6 +33,9 @@ namespace eOdvjetnik.ViewModel
         SMBConnect sMBConnect = new SMBConnect();
         public ICommand RefreshButton { get; set; }
         public ICommand ItemClicked { get; set; }
+        public ICommand OtvoriClicked { get; set; }
+        public ICommand NazadClicked { get; set; }
+        public ICommand HomeClicked { get; set; }
 
         public ObservableCollection<RootShare> rootShares;
         public ObservableCollection<RootShare> RootShares
@@ -46,6 +47,19 @@ namespace eOdvjetnik.ViewModel
             //    OnPropertyChanged(nameof(RootShares));
             //}
         }
+
+        private string textEntry;
+
+        public string TextEntry
+        {
+            get => textEntry;
+            set
+            {
+                textEntry = value;
+                OnPropertyChanged(nameof(TextEntry));
+            }
+        }
+        
 
         public ObservableCollection<DocsItem> items;
 
@@ -75,6 +89,10 @@ namespace eOdvjetnik.ViewModel
             //ItemClicked = new Command(itemClicked);
             RefreshButton = new Command(RefreshButtonClick);
             Items = new ObservableCollection<DocsItem>();
+            OtvoriClicked = new Command(OtvoriButtonCLick);
+            NazadClicked = new Command(NazadButtonClick);
+            HomeClicked = new Command(HomeButtonClick);
+
             //RootShares = new ObservableCollection<RootShare>();
             ConnectAndFetchDocumentsAsync();
 
@@ -101,6 +119,78 @@ namespace eOdvjetnik.ViewModel
                 //Debug.WriteLine(ex.Message);
             }
         }
+        public void OtvoriButtonCLick()
+        {
+            try
+            {
+                
+
+                string subfolder_nas = textEntry;
+                string[] parts = subfolder_nas.Split('\\');
+                string lastPart = parts[parts.Length - 1];
+
+                Debug.WriteLine("Subfolder iz text entrya  " + lastPart + " " + TextEntry);
+
+                TrecaSreca.Set(SUBFOLDER_nas, lastPart);
+
+                ConnectAndFetchDocumentsAsync();
+                
+
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public void NazadButtonClick()
+        {
+            try
+            {
+                TrecaSreca.Remove(SUBFOLDER_nas);
+                string subfolder_nas = textEntry;
+
+                int lastBackslashIndex = subfolder_nas.LastIndexOf('\\');
+
+                if (lastBackslashIndex >= 0)
+                {
+                    string trimmedString = subfolder_nas.Substring(0, lastBackslashIndex + 1);
+                    TrecaSreca.Set(SUBFOLDER_nas, trimmedString);
+                    TextEntry = trimmedString;
+                    Debug.WriteLine(TextEntry + " " + trimmedString + " u NazadButton clickedu");
+                    OtvoriButtonCLick();
+
+                    // trimmedString will contain "example\\path\\to"
+                }
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public void HomeButtonClick()
+        {
+            try
+            {
+                TrecaSreca.Remove(SUBFOLDER_nas);
+                string folder_nas = "\\" + TrecaSreca.Get(FOLDER_nas) + "\\";
+                Debug.WriteLine(folder_nas);
+
+                string subfolder_nas = TrecaSreca.Get(SUBFOLDER_nas);
+                string empty = " ";
+                TrecaSreca.Set(SUBFOLDER_nas, empty);
+
+                
+                TextEntry = folder_nas;
+                OtvoriButtonCLick();
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
         public void ConnectAndFetchDocumentsAsync()
         {
             try
@@ -112,8 +202,10 @@ namespace eOdvjetnik.ViewModel
                 if (rootShares == null) { } else { rootShares.Clear(); }
                 if (RootShares == null) { } else { RootShares.Clear(); }
                 if (RootShares == null) { } else { RootShares.Clear(); }
-
+                
                 string subfolder_nas = TrecaSreca.Get(SUBFOLDER_nas);
+                
+                Debug.WriteLine(subfolder_nas);
                 //Ispis svega na putanji
                 List<QueryDirectoryFileInformation> fileList = sMBConnect.ListPath(subfolder_nas);
 

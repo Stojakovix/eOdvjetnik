@@ -85,8 +85,9 @@ namespace eOdvjetnik.Services
                 //Debug.WriteLine("6666666666666666666");
                 //Debug.WriteLine(status);
                 //Debug.WriteLine("6666666666666666666");
-
-                ISMBFileStore fileStore = client.TreeConnect(TrecaSreca.Get(FOLDER_nas), out status);
+                //TrecaSreca.Remove(FOLDER_nas);
+                var folder = TrecaSreca.Get(FOLDER_nas);
+                ISMBFileStore fileStore = client.TreeConnect(folder, out status);
                 if (status == NTStatus.STATUS_SUCCESS)
                 {
                     //Debug.WriteLine("7777777777777777777");
