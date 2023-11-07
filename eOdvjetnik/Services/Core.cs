@@ -294,6 +294,7 @@ namespace eOdvjetnik.Services
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex);
                 // An unexpected error occurred. No browser may be installed on the device.
                 return null;
             }
