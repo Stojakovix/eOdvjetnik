@@ -917,7 +917,10 @@ public class PostavkeViewModel : INotifyPropertyChanged
         {
             string[] arguments = new string[] { "database" };
             externalSQLConnect.createDatabase(arguments);
+            
             externalSQLConnect.ExecuteSqlFile();
+            Application.Current.MainPage.DisplayAlert("", "Baza uspješno instalirana.", "OK");
+
         }
         catch (Exception ex)
         {
