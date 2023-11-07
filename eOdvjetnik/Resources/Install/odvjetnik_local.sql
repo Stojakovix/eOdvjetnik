@@ -1,93 +1,122 @@
-﻿USE `eodvjetnik_install`;
-
-CREATE TABLE IF NOT EXISTS `contacts` (
-  `id` int(11) NOT NULL,
-  `ime` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  `OIB` text COLLATE utf8mb4_bin DEFAULT NULL,
-  `datum_rodenja` varchar(25) COLLATE utf8mb4_bin DEFAULT NULL,
-  `adresa` text COLLATE utf8mb4_bin NOT NULL,
-  `ostalo` text COLLATE utf8mb4_bin DEFAULT NULL,
-  `boraviste` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `telefon` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `fax` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `mobitel` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  `drzava` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `pravna` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+﻿USE `eodvjetnik`;
 
 
-CREATE TABLE IF NOT EXISTS `documents` (
-  `id` int(11) NOT NULL,
-  `file_id` int(11) DEFAULT NULL,
-  `naziv` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  `lokacija` text COLLATE utf8mb4_bin DEFAULT NULL,
-  `documentscol` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `datum` datetime DEFAULT NULL,
-  `inicijali_dodao` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `inicijali_dodjeljeno` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `referenca` text COLLATE utf8mb4_bin DEFAULT NULL,
-  `dokument` text COLLATE utf8mb4_bin DEFAULT NULL,
-  `biljeska` text COLLATE utf8mb4_bin DEFAULT NULL,
-  `LinkArt` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `file_status` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `datum_izmjene_dokumenta` datetime DEFAULT NULL,
-  `datum_kreiranja_dokumenta` datetime DEFAULT NULL,
-  `neprocitano` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `broj_privitaka` int(11) DEFAULT NULL,
-  `tip_dokumenta` int(11) DEFAULT NULL,
-  `nazivi_privitaka` text COLLATE utf8mb4_bin DEFAULT NULL,
-  `email_adrese` text COLLATE utf8mb4_bin DEFAULT NULL,
-  `kreirao` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `zadnje_uredio` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+CREATE TABLE IF NOT EXISTS `odvjetnik`.`contacts` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `ime` VARCHAR(255) NULL DEFAULT NULL,
+  `OIB` TEXT NULL DEFAULT NULL,
+  `datum_rodenja` VARCHAR(25) NULL DEFAULT NULL,
+  `adresa` TEXT NOT NULL,
+  `ostalo` TEXT NULL DEFAULT NULL,
+  `boraviste` VARCHAR(45) NULL DEFAULT NULL,
+  `telefon` VARCHAR(45) NULL DEFAULT NULL,
+  `fax` VARCHAR(45) NULL DEFAULT NULL,
+  `mobitel` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(255) NULL DEFAULT NULL,
+  `drzava` VARCHAR(45) NULL DEFAULT NULL,
+  `pravna` TINYINT(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 100000
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_bin
 
 
 
-CREATE TABLE IF NOT EXISTS `employees` (
-  `id` int(11) NOT NULL,
-  `ime` varchar(45) COLLATE utf8mb4_bin NOT NULL,
-  `prezime` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `inicijali` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `mentor` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `hwid` text COLLATE utf8mb4_bin DEFAULT NULL,
-  `active` tinyint(1) DEFAULT NULL,
-  `type` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+CREATE TABLE IF NOT EXISTS `odvjetnik`.`documents` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `file_id` INT(11) NULL DEFAULT NULL,
+  `naziv` VARCHAR(255) NULL DEFAULT NULL,
+  `lokacija` TEXT NULL DEFAULT NULL,
+  `documentscol` VARCHAR(45) NULL DEFAULT NULL,
+  `datum` DATETIME NULL DEFAULT NULL,
+  `inicijali_dodao` VARCHAR(45) NULL DEFAULT NULL,
+  `inicijali_dodjeljeno` VARCHAR(45) NULL DEFAULT NULL,
+  `referenca` TEXT NULL DEFAULT NULL,
+  `dokument` TEXT NULL DEFAULT NULL,
+  `biljeska` TEXT NULL DEFAULT NULL,
+  `LinkArt` VARCHAR(45) NULL DEFAULT NULL,
+  `file_status` VARCHAR(45) NULL DEFAULT NULL,
+  `datum_izmjene_dokumenta` DATETIME NULL DEFAULT NULL,
+  `datum_kreiranja_dokumenta` DATETIME NULL DEFAULT NULL,
+  `neprocitano` VARCHAR(45) NULL DEFAULT NULL,
+  `broj_privitaka` INT(11) NULL DEFAULT NULL,
+  `tip_dokumenta` INT(11) NULL DEFAULT NULL,
+  `nazivi_privitaka` TEXT NULL DEFAULT NULL,
+  `email_adrese` TEXT NULL DEFAULT NULL,
+  `kreirao` VARCHAR(45) NULL DEFAULT NULL,
+  `zadnje_uredio` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `iddocuments_UNIQUE` (`id` ASC) VISIBLE,
+  INDEX `fk_documents_files1_idx` (`file_id` ASC) VISIBLE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 107111
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_bin
 
 
 
-CREATE TABLE IF NOT EXISTS `events` (
-  `ID` int(11) NOT NULL,
-  `TimeFrom` datetime NOT NULL,
-  `TimeTo` datetime NOT NULL,
-  `AllDay` varchar(45) DEFAULT NULL,
-  `EventName` varchar(45) NOT NULL,
-  `DescriptionNotes` text DEFAULT NULL,
-  `Files` text DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `resource_id` int(11) DEFAULT NULL,
-  `updated` datetime DEFAULT NULL,
-  `hardwareid` text DEFAULT NULL,
-  `internal_event_id` varchar(45) DEFAULT '0',
-  `color` varchar(45) DEFAULT 'LightGray'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS `odvjetnik`.`employees` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `ime` VARCHAR(45) NOT NULL,
+  `prezime` VARCHAR(45) NULL DEFAULT NULL,
+  `inicijali` VARCHAR(45) NULL DEFAULT NULL,
+  `mentor` VARCHAR(45) NULL DEFAULT NULL,
+  `hwid` TEXT NULL DEFAULT NULL,
+  `active` TINYINT(1) NULL DEFAULT NULL,
+  `type` VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `idemployees_UNIQUE` (`id` ASC) VISIBLE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 127
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_bin
 
 
 
-CREATE TABLE IF NOT EXISTS `events_has_employees` (
-  `event_id` int(11) NOT NULL,
-  `employee_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+CREATE TABLE IF NOT EXISTS `odvjetnik`.`events` (
+  `ID` INT(11) NOT NULL AUTO_INCREMENT,
+  `TimeFrom` DATETIME NOT NULL,
+  `TimeTo` DATETIME NOT NULL,
+  `AllDay` VARCHAR(45) NULL DEFAULT NULL,
+  `EventName` VARCHAR(45) NOT NULL,
+  `DescriptionNotes` TEXT NULL DEFAULT NULL,
+  `Files` INT(11) NULL DEFAULT NULL,
+  `user_id` INT(11) NULL DEFAULT NULL,
+  `resource_id` INT(11) NULL DEFAULT NULL,
+  `updated` DATETIME NULL DEFAULT NULL,
+  `hardwareid` TEXT NULL DEFAULT NULL,
+  `internal_event_id` VARCHAR(45) NULL DEFAULT '0',
+  `color` VARCHAR(45) NULL DEFAULT 'LightGray',
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1187
+DEFAULT CHARACTER SET = utf8mb4
 
 
 
-CREATE TABLE IF NOT EXISTS `event_colors` (
-  `id` int(11) NOT NULL,
-  `naziv_boje` varchar(45) DEFAULT NULL,
-  `boja` varchar(45) DEFAULT NULL,
-  `vrsta_dogadaja` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS `odvjetnik`.`events_has_employees` (
+  `event_id` INT(11) NOT NULL,
+  `employee_id` INT(11) NOT NULL,
+  PRIMARY KEY (`event_id`, `employee_id`),
+  INDEX `fk_events_has_employees_employees1_idx` (`employee_id` ASC) VISIBLE,
+  INDEX `fk_events_has_employees_events1_idx` (`event_id` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_bin
+
+
+
+CREATE TABLE IF NOT EXISTS `odvjetnik_local`.`event_colors` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `naziv_boje` VARCHAR(45) NULL DEFAULT NULL,
+  `boja` VARCHAR(45) NULL DEFAULT NULL,
+  `vrsta_dogadaja` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 12
+DEFAULT CHARACTER SET = utf8mb4
 
 
 INSERT INTO `event_colors` (`id`, `naziv_boje`, `boja`, `vrsta_dogadaja`) VALUES
@@ -105,50 +134,49 @@ INSERT INTO `event_colors` (`id`, `naziv_boje`, `boja`, `vrsta_dogadaja`) VALUES
 
 
 
-CREATE TABLE IF NOT EXISTS `files` (
-  `id` int(11) NOT NULL,
-  `broj_spisa` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  `spisicol` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `client_id` int(11) DEFAULT NULL,
-  `opponent_id` int(11) DEFAULT NULL,
-  `inicijali_voditelj_id` int(11) DEFAULT NULL,
-  `inicijali_dodao` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `filescol` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `inicijali_dodjeljeno` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `created` datetime DEFAULT NULL,
-  `aktivno_pasivno` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `referenca` text COLLATE utf8mb4_bin DEFAULT NULL,
-  `datum_promjene_statusa` datetime DEFAULT NULL,
-  `uzrok` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  `datum_kreiranja_spisa` datetime DEFAULT NULL,
-  `datum_izmjene_spisa` datetime DEFAULT NULL,
-  `kreirao` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `zadnje_uredio` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `jezik` varchar(45) COLLATE utf8mb4_bin DEFAULT NULL,
-  `broj_predmeta` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+CREATE TABLE IF NOT EXISTS `odvjetnik`.`files` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `broj_spisa` VARCHAR(255) NULL DEFAULT NULL,
+  `spisicol` VARCHAR(45) NULL DEFAULT NULL,
+  `client_id` INT(11) NULL DEFAULT NULL,
+  `opponent_id` INT(11) NULL DEFAULT NULL,
+  `inicijali_voditelj_id` VARCHAR(45) NULL DEFAULT NULL,
+  `inicijali_dodao` VARCHAR(45) NULL DEFAULT NULL,
+  `filescol` VARCHAR(45) NULL DEFAULT NULL,
+  `inicijali_dodjeljeno` VARCHAR(45) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `aktivno_pasivno` VARCHAR(45) NULL DEFAULT NULL,
+  `referenca` TEXT NULL DEFAULT NULL,
+  `datum_promjene_statusa` DATETIME NULL DEFAULT NULL,
+  `uzrok` VARCHAR(255) NULL DEFAULT NULL,
+  `datum_kreiranja_spisa` DATETIME NULL DEFAULT NULL,
+  `datum_izmjene_spisa` DATETIME NULL DEFAULT NULL,
+  `kreirao` VARCHAR(45) NULL DEFAULT NULL,
+  `zadnje_uredio` VARCHAR(45) NULL DEFAULT NULL,
+  `jezik` VARCHAR(45) NULL DEFAULT NULL,
+  `broj_predmeta` VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+  INDEX `fk_files_employees1_idx` (`inicijali_voditelj_id` ASC) VISIBLE,
+  INDEX `fk_files_contacts1_idx` USING BTREE (`client_id`) VISIBLE,
+  INDEX `1` USING BTREE (`opponent_id`) VISIBLE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 100087
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_bin
 
 
-
-CREATE TABLE IF NOT EXISTS `odvjetnicka_drustva` (
-  `Ime_Naziv` varchar(255) DEFAULT NULL,
-  `Status` varchar(255) DEFAULT NULL,
-  `Zaposlen_a_kod` varchar(255) DEFAULT NULL,
-  `Adresa` varchar(255) DEFAULT NULL,
-  `Mjesto` varchar(255) DEFAULT NULL,
-  `Telefon` varchar(255) DEFAULT NULL,
-  `Web` varchar(255) DEFAULT NULL,
-  `Jezici` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-CREATE TABLE IF NOT EXISTS `tariffs` (
-  `id` int(11) NOT NULL,
-  `parent_id` int(11) DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `oznaka` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bodovi` varchar(9) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE IF NOT EXISTS `odvjetnik`.`tariffs` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` INT(11) NULL DEFAULT NULL,
+  `name` VARCHAR(255) NULL DEFAULT NULL,
+  `oznaka` VARCHAR(45) NULL DEFAULT NULL,
+  `bodovi` VARCHAR(9) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 703
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci
 
 INSERT INTO `tariffs` (`id`, `parent_id`, `name`, `oznaka`, `bodovi`) VALUES
 (1, 0, 'Kazneni i prekršajni', '', ''),
