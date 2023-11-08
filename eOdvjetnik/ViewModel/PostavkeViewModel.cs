@@ -346,6 +346,36 @@ public class PostavkeViewModel : INotifyPropertyChanged
         }
     }
 
+    private bool activityRunning;
+
+    public bool ActivityRunning
+    {
+        get { return activityRunning; }
+        set
+        {
+            if (activityRunning != value)
+            {
+                activityRunning = value;
+                OnPropertyChanged(nameof(ActivityRunning));
+            }
+        }
+    }
+
+    private bool activityEnabled;
+
+    public bool ActivityEnabled
+    {
+        get { return activityEnabled; }
+        set
+        {
+            if (activityEnabled != value)
+            {
+                activityEnabled = value;
+                OnPropertyChanged(nameof(ActivityEnabled));
+            }
+        }
+    }
+
     public ICommand GetAllCompanyDevices { get; set; }
     public ICommand GetAllCompanyEmployees { get; set; }
     public ICommand OpenZaposlenici { get; set; }
@@ -810,6 +840,9 @@ public class PostavkeViewModel : INotifyPropertyChanged
                 Port = "3306";
             }
 
+            activityEnabled = false;
+            activityRunning = false;
+
             #endregion
 
             #region Feedback
@@ -911,21 +944,37 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     #region SQL Funkcije
 
-    private void OnDatabaseClick()
+    private async void OnDatabaseClick()
     {
         try
         {
+            ActivityEnabled = true;
+            ActivityRunning = true;
+
+            Debug.WriteLine(activityEnabled.ToString());
+
             string[] arguments = new string[] { "database" };
+            await Task.Delay(1500);
             externalSQLConnect.createDatabase(arguments);
             
             externalSQLConnect.ExecuteSqlFile();
-            Application.Current.MainPage.DisplayAlert("", "Baza uspješno instalirana.", "OK");
+            
 
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
+            await Application.Current.MainPage.DisplayAlert("", "Greška u izradi baze, Molimo kontaktirajte administratora", "OK");
         }
+        finally
+        {
+            ActivityRunning = false;
+            ActivityEnabled = false;
+            await Application.Current.MainPage.DisplayAlert("", "Baza uspješno instalirana.", "OK");
+            Debug.WriteLine(activityEnabled.ToString());
+
+        }
+
     }
     private void OnSaveClickedMySQL()
     {
@@ -947,8 +996,15 @@ public class PostavkeViewModel : INotifyPropertyChanged
             Debug.WriteLine("Saved");
             Debug.WriteLine(UserName + " " + Password + " " + Port);
             Debug.WriteLine("KLINUTO NA SAVE U SQL POSTAVKAMA");
-            Application.Current.MainPage.DisplayAlert("", "SQL postavke su uspješno spremljene.", "OK");
 
+            if (string.IsNullOrEmpty(ip) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(databaseName) || string.IsNullOrEmpty(portId))
+            {
+                Application.Current.MainPage.DisplayAlert("", "Došlo je do pogreške prilikom spremanja.", "OK");
+            }
+            else
+            {
+                Application.Current.MainPage.DisplayAlert("", "SQL postavke su uspješno spremljene.", "OK");
+            }
 
         }
         catch (Exception ex)
@@ -956,6 +1012,16 @@ public class PostavkeViewModel : INotifyPropertyChanged
             Debug.WriteLine(ex.Message);
             Application.Current.MainPage.DisplayAlert("", "Došlo je do pogreške prilikom spremanja.", "OK");
 
+        }
+        finally
+        {
+            string sqlip = TrecaSreca.Get(IP_mysql);
+            string sqlpassword = TrecaSreca.Get(PASS_mysql);
+            string sqluserName = TrecaSreca.Get(USER_mysql);
+            string sqldatabaseName = TrecaSreca.Get(databasename_mysql);
+            string sqlportId = TrecaSreca.Get(port);
+
+ 
         }
     }
     //private void OnLoadClickedMySQL()

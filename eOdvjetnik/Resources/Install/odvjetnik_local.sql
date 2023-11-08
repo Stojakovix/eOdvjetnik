@@ -1,7 +1,7 @@
 ﻿USE `eodvjetnik`;
 
 
-CREATE TABLE IF NOT EXISTS `odvjetnik`.`contacts` (
+CREATE TABLE IF NOT EXISTS `eodvjetnik`.`contacts` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `ime` VARCHAR(255) NULL DEFAULT NULL,
   `OIB` TEXT NULL DEFAULT NULL,
@@ -20,11 +20,11 @@ CREATE TABLE IF NOT EXISTS `odvjetnik`.`contacts` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 100000
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_bin
+COLLATE = utf8mb4_bin;
 
 
 
-CREATE TABLE IF NOT EXISTS `odvjetnik`.`documents` (
+CREATE TABLE IF NOT EXISTS `eodvjetnik`.`documents` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `file_id` INT(11) NULL DEFAULT NULL,
   `naziv` VARCHAR(255) NULL DEFAULT NULL,
@@ -53,11 +53,11 @@ CREATE TABLE IF NOT EXISTS `odvjetnik`.`documents` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 107111
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_bin
+COLLATE = utf8mb4_bin;
 
 
 
-CREATE TABLE IF NOT EXISTS `odvjetnik`.`employees` (
+CREATE TABLE IF NOT EXISTS `eodvjetnik`.`employees` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `ime` VARCHAR(45) NOT NULL,
   `prezime` VARCHAR(45) NULL DEFAULT NULL,
@@ -71,11 +71,11 @@ CREATE TABLE IF NOT EXISTS `odvjetnik`.`employees` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 127
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_bin
+COLLATE = utf8mb4_bin;
 
 
 
-CREATE TABLE IF NOT EXISTS `odvjetnik`.`events` (
+CREATE TABLE IF NOT EXISTS `eodvjetnik`.`events` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `TimeFrom` DATETIME NOT NULL,
   `TimeTo` DATETIME NOT NULL,
@@ -92,11 +92,11 @@ CREATE TABLE IF NOT EXISTS `odvjetnik`.`events` (
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1187
-DEFAULT CHARACTER SET = utf8mb4
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 
-CREATE TABLE IF NOT EXISTS `odvjetnik`.`events_has_employees` (
+CREATE TABLE IF NOT EXISTS `eodvjetnik`.`events_has_employees` (
   `event_id` INT(11) NOT NULL,
   `employee_id` INT(11) NOT NULL,
   PRIMARY KEY (`event_id`, `employee_id`),
@@ -104,11 +104,11 @@ CREATE TABLE IF NOT EXISTS `odvjetnik`.`events_has_employees` (
   INDEX `fk_events_has_employees_events1_idx` (`event_id` ASC) VISIBLE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_bin
+COLLATE = utf8mb4_bin;
 
 
 
-CREATE TABLE IF NOT EXISTS `odvjetnik_local`.`event_colors` (
+CREATE TABLE IF NOT EXISTS `eodvjetnik`.`event_colors` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `naziv_boje` VARCHAR(45) NULL DEFAULT NULL,
   `boja` VARCHAR(45) NULL DEFAULT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `odvjetnik_local`.`event_colors` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 12
-DEFAULT CHARACTER SET = utf8mb4
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 INSERT INTO `event_colors` (`id`, `naziv_boje`, `boja`, `vrsta_dogadaja`) VALUES
@@ -134,7 +134,7 @@ INSERT INTO `event_colors` (`id`, `naziv_boje`, `boja`, `vrsta_dogadaja`) VALUES
 
 
 
-CREATE TABLE IF NOT EXISTS `odvjetnik`.`files` (
+CREATE TABLE IF NOT EXISTS `eodvjetnik`.`files` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `broj_spisa` VARCHAR(255) NULL DEFAULT NULL,
   `spisicol` VARCHAR(45) NULL DEFAULT NULL,
@@ -163,10 +163,10 @@ CREATE TABLE IF NOT EXISTS `odvjetnik`.`files` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 100087
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_bin
+COLLATE = utf8mb4_bin;
 
 
-CREATE TABLE IF NOT EXISTS `odvjetnik`.`tariffs` (
+CREATE TABLE IF NOT EXISTS `eodvjetnik`.`tariffs` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `parent_id` INT(11) NULL DEFAULT NULL,
   `name` VARCHAR(255) NULL DEFAULT NULL,
@@ -176,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `odvjetnik`.`tariffs` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 703
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_unicode_ci
+COLLATE = utf8mb4_unicode_ci;
 
 INSERT INTO `tariffs` (`id`, `parent_id`, `name`, `oznaka`, `bodovi`) VALUES
 (1, 0, 'Kazneni i prekršajni', '', ''),
