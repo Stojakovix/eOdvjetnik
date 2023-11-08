@@ -484,18 +484,25 @@ namespace eOdvjetnik.ViewModel
                                 TrialFileCreated = oldestFileCreatedDate;
                             };
                             Debug.WriteLine("Trial file check " + TrialFileCreated);
+                            DateTime dateTime = DateTime.Now;
 
+                            TimeSpan difference = dateTime.Subtract(TrialFileCreated);
+                            int daysDifference = difference.Days;
+                            if (daysDifference > 45)
+                            {
+                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
+                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
+                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
+                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
+                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
+                                Debug.WriteLine(daysDifference);
+                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
+                                //ExpiredLicence = true;
+
+                            }
                         }
 
-                        DateTime dateTime = DateTime.Now;
 
-                        TimeSpan difference = dateTime.Subtract(TrialFileCreated);
-                        int daysDifference = difference.Days;
-                        if (daysDifference > 45)
-                        {
-                            ExpiredLicence = true;
-                        
-                        }
                     }
 
                     catch (Exception ex)
