@@ -5,7 +5,6 @@ using Timer = System.Timers.Timer;
 using eOdvjetnik.Services;
 using eOdvjetnik.Resources.Strings;
 using CommunityToolkit.Mvvm.Messaging;
-using Plugin.LocalNotification;
 using System.Text.Json;
 using eOdvjetnik.Models;
 using System.Security.Cryptography;
@@ -591,28 +590,6 @@ namespace eOdvjetnik.ViewModel
         {
             LicenceCheck(); 
 
-            try
-            {
-                var request = new NotificationRequest
-                {
-                    NotificationId = 1,
-                    Title = "Kliknut kalendar",
-                    Description = "U kalendaru je dodan novi događaj",
-                    BadgeNumber = 1,
-                    CategoryType = NotificationCategoryType.Status,
-                    Schedule = new NotificationRequestSchedule
-                    {
-                        NotifyTime = DateTime.Now.AddSeconds(5),
-                    }
-                };
-                LocalNotificationCenter.Current.AreNotificationsEnabled();
-                LocalNotificationCenter.Current.Show(request);
-                Debug.WriteLine(request.Title);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
 
         }
 

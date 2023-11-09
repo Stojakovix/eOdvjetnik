@@ -7,7 +7,6 @@ using Permissions = Microsoft.Maui.ApplicationModel.Permissions;
 using PermissionStatus = Microsoft.Maui.ApplicationModel.PermissionStatus;
 using DeviceType = Microsoft.Maui.Devices.DeviceType;
 using DeviceInfo = Microsoft.Maui.Devices.DeviceInfo;
-using Plugin.LocalNotification;
 using eOdvjetnik.Services;
 
 namespace eOdvjetnik;
@@ -19,31 +18,7 @@ public partial class MainPage : ContentPage
 
     private HttpClient _Client = new HttpClient();
       
-    private void SaveNotification()
-    {
-        try
-        {
-            var request = new NotificationRequest
-            {
-                NotificationId = 1,
-                Title = "Kliknut kalendar",
-                Description = "U kalendaru je dodan novi događaj",
-                BadgeNumber = 1,
-                CategoryType = NotificationCategoryType.Status,
-                Schedule = new NotificationRequestSchedule
-                {
-                    NotifyTime = DateTime.Now.AddSeconds(5),
-                }
-            };
-            LocalNotificationCenter.Current.AreNotificationsEnabled();
-            LocalNotificationCenter.Current.Show(request);
-            Debug.WriteLine(request.Title);
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message);
-        }
-    }
+
        
     private void OnLanguageSelected(object sender, EventArgs e)
     {

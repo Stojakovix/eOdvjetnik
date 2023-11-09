@@ -5,7 +5,6 @@ using eOdvjetnik.Services;
 using System.Diagnostics;
 using eOdvjetnik.Model;
 using eOdvjetnik.ViewModel;
-using Plugin.LocalNotification;
 using System.Globalization;
 using System.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
@@ -130,7 +129,7 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
         {
             ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
             //var appId = Convert.ToInt32(appointment.Id);
-            string getIDQuery = $"SELECT * FROM events WHERE id \"{appointment.Id}\"";
+            string getIDQuery = $"SELECT * FROM events WHERE id = \"{appointment.Id}\"";
             Debug.WriteLine(getIDQuery);
             Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(getIDQuery);
 
@@ -138,12 +137,16 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
             {
                 foreach (Dictionary<string, string> filesRow in filesData)
                 {
-                    int id;
-
-                    int.TryParse(filesRow["Files"], out id);
-                    if (id != 0)
+                    if (filesRow != null)
                     {
-                        IDSpisa = id;
+                        int id;
+
+                        int.TryParse(filesRow["Files"], out id);
+                        if (id != 0)
+                        {
+                            IDSpisa = id;
+                            Debug.WriteLine("id spisa je " + IDSpisa);
+                        } 
                     }
                 }
             }
@@ -152,7 +155,7 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
         catch (Exception ex)
         {
 
-            Debug.WriteLine(ex.Message);
+            Debug.WriteLine(ex.Message + "u dohvati spis");
         }
     }
 
@@ -217,7 +220,7 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine(ex.Message);
+                        Debug.WriteLine(ex.Message + "u elseu delete button clickeda");
                     }
                     if (DevicePlatform == "MacCatalyst")
                     {
@@ -241,7 +244,7 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
         catch (Exception ex)
         {
 
-            Debug.WriteLine(ex.Message);
+            Debug.WriteLine(ex.Message + " u vanjskom catchu delete button clickeda");
         }
     }
 
@@ -519,30 +522,7 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
         }
     }
 
-    private void SaveNotification()
-    {
-        try
-        {
-            var request = new NotificationRequest
-            {
-                NotificationId = 1,
-                Title = "Dodan novi događaj",
-                Description = "U kalendaru je dodan novi događaj",
-                BadgeNumber = 1,
-                CategoryType = NotificationCategoryType.Status,
-                Schedule = new NotificationRequestSchedule
-                {
-                    NotifyTime = DateTime.Now.AddSeconds(10),
-                }
-            };
 
-            LocalNotificationCenter.Current.Show(request);
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message);
-        }
-    }
     private void AppointmentDetails()
     {
         if (appointment == null)
@@ -861,7 +841,7 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
         catch (Exception ex)
         {
 
-            Debug.WriteLine(ex.Message);
+            Debug.WriteLine(ex.Message + "u listview item tappeda u app dialogu");
         }
     }
 }

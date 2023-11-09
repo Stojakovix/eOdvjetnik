@@ -5,7 +5,6 @@ using System.Diagnostics;
 using Syncfusion.Maui.Popup;
 using System.ComponentModel;
 using eOdvjetnik.Resources.Strings;
-using Plugin.LocalNotification;
 using eOdvjetnik.Services;
 using CommunityToolkit.Mvvm.Messaging;
 
