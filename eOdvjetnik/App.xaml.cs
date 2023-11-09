@@ -98,7 +98,7 @@ public partial class App : Application
     {
 
     }
-    public void ResetirajNaplatu()
+    public void ResetirajNaplatu(object recipient, RestartNaplata message)
     {
         SharedNaplataViewModel = new NaplataViewModel();
     }
