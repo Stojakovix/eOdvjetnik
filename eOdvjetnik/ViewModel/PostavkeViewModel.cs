@@ -965,6 +965,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         {
             Debug.WriteLine(ex.Message);
             await Application.Current.MainPage.DisplayAlert("", "Greška u izradi baze, Molimo kontaktirajte administratora", "OK");
+            return;
         }
         finally
         {
@@ -1013,7 +1014,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         {
             Debug.WriteLine(ex.Message);
             Application.Current.MainPage.DisplayAlert("", "Došlo je do pogreške prilikom spremanja.", "OK");
-
+            return;
         }
         finally
         {
