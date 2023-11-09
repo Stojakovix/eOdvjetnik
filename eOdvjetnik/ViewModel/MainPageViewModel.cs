@@ -353,6 +353,8 @@ namespace eOdvjetnik.ViewModel
                         string OIBTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("OIB").GetString();
                         string adresaTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("adresa").GetString();
                         bool serviceMode = jsonObject.GetProperty("Companies")[0].GetProperty("service_mode").GetBoolean();
+                        int localUserID = jsonObject.GetProperty("Devices")[0].GetProperty("id").GetInt32();
+                        string localUserName = jsonObject.GetProperty("Devices")[0].GetProperty("opis").GetString();
 
 
 
@@ -365,6 +367,9 @@ namespace eOdvjetnik.ViewModel
                         TrecaSreca.Set("company_id", company_ID);
                         TrecaSreca.Set("device_type_id", devicetype_ID);
                         TrecaSreca.Set("service_mode", serviceMode.ToString());
+
+                        TrecaSreca.Set("UserName", localUserName);
+                        TrecaSreca.Set("UserID", localUserID.ToString());
 
                         Debug.WriteLine("MainPageViewModel - > Company info: " + nazivTvrtke + " " + OIBTvrtke + " " + adresaTvrtke);
                         Debug.WriteLine("MainPageViewModel - > LicenceCheck -> Uspjesno dovrsen!");
@@ -483,18 +488,25 @@ namespace eOdvjetnik.ViewModel
                                 TrialFileCreated = oldestFileCreatedDate;
                             };
                             Debug.WriteLine("Trial file check " + TrialFileCreated);
+                            DateTime dateTime = DateTime.Now;
 
+                            TimeSpan difference = dateTime.Subtract(TrialFileCreated);
+                            int daysDifference = difference.Days;
+                            if (daysDifference > 45)
+                            {
+                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
+                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
+                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
+                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
+                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
+                                Debug.WriteLine(daysDifference);
+                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
+                                //ExpiredLicence = true;
+
+                            }
                         }
 
-                        DateTime dateTime = DateTime.Now;
 
-                        TimeSpan difference = dateTime.Subtract(TrialFileCreated);
-                        int daysDifference = difference.Days;
-                        if (daysDifference > 45)
-                        {
-                            ExpiredLicence = true;
-                        
-                        }
                     }
 
                     catch (Exception ex)
@@ -557,10 +569,21 @@ namespace eOdvjetnik.ViewModel
                         int id;
                         int.TryParse(filesRow["id"], out id);
                         UserName = filesRow["ime"];
+                        if (string.IsNullOrEmpty(UserName))
+                        {
+                            TrecaSreca.Get("UserName");
+                        }
                         UserID = id.ToString();
-                        UserInitials = filesRow["inicijali"];
+                        if (string.IsNullOrEmpty(UserID))
+
+                        {
+
+                            TrecaSreca.Get("UserID");
+                        }
+                            UserInitials = filesRow["inicijali"];
                     }
                     
+
                     TrecaSreca.Set("UserName", UserName);
                     TrecaSreca.Set("UserID", UserID);
                     Debug.WriteLine(UserID);
