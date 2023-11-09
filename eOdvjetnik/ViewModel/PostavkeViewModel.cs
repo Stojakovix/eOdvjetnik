@@ -972,6 +972,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
             ActivityEnabled = false;
             await Application.Current.MainPage.DisplayAlert("", "Baza uspješno instalirana.", "OK");
             Debug.WriteLine(activityEnabled.ToString());
+            WeakReferenceMessenger.Default.Send(new RestartNaplata("RestartNaplataVM!"));
+
 
         }
 
@@ -1020,8 +1022,9 @@ public class PostavkeViewModel : INotifyPropertyChanged
             string sqluserName = TrecaSreca.Get(USER_mysql);
             string sqldatabaseName = TrecaSreca.Get(databasename_mysql);
             string sqlportId = TrecaSreca.Get(port);
+            WeakReferenceMessenger.Default.Send(new RestartNaplata("RestartNaplataVM!"));
 
- 
+
         }
     }
     //private void OnLoadClickedMySQL()
