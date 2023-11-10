@@ -1,4 +1,5 @@
-﻿using eOdvjetnik.Data;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using eOdvjetnik.Data;
 using eOdvjetnik.Services;
 using eOdvjetnik.ViewModel;
 using eOdvjetnik.Views;
@@ -31,6 +32,7 @@ public partial class App : Application
         InitializeComponent();
         //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjQ5MTQ1M0AzMjMyMmUzMDJlMzBRT2JkTm1HczFuTmdmNTVFcWNWU29xbGt6Z2lhRDFYYk1GZWppS3pjWnlNPQ==");
         Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NHaF5cXmVCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdgWXZfeHRUQmddWEJ2V0c=");
+        WeakReferenceMessenger.Default.Register<RestartNaplata>(this, ResetirajNaplatu);
 
         var database = new Prefdatabase();
         database.Init();
@@ -95,5 +97,9 @@ public partial class App : Application
     private void Application_RequestedThemeChanged(object sender, AppThemeChangedEventArgs e)
     {
 
+    }
+    public void ResetirajNaplatu(object recipient, RestartNaplata message)
+    {
+        SharedNaplataViewModel = new NaplataViewModel();
     }
 }

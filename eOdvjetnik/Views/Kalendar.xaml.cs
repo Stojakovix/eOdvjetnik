@@ -38,7 +38,7 @@ public partial class Kalendar : ContentPage
         catch (Exception ex)
         {
 
-            Debug.WriteLine(ex.Message);
+            Debug.WriteLine(ex.Message + "u kalendar konstruktoru");
         }
 
     }
@@ -167,7 +167,7 @@ public partial class Kalendar : ContentPage
         catch (Exception ex)
         {
 
-            Debug.WriteLine(ex.Message);
+            Debug.WriteLine(ex.Message + " u on scheduler appointment dropu");
         }
     }
 

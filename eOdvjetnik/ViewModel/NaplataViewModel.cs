@@ -118,6 +118,10 @@ namespace eOdvjetnik.ViewModel
 
                             });
                         }
+                        foreach (TariffItem item in tariffItems)
+                        {
+                            Debug.WriteLine(item.parent_name);
+                        }
                     }
                     else
                     {
@@ -296,12 +300,15 @@ namespace eOdvjetnik.ViewModel
                     Name = odabraniNaziv,
                     Points = odabraniBodovi,
                     Coefficient = 1,
-                    ParentName = OdabraniParentName,
+                    ParentName = odabraniParentName,
 
                     UkupanIznosVisible = false
                 };
                 ReceiptItems.Add(newItem);
-                Debug.WriteLine("added new item as ReceptItem: " + newItem.Name);
+                Debug.WriteLine("ReceptItem newItem.Name: " + newItem.Name);
+                Debug.WriteLine("ReceptItem newItem.ParentName: " + newItem.ParentName);
+                Debug.WriteLine("ReceptItem odabraniParentName: " + odabraniParentName);
+
                 CalculateTotalAmount();
 
             }
@@ -521,7 +528,7 @@ namespace eOdvjetnik.ViewModel
                 odabraniTBR = TrecaSreca.Get("SelectedOznaka");
                 odabraniBodovi = TrecaSreca.Get("SelectedBodovi");
                 odabraniNaziv = TrecaSreca.Get("SelectedConcatenatedName");
-                OdabraniParentName = TrecaSreca.Get("SelectedParentName");
+                odabraniParentName = TrecaSreca.Get("SelectedParentName");
                 NazivKlijenta = TrecaSreca.Get("SelectedName");
                 CalculateTotalAmount();
 
@@ -553,6 +560,11 @@ namespace eOdvjetnik.ViewModel
                     TrecaSreca.Set("SelectedBodovi", SelectedItem.bodovi);
                     TrecaSreca.Set("SelectedConcatenatedName", SelectedItem.concatenated_name);
                     TrecaSreca.Set("SelectedOznaka", SelectedItem.oznaka);
+                    TrecaSreca.Set("SelectedParentName", SelectedItem.parent_name);
+                  
+                                
+
+
                 }
                 catch (Exception ex)
                 {

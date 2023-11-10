@@ -965,6 +965,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         {
             Debug.WriteLine(ex.Message);
             await Application.Current.MainPage.DisplayAlert("", "Greška u izradi baze, Molimo kontaktirajte administratora", "OK");
+            return;
         }
         finally
         {
@@ -972,6 +973,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
             ActivityEnabled = false;
             await Application.Current.MainPage.DisplayAlert("", "Baza uspješno instalirana.", "OK");
             Debug.WriteLine(activityEnabled.ToString());
+            WeakReferenceMessenger.Default.Send(new RestartNaplata("RestartNaplataVM!"));
+
 
         }
 
@@ -1011,7 +1014,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
         {
             Debug.WriteLine(ex.Message);
             Application.Current.MainPage.DisplayAlert("", "Došlo je do pogreške prilikom spremanja.", "OK");
-
+            return;
         }
         finally
         {
@@ -1020,8 +1023,9 @@ public class PostavkeViewModel : INotifyPropertyChanged
             string sqluserName = TrecaSreca.Get(USER_mysql);
             string sqldatabaseName = TrecaSreca.Get(databasename_mysql);
             string sqlportId = TrecaSreca.Get(port);
+            WeakReferenceMessenger.Default.Send(new RestartNaplata("RestartNaplataVM!"));
 
- 
+
         }
     }
     //private void OnLoadClickedMySQL()

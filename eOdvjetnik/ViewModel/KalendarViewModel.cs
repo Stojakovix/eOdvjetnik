@@ -165,13 +165,13 @@ namespace eOdvjetnik.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.Message + " u get collorsu u prvom tryu");
 
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message + "u get collorsu u drugom tryu");
 
             }
         }
@@ -512,13 +512,13 @@ namespace eOdvjetnik.ViewModel
 
 
                     }
-                    Debug.WriteLine("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB" + fileItems.Count());
+                    //Debug.Assert(fileItems.Count() == 0);
 
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message + "u generate search resultu");
             }
         }
         #endregion
@@ -705,12 +705,12 @@ namespace eOdvjetnik.ViewModel
 
 
                     }
-                    Debug.WriteLine("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB" + fileItems.Count());
+                    //Debug.WriteLine("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB" + fileItems.Count());
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message + "u AppointmentSpisIdReceived");
             }
             
         }

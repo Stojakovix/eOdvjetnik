@@ -5,7 +5,6 @@ using Timer = System.Timers.Timer;
 using eOdvjetnik.Services;
 using eOdvjetnik.Resources.Strings;
 using CommunityToolkit.Mvvm.Messaging;
-using Plugin.LocalNotification;
 using System.Text.Json;
 using eOdvjetnik.Models;
 using System.Security.Cryptography;
@@ -354,6 +353,8 @@ namespace eOdvjetnik.ViewModel
                         string OIBTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("OIB").GetString();
                         string adresaTvrtke = jsonObject.GetProperty("Companies")[0].GetProperty("adresa").GetString();
                         bool serviceMode = jsonObject.GetProperty("Companies")[0].GetProperty("service_mode").GetBoolean();
+                        int localUserID = jsonObject.GetProperty("Devices")[0].GetProperty("id").GetInt32();
+                        string localUserName = jsonObject.GetProperty("Devices")[0].GetProperty("opis").GetString();
 
 
 
@@ -366,6 +367,9 @@ namespace eOdvjetnik.ViewModel
                         TrecaSreca.Set("company_id", company_ID);
                         TrecaSreca.Set("device_type_id", devicetype_ID);
                         TrecaSreca.Set("service_mode", serviceMode.ToString());
+
+                        TrecaSreca.Set("UserName", localUserName);
+                        TrecaSreca.Set("UserID", localUserID.ToString());
 
                         Debug.WriteLine("MainPageViewModel - > Company info: " + nazivTvrtke + " " + OIBTvrtke + " " + adresaTvrtke);
                         Debug.WriteLine("MainPageViewModel - > LicenceCheck -> Uspjesno dovrsen!");
@@ -565,10 +569,21 @@ namespace eOdvjetnik.ViewModel
                         int id;
                         int.TryParse(filesRow["id"], out id);
                         UserName = filesRow["ime"];
+                        if (string.IsNullOrEmpty(UserName))
+                        {
+                            TrecaSreca.Get("UserName");
+                        }
                         UserID = id.ToString();
-                        UserInitials = filesRow["inicijali"];
+                        if (string.IsNullOrEmpty(UserID))
+
+                        {
+
+                            TrecaSreca.Get("UserID");
+                        }
+                            UserInitials = filesRow["inicijali"];
                     }
                     
+
                     TrecaSreca.Set("UserName", UserName);
                     TrecaSreca.Set("UserID", UserID);
                     Debug.WriteLine(UserID);
@@ -598,28 +613,6 @@ namespace eOdvjetnik.ViewModel
         {
             LicenceCheck(); 
 
-            try
-            {
-                var request = new NotificationRequest
-                {
-                    NotificationId = 1,
-                    Title = "Kliknut kalendar",
-                    Description = "U kalendaru je dodan novi događaj",
-                    BadgeNumber = 1,
-                    CategoryType = NotificationCategoryType.Status,
-                    Schedule = new NotificationRequestSchedule
-                    {
-                        NotifyTime = DateTime.Now.AddSeconds(5),
-                    }
-                };
-                LocalNotificationCenter.Current.AreNotificationsEnabled();
-                LocalNotificationCenter.Current.Show(request);
-                Debug.WriteLine(request.Title);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
 
         }
 
