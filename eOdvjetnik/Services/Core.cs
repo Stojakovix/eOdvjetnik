@@ -206,23 +206,10 @@ namespace eOdvjetnik.Services
         private const string databasename_mysql = "databasename";
 
 
-        public string Install(string data)
-        {
-            string sqlCommands = File.ReadAllText("Resource/Install/odvjetnik_local.sql");
-
-            // Split the SQL commands into individual commands
-            IEnumerable<string> commands = sqlCommands.Split(new[] { ";\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-
-            foreach (string command in commands)
-            {
-                sqlQuery(command);
-            }
-            return data;
-        }
         public void createDatabase(string[] args)
         {
             // MySQL server connection string
-            string connectionString = "Server=" + TrecaSreca.Get(IP_mysql) + ";Port="+ TrecaSreca.Get("port") +";User=" + TrecaSreca.Get(USER_mysql) + ";Password=" + TrecaSreca.Get(PASS_mysql) + ";";
+            string connectionString = "server=" + TrecaSreca.Get(IP_mysql) + ";port="+ TrecaSreca.Get("port") + ";user=" + TrecaSreca.Get(USER_mysql) + ";password=" + TrecaSreca.Get(PASS_mysql) + ";";
 
             try
             {
@@ -238,12 +225,28 @@ namespace eOdvjetnik.Services
                         // Specify the SQL command to create a new database
                         cmd.CommandText = "CREATE DATABASE IF NOT EXISTS `eodvjetnik` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;";
                         Debug.WriteLine(cmd.CommandText);
+
+                        
                         cmd.CommandType = CommandType.Text;
 
                         // Execute the SQL command
                         cmd.ExecuteNonQuery();
 
-                        Console.WriteLine("Database created successfully.");
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected >= 0)
+                        {
+                            Debug.WriteLine("Database created successfully inside of the if.");
+                            // Database creation was successful
+                        }
+                        else
+                        {
+                            Debug.WriteLine("No rows affected. Database may already exist.");
+                            // Database might already exist
+                        }
+
+                        Console.WriteLine("Database created successfully outside of teh if.");
+                        connection.Close();
                     }
                 }
             }
@@ -304,7 +307,7 @@ namespace eOdvjetnik.Services
         public void ExecuteSqlFile()
         {
             // MySQL connection settings
-            string connString = "server=" + TrecaSreca.Get(IP_mysql) + ";user=" + TrecaSreca.Get(USER_mysql) + ";password=" + TrecaSreca.Get(PASS_mysql) + ";database=" + TrecaSreca.Get(databasename_mysql);
+            string connString = "server=" + TrecaSreca.Get(IP_mysql) + ";port=" + TrecaSreca.Get("port") + ";user=" + TrecaSreca.Get(USER_mysql) + ";password=" + TrecaSreca.Get(PASS_mysql) + ";";
 
             // Connect to MySQL database
             using MySqlConnection conn = new MySqlConnection(connString);
@@ -327,7 +330,7 @@ namespace eOdvjetnik.Services
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine("Error executing SQL: " + ex.Message);
+                        Debug.WriteLine("Error executing SQL: " + ex.Message + " -  inside of the ExecuteSQlFile");
                     }
                 }
             }
