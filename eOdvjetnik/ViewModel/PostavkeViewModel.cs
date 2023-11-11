@@ -12,6 +12,8 @@ namespace eOdvjetnik.ViewModel;
 
 public class PostavkeViewModel : INotifyPropertyChanged
 {
+    public ICommand ClearPrefrences { get; set; }
+
     private bool ServiceModeEnabled { get; set; }
     public bool ServiceMode
     {
@@ -780,6 +782,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
             SaveColors = new Command(SetColors);
             AdminColorPopup = false;
             CloseNewEmployeeCommand = new Command(CloseNewEmployee);
+            ClearPrefrences = new Command(DeletePreferences);
 
             Colors = new ObservableCollection<ColorItem>();
             WeakReferenceMessenger.Default.Register<LicenceUpdated>(this, LicenceUpdatedReceived);
@@ -1103,7 +1106,20 @@ public class PostavkeViewModel : INotifyPropertyChanged
 
     #endregion
 
-
+    public void DeletePreferences()
+    {
+        string hwid = TrecaSreca.Get("key");
+        string activationCode = TrecaSreca.Get("activation_code");
+        Debug.WriteLine("Brisanje preferenci " + hwid + " " + activationCode);
+        try
+        {
+            TrecaSreca.Clear();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+    }
 
     private async void ShowAlert(string title, string message)
     {

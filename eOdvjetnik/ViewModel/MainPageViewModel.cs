@@ -505,13 +505,8 @@ namespace eOdvjetnik.ViewModel
                             int daysDifference = difference.Days;
                             if (daysDifference > 45)
                             {
-                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
-                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
-                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
-                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
-                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
+                                
                                 Debug.WriteLine(daysDifference);
-                                Debug.WriteLine("8888888888888888888888888888888888888888888888");
                                 //ExpiredLicence = true;
 
                             }

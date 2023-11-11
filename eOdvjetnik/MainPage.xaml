@@ -40,7 +40,7 @@
 
             <Image Source="text_only.png" HeightRequest="120" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,30" IsVisible="{OnPlatform Android=False, iOS=False, WinUI=True, MacCatalyst=True}" />
 
-            <Button Text="Clear All Preferences"  Command="{Binding ClearPrefrences}" IsVisible="{Binding ServiceMode}" />
+            <!--<Button Text="Clear All Preferences"  Command="{Binding ClearPrefrences}" IsVisible="{Binding ServiceMode}" />-->
 
             <Label
                 Text="{x:Static resx:AppResources.ZaAktivaciju}"

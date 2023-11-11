@@ -82,7 +82,7 @@ namespace eOdvjetnik.ViewModel
         {
             NoQueryResult = false;
             NoSQLreply = false;
-            Debug.WriteLine(tariffItems);
+            //Debug.WriteLine(tariffItems);
             try
             {
                 if (tariffItems != null)
@@ -118,10 +118,10 @@ namespace eOdvjetnik.ViewModel
 
                             });
                         }
-                        foreach (TariffItem item in tariffItems)
-                        {
-                            Debug.WriteLine(item.parent_name);
-                        }
+                        //foreach (TariffItem item in tariffItems)
+                        //{
+                        //    Debug.WriteLine(item.parent_name);
+                        //}
                     }
                     else
                     {
@@ -305,9 +305,9 @@ namespace eOdvjetnik.ViewModel
                     UkupanIznosVisible = false
                 };
                 ReceiptItems.Add(newItem);
-                Debug.WriteLine("ReceptItem newItem.Name: " + newItem.Name);
-                Debug.WriteLine("ReceptItem newItem.ParentName: " + newItem.ParentName);
-                Debug.WriteLine("ReceptItem odabraniParentName: " + odabraniParentName);
+                //Debug.WriteLine("ReceptItem newItem.Name: " + newItem.Name);
+                //Debug.WriteLine("ReceptItem newItem.ParentName: " + newItem.ParentName);
+                //Debug.WriteLine("ReceptItem odabraniParentName: " + odabraniParentName);
 
                 CalculateTotalAmount();
 
