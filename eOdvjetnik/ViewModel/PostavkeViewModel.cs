@@ -7,13 +7,14 @@ using System.Diagnostics;
 using System.Text;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Maui.Controls;
 
 namespace eOdvjetnik.ViewModel;
 
 public class PostavkeViewModel : INotifyPropertyChanged
 {
     public ICommand ClearPrefrences { get; set; }
-
+    public int EmployeeCount { get; set; }
     private bool ServiceModeEnabled { get; set; }
     public bool ServiceMode
     {
@@ -541,10 +542,10 @@ public class PostavkeViewModel : INotifyPropertyChanged
                 {
                     
                     GetEmployees();
+                    AddInitialEmployee();
                     await Shell.Current.GoToAsync("///Zaposlenici");
                     Debug.WriteLine("Zaposlenici clicked");
                 }
-
                 AssignEmployees();
 
 
@@ -1439,6 +1440,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
             HWID = TrecaSreca.Get("key");
             HWID64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(HWID));
             ParseDate();
+            AddInitialEmployee();
         }
         catch (Exception ex)
         {
@@ -1494,9 +1496,53 @@ public class PostavkeViewModel : INotifyPropertyChanged
         else
         {
             await Shell.Current.GoToAsync("//Zaposlenici");
-
+            
         }
     }
 
+    public void AddInitialEmployee()
+    {
+        try
+        {
+            ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
+            string query1 = "SELECT COUNT(id) AS id FROM employees;";
+            externalSQLConnect.sqlQuery(query1);
+            Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(query1);
+
+            if (filesData != null)
+            {
+                    foreach (Dictionary<string, string> filesRow in filesData)
+                    {
+
+                    string count = filesRow["id"];
+                    Debug.WriteLine("LICENCE COUNT ++++++++++++++++++ " + count);
+                    EmployeeCount = int.Parse(count);
+                };
+
+                if (EmployeeCount > 0)
+                {
+                    //ništa
+                }
+                else
+                {
+                    PostavkeUserName = TrecaSreca.Get("UserName");
+                    string inicijali = "ADMIN";
+                    string HWID = TrecaSreca.Get("key");
+                    int active = 1;
+                    string vrsta = "Odvjetnik";
+                    string query2 = $"INSERT INTO employees (ime, inicijali, hwid, active, type) " +
+                              $"VALUES ('{PostavkeUserName}', '{inicijali}', '{HWID}', '{active}' , '{vrsta}')";
+                    externalSQLConnect.sqlQuery(query2);
+
+                    Debug.WriteLine("Dodan inicijalni zaposlenik: " + PostavkeUserName + " " + inicijali + " " + HWID);
+                }
+            }
+        }
+
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+    }
 
 }
