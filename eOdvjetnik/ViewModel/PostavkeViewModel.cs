@@ -473,6 +473,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
                         Initals = filesRow["inicijali"],
                         Active = active,
                         Type = type,
+                        Opis = "Bez uređaja",
                     };
 
                     if (!string.IsNullOrEmpty(employee.EmployeeHWID))
@@ -496,6 +497,22 @@ public class PostavkeViewModel : INotifyPropertyChanged
         }
     }
 
+    ////////////////////////////
+
+    public void AssignEmployees()
+    {
+        foreach (EmployeeItem employeeItem in EmployeeItems)
+        {
+            Device companyDeviceItem = DataModel.Devices.FirstOrDefault(device => device.hwid == employeeItem.EmployeeHWID);
+
+            if (companyDeviceItem != null)
+            {
+                employeeItem.Opis = companyDeviceItem.opis;
+            }
+        }
+    }
+
+    ////////////////////////////
     private async void ZaposleniciClicked()
     {
         string licence_type = TrecaSreca.Get("licence_type");
@@ -506,7 +523,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
             adminCheck = licence_type.Substring(0, Math.Min(licence_type.Length, numberOfCharacters));
         }
         Debug.WriteLine("Zaposlenici button - 'Admin' provjera: " + adminCheck);
-        if (adminCheck == "Admin")
+        if (adminCheck == "Admin" || adminCheck == "Trial")
         {
             try
             {
@@ -525,6 +542,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
                     await Shell.Current.GoToAsync("///Zaposlenici");
                     Debug.WriteLine("Zaposlenici clicked");
                 }
+
+                AssignEmployees();
 
 
             }
@@ -1283,6 +1302,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
                     }
                     GetEmployees();
                     Application.Current.MainPage.DisplayAlert("", "Uspješno ažurirano.", "OK");
+                    AssignEmployees();
                 }
                 catch (Exception ex)
                 {
@@ -1371,6 +1391,7 @@ public class PostavkeViewModel : INotifyPropertyChanged
                 {
                     await Shell.Current.GoToAsync("///LoadingPageZaposlenici");
 
+
                 }
                 else
                 {
@@ -1385,6 +1406,8 @@ public class PostavkeViewModel : INotifyPropertyChanged
             }
         }
         GetEmployees();
+        AssignEmployees();
+
 
     }
     private void LicenceUpdatedReceived(object recipient, LicenceUpdated message)
