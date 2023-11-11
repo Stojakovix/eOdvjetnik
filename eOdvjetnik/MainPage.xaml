@@ -70,7 +70,7 @@
                 VerticalOptions="Center" 
                 HorizontalOptions="Center"
                 FontSize="Large"
-                Margin="{OnPlatform Android='0,30,0,10', iOS='0,30,0,10', MacCatalyst='0,0,0,10', WinUI='0,0,0,10'}"
+                Margin="{OnPlatform Android='0,30,0,10', iOS='0,30,0,10', MacCatalyst='0,20,0,10', WinUI='0,20,0,10'}"
 
                 TextColor="Black"
                 IsVisible="{Binding ActivationVisible }"
@@ -91,15 +91,21 @@
 
 
             </Label>
-
             <Button  Grid.Row="1" Grid.ColumnSpan="5"
+               Margin="{OnPlatform Android='0,10,0,10', iOS='0,10,0,10', MacCatalyst='0,10,0,0', WinUI='0,10,0,0'}"
+               HeightRequest="50" 
+               Text="Kopiraj kȏd"  
+               Command="{Binding CopyToClipboard}"
+               IsVisible="{Binding ActivationVisible }" />
+
+            <Button  Grid.Row="2" Grid.ColumnSpan="5"
                      Margin="{OnPlatform Android='0,40,0,10', iOS='0,30,0,10', MacCatalyst='0,10,0,0', WinUI='0,10,0,0'}"
                      HeightRequest="50" 
                      Text="Provjeri status licence"  
                      Command="{Binding CheckLicenceStatus}"
                      IsVisible="{Binding ActivationVisible }" />
             
-            <Button  Grid.Row="2" 
+            <Button  Grid.Row="3" 
                      Grid.ColumnSpan="6"
                      Margin="{OnPlatform Android='0,20,0,10', iOS='0,30,0,10', MacCatalyst='0,10,0,0', WinUI='0,10,0,0'}"
                      HeightRequest="50" 
@@ -107,7 +113,7 @@
                      Clicked="BrowserOpen_Clicked" 
                      IsVisible="{Binding ActivationVisible }"/>
             
-            <Image HorizontalOptions="FillAndExpand" Grid.ColumnSpan="7" Grid.Row="3" Source="text_only.png" Aspect="AspectFit"  Margin="80,70,80,0" IsVisible="{OnPlatform Android=True, iOS=True, WinUI=False, MacCatalyst=False}" />
+            <Image HorizontalOptions="FillAndExpand" Grid.ColumnSpan="7" Grid.Row="4" Source="text_only.png" Aspect="AspectFit"  Margin="80,70,80,0" IsVisible="{OnPlatform Android=True, iOS=True, WinUI=False, MacCatalyst=False}" />
 
         </VerticalStackLayout>
         <StackLayout IsVisible="false" Grid.Column="4" HorizontalOptions="EndAndExpand" Padding="0,0,10,0">

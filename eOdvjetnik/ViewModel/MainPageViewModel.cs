@@ -44,6 +44,8 @@ namespace eOdvjetnik.ViewModel
             }
         }
         public ICommand ClearPrefrences { get; set; }
+        public ICommand CopyToClipboard { get; set; }
+
         public ICommand CheckLicenceStatus { get; set; } //jer premještamo gumb iz clicked cs u binding VM - dodati u constructor!
 
 
@@ -161,6 +163,7 @@ namespace eOdvjetnik.ViewModel
             Version = $"{AppResources.Version} {AppInfo.VersionString}";
             ClearPrefrences = new Command(DeletePreferences);
             CheckLicenceStatus = new Command(OnRefreshLicenceClick);
+            CopyToClipboard = new Command(CopyStringToClipboard);
             CurrentDateDT = DateTime.Now.Date;
             RefreshTime();
 
@@ -203,6 +206,14 @@ namespace eOdvjetnik.ViewModel
 
         }
 
+        public void CopyStringToClipboard()
+        {
+            string activationCode = TrecaSreca.Get("activation_code");
+            if (!string.IsNullOrEmpty(activationCode))
+            {
+                Clipboard.SetTextAsync(activationCode);
+            }
+        }
         void RefreshTime()
         {
             MainThread.BeginInvokeOnMainThread(() =>
