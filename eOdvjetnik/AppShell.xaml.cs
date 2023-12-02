@@ -1,4 +1,5 @@
-﻿namespace eOdvjetnik;
+﻿using Microsoft.Maui.ApplicationModel;
+namespace eOdvjetnik;
 using System.Diagnostics;
 using Views;
 using Microsoft.Maui.Controls;

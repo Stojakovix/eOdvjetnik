@@ -15,6 +15,8 @@ using System;
 using System.IO;
 using Microsoft.Maui.Controls;
 using Org.BouncyCastle.Asn1.BC;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Devices;
 
 namespace eOdvjetnik.ViewModel
 {

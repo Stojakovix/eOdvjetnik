@@ -7,6 +7,7 @@ using System.ComponentModel;
 using eOdvjetnik.Resources.Strings;
 using eOdvjetnik.Services;
 using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Maui.ApplicationModel;
 
 
 namespace eOdvjetnik.ViewModel
