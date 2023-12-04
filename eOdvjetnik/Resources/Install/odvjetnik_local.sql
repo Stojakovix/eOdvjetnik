@@ -89,6 +89,7 @@ CREATE TABLE IF NOT EXISTS `eodvjetnik`.`events` (
   `hardwareid` TEXT NULL DEFAULT NULL,
   `internal_event_id` VARCHAR(45) NULL DEFAULT '0',
   `color` VARCHAR(45) NULL DEFAULT 'LightGray',
+  `ReminderDuration` INT NULL DEFAULT '0',
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1187

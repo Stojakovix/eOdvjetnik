@@ -22,7 +22,7 @@
     <ScrollView>
         <StackLayout  NavigationPage.HasNavigationBar="False">
 
-            <VerticalStackLayout Margin="20,20,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" MinimumHeightRequest="720" >
+            <VerticalStackLayout Margin="20,20,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" MinimumHeightRequest="770" >
 
 
                 <Grid>
@@ -237,18 +237,34 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="200" />
                         <ColumnDefinition Width="200" />
+                        
                     </Grid.ColumnDefinitions>
 
                     <!--<Label  Grid.Column="0"  Text="Spisi" FontSize="Default" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20" />-->
-                    <Button Grid.Column="0"  Text="Povezani spis" FontSize="Default" TextColor="Black" Command="{Binding DodajButtonClick}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20"/>
+                    <Button Grid.Column="0" Grid.Row="1"   Text="Povezani spis" FontSize="Default" TextColor="Black" Command="{Binding DodajButtonClick}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,0,20"/>
                     <SearchBar Grid.Column="0" Grid.ColumnSpan="3" SearchCommand="{Binding SearchCommand}" WidthRequest="200"
-                               Text="{Binding SearchText}" Grid.Row="1" Placeholder="Pretraga spisa" IsVisible="{Binding SpisiGridIsVisible}" HorizontalOptions="Start" VerticalOptions="Center" ></SearchBar>
+                               Text="{Binding SearchText}" Grid.Row="2" Placeholder="Pretraga spisa" IsVisible="{Binding SpisiGridIsVisible}" HorizontalOptions="Start" VerticalOptions="Center" ></SearchBar>
 
+                    <Label Text="Podsjetnik" Grid.Column="0" Grid.Row="0" HorizontalOptions="Start"  VerticalOptions="Center"></Label>
+                    <Switch Grid.Column="1" x:Name="ReminderSwitch"  Grid.Row="0" HorizontalOptions="Start"  VerticalOptions="Center" ThumbColor="#DC143C"  Toggled="Switch_Toggled"  ></Switch>
+                    <Picker x:Name="ReminderPicker" SelectedIndexChanged="OnReminderPickerCategoryChanged" Grid.Column="2" Grid.Row="0" HorizontalOptions="Start"  VerticalOptions="Center" IsVisible="False">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String> Bez podsjetnika</x:String>
+                                <x:String> 15 minuta</x:String>
+                                <x:String> 30 minuta</x:String>
+                                <x:String> 1 sat</x:String>
+                                <x:String> 6 sati</x:String>
+                                <x:String> 24 sata</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
                 </Grid>
 
                 <Grid Margin="0,15,0,0"  x:Name="SpisiGrid" IsVisible="{Binding SpisiGridIsVisible}" MinimumHeightRequest="100" BackgroundColor="#faf9fb" >

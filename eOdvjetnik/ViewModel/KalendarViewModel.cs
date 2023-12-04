@@ -208,6 +208,8 @@ namespace eOdvjetnik.ViewModel
 
 
 
+
+
         public KalendarViewModel()
         {
             //    AdminViewByDate = new Command(GetAdminCalendarEventsByDate);
@@ -225,8 +227,8 @@ namespace eOdvjetnik.ViewModel
                 Resources = new ObservableCollection<SchedulerResource>();
                 FileItems = new ObservableCollection<FileItem>();
                 DodajButtonClick = new Command(DodajSpis_clicked);
-                
 
+                
 
                 GetColors();
                 AdminLicenceCheck();
@@ -235,6 +237,7 @@ namespace eOdvjetnik.ViewModel
                 //this.QueryAppointmentsCommand = new Command<Object(LoadMoreAppointments, CanLoadMoreAppointments);
                 Debug.WriteLine("---------------------inicijalizirano kalendarViewModel constructor");
 
+                
             }
             catch (Exception ex)
             {
@@ -561,6 +564,8 @@ namespace eOdvjetnik.ViewModel
                         }
                         //Debug.WriteLine("-------------------------------------------------------------- " + colorName + " 0000000000000000");
                         Color backgroundColor = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(colorName);
+                        int reminderDuration = int.Parse(appointmentRow["ReminderDuration"]);
+                        TimeSpan ReminderTime = TimeSpan.FromMinutes(reminderDuration);
 
 
 
@@ -579,6 +584,11 @@ namespace eOdvjetnik.ViewModel
                                 IsAllDay = bool.Parse(appointmentRow["AllDay"]),
                                 Notes = appointmentRow["DescriptionNotes"],
                                 Background = backgroundColor,
+                                Reminders = new ObservableCollection<SchedulerReminder>
+                                {
+                                    new SchedulerReminder {TimeBeforeStart = ReminderTime}
+                                }
+
                             });
                             //foreach (SchedulerAppointment appointment in Appointments)
                             //{
@@ -617,6 +627,8 @@ namespace eOdvjetnik.ViewModel
                 Debug.WriteLine(query);
 
 
+
+
                 //Rezultat query-ja u apointmentData
                 Dictionary<string, string>[] appointmentData = externalSQLConnect.sqlQuery(query);
                 if (appointmentData != null)
@@ -625,6 +637,8 @@ namespace eOdvjetnik.ViewModel
 
                     //Externa lista bez internih
                     List<int> ExtDifference = ExternalEventIDs.Except(InternalEventIDs).ToList();
+
+
 
                     foreach (Dictionary<string, string> appointmentRow in appointmentData)
                     {
@@ -638,7 +652,10 @@ namespace eOdvjetnik.ViewModel
                         //Debug.WriteLine("-------------------------------------------------------------- " + colorName + " 0000000000000000");
                         Color backgroundColor = (Color)TypeDescriptor.GetConverter(typeof(Color)).ConvertFromString(colorName);
 
+                        int reminderDuration = int.Parse(appointmentRow["ReminderDuration"]);
+                        TimeSpan ReminderTime = TimeSpan.FromMinutes(reminderDuration);
 
+                        Debug.WriteLine("vrijeme podsjetnika" + ReminderTime.ToString());
 
                         Appointments.Add(new SchedulerAppointment()
                         {
@@ -650,9 +667,14 @@ namespace eOdvjetnik.ViewModel
                             {
                                 (object)int.Parse(appointmentRow["resource_id"]) // Boxing the integer into an object
                             },
+
                             IsAllDay = bool.Parse(appointmentRow["AllDay"]),
                             Notes = appointmentRow["DescriptionNotes"],
                             Background = backgroundColor,
+                            Reminders = new ObservableCollection<SchedulerReminder>
+                            {
+                                new SchedulerReminder {TimeBeforeStart = ReminderTime}
+                            }
                         });
                     }
                 }
@@ -734,6 +756,7 @@ namespace eOdvjetnik.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #region Stari kod za adminkalendar
         //public void GetAdminCalendarEventsByDate()
         //{
         //    if (adminAppointments != null)
@@ -850,6 +873,7 @@ namespace eOdvjetnik.ViewModel
         //    {
         //        Debug.WriteLine(ex.Message + "in viewModel generate files");
         //    }
-        //}
+        //} 
+        #endregion
     }
 }

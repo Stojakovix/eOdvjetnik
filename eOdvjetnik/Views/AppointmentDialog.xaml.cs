@@ -73,6 +73,10 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
     public DateTime MacBookStartDT { get; set; }
     public DateTime MacBookEndDT { get; set; }
 
+    public TimeSpan ReminderTime { get; set; }
+
+    public DateTime AppointmentTime { get; set; }
+
     public AppointmentDialog(SchedulerAppointment appointment, DateTime selectedDate, SfScheduler scheduler)
     {
         try
@@ -439,6 +443,7 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
             ExternalSQLConnect externalSQLConnect = new ExternalSQLConnect();
             //var appId = Convert.ToInt32(appointment.Id);
             string getIDQuery = $"SELECT * FROM events WHERE internal_event_id = \"{appointment.Id}\"";
+            int totalMinutes = (int)ReminderTime.TotalMinutes;
             Debug.WriteLine(getIDQuery);
             Dictionary<string, string>[] filesData = externalSQLConnect.sqlQuery(getIDQuery);
 
@@ -453,13 +458,13 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
                     var hardware_id = TrecaSreca.Get("key");
                     if (DevicePlatform == "MacCatalyst")
                     {
-                        string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, Files, internal_event_id, color, user_id, resource_id, hardwareid) VALUES ('{MacBookStartDT.ToString("yyyy-MM-dd HH:mm:ss")}', '{MacBookEndDT.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{IDSpisa}', '{appointment.Id}', '{AppoitmentColorName}' , '{SQLUserID}' , '{ResourceId}' , '{hardware_id}')";
+                        string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, Files, internal_event_id, color, ReminderDuration, user_id, resource_id, hardwareid) VALUES ('{MacBookStartDT.ToString("yyyy-MM-dd HH:mm:ss")}', '{MacBookEndDT.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{IDSpisa}', '{appointment.Id}', '{AppoitmentColorName}' , '{totalMinutes}' , '{SQLUserID}' , '{ResourceId}' , '{hardware_id}')";
                         externalSQLConnect.sqlQuery(query);
                         Debug.WriteLine(query);
                     }
                     else
                     {
-                        string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, Files, internal_event_id, color, user_id, resource_id, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{IDSpisa}', '{appointment.Id}', '{AppoitmentColorName}' , '{SQLUserID}' , '{ResourceId}' , '{hardware_id}')";
+                        string query = $"INSERT INTO events (TimeFrom, TimeTo, EventName, AllDay, DescriptionNotes, Files, internal_event_id, color, ReminderDuration, user_id, resource_id, hardwareid) VALUES ('{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{appointment.Subject}', '{appointment.IsAllDay}', '{appointment.Notes}', '{IDSpisa}', '{appointment.Id}', '{AppoitmentColorName}' , '{totalMinutes}' , '{SQLUserID}' , '{ResourceId}' , '{hardware_id}')";
                         externalSQLConnect.sqlQuery(query);
                         Debug.WriteLine(query);
                     }
@@ -478,13 +483,13 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
                     var hardware_id = TrecaSreca.Get("key");
                     if (DevicePlatform == "MacCatalyst")
                     {
-                        string query = $"UPDATE events SET TimeFrom = '{MacBookStartDT.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{MacBookEndDT.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', Files = '{IDSpisa}', color = '{AppoitmentColorName}',  user_id = '{SQLUserID}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
+                        string query = $"UPDATE events SET TimeFrom = '{MacBookStartDT.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{MacBookEndDT.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', Files = '{IDSpisa}', color = '{AppoitmentColorName}', ReminderDuration = '{totalMinutes}',  user_id = '{SQLUserID}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
                         externalSQLConnect.sqlQuery(query);
                         Debug.WriteLine(query);
                     }
                     else
                     {
-                        string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', Files = '{IDSpisa}', color = '{AppoitmentColorName}',  user_id = '{SQLUserID}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
+                        string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', Files = '{IDSpisa}', color = '{AppoitmentColorName}', ReminderDuration = '{totalMinutes}',  user_id = '{SQLUserID}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
                         externalSQLConnect.sqlQuery(query);
                         Debug.WriteLine(query);
                     }
@@ -503,13 +508,13 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
                 var hardware_id = TrecaSreca.Get("key");
                 if (DevicePlatform == "MacCatalyst")
                 {
-                    string query = $"UPDATE events SET TimeFrom = '{MacBookStartDT.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{MacBookEndDT.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', Files = '{IDSpisa}', user_id = '{ResourceId}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
+                    string query = $"UPDATE events SET TimeFrom = '{MacBookStartDT.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{MacBookEndDT.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', Files = '{IDSpisa}', ReminderDuration = '{totalMinutes}', user_id = '{ResourceId}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine(query);
                 }
                 else
                 {
-                    string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', Files = '{IDSpisa}', user_id = '{ResourceId}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
+                    string query = $"UPDATE events SET TimeFrom = '{appointment.StartTime.ToString("yyyy-MM-dd HH:mm:ss")}', TimeTo = '{appointment.EndTime.ToString("yyyy-MM-dd HH:mm:ss")}', EventName = '{appointment.Subject}', AllDay = '{appointment.IsAllDay}', DescriptionNotes = '{appointment.Notes}', Files = '{IDSpisa}', ReminderDuration = '{totalMinutes}', user_id = '{ResourceId}', resource_id = '{ResourceId}' , hardwareid = '{hardware_id}' WHERE internal_event_id = " + appointment.Id;
                     externalSQLConnect.sqlQuery(query);
                     Debug.WriteLine(query);
                 }
@@ -525,8 +530,11 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
 
     private void AppointmentDetails()
     {
+         
         if (appointment == null)
         {
+            
+
             appointment = new SchedulerAppointment();
             appointment.Subject = this.eventNameText.Text;
             appointment.StartTime = this.startDate_picker.Date.Add(this.startTime_picker.Time);
@@ -537,6 +545,10 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
             appointment.ResourceIds = new ObservableCollection<object>
                         {
                 (object)ResourceId // Boxing the integer into an object
+            };
+            appointment.Reminders = new ObservableCollection<SchedulerReminder>
+            {
+                    new SchedulerReminder {TimeBeforeStart = ReminderTime } 
             };
             if (DevicePlatform == "MacCatalyst")
             {
@@ -585,6 +597,10 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
             appointment.ResourceIds = new ObservableCollection<object>
             {
                 (object)ResourceId // Boxing the integer into an object
+            };
+            appointment.Reminders = new ObservableCollection<SchedulerReminder>
+            {
+                    new SchedulerReminder {TimeBeforeStart = ReminderTime}
             };
             if (DevicePlatform == "MacCatalyst")
             {
@@ -652,6 +668,12 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
                     OnCategoryPickerSelectedIndexChanged(categoryPicker, EventArgs.Empty);
                     break;
                 }
+            }
+            if(appointment.Reminders != null) 
+            {
+                ReminderSwitch.IsToggled = true;
+                ReminderPicker.IsVisible = true;
+                
             }
 
 
@@ -844,4 +866,58 @@ public partial class AppointmentDialog : ContentPage, INotifyPropertyChanged
             Debug.WriteLine(ex.Message + "u listview item tappeda u app dialogu");
         }
     }
+
+    private void Switch_Toggled(object sender, ToggledEventArgs e)
+    {
+        if (ReminderPicker.IsVisible == false)
+        {
+            ReminderPicker.IsVisible = true;
+        }
+        else
+        {
+            ReminderPicker.IsVisible= false;
+        }
+    }
+
+    private void OnReminderPickerCategoryChanged(object sender, EventArgs e)
+    {
+        var picker = (Picker)sender;
+        
+        int selectedIndex = picker.SelectedIndex;
+
+        if (selectedIndex == 0)
+        {
+            ReminderTime = new TimeSpan(0, 0, 0);
+            Debug.WriteLine(ReminderTime.ToString());
+        }
+
+
+        if (selectedIndex == 1)
+        {
+            ReminderTime = new TimeSpan(0,15,0);
+            Debug.WriteLine(ReminderTime.ToString());
+        }
+        else if(selectedIndex == 2)
+        {
+            ReminderTime = new TimeSpan(0, 30, 0);
+            Debug.WriteLine(ReminderTime.ToString());
+        }
+        else if(selectedIndex == 3)
+        {
+            ReminderTime = new TimeSpan(0, 60, 0);
+            Debug.WriteLine(ReminderTime.ToString());
+        }
+        else if (selectedIndex == 4)
+        {
+            ReminderTime = new TimeSpan(6, 0, 0);
+            Debug.WriteLine(ReminderTime.ToString());
+        }
+        else if (selectedIndex == 5)
+        {
+            ReminderTime = new TimeSpan(24, 0, 0);
+            Debug.WriteLine(ReminderTime.ToString());
+        }
+        
+    }
+
 }
