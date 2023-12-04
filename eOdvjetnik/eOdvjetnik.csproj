@@ -1,885 +1,869 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<PropertyGroup>
-		<TargetFrameworks>net7.0-ios;net7.0-maccatalyst;net7.0-android</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
-		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
-		<OutputType>Exe</OutputType>
-		<RootNamespace>eOdvjetnik</RootNamespace>
-		<UseMaui>true</UseMaui>
-		<SingleProject>true</SingleProject>
-		<ImplicitUsings>enable</ImplicitUsings>
-
-		<!-- Display name -->
-		<ApplicationTitle>eOdvjetnik</ApplicationTitle>
-
-		<!-- App Identifier -->
-		<ApplicationId>com.zadarict.eodvjetnik</ApplicationId>
-		<ApplicationIdGuid>70cf2bf6-7324-45d9-a89e-7377ea1e46e0</ApplicationIdGuid>
-
-		<!-- Versions -->
-		<ApplicationDisplayVersion>2.21</ApplicationDisplayVersion>
-		<ApplicationVersion>221</ApplicationVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">29.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
-		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		<Configurations>Release;Debug</Configurations>
-		<UseMauiEssentials>true</UseMauiEssentials>
-	</PropertyGroup>
-
-	
-	<PropertyGroup>
-		<AndroidLinkResources>true</AndroidLinkResources>
-		<AndroidLinkMode>None</AndroidLinkMode>
-		<UseInterpreter>true</UseInterpreter>
-		<RunAOTCompilation>false</RunAOTCompilation>
-		<AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
-		<RuntimeIdentifiers Condition="$(TargetFramework.Contains('-android'))">android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
-		<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
-		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-		<PackageCertificateThumbprint>35F6166BB0CB132E9C171CF3E87E353AA4116EB4</PackageCertificateThumbprint>
-		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-		<AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
-		<GenerateTestArtifacts>True</GenerateTestArtifacts>
-		<AppInstallerUri>https://eodvjetnik.hr/install</AppInstallerUri>
-		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-		<GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
-		<DefaultLanguage>hr</DefaultLanguage>
-		<AppxPackageSigningTimestampServerUrl>http://timestamp.globalsign.com/tsa/r6advanced1</AppxPackageSigningTimestampServerUrl>
-	</PropertyGroup>
-
-
-	<PropertyGroup Condition="$(TargetFramework.Contains('-ios'))">
-		   <UseInterpreter>true</UseInterpreter>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
-	  <CreatePackage>false</CreatePackage>
-	  <CodesignProvision>Automatic</CodesignProvision>
-	  <CodesignKey>iPhone Distribution: Robert Vincic (FY8PYJ9EF9)</CodesignKey>
-	  <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
-	  <CreatePackage>false</CreatePackage>
-	  <CodesignKey>iPhone Distribution</CodesignKey>
-	  <CodesignProvision>Automatic</CodesignProvision>
-	  <MtouchDebug>true</MtouchDebug>
-	  <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-	  <DebugSymbols>true</DebugSymbols>
-	  <WarningLevel>4</WarningLevel>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|AnyCPU'">
-	  <MtouchLink>SdkOnly</MtouchLink>
-	  <EnableCodeSigning>True</EnableCodeSigning>
-	  <EnablePackageSigning>true</EnablePackageSigning>
-	  <CreatePackage>true</CreatePackage>
-	  <CodesignKey>Developer ID Application: Robert Vincic (FY8PYJ9EF9)</CodesignKey>
-	  <CodesignProvision>eOdvjetnik_DeveloperID</CodesignProvision>
-	  <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-	  <PackageSigningKey>Developer ID Installer: Robert Vincic (FY8PYJ9EF9)</PackageSigningKey>
-	  <MtouchDebug>true</MtouchDebug>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
-	  <CreatePackage>false</CreatePackage>
-	  <MtouchDebug>true</MtouchDebug>
-	</PropertyGroup>
-	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
-		<AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
-		<PackageCertificateThumbprint>35F6166BB0CB132E9C171CF3E87E353AA4116EB4</PackageCertificateThumbprint>
-	</PropertyGroup>
-	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(RuntimeIdentifierOverride)' != ''">
-		<RuntimeIdentifier>$(RuntimeIdentifierOverride)</RuntimeIdentifier>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
-	</PropertyGroup>
-	<ItemGroup>
-		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\logo.svg" />
-		<MauiIcon Include="Resources\AppIcon\logo.svg" />
-
-		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash_new.svg" BaseSize="128,128" />
-
-		<!-- Images -->
-		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
-		
-		<!-- Custom Fonts -->
-		<MauiFont Include="Resources\Fonts\*" />
-
-		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Remove="NewFolder1\**" />
-	  <EmbeddedResource Remove="NewFolder1\**" />
-	  <MauiCss Remove="NewFolder1\**" />
-	  <MauiXaml Remove="NewFolder1\**" />
-	  <None Remove="NewFolder1\**" />
-	  <Compile Remove="Services\SaveAndroid.cs" />
-	  <MauiImage Remove="Resources\Images\aac.png" />
-	  <MauiImage Remove="Resources\Images\ai.png" />
-	  <MauiImage Remove="Resources\Images\aiff.png" />
-	  <MauiImage Remove="Resources\Images\avi.png" />
-	  <MauiImage Remove="Resources\Images\blank.png" />
-	  <MauiImage Remove="Resources\Images\bmp.png" />
-	  <MauiImage Remove="Resources\Images\cpp.png" />
-	  <MauiImage Remove="Resources\Images\css.png" />
-	  <MauiImage Remove="Resources\Images\csv.png" />
-	  <MauiImage Remove="Resources\Images\dat.png" />
-	  <MauiImage Remove="Resources\Images\dmg.png" />
-	  <MauiImage Remove="Resources\Images\doc.png" />
-	  <MauiImage Remove="Resources\Images\docx.png" />
-	  <MauiImage Remove="Resources\Images\dotx.png" />
-	  <MauiImage Remove="Resources\Images\down.png" />
-	  <MauiImage Remove="Resources\Images\dwg.png" />
-	  <MauiImage Remove="Resources\Images\dxf.png" />
-	  <MauiImage Remove="Resources\Images\edit.svg" />
-	  <MauiImage Remove="Resources\Images\eps.png" />
-	  <MauiImage Remove="Resources\Images\exe.png" />
-	  <MauiImage Remove="Resources\Images\flv.png" />
-	  <MauiImage Remove="Resources\Images\folder_1484.png" />
-	  <MauiImage Remove="Resources\Images\gif.png" />
-	  <MauiImage Remove="Resources\Images\hpp.png" />
-	  <MauiImage Remove="Resources\Images\html.png" />
-	  <MauiImage Remove="Resources\Images\ics.png" />
-	  <MauiImage Remove="Resources\Images\iso.png" />
-	  <MauiImage Remove="Resources\Images\java.png" />
-	  <MauiImage Remove="Resources\Images\jpg.png" />
-	  <MauiImage Remove="Resources\Images\js.png" />
-	  <MauiImage Remove="Resources\Images\key.png" />
-	  <MauiImage Remove="Resources\Images\left.png" />
-	  <MauiImage Remove="Resources\Images\less.png" />
-	  <MauiImage Remove="Resources\Images\mid.png" />
-	  <MauiImage Remove="Resources\Images\mp3.png" />
-	  <MauiImage Remove="Resources\Images\mp4.png" />
-	  <MauiImage Remove="Resources\Images\mpg.png" />
-	  <MauiImage Remove="Resources\Images\new_window.png" />
-	  <MauiImage Remove="Resources\Images\odf.png" />
-	  <MauiImage Remove="Resources\Images\ods.png" />
-	  <MauiImage Remove="Resources\Images\odt.png" />
-	  <MauiImage Remove="Resources\Images\otp.png" />
-	  <MauiImage Remove="Resources\Images\ots.png" />
-	  <MauiImage Remove="Resources\Images\ott.png" />
-	  <MauiImage Remove="Resources\Images\page.png" />
-	  <MauiImage Remove="Resources\Images\pdf.png" />
-	  <MauiImage Remove="Resources\Images\php.png" />
-	  <MauiImage Remove="Resources\Images\play.png" />
-	  <MauiImage Remove="Resources\Images\png.png" />
-	  <MauiImage Remove="Resources\Images\ppt.png" />
-	  <MauiImage Remove="Resources\Images\psd.png" />
-	  <MauiImage Remove="Resources\Images\py.png" />
-	  <MauiImage Remove="Resources\Images\qt.png" />
-	  <MauiImage Remove="Resources\Images\rar.png" />
-	  <MauiImage Remove="Resources\Images\rb.png" />
-	  <MauiImage Remove="Resources\Images\refresh.png" />
-	  <MauiImage Remove="Resources\Images\rtf.png" />
-	  <MauiImage Remove="Resources\Images\sass.png" />
-	  <MauiImage Remove="Resources\Images\scss.png" />
-	  <MauiImage Remove="Resources\Images\sql.png" />
-	  <MauiImage Remove="Resources\Images\tga.png" />
-	  <MauiImage Remove="Resources\Images\tgz.png" />
-	  <MauiImage Remove="Resources\Images\tiff.png" />
-	  <MauiImage Remove="Resources\Images\txt.png" />
-	  <MauiImage Remove="Resources\Images\wav.png" />
-	  <MauiImage Remove="Resources\Images\xls.png" />
-	  <MauiImage Remove="Resources\Images\xlsx.png" />
-	  <MauiImage Remove="Resources\Images\xml.png" />
-	  <MauiImage Remove="Resources\Images\yml.png" />
-	  <MauiImage Remove="Resources\Images\zip.png" />
-	  <MauiImage Remove="Resources\Images\zoom.png" />
+  <PropertyGroup>
+    <TargetFrameworks>net8.0-ios;net8.0-maccatalyst;net8.0-android</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+    <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+    <!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
+    <OutputType>Exe</OutputType>
+    <RootNamespace>eOdvjetnik</RootNamespace>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Display name -->
+    <ApplicationTitle>eOdvjetnik</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>com.zadarict.eodvjetnik</ApplicationId>
+    <ApplicationIdGuid>70cf2bf6-7324-45d9-a89e-7377ea1e46e0</ApplicationIdGuid>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>2.21</ApplicationDisplayVersion>
+    <ApplicationVersion>221</ApplicationVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">29.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</SupportedOSPlatformVersion>
+    <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+    <Configurations>Release;Debug</Configurations>
+    <UseMauiEssentials>true</UseMauiEssentials>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AndroidLinkResources>true</AndroidLinkResources>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <UseInterpreter>true</UseInterpreter>
+    <RunAOTCompilation>false</RunAOTCompilation>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <RuntimeIdentifiers Condition="$(TargetFramework.Contains('-android'))">android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
+    <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <PackageCertificateThumbprint>35F6166BB0CB132E9C171CF3E87E353AA4116EB4</PackageCertificateThumbprint>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppInstallerUri>https://eodvjetnik.hr/install</AppInstallerUri>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
+    <DefaultLanguage>hr</DefaultLanguage>
+    <AppxPackageSigningTimestampServerUrl>http://timestamp.globalsign.com/tsa/r6advanced1</AppxPackageSigningTimestampServerUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <UseInterpreter>true</UseInterpreter>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
+    <CreatePackage>false</CreatePackage>
+    <CodesignProvision>Automatic</CodesignProvision>
+    <CodesignKey>iPhone Distribution: Robert Vincic (FY8PYJ9EF9)</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
+    <CreatePackage>false</CreatePackage>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignProvision>Automatic</CodesignProvision>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
+    <MtouchLink>SdkOnly</MtouchLink>
+    <EnableCodeSigning>True</EnableCodeSigning>
+    <EnablePackageSigning>true</EnablePackageSigning>
+    <CreatePackage>true</CreatePackage>
+    <CodesignKey>Developer ID Application: Robert Vincic (FY8PYJ9EF9)</CodesignKey>
+    <CodesignProvision>eOdvjetnik_DeveloperID</CodesignProvision>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <PackageSigningKey>Developer ID Installer: Robert Vincic (FY8PYJ9EF9)</PackageSigningKey>
+    <MtouchDebug>true</MtouchDebug>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
+    <CreatePackage>false</CreatePackage>
+    <MtouchDebug>true</MtouchDebug>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
+    <AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
+    <PackageCertificateThumbprint>35F6166BB0CB132E9C171CF3E87E353AA4116EB4</PackageCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(RuntimeIdentifierOverride)' != ''">
+    <RuntimeIdentifier>$(RuntimeIdentifierOverride)</RuntimeIdentifier>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- App Icon -->
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\logo.svg" />
+    <MauiIcon Include="Resources\AppIcon\logo.svg" />
+    <!-- Splash Screen -->
+    <MauiSplashScreen Include="Resources\Splash\splash_new.svg" BaseSize="128,128" />
+    <!-- Images -->
+    <MauiImage Include="Resources\Images\*" />
+    <MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+    <!-- Custom Fonts -->
+    <MauiFont Include="Resources\Fonts\*" />
+    <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="NewFolder1\**" />
+    <EmbeddedResource Remove="NewFolder1\**" />
+    <MauiCss Remove="NewFolder1\**" />
+    <MauiXaml Remove="NewFolder1\**" />
+    <None Remove="NewFolder1\**" />
+    <Compile Remove="Services\SaveAndroid.cs" />
+    <MauiImage Remove="Resources\Images\aac.png" />
+    <MauiImage Remove="Resources\Images\ai.png" />
+    <MauiImage Remove="Resources\Images\aiff.png" />
+    <MauiImage Remove="Resources\Images\avi.png" />
+    <MauiImage Remove="Resources\Images\blank.png" />
+    <MauiImage Remove="Resources\Images\bmp.png" />
+    <MauiImage Remove="Resources\Images\cpp.png" />
+    <MauiImage Remove="Resources\Images\css.png" />
+    <MauiImage Remove="Resources\Images\csv.png" />
+    <MauiImage Remove="Resources\Images\dat.png" />
+    <MauiImage Remove="Resources\Images\dmg.png" />
+    <MauiImage Remove="Resources\Images\doc.png" />
+    <MauiImage Remove="Resources\Images\docx.png" />
+    <MauiImage Remove="Resources\Images\dotx.png" />
+    <MauiImage Remove="Resources\Images\down.png" />
+    <MauiImage Remove="Resources\Images\dwg.png" />
+    <MauiImage Remove="Resources\Images\dxf.png" />
+    <MauiImage Remove="Resources\Images\edit.svg" />
+    <MauiImage Remove="Resources\Images\eps.png" />
+    <MauiImage Remove="Resources\Images\exe.png" />
+    <MauiImage Remove="Resources\Images\flv.png" />
+    <MauiImage Remove="Resources\Images\folder_1484.png" />
+    <MauiImage Remove="Resources\Images\gif.png" />
+    <MauiImage Remove="Resources\Images\hpp.png" />
+    <MauiImage Remove="Resources\Images\html.png" />
+    <MauiImage Remove="Resources\Images\ics.png" />
+    <MauiImage Remove="Resources\Images\iso.png" />
+    <MauiImage Remove="Resources\Images\java.png" />
+    <MauiImage Remove="Resources\Images\jpg.png" />
+    <MauiImage Remove="Resources\Images\js.png" />
+    <MauiImage Remove="Resources\Images\key.png" />
+    <MauiImage Remove="Resources\Images\left.png" />
+    <MauiImage Remove="Resources\Images\less.png" />
+    <MauiImage Remove="Resources\Images\mid.png" />
+    <MauiImage Remove="Resources\Images\mp3.png" />
+    <MauiImage Remove="Resources\Images\mp4.png" />
+    <MauiImage Remove="Resources\Images\mpg.png" />
+    <MauiImage Remove="Resources\Images\new_window.png" />
+    <MauiImage Remove="Resources\Images\odf.png" />
+    <MauiImage Remove="Resources\Images\ods.png" />
+    <MauiImage Remove="Resources\Images\odt.png" />
+    <MauiImage Remove="Resources\Images\otp.png" />
+    <MauiImage Remove="Resources\Images\ots.png" />
+    <MauiImage Remove="Resources\Images\ott.png" />
+    <MauiImage Remove="Resources\Images\page.png" />
+    <MauiImage Remove="Resources\Images\pdf.png" />
+    <MauiImage Remove="Resources\Images\php.png" />
+    <MauiImage Remove="Resources\Images\play.png" />
+    <MauiImage Remove="Resources\Images\png.png" />
+    <MauiImage Remove="Resources\Images\ppt.png" />
+    <MauiImage Remove="Resources\Images\psd.png" />
+    <MauiImage Remove="Resources\Images\py.png" />
+    <MauiImage Remove="Resources\Images\qt.png" />
+    <MauiImage Remove="Resources\Images\rar.png" />
+    <MauiImage Remove="Resources\Images\rb.png" />
+    <MauiImage Remove="Resources\Images\refresh.png" />
+    <MauiImage Remove="Resources\Images\rtf.png" />
+    <MauiImage Remove="Resources\Images\sass.png" />
+    <MauiImage Remove="Resources\Images\scss.png" />
+    <MauiImage Remove="Resources\Images\sql.png" />
+    <MauiImage Remove="Resources\Images\tga.png" />
+    <MauiImage Remove="Resources\Images\tgz.png" />
+    <MauiImage Remove="Resources\Images\tiff.png" />
+    <MauiImage Remove="Resources\Images\txt.png" />
+    <MauiImage Remove="Resources\Images\wav.png" />
+    <MauiImage Remove="Resources\Images\xls.png" />
+    <MauiImage Remove="Resources\Images\xlsx.png" />
+    <MauiImage Remove="Resources\Images\xml.png" />
+    <MauiImage Remove="Resources\Images\yml.png" />
+    <MauiImage Remove="Resources\Images\zip.png" />
+    <MauiImage Remove="Resources\Images\zoom.png" />
     <Resource Remove="Resources\Icons\zoom.png" />
     <Resource Remove="Resources\Icons\book.png" />
-	  </ItemGroup>
-	 <ItemGroup>
-		 <EmbeddedResource Include="Resources\DocIO\eodvjetnik.svg" />
-		 <EmbeddedResource Include="Resources\DocIO\logoNincevic.png" />
-
-
-
-	 </ItemGroup>
-	<ItemGroup>
-	  <None Remove="Resources\Fonts\SF-Pro-Display-Black.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-BlackItalic.otf" />
-	  <None Remove="Resources\Fonts\SFUIDisplay-Thin.otf" />
-	  <None Remove="Resources\Fonts\SFUIDisplay-ThinItalic.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-Heavy.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-HeavyItalic.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-Light.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-LightItalic.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-Medium.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-MediumItalic.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-Regular.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-RegularItalic.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-Semibold.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-SemiboldItalic.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-Thin.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-ThinItalic.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-Ultralight.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Display-UltralightItalic.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Text-Bold.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Text-BoldItalic.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Text-Heavy.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Text-HeavyItalic.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Text-Light.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Text-LightItalic.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Text-Medium.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Text-MediumItalic.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Text-Regular.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Text-RegularItalic.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Text-Semibold.otf" />
-	  <None Remove="Resources\Fonts\SF-Pro-Text-SemiboldItalic.otf" />
-	  <None Remove="Resources\Fonts\SFUIDisplay-Black.otf" />
-	  <None Remove="Resources\Fonts\SFUIDisplay-Bold.ttf" />
-	  <None Remove="Resources\Fonts\SFUIDisplay-Heavy.otf" />
-	  <None Remove="Resources\Fonts\SFUIDisplay-Light.ttf" />
-	  <None Remove="Resources\Fonts\SFUIDisplay-Medium.otf" />
-	  <None Remove="Resources\Fonts\SFUIDisplay-Regular.otf" />
-	  <None Remove="Resources\Fonts\SFUIDisplay-Semibold.otf" />
-	  <None Remove="Resources\Fonts\SFUIDisplay-Thin.otf" />
-	  <None Remove="Resources\Fonts\SFUIDisplay-Ultralight.otf" />
-	  <None Remove="Resources\Fonts\SFUIText-Regular.otf" />
-	  <None Remove="Resources\Icons\aac.png" />
-	  <None Remove="Resources\Icons\add.png" />
-	  <None Remove="Resources\Icons\adjustment.png" />
-	  <None Remove="Resources\Icons\ai.png" />
-	  <None Remove="Resources\Icons\aiff.png" />
-	  <None Remove="Resources\Icons\airbnb.png" />
-	  <None Remove="Resources\Icons\alert.png" />
-	  <None Remove="Resources\Icons\amazon.png" />
-	  <None Remove="Resources\Icons\among_us.png" />
-	  <None Remove="Resources\Icons\android.png" />
-	  <None Remove="Resources\Icons\android_store.png" />
-	  <None Remove="Resources\Icons\aperture.png" />
-	  <None Remove="Resources\Icons\apple_logo.png" />
-	  <None Remove="Resources\Icons\avi.png" />
-	  <None Remove="Resources\Icons\battery.png" />
-	  <None Remove="Resources\Icons\behance.png" />
-	  <None Remove="Resources\Icons\blank.png" />
-	  <None Remove="Resources\Icons\bluetooth.png" />
-	  <None Remove="Resources\Icons\bmp.png" />
-	  <None Remove="Resources\Icons\book.png" />
-	  <None Remove="Resources\Icons\bubble_speech.png" />
-	  <None Remove="Resources\Icons\busuu.png" />
-	  <None Remove="Resources\Icons\calculator.png" />
-	  <None Remove="Resources\Icons\calendar.png" />
-	  <None Remove="Resources\Icons\camera_focus.png" />
-	  <None Remove="Resources\Icons\checklist.png" />
-	  <None Remove="Resources\Icons\clock_app.png" />
-	  <None Remove="Resources\Icons\cloud_sun.png" />
-	  <None Remove="Resources\Icons\compass.png" />
-	  <None Remove="Resources\Icons\cpp.png" />
-	  <None Remove="Resources\Icons\credit_card.png" />
-	  <None Remove="Resources\Icons\css.png" />
-	  <None Remove="Resources\Icons\csv.png" />
-	  <None Remove="Resources\Icons\dat.png" />
-	  <None Remove="Resources\Icons\deliveroo.png" />
-	  <None Remove="Resources\Icons\deviantart.png" />
-	  <None Remove="Resources\Icons\digital_camera.png" />
-	  <None Remove="Resources\Icons\discord.png" />
-	  <None Remove="Resources\Icons\disney_plus.png" />
-	  <None Remove="Resources\Icons\dmg.png" />
-	  <None Remove="Resources\Icons\doc.png" />
-	  <None Remove="Resources\Icons\docx.png" />
-	  <None Remove="Resources\Icons\dotted_bubble_speech.png" />
-	  <None Remove="Resources\Icons\dotx.png" />
-	  <None Remove="Resources\Icons\dot_list.png" />
-	  <None Remove="Resources\Icons\down.png" />
-	  <None Remove="Resources\Icons\dribbble.png" />
-	  <None Remove="Resources\Icons\dropbox.png" />
-	  <None Remove="Resources\Icons\dwg.png" />
-	  <None Remove="Resources\Icons\dxf.png" />
-	  <None Remove="Resources\Icons\edit.svg" />
-	  <None Remove="Resources\Icons\eject.png" />
-	  <None Remove="Resources\Icons\eps.png" />
-	  <None Remove="Resources\Icons\evernote.png" />
-	  <None Remove="Resources\Icons\excel.png" />
-	  <None Remove="Resources\Icons\exe.png" />
-	  <None Remove="Resources\Icons\facebook.png" />
-	  <None Remove="Resources\Icons\facebook_messenger.png" />
-	  <None Remove="Resources\Icons\facetime.png" />
-	  <None Remove="Resources\Icons\find_my.png" />
-	  <None Remove="Resources\Icons\fitness.png" />
-	  <None Remove="Resources\Icons\flickr.png" />
-	  <None Remove="Resources\Icons\flv.png" />
-	  <None Remove="Resources\Icons\folder.png" />
-	  <None Remove="Resources\Icons\folder_1484.png" />
-	  <None Remove="Resources\Icons\football.png" />
-	  <None Remove="Resources\Icons\forward_icon.png" />
-	  <None Remove="Resources\Icons\foursquare.png" />
-	  <None Remove="Resources\Icons\gallery.png" />
-	  <None Remove="Resources\Icons\gif.png" />
-	  <None Remove="Resources\Icons\gmail.png" />
-	  <None Remove="Resources\Icons\google.png" />
-	  <None Remove="Resources\Icons\google_authenticator.png" />
-	  <None Remove="Resources\Icons\google_chrome.png" />
-	  <None Remove="Resources\Icons\google_drive.png" />
-	  <None Remove="Resources\Icons\google_meet.png" />
-	  <None Remove="Resources\Icons\google_photos.png" />
-	  <None Remove="Resources\Icons\googl_docs.png" />
-	  <None Remove="Resources\Icons\graph.png" />
-	  <None Remove="Resources\Icons\grid_view.png" />
-	  <None Remove="Resources\Icons\hbo_max.png" />
-	  <None Remove="Resources\Icons\heart.png" />
-	  <None Remove="Resources\Icons\home.png" />
-	  <None Remove="Resources\Icons\hpp.png" />
-	  <None Remove="Resources\Icons\html.png" />
-	  <None Remove="Resources\Icons\hulu.png" />
-	  <None Remove="Resources\Icons\ics.png" />
-	  <None Remove="Resources\Icons\inbox.png" />
-	  <None Remove="Resources\Icons\instagram.png" />
-	  <None Remove="Resources\Icons\ios_x.png" />
-	  <None Remove="Resources\Icons\iso.png" />
-	  <None Remove="Resources\Icons\java.png" />
-	  <None Remove="Resources\Icons\jpg.png" />
-	  <None Remove="Resources\Icons\js.png" />
-	  <None Remove="Resources\Icons\key.png" />
-	  <None Remove="Resources\Icons\keynote.png" />
-	  <None Remove="Resources\Icons\keynotes.png" />
-	  <None Remove="Resources\Icons\lastpass.png" />
-	  <None Remove="Resources\Icons\left.png" />
-	  <None Remove="Resources\Icons\less.png" />
-	  <None Remove="Resources\Icons\letter.png" />
-	  <None Remove="Resources\Icons\linkedin.png" />
-	  <None Remove="Resources\Icons\map_pin.png" />
-	  <None Remove="Resources\Icons\menu_sign.png" />
-	  <None Remove="Resources\Icons\microphone.png" />
-	  <None Remove="Resources\Icons\microsoft_teams.png" />
-	  <None Remove="Resources\Icons\mid.png" />
-	  <None Remove="Resources\Icons\mp3.png" />
-	  <None Remove="Resources\Icons\mp4.png" />
-	  <None Remove="Resources\Icons\mpg.png" />
-	  <None Remove="Resources\Icons\ms_words.png" />
-	  <None Remove="Resources\Icons\music_sign.png" />
-	  <None Remove="Resources\Icons\netflix.png" />
-	  <None Remove="Resources\Icons\news.png" />
-	  <None Remove="Resources\Icons\night.png" />
-	  <None Remove="Resources\Icons\notion.png" />
-	  <None Remove="Resources\Icons\numbers.png" />
-	  <None Remove="Resources\Icons\odf.png" />
-	  <None Remove="Resources\Icons\ods.png" />
-	  <None Remove="Resources\Icons\odt.png" />
-	  <None Remove="Resources\Icons\otp.png" />
-	  <None Remove="Resources\Icons\ots.png" />
-	  <None Remove="Resources\Icons\ott.png" />
-	  <None Remove="Resources\Icons\overcast.png" />
-	  <None Remove="Resources\Icons\padlock.png" />
-	  <None Remove="Resources\Icons\page.png" />
-	  <None Remove="Resources\Icons\pages.png" />
-	  <None Remove="Resources\Icons\pause.png" />
-	  <None Remove="Resources\Icons\pay.png" />
-	  <None Remove="Resources\Icons\paypal.png" />
-	  <None Remove="Resources\Icons\pdf.png" />
-	  <None Remove="Resources\Icons\phone.png" />
-	  <None Remove="Resources\Icons\php.png" />
-	  <None Remove="Resources\Icons\piano.png" />
-	  <None Remove="Resources\Icons\pinterest.png" />
-	  <None Remove="Resources\Icons\plane.png" />
-	  <None Remove="Resources\Icons\play.png" />
-	  <None Remove="Resources\Icons\playstation.png" />
-	  <None Remove="Resources\Icons\png.png" />
-	  <None Remove="Resources\Icons\podcasts.png" />
-	  <None Remove="Resources\Icons\pokemon_go.png" />
-	  <None Remove="Resources\Icons\powerpoint.png" />
-	  <None Remove="Resources\Icons\ppt.png" />
-	  <None Remove="Resources\Icons\prime_video.png" />
-	  <None Remove="Resources\Icons\procreate.png" />
-	  <None Remove="Resources\Icons\psd.png" />
-	  <None Remove="Resources\Icons\pubj.png" />
-	  <None Remove="Resources\Icons\py.png" />
-	  <None Remove="Resources\Icons\qt.png" />
-	  <None Remove="Resources\Icons\radio.png" />
-	  <None Remove="Resources\Icons\rar.png" />
-	  <None Remove="Resources\Icons\rb.png" />
-	  <None Remove="Resources\Icons\recording.png" />
-	  <None Remove="Resources\Icons\reddit.png" />
-	  <None Remove="Resources\Icons\ribbon.png" />
-	  <None Remove="Resources\Icons\rtf.png" />
-	  <None Remove="Resources\Icons\safari.png" />
-	  <None Remove="Resources\Icons\sass.png" />
-	  <None Remove="Resources\Icons\scss.png" />
-	  <None Remove="Resources\Icons\search.png" />
-	  <None Remove="Resources\Icons\setting_cog.png" />
-	  <None Remove="Resources\Icons\shield_secure.png" />
-	  <None Remove="Resources\Icons\shopping_cart.png" />
-	  <None Remove="Resources\Icons\shortcuts.png" />
-	  <None Remove="Resources\Icons\skype.png" />
-	  <None Remove="Resources\Icons\slack.png" />
-	  <None Remove="Resources\Icons\slider.png" />
-	  <None Remove="Resources\Icons\smartwatch.png" />
-	  <None Remove="Resources\Icons\snapchat.png" />
-	  <None Remove="Resources\Icons\speaker.png" />
-	  <None Remove="Resources\Icons\spotify.png" />
-	  <None Remove="Resources\Icons\sql.png" />
-	  <None Remove="Resources\Icons\steam.png" />
-	  <None Remove="Resources\Icons\stocks.png" />
-	  <None Remove="Resources\Icons\stop.png" />
-	  <None Remove="Resources\Icons\stumbleupon.png" />
-	  <None Remove="Resources\Icons\telegram.png" />
-	  <None Remove="Resources\Icons\tesla.png" />
-	  <None Remove="Resources\Icons\tga.png" />
-	  <None Remove="Resources\Icons\tgz.png" />
-	  <None Remove="Resources\Icons\tiff.png" />
-	  <None Remove="Resources\Icons\tiktok.png" />
-	  <None Remove="Resources\Icons\tinder.png" />
-	  <None Remove="Resources\Icons\translate.png" />
-	  <None Remove="Resources\Icons\tumblr.png" />
-	  <None Remove="Resources\Icons\tunein.png" />
-	  <None Remove="Resources\Icons\twitch.png" />
-	  <None Remove="Resources\Icons\twitter.png" />
-	  <None Remove="Resources\Icons\txt.png" />
-	  <None Remove="Resources\Icons\uber.png" />
-	  <None Remove="Resources\Icons\uber_eats.png" />
-	  <None Remove="Resources\Icons\unsafe.png" />
-	  <None Remove="Resources\Icons\user.png" />
-	  <None Remove="Resources\Icons\video.png" />
-	  <None Remove="Resources\Icons\video_sign.png" />
-	  <None Remove="Resources\Icons\vimeo.png" />
-	  <None Remove="Resources\Icons\wallet.png" />
-	  <None Remove="Resources\Icons\watch_video.png" />
-	  <None Remove="Resources\Icons\wav.png" />
-	  <None Remove="Resources\Icons\waze.png" />
-	  <None Remove="Resources\Icons\weather_cloud.png" />
-	  <None Remove="Resources\Icons\wechat.png" />
-	  <None Remove="Resources\Icons\whatsapp.png" />
-	  <None Remove="Resources\Icons\windows.png" />
-	  <None Remove="Resources\Icons\wireless.png" />
-	  <None Remove="Resources\Icons\xbox.png" />
-	  <None Remove="Resources\Icons\xing.png" />
-	  <None Remove="Resources\Icons\xls.png" />
-	  <None Remove="Resources\Icons\xlsx.png" />
-	  <None Remove="Resources\Icons\xml.png" />
-	  <None Remove="Resources\Icons\yml.png" />
-	  <None Remove="Resources\Icons\youtube.png" />
-	  <None Remove="Resources\Icons\zip.png" />
-	  <None Remove="Resources\Icons\zoom.png" />
-	  <None Remove="Resources\Install\odvjetnik_local-2.3.sql" />
-	  <None Remove="Resources\Install\odvjetnik_local.sql" />
-
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="banditoth.MAUI.Multilanguage" Version="1.0.5" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="LocalizationResourceManager.Maui" Version="1.2.1" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="SMBLibrary" Version="1.5.0.1" />
-		<PackageReference Include="SQLite" Version="3.13.0" />
-		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
-		<PackageReference Include="Syncfusion.DocIO.NET" Version="23.1.44" />
-		<PackageReference Include="Syncfusion.Licensing" Version="23.1.44" />
-		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="23.1.44" />
-		<PackageReference Include="Syncfusion.Maui.Picker" Version="23.1.44" />
-		<PackageReference Include="Syncfusion.Maui.Popup" Version="23.1.44" />
-		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="23.1.44" />
-		<PackageReference Include="MySql.Data" Version="8.2.0" />
-		<PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
-
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="Views\AdminKalendar.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\AppointmentDialog.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\DevInfoPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\DocsItemPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Dokumenti.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Kalendar.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Klijenti.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\LoadingPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\LoadingPageZaposlenici.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Naplata.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\NoviZaposlenik.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\SpiDok.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\UrediKlijenta.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\NoviKlijent.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Racun.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Postavke.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\NoviSpis.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Spisi.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Zaposlenici.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Settings.bundle\" />
-	  <Folder Include="Templates\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <MauiImage Include="Resources\Icons\aac.png" />
-	  <MauiImage Include="Resources\Icons\ai.png" />
-	  <MauiImage Include="Resources\Icons\aiff.png" />
-	  <MauiImage Include="Resources\Icons\avi.png" />
-	  <MauiImage Include="Resources\Icons\blank.png" />
-	  <MauiImage Include="Resources\Icons\bmp.png" />
-	  <MauiImage Include="Resources\Icons\cpp.png" />
-	  <MauiImage Include="Resources\Icons\css.png" />
-	  <MauiImage Include="Resources\Icons\csv.png" />
-	  <MauiImage Include="Resources\Icons\dat.png" />
-	  <MauiImage Include="Resources\Icons\dmg.png" />
-	  <MauiImage Include="Resources\Icons\doc.png" />
-	  <MauiImage Include="Resources\Icons\docx.png" />
-	  <MauiImage Include="Resources\Icons\dotx.png" />
-	  <MauiImage Include="Resources\Icons\down.png" />
-	  <MauiImage Include="Resources\Icons\dwg.png" />
-	  <MauiImage Include="Resources\Icons\dxf.png" />
-	  <MauiImage Include="Resources\Icons\edit.svg" />
-	  <MauiImage Include="Resources\Icons\eps.png" />
-	  <MauiImage Include="Resources\Icons\exe.png" />
-	  <MauiImage Include="Resources\Icons\flv.png" />
-	  <MauiImage Include="Resources\Icons\folder_1484.png" />
-	  <MauiImage Include="Resources\Icons\gif.png" />
-	  <MauiImage Include="Resources\Icons\hpp.png" />
-	  <MauiImage Include="Resources\Icons\html.png" />
-	  <MauiImage Include="Resources\Icons\ics.png" />
-	  <MauiImage Include="Resources\Icons\iso.png" />
-	  <MauiImage Include="Resources\Icons\java.png" />
-	  <MauiImage Include="Resources\Icons\jpg.png" />
-	  <MauiImage Include="Resources\Icons\js.png" />
-	  <MauiImage Include="Resources\Icons\key.png" />
-	  <MauiImage Include="Resources\Icons\left.png" />
-	  <MauiImage Include="Resources\Icons\less.png" />
-	  <MauiImage Include="Resources\Icons\mid.png" />
-	  <MauiImage Include="Resources\Icons\mp3.png" />
-	  <MauiImage Include="Resources\Icons\mp4.png" />
-	  <MauiImage Include="Resources\Icons\mpg.png" />
-	  <MauiImage Include="Resources\Icons\odf.png" />
-	  <MauiImage Include="Resources\Icons\ods.png" />
-	  <MauiImage Include="Resources\Icons\odt.png" />
-	  <MauiImage Include="Resources\Icons\otp.png" />
-	  <MauiImage Include="Resources\Icons\ots.png" />
-	  <MauiImage Include="Resources\Icons\ott.png" />
-	  <MauiImage Include="Resources\Icons\page.png" />
-	  <MauiImage Include="Resources\Icons\pdf.png" />
-	  <MauiImage Include="Resources\Icons\php.png" />
-	  <MauiImage Include="Resources\Icons\play.png" />
-	  <MauiImage Include="Resources\Icons\png.png" />
-	  <MauiImage Include="Resources\Icons\ppt.png" />
-	  <MauiImage Include="Resources\Icons\psd.png" />
-	  <MauiImage Include="Resources\Icons\py.png" />
-	  <MauiImage Include="Resources\Icons\qt.png" />
-	  <MauiImage Include="Resources\Icons\rar.png" />
-	  <MauiImage Include="Resources\Icons\rb.png" />
-	  <MauiImage Include="Resources\Icons\rtf.png" />
-	  <MauiImage Include="Resources\Icons\sass.png" />
-	  <MauiImage Include="Resources\Icons\scss.png" />
-	  <MauiImage Include="Resources\Icons\sql.png" />
-	  <MauiImage Include="Resources\Icons\tga.png" />
-	  <MauiImage Include="Resources\Icons\tgz.png" />
-	  <MauiImage Include="Resources\Icons\tiff.png" />
-	  <MauiImage Include="Resources\Icons\txt.png" />
-	  <MauiImage Include="Resources\Icons\wav.png" />
-	  <MauiImage Include="Resources\Icons\xls.png" />
-	  <MauiImage Include="Resources\Icons\xlsx.png" />
-	  <MauiImage Include="Resources\Icons\xml.png" />
-	  <MauiImage Include="Resources\Icons\yml.png" />
-	  <MauiImage Include="Resources\Icons\zip.png" />
-	  <MauiImage Include="Resources\Icons\zoom.png" />
-	  <EmbeddedResource Include="Resources\Images\aac.png" />
-	  <EmbeddedResource Include="Resources\Images\ai.png" />
-	  <EmbeddedResource Include="Resources\Images\aiff.png" />
-	  <EmbeddedResource Include="Resources\Images\avi.png" />
-	  <EmbeddedResource Include="Resources\Images\blank.png" />
-	  <EmbeddedResource Include="Resources\Images\bmp.png" />
-	  <EmbeddedResource Include="Resources\Images\cpp.png" />
-	  <EmbeddedResource Include="Resources\Images\css.png" />
-	  <EmbeddedResource Include="Resources\Images\csv.png" />
-	  <EmbeddedResource Include="Resources\Images\dat.png" />
-	  <EmbeddedResource Include="Resources\Images\dmg.png" />
-	  <EmbeddedResource Include="Resources\Images\doc.png" />
-	  <EmbeddedResource Include="Resources\Images\docx.png" />
-	  <EmbeddedResource Include="Resources\Images\dotx.png" />
-	  <EmbeddedResource Include="Resources\Images\down.png" />
-	  <EmbeddedResource Include="Resources\Images\dwg.png" />
-	  <EmbeddedResource Include="Resources\Images\dxf.png" />
-	  <EmbeddedResource Include="Resources\Images\edit.svg" />
-	  <EmbeddedResource Include="Resources\Images\eps.png" />
-	  <EmbeddedResource Include="Resources\Images\exe.png" />
-	  <EmbeddedResource Include="Resources\Images\flv.png" />
-	  <EmbeddedResource Include="Resources\Images\folder_1484.png" />
-	  <EmbeddedResource Include="Resources\Images\gif.png" />
-	  <EmbeddedResource Include="Resources\Images\hpp.png" />
-	  <EmbeddedResource Include="Resources\Images\html.png" />
-	  <EmbeddedResource Include="Resources\Images\ics.png" />
-	  <EmbeddedResource Include="Resources\Images\iso.png" />
-	  <EmbeddedResource Include="Resources\Images\java.png" />
-	  <EmbeddedResource Include="Resources\Images\jpg.png" />
-	  <EmbeddedResource Include="Resources\Images\js.png" />
-	  <EmbeddedResource Include="Resources\Images\key.png" />
-	  <EmbeddedResource Include="Resources\Images\left.png" />
-	  <EmbeddedResource Include="Resources\Images\less.png" />
-	  <EmbeddedResource Include="Resources\Images\mid.png" />
-	  <EmbeddedResource Include="Resources\Images\mp3.png" />
-	  <EmbeddedResource Include="Resources\Images\mp4.png" />
-	  <EmbeddedResource Include="Resources\Images\mpg.png" />
-	  <EmbeddedResource Include="Resources\Images\new_window.png" />
-	  <EmbeddedResource Include="Resources\Images\odf.png" />
-	  <EmbeddedResource Include="Resources\Images\ods.png" />
-	  <EmbeddedResource Include="Resources\Images\odt.png" />
-	  <EmbeddedResource Include="Resources\Images\otp.png" />
-	  <EmbeddedResource Include="Resources\Images\ots.png" />
-	  <EmbeddedResource Include="Resources\Images\ott.png" />
-	  <EmbeddedResource Include="Resources\Images\page.png" />
-	  <EmbeddedResource Include="Resources\Images\pdf.png" />
-	  <EmbeddedResource Include="Resources\Images\php.png" />
-	  <EmbeddedResource Include="Resources\Images\play.png" />
-	  <EmbeddedResource Include="Resources\Images\png.png" />
-	  <EmbeddedResource Include="Resources\Images\ppt.png" />
-	  <EmbeddedResource Include="Resources\Images\psd.png" />
-	  <EmbeddedResource Include="Resources\Images\py.png" />
-	  <EmbeddedResource Include="Resources\Images\qt.png" />
-	  <EmbeddedResource Include="Resources\Images\rar.png" />
-	  <EmbeddedResource Include="Resources\Images\rb.png" />
-	  <EmbeddedResource Include="Resources\Images\refresh.png" />
-	  <EmbeddedResource Include="Resources\Images\rtf.png" />
-	  <EmbeddedResource Include="Resources\Images\sass.png" />
-	  <EmbeddedResource Include="Resources\Images\scss.png" />
-	  <EmbeddedResource Include="Resources\Images\sql.png" />
-	  <EmbeddedResource Include="Resources\Images\tga.png" />
-	  <EmbeddedResource Include="Resources\Images\tgz.png" />
-	  <EmbeddedResource Include="Resources\Images\tiff.png" />
-	  <EmbeddedResource Include="Resources\Images\txt.png" />
-	  <EmbeddedResource Include="Resources\Images\wav.png" />
-	  <EmbeddedResource Include="Resources\Images\xls.png" />
-	  <EmbeddedResource Include="Resources\Images\xlsx.png" />
-	  <EmbeddedResource Include="Resources\Images\xml.png" />
-	  <EmbeddedResource Include="Resources\Images\yml.png" />
-	  <EmbeddedResource Include="Resources\Images\zip.png" />
-	  <EmbeddedResource Include="Resources\Images\zoom.png" />
-	</ItemGroup>
-	<ItemGroup>
-	  <MauiImage Include="Resources\Icons\add.png" />
-	  <MauiImage Include="Resources\Icons\adjustment.png" />
-	  <MauiImage Include="Resources\Icons\airbnb.png" />
-	  <MauiImage Include="Resources\Icons\alert.png" />
-	  <MauiImage Include="Resources\Icons\amazon.png" />
-	  <MauiImage Include="Resources\Icons\among_us.png" />
-	  <MauiImage Include="Resources\Icons\android.png" />
-	  <MauiImage Include="Resources\Icons\android_store.png" />
-	  <MauiImage Include="Resources\Icons\aperture.png" />
-	  <MauiImage Include="Resources\Icons\apple_logo.png" />
-	  <MauiImage Include="Resources\Icons\battery.png" />
-	  <MauiImage Include="Resources\Icons\behance.png" />
-	  <MauiImage Include="Resources\Icons\bluetooth.png" />
-	  <MauiImage Include="Resources\Icons\book.png" />
-	  <MauiImage Include="Resources\Icons\bubble_speech.png" />
-	  <MauiImage Include="Resources\Icons\busuu.png" />
-	  <MauiImage Include="Resources\Icons\calculator.png" />
-	  <MauiImage Include="Resources\Icons\calendar.png" />
-	  <MauiImage Include="Resources\Icons\camera_focus.png" />
-	  <MauiImage Include="Resources\Icons\checklist.png" />
-	  <MauiImage Include="Resources\Icons\clock_app.png" />
-	  <MauiImage Include="Resources\Icons\cloud_sun.png" />
-	  <MauiImage Include="Resources\Icons\compass.png" />
-	  <MauiImage Include="Resources\Icons\credit_card.png" />
-	  <MauiImage Include="Resources\Icons\deliveroo.png" />
-	  <MauiImage Include="Resources\Icons\deviantart.png" />
-	  <MauiImage Include="Resources\Icons\digital_camera.png" />
-	  <MauiImage Include="Resources\Icons\discord.png" />
-	  <MauiImage Include="Resources\Icons\disney_plus.png" />
-	  <MauiImage Include="Resources\Icons\dotted_bubble_speech.png" />
-	  <MauiImage Include="Resources\Icons\dot_list.png" />
-	  <MauiImage Include="Resources\Icons\dribbble.png" />
-	  <MauiImage Include="Resources\Icons\dropbox.png" />
-	  <MauiImage Include="Resources\Icons\eject.png" />
-	  <MauiImage Include="Resources\Icons\evernote.png" />
-	  <MauiImage Include="Resources\Icons\excel.png" />
-	  <MauiImage Include="Resources\Icons\facebook.png" />
-	  <MauiImage Include="Resources\Icons\facebook_messenger.png" />
-	  <MauiImage Include="Resources\Icons\facetime.png" />
-	  <MauiImage Include="Resources\Icons\find_my.png" />
-	  <MauiImage Include="Resources\Icons\fitness.png" />
-	  <MauiImage Include="Resources\Icons\flickr.png" />
-	  <MauiImage Include="Resources\Icons\folder.png" />
-	  <MauiImage Include="Resources\Icons\football.png" />
-	  <MauiImage Include="Resources\Icons\forward_icon.png" />
-	  <MauiImage Include="Resources\Icons\foursquare.png" />
-	  <MauiImage Include="Resources\Icons\gallery.png" />
-	  <MauiImage Include="Resources\Icons\gmail.png" />
-	  <MauiImage Include="Resources\Icons\google.png" />
-	  <MauiImage Include="Resources\Icons\google_authenticator.png" />
-	  <MauiImage Include="Resources\Icons\google_chrome.png" />
-	  <MauiImage Include="Resources\Icons\google_drive.png" />
-	  <MauiImage Include="Resources\Icons\google_meet.png" />
-	  <MauiImage Include="Resources\Icons\google_photos.png" />
-	  <MauiImage Include="Resources\Icons\googl_docs.png" />
-	  <MauiImage Include="Resources\Icons\graph.png" />
-	  <MauiImage Include="Resources\Icons\grid_view.png" />
-	  <MauiImage Include="Resources\Icons\hbo_max.png" />
-	  <MauiImage Include="Resources\Icons\heart.png" />
-	  <MauiImage Include="Resources\Icons\home.png" />
-	  <MauiImage Include="Resources\Icons\hulu.png" />
-	  <MauiImage Include="Resources\Icons\inbox.png" />
-	  <MauiImage Include="Resources\Icons\instagram.png" />
-	  <MauiImage Include="Resources\Icons\ios_x.png" />
-	  <MauiImage Include="Resources\Icons\keynote.png" />
-	  <MauiImage Include="Resources\Icons\keynotes.png" />
-	  <MauiImage Include="Resources\Icons\lastpass.png" />
-	  <MauiImage Include="Resources\Icons\letter.png" />
-	  <MauiImage Include="Resources\Icons\linkedin.png" />
-	  <MauiImage Include="Resources\Icons\map_pin.png" />
-	  <MauiImage Include="Resources\Icons\menu_sign.png" />
-	  <MauiImage Include="Resources\Icons\microphone.png" />
-	  <MauiImage Include="Resources\Icons\microsoft_teams.png" />
-	  <MauiImage Include="Resources\Icons\ms_words.png" />
-	  <MauiImage Include="Resources\Icons\music_sign.png" />
-	  <MauiImage Include="Resources\Icons\netflix.png" />
-	  <MauiImage Include="Resources\Icons\news.png" />
-	  <MauiImage Include="Resources\Icons\night.png" />
-	  <MauiImage Include="Resources\Icons\notion.png" />
-	  <MauiImage Include="Resources\Icons\numbers.png" />
-	  <MauiImage Include="Resources\Icons\overcast.png" />
-	  <MauiImage Include="Resources\Icons\padlock.png" />
-	  <MauiImage Include="Resources\Icons\pages.png" />
-	  <MauiImage Include="Resources\Icons\pause.png" />
-	  <MauiImage Include="Resources\Icons\pay.png" />
-	  <MauiImage Include="Resources\Icons\paypal.png" />
-	  <MauiImage Include="Resources\Icons\phone.png" />
-	  <MauiImage Include="Resources\Icons\piano.png" />
-	  <MauiImage Include="Resources\Icons\pinterest.png" />
-	  <MauiImage Include="Resources\Icons\plane.png" />
-	  <MauiImage Include="Resources\Icons\playstation.png" />
-	  <MauiImage Include="Resources\Icons\podcasts.png" />
-	  <MauiImage Include="Resources\Icons\pokemon_go.png" />
-	  <MauiImage Include="Resources\Icons\powerpoint.png" />
-	  <MauiImage Include="Resources\Icons\prime_video.png" />
-	  <MauiImage Include="Resources\Icons\procreate.png" />
-	  <MauiImage Include="Resources\Icons\pubj.png" />
-	  <MauiImage Include="Resources\Icons\radio.png" />
-	  <MauiImage Include="Resources\Icons\recording.png" />
-	  <MauiImage Include="Resources\Icons\reddit.png" />
-	  <MauiImage Include="Resources\Icons\ribbon.png" />
-	  <MauiImage Include="Resources\Icons\safari.png" />
-	  <MauiImage Include="Resources\Icons\search.png" />
-	  <MauiImage Include="Resources\Icons\setting_cog.png" />
-	  <MauiImage Include="Resources\Icons\shield_secure.png" />
-	  <MauiImage Include="Resources\Icons\shopping_cart.png" />
-	  <MauiImage Include="Resources\Icons\shortcuts.png" />
-	  <MauiImage Include="Resources\Icons\skype.png" />
-	  <MauiImage Include="Resources\Icons\slack.png" />
-	  <MauiImage Include="Resources\Icons\slider.png" />
-	  <MauiImage Include="Resources\Icons\smartwatch.png" />
-	  <MauiImage Include="Resources\Icons\snapchat.png" />
-	  <MauiImage Include="Resources\Icons\speaker.png" />
-	  <MauiImage Include="Resources\Icons\spotify.png" />
-	  <MauiImage Include="Resources\Icons\steam.png" />
-	  <MauiImage Include="Resources\Icons\stocks.png" />
-	  <MauiImage Include="Resources\Icons\stop.png" />
-	  <MauiImage Include="Resources\Icons\stumbleupon.png" />
-	  <MauiImage Include="Resources\Icons\telegram.png" />
-	  <MauiImage Include="Resources\Icons\tesla.png" />
-	  <MauiImage Include="Resources\Icons\tiktok.png" />
-	  <MauiImage Include="Resources\Icons\tinder.png" />
-	  <MauiImage Include="Resources\Icons\translate.png" />
-	  <MauiImage Include="Resources\Icons\tumblr.png" />
-	  <MauiImage Include="Resources\Icons\tunein.png" />
-	  <MauiImage Include="Resources\Icons\twitch.png" />
-	  <MauiImage Include="Resources\Icons\twitter.png" />
-	  <MauiImage Include="Resources\Icons\uber.png" />
-	  <MauiImage Include="Resources\Icons\uber_eats.png" />
-	  <MauiImage Include="Resources\Icons\unsafe.png" />
-	  <MauiImage Include="Resources\Icons\user.png" />
-	  <MauiImage Include="Resources\Icons\video.png" />
-	  <MauiImage Include="Resources\Icons\video_sign.png" />
-	  <MauiImage Include="Resources\Icons\vimeo.png" />
-	  <MauiImage Include="Resources\Icons\wallet.png" />
-	  <MauiImage Include="Resources\Icons\watch_video.png" />
-	  <MauiImage Include="Resources\Icons\waze.png" />
-	  <MauiImage Include="Resources\Icons\weather_cloud.png" />
-	  <MauiImage Include="Resources\Icons\wechat.png" />
-	  <MauiImage Include="Resources\Icons\whatsapp.png" />
-	  <MauiImage Include="Resources\Icons\windows.png" />
-	  <MauiImage Include="Resources\Icons\wireless.png" />
-	  <MauiImage Include="Resources\Icons\xbox.png" />
-	  <MauiImage Include="Resources\Icons\xing.png" />
-	  <MauiImage Include="Resources\Icons\youtube.png" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Resource Include="Resources\Install\odvjetnik_local-2.3.sql" />
-	  <EmbeddedResource Include="Resources\Install\odvjetnik_local.sql" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Compile Update="Resources\Strings\AppResources.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>AppResources.resx</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\LoadingPageZaposlenici.xaml.cs">
-	    <DependentUpon>LoadingPageZaposlenici.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\UrediKlijenta.xaml.cs">
-	    <DependentUpon>UrediKlijenta.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Racun.xaml.cs">
-	    <DependentUpon>Racun.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Postavke.xaml.cs">
-	    <DependentUpon>Postavke.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-	<ItemGroup>
-	  <EmbeddedResource Update="Resources\Strings\AppResources.hr-HR.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Resources\Strings\AppResources.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
-	</ItemGroup>
-	<ItemGroup>
-	  <None Update="Resources\Splash\splash.svg">
-	    <CopyToOutputDirectory>MauiSplashScreen</CopyToOutputDirectory>
-	  </None>
-	</ItemGroup>
-	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptioneOdvjetnikHideInfoBar="True" /></VisualStudio></ProjectExtensions>
-	<Target Name="_SkipCodesignVerify" BeforeTargets="_CodesignVerify" AfterTargets="_CodesignAppBundle">  
-		<PropertyGroup>    
-		  <_RequireCodeSigning>false</_RequireCodeSigning>  
-		</PropertyGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DocIO\eodvjetnik.svg" />
+    <EmbeddedResource Include="Resources\DocIO\logoNincevic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\Fonts\SF-Pro-Display-Black.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Display-BlackItalic.otf" />
+    <None Remove="Resources\Fonts\SFUIDisplay-Thin.otf" />
+    <None Remove="Resources\Fonts\SFUIDisplay-ThinItalic.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Display-Heavy.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Display-HeavyItalic.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Display-Light.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Display-LightItalic.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Display-Medium.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Display-MediumItalic.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Display-Regular.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Display-RegularItalic.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Display-Semibold.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Display-SemiboldItalic.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Display-Thin.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Display-ThinItalic.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Display-Ultralight.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Display-UltralightItalic.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Text-Bold.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Text-BoldItalic.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Text-Heavy.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Text-HeavyItalic.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Text-Light.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Text-LightItalic.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Text-Medium.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Text-MediumItalic.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Text-Regular.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Text-RegularItalic.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Text-Semibold.otf" />
+    <None Remove="Resources\Fonts\SF-Pro-Text-SemiboldItalic.otf" />
+    <None Remove="Resources\Fonts\SFUIDisplay-Black.otf" />
+    <None Remove="Resources\Fonts\SFUIDisplay-Bold.ttf" />
+    <None Remove="Resources\Fonts\SFUIDisplay-Heavy.otf" />
+    <None Remove="Resources\Fonts\SFUIDisplay-Light.ttf" />
+    <None Remove="Resources\Fonts\SFUIDisplay-Medium.otf" />
+    <None Remove="Resources\Fonts\SFUIDisplay-Regular.otf" />
+    <None Remove="Resources\Fonts\SFUIDisplay-Semibold.otf" />
+    <None Remove="Resources\Fonts\SFUIDisplay-Thin.otf" />
+    <None Remove="Resources\Fonts\SFUIDisplay-Ultralight.otf" />
+    <None Remove="Resources\Fonts\SFUIText-Regular.otf" />
+    <None Remove="Resources\Icons\aac.png" />
+    <None Remove="Resources\Icons\add.png" />
+    <None Remove="Resources\Icons\adjustment.png" />
+    <None Remove="Resources\Icons\ai.png" />
+    <None Remove="Resources\Icons\aiff.png" />
+    <None Remove="Resources\Icons\airbnb.png" />
+    <None Remove="Resources\Icons\alert.png" />
+    <None Remove="Resources\Icons\amazon.png" />
+    <None Remove="Resources\Icons\among_us.png" />
+    <None Remove="Resources\Icons\android.png" />
+    <None Remove="Resources\Icons\android_store.png" />
+    <None Remove="Resources\Icons\aperture.png" />
+    <None Remove="Resources\Icons\apple_logo.png" />
+    <None Remove="Resources\Icons\avi.png" />
+    <None Remove="Resources\Icons\battery.png" />
+    <None Remove="Resources\Icons\behance.png" />
+    <None Remove="Resources\Icons\blank.png" />
+    <None Remove="Resources\Icons\bluetooth.png" />
+    <None Remove="Resources\Icons\bmp.png" />
+    <None Remove="Resources\Icons\book.png" />
+    <None Remove="Resources\Icons\bubble_speech.png" />
+    <None Remove="Resources\Icons\busuu.png" />
+    <None Remove="Resources\Icons\calculator.png" />
+    <None Remove="Resources\Icons\calendar.png" />
+    <None Remove="Resources\Icons\camera_focus.png" />
+    <None Remove="Resources\Icons\checklist.png" />
+    <None Remove="Resources\Icons\clock_app.png" />
+    <None Remove="Resources\Icons\cloud_sun.png" />
+    <None Remove="Resources\Icons\compass.png" />
+    <None Remove="Resources\Icons\cpp.png" />
+    <None Remove="Resources\Icons\credit_card.png" />
+    <None Remove="Resources\Icons\css.png" />
+    <None Remove="Resources\Icons\csv.png" />
+    <None Remove="Resources\Icons\dat.png" />
+    <None Remove="Resources\Icons\deliveroo.png" />
+    <None Remove="Resources\Icons\deviantart.png" />
+    <None Remove="Resources\Icons\digital_camera.png" />
+    <None Remove="Resources\Icons\discord.png" />
+    <None Remove="Resources\Icons\disney_plus.png" />
+    <None Remove="Resources\Icons\dmg.png" />
+    <None Remove="Resources\Icons\doc.png" />
+    <None Remove="Resources\Icons\docx.png" />
+    <None Remove="Resources\Icons\dotted_bubble_speech.png" />
+    <None Remove="Resources\Icons\dotx.png" />
+    <None Remove="Resources\Icons\dot_list.png" />
+    <None Remove="Resources\Icons\down.png" />
+    <None Remove="Resources\Icons\dribbble.png" />
+    <None Remove="Resources\Icons\dropbox.png" />
+    <None Remove="Resources\Icons\dwg.png" />
+    <None Remove="Resources\Icons\dxf.png" />
+    <None Remove="Resources\Icons\edit.svg" />
+    <None Remove="Resources\Icons\eject.png" />
+    <None Remove="Resources\Icons\eps.png" />
+    <None Remove="Resources\Icons\evernote.png" />
+    <None Remove="Resources\Icons\excel.png" />
+    <None Remove="Resources\Icons\exe.png" />
+    <None Remove="Resources\Icons\facebook.png" />
+    <None Remove="Resources\Icons\facebook_messenger.png" />
+    <None Remove="Resources\Icons\facetime.png" />
+    <None Remove="Resources\Icons\find_my.png" />
+    <None Remove="Resources\Icons\fitness.png" />
+    <None Remove="Resources\Icons\flickr.png" />
+    <None Remove="Resources\Icons\flv.png" />
+    <None Remove="Resources\Icons\folder.png" />
+    <None Remove="Resources\Icons\folder_1484.png" />
+    <None Remove="Resources\Icons\football.png" />
+    <None Remove="Resources\Icons\forward_icon.png" />
+    <None Remove="Resources\Icons\foursquare.png" />
+    <None Remove="Resources\Icons\gallery.png" />
+    <None Remove="Resources\Icons\gif.png" />
+    <None Remove="Resources\Icons\gmail.png" />
+    <None Remove="Resources\Icons\google.png" />
+    <None Remove="Resources\Icons\google_authenticator.png" />
+    <None Remove="Resources\Icons\google_chrome.png" />
+    <None Remove="Resources\Icons\google_drive.png" />
+    <None Remove="Resources\Icons\google_meet.png" />
+    <None Remove="Resources\Icons\google_photos.png" />
+    <None Remove="Resources\Icons\googl_docs.png" />
+    <None Remove="Resources\Icons\graph.png" />
+    <None Remove="Resources\Icons\grid_view.png" />
+    <None Remove="Resources\Icons\hbo_max.png" />
+    <None Remove="Resources\Icons\heart.png" />
+    <None Remove="Resources\Icons\home1.png" />
+    <None Remove="Resources\Icons\hpp.png" />
+    <None Remove="Resources\Icons\html.png" />
+    <None Remove="Resources\Icons\hulu.png" />
+    <None Remove="Resources\Icons\ics.png" />
+    <None Remove="Resources\Icons\inbox.png" />
+    <None Remove="Resources\Icons\instagram.png" />
+    <None Remove="Resources\Icons\ios_x.png" />
+    <None Remove="Resources\Icons\iso.png" />
+    <None Remove="Resources\Icons\java.png" />
+    <None Remove="Resources\Icons\jpg.png" />
+    <None Remove="Resources\Icons\js.png" />
+    <None Remove="Resources\Icons\key.png" />
+    <None Remove="Resources\Icons\keynote.png" />
+    <None Remove="Resources\Icons\keynotes.png" />
+    <None Remove="Resources\Icons\lastpass.png" />
+    <None Remove="Resources\Icons\left.png" />
+    <None Remove="Resources\Icons\less.png" />
+    <None Remove="Resources\Icons\letter.png" />
+    <None Remove="Resources\Icons\linkedin.png" />
+    <None Remove="Resources\Icons\map_pin.png" />
+    <None Remove="Resources\Icons\menu_sign.png" />
+    <None Remove="Resources\Icons\microphone.png" />
+    <None Remove="Resources\Icons\microsoft_teams.png" />
+    <None Remove="Resources\Icons\mid.png" />
+    <None Remove="Resources\Icons\mp3.png" />
+    <None Remove="Resources\Icons\mp4.png" />
+    <None Remove="Resources\Icons\mpg.png" />
+    <None Remove="Resources\Icons\ms_words.png" />
+    <None Remove="Resources\Icons\music_sign.png" />
+    <None Remove="Resources\Icons\netflix.png" />
+    <None Remove="Resources\Icons\news.png" />
+    <None Remove="Resources\Icons\night.png" />
+    <None Remove="Resources\Icons\notion.png" />
+    <None Remove="Resources\Icons\numbers.png" />
+    <None Remove="Resources\Icons\odf.png" />
+    <None Remove="Resources\Icons\ods.png" />
+    <None Remove="Resources\Icons\odt.png" />
+    <None Remove="Resources\Icons\otp.png" />
+    <None Remove="Resources\Icons\ots.png" />
+    <None Remove="Resources\Icons\ott.png" />
+    <None Remove="Resources\Icons\overcast.png" />
+    <None Remove="Resources\Icons\padlock.png" />
+    <None Remove="Resources\Icons\page.png" />
+    <None Remove="Resources\Icons\pages.png" />
+    <None Remove="Resources\Icons\pause.png" />
+    <None Remove="Resources\Icons\pay.png" />
+    <None Remove="Resources\Icons\paypal.png" />
+    <None Remove="Resources\Icons\pdf.png" />
+    <None Remove="Resources\Icons\phone.png" />
+    <None Remove="Resources\Icons\php.png" />
+    <None Remove="Resources\Icons\piano.png" />
+    <None Remove="Resources\Icons\pinterest.png" />
+    <None Remove="Resources\Icons\plane.png" />
+    <None Remove="Resources\Icons\play.png" />
+    <None Remove="Resources\Icons\playstation.png" />
+    <None Remove="Resources\Icons\png.png" />
+    <None Remove="Resources\Icons\podcasts.png" />
+    <None Remove="Resources\Icons\pokemon_go.png" />
+    <None Remove="Resources\Icons\powerpoint.png" />
+    <None Remove="Resources\Icons\ppt.png" />
+    <None Remove="Resources\Icons\prime_video.png" />
+    <None Remove="Resources\Icons\procreate.png" />
+    <None Remove="Resources\Icons\psd.png" />
+    <None Remove="Resources\Icons\pubj.png" />
+    <None Remove="Resources\Icons\py.png" />
+    <None Remove="Resources\Icons\qt.png" />
+    <None Remove="Resources\Icons\radio.png" />
+    <None Remove="Resources\Icons\rar.png" />
+    <None Remove="Resources\Icons\rb.png" />
+    <None Remove="Resources\Icons\recording.png" />
+    <None Remove="Resources\Icons\reddit.png" />
+    <None Remove="Resources\Icons\ribbon.png" />
+    <None Remove="Resources\Icons\rtf.png" />
+    <None Remove="Resources\Icons\safari.png" />
+    <None Remove="Resources\Icons\sass.png" />
+    <None Remove="Resources\Icons\scss.png" />
+    <None Remove="Resources\Icons\search.png" />
+    <None Remove="Resources\Icons\setting_cog.png" />
+    <None Remove="Resources\Icons\shield_secure.png" />
+    <None Remove="Resources\Icons\shopping_cart.png" />
+    <None Remove="Resources\Icons\shortcuts.png" />
+    <None Remove="Resources\Icons\skype.png" />
+    <None Remove="Resources\Icons\slack.png" />
+    <None Remove="Resources\Icons\slider.png" />
+    <None Remove="Resources\Icons\smartwatch.png" />
+    <None Remove="Resources\Icons\snapchat.png" />
+    <None Remove="Resources\Icons\speaker.png" />
+    <None Remove="Resources\Icons\spotify.png" />
+    <None Remove="Resources\Icons\sql.png" />
+    <None Remove="Resources\Icons\steam.png" />
+    <None Remove="Resources\Icons\stocks.png" />
+    <None Remove="Resources\Icons\stop.png" />
+    <None Remove="Resources\Icons\stumbleupon.png" />
+    <None Remove="Resources\Icons\telegram.png" />
+    <None Remove="Resources\Icons\tesla.png" />
+    <None Remove="Resources\Icons\tga.png" />
+    <None Remove="Resources\Icons\tgz.png" />
+    <None Remove="Resources\Icons\tiff.png" />
+    <None Remove="Resources\Icons\tiktok.png" />
+    <None Remove="Resources\Icons\tinder.png" />
+    <None Remove="Resources\Icons\translate.png" />
+    <None Remove="Resources\Icons\tumblr.png" />
+    <None Remove="Resources\Icons\tunein.png" />
+    <None Remove="Resources\Icons\twitch.png" />
+    <None Remove="Resources\Icons\twitter.png" />
+    <None Remove="Resources\Icons\txt.png" />
+    <None Remove="Resources\Icons\uber.png" />
+    <None Remove="Resources\Icons\uber_eats.png" />
+    <None Remove="Resources\Icons\unsafe.png" />
+    <None Remove="Resources\Icons\user.png" />
+    <None Remove="Resources\Icons\video.png" />
+    <None Remove="Resources\Icons\video_sign.png" />
+    <None Remove="Resources\Icons\vimeo.png" />
+    <None Remove="Resources\Icons\wallet.png" />
+    <None Remove="Resources\Icons\watch_video.png" />
+    <None Remove="Resources\Icons\wav.png" />
+    <None Remove="Resources\Icons\waze.png" />
+    <None Remove="Resources\Icons\weather_cloud.png" />
+    <None Remove="Resources\Icons\wechat.png" />
+    <None Remove="Resources\Icons\whatsapp.png" />
+    <None Remove="Resources\Icons\windows.png" />
+    <None Remove="Resources\Icons\wireless.png" />
+    <None Remove="Resources\Icons\xbox.png" />
+    <None Remove="Resources\Icons\xing.png" />
+    <None Remove="Resources\Icons\xls.png" />
+    <None Remove="Resources\Icons\xlsx.png" />
+    <None Remove="Resources\Icons\xml.png" />
+    <None Remove="Resources\Icons\yml.png" />
+    <None Remove="Resources\Icons\youtube.png" />
+    <None Remove="Resources\Icons\zip.png" />
+    <None Remove="Resources\Icons\zoom.png" />
+    <None Remove="Resources\Install\odvjetnik_local-2.3.sql" />
+    <None Remove="Resources\Install\odvjetnik_local.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="banditoth.MAUI.Multilanguage" Version="1.0.5" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="LocalizationResourceManager.Maui" Version="1.2.1" />
+    <PackageReference Include="SMBLibrary" Version="1.5.0.2" />
+    <PackageReference Include="SQLite" Version="3.13.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
+    <PackageReference Include="Syncfusion.DocIO.NET" Version="23.2.6" />
+    <PackageReference Include="Syncfusion.Licensing" Version="23.2.6" />
+    <PackageReference Include="Syncfusion.Maui.DataGrid" Version="23.2.6" />
+    <PackageReference Include="Syncfusion.Maui.Picker" Version="23.2.6" />
+    <PackageReference Include="Syncfusion.Maui.Popup" Version="23.2.6" />
+    <PackageReference Include="Syncfusion.Maui.Scheduler" Version="23.2.6" />
+    <PackageReference Include="MySql.Data" Version="8.2.0" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <MauiXaml Update="Views\AdminKalendar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\AppointmentDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\DevInfoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\DocsItemPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Dokumenti.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Kalendar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Klijenti.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\LoadingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\LoadingPageZaposlenici.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Naplata.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\NoviZaposlenik.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\SpiDok.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\UrediKlijenta.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\NoviKlijent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Racun.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Postavke.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\NoviSpis.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Spisi.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Zaposlenici.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Settings.bundle\" />
+    <Folder Include="Templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <MauiImage Include="Resources\Icons\aac.png" />
+    <MauiImage Include="Resources\Icons\ai.png" />
+    <MauiImage Include="Resources\Icons\aiff.png" />
+    <MauiImage Include="Resources\Icons\avi.png" />
+    <MauiImage Include="Resources\Icons\blank.png" />
+    <MauiImage Include="Resources\Icons\bmp.png" />
+    <MauiImage Include="Resources\Icons\cpp.png" />
+    <MauiImage Include="Resources\Icons\css.png" />
+    <MauiImage Include="Resources\Icons\csv.png" />
+    <MauiImage Include="Resources\Icons\dat.png" />
+    <MauiImage Include="Resources\Icons\dmg.png" />
+    <MauiImage Include="Resources\Icons\doc.png" />
+    <MauiImage Include="Resources\Icons\docx.png" />
+    <MauiImage Include="Resources\Icons\dotx.png" />
+    <MauiImage Include="Resources\Icons\down.png" />
+    <MauiImage Include="Resources\Icons\dwg.png" />
+    <MauiImage Include="Resources\Icons\dxf.png" />
+    <MauiImage Include="Resources\Icons\edit.svg" />
+    <MauiImage Include="Resources\Icons\eps.png" />
+    <MauiImage Include="Resources\Icons\exe.png" />
+    <MauiImage Include="Resources\Icons\flv.png" />
+    <MauiImage Include="Resources\Icons\folder_1484.png" />
+    <MauiImage Include="Resources\Icons\gif.png" />
+    <MauiImage Include="Resources\Icons\hpp.png" />
+    <MauiImage Include="Resources\Icons\html.png" />
+    <MauiImage Include="Resources\Icons\ics.png" />
+    <MauiImage Include="Resources\Icons\iso.png" />
+    <MauiImage Include="Resources\Icons\java.png" />
+    <MauiImage Include="Resources\Icons\jpg.png" />
+    <MauiImage Include="Resources\Icons\js.png" />
+    <MauiImage Include="Resources\Icons\key.png" />
+    <MauiImage Include="Resources\Icons\left.png" />
+    <MauiImage Include="Resources\Icons\less.png" />
+    <MauiImage Include="Resources\Icons\mid.png" />
+    <MauiImage Include="Resources\Icons\mp3.png" />
+    <MauiImage Include="Resources\Icons\mp4.png" />
+    <MauiImage Include="Resources\Icons\mpg.png" />
+    <MauiImage Include="Resources\Icons\odf.png" />
+    <MauiImage Include="Resources\Icons\ods.png" />
+    <MauiImage Include="Resources\Icons\odt.png" />
+    <MauiImage Include="Resources\Icons\otp.png" />
+    <MauiImage Include="Resources\Icons\ots.png" />
+    <MauiImage Include="Resources\Icons\ott.png" />
+    <MauiImage Include="Resources\Icons\page.png" />
+    <MauiImage Include="Resources\Icons\pdf.png" />
+    <MauiImage Include="Resources\Icons\php.png" />
+    <MauiImage Include="Resources\Icons\play.png" />
+    <MauiImage Include="Resources\Icons\png.png" />
+    <MauiImage Include="Resources\Icons\ppt.png" />
+    <MauiImage Include="Resources\Icons\psd.png" />
+    <MauiImage Include="Resources\Icons\py.png" />
+    <MauiImage Include="Resources\Icons\qt.png" />
+    <MauiImage Include="Resources\Icons\rar.png" />
+    <MauiImage Include="Resources\Icons\rb.png" />
+    <MauiImage Include="Resources\Icons\rtf.png" />
+    <MauiImage Include="Resources\Icons\sass.png" />
+    <MauiImage Include="Resources\Icons\scss.png" />
+    <MauiImage Include="Resources\Icons\sql.png" />
+    <MauiImage Include="Resources\Icons\tga.png" />
+    <MauiImage Include="Resources\Icons\tgz.png" />
+    <MauiImage Include="Resources\Icons\tiff.png" />
+    <MauiImage Include="Resources\Icons\txt.png" />
+    <MauiImage Include="Resources\Icons\wav.png" />
+    <MauiImage Include="Resources\Icons\xls.png" />
+    <MauiImage Include="Resources\Icons\xlsx.png" />
+    <MauiImage Include="Resources\Icons\xml.png" />
+    <MauiImage Include="Resources\Icons\yml.png" />
+    <MauiImage Include="Resources\Icons\zip.png" />
+    <MauiImage Include="Resources\Icons\zoom.png" />
+    <EmbeddedResource Include="Resources\Images\aac.png" />
+    <EmbeddedResource Include="Resources\Images\ai.png" />
+    <EmbeddedResource Include="Resources\Images\aiff.png" />
+    <EmbeddedResource Include="Resources\Images\avi.png" />
+    <EmbeddedResource Include="Resources\Images\blank.png" />
+    <EmbeddedResource Include="Resources\Images\bmp.png" />
+    <EmbeddedResource Include="Resources\Images\cpp.png" />
+    <EmbeddedResource Include="Resources\Images\css.png" />
+    <EmbeddedResource Include="Resources\Images\csv.png" />
+    <EmbeddedResource Include="Resources\Images\dat.png" />
+    <EmbeddedResource Include="Resources\Images\dmg.png" />
+    <EmbeddedResource Include="Resources\Images\doc.png" />
+    <EmbeddedResource Include="Resources\Images\docx.png" />
+    <EmbeddedResource Include="Resources\Images\dotx.png" />
+    <EmbeddedResource Include="Resources\Images\down.png" />
+    <EmbeddedResource Include="Resources\Images\dwg.png" />
+    <EmbeddedResource Include="Resources\Images\dxf.png" />
+    <EmbeddedResource Include="Resources\Images\edit.svg" />
+    <EmbeddedResource Include="Resources\Images\eps.png" />
+    <EmbeddedResource Include="Resources\Images\exe.png" />
+    <EmbeddedResource Include="Resources\Images\flv.png" />
+    <EmbeddedResource Include="Resources\Images\folder_1484.png" />
+    <EmbeddedResource Include="Resources\Images\gif.png" />
+    <EmbeddedResource Include="Resources\Images\hpp.png" />
+    <EmbeddedResource Include="Resources\Images\html.png" />
+    <EmbeddedResource Include="Resources\Images\ics.png" />
+    <EmbeddedResource Include="Resources\Images\iso.png" />
+    <EmbeddedResource Include="Resources\Images\java.png" />
+    <EmbeddedResource Include="Resources\Images\jpg.png" />
+    <EmbeddedResource Include="Resources\Images\js.png" />
+    <EmbeddedResource Include="Resources\Images\key.png" />
+    <EmbeddedResource Include="Resources\Images\left.png" />
+    <EmbeddedResource Include="Resources\Images\less.png" />
+    <EmbeddedResource Include="Resources\Images\mid.png" />
+    <EmbeddedResource Include="Resources\Images\mp3.png" />
+    <EmbeddedResource Include="Resources\Images\mp4.png" />
+    <EmbeddedResource Include="Resources\Images\mpg.png" />
+    <EmbeddedResource Include="Resources\Images\new_window.png" />
+    <EmbeddedResource Include="Resources\Images\odf.png" />
+    <EmbeddedResource Include="Resources\Images\ods.png" />
+    <EmbeddedResource Include="Resources\Images\odt.png" />
+    <EmbeddedResource Include="Resources\Images\otp.png" />
+    <EmbeddedResource Include="Resources\Images\ots.png" />
+    <EmbeddedResource Include="Resources\Images\ott.png" />
+    <EmbeddedResource Include="Resources\Images\page.png" />
+    <EmbeddedResource Include="Resources\Images\pdf.png" />
+    <EmbeddedResource Include="Resources\Images\php.png" />
+    <EmbeddedResource Include="Resources\Images\play.png" />
+    <EmbeddedResource Include="Resources\Images\png.png" />
+    <EmbeddedResource Include="Resources\Images\ppt.png" />
+    <EmbeddedResource Include="Resources\Images\psd.png" />
+    <EmbeddedResource Include="Resources\Images\py.png" />
+    <EmbeddedResource Include="Resources\Images\qt.png" />
+    <EmbeddedResource Include="Resources\Images\rar.png" />
+    <EmbeddedResource Include="Resources\Images\rb.png" />
+    <EmbeddedResource Include="Resources\Images\refresh.png" />
+    <EmbeddedResource Include="Resources\Images\rtf.png" />
+    <EmbeddedResource Include="Resources\Images\sass.png" />
+    <EmbeddedResource Include="Resources\Images\scss.png" />
+    <EmbeddedResource Include="Resources\Images\sql.png" />
+    <EmbeddedResource Include="Resources\Images\tga.png" />
+    <EmbeddedResource Include="Resources\Images\tgz.png" />
+    <EmbeddedResource Include="Resources\Images\tiff.png" />
+    <EmbeddedResource Include="Resources\Images\txt.png" />
+    <EmbeddedResource Include="Resources\Images\wav.png" />
+    <EmbeddedResource Include="Resources\Images\xls.png" />
+    <EmbeddedResource Include="Resources\Images\xlsx.png" />
+    <EmbeddedResource Include="Resources\Images\xml.png" />
+    <EmbeddedResource Include="Resources\Images\yml.png" />
+    <EmbeddedResource Include="Resources\Images\zip.png" />
+    <EmbeddedResource Include="Resources\Images\zoom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <MauiImage Include="Resources\Icons\add.png" />
+    <MauiImage Include="Resources\Icons\adjustment.png" />
+    <MauiImage Include="Resources\Icons\airbnb.png" />
+    <MauiImage Include="Resources\Icons\alert.png" />
+    <MauiImage Include="Resources\Icons\amazon.png" />
+    <MauiImage Include="Resources\Icons\among_us.png" />
+    <MauiImage Include="Resources\Icons\android.png" />
+    <MauiImage Include="Resources\Icons\android_store.png" />
+    <MauiImage Include="Resources\Icons\aperture.png" />
+    <MauiImage Include="Resources\Icons\apple_logo.png" />
+    <MauiImage Include="Resources\Icons\battery.png" />
+    <MauiImage Include="Resources\Icons\behance.png" />
+    <MauiImage Include="Resources\Icons\bluetooth.png" />
+    <MauiImage Include="Resources\Icons\book.png" />
+    <MauiImage Include="Resources\Icons\bubble_speech.png" />
+    <MauiImage Include="Resources\Icons\busuu.png" />
+    <MauiImage Include="Resources\Icons\calculator.png" />
+    <MauiImage Include="Resources\Icons\calendar.png" />
+    <MauiImage Include="Resources\Icons\camera_focus.png" />
+    <MauiImage Include="Resources\Icons\checklist.png" />
+    <MauiImage Include="Resources\Icons\clock_app.png" />
+    <MauiImage Include="Resources\Icons\cloud_sun.png" />
+    <MauiImage Include="Resources\Icons\compass.png" />
+    <MauiImage Include="Resources\Icons\credit_card.png" />
+    <MauiImage Include="Resources\Icons\deliveroo.png" />
+    <MauiImage Include="Resources\Icons\deviantart.png" />
+    <MauiImage Include="Resources\Icons\digital_camera.png" />
+    <MauiImage Include="Resources\Icons\discord.png" />
+    <MauiImage Include="Resources\Icons\disney_plus.png" />
+    <MauiImage Include="Resources\Icons\dotted_bubble_speech.png" />
+    <MauiImage Include="Resources\Icons\dot_list.png" />
+    <MauiImage Include="Resources\Icons\dribbble.png" />
+    <MauiImage Include="Resources\Icons\dropbox.png" />
+    <MauiImage Include="Resources\Icons\eject.png" />
+    <MauiImage Include="Resources\Icons\evernote.png" />
+    <MauiImage Include="Resources\Icons\excel.png" />
+    <MauiImage Include="Resources\Icons\facebook.png" />
+    <MauiImage Include="Resources\Icons\facebook_messenger.png" />
+    <MauiImage Include="Resources\Icons\facetime.png" />
+    <MauiImage Include="Resources\Icons\find_my.png" />
+    <MauiImage Include="Resources\Icons\fitness.png" />
+    <MauiImage Include="Resources\Icons\flickr.png" />
+    <MauiImage Include="Resources\Icons\folder.png" />
+    <MauiImage Include="Resources\Icons\football.png" />
+    <MauiImage Include="Resources\Icons\forward_icon.png" />
+    <MauiImage Include="Resources\Icons\foursquare.png" />
+    <MauiImage Include="Resources\Icons\gallery.png" />
+    <MauiImage Include="Resources\Icons\gmail.png" />
+    <MauiImage Include="Resources\Icons\google.png" />
+    <MauiImage Include="Resources\Icons\google_authenticator.png" />
+    <MauiImage Include="Resources\Icons\google_chrome.png" />
+    <MauiImage Include="Resources\Icons\google_drive.png" />
+    <MauiImage Include="Resources\Icons\google_meet.png" />
+    <MauiImage Include="Resources\Icons\google_photos.png" />
+    <MauiImage Include="Resources\Icons\googl_docs.png" />
+    <MauiImage Include="Resources\Icons\graph.png" />
+    <MauiImage Include="Resources\Icons\grid_view.png" />
+    <MauiImage Include="Resources\Icons\hbo_max.png" />
+    <MauiImage Include="Resources\Icons\heart.png" />
+    <MauiImage Include="Resources\Icons\home1.png" />
+    <MauiImage Include="Resources\Icons\hulu.png" />
+    <MauiImage Include="Resources\Icons\inbox.png" />
+    <MauiImage Include="Resources\Icons\instagram.png" />
+    <MauiImage Include="Resources\Icons\ios_x.png" />
+    <MauiImage Include="Resources\Icons\keynote.png" />
+    <MauiImage Include="Resources\Icons\keynotes.png" />
+    <MauiImage Include="Resources\Icons\lastpass.png" />
+    <MauiImage Include="Resources\Icons\letter.png" />
+    <MauiImage Include="Resources\Icons\linkedin.png" />
+    <MauiImage Include="Resources\Icons\map_pin.png" />
+    <MauiImage Include="Resources\Icons\menu_sign.png" />
+    <MauiImage Include="Resources\Icons\microphone.png" />
+    <MauiImage Include="Resources\Icons\microsoft_teams.png" />
+    <MauiImage Include="Resources\Icons\ms_words.png" />
+    <MauiImage Include="Resources\Icons\music_sign.png" />
+    <MauiImage Include="Resources\Icons\netflix.png" />
+    <MauiImage Include="Resources\Icons\news.png" />
+    <MauiImage Include="Resources\Icons\night.png" />
+    <MauiImage Include="Resources\Icons\notion.png" />
+    <MauiImage Include="Resources\Icons\numbers.png" />
+    <MauiImage Include="Resources\Icons\overcast.png" />
+    <MauiImage Include="Resources\Icons\padlock.png" />
+    <MauiImage Include="Resources\Icons\pages.png" />
+    <MauiImage Include="Resources\Icons\pause.png" />
+    <MauiImage Include="Resources\Icons\pay.png" />
+    <MauiImage Include="Resources\Icons\paypal.png" />
+    <MauiImage Include="Resources\Icons\phone.png" />
+    <MauiImage Include="Resources\Icons\piano.png" />
+    <MauiImage Include="Resources\Icons\pinterest.png" />
+    <MauiImage Include="Resources\Icons\plane.png" />
+    <MauiImage Include="Resources\Icons\playstation.png" />
+    <MauiImage Include="Resources\Icons\podcasts.png" />
+    <MauiImage Include="Resources\Icons\pokemon_go.png" />
+    <MauiImage Include="Resources\Icons\powerpoint.png" />
+    <MauiImage Include="Resources\Icons\prime_video.png" />
+    <MauiImage Include="Resources\Icons\procreate.png" />
+    <MauiImage Include="Resources\Icons\pubj.png" />
+    <MauiImage Include="Resources\Icons\radio.png" />
+    <MauiImage Include="Resources\Icons\recording.png" />
+    <MauiImage Include="Resources\Icons\reddit.png" />
+    <MauiImage Include="Resources\Icons\ribbon.png" />
+    <MauiImage Include="Resources\Icons\safari.png" />
+    <MauiImage Include="Resources\Icons\search.png" />
+    <MauiImage Include="Resources\Icons\setting_cog.png" />
+    <MauiImage Include="Resources\Icons\shield_secure.png" />
+    <MauiImage Include="Resources\Icons\shopping_cart.png" />
+    <MauiImage Include="Resources\Icons\shortcuts.png" />
+    <MauiImage Include="Resources\Icons\skype.png" />
+    <MauiImage Include="Resources\Icons\slack.png" />
+    <MauiImage Include="Resources\Icons\slider.png" />
+    <MauiImage Include="Resources\Icons\smartwatch.png" />
+    <MauiImage Include="Resources\Icons\snapchat.png" />
+    <MauiImage Include="Resources\Icons\speaker.png" />
+    <MauiImage Include="Resources\Icons\spotify.png" />
+    <MauiImage Include="Resources\Icons\steam.png" />
+    <MauiImage Include="Resources\Icons\stocks.png" />
+    <MauiImage Include="Resources\Icons\stop.png" />
+    <MauiImage Include="Resources\Icons\stumbleupon.png" />
+    <MauiImage Include="Resources\Icons\telegram.png" />
+    <MauiImage Include="Resources\Icons\tesla.png" />
+    <MauiImage Include="Resources\Icons\tiktok.png" />
+    <MauiImage Include="Resources\Icons\tinder.png" />
+    <MauiImage Include="Resources\Icons\translate.png" />
+    <MauiImage Include="Resources\Icons\tumblr.png" />
+    <MauiImage Include="Resources\Icons\tunein.png" />
+    <MauiImage Include="Resources\Icons\twitch.png" />
+    <MauiImage Include="Resources\Icons\twitter.png" />
+    <MauiImage Include="Resources\Icons\uber.png" />
+    <MauiImage Include="Resources\Icons\uber_eats.png" />
+    <MauiImage Include="Resources\Icons\unsafe.png" />
+    <MauiImage Include="Resources\Icons\user.png" />
+    <MauiImage Include="Resources\Icons\video.png" />
+    <MauiImage Include="Resources\Icons\video_sign.png" />
+    <MauiImage Include="Resources\Icons\vimeo.png" />
+    <MauiImage Include="Resources\Icons\wallet.png" />
+    <MauiImage Include="Resources\Icons\watch_video.png" />
+    <MauiImage Include="Resources\Icons\waze.png" />
+    <MauiImage Include="Resources\Icons\weather_cloud.png" />
+    <MauiImage Include="Resources\Icons\wechat.png" />
+    <MauiImage Include="Resources\Icons\whatsapp.png" />
+    <MauiImage Include="Resources\Icons\windows.png" />
+    <MauiImage Include="Resources\Icons\wireless.png" />
+    <MauiImage Include="Resources\Icons\xbox.png" />
+    <MauiImage Include="Resources\Icons\xing.png" />
+    <MauiImage Include="Resources\Icons\youtube.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Install\odvjetnik_local-2.3.sql" />
+    <EmbeddedResource Include="Resources\Install\odvjetnik_local.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\Strings\AppResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\LoadingPageZaposlenici.xaml.cs">
+      <DependentUpon>LoadingPageZaposlenici.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\UrediKlijenta.xaml.cs">
+      <DependentUpon>UrediKlijenta.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Racun.xaml.cs">
+      <DependentUpon>Racun.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Postavke.xaml.cs">
+      <DependentUpon>Postavke.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Strings\AppResources.hr-HR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Strings\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Resources\Splash\splash.svg">
+      <CopyToOutputDirectory>MauiSplashScreen</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptioneOdvjetnikHideInfoBar="True" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="_SkipCodesignVerify" BeforeTargets="_CodesignVerify" AfterTargets="_CodesignAppBundle">
+    <PropertyGroup>
+      <_RequireCodeSigning>false</_RequireCodeSigning>
+    </PropertyGroup>
   </Target>
 </Project>

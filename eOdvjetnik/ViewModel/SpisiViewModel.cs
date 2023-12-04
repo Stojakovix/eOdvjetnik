@@ -5,6 +5,7 @@ using System.Windows.Input;
 using eOdvjetnik.Model;
 using eOdvjetnik.Services;
 using Syncfusion.Maui.Data;
+using Microsoft.Maui.ApplicationModel;
 
 namespace eOdvjetnik.ViewModel
 {

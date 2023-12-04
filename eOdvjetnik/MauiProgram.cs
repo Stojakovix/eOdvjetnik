@@ -12,6 +12,7 @@ using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using eOdvjetnik.ViewModel;
+using Microsoft.Maui.ApplicationModel;
 
 //using Microsoft.UI;
 

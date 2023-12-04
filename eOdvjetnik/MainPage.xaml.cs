@@ -8,6 +8,9 @@ using PermissionStatus = Microsoft.Maui.ApplicationModel.PermissionStatus;
 using DeviceType = Microsoft.Maui.Devices.DeviceType;
 using DeviceInfo = Microsoft.Maui.Devices.DeviceInfo;
 using eOdvjetnik.Services;
+using Microsoft.Maui.Devices;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Storage;
 
 namespace eOdvjetnik;
 

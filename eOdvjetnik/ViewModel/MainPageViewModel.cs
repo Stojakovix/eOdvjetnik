@@ -9,6 +9,9 @@ using System.Text.Json;
 using eOdvjetnik.Models;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.Maui.ApplicationModel.DataTransfer;
+using Microsoft.Maui.Devices;
+using Microsoft.Maui.ApplicationModel;
 
 namespace eOdvjetnik.ViewModel
 {

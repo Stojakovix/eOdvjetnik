@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using eOdvjetnik.Models;
 using eOdvjetnik.Services;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.ApplicationModel;
 
 
 namespace eOdvjetnik.ViewModel

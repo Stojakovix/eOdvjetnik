@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.ApplicationModel;
 
 namespace eOdvjetnik.ViewModel;
 

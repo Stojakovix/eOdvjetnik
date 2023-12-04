@@ -13,6 +13,7 @@ using System.Globalization;
 using System.Diagnostics.Metrics;
 using System.Reflection;
 using System.Web;
+using Microsoft.Maui.ApplicationModel;
 
 namespace eOdvjetnik.ViewModel;
 
