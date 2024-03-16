@@ -27,8 +27,6 @@
 
             </HorizontalStackLayout.Margin>
 
-
-
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                    
                     Command="{Binding MainClickCommand}"
@@ -43,7 +41,6 @@
                     Clicked="Button_Clicked"
 
              />
-
 
             <Button IsVisible="{OnPlatform Android=False , iOS=False , WinUI=True , MacCatalyst=True}" 
                     Grid.Column="1" Text="Ročišnik" 
